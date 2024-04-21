@@ -6,11 +6,12 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Marcell Varga",
-    default: "Marcell Varga",
+    template: "%s | Acme Dashboard",
+    default: "Acme Dashboard",
   },
-  description: "Marcell Varga Portfolio | UX & Frontend Engineer",
+  description: "Portfolio Page of Marcell Varga",
 };
+
 export default function RootLayout({
   children,
 }: Readonly<{
