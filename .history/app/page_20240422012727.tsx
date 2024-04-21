@@ -89,7 +89,7 @@ export default function Page() {
       </main>
       {/* New Experience Section */}
       <section className="mt-8">
-        <h2 className="text-custom-blue text-sm font-bold mb-4 tracking-wider uppercase">
+        <h2 className="text-custom-blue text-xs font-bold mb-4 tracking-wider uppercase">
           Experience
         </h2>
         <div className="flex flex-wrap gap-2">
@@ -124,12 +124,23 @@ export default function Page() {
         </h2>
         <div className="flex flex-wrap gap-2">
           {[
-            "HTML",
-            "CSS",
+            "React",
+            "Figma",
+            "Sketch",
             "JavaScript",
             "TypeScript",
-            "React-Bootstrap",
-            "Fluent UI",
+            "Next.js",
+            "Node.js",
+            "Express.js",
+            "HTML",
+            "CSS",
+            "UX Design",
+            "UX Research",
+            "RESTful APIs",
+            "Git (Gitlab & Github)",
+            "Svelte & SvelteKit",
+            "Tailwind CSS",
+            "Adobe CC Suite",
           ].map((skill) => (
             <div key={skill} className="bg-gray-200 p-2 rounded-full">
               {skill}

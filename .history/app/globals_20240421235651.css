@@ -32,15 +32,6 @@ body {
   }
 } */
 
-@keyframes moveDown {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(10px); /* Adjust the value as needed */
-  }
-}
-
 .animate-moveDown {
-  animation: moveDown 2s infinite alternate ease-in-out; /* Adjust the duration as needed */
-}
+  animation: moveDown 2s infinite alternate; /* Adjust the duration as needed */
+ }

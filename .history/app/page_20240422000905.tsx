@@ -67,17 +67,17 @@ export default function Page() {
   return (
     <div className="m-4">
       <Header />
-      <main className="flex flex-col items-center justify-between h-screen m-4 gap-1 w-full">
-        <div className="flex-grow py-12 w-full flex flex-col items-center justify-center gap-">
-          <div className="flex w-full text-5xl font-medium items-center justify-start">
+      <main className="flex flex-col items-center justify-between h-screen m-4 gap-1">
+        <div className="flex-grow py-12">
+          <div className="flex w-full text-4xl font-medium items-center justify-start">
             Hey, I'm&nbsp;
             <span className="text-custom-blue font-bold">Marcell Varga</span>
           </div>
-          <div className="flex w-full text-3xl font-light items-center justify-start">
+          <div className="flex w-full text-2xl font-light items-center justify-start">
             UX & Frontend engineer
           </div>
         </div>
-        <div className="flex-grow py-12 flex flex-col items-center justify-center">
+        <div className="flex-grow-0 py-12">
           <Image
             className="animate-moveDown"
             src="/icons/mouseScroll.svg"
@@ -87,56 +87,6 @@ export default function Page() {
           />
         </div>
       </main>
-      {/* New Experience Section */}
-      <section className="mt-8">
-        <h2 className="text-custom-blue text-sm font-bold mb-4 tracking-wider uppercase">
-          Experience
-        </h2>
-        <div className="flex flex-wrap gap-2">
-          {[
-            "React",
-            "Figma",
-            "Sketch",
-            "JavaScript",
-            "TypeScript",
-            "Next.js",
-            "Node.js",
-            "Express.js",
-            "HTML",
-            "CSS",
-            "UX Design",
-            "UX Research",
-            "RESTful APIs",
-            "Git (Gitlab & Github)",
-            "Svelte & SvelteKit",
-            "Tailwind CSS",
-            "Adobe CC Suite",
-          ].map((skill) => (
-            <div key={skill} className="bg-gray-200 p-2 rounded-full">
-              {skill}
-            </div>
-          ))}
-        </div>
-      </section>
-      <section className="mt-8">
-        <h2 className="text-custom-blue text-sm font-bold mb-4 tracking-wider uppercase">
-          Projects
-        </h2>
-        <div className="flex flex-wrap gap-2">
-          {[
-            "HTML",
-            "CSS",
-            "JavaScript",
-            "TypeScript",
-            "React-Bootstrap",
-            "Fluent UI",
-          ].map((skill) => (
-            <div key={skill} className="bg-gray-200 p-2 rounded-full">
-              {skill}
-            </div>
-          ))}
-        </div>
-      </section>
       <Footer />
     </div>
   );

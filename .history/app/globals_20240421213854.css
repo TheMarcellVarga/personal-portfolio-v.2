@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* :root {
+:root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -30,17 +30,4 @@ body {
   .text-balance {
     text-wrap: balance;
   }
-} */
-
-@keyframes moveDown {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(10px); /* Adjust the value as needed */
-  }
-}
-
-.animate-moveDown {
-  animation: moveDown 2s infinite alternate ease-in-out; /* Adjust the duration as needed */
 }

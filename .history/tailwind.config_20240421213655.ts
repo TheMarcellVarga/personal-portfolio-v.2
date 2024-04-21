@@ -15,11 +15,9 @@ const config: Config = {
       },
       colors: {
         "custom-blue": "#176B87",
-        "custom-teal": "#4FD5CC",
-      },
+      }
     },
   },
   plugins: [],
 };
-
 export default config;

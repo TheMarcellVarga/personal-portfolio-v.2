@@ -42,5 +42,5 @@ body {
 }
 
 .animate-moveDown {
-  animation: moveDown 2s infinite alternate ease-in-out; /* Adjust the duration as needed */
+  animation: moveDown 2s infinite alternate; /* Adjust the duration as needed */
 }
