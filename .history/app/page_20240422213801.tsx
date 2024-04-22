@@ -3,24 +3,19 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import IndexSigAnimated from "../public/icons/indexSigAnimated";
+import { ReactComponent as IndexSigIcon } from '/icons/indexSig.svg';
 
 // Header component
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+ const [isOpen, setIsOpen] = useState(false);
 
-  return (
+ return (
     <header className="flex justify-between items-center w-full max-w-5xl">
       <div className="flex items-center">
         {/* Icon */}
         <Link href="/">
-          <IndexSigAnimated />
-          {/* <Image
-            src="/icons/indexSig.svg"
-            alt="Marcell's signature as Index button"
-            width={85}
-            height={37}
-          /> */}
+          {/* <Image src="/icons/indexSig.svg" /> */}
+          <IndexSigIcon className="svg-elem-1" aria-label="Icon" width={72} height={36} />
         </Link>
       </div>
       <nav className="flex items-center">
@@ -44,12 +39,12 @@ const Header = () => {
         </div>
       </nav>
     </header>
-  );
+ );
 };
 
 // Footer component
 const Footer = () => {
-  return (
+ return (
     <div className="flex w-full flex-row justify-between items-center">
       <div className="flex w-full">© 2024 Marcell Varga</div>
       <div className="flex space-x-4">
@@ -67,11 +62,11 @@ const Footer = () => {
         />
       </div>
     </div>
-  );
+ );
 };
 
 export default function Page() {
-  return (
+ return (
     <div className="m-4">
       <Header />
       <main className="flex flex-col items-center justify-between h-screen m-4 gap-1 w-full">
@@ -146,5 +141,5 @@ export default function Page() {
       </section>
       <Footer />
     </div>
-  );
+ );
 }

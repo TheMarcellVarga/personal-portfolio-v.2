@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import IndexSigAnimated from "../public/icons/indexSigAnimated";
+import IndexSig from "../public/icons/indexSig";
+import IndexSigAnimated from "../public/icons/indexSig";
 
 // Header component
 const Header = () => {
@@ -15,12 +16,7 @@ const Header = () => {
         {/* Icon */}
         <Link href="/">
           <IndexSigAnimated />
-          {/* <Image
-            src="/icons/indexSig.svg"
-            alt="Marcell's signature as Index button"
-            width={85}
-            height={37}
-          /> */}
+          <IndexSig />
         </Link>
       </div>
       <nav className="flex items-center">

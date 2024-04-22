@@ -15,12 +15,12 @@ const Header = () => {
         {/* Icon */}
         <Link href="/">
           <IndexSigAnimated />
-          {/* <Image
-            src="/icons/indexSig.svg"
-            alt="Marcell's signature as Index button"
-            width={85}
-            height={37}
-          /> */}
+          <Image
+          src="/icons/indexSig.svg"
+          alt="Marcell's signature as Index button"
+          width={36}
+          height={36}
+        />
         </Link>
       </div>
       <nav className="flex items-center">
