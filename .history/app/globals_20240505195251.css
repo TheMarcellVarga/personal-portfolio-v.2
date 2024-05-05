@@ -248,7 +248,7 @@ body {
     transform: translateY(0);
   }
   100% {
-    transform: translateY(15px); /* Adjust the value as needed */
+    transform: translateY(20px); /* Adjust the value as needed */
   }
 }
 

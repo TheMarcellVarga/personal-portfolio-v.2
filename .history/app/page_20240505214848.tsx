@@ -313,19 +313,8 @@ export default function Page() {
     "(prefers-color-scheme: dark)"
   ).matches;
 
-  console.log(prefersDarkMode)
-
   const [isDarkMode, setIsDarkMode] = useState(prefersDarkMode); // State to track dark mode
   const [isOpen, setIsOpen] = useState(false); // State for other purposes (e.g., menu open)
-
-  useEffect(() => {
-    const htmlElement = document.documentElement;
-    if (isDarkMode) {
-      htmlElement.classList.add('dark');
-    } else {
-      htmlElement.classList.remove('dark');
-    }
- }, [isDarkMode]);
 
   return (
     <div className="px-4 pb-4 bg-custom-light dark:bg-custom-dark transition-colors duration-200 ease-in-out">
