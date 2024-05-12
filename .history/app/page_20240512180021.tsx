@@ -537,10 +537,7 @@ export default function Page() {
                     <div className="text-2xl">{project.title}</div>
                     <div className="text-md">{project.subTitle}</div>
                   </div> */}
-                  <Link
-                    href={project.link}
-                    className="w-full flex flex-row bg-gray-50 p-8 rounded-lg"
-                  >
+                  <Link href={project.link} className="w-full flex flex-row bg-gray-50 p-8 rounded-lg">
                     <div className="w-2/4 relative rounded-lg overflow-hidden y-5">
                       <div className="block h-48">
                         <div className="w-full h-full flex justify-center items-center">
