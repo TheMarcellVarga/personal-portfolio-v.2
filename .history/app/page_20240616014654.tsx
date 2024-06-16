@@ -333,7 +333,6 @@ const history = [
       "Enhanced Maps Indoors CMS through research and development of interactive, animated prototypes.",
       "Executed tasks via Jira, including project management and documentation.",
       "Leveraged the company Design System, contributing to its evolution",
-      "Prioritized delivery efficiency using Auto-Layout.",
       "Designed cross-platform solutions for both desktop and mobile, with a focus on accessibility.",
       "Acquired interdisciplinary skills working within a SaaS company team.",
     ],
@@ -354,11 +353,10 @@ const history = [
       end: "Jun 2022",
     },
     description: [
-      "UX/UI Design and Elective Specialization: Focused on enhancing UI/UX design skills through practical projects. This aligns with the importance of a well-crafted website or app for user satisfaction.",
-      "Front-End Web Development: Engaged in hands-on experience building applications. Emphasis was placed on the design-to-code process and creating visually appealing, easy-to-use interfaces.",
-      "Content Production: Involved in creating content that meets user needs and ensures a positive user experience. This reflects the ongoing process of UX design.",
-      "Collaboration and Project Management: Worked collaboratively with real companies within Reflective Practice-based Learning (RPL). Applied user research methodologies and usability testing to improve product functionality.",
-      "Reflective Practice-based Learning: Executed projects in collaboration with real companies. Applied UX/UI design principles to real-world challenges, enhancing the design-to-code process.",
+      "UX/UI Design and Elective Specialization: Focused on enhancing UI/UX design skills through practical projects, aligning with the importance of a well-crafted website or app for user satisfaction.",
+      "Front-End Web Development: Engaged in hands-on experience building applications, emphasizing the design to code process and the importance of creating visually appealing and easy-to-use interfaces.",
+      "Content Production: Involved in creating content that not only meets user needs but also ensures a positive user experience, reflecting the ongoing process of UX design.",
+      "Reflective Practice-based Learning: Throughout the study, executed projects in collaboration with real companies, applying UX/UI design principles to real-world challenges and enhancing the design to code process.",
     ],
     skills: [
       "HTML",
@@ -694,7 +692,7 @@ export default function Page() {
           </article>
         </section>
       </div>
-      {/* <section>
+      <section>
         <div className="flex w-full items-center justify-center text-5xl mt-60">
           <h3 className="text-2xl font-light text-justify leading-relaxed text-black dark:text-white ">
             Current Location:&nbsp;
@@ -720,7 +718,7 @@ export default function Page() {
             animateIn={true} // Enable auto rotation
           />
         </div>
-      </section> */}
+      </section>
       <Footer isDarkMode={isDarkMode} isOpen={isOpen} />
     </div>
   );
