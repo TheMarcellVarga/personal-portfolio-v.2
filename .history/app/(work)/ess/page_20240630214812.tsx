@@ -47,6 +47,15 @@ const history = [
           "",
         ],
       },
+      // {
+      //   title: "Project Management",
+      //   text: [
+      //     "To ensure a flawless workflow, we've decided to create our project plan by using a Work Breakdown Structure both for the project and the report to improve our efficiency in terms of dividing tasks and their possible dependencies.",
+      //     "By utilizing the Gantt chart, we will have the opportunity to visualize different tasks better, therefore we will have more seamless communication about our progress and challenges with the client.",
+      //     "As the organization does not have any background or website yet, it can be difficult to reach an ideal solution for the problem in a short period. We believe it will require many design iterations and user tests, and because it's very focused on user-centered design, where the user and the client are very much included in the process, will require us to do as many changes as the client wants.",
+      //     "With the five planes of UX, which is not purely plan-driven and has agile features, we feel more comfortable using, since we would have a fixed framework, which will help us to keep the focus better on the problem and do as many iterations as we can. That would be the main reason why we chose to work with five planes of UX.",
+      //   ],
+      // },
       {
         title: "User Research",
         text: [
@@ -81,6 +90,15 @@ const history = [
           "Skeleton plane",
         ],
         subText: [
+          // "We started with setting two key issues: what value should the website bring for the organization and what value it can bring for the user. Since the agency doesn't have any website yet, it would be a core platform for them to attract potential customers, and for the users, it would be the main moderator between the agency and partner universities.",
+          // "By answering these questions, it helped us to see that the website we will produce, will be more intended to use as an information website, with less functional specifications and more content requirements, so we will spend more time on Information Architecture, to increase the content readability.",
+          // "At this phase, we define what content elements may be required to meet users' needs. We didn't seem to know a lot about the user, just from the categorization, we assumed user gender, age, and behavior features, so it can be difficult to set the main goal of the product and what user problems we should help to solve. That is why we have made qualitative research- interviews on our target group to make a valuable product, which would meet their needs.",
+          // "From the functional side, features like a navigation bar, which should display the clear website structure, and contact form would matter the most, since the agency at first receives applications and then have meetings with applicants.",
+          // "From the content requirements side, it should have a clear information structure for the user, using information hierarchy and prioritizing the most important information, also visuals-like pictures and video reviews section and description of what is included in different price packages, reviews, FAQ",
+          // "After the requirements have been set, we have a clear picture of what will be included on the website. After a few more meetings with a client, we have added new elements like FAQ and a scale of American and European Study tuition price, which she thinks will help to visualize the difference even more.",
+          // "In content development, structuring the user experience is a question of information architecture, creating categories and navigational schemes that allow users to move through the site content effectively. So, this phase is all about understanding the user, even more, the way they behave and think.",
+          // "By building this understanding into the structure of our website, will help us to ensure a successful experience for those who will use it.",
+          // "in this phase, we have already experimented with the very first wireframe, identifying specific aspects of the interface like navigation, placing the buttons, blocks of text, etc. On the structure plane, we looked at the larger-scale issues of architecture and interactions. In this phase, our concerns exist at a smaller scale of individual components and their relationship.",
           "We started with setting two key issues: what value should the website bring for the organization and what value it can bring for the user. Since the agency didn't have any website yet, it would be a core platform for them to attract potential customers, and for the users, it would be the main moderator between the agency and partner universities.",
           "By answering these questions, it helped us to see that the website we will produce, will be more intended to use as an information website, with less functional specifications and more content requirements, hence spending more time on Information Architecture, to increase the content readability",
           "We defined what are the required content elements to meet the users' needs, both from the functional and content requirement side.",
@@ -103,6 +121,12 @@ const history = [
       {
         title: "Wireframing",
         text: [
+          // "At the skeleton phase, we have created the first design iterations- wireframes. It helped us to see a clear overview of the page structure, layout, information architecture, and intended user behaviors. As a wireframe usually represents the initial product concept, styling, color, and graphics we kept it to a minimum. We have used a digital way of displaying it, using Adobe XD, since we believe it's easier to visualize than using a paper version.  According to the landing page, we had a few iterations of displaying elements. In the navigation bar, we displayed different page labels- Available Programs, Service, Contact, and Apply page, to show the website structure, and would make it to be sticky and follow when scrolling down, to let the user navigate more easily to other pages. After some discussions, we decided to marge contact and apply pages because they would contain very similar information, which would create some confusion for the user on which one to use.",
+          // "Besides, at the very beginning of the website, we had a similar vision of displaying a full-width picture or slide show gallery.",
+          // "Since the landing page is the most important one, which should create the user's interest from the very first second, using the hierarchy of information, allows to point out to the viewer what he wants to see first. This is highly important as users tend not to spend too much time on the website these days. According to our prototypes, we wanted to mention what ESS is about and what service they can provide, also the key points, and the application process step-by-step. We came up with different iterations for that.",
+          // "We considered implementing a section where the reviews of the company would be shown. Our idea was to display these as a card element in accordance with the Gestalt Principles.",
+          // "According to the footer design, we have tried to display the most important links from the website they should look for, if they missed it on the page, also the agency’s contact information. We tried to group them, by using The Principle of Objects according to the 8 Principles of Information Architecture, where we grouped similar content as well as determining each group’s attributes. Pressing one of the links will lead the user to the place, where the precise content is displayed.",
+          // "Moving to the service page, we were thinking about how to display the layout of different services and the description of each on the page. Should it be as a sidebar or navigation bar on the top of the page? The most convenient solution we came up, was to have a vertical sidebar on the side, with different tabs, and on the right, a block of the container with the information, which will change according to the tab.",
           "As part of the skeleton phase, we have created the first design iterations - Wireframes. It gave us clear overview of the page structure and while represented the initial product concept, we kept styling, color, and graphics to the minimum.",
           "We established the navigation bar where we included different page labels to emphasize the structure.",
           "Besides, at the very beginning of the website, we had a similar vision of displaying a full-width picture or slide show gallery.",
@@ -200,8 +224,8 @@ const history = [
 ];
 
 const ESS = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false); // State to track dark mode
+  const [isOpen, setIsOpen] = useState(false); // State for other purposes (e.g., menu open)
   const [isHover, setIsHover] = useState(false);
 
   return (
@@ -235,12 +259,12 @@ const ESS = () => {
                       </h3>
                       <h4 className="text-base font-light text-black dark:text-white">
                         <Image
-                          src={item.content.picture}
-                          alt={item.content.text}
-                          layout="responsive"
-                          width={300}
-                          height={200}
-                          objectFit="cover"
+                          src={item.content.picture} // Use the image path from the project object
+                          alt={item.content.text} // Use the project title as the alt text
+                          layout="responsive" // Adjusted to responsive to maintain aspect ratio
+                          width={300} // Set width explicitly
+                          height={200} // Set height explicitly
+                          objectFit="cover" // Changed to cover to ensure the image covers the area without distortion
                         />
                         {item.content.text}
                       </h4>
