@@ -279,7 +279,7 @@ const ESS = () => {
                                     <React.Fragment>
                                       {/* Render subPicture using Next.js Image component */}
                                       {desc.subPicture?.[index] && (
-                                        <div className="my-4 px-16">
+                                        <div className="my-4 px-16 w-full">
                                           <Image
                                             src={desc.subPicture[index] ?? ""} // Provide a fallback image source
                                             alt={`Sub-picture ${index}`}

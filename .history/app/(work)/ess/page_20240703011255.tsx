@@ -277,7 +277,6 @@ const ESS = () => {
                                   <div key={index} className="mb-2">
                                     {/* Add margin-bottom for spacing */}
                                     <React.Fragment>
-                                      {/* Render subPicture using Next.js Image component */}
                                       {desc.subPicture?.[index] && (
                                         <div className="my-4 px-16">
                                           <Image
@@ -285,7 +284,7 @@ const ESS = () => {
                                             alt={`Sub-picture ${index}`}
                                             layout="responsive"
                                             width={150} // Adjust the width as needed
-                                            height={100} // Adjust the height as needed
+                                            height={50} // Adjust the height as needed
                                             objectFit="cover"
                                           />
                                         </div>
@@ -294,6 +293,8 @@ const ESS = () => {
                                         {title}
                                       </h4>
                                       <p>{desc.subText?.[index] || ""}</p>
+                                      {/* Render subPicture */}
+                                      {/* Render subPicture using Next.js Image component */}
                                     </React.Fragment>
                                   </div>
                                 ))}

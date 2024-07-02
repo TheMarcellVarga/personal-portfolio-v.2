@@ -80,10 +80,8 @@ const history = [
         ],
         subPicture: [
           "/images/legacy/ESS-Images/FivePlane5.png",
-          "/images/legacy/ESS-Images/FivePlane4.png",
-          "/images/legacy/ESS-Images/FivePlane3.png",
-          "/images/legacy/ESS-Images/FivePlane2.png",
-          "/images/legacy/ESS-Images/FivePlane1.png",
+          "/images/legacy/ESS-Images/FivePlane5.png",
+          "/images/legacy/ESS-Images/FivePlane5.png",
         ],
       },
       {
@@ -272,24 +270,10 @@ const ESS = () => {
                             <div className="text-sm text-gray-600 dark:text-gray-300">
                               {Array.isArray(desc.subTitle) &&
                                 Array.isArray(desc.subText) &&
-                                Array.isArray(desc.subPicture) &&
                                 desc.subTitle.map((title, index) => (
                                   <div key={index} className="mb-2">
                                     {/* Add margin-bottom for spacing */}
                                     <React.Fragment>
-                                      {/* Render subPicture using Next.js Image component */}
-                                      {desc.subPicture?.[index] && (
-                                        <div className="my-4 px-16">
-                                          <Image
-                                            src={desc.subPicture[index] ?? ""} // Provide a fallback image source
-                                            alt={`Sub-picture ${index}`}
-                                            layout="responsive"
-                                            width={150} // Adjust the width as needed
-                                            height={100} // Adjust the height as needed
-                                            objectFit="cover"
-                                          />
-                                        </div>
-                                      )}
                                       <h4 className="text-base mb-1 text-gray-900 dark:text-gray-100">
                                         {title}
                                       </h4>
@@ -297,32 +281,7 @@ const ESS = () => {
                                     </React.Fragment>
                                   </div>
                                 ))}
-                            </div>{" "}
-                            {/* Render subPicture if it exists
-                            {(desc.subPicture || []).length > 0 && (
-                              <div className="mt-2 flex flex-row space-x-4">
-                                {(desc.subPicture || []).map(
-                                  (
-                                    pictureUrl: string,
-                                    pictureIndex: number
-                                  ) => (
-                                    <div
-                                      key={pictureIndex}
-                                      className="w-full max-w-xs"
-                                    >
-                                      <Image
-                                        src={pictureUrl}
-                                        alt={`Sub-picture ${pictureIndex}`}
-                                        layout="responsive"
-                                        width={150}
-                                        height={100}
-                                        objectFit="cover"
-                                      />
-                                    </div>
-                                  )
-                                )}
-                              </div>
-                            )} */}
+                            </div>
                           </div>
                         ))}
                       </div>

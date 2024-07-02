@@ -78,13 +78,7 @@ const history = [
           "After the requirements have been set, we got a clear picture of what will be included on the website. Besides adding new elements after meeting with our client, we revised the information architecture and created categories and navigational schemes that would allow users to move through the site content efficiently.",
           "In this phase, we have already experimented with the very first wireframe, identifying specific aspects of the interface like navigation, placing the buttons, blocks of text, etc. On the structure plane, we looked at the larger-scale issues of architecture and interactions. In this phase, our concerns exist at a smaller scale of individual components and their relationship.",
         ],
-        subPicture: [
-          "/images/legacy/ESS-Images/FivePlane5.png",
-          "/images/legacy/ESS-Images/FivePlane4.png",
-          "/images/legacy/ESS-Images/FivePlane3.png",
-          "/images/legacy/ESS-Images/FivePlane2.png",
-          "/images/legacy/ESS-Images/FivePlane1.png",
-        ],
+        subPicture: [],
       },
       {
         title: "Information Architecture",
@@ -205,20 +199,6 @@ const ESS = () => {
                       <h3 className="text-xl text-black dark:text-white">
                         {item.title}
                       </h3>
-                      <h3 className="text-lg text-black dark:text-white">
-                        {item.subTitle}
-                      </h3>
-                      <h4 className="text-base font-light text-black dark:text-white">
-                        <Image
-                          src={item.content.picture}
-                          alt={item.content.text}
-                          layout="responsive"
-                          width={300}
-                          height={200}
-                          objectFit="cover"
-                        />
-                        {item.content.text}
-                      </h4>
                       <div className="text-sm text-black dark:text-white ">
                         {item.description.map((desc, descIndex) => (
                           <div key={descIndex}>
@@ -245,11 +225,13 @@ const ESS = () => {
                             <div className="mt-2 flex flex-row ">
                               {Array.isArray(desc.picture) ? (
                                 desc.picture.map((pictureUrl, pictureIndex) => (
-                                  <div className="w-full mx-4">
+                                  <div
+                                    className="w-full mx-4"
+                                    key={pictureIndex}
+                                  >
                                     <Image
                                       src={pictureUrl}
-                                      key={pictureIndex}
-                                      alt="kek"
+                                      alt={`Sub-picture ${pictureIndex}`}
                                       layout="responsive"
                                       width={150}
                                       height={100}
@@ -260,7 +242,7 @@ const ESS = () => {
                               ) : (
                                 <Image
                                   src={desc.picture || ""}
-                                  alt="kek"
+                                  alt="Default Sub-picture"
                                   layout="responsive"
                                   width={150}
                                   height={100}
@@ -268,67 +250,43 @@ const ESS = () => {
                                 />
                               )}
                             </div>
-                            {/* Render subTitle and subText alternatively with spacing */}
-                            <div className="text-sm text-gray-600 dark:text-gray-300">
-                              {Array.isArray(desc.subTitle) &&
-                                Array.isArray(desc.subText) &&
-                                Array.isArray(desc.subPicture) &&
-                                desc.subTitle.map((title, index) => (
-                                  <div key={index} className="mb-2">
-                                    {/* Add margin-bottom for spacing */}
-                                    <React.Fragment>
-                                      {/* Render subPicture using Next.js Image component */}
-                                      {desc.subPicture?.[index] && (
-                                        <div className="my-4 px-16">
-                                          <Image
-                                            src={desc.subPicture[index] ?? ""} // Provide a fallback image source
-                                            alt={`Sub-picture ${index}`}
-                                            layout="responsive"
-                                            width={150} // Adjust the width as needed
-                                            height={100} // Adjust the height as needed
-                                            objectFit="cover"
-                                          />
-                                        </div>
-                                      )}
-                                      <h4 className="text-base mb-1 text-gray-900 dark:text-gray-100">
-                                        {title}
-                                      </h4>
-                                      <p>{desc.subText?.[index] || ""}</p>
-                                    </React.Fragment>
-                                  </div>
-                                ))}
-                            </div>{" "}
-                            {/* Render subPicture if it exists
-                            {(desc.subPicture || []).length > 0 && (
-                              <div className="mt-2 flex flex-row space-x-4">
-                                {(desc.subPicture || []).map(
-                                  (
-                                    pictureUrl: string,
-                                    pictureIndex: number
-                                  ) => (
-                                    <div
-                                      key={pictureIndex}
-                                      className="w-full max-w-xs"
-                                    >
-                                      <Image
-                                        src={pictureUrl}
-                                        alt={`Sub-picture ${pictureIndex}`}
-                                        layout="responsive"
-                                        width={150}
-                                        height={100}
-                                        objectFit="cover"
-                                      />
-                                    </div>
-                                  )
+                            {/* Adjusted logic for alternating subTitle and subText */}
+                            {desc.subTitle && desc.subText && (
+                              <>
+                                {descIndex % 2 === 0 && (
+                                  <h4 className="text-lg text-gray-700 dark:text-gray-300">
+                                  </h4>
                                 )}
-                              </div>
-                            )} */}
+                                {descIndex % 2 !== 0 && (
+                                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                                    {Array.isArray(desc.subText) ? (
+                                      desc.subText.map((text, index) => (
+                                        <React.Fragment key={index}>
+                                          <p>{text}</p>
+                                          {index !==
+                                            desc.subText.length - 1 && (
+                                            <span
+                                              style={{
+                                                marginLeft: "-1em",
+                                                display: "inline-block",
+                                              }}
+                                            />
+                                          )}
+                                        </React.Fragment>
+                                      ))
+                                    ) : (
+                                      <p>{desc.subText || ""}</p>
+                                    )}
+                                  </div>
+                                )}
+                              </>
+                            )}
                           </div>
                         ))}
                       </div>
                     </div>
                   </div>
-                ))}
+                ))}{" "}
               </div>
             </article>
           </section>

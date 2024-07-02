@@ -80,10 +80,8 @@ const history = [
         ],
         subPicture: [
           "/images/legacy/ESS-Images/FivePlane5.png",
-          "/images/legacy/ESS-Images/FivePlane4.png",
-          "/images/legacy/ESS-Images/FivePlane3.png",
-          "/images/legacy/ESS-Images/FivePlane2.png",
-          "/images/legacy/ESS-Images/FivePlane1.png",
+          "/images/legacy/ESS-Images/FivePlane5.png",
+          "/images/legacy/ESS-Images/FivePlane5.png",
         ],
       },
       {
@@ -277,23 +275,20 @@ const ESS = () => {
                                   <div key={index} className="mb-2">
                                     {/* Add margin-bottom for spacing */}
                                     <React.Fragment>
-                                      {/* Render subPicture using Next.js Image component */}
-                                      {desc.subPicture?.[index] && (
-                                        <div className="my-4 px-16">
-                                          <Image
-                                            src={desc.subPicture[index] ?? ""} // Provide a fallback image source
-                                            alt={`Sub-picture ${index}`}
-                                            layout="responsive"
-                                            width={150} // Adjust the width as needed
-                                            height={100} // Adjust the height as needed
-                                            objectFit="cover"
-                                          />
-                                        </div>
-                                      )}
                                       <h4 className="text-base mb-1 text-gray-900 dark:text-gray-100">
                                         {title}
                                       </h4>
                                       <p>{desc.subText?.[index] || ""}</p>
+                                      {/* Render subPicture */}
+                                      {desc.subPicture[index] && (
+                                        <img
+                                          src={desc.subPicture[index]}
+                                          alt={`Subpicture ${index}`}
+                                          className="mt-2 rounded shadow-sm"
+                                          width={150} // Adjust the width as needed
+                                          height={100} // Adjust the height as needed
+                                        />
+                                      )}
                                     </React.Fragment>
                                   </div>
                                 ))}

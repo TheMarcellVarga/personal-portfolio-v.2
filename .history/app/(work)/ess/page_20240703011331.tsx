@@ -294,6 +294,7 @@ const ESS = () => {
                                         {title}
                                       </h4>
                                       <p>{desc.subText?.[index] || ""}</p>
+                                      {/* Render subPicture */}
                                     </React.Fragment>
                                   </div>
                                 ))}

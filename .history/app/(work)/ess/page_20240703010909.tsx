@@ -82,8 +82,6 @@ const history = [
           "/images/legacy/ESS-Images/FivePlane5.png",
           "/images/legacy/ESS-Images/FivePlane4.png",
           "/images/legacy/ESS-Images/FivePlane3.png",
-          "/images/legacy/ESS-Images/FivePlane2.png",
-          "/images/legacy/ESS-Images/FivePlane1.png",
         ],
       },
       {
@@ -277,9 +275,8 @@ const ESS = () => {
                                   <div key={index} className="mb-2">
                                     {/* Add margin-bottom for spacing */}
                                     <React.Fragment>
-                                      {/* Render subPicture using Next.js Image component */}
                                       {desc.subPicture?.[index] && (
-                                        <div className="my-4 px-16">
+                                        <div className="mt-2">
                                           <Image
                                             src={desc.subPicture[index] ?? ""} // Provide a fallback image source
                                             alt={`Sub-picture ${index}`}
@@ -294,6 +291,8 @@ const ESS = () => {
                                         {title}
                                       </h4>
                                       <p>{desc.subText?.[index] || ""}</p>
+                                      {/* Render subPicture */}
+                                      {/* Render subPicture using Next.js Image component */}
                                     </React.Fragment>
                                   </div>
                                 ))}

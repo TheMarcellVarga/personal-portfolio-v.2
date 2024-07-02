@@ -78,13 +78,7 @@ const history = [
           "After the requirements have been set, we got a clear picture of what will be included on the website. Besides adding new elements after meeting with our client, we revised the information architecture and created categories and navigational schemes that would allow users to move through the site content efficiently.",
           "In this phase, we have already experimented with the very first wireframe, identifying specific aspects of the interface like navigation, placing the buttons, blocks of text, etc. On the structure plane, we looked at the larger-scale issues of architecture and interactions. In this phase, our concerns exist at a smaller scale of individual components and their relationship.",
         ],
-        subPicture: [
-          "/images/legacy/ESS-Images/FivePlane5.png",
-          "/images/legacy/ESS-Images/FivePlane4.png",
-          "/images/legacy/ESS-Images/FivePlane3.png",
-          "/images/legacy/ESS-Images/FivePlane2.png",
-          "/images/legacy/ESS-Images/FivePlane1.png",
-        ],
+        subPicture: [],
       },
       {
         title: "Information Architecture",
@@ -268,29 +262,16 @@ const ESS = () => {
                                 />
                               )}
                             </div>
+                            {/* Render subTitle and subText alternatively */}
                             {/* Render subTitle and subText alternatively with spacing */}
-                            <div className="text-sm text-gray-600 dark:text-gray-300">
+                            <div className="text-sm text-gray-600 dark:text-gray-200">
                               {Array.isArray(desc.subTitle) &&
                                 Array.isArray(desc.subText) &&
-                                Array.isArray(desc.subPicture) &&
                                 desc.subTitle.map((title, index) => (
                                   <div key={index} className="mb-2">
                                     {/* Add margin-bottom for spacing */}
                                     <React.Fragment>
-                                      {/* Render subPicture using Next.js Image component */}
-                                      {desc.subPicture?.[index] && (
-                                        <div className="my-4 px-16">
-                                          <Image
-                                            src={desc.subPicture[index] ?? ""} // Provide a fallback image source
-                                            alt={`Sub-picture ${index}`}
-                                            layout="responsive"
-                                            width={150} // Adjust the width as needed
-                                            height={100} // Adjust the height as needed
-                                            objectFit="cover"
-                                          />
-                                        </div>
-                                      )}
-                                      <h4 className="text-base mb-1 text-gray-900 dark:text-gray-100">
+                                      <h4 className="text-base mb-1 text-gray-900 dark:text-gray-300">
                                         {title}
                                       </h4>
                                       <p>{desc.subText?.[index] || ""}</p>
@@ -298,7 +279,7 @@ const ESS = () => {
                                   </div>
                                 ))}
                             </div>{" "}
-                            {/* Render subPicture if it exists
+                            {/* Render subPicture if it exists */}
                             {(desc.subPicture || []).length > 0 && (
                               <div className="mt-2 flex flex-row space-x-4">
                                 {(desc.subPicture || []).map(
@@ -322,7 +303,7 @@ const ESS = () => {
                                   )
                                 )}
                               </div>
-                            )} */}
+                            )}
                           </div>
                         ))}
                       </div>

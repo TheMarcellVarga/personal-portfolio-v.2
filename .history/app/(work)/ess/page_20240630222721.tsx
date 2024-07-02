@@ -25,21 +25,27 @@ const history = [
         text: [
           "European Study Solution is a new start-up organization registered in Ukraine, whose purpose is to help American students with the application process and preparation for life abroad. ESS would like to provide a payable service for Americans to help with application submission to European educational programs. The company’s main service feature is a unique approach to their client, where the main focus would lay on helping to find professional orientation, assistance with all the documentary work, preparation for life abroad, etc.",
         ],
-        picture: [],
+        picture: [
+          "",
+        ],
       },
       {
         title: "Problem",
         text: [
           "The main issue ESS is facing is that the company is missing an informative website with the necessary information, which would help students to choose them as a study agency. The website should contain all necessary information about available university programs, the application process, coming deadlines, service fees, and information about living abroad to make the website more attractive and useful to convince people to use the agency's service.",
         ],
-        picture: [],
+        picture: [
+          "",
+        ],
       },
       {
         title: "Objective",
         text: [
           "This must be achieved by creating the website from scratch, which would be the main information platform for the company, where they could have an overview of different services, prices, and information about universities available in France.",
         ],
-        picture: [],
+        picture: [
+          "",
+        ],
       },
       {
         title: "User Research",
@@ -47,7 +53,9 @@ const history = [
           "To get a better understanding of our users we had to conduct detailed research understand the environment they live in and observe their behaviors and habits",
           "We proceeded with gathering data using qualitative user research where we conducted interviews using a closed question survey. For this we have created an interview guide with a categorization list, to set our target audience which in our case consisted of American students from 18-20 year-old or older, willing to study abroad and open to new cultures and experiences",
         ],
-        picture: [],
+        picture: [
+          "",
+        ],
       },
       {
         title: "Personas",
@@ -55,8 +63,8 @@ const history = [
           "For further insight we created personas to understand our users needs and assume their experiences within a product, behavior and goals.",
         ],
         picture: [
-          "/images/legacy/ESS-Images/Picture 3.png",
-          "/images/legacy/ESS-Images/Picture 4.png",
+          "/images/legacy/ESS-Images/Picture 1.png",
+          "/images/legacy/ESS-CaseIndex-New.png",
         ],
       },
       {
@@ -64,7 +72,9 @@ const history = [
         text: [
           "We carried out this product by utilizing the Five Planes Method.",
         ],
-        picture: [],
+        picture: [
+          "",
+        ],
         subTitle: [
           "Strategy plane",
           "Scope plane",
@@ -79,11 +89,7 @@ const history = [
           "In this phase, we have already experimented with the very first wireframe, identifying specific aspects of the interface like navigation, placing the buttons, blocks of text, etc. On the structure plane, we looked at the larger-scale issues of architecture and interactions. In this phase, our concerns exist at a smaller scale of individual components and their relationship.",
         ],
         subPicture: [
-          "/images/legacy/ESS-Images/FivePlane5.png",
-          "/images/legacy/ESS-Images/FivePlane4.png",
-          "/images/legacy/ESS-Images/FivePlane3.png",
-          "/images/legacy/ESS-Images/FivePlane2.png",
-          "/images/legacy/ESS-Images/FivePlane1.png",
+          "",
         ],
       },
       {
@@ -91,7 +97,9 @@ const history = [
         text: [
           "The main purpose of our website was to interpret information for the users, by performing tasks with the least amount of effort possible contributing to an easy and natural experience. To truly accomplish this task, we of course also had to define the most relevant contents for the user.",
         ],
-        picture: [],
+        picture: [
+          "",
+        ],
       },
       {
         title: "Wireframing",
@@ -105,7 +113,9 @@ const history = [
           "Moving to the service page, the most convenient solution we came up with is a vertical sidebar on the left with variety of tabs. On the right side, we placed a container with information, which can be changed by using the tabs",
           "We placed a page for the universities, where content and visuals play an important role, therefore it was our task to make it informative, while being easily readable. Since we have different universities' information, we tried to make the layout template that should suit all of them.",
         ],
-        picture: [],
+        picture: [
+          "",
+        ],
       },
       {
         title: "Lo-Fi",
@@ -114,14 +124,18 @@ const history = [
           "As a follow-up, we also placed a price scale, to highlight the advantage of using the service of our client by studying in European universities over Americans.",
           "Moreover, we placed an implementation of service package prices and what included in them to help consumers find a deal suited for their needs.",
         ],
-        picture: [],
+        picture: [
+          "",
+        ],
       },
       {
         title: "Surface Plane",
         text: [
           "After making the structure of wireframes and elements that should be on the page, we reached the Surface Plane. Here we placed our attention to the sensory design to produce a finished design, where content, functionality and aesthetics came together.",
         ],
-        picture: [],
+        picture: [
+          "",
+        ],
       },
       {
         title: "Mockup",
@@ -131,21 +145,27 @@ const history = [
           "Reading plenty of text can result in fatigue. Placing pictures of the schools can uplift their mood and leave a cheerful impression on the users. Afterall, they sometimes speak more than words",
           "Lastly, but not least, the contact us page, provides is satisfying confirmation to eliminate any uncertainty if their application was submitted.",
         ],
-        picture: [],
+        picture: [
+          "",
+        ],
       },
       {
         title: "Responsive Design",
         text: [
           "Due to our target audience, making the website responsive was one of our highest priority. Consequently, we made prototypes for both tablet and mobile devices. This came with a responsive navigation via a hamburger menu.",
         ],
-        picture: [],
+        picture: [
+          "",
+        ],
       },
       {
         title: "Realization",
         text: [
           "After finishing our final design, or for our high-fidelity mockup, we started to code by using HTML, CSS and JavaScript.",
         ],
-        picture: [],
+        picture: [
+          "",
+        ],
       },
       {
         title: "Usability",
@@ -153,14 +173,18 @@ const history = [
           "To validate our design, we conducted a five-second test to view and observe the first impressions of our users and a Think Aloud test to make sure our product serves its purpose as intended.",
           "The test was successful and concluded that the concept is well founded.",
         ],
-        picture: [],
+        picture: [
+          "",
+        ],
       },
       {
         title: "SEO",
         text: [
           "Lastly, we improved the website using metadata and further optimization to generate online traffic, driven by search engines so it can be properly indexed and displayed within the search results.",
         ],
-        picture: [],
+        picture: [
+          "",
+        ],
       },
       {
         title: "Summary",
@@ -168,7 +192,9 @@ const history = [
           "To conclude our process, we have created a website for the start-up organization - European Study Solution, which will be the main platform for them to develop their business and keep in contact with students in the future. From the user perspective, ewe create the possibility to know more about the agency and engage them to use the agency's services.",
           "Overall, we feel we have created a content-rich and functional product that the user can utilize and receive the information and assistance they require regarding their journey abroad",
         ],
-        picture: [],
+        picture: [
+          "",
+        ],
       },
     ],
   },
@@ -242,87 +268,24 @@ const ESS = () => {
                                 <p>{desc.text || ""}</p>
                               )}
                             </div>
-                            <div className="mt-2 flex flex-row ">
+                            <div className="mt-2">
                               {Array.isArray(desc.picture) ? (
                                 desc.picture.map((pictureUrl, pictureIndex) => (
-                                  <div className="w-full mx-4">
-                                    <Image
-                                      src={pictureUrl}
-                                      key={pictureIndex}
-                                      alt="kek"
-                                      layout="responsive"
-                                      width={150}
-                                      height={100}
-                                      objectFit="cover"
-                                    />
-                                  </div>
+                                  <img
+                                    src={pictureUrl}
+                                    alt=""
+                                    key={pictureIndex}
+                                    className="w-full object-cover"
+                                  />
                                 ))
                               ) : (
-                                <Image
+                                <img
                                   src={desc.picture || ""}
-                                  alt="kek"
-                                  layout="responsive"
-                                  width={150}
-                                  height={100}
-                                  objectFit="cover"
+                                  alt=""
+                                  className="w-full object-cover"
                                 />
                               )}
                             </div>
-                            {/* Render subTitle and subText alternatively with spacing */}
-                            <div className="text-sm text-gray-600 dark:text-gray-300">
-                              {Array.isArray(desc.subTitle) &&
-                                Array.isArray(desc.subText) &&
-                                Array.isArray(desc.subPicture) &&
-                                desc.subTitle.map((title, index) => (
-                                  <div key={index} className="mb-2">
-                                    {/* Add margin-bottom for spacing */}
-                                    <React.Fragment>
-                                      {/* Render subPicture using Next.js Image component */}
-                                      {desc.subPicture?.[index] && (
-                                        <div className="my-4 px-16">
-                                          <Image
-                                            src={desc.subPicture[index] ?? ""} // Provide a fallback image source
-                                            alt={`Sub-picture ${index}`}
-                                            layout="responsive"
-                                            width={150} // Adjust the width as needed
-                                            height={100} // Adjust the height as needed
-                                            objectFit="cover"
-                                          />
-                                        </div>
-                                      )}
-                                      <h4 className="text-base mb-1 text-gray-900 dark:text-gray-100">
-                                        {title}
-                                      </h4>
-                                      <p>{desc.subText?.[index] || ""}</p>
-                                    </React.Fragment>
-                                  </div>
-                                ))}
-                            </div>{" "}
-                            {/* Render subPicture if it exists
-                            {(desc.subPicture || []).length > 0 && (
-                              <div className="mt-2 flex flex-row space-x-4">
-                                {(desc.subPicture || []).map(
-                                  (
-                                    pictureUrl: string,
-                                    pictureIndex: number
-                                  ) => (
-                                    <div
-                                      key={pictureIndex}
-                                      className="w-full max-w-xs"
-                                    >
-                                      <Image
-                                        src={pictureUrl}
-                                        alt={`Sub-picture ${pictureIndex}`}
-                                        layout="responsive"
-                                        width={150}
-                                        height={100}
-                                        objectFit="cover"
-                                      />
-                                    </div>
-                                  )
-                                )}
-                              </div>
-                            )} */}
                           </div>
                         ))}
                       </div>
