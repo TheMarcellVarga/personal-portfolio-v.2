@@ -16,7 +16,7 @@ const history = [
     title: "",
     subTitle: "",
     content: {
-      picture: "/images/legacy/CatchScan-CaseIndex-New.png",
+      picture: "/images/legacy/ESS-CaseIndex-New.png",
       text: "",
     },
     description: [

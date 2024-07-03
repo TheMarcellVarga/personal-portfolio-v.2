@@ -13,10 +13,10 @@ import Footer from "../../footer";
 
 const history = [
   {
-    title: "",
+    title: "a",
     subTitle: "",
     content: {
-      picture: "/images/legacy/CatchScan-CaseIndex-New.png",
+      picture: "/images/legacy/ESS-CaseIndex-New.png",
       text: "",
     },
     description: [
@@ -266,7 +266,7 @@ const history = [
   },
 ];
 
-const Catchscan = () => {
+const AskCody = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isHover, setIsHover] = useState(false);
@@ -308,6 +308,8 @@ const Catchscan = () => {
     }
   }, [isDarkMode]);
 
+
+
   return (
     <div className="px-4 pb-4 bg-custom-light dark:bg-custom-dark transition-colors duration-200 ease-in-out">
       <Header
@@ -322,10 +324,10 @@ const Catchscan = () => {
             {/* New Experience Section */}
             <article className="mt-8 w-full p-4">
               <h2 className="text-slate-900 dark:text-slate-50 text-3xl font-bold">
-                CatchScan
+                European Study Solution
               </h2>
               <h2 className="text-custom-blue text-md font-bold mb-4 tracking-wider uppercase">
-                Copyright Protection SaaS
+                Student Agency
               </h2>
               <div className="flex flex-col gap-12">
                 {history.map((item, index) => (
@@ -488,4 +490,4 @@ const Catchscan = () => {
   );
 };
 
-export default Catchscan;
+export default AskCody;
