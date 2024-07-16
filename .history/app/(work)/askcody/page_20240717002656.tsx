@@ -37,295 +37,228 @@ const history = [
       {
         title: "Objective",
         text: [
-          "To help companies address this issue, we will investigate developing a software solution which will capitalize on utilizing all the company's resources while providing flexible work arrangements for its employees.",
+          "This must be achieved by creating the website from scratch, which would be the main information platform for the company, where they could have an overview of different services, prices, and information about universities available in France.",
         ],
         picture: [],
       },
       {
-        title: "Design Thinking",
+        title: "User Research",
         text: [
-          "Our choice of development method for the project was Design Thinking as it can help us systematically extract, teach, learn and apply human centric techniques to solve problems in a creative and innovative way. By using Design Thinking we will ensure that the focus is kept on the users' needs and values, and that it is a human-centered procedure.",
+          "To get a better understanding of our users we had to conduct detailed research understand the environment they live in and observe their behaviors and habits",
+          "We proceeded with gathering data using qualitative user research where we conducted interviews using a closed question survey. For this we have created an interview guide with a categorization list, to set our target audience which in our case consisted of American students from 18-20 year-old or older, willing to study abroad and open to new cultures and experiences",
         ],
         picture: [],
       },
       {
-        title: "Empathize",
-        text: [],
-        picture: [],
-        subTitle: ["Interviews", "", "Personas", "", ""],
-        subText: [
-          "We prepared a thorough interview guide and carefully selected the possible participants, as it would greatly influence the result. We believed that the best source to extract information from would be from personnel of the corporate offices.",
-          "Based on the interviews, we gained insight to many unique needs, which we sorted and evaluated. From this we concluded that companies are looking to optimize their capacity of space resources and to increase the productivity of their employees by automating everyday ad-hoc tasks. In addition, complying with the hybrid model was a key factor.",
-          "Together our findings we settled on having personas for the best representation of our target audience. By doing this we'll be able to know the specific needs of workers in similar positions and use their possible motivation or pain points for our own good. We chose to bring our perception for making it role based.",
-          "",
-        ],
-        subPicture: [
-          "",
-          "",
-          "",
-          "/images/legacy/AC-Images/Figure1.png",
-          "/images/legacy/AC-Images/Figure2.png",
-        ],
-      },
-      {
-        title: "Define",
+        title: "Personas",
         text: [
-          "After finding the core issues to be solved, we analyze our observations from our users and funnel our thoughts down to make it more tangible. To do this we are synthesizing our findings so we can define the problem.",
+          "For further insight we created personas to understand our users needs and assume their experiences within a product, behavior and goals.",
         ],
-        picture: [],
-        subTitle: ["Point of View", "", "", "", ""],
-        subText: [
-          "Since our project was revolving around exploring what are the crucial issues and how they could act as an obstacle for digital-first work environment, we had to define what the exact problems are, using an actionable problem statements.",
-          "",
-          "",
-          "",
-          "",
-        ],
-        subPicture: [
-          "",
-          "/images/legacy/AC-Images/Figure3.1.png",
-          "/images/legacy/AC-Images/Figure3.2.png",
-          "/images/legacy/AC-Images/Figure3.3.png",
-          "/images/legacy/AC-Images/Figure3.4.png",
+        picture: [
+          "/images/legacy/ESS-Images/Picture 3.png",
+          "/images/legacy/ESS-Images/Picture 4.png",
         ],
       },
       {
-        title: "Ideate",
-        text: [],
+        title: "Five Planes Method",
+        text: [
+          "We carried out this product by utilizing the Five Planes Method.",
+        ],
         picture: [],
         subTitle: [
-          "Crazy 8s",
-          "",
-          "",
-          "",
-          "Card Sorting",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "Information Architecture",
-          "",
-          "",
-          "",
-          "",
-          "User Stories",
-          "",
-          "",
-          "",
-          "",
+          "Strategy plane",
+          "Scope plane",
+          "Structure plane",
+          "Skeleton plane",
         ],
         subText: [
-          "Having sufficient data made it easy for us to start ideating on the show structure for the product and with it the functionalities which will provide a solution for different user types.´",
-          "First, we are stating our goal, which in our case was to discover the potential functionality of the product. To fulfill this, we developed ideas under a short, predetermined amount of time and later validated them among us.´",
-          "",
-          "",
-          "Our next step was to conduct a card sorting study. We have created cards based on our previous brainstorming sessions, where we were discussing taxonomically low-level features and other aspects of the future system.",
-          "We choose our card sorting method to be hybrid, as our end-product was focusing more on functionality, rather than pure information presentation.",
-          "",
-          "The results were captivating, which drove us to generate additional categories, which gave us a further approvement.",
-          "",
-          "",
-          "We started to establish an informational architecture by creating a sitemap. Visual sitemaps gave us a clear representation of the structure for our product. To institute the taxonomy, we had made clear relations between the content, which also lay down the foundation for multiple user flows.",
-          "",
-          "",
-          "Before finalizing the IA, we created a sitemap for the most valid categories and listed their functions and dependencies beneath them, based on the study results. This was necessary as after working with many pages with many functionalities their relations became quite confusing and therefore, we visualize them.",
-          "",
-          "Before going any further we had to make a product discovery using User Stories to revise our progress and verify if all customer goals and product requirements achievable and can be met.",
-          "Our discovery was dictated by two factors, which were our project needs and the technical requirements, including the potential limitations.",
-          "",
-          "We have made a list with User Stories to catch all software features from our users' perspective.",
+          "We started with setting two key issues: what value should the website bring for the organization and what value it can bring for the user. Since the agency didn't have any website yet, it would be a core platform for them to attract potential customers, and for the users, it would be the main moderator between the agency and partner universities.",
+          "By answering these questions, it helped us to see that the website we will produce, will be more intended to use as an information website, with less functional specifications and more content requirements, hence spending more time on Information Architecture, to increase the content readability",
+          "We defined what are the required content elements to meet the users' needs, both from the functional and content requirement side.",
+          "After the requirements have been set, we got a clear picture of what will be included on the website. Besides adding new elements after meeting with our client, we revised the information architecture and created categories and navigational schemes that would allow users to move through the site content efficiently.",
+          "In this phase, we have already experimented with the very first wireframe, identifying specific aspects of the interface like navigation, placing the buttons, blocks of text, etc. On the structure plane, we looked at the larger-scale issues of architecture and interactions. In this phase, our concerns exist at a smaller scale of individual components and their relationship.",
         ],
         subPicture: [
-          "",
-          "",
-          "/images/legacy/AC-Images/Figure4.png",
-          "/images/legacy/AC-Images/Figure5.png",
-          "/images/legacy/AC-Images/Figure6.png",
-          "",
-          "",
-          "/images/legacy/AC-Images/Figure7.png",
-          "/images/legacy/AC-Images/Figure8.png",
-          "/images/legacy/AC-Images/Figure9.png",
-          "",
-          "/images/legacy/AC-Images/Figure10.png",
-          "/images/legacy/AC-Images/Figure11.png",
-          "",
-          "/images/legacy/AC-Images/Figure12.png",
-          "",
-          "",
-          "",
-          "",
-          "/images/legacy/AC-Images/Figure13.png",
+          "/images/legacy/ESS-Images/FivePlane5.png",
+          "/images/legacy/ESS-Images/FivePlane4.png",
+          "/images/legacy/ESS-Images/FivePlane3.png",
+          "/images/legacy/ESS-Images/FivePlane2.png",
+          "/images/legacy/ESS-Images/FivePlane1.png",
         ],
       },
       {
-        title: "Prototype",
-        text: [""],
-        picture: [],
-        subTitle: ["Sketches", "", ""],
-        subText: [
-          "We had started to create initial sketches to capture our vision and get an overview of the page structure. We're also able to visualize the information architecture and project the user behaviors.",
-          "",
-          "",
-        ],
-        subPicture: [
-          "",
-          "/images/legacy/AC-Images/Figure14.jpg",
-          "/images/legacy/AC-Images/Figure15.jpg",
-        ],
-      },
-      {
-        title: "Low-Fidelity Wireframes",
+        title: "Information Architecture",
         text: [
-          "This time we started to apply more details, including a well-defined information architecture.",
-          "Based on the assessment of the card sorting we had re-evaluated and placed the access to the most important pages into the header, ending up with five subpages.",
-        ],
-        picture: ["/images/legacy/AC-Images/Figure16.png"],
-      },
-      {
-        title: "Mid-Fidelity Prototype",
-        text: [
-          "Our design was determined by the Fluent UI design system while retaining the AskCody corporate visual identity.",
-          "We made a dashboard design, including a snippet of a calendar for a quick overview of the upcoming events, which is one of the most crucial assets of an office worker. In case the visitor in the project manager, we also placed a quick overview widget for thƒe tickets submitted though the support.",
-        ],
-        picture: ["/images/legacy/AC-Images/Figure17.png"],
-      },
-      {
-        title: "",
-        text: [
-          "We have created design assets and components respecting the Microsoft design language, Fluent, due to our platform of implementation.",
+          "The main purpose of our website was to interpret information for the users, by performing tasks with the least amount of effort possible contributing to an easy and natural experience. To truly accomplish this task, we of course also had to define the most relevant contents for the user.",
         ],
         picture: [],
       },
       {
-        title: "",
+        title: "Wireframing",
         text: [
-          "In terms of colors, we had to take both Teams' and AskCody's into consideration. It was important to establish a harmony between them, while not blending them in too much.",
+          "As part of the skeleton phase, we have created the first design iterations - Wireframes. It gave us clear overview of the page structure and while represented the initial product concept, we kept styling, color, and graphics to the minimum.",
+          "We established the navigation bar where we included different page labels to emphasize the structure.",
         ],
-        picture: ["/images/legacy/AC-Images/Figure18.png"],
-      },
-      {
-        title: "",
-        text: [],
-        picture: ["/images/legacy/AC-Images/Figure19.1.png"],
-      },
-      {
-        title: "",
-        text: [],
-        picture: ["/images/legacy/AC-Images/Figure19.2.png"],
+        picture: ["/images/legacy/ESS-Images/Picture 5.png"],
       },
       {
         title: "",
         text: [
-          "Despite them being a way to interpret the brand itself, it also helps capturing feeling, which we want to make the users feel when they are using our solution. Using it properly can improve how the users perceive and interact with the interface. AskCody's main color is a shade of blue, which is notoriously stand for calmness or serenity. This exactly captures what our goal is with our product by contributing to the establishment of a structured and orderly environment.",
+          "Besides, at the very beginning of the website, we had a similar vision of displaying a full-width picture or slide show gallery.",
+        ],
+        picture: [
+          [
+            "/images/legacy/ESS-Images/Picture 6.1.png",
+            "/images/legacy/ESS-Images/Picture 6.2.png",
+            "/images/legacy/ESS-Images/Picture 6.3.png",
+          ],
+        ],
+      },
+      {
+        title: "",
+        text: [
+          "Since the landing page is what will catch the user's interest from the very second, therefore we made multiple different prototype, where we clarified what ESS is about and what service they provide, including the key points of their service.",
+        ],
+        picture: [
+          [
+            "/images/legacy/ESS-Images/Picture 7.1.png",
+            "/images/legacy/ESS-Images/Picture 7.2.png",
+            "/images/legacy/ESS-Images/Picture 7.3.png",
+            "/images/legacy/ESS-Images/Picture 7.4.png",
+          ],
+        ],
+      },
+      {
+        title: "",
+        text: [
+          "We considered implementing a section where the reviews of the company would be shown. Our idea was to display these as a card element in accordance with the Gestalt Principles.",
+        ],
+        picture: [
+          [
+            "/images/legacy/ESS-Images/Picture 8.1.png",
+            "/images/legacy/ESS-Images/Picture 8.2.png",
+          ],
+        ],
+      },
+      {
+        title: "",
+        text: [
+          "According to the footer design, we have tried to display the most important links from the website they should look for, if they missed it on the page, also the agency’s contact information.",
+        ],
+        picture: [["/images/legacy/ESS-Images/Picture 9.png"]],
+      },
+      {
+        title: "",
+        text: [
+          "Moving to the service page, the most convenient solution we came up with is a vertical sidebar on the left with variety of tabs. On the right side, we placed a container with information, which can be changed by using the tabs",
+        ],
+        picture: [["/images/legacy/ESS-Images/Picture 10.png"]],
+      },
+      {
+        title: "",
+        text: [
+          "We placed a page for the universities, where content and visuals play an important role, therefore it was our task to make it informative, while being easily readable. Since we have different universities' information, we tried to make the layout template that should suit all of them.",
+        ],
+        picture: [["/images/legacy/ESS-Images/Picture 11.2.png"]],
+      },
+      {
+        title: "Lo-Fi",
+        text: [
+          "Following additional client meetings, we showcased the partner universities on the landing page based on feedback. This inspired us to display them on the university page as well, whereby clicking on the icon of the institution, the content will change accordingly.",
+        ],
+        picture: [["/images/legacy/ESS-Images/Picture 12.1.png"]],
+      },
+      {
+        title: "",
+        text: [
+          "As a follow-up, we also placed a price scale, to highlight the advantage of using the service of our client by studying in European universities over Americans.",
+        ],
+        picture: [["/images/legacy/ESS-Images/Picture 12.2.png"]],
+      },
+      {
+        title: "",
+        text: [
+          "Moreover, we placed an implementation of service package prices and what included in them to help consumers find a deal suited for their needs.",
         ],
         picture: [],
       },
       {
-        title: "High-Fidelity Mockups",
-        text: [
-          "Our last iterations included all the functional and interactive elements, using both the design system and the custom assets.",
-          "At this point, we had planned out how the interactions should behave and what they should result in, including changes based on additional feedback.",
-        ],
-        picture: [
-          "/images/legacy/AC-Images/Figure20.png",
-          "/images/legacy/AC-Images/Figure21.png",
-        ],
-      },
-      {
-        title: "",
+        title: "Surface Plane",
         text: [],
-        picture: [
-          "/images/legacy/AC-Images/Figure23.png",
-          "/images/legacy/AC-Images/Figure23.1.png",
-        ],
-      },
-      {
-        title: "",
-        text: [],
-        picture: [
-          "/images/legacy/AC-Images/Figure26.png",
-          "/images/legacy/AC-Images/Figure27.png",
-        ],
-      },
-      {
-        title: "",
-        text: [],
-        picture: [
-          "/images/legacy/AC-Images/Figure28.png",
-          "/images/legacy/AC-Images/Figure29.png",
-        ],
-      },
-      {
-        title: "",
-        text: [],
-        picture: [
-          "/images/legacy/AC-Images/Figure30.png",
-          "/images/legacy/AC-Images/Figure33.png",
-        ],
-      },
-      {
-        title: "Mobile Functionality",
-        text: [
-          "When thinking about convenience and fast ways of booking the resources, the mobile comes as an obvious solution, unless the ad-hoc on-site version is more convenient. This is exactly the reason we have decided to create a concept of what mobile interaction could look like.",
-          "We have created a concept combining did you to land real world implication, where booking could be done using mobile devices.",
-        ],
-        picture: [
-          "/images/legacy/AC-Images/Figure34.png",
-          "/images/legacy/AC-Images/Figure35.png",
-          "/images/legacy/AC-Images/Figure36.png",
-        ],
-      },
-      {
-        title: "Watch Functionality",
-        text: [
-          "We carried out a watch companion implementation of the booking system that is remarkably similar to the mobile version.",
-        ],
-        picture: [
-          "/images/legacy/AC-Images/Figure37.png",
-          "/images/legacy/AC-Images/Figure38.png",
-        ],
-      },
-      {
-        title: "Test",
-        text: [
-          "We had proceeded with carrying out a series of five second tests to verify our findings.",
-          "For the first session, we took the busiest page of our prototype to see if the call-to-actions are working as intended and what grabs the user attention the most.",
-        ],
-        picture: [
-          "/images/legacy/AC-Images/Figure39.1.png",
-          "/images/legacy/AC-Images/Figure39.2.png",
-        ],
-      },
-      {
-        title: "",
-        text: [],
-        picture: [
-          "/images/legacy/AC-Images/Figure40.1.png",
-          "/images/legacy/AC-Images/Figure40.2.png",
-        ],
+        picture: [["/images/legacy/ESS-Images/FivePlane1.png"]],
       },
       {
         title: "",
         text: [
-          "The results of our testing sessions were better than we anticipated. The key targets we were aiming for are recognized by the users in the way that we thought they would. This confirmed our solutions are validity.",
+          "After making the structure of wireframes and elements that should be on the page, we reached the Surface Plane. Here we placed our attention to the sensory design to produce a finished design, where content, functionality and aesthetics came together.",
         ],
-        picture: [],
+        picture: [[]],
+      },
+      {
+        title: "Mockup",
+        text: [],
+        picture: [["/images/legacy/ESS-Images/Picture 13.1.png"]],
+      },
+      {
+        title: "",
+        text: [
+          "We have made the last iteration of combining our ideas, client wishes, and research to make the final product, with most of the necessary design assets and components.",
+          "In the review section, we displayed place for 3 upcoming customer review, which in the future can be expanded with the use of a slide function.",
+        ],
+        picture: [["/images/legacy/ESS-Images/Picture 13.2.png"]],
+      },
+      {
+        title: "",
+        text: [
+          "Reading plenty of text can result in fatigue. Placing pictures of the schools can uplift their mood and leave a cheerful impression on the users. Afterall, they sometimes speak more than words",
+        ],
+        picture: [["/images/legacy/ESS-Images/Picture 13.3.png"]],
+      },
+      {
+        title: "",
+        text: [
+          "Lastly, but not least, the contact us page, provides is satisfying confirmation to eliminate any uncertainty if their application was submitted.",
+        ],
+        picture: [["/images/legacy/ESS-Images/Picture 13.4.png"]],
+      },
+      {
+        title: "Responsive Design",
+        text: [
+          "Due to our target audience, making the website responsive was one of our highest priority. Consequently, we made prototypes for both tablet and mobile devices. This came with a responsive navigation via a hamburger menu.",
+        ],
+        picture: [
+          "/images/legacy/ESS-Images/Picture 14.1.png",
+          "/images/legacy/ESS-Images/Picture 14.2.png",
+          "/images/legacy/ESS-Images/Picture 14.2.png",
+        ],
       },
       {
         title: "Realization",
         text: [
-          "The solution was carried out using HTML, CSS, JavaScript. We utilized React as Front-end framework, by having React-Bootstrap as our library. This was due to it is being Microsoft's recommended tool for building Team's applications.",
-          "React being a lightweight library, allowed us a flexible and rapid process.",
+          "After finishing our final design, or for our high-fidelity mockup, we started to code by using HTML, CSS and JavaScript.",
         ],
         picture: [],
       },
       {
+        title: "Usability",
+        text: [
+          "To validate our design, we conducted a five-second test to view and observe the first impressions of our users and a Think Aloud test to make sure our product serves its purpose as intended.",
+          "The test was successful and concluded that the concept is well founded.",
+        ],
+        picture: [],
+      },
+      {
+        title: "SEO",
+        text: [
+          "Lastly, we improved the website using metadata and further optimization to generate online traffic, driven by search engines so it can be properly indexed and displayed within the search results.",
+        ],
+        picture: ["/images/legacy/ESS-Images/Picture 15.png"],
+      },
+      {
         title: "Summary",
         text: [
-          "To summarize, we have created an innovative concept for AskCody to solve the issue of resource management and flexible transformation in the office management area.",
-          "We had carried out a centralized solution existing part of AskCody's ecosystem integrated into Microsoft Teams to manage office resources, while providing an overview of the company both for the employees and the managers in the rising trend of hybrid work environments.",
+          "To conclude our process, we have created a website for the start-up organization - European Study Solution, which will be the main platform for them to develop their business and keep in contact with students in the future. From the user perspective, ewe create the possibility to know more about the agency and engage them to use the agency's services.",
+          "Overall, we feel we have created a content-rich and functional product that the user can utilize and receive the information and assistance they require regarding their journey abroad",
         ],
         picture: [],
       },

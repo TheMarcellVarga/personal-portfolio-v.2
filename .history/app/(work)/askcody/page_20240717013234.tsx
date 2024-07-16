@@ -313,22 +313,6 @@ const history = [
         ],
         picture: [],
       },
-      {
-        title: "Realization",
-        text: [
-          "The solution was carried out using HTML, CSS, JavaScript. We utilized React as Front-end framework, by having React-Bootstrap as our library. This was due to it is being Microsoft's recommended tool for building Team's applications.",
-          "React being a lightweight library, allowed us a flexible and rapid process.",
-        ],
-        picture: [],
-      },
-      {
-        title: "Summary",
-        text: [
-          "To summarize, we have created an innovative concept for AskCody to solve the issue of resource management and flexible transformation in the office management area.",
-          "We had carried out a centralized solution existing part of AskCody's ecosystem integrated into Microsoft Teams to manage office resources, while providing an overview of the company both for the employees and the managers in the rising trend of hybrid work environments.",
-        ],
-        picture: [],
-      },
     ],
   },
 ];

@@ -50,14 +50,21 @@ const history = [
       },
       {
         title: "Empathize",
-        text: [],
+        text: [
+        ],
         picture: [],
-        subTitle: ["Interviews", "", "Personas", "", ""],
-        subText: [
-          "We prepared a thorough interview guide and carefully selected the possible participants, as it would greatly influence the result. We believed that the best source to extract information from would be from personnel of the corporate offices.",
-          "Based on the interviews, we gained insight to many unique needs, which we sorted and evaluated. From this we concluded that companies are looking to optimize their capacity of space resources and to increase the productivity of their employees by automating everyday ad-hoc tasks. In addition, complying with the hybrid model was a key factor.",
-          "Together our findings we settled on having personas for the best representation of our target audience. By doing this we'll be able to know the specific needs of workers in similar positions and use their possible motivation or pain points for our own good. We chose to bring our perception for making it role based.",
+        subTitle: [
+          "Interviews",
           "",
+          "Personas",
+          "",
+          "",
+        ],
+        subText: [
+        "We prepared a thorough interview guide and carefully selected the possible participants, as it would greatly influence the result. We believed that the best source to extract information from would be from personnel of the corporate offices.",
+        "Based on the interviews, we gained insight to many unique needs, which we sorted and evaluated. From this we concluded that companies are looking to optimize their capacity of space resources and to increase the productivity of their employees by automating everyday ad-hoc tasks. In addition, complying with the hybrid model was a key factor.",
+        "Together our findings we settled on having personas for the best representation of our target audience. By doing this we'll be able to know the specific needs of workers in similar positions and use their possible motivation or pain points for our own good. We chose to bring our perception for making it role based.",
+        "",
         ],
         subPicture: [
           "",
@@ -73,7 +80,13 @@ const history = [
           "After finding the core issues to be solved, we analyze our observations from our users and funnel our thoughts down to make it more tangible. To do this we are synthesizing our findings so we can define the problem.",
         ],
         picture: [],
-        subTitle: ["Point of View", "", "", "", ""],
+        subTitle: [
+          "Point of View",
+          "",
+          "",
+          "",
+          "",
+        ],
         subText: [
           "Since our project was revolving around exploring what are the crucial issues and how they could act as an obstacle for digital-first work environment, we had to define what the exact problems are, using an actionable problem statements.",
           "",
@@ -91,7 +104,8 @@ const history = [
       },
       {
         title: "Ideate",
-        text: [],
+        text: [
+        ],
         picture: [],
         subTitle: [
           "Crazy 8s",
@@ -161,9 +175,15 @@ const history = [
       },
       {
         title: "Prototype",
-        text: [""],
+        text: [
+          "",
+        ],
         picture: [],
-        subTitle: ["Sketches", "", ""],
+        subTitle: [
+          "Sketches",
+          "",
+          "",
+        ],
         subText: [
           "We had started to create initial sketches to capture our vision and get an overview of the page structure. We're also able to visualize the information architecture and project the user behaviors.",
           "",
@@ -181,7 +201,9 @@ const history = [
           "This time we started to apply more details, including a well-defined information architecture.",
           "Based on the assessment of the card sorting we had re-evaluated and placed the access to the most important pages into the header, ending up with five subpages.",
         ],
-        picture: ["/images/legacy/AC-Images/Figure16.png"],
+        picture: [
+          "/images/legacy/AC-Images/Figure16.png",
+        ],
       },
       {
         title: "Mid-Fidelity Prototype",
@@ -189,145 +211,51 @@ const history = [
           "Our design was determined by the Fluent UI design system while retaining the AskCody corporate visual identity.",
           "We made a dashboard design, including a snippet of a calendar for a quick overview of the upcoming events, which is one of the most crucial assets of an office worker. In case the visitor in the project manager, we also placed a quick overview widget for thƒe tickets submitted though the support.",
         ],
-        picture: ["/images/legacy/AC-Images/Figure17.png"],
+        picture: [
+          "/images/legacy/AC-Images/Figure17.png",
+        ],
       },
       {
         title: "",
         text: [
           "We have created design assets and components respecting the Microsoft design language, Fluent, due to our platform of implementation.",
         ],
-        picture: [],
+        picture: [
+        ],
       },
       {
         title: "",
         text: [
           "In terms of colors, we had to take both Teams' and AskCody's into consideration. It was important to establish a harmony between them, while not blending them in too much.",
         ],
-        picture: ["/images/legacy/AC-Images/Figure18.png"],
-      },
-      {
-        title: "",
-        text: [],
-        picture: ["/images/legacy/AC-Images/Figure19.1.png"],
-      },
-      {
-        title: "",
-        text: [],
-        picture: ["/images/legacy/AC-Images/Figure19.2.png"],
-      },
-      {
-        title: "",
-        text: [
-          "Despite them being a way to interpret the brand itself, it also helps capturing feeling, which we want to make the users feel when they are using our solution. Using it properly can improve how the users perceive and interact with the interface. AskCody's main color is a shade of blue, which is notoriously stand for calmness or serenity. This exactly captures what our goal is with our product by contributing to the establishment of a structured and orderly environment.",
-        ],
-        picture: [],
-      },
-      {
-        title: "High-Fidelity Mockups",
-        text: [
-          "Our last iterations included all the functional and interactive elements, using both the design system and the custom assets.",
-          "At this point, we had planned out how the interactions should behave and what they should result in, including changes based on additional feedback.",
-        ],
         picture: [
-          "/images/legacy/AC-Images/Figure20.png",
-          "/images/legacy/AC-Images/Figure21.png",
-        ],
-      },
-      {
-        title: "",
-        text: [],
-        picture: [
-          "/images/legacy/AC-Images/Figure23.png",
-          "/images/legacy/AC-Images/Figure23.1.png",
-        ],
-      },
-      {
-        title: "",
-        text: [],
-        picture: [
-          "/images/legacy/AC-Images/Figure26.png",
-          "/images/legacy/AC-Images/Figure27.png",
-        ],
-      },
-      {
-        title: "",
-        text: [],
-        picture: [
-          "/images/legacy/AC-Images/Figure28.png",
-          "/images/legacy/AC-Images/Figure29.png",
-        ],
-      },
-      {
-        title: "",
-        text: [],
-        picture: [
-          "/images/legacy/AC-Images/Figure30.png",
-          "/images/legacy/AC-Images/Figure33.png",
-        ],
-      },
-      {
-        title: "Mobile Functionality",
-        text: [
-          "When thinking about convenience and fast ways of booking the resources, the mobile comes as an obvious solution, unless the ad-hoc on-site version is more convenient. This is exactly the reason we have decided to create a concept of what mobile interaction could look like.",
-          "We have created a concept combining did you to land real world implication, where booking could be done using mobile devices.",
-        ],
-        picture: [
-          "/images/legacy/AC-Images/Figure34.png",
-          "/images/legacy/AC-Images/Figure35.png",
-          "/images/legacy/AC-Images/Figure36.png",
-        ],
-      },
-      {
-        title: "Watch Functionality",
-        text: [
-          "We carried out a watch companion implementation of the booking system that is remarkably similar to the mobile version.",
-        ],
-        picture: [
-          "/images/legacy/AC-Images/Figure37.png",
-          "/images/legacy/AC-Images/Figure38.png",
-        ],
-      },
-      {
-        title: "Test",
-        text: [
-          "We had proceeded with carrying out a series of five second tests to verify our findings.",
-          "For the first session, we took the busiest page of our prototype to see if the call-to-actions are working as intended and what grabs the user attention the most.",
-        ],
-        picture: [
-          "/images/legacy/AC-Images/Figure39.1.png",
-          "/images/legacy/AC-Images/Figure39.2.png",
-        ],
-      },
-      {
-        title: "",
-        text: [],
-        picture: [
-          "/images/legacy/AC-Images/Figure40.1.png",
-          "/images/legacy/AC-Images/Figure40.2.png",
+          "/images/legacy/AC-Images/Figure18.png",
         ],
       },
       {
         title: "",
         text: [
-          "The results of our testing sessions were better than we anticipated. The key targets we were aiming for are recognized by the users in the way that we thought they would. This confirmed our solutions are validity.",
+          "In terms of colors, we had to take both Teams' and AskCody's into consideration. It was important to establish a harmony between them, while not blending them in too much.",
         ],
-        picture: [],
+        picture: [
+          "/images/legacy/AC-Images/Figure19.1.png",
+        ],
       },
       {
-        title: "Realization",
+        title: "",
         text: [
-          "The solution was carried out using HTML, CSS, JavaScript. We utilized React as Front-end framework, by having React-Bootstrap as our library. This was due to it is being Microsoft's recommended tool for building Team's applications.",
-          "React being a lightweight library, allowed us a flexible and rapid process.",
         ],
-        picture: [],
+        picture: [
+          "/images/legacy/AC-Images/Figure19.2.png",
+        ],
       },
       {
-        title: "Summary",
+        title: "",
         text: [
-          "To summarize, we have created an innovative concept for AskCody to solve the issue of resource management and flexible transformation in the office management area.",
-          "We had carried out a centralized solution existing part of AskCody's ecosystem integrated into Microsoft Teams to manage office resources, while providing an overview of the company both for the employees and the managers in the rising trend of hybrid work environments.",
         ],
-        picture: [],
+        picture: [
+          "/images/legacy/AC-Images/Figure19.3.png",
+        ],
       },
     ],
   },

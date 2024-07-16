@@ -325,7 +325,7 @@ const history = [
         title: "Summary",
         text: [
           "To summarize, we have created an innovative concept for AskCody to solve the issue of resource management and flexible transformation in the office management area.",
-          "We had carried out a centralized solution existing part of AskCody's ecosystem integrated into Microsoft Teams to manage office resources, while providing an overview of the company both for the employees and the managers in the rising trend of hybrid work environments.",
+          "React being a lightweight library, allowed us a flexible and rapid process.",
         ],
         picture: [],
       },
