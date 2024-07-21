@@ -245,7 +245,7 @@ export default function Page() {
           <div className="absolute w-fit z-10">
             <div className="flex flex-row w-full text-7xl font-medium items-center justify-start text-slate-900 dark:text-slate-50 ">
               Hey, I'm&nbsp;
-              <span className="text-custom-blue font-bold">Marcell Varga</span>
+              <span className="text-gradient-darkfont-bold">Marcell Varga</span>
             </div>
             <div className="flex w-full text-4xl font-light items-center justify-start my-2 text-slate-900 dark:text-slate-50 ">
               UX & Frontend engineer

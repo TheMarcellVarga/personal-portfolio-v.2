@@ -51,7 +51,7 @@ body {
 
 /* In your CSS file */
 .light .dark-mode-icon {
-  fill: #ffffff;
+  fill: #ffffff
 }
 
 .dark .dark-mode-icon {
@@ -161,12 +161,12 @@ body {
   align-items: center;
   padding: 2rem;
   z-index: 2;
-}
-
-.nav-overlay.open {
+ }
+ 
+ .nav-overlay.open {
   transform: translateX(0); /* Slide in from the right */
-}
-
+ }
+ 
 /* Hamburger menu with increased z-index when open */
 .md\:hidden {
   cursor: pointer;
@@ -276,15 +276,17 @@ body {
   z-index: 1;
 }
 
+
+
 .dark-mode .triangle-bg-svg path:first-child {
   fill: #001822;
 }
 
 .light-mode .triangle-bg-svg path:first-child {
-  fill: #f8f8f8;
+  fill: #F8F8F8;
 }
 
 .icon-container {
+  transform: translateX(50px);
   transition: transform 0.3s;
-  transform: translate(2px, -2px);
 }

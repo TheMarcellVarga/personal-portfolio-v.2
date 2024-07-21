@@ -245,7 +245,10 @@ export default function Page() {
           <div className="absolute w-fit z-10">
             <div className="flex flex-row w-full text-7xl font-medium items-center justify-start text-slate-900 dark:text-slate-50 ">
               Hey, I'm&nbsp;
-              <span className="text-custom-blue font-bold">Marcell Varga</span>
+              <span className="text-custom-blue font-bold">
+                Marcell
+                Varga
+              </span>
             </div>
             <div className="flex w-full text-4xl font-light items-center justify-start my-2 text-slate-900 dark:text-slate-50 ">
               UX & Frontend engineer
@@ -395,18 +398,18 @@ export default function Page() {
                   <div key={project.title} className="w-full flex">
                     {/* <div className="w-1/2">
                     <div className="text-2xl">{project.title}</div>
-                    <div className="text-base">{project.subTitle}</div>
+                    <div className="text-md">{project.subTitle}</div>
                   </div> */}
                     <Link
                       href={project.link}
-                      className={`w-full flex flex-col md:flex-row px-4 md:px-8 py-6 md:py-4 lg:py-4.5 2xl:py-8 rounded-lg transition-colors duration-200 ease-in-out ${
+                      className={`w-full flex flex-col md:flex-row px-4 md:px-8 py-3.5 md:py-4 lg:py-4.5 2xl:py-8 rounded-lg transition-colors duration-200 ease-in-out ${
                         isDarkMode
                           ? "bg-slate-800 hover:bg-slate-700 border-transparent hover:border-slate-600 border"
                           : "bg-slate-100 hover:bg-slate-100 border-transparent hover:border-slate-300 border"
                       }`}
                     >
                       <div className="w-full md:w-fit relative overflow-hidden flex justify-center md:justify-start items-center">
-                        <div className="w-[275px] sm:w-[250px] md:w-[300px] relative rounded-lg overflow-hidden">
+                        <div className="w-[250px] md:w-[300px] relative rounded-lg overflow-hidden">
                           <Image
                             src={project.image} // Use the image path from the project object
                             alt={project.title} // Use the project title as the alt text
@@ -417,21 +420,15 @@ export default function Page() {
                           />
                         </div>
                       </div>
-                      <div className="flex flex-col p-4 md:p-6 pb-0 md:pb-6 gap-2 md:gap-2 w-full">
+                      <div className="flex flex-col m-6 gap-2 w-full">
                         <div className="w-fit">
-                          <div className="text-xl md:text-2xl">
-                            {project.title}
-                          </div>
-                          <div className="text-sm md:text-base">
-                            {project.subTitle}
-                          </div>
+                          <div className="text-2xl">{project.title}</div>
+                          <div className="text-md">{project.subTitle}</div>
                         </div>
-                        <div className="text-base font-light text-justify text-slate-900 dark:text-slate-50">
-                          <div className="text-sm md:text-base">
-                            {project.description}
-                          </div>
+                        <div className="text-md font-light text-justify text-slate-900 dark:text-slate-50">
+                          <div>{project.description}</div>
                         </div>
-                        <div className="flex flex-wrap gap-1.5 md:gap-1.5 mt-1 md:mt-0">
+                        <div className="flex flex-wrap gap-1.5">
                           {project.skills.map((skill) => (
                             <div
                               key={skill}
@@ -444,7 +441,7 @@ export default function Page() {
                       </div>
 
                       {/* <div className="flex flex-col m-6 gap-2 w-full h-full">
-                      <div className="text-base font-light text-justify text-slate-900 dark:text-slate-50 ">
+                      <div className="text-md font-light text-justify text-slate-900 dark:text-slate-50 ">
                         <div>{project.description}</div>
                       </div>
                       <div className="flex flex-wrap gap-2">
@@ -460,7 +457,7 @@ export default function Page() {
                     </div> */}
                     </Link>
                     {/* <div className="flex flex-col m-6 gap-2 w-full h-full">
-                    <div className="text-base font-light text-justify text-slate-900 dark:text-slate-50 ">
+                    <div className="text-md font-light text-justify text-slate-900 dark:text-slate-50 ">
                       <div>{project.description}</div>
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -485,13 +482,13 @@ export default function Page() {
             </h2>
             <div className="flex flex-col gap-12">
               {history.map((item, index) => (
-                <div key={index} className="flex flex-col md:flex-row">
-                  <div className="w-full md:w-1/2">
+                <div key={index} className="flex">
+                  <div className="w-1/2">
                     <h3 className="text-xl text-slate-900 dark:text-slate-50">
                       {item.company}
                     </h3>
                   </div>
-                  <div className="w-full md:w-1/2">
+                  <div className="w-1/2">
                     <div className="flex flex-col gap-4">
                       <div>
                         <h3 className="text-lg text-slate-900 dark:text-slate-50">
@@ -503,7 +500,7 @@ export default function Page() {
                         </h4>
                       </div>
                       <div>
-                        <div className="text-sm text-left md:text-left text-slate-900 dark:text-slate-50 ">
+                        <div className="text-sm text-slate-900 dark:text-slate-50 ">
                           {item.description.map((desc, index) => (
                             <p key={index} className="py-2">
                               {desc}
@@ -527,9 +524,7 @@ export default function Page() {
                   className="flex justify-start items-center gap-2 hover:text-custom-blue dark:hover:text-custom-teal"
                 >
                   <span>View Full Resume</span>
-                  <div className={isHover ? "icon-container" : ""}>
-                    <OpenResumeIcon isDarkMode={isDarkMode} isHover={isHover} />
-                  </div>
+                  <OpenResumeIcon isDarkMode={isDarkMode} isHover={isHover} />
                 </a>
               </div>
             </div>

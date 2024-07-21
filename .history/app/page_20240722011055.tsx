@@ -515,24 +515,21 @@ export default function Page() {
                   </div>
                 </div>
               ))}
-              <div
-                className="flex justify-start items-center gap-2"
-                onMouseEnter={() => setIsHover(true)}
-                onMouseLeave={() => setIsHover(false)}
-              >
-                <a
-                  href="/Marcell-Varga-CV.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex justify-start items-center gap-2 hover:text-custom-blue dark:hover:text-custom-teal"
-                >
-                  <span>View Full Resume</span>
-                  <div className={isHover ? "icon-container" : ""}>
-                    <OpenResumeIcon isDarkMode={isDarkMode} isHover={isHover} />
-                  </div>
-                </a>
-              </div>
-            </div>
+<div
+  className="flex justify-start items-center gap-2"
+  onMouseEnter={() => setIsHover(true)}
+  onMouseLeave={() => setIsHover(false)}
+>
+  <a
+    href="/Marcell-Varga-CV.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex justify-start items-center gap-2 hover:text-custom-blue dark:hover:text-custom-teal"
+  >
+    <span>View Full Resume</span>
+      <OpenResumeIcon isDarkMode={isDarkMode} isHover={isHover} />
+  </a>
+</div>            </div>
           </article>
         </section>
       </div>

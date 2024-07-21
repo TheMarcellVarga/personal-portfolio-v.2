@@ -524,12 +524,9 @@ export default function Page() {
                   href="/Marcell-Varga-CV.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex justify-start items-center gap-2 hover:text-custom-blue dark:hover:text-custom-teal"
-                >
+                  className="flex justify-start items-center gap-2 hover:text-custom-blue dark:hover:text-custom-teal hover-transform"                >
                   <span>View Full Resume</span>
-                  <div className={isHover ? "icon-container" : ""}>
-                    <OpenResumeIcon isDarkMode={isDarkMode} isHover={isHover} />
-                  </div>
+                  <OpenResumeIcon isDarkMode={isDarkMode} isHover={isHover} />
                 </a>
               </div>
             </div>

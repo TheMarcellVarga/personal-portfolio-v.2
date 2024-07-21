@@ -527,7 +527,7 @@ export default function Page() {
                   className="flex justify-start items-center gap-2 hover:text-custom-blue dark:hover:text-custom-teal"
                 >
                   <span>View Full Resume</span>
-                  <div className={isHover ? "icon-container" : ""}>
+                  <div className={isHover ? 'bg-blue-500' : 'bg-white'}>
                     <OpenResumeIcon isDarkMode={isDarkMode} isHover={isHover} />
                   </div>
                 </a>

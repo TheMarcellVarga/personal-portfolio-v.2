@@ -245,7 +245,10 @@ export default function Page() {
           <div className="absolute w-fit z-10">
             <div className="flex flex-row w-full text-7xl font-medium items-center justify-start text-slate-900 dark:text-slate-50 ">
               Hey, I'm&nbsp;
-              <span className="text-custom-blue font-bold">Marcell Varga</span>
+              <span className="text-custom-blue font-bold">
+                Marcell
+                Varga
+              </span>
             </div>
             <div className="flex w-full text-4xl font-light items-center justify-start my-2 text-slate-900 dark:text-slate-50 ">
               UX & Frontend engineer
@@ -419,17 +422,11 @@ export default function Page() {
                       </div>
                       <div className="flex flex-col p-4 md:p-6 pb-0 md:pb-6 gap-2 md:gap-2 w-full">
                         <div className="w-fit">
-                          <div className="text-xl md:text-2xl">
-                            {project.title}
-                          </div>
-                          <div className="text-sm md:text-base">
-                            {project.subTitle}
-                          </div>
+                          <div className="text-xl md:text-2xl">{project.title}</div>
+                          <div className="text-sm md:text-base">{project.subTitle}</div>
                         </div>
                         <div className="text-base font-light text-justify text-slate-900 dark:text-slate-50">
-                          <div className="text-sm md:text-base">
-                            {project.description}
-                          </div>
+                          <div className="text-sm md:text-base">{project.description}</div>
                         </div>
                         <div className="flex flex-wrap gap-1.5 md:gap-1.5 mt-1 md:mt-0">
                           {project.skills.map((skill) => (
@@ -491,7 +488,7 @@ export default function Page() {
                       {item.company}
                     </h3>
                   </div>
-                  <div className="w-full md:w-1/2">
+                  <div className="w-1/2">
                     <div className="flex flex-col gap-4">
                       <div>
                         <h3 className="text-lg text-slate-900 dark:text-slate-50">
@@ -503,7 +500,7 @@ export default function Page() {
                         </h4>
                       </div>
                       <div>
-                        <div className="text-sm text-left md:text-left text-slate-900 dark:text-slate-50 ">
+                        <div className="text-sm text-slate-900 dark:text-slate-50 ">
                           {item.description.map((desc, index) => (
                             <p key={index} className="py-2">
                               {desc}
@@ -527,9 +524,7 @@ export default function Page() {
                   className="flex justify-start items-center gap-2 hover:text-custom-blue dark:hover:text-custom-teal"
                 >
                   <span>View Full Resume</span>
-                  <div className={isHover ? "icon-container" : ""}>
-                    <OpenResumeIcon isDarkMode={isDarkMode} isHover={isHover} />
-                  </div>
+                  <OpenResumeIcon isDarkMode={isDarkMode} isHover={isHover} />
                 </a>
               </div>
             </div>

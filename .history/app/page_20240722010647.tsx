@@ -516,7 +516,7 @@ export default function Page() {
                 </div>
               ))}
               <div
-                className="flex justify-start items-center gap-2"
+                className={`flex justify-start items-center gap-2 ${isHover ? 'icon-container' : ''}`}
                 onMouseEnter={() => setIsHover(true)}
                 onMouseLeave={() => setIsHover(false)}
               >
@@ -527,9 +527,8 @@ export default function Page() {
                   className="flex justify-start items-center gap-2 hover:text-custom-blue dark:hover:text-custom-teal"
                 >
                   <span>View Full Resume</span>
-                  <div className={isHover ? "icon-container" : ""}>
-                    <OpenResumeIcon isDarkMode={isDarkMode} isHover={isHover} />
-                  </div>
+                  <OpenResumeIcon isDarkMode={isDarkMode} isHover={isHover} />
+
                 </a>
               </div>
             </div>

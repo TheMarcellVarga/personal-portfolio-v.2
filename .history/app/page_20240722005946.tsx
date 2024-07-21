@@ -516,7 +516,7 @@ export default function Page() {
                 </div>
               ))}
               <div
-                className="flex justify-start items-center gap-2"
+                className="flex justify-start items-center gap-2 hover:text-custom-blue dark:hover:text-custom-teal dark:hover:text-custom-teal="flex justify-start items-center gap-2">
                 onMouseEnter={() => setIsHover(true)}
                 onMouseLeave={() => setIsHover(false)}
               >
@@ -524,10 +524,10 @@ export default function Page() {
                   href="/Marcell-Varga-CV.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex justify-start items-center gap-2 hover:text-custom-blue dark:hover:text-custom-teal"
+                  className={isHover ? 'hover:text-custom-blue dark:hover:text-custom-teal="flex justify-start items-center gap-2">
                 >
                   <span>View Full Resume</span>
-                  <div className={isHover ? "icon-container" : ""}>
+                  <div className={`icon-container ${isHover ? 'hover:text-custom-blue dark:hover:text-custom-teal'}>
                     <OpenResumeIcon isDarkMode={isDarkMode} isHover={isHover} />
                   </div>
                 </a>

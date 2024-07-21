@@ -527,9 +527,11 @@ export default function Page() {
                   className="flex justify-start items-center gap-2 hover:text-custom-blue dark:hover:text-custom-teal"
                 >
                   <span>View Full Resume</span>
-                  <div className={isHover ? "icon-container" : ""}>
-                    <OpenResumeIcon isDarkMode={isDarkMode} isHover={isHover} />
-                  </div>
+                  {!isHover && (
+                    <div className="icon-container">
+                      <OpenResumeIcon isDarkMode={isDarkMode} isHover={isHover} />
+                    </div>
+                  )}
                 </a>
               </div>
             </div>

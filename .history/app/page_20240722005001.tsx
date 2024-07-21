@@ -525,11 +525,14 @@ export default function Page() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex justify-start items-center gap-2 hover:text-custom-blue dark:hover:text-custom-teal"
+                  style={{
+                    transition: "transform 0.2s",
+                    ":hover": { transform: "translateX(-5px)" },
+                  }}
                 >
+                  {" "}
                   <span>View Full Resume</span>
-                  <div className={isHover ? "icon-container" : ""}>
-                    <OpenResumeIcon isDarkMode={isDarkMode} isHover={isHover} />
-                  </div>
+                  <OpenResumeIcon isDarkMode={isDarkMode} isHover={isHover} />
                 </a>
               </div>
             </div>
