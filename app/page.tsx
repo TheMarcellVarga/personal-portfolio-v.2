@@ -250,7 +250,16 @@ export default function Page() {
             <div className="flex w-full text-4xl font-light items-center justify-start my-4 text-slate-900 dark:text-slate-50 ">
               UX & Frontend engineer
             </div>
+            <div className="">
+              <button
+                className="w-fit z-50 rounded-lg px-6 py-2 text-white bg-custom-blue hover:bg-custom-blue-dark transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 min-w-[120px]"
+                onClick={() => console.log("Button clicked")}
+              >
+                Learn more
+              </button>
+            </div>
           </div>
+
           {/* <div className={`w-1/4 h-1/2 absolute right-48 ${isDarkMode ? 'bg-gradient-dark' : 'bg-gradient-light'}`}>
             <Image
               src="/images/personalpageprofilealt.png"
