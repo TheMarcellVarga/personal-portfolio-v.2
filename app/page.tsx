@@ -17,8 +17,8 @@ import useWindowSize from "./useWindowSize";
 import { SizeMe } from "react-sizeme";
 import d3 from "d3";
 import polished from "polished";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import Header from "./header";
 import Footer from "./footer";
 ("");
@@ -209,25 +209,6 @@ export default function Page() {
 
   const size = useWindowSize(); // Get the window size
 
-  const [isSticky, setIsSticky] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  const checkScrollTop = () => {
-    // Check if the scroll position is greater than the top of the section
-    // and less than the bottom of the section to make it sticky
-    if (window.pageYOffset > 200 && window.pageYOffset < 800) {
-      // Adjust these values based on your layout
-      setIsSticky(true);
-    } else {
-      setIsSticky(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", checkScrollTop);
-    return () => window.removeEventListener("scroll", checkScrollTop);
-  }, []);
-
   return (
     <div
       className={`px-4 pb-4 transition-colors duration-200 ease-in-out ${
@@ -242,44 +223,25 @@ export default function Page() {
       />
       <main className="flex flex-col items-center justify-between h-screen m-4 gap-1">
         <div className="flex-grow pb-12 w-full flex flex-row items-center justify-strech gap-2 fade-top-bottom">
-          <div className="absolute w-fit z-20 pl-24">
+          <div className="absolute w-fit h-screen z-20 pl-24 flex flex-col items-center justify-center">
             <div className="flex flex-row w-full text-7xl lg:text-8xl bg-clip-text font-b items-center justify-start text-slate-900 dark:text-slate-50 ">
               Hey, I'm&nbsp;
               <span className="text-custom-blue font-bold">Marcell Varga</span>
             </div>
-            <div className="flex w-full text-4xl font-light items-center justify-start my-4 text-slate-900 dark:text-slate-50 ">
+            <div className="flex w-full text-4xl font-light items-center justify-start m-4 text-slate-900 dark:text-slate-50 ">
               UX & Frontend engineer
             </div>
-            <div className="">
+            {/* <div className="w-full mt-2">
               <button
                 className="w-fit z-50 rounded-lg px-6 py-2 text-white bg-custom-blue hover:bg-custom-blue-dark transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 min-w-[120px]"
                 onClick={() => console.log("Button clicked")}
               >
                 Learn more
               </button>
-            </div>
+            </div> */}
           </div>
 
-          {/* <div className={`w-1/4 h-1/2 absolute right-48 ${isDarkMode ? 'bg-gradient-dark' : 'bg-gradient-light'}`}>
-            <Image
-              src="/images/personalpageprofilealt.png"
-              alt="Profile Picture"
-              layout="responsive" // Adjusted to responsive to maintain aspect ratio
-              width={150} // Set width explicitly
-              height={100} // Set height explicitly
-              objectFit="cover" // Changed to cover to ensure the image covers the area without distortion
-            />
-          </div> */}
           <div className="relative w-full h-full flex justify-end">
-            {/* <div
-              className="relative w-full h-full flex justify-end main-container rounded-2xl triangle-background"
-              // style={{ background: "linear-gradient(to right, #02425C, #0F172A, #001822"}}
-              // style={{
-              //   background: "linear-gradient(to right, #001822)"
-              //   // backgroundImage: "linear-gradient(to bottom right, transparent 50%, #02425C 50%)",
-              //   // clipPath: "polygon(0 0, 100% 0%, 100% 100%, 0 100%)",
-              // }}
-            /> */}
             <div className="relative w-full h-full flex justify-end main-container rounded-2lg">
               <svg
                 className={`triangle-bg-svg ${
@@ -338,7 +300,7 @@ export default function Page() {
         </div>
       </main>
       {/* Drive Section */}
-      <section className=" flex flex-col items-center justify-between min-h-[100vh] max-h-[100vh] gap-1 w-full">
+      <section className="flex flex-col items-center justify-between min-h-[100vh] max-h-[100vh] gap-1 w-full">
         <div className="flex w-4/5 h-screen text-5xl font-medium items-center justify-start">
           <h2 className="text-2xl font-light text-justify m-8 leading-relaxed text-slate-900 dark:text-slate-50 ">
             An adventurous UX & Frontend engineer dedicated to crafting
@@ -415,7 +377,7 @@ export default function Page() {
             <div className="w-full h-full flex justify-center items-center">
               <div className="w-full flex flex-col gap-12">
                 {projects.map((project) => (
-                  <div key={project.title} className="w-full flex">
+                  <div key={project.title} className="w-full flex group relative overflow-hidden">
                     {/* <div className="w-1/2">
                     <div className="text-2xl">{project.title}</div>
                     <div className="text-base">{project.subTitle}</div>
@@ -465,22 +427,15 @@ export default function Page() {
                           ))}
                         </div>
                       </div>
+                      <div className="w-1/6 relative overflow-hidden">
+                        <div className="flex justify-center items-center absolute inset-y-0 right-10 w-10 h-full bg-transparent pointer-events-none transition-transform duration-300 ease-in-out origin-left group-hover:translate-x-5">
+                          <FontAwesomeIcon 
+                            icon={faChevronRight} 
+                            className="w-6 h-6 text-gray-500 group-hover:text-custom-blue transition-colors duration-300 ease-in-out"
+                          />
+                        </div>
+                      </div>
 
-                      {/* <div className="flex flex-col m-6 gap-2 w-full h-full">
-                      <div className="text-base font-light text-justify text-slate-900 dark:text-slate-50 ">
-                        <div>{project.description}</div>
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {project.skills.map((skill) => (
-                          <div
-                            key={skill}
-                            className="bg-custom-blue text-custom-teal px-2.5 py-1 rounded-lg"
-                          >
-                            {skill}
-                          </div>
-                        ))}
-                      </div>
-                    </div> */}
                     </Link>
                     {/* <div className="flex flex-col m-6 gap-2 w-full h-full">
                     <div className="text-base font-light text-justify text-slate-900 dark:text-slate-50 ">
@@ -564,7 +519,7 @@ export default function Page() {
           <h3 className="text-2xl font-light text-justify leading-relaxed text-slate-900 dark:text-slate-50 ">
             Current Location:&nbsp;
             <span className="text-red-500 font-medium">
-              Copenhagen, Denmark 📍
+              Copenhagen, Denmark ���
             </span>
           </h3>
         </div>
