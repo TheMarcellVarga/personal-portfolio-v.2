@@ -64,16 +64,6 @@ const Header: React.FC<HeaderProps> = ({
     };
   }, [toggleDarkMode]);
 
-  // const [showTooltip, setShowTooltip] = useState(false);
-
-  // const handleMouseEnter = () => {
-  //   setTimeout(() => setShowTooltip(true), 1000); // Show tooltip after 1 second
-  // };
-
-  // const handleMouseLeave = () => {
-  //   setShowTooltip(false);
-  // };
-
   const [showTooltip, setShowTooltip] = useState(false);
 
   const handleMouseEnter = () => {

@@ -8,20 +8,12 @@ import IndexSig from "../public/icons/indexSig.svg";
 import DarkModeIcon from "../public/icons/darkMode";
 import LinkedInIcon from "../public/icons/linkedin";
 import OpenResumeIcon from "../public/icons/openResume";
-import GitHubIcon from "../public/icons/github";
 import MouseScrollIcon from "@/public/icons/mouseScroll";
-import { Canvas } from "react-three-fiber";
-import Globe from "react-globe.gl";
-import ThreeGlobe from "three-globe";
 import useWindowSize from "./useWindowSize";
-import { SizeMe } from "react-sizeme";
-import d3 from "d3";
-import polished from "polished";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import Header from "./header";
 import Footer from "./footer";
-("");
 
 const projects = [
   {
@@ -150,11 +142,6 @@ const copenhagen = {
 };
 
 export default function Page() {
-  // const prefersDarkMode = window.matchMedia(
-  //   "(prefers-color-scheme: dark)"
-  // ).matches;
-
-  // console.log(prefersDarkMode);
 
   const [isDarkMode, setIsDarkMode] = useState(false); // State to track dark mode
   const [isOpen, setIsOpen] = useState(false); // State for other purposes (e.g., menu open)
@@ -182,7 +169,7 @@ export default function Page() {
     // Call the function to set isDarkMode
     setDarkModeBasedOnPreference();
 
-    // Optionally, you can also lis3ten for changes to the user's preference
+    // Optionally, you can also listen for changes to the user's preference
     const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
     const listener = (e: {
       matches: boolean | ((prevState: boolean) => boolean);
@@ -207,7 +194,7 @@ export default function Page() {
     }
   }, [isDarkMode]);
 
-  const size = useWindowSize(); // Get the window size
+  const size = useWindowSize();
 
   return (
     <div
@@ -223,7 +210,7 @@ export default function Page() {
       />
       <main className="flex flex-col items-center justify-between h-screen m-4 gap-1">
         <div className="flex-grow pb-12 w-full flex flex-row items-center justify-strech gap-2 fade-top-bottom">
-          <div className="absolute w-fit h-screen z-20 pl-24 flex flex-col items-center justify-center">
+          <div className="absolute w-fit h-screen z-20 pl-8 flex flex-col items-center justify-center">
             <div className="flex flex-row w-full text-7xl lg:text-8xl bg-clip-text font-b items-center justify-start text-slate-900 dark:text-slate-50 ">
               Hey, I'm&nbsp;
               <span className="text-custom-blue font-bold">Marcell Varga</span>
@@ -231,14 +218,6 @@ export default function Page() {
             <div className="flex w-full text-4xl font-light items-center justify-start m-4 text-slate-900 dark:text-slate-50 ">
               UX & Frontend engineer
             </div>
-            {/* <div className="w-full mt-2">
-              <button
-                className="w-fit z-50 rounded-lg px-6 py-2 text-white bg-custom-blue hover:bg-custom-blue-dark transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 min-w-[120px]"
-                onClick={() => console.log("Button clicked")}
-              >
-                Learn more
-              </button>
-            </div> */}
           </div>
 
           <div className="relative w-full h-full flex justify-end">
@@ -250,16 +229,11 @@ export default function Page() {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                {/* <path d="M1000 -109L335 686H0V-109Z" /> */}
                 <path d="M1750 -2009L335 786H0V-109Z" />
                 <path
                   d="M1750 -2009L335 786H0V-109Z"
                   fill="url(#paint0_linear_364_239)"
                 />
-                {/* <path
-                  d="M1000 -109L335 686H0V-109Z"
-                  fill="url(#paint0_linear_364_239)"
-                /> */}
                 <defs>
                   <linearGradient
                     id="paint0_linear_364_239"
@@ -290,13 +264,6 @@ export default function Page() {
         </div>
         <div className="pb-32 flex flex-col items-center justify-start">
           <MouseScrollIcon isDarkMode={isDarkMode} isOpen={isOpen} />
-          {/* <Image
-            className="animate-moveDown"
-            src="/icons/mouseScroll.svg"
-            alt="Scroll your mouse down Icon"
-            width={30}
-            height={30}
-          /> */}
         </div>
       </main>
       {/* Drive Section */}
@@ -320,23 +287,6 @@ export default function Page() {
             </h2>
             <div className="flex flex-wrap gap-2">
               {[
-                // "React",
-                // "Figma",
-                // "Sketch",
-                // "JavaScript",
-                // "TypeScript",
-                // "Next.js",
-                // "Node.js",
-                // "Express.js",
-                // "HTML",
-                // "CSS",
-                // "UX Design",
-                // "UX Research",
-                // "RESTful APIs",
-                // "Git (Gitlab & Github)",
-                // "Svelte & SvelteKit",
-                // "Tailwind CSS",
-                // "Adobe CC Suite",
                 "User Interface (UI) Design",
                 "User Experience (UX) Design",
                 "User Research",
@@ -377,11 +327,10 @@ export default function Page() {
             <div className="w-full h-full flex justify-center items-center">
               <div className="w-full flex flex-col gap-12">
                 {projects.map((project) => (
-                  <div key={project.title} className="w-full flex group relative overflow-hidden">
-                    {/* <div className="w-1/2">
-                    <div className="text-2xl">{project.title}</div>
-                    <div className="text-base">{project.subTitle}</div>
-                  </div> */}
+                  <div
+                    key={project.title}
+                    className="w-full flex group relative overflow-hidden"
+                  >
                     <Link
                       href={project.link}
                       className={`w-full flex flex-col md:flex-row px-4 md:px-8 py-6 md:py-4 lg:py-4.5 2xl:py-8 rounded-lg transition-colors duration-200 ease-in-out ${
@@ -393,12 +342,12 @@ export default function Page() {
                       <div className="w-full md:w-fit relative overflow-hidden flex justify-center md:justify-start items-center">
                         <div className="w-[275px] sm:w-[250px] md:w-[300px] relative rounded-lg overflow-hidden">
                           <Image
-                            src={project.image} // Use the image path from the project object
-                            alt={project.title} // Use the project title as the alt text
-                            layout="responsive" // Adjusted to responsive to maintain aspect ratio
-                            width={300} // Set width explicitly
-                            height={200} // Set height explicitly
-                            objectFit="cover" // Changed to cover to ensure the image covers the area without distortion
+                            src={project.image}
+                            alt={project.title}
+                            layout="responsive"
+                            width={300}
+                            height={200}
+                            objectFit="cover"
                           />
                         </div>
                       </div>
@@ -429,29 +378,13 @@ export default function Page() {
                       </div>
                       <div className="w-1/6 relative overflow-hidden">
                         <div className="flex justify-center items-center absolute inset-y-0 right-10 w-10 h-full bg-transparent pointer-events-none transition-transform duration-300 ease-in-out origin-left group-hover:translate-x-5">
-                          <FontAwesomeIcon 
-                            icon={faChevronRight} 
+                          <FontAwesomeIcon
+                            icon={faChevronRight}
                             className="w-6 h-6 text-gray-500 group-hover:text-custom-blue transition-colors duration-300 ease-in-out"
                           />
                         </div>
                       </div>
-
                     </Link>
-                    {/* <div className="flex flex-col m-6 gap-2 w-full h-full">
-                    <div className="text-base font-light text-justify text-slate-900 dark:text-slate-50 ">
-                      <div>{project.description}</div>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {project.skills.map((skill) => (
-                        <div
-                          key={skill}
-                          className="bg-custom-blue text-custom-teal px-2.5 py-1 rounded-lg"
-                        >
-                          {skill}
-                        </div>
-                      ))}
-                    </div>
-                  </div> */}
                   </div>
                 ))}
               </div>
@@ -514,33 +447,6 @@ export default function Page() {
           </article>
         </section>
       </div>
-      {/* <section>
-        <div className="flex w-full items-center justify-center text-5xl mt-60">
-          <h3 className="text-2xl font-light text-justify leading-relaxed text-slate-900 dark:text-slate-50 ">
-            Current Location:&nbsp;
-            <span className="text-red-500 font-medium">
-              Copenhagen, Denmark ���
-            </span>
-          </h3>
-        </div>
-        <div className="flex items-center justify-center w-full">
-          <Globe
-            ref={globeRef}
-            globeImageUrl={
-              isDarkMode
-                ? "//unpkg.com/three-globe/example/img/earth-night.jpg"
-                : "//unpkg.com/three-globe/example/img/earth-day.jpg"
-            }
-            pointsData={[copenhagen]}
-            pointLabel="name"
-            pointColor={() => "#FF4444"}
-            backgroundColor="rgba(0,0,0,0)"
-            width={size.width} // Use the width of the window as the width of the Globe
-            height={size.height} // Use the height of the window as the height of the Globe
-            animateIn={true} // Enable auto rotation
-          />
-        </div>
-      </section> */}
       <Footer
         isDarkMode={isDarkMode}
         setIsDarkMode={setIsDarkMode}
