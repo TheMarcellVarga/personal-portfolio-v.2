@@ -154,14 +154,16 @@ export default function Page() {
         const currentScrollPosition = window.scrollY;
         const scrollDistance = currentScrollPosition - initialScrollPosition;
 
-        // Set the fade threshold to start fading when the section is still partially visible
-        const fadeThreshold = 100; // Adjust this value to change when the fade starts
+        // // Set the fade threshold to start fading when the section is still partially visible
+        // const fadeThreshold = 0; // Adjust this value to change when the fade starts
 
-        if (scrollDistance <= fadeThreshold - 200) {
-          const opacity = 1 - scrollDistance / fadeThreshold;
+        console.log(scrollDistance);
+
+        if (scrollDistance >= 1450) {
+          const opacity = Math.max(0, 1 - (scrollDistance - 1450) / 1000);
           stickySectionRef.current.style.opacity = opacity.toString();
         } else {
-          stickySectionRef.current.style.opacity = "0";
+          stickySectionRef.current.style.opacity = "1";
         }
       } 
     };
@@ -253,7 +255,7 @@ export default function Page() {
       {/* Drive Section */}
       <section
         ref={stickySectionRef}
-        className="sticky h-[150vh] top-0 flex flex-col items-center justify-between gap-1 w-full transition-opacity duration-300"
+        className="sticky h-[250vh] top-0 flex flex-col items-center justify-between gap-1 w-full transition-opacity duration-300"
       >
         <div className="flex w-4/5 h-screen text-5xl font-medium items-center justify-start">
           <h2 className="text-2xl font-light text-justify m-8 leading-relaxed text-slate-50 ">
