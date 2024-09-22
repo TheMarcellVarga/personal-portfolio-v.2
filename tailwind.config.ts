@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       backgroundImage: {
         'gradient-dark': 'linear-gradient(243deg, #02425C 0%, #0F172A 47.5%, #001822 100%)',
-        'gradient-light': 'linear-gradient(243deg, #89CFF0 0%, #BEE1E6 47.5%, #F0FFF7 100%)', // Light gradient added here
+        'gradient-light': 'linear-gradient(243deg, #E6F8FF 0%, #D9E6FF 47.5%, #BEE1E6 100%)',
       },
       backdropBlur: {
         'blur': 'blur(10px)',

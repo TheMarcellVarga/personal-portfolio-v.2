@@ -6,18 +6,11 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 interface HeaderProps {
-  isDarkMode: boolean;
-  setIsDarkMode: (isDarkMode: boolean) => void;
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({
-  isDarkMode,
-  setIsDarkMode,
-  isOpen,
-  setIsOpen,
-}) => {
+const Header: React.FC<HeaderProps> = ({ isOpen, setIsOpen }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollTop, setLastScrollTop] = useState(0);
 
@@ -38,32 +31,6 @@ const Header: React.FC<HeaderProps> = ({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollTop]);
 
-  // Function to toggle dark mode
-  const toggleDarkMode = () => {
-    const body = document.body;
-    if (body.classList.contains("dark")) {
-      body.classList.remove("dark");
-      setIsDarkMode(false);
-    } else {
-      body.classList.add("dark");
-      setIsDarkMode(true);
-    }
-  };
-
-  useEffect(() => {
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.altKey && event.code === "KeyC") {
-        toggleDarkMode();
-      }
-    }
-
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [toggleDarkMode]);
-
   const [showTooltip, setShowTooltip] = useState(false);
 
   const handleMouseEnter = () => {
@@ -83,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({
       <div className="flex items-center">
         {/* Icon */}
         <Link href="/ ">
-          <IndexSigAnimatedIcon isDarkMode={isDarkMode} isOpen={isOpen} />
+          <IndexSigAnimatedIcon isOpen={isOpen} />
         </Link>
       </div>
       <nav className="flex items-center">
@@ -92,9 +59,9 @@ const Header: React.FC<HeaderProps> = ({
           className={`md:hidden z-2 ${isOpen ? "open" : ""}`}
           onClick={() => setIsOpen(!isOpen)}
         >
-          <div className="w-6 h-0.5 bg-slate-800 dark:bg-slate-400 mb-1"></div>
-          <div className="w-6 h-0.5 bg-slate-800 dark:bg-slate-400 mb-1"></div>
-          <div className="w-6 h-0.5 bg-slate-800 dark:bg-slate-400"></div>
+          <div className="w-6 h-0.5 bg-slate-400 mb-1"></div>
+          <div className="w-6 h-0.5 bg-slate-400 mb-1"></div>
+          <div className="w-6 h-0.5 bg-slate-400"></div>
         </div>
         {/* Navigation Links */}
         <div className={`nav-overlay ${isOpen ? "open" : ""}`}>
@@ -105,7 +72,9 @@ const Header: React.FC<HeaderProps> = ({
           >
             <Link href="/about">
               <div
-                className={`text-xl md:text-sm font-medium ${isOpen ? "lg:text-3xl" : ""}`}
+                className={`text-xl md:text-sm font-medium ${
+                  isOpen ? "lg:text-3xl" : ""
+                }`}
                 style={{ color: isOpen ? "#eeeeee" : "inherit" }}
               >
                 About
@@ -113,7 +82,9 @@ const Header: React.FC<HeaderProps> = ({
             </Link>
             <Link href="/work">
               <div
-                className={`text-xl md:text-sm font-medium ${isOpen ? "lg:text-3xl" : ""}`}
+                className={`text-xl md:text-sm font-medium ${
+                  isOpen ? "lg:text-3xl" : ""
+                }`}
                 style={{ color: isOpen ? "#eeeeee" : "inherit" }}
               >
                 Work
@@ -121,27 +92,16 @@ const Header: React.FC<HeaderProps> = ({
             </Link>
             <Link href="/contact">
               <div
-                className={`text-xl md:text-sm font-medium ${isOpen ? "lg:text-3xl" : ""}`}
+                className={`text-xl md:text-sm font-medium ${
+                  isOpen ? "lg:text-3xl" : ""
+                }`}
                 style={{ color: isOpen ? "#eeeeee" : "inherit" }}
               >
                 Contact
               </div>
             </Link>
           </div>
-          {/* Dark Mode Toggle */}
-          <button
-            onClick={toggleDarkMode}
-            className="px-4 py-2 text-white md:text-slate-900 md:dark:text-slate-50 rounded"
-          >
-            <DarkModeIcon isDarkMode={isDarkMode} isOpen={isOpen} />
-            {showTooltip && (
-              <div className="relative">
-                <div className="bg-slate-800 text-white px-2 py-1 rounded text-xs absolute top-2 left-1/2 transform -translate-x-1/2">
-                  Alt&nbsp;+&nbsp;C
-                </div>
-              </div>
-            )}
-          </button>
+
         </div>
         <div className={`${isOpen ? "hidden" : "block"}`}>
           <div
@@ -151,7 +111,7 @@ const Header: React.FC<HeaderProps> = ({
           >
             <Link href="/about">
               <div
-                className="text-sm font-medium text-slate-900 dark:text-slate-50"
+                className="text-sm font-medium text-slate-50"
                 style={{ color: isOpen ? "#eeeeee" : "" }}
               >
                 About
@@ -159,7 +119,7 @@ const Header: React.FC<HeaderProps> = ({
             </Link>
             <Link href="/work">
               <div
-                className="text-sm font-medium text-slate-900 dark:text-slate-50"
+                className="text-sm font-medium text-slate-50"
                 style={{ color: isOpen ? "#eeeeee" : "" }}
               >
                 Work
@@ -167,28 +127,12 @@ const Header: React.FC<HeaderProps> = ({
             </Link>
             <Link href="/contact">
               <div
-                className="text-sm font-medium text-slate-900 dark:text-slate-50"
+                className="text-sm font-medium text-slate-50"
                 style={{ color: isOpen ? "#eeeeee" : "" }}
               >
                 Contact
               </div>
             </Link>
-            {/* Dark Mode Toggle */}
-            <button
-              onClick={toggleDarkMode}
-              className="px-4 py-2 text-slate-900 dark:text-slate-50 rounded"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              <DarkModeIcon isDarkMode={isDarkMode} isOpen={false} />
-              {showTooltip && (
-                <div className="relative">
-                  <div className="bg-slate-800 text-white px-2 py-1 rounded text-xs absolute top-2 left-1/2 transform -translate-x-1/2">
-                    Alt&nbsp;+&nbsp;C
-                  </div>
-                </div>
-              )}
-            </button>
           </div>
         </div>
       </nav>

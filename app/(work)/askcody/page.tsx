@@ -334,55 +334,14 @@ const history = [
 ];
 
 const AskCody = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isHover, setIsHover] = useState(false);
 
-  useEffect(() => {
-    // Function to set isDarkMode based on user preference
-    const setDarkModeBasedOnPreference = () => {
-      const prefersDarkMode = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      setIsDarkMode(prefersDarkMode);
-    };
-
-    // Call the function to set isDarkMode
-    setDarkModeBasedOnPreference();
-
-    // Optionally, you can also lis3ten for changes to the user's preference
-    const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
-    const listener = (e: {
-      matches: boolean | ((prevState: boolean) => boolean);
-    }) => {
-      setIsDarkMode(e.matches);
-    };
-
-    mediaQueryList.addListener(listener);
-
-    // Cleanup function to remove the listener
-    return () => {
-      mediaQueryList.removeListener(listener);
-    };
-  }, []); // Empty dependency array means this effect runs once on mount
-
-  useEffect(() => {
-    const htmlElement = document.documentElement;
-    if (isDarkMode) {
-      htmlElement.classList.add("dark");
-    } else {
-      htmlElement.classList.remove("dark");
-    }
-  }, [isDarkMode]);
-
   return (
-    <div className={`px-4 pb-4 ${isDarkMode ? 'bg-gradient-dark' : 'bg-gradient-light'} transition-colors duration-200 ease-in-out`}>
-      <Header
-        isDarkMode={isDarkMode}
-        setIsDarkMode={setIsDarkMode}
-        isOpen={isOpen}
-        setIsOpen={setIsDarkMode}
-      />
+    <div
+      className={`px-4 pb-4 bg-gradient-dark transition-colors duration-200 ease-in-out`}
+    >
+      <Header isOpen={isOpen} setIsOpen={setIsOpen} />
       <main className="flex flex-col items-center justify-between m-4 gap-1 w-full">
         <div className="flex-grow pb-12 w-full flex flex-row items-center justify-center gap-2">
           <section className="flex flex-col items-center justify-between my-4 gap-24 w-4/5">
@@ -546,10 +505,10 @@ const AskCody = () => {
         <div className="pb-32 flex flex-col items-center justify-start"></div>
       </main>
       <Footer
-        isDarkMode={isDarkMode}
-        setIsDarkMode={setIsDarkMode}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
+        isHover={isHover}
+        setIsHover={setIsHover}
       />
     </div>
   );

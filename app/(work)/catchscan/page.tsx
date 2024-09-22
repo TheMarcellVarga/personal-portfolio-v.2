@@ -465,10 +465,10 @@ const Catchscan = () => {
         <div className="pb-32 flex flex-col items-center justify-start"></div>
       </main>
       <Footer
-        isDarkMode={isDarkMode}
-        setIsDarkMode={setIsDarkMode}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
+        isHover={isHover}
+        setIsHover={setIsHover}
       />
     </div>
   );

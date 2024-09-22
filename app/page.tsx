@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import IndexSigAnimatedIcon from "../public/icons/indexSigAnimated";
@@ -142,12 +142,42 @@ const copenhagen = {
 };
 
 export default function Page() {
+  const globeRef = useRef<any>();
 
-  const [isDarkMode, setIsDarkMode] = useState(false); // State to track dark mode
+  const stickySectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let initialScrollPosition: number | null = null;
+
+    const handleScroll = () => {
+      if (stickySectionRef.current && initialScrollPosition !== null) {
+        const currentScrollPosition = window.scrollY;
+        const scrollDistance = currentScrollPosition - initialScrollPosition;
+
+        // Set the fade threshold to start fading when the section is still partially visible
+        const fadeThreshold = 100; // Adjust this value to change when the fade starts
+
+        if (scrollDistance <= fadeThreshold - 200) {
+          const opacity = 1 - scrollDistance / fadeThreshold;
+          stickySectionRef.current.style.opacity = opacity.toString();
+        } else {
+          stickySectionRef.current.style.opacity = "0";
+        }
+      } 
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Set the initial scroll position when the component mounts
+    initialScrollPosition = window.scrollY;
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const [isOpen, setIsOpen] = useState(false); // State for other purposes (e.g., menu open)
   const [isHover, setIsHover] = useState(false);
-
-  const globeRef = useRef<any>(); // Assuming globeRef is a ref to the Globe component
 
   useEffect(() => {
     if (globeRef.current) {
@@ -157,65 +187,21 @@ export default function Page() {
     }
   }, []);
 
-  useEffect(() => {
-    // Function to set isDarkMode based on user preference
-    const setDarkModeBasedOnPreference = () => {
-      const prefersDarkMode = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      setIsDarkMode(prefersDarkMode);
-    };
-
-    // Call the function to set isDarkMode
-    setDarkModeBasedOnPreference();
-
-    // Optionally, you can also listen for changes to the user's preference
-    const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
-    const listener = (e: {
-      matches: boolean | ((prevState: boolean) => boolean);
-    }) => {
-      setIsDarkMode(e.matches);
-    };
-
-    mediaQueryList.addListener(listener);
-
-    // Cleanup function to remove the listener
-    return () => {
-      mediaQueryList.removeListener(listener);
-    };
-  }, []); // Empty dependency array means this effect runs once on mount
-
-  useEffect(() => {
-    const htmlElement = document.documentElement;
-    if (isDarkMode) {
-      htmlElement.classList.add("dark");
-    } else {
-      htmlElement.classList.remove("dark");
-    }
-  }, [isDarkMode]);
-
   const size = useWindowSize();
 
   return (
     <div
-      className={`px-4 pb-4 transition-colors duration-200 ease-in-out ${
-        isDarkMode ? "bg-gradient-dark" : "bg-gradient-light"
-      }`}
+      className={`px-4 pb-4 transition-colors duration-200 ease-in-out bg-gradient-dark`}
     >
-      <Header
-        isDarkMode={isDarkMode}
-        setIsDarkMode={setIsDarkMode}
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-      />
+      <Header isOpen={isOpen} setIsOpen={setIsOpen} />
       <main className="flex flex-col items-center justify-between h-screen m-4 gap-1">
         <div className="flex-grow pb-12 w-full flex flex-row items-center justify-strech gap-2 fade-top-bottom">
           <div className="absolute w-fit h-screen z-20 pl-8 flex flex-col items-center justify-center">
-            <div className="flex flex-row w-full text-7xl lg:text-8xl bg-clip-text font-b items-center justify-start text-slate-900 dark:text-slate-50 ">
+            <div className="flex flex-row w-full text-7xl lg:text-8xl bg-clip-text font-b items-center justify-start text-slate-50 ">
               Hey, I'm&nbsp;
               <span className="text-custom-blue font-bold">Marcell Varga</span>
             </div>
-            <div className="flex w-full text-4xl font-light items-center justify-start m-4 text-slate-900 dark:text-slate-50 ">
+            <div className="flex w-full text-4xl font-light items-center justify-start m-4 text-slate-50 ">
               UX & Frontend engineer
             </div>
           </div>
@@ -223,9 +209,7 @@ export default function Page() {
           <div className="relative w-full h-full flex justify-end">
             <div className="relative w-full h-full flex justify-end main-container rounded-2lg">
               <svg
-                className={`triangle-bg-svg ${
-                  isDarkMode ? "dark-mode" : "light-mode"
-                }`}
+                className={`triangle-bg-svg ${"dark-mode"}`}
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -263,13 +247,16 @@ export default function Page() {
           </div>
         </div>
         <div className="pb-32 flex flex-col items-center justify-start">
-          <MouseScrollIcon isDarkMode={isDarkMode} isOpen={isOpen} />
+          <MouseScrollIcon isOpen={isOpen} />
         </div>
       </main>
       {/* Drive Section */}
-      <section className="flex flex-col items-center justify-between min-h-[100vh] max-h-[100vh] gap-1 w-full">
+      <section
+        ref={stickySectionRef}
+        className="sticky h-[150vh] top-0 flex flex-col items-center justify-between gap-1 w-full transition-opacity duration-300"
+      >
         <div className="flex w-4/5 h-screen text-5xl font-medium items-center justify-start">
-          <h2 className="text-2xl font-light text-justify m-8 leading-relaxed text-slate-900 dark:text-slate-50 ">
+          <h2 className="text-2xl font-light text-justify m-8 leading-relaxed text-slate-50 ">
             An adventurous UX & Frontend engineer dedicated to crafting
             delightful, business-focused, and user-centred digital experiences.
             I excel at solving complex problems through efficient design,
@@ -333,11 +320,7 @@ export default function Page() {
                   >
                     <Link
                       href={project.link}
-                      className={`w-full flex flex-col md:flex-row px-4 md:px-8 py-6 md:py-4 lg:py-4.5 2xl:py-8 rounded-lg transition-colors duration-200 ease-in-out ${
-                        isDarkMode
-                          ? "bg-slate-800 hover:bg-slate-700 border-transparent hover:border-slate-600 border"
-                          : "bg-slate-100 hover:bg-slate-100 border-transparent hover:border-slate-300 border"
-                      }`}
+                      className={`w-full flex flex-col md:flex-row px-4 md:px-8 py-6 md:py-4 lg:py-4.5 2xl:py-8 rounded-lg transition-colors duration-200 ease-in-out ${"bg-slate-800 hover:bg-slate-700 border-transparent hover:border-slate-600 border"}`}
                     >
                       <div className="w-full md:w-fit relative overflow-hidden flex justify-center md:justify-start items-center">
                         <div className="w-[275px] sm:w-[250px] md:w-[300px] relative rounded-lg overflow-hidden">
@@ -353,14 +336,14 @@ export default function Page() {
                       </div>
                       <div className="flex flex-col p-4 md:p-6 pb-0 md:pb-6 gap-2 md:gap-2 w-full">
                         <div className="w-fit">
-                          <div className="text-xl md:text-2xl">
+                          <div className="text-xl md:text-2xl text-slate-50">
                             {project.title}
                           </div>
-                          <div className="text-sm md:text-base">
+                          <div className="text-sm md:text-base text-slate-50">
                             {project.subTitle}
                           </div>
                         </div>
-                        <div className="text-base font-light text-justify text-slate-900 dark:text-slate-50">
+                        <div className="text-base font-light text-justify text-slate-50">
                           <div className="text-sm md:text-base">
                             {project.description}
                           </div>
@@ -380,7 +363,7 @@ export default function Page() {
                         <div className="flex justify-center items-center absolute inset-y-0 right-10 w-10 h-full bg-transparent pointer-events-none transition-transform duration-300 ease-in-out origin-left group-hover:translate-x-5">
                           <FontAwesomeIcon
                             icon={faChevronRight}
-                            className="w-6 h-6 text-gray-500 group-hover:text-custom-blue transition-colors duration-300 ease-in-out"
+                            className="w-6 h-6 text-gray-500 group-hover:text-custom-teal transition-colors duration-700 ease-in-out"
                           />
                         </div>
                       </div>
@@ -398,23 +381,21 @@ export default function Page() {
               {history.map((item, index) => (
                 <div key={index} className="flex flex-col md:flex-row">
                   <div className="w-full md:w-1/2">
-                    <h3 className="text-xl text-slate-900 dark:text-slate-50">
-                      {item.company}
-                    </h3>
+                    <h3 className="text-xl text-slate-50">{item.company}</h3>
                   </div>
                   <div className="w-full md:w-1/2">
                     <div className="flex flex-col gap-4">
                       <div>
-                        <h3 className="text-lg text-slate-900 dark:text-slate-50">
+                        <h3 className="text-lg text-slate-50">
                           {item.jobTitle}
                         </h3>
-                        <h4 className="text-base font-light text-slate-900 dark:text-slate-50">
+                        <h4 className="text-base font-light text-slate-50">
                           {item.time.start} -{" "}
                           {item.time.end ? item.time.end : "Present"}
                         </h4>
                       </div>
                       <div>
-                        <div className="text-sm text-left md:text-left text-slate-900 dark:text-slate-50 ">
+                        <div className="text-sm text-left md:text-left text-slate-50 ">
                           {item.description.map((desc, index) => (
                             <p key={index} className="py-2">
                               {desc}
@@ -435,11 +416,11 @@ export default function Page() {
                   href="/Marcell-Varga-CV.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex justify-start items-center gap-2 hover:text-custom-blue dark:hover:text-custom-teal"
+                  className="flex justify-start items-center gap-2 text-slate-50 hover:text-custom-blue dark:hover:text-custom-teal"
                 >
                   <span>View Full Resume</span>
                   <div className={isHover ? "icon-container" : ""}>
-                    <OpenResumeIcon isDarkMode={isDarkMode} isHover={isHover} />
+                    <OpenResumeIcon isHover={isHover} />
                   </div>
                 </a>
               </div>
@@ -448,10 +429,10 @@ export default function Page() {
         </section>
       </div>
       <Footer
-        isDarkMode={isDarkMode}
-        setIsDarkMode={setIsDarkMode}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
+        isHover={isHover}
+        setIsHover={setIsHover}
       />
     </div>
   );
