@@ -160,19 +160,31 @@ export default function Page() {
       if (stickySectionRef.current && initialScrollPosition !== null) {
         const currentScrollPosition = window.scrollY;
         const scrollDistance = currentScrollPosition - initialScrollPosition;
-
+    
         console.log(scrollDistance);
-
-        const maxScrollForTyping = 2000; // Adjust this value as needed
-
+    
+        const typingStart = 800; // Start typing at this scroll distance
+        const maxScrollForTyping = 2000; // Complete typing at this scroll distance
+        const fadeStart = 3000; // Start fading at this scroll distance
+        const fadeDuration = 400; // Duration of the fade effect
+    
+        // Apply fade effect
+        if (scrollDistance >= fadeStart) {
+          const opacity = Math.max(0, 1 - (scrollDistance - fadeStart) / fadeDuration);
+          stickySectionRef.current.style.opacity = opacity.toString();
+        } else {
+          stickySectionRef.current.style.opacity = "1";
+        }
+    
+        // Handle typing animation
         if (!typingCompleted) {
           if (scrollDistance >= maxScrollForTyping) {
             setTypedText(textToType); // Ensure full text is displayed
             setTypingCompleted(true);
-          } else {
+          } else if (scrollDistance >= typingStart) {
             // Calculate typing progress based on scroll distance
-            typingProgress = Math.min(1, scrollDistance / maxScrollForTyping);
-
+            typingProgress = Math.min(1, (scrollDistance - typingStart) / (maxScrollForTyping - typingStart));
+    
             // Update typed text based on progress
             const newText = textToType.slice(
               0,
@@ -181,18 +193,9 @@ export default function Page() {
             setTypedText(newText);
           }
         }
-
-        // Fade out after typing is completed
-        if (typingCompleted) {
-          const opacity = Math.max(
-            0,
-            1 - (scrollDistance - maxScrollForTyping) / 1000
-          );
-          stickySectionRef.current.style.opacity = opacity.toString();
-        }
       }
     };
-
+    
     window.addEventListener("scroll", handleScroll);
 
     // Set the initial scroll position when the component mounts
