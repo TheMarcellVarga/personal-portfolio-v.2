@@ -141,31 +141,56 @@ const copenhagen = {
   name: "Copenhagen, Denmark", // Label for the point
 };
 
+const textToType =
+  "An adventurous UX & Frontend engineer dedicated to crafting delightful, business-focused, and user-centred digital experiences. I excel at solving complex problems through efficient design, turning challenges into opportunities. Overcoming challenges through efficient design is what fuelling my everyday drive.";
+
 export default function Page() {
   const globeRef = useRef<any>();
 
   const stickySectionRef = useRef<HTMLDivElement>(null);
 
+  const [typedText, setTypedText] = useState("");
+  const [typingCompleted, setTypingCompleted] = useState(false);
+
   useEffect(() => {
     let initialScrollPosition: number | null = null;
+    let typingProgress = 0;
 
     const handleScroll = () => {
       if (stickySectionRef.current && initialScrollPosition !== null) {
         const currentScrollPosition = window.scrollY;
         const scrollDistance = currentScrollPosition - initialScrollPosition;
 
-        // // Set the fade threshold to start fading when the section is still partially visible
-        // const fadeThreshold = 0; // Adjust this value to change when the fade starts
-
         console.log(scrollDistance);
 
-        if (scrollDistance >= 1450) {
-          const opacity = Math.max(0, 1 - (scrollDistance - 1450) / 1000);
-          stickySectionRef.current.style.opacity = opacity.toString();
-        } else {
-          stickySectionRef.current.style.opacity = "1";
+        const maxScrollForTyping = 2000; // Adjust this value as needed
+
+        if (!typingCompleted) {
+          if (scrollDistance >= maxScrollForTyping) {
+            setTypedText(textToType); // Ensure full text is displayed
+            setTypingCompleted(true);
+          } else {
+            // Calculate typing progress based on scroll distance
+            typingProgress = Math.min(1, scrollDistance / maxScrollForTyping);
+
+            // Update typed text based on progress
+            const newText = textToType.slice(
+              0,
+              Math.floor(typingProgress * textToType.length)
+            );
+            setTypedText(newText);
+          }
         }
-      } 
+
+        // Fade out after typing is completed
+        if (typingCompleted) {
+          const opacity = Math.max(
+            0,
+            1 - (scrollDistance - maxScrollForTyping) / 1000
+          );
+          stickySectionRef.current.style.opacity = opacity.toString();
+        }
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -255,15 +280,11 @@ export default function Page() {
       {/* Drive Section */}
       <section
         ref={stickySectionRef}
-        className="sticky h-[250vh] top-0 flex flex-col items-center justify-between gap-1 w-full transition-opacity duration-300"
+        className="sticky h-[400vh] top-0 flex flex-col items-center justify-between gap-1 w-full transition-opacity duration-300"
       >
         <div className="flex w-4/5 h-screen text-5xl font-medium items-center justify-start">
           <h2 className="text-2xl font-light text-justify m-8 leading-relaxed text-slate-50 ">
-            An adventurous UX & Frontend engineer dedicated to crafting
-            delightful, business-focused, and user-centred digital experiences.
-            I excel at solving complex problems through efficient design,
-            turning challenges into opportunities. Overcoming challenges through
-            efficient design is what fuelling my everyday drive.
+            {typedText}
           </h2>
         </div>
       </section>
@@ -365,7 +386,7 @@ export default function Page() {
                         <div className="flex justify-center items-center absolute inset-y-0 right-10 w-10 h-full bg-transparent pointer-events-none transition-transform duration-300 ease-in-out origin-left group-hover:translate-x-5">
                           <FontAwesomeIcon
                             icon={faChevronRight}
-                            className="w-6 h-6 text-gray-500 group-hover:text-custom-teal transition-colors duration-700 ease-in-out"
+                            className="w-6 h-6 text-gray-500 group-hover:text-slate-100 transition-colors duration-700 ease-in-out"
                           />
                         </div>
                       </div>
