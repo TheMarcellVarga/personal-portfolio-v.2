@@ -155,36 +155,62 @@ export default function Page() {
   useEffect(() => {
     let initialScrollPosition: number | null = null;
     let typingProgress = 0;
+    let previousScrollPosition = 0;
 
     const handleScroll = () => {
       if (stickySectionRef.current && initialScrollPosition !== null) {
         const currentScrollPosition = window.scrollY;
         const scrollDistance = currentScrollPosition - initialScrollPosition;
-    
+
         console.log(scrollDistance);
-    
-        const typingStart = 800; // Start typing at this scroll distance
-        const maxScrollForTyping = 2000; // Complete typing at this scroll distance
-        const fadeStart = 3000; // Start fading at this scroll distance
+
+        const typingStart = 550; // Start typing at this scroll distance
+        const maxScrollForTyping = 2250; // Complete typing at this scroll distance
+        const fadeStart = 2800; // Start fading at this scroll distance
         const fadeDuration = 400; // Duration of the fade effect
-    
-        // Apply fade effect
-        if (scrollDistance >= fadeStart) {
-          const opacity = Math.max(0, 1 - (scrollDistance - fadeStart) / fadeDuration);
-          stickySectionRef.current.style.opacity = opacity.toString();
-        } else {
-          stickySectionRef.current.style.opacity = "1";
+        const zIndexThreshold = 3600; // Threshold above which zIndex becomes -99
+
+        // Apply zIndex based on scroll distance
+        if (stickySectionRef.current) {
+          if (scrollDistance > zIndexThreshold) {
+            stickySectionRef.current.style.zIndex = "-99";
+          } else {
+            stickySectionRef.current.style.zIndex = "";
+          }
         }
-    
+
+        if (scrollDistance >= fadeStart) {
+          const opacity = Math.max(
+            0,
+            1 - (scrollDistance - fadeStart) / fadeDuration
+          );
+
+          if (stickySectionRef.current) {
+            stickySectionRef.current.style.opacity = opacity.toString();
+          }
+        } else {
+          if (stickySectionRef.current) {
+            stickySectionRef.current.style.opacity = "1";
+          }
+        }
+
         // Handle typing animation
-        if (!typingCompleted) {
+        if (scrollDistance < typingStart) {
+          // Reset text when scrolling above the typing start position
+          setTypedText("");
+          setTypingCompleted(false);
+        } else if (!typingCompleted) {
           if (scrollDistance >= maxScrollForTyping) {
             setTypedText(textToType); // Ensure full text is displayed
             setTypingCompleted(true);
-          } else if (scrollDistance >= typingStart) {
+          } else {
             // Calculate typing progress based on scroll distance
-            typingProgress = Math.min(1, (scrollDistance - typingStart) / (maxScrollForTyping - typingStart));
-    
+            const typingProgress = Math.min(
+              1,
+              (scrollDistance - typingStart) /
+                (maxScrollForTyping - typingStart)
+            );
+
             // Update typed text based on progress
             const newText = textToType.slice(
               0,
@@ -195,7 +221,6 @@ export default function Page() {
         }
       }
     };
-    
     window.addEventListener("scroll", handleScroll);
 
     // Set the initial scroll position when the component mounts
