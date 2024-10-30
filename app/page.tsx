@@ -160,7 +160,7 @@ export default function Page() {
     const handleScroll = () => {
       if (stickySectionRef.current && initialScrollPosition !== null) {
         const currentScrollPosition = window.scrollY;
-        const scrollDistance = currentScrollPosition - initialScrollPosition;
+        const scrollDistance = currentScrollPosition;
 
         console.log(scrollDistance);
 
@@ -226,6 +226,10 @@ export default function Page() {
     // Set the initial scroll position when the component mounts
     initialScrollPosition = window.scrollY;
 
+    setTimeout(() => {
+      handleScroll();
+    }, 0);
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -246,7 +250,7 @@ export default function Page() {
 
   return (
     <div
-      className={`px-4 pb-4 transition-colors duration-200 ease-in-out bg-gradient-dark`}
+      className={`px-4 pb-4 transition-colors duration-200 ease-in-out bg-sky-950`}
     >
       <Header isOpen={isOpen} setIsOpen={setIsOpen} />
       <main className="flex flex-col items-center justify-between h-screen m-4 gap-1">
@@ -371,7 +375,7 @@ export default function Page() {
                   >
                     <Link
                       href={project.link}
-                      className={`w-full flex flex-col md:flex-row px-4 md:px-8 py-6 md:py-4 lg:py-4.5 2xl:py-8 rounded-lg transition-colors duration-200 ease-in-out ${"bg-slate-800 hover:bg-slate-700 border-transparent hover:border-slate-600 border"}`}
+                      className={`w-full flex flex-col md:flex-row px-4 md:px-8 py-6 md:py-4 lg:py-4.5 2xl:py-8 rounded-2xl transition-all duration-200 ease-in-out ${"bg-white/10 backdrop-blur-md shadow-lg hover:bg-white/20 hover:shadow-xl border border-white/20 hover:border-white/30"}`}
                     >
                       <div className="w-full md:w-fit relative overflow-hidden flex justify-center md:justify-start items-center">
                         <div className="w-[275px] sm:w-[250px] md:w-[300px] relative rounded-lg overflow-hidden">
@@ -410,8 +414,8 @@ export default function Page() {
                           ))}
                         </div>
                       </div>
-                      <div className="w-1/6 relative overflow-hidden">
-                        <div className="flex justify-center items-center absolute inset-y-0 right-10 w-10 h-full bg-transparent pointer-events-none transition-transform duration-300 ease-in-out origin-left group-hover:translate-x-5">
+                      <div className="w-32 relative overflow-hidden">
+                        <div className="flex justify-center items-center absolute inset-0 bg-transparent pointer-events-none transition-transform duration-300 ease-in-out origin-left group-hover:translate-x-5">
                           <FontAwesomeIcon
                             icon={faChevronRight}
                             className="w-6 h-6 text-gray-500 group-hover:text-slate-100 transition-colors duration-700 ease-in-out"
