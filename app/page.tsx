@@ -257,7 +257,7 @@ export default function Page() {
       <Header isOpen={isOpen} setIsOpen={setIsOpen} />
       <main className="flex flex-col items-center justify-between h-screen mt-2 m-4 gap-1 ">
         <div className="flex-grow pb-8 w-full flex flex-row items-center justify-strech gap-2 fade-top-bottom">
-          <div className="absolute w-fit h-screen z-20 pl-12 pt-4 flex flex-col items-start justify-center">
+          <div className="absolute mt-4 w-fit h-screen z-20 pl-12 pt-4 flex flex-col items-start justify-center">
             <div className="flex flex-row w-full lg:text-8xl bg-clip-text font-b items-baseline justify-start">
               <span className="text-gray-700 text-6xl">Hey, I'm&nbsp;</span>
               <span className="text-custom-blue font-bold text-7xl">
@@ -267,9 +267,9 @@ export default function Page() {
             <div className="flex w-full text-4xl font-light items-center justify-start my-4 text-custom-blue">
               UX & Frontend engineer
             </div>
-            {/* <div className="flex w-full text-xl font-light items-center justify-start my-4 text-gray-700">
-              Crafting seamless digital experiences.
-            </div> */}
+            <div className="flex w-full text-lg font-light items-center justify-start mt-34 italic text-gray-400">
+              - Crafting digital journeys that captivate and engage.
+            </div>
           </div>
           <div className="absolute bottom-40 left-12 z-20 pl-8">
             {/* <button className="px-5 py-2 text-white rounded-full bg-custom-blue hover:bg-custom-blue/90 transition-colors duration-300 ease-in-out min-w-32">
