@@ -101,36 +101,42 @@ const Header: React.FC<HeaderProps> = ({ isOpen, setIsOpen }) => {
               </div>
             </Link>
           </div>
-
         </div>
-        <div className={`${isOpen ? "hidden" : "block"}`}>
+        <div
+          className={`${
+            isOpen ? "hidden" : "block"
+          } transition-all duration-300 ease-in-out`}
+        >
           <div
             className={`${
               isOpen ? "block" : "hidden"
-            } md:flex items-center space-x-4`}
+            } md:flex items-center space-x-4 transition-all duration-300 ease-in-out`}
           >
             <Link href="/about">
               <div
-                className="text-sm font-medium text-slate-50"
+                className="relative inline-block text-sm font-medium text-custom-blue tracking-wider  group"
                 style={{ color: isOpen ? "#eeeeee" : "" }}
               >
                 About
+                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-custom-blue transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
               </div>
             </Link>
             <Link href="/work">
               <div
-                className="text-sm font-medium text-slate-50"
+                className="relative inline-block text-sm font-medium text-custom-blue tracking-wider  group"
                 style={{ color: isOpen ? "#eeeeee" : "" }}
               >
                 Work
+                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-custom-blue transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
               </div>
             </Link>
             <Link href="/contact">
               <div
-                className="text-sm font-medium text-slate-50"
+                className="relative inline-block text-sm font-medium text-custom-blue tracking-wider  group"
                 style={{ color: isOpen ? "#eeeeee" : "" }}
               >
                 Contact
+                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-custom-blue transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
               </div>
             </Link>
           </div>

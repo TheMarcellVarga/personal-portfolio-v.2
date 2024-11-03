@@ -15,7 +15,7 @@ const Footer: React.FC<FooterProps> = ({ isHover }) => {
   return (
     <div className="flex w-full justify-center">
       <div className="flex w-full flex-row justify-between items-center px-4 pt-8">
-        <div className="flex text-slate-300 w-full text-sm">© 2024 Marcell Varga</div>
+        <div className="flex text-gray-400 w-full text-sm">© 2024 Marcell Varga</div>
         <div className="flex space-x-4">
           <Link href="https://www.linkedin.com/in/marcellvarga/">
             <LinkedInIcon />

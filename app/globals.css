@@ -274,7 +274,6 @@ body {
   width: 100%; /* Adjust based on your needs */
   height: 100%; /* Adjust based on your needs */
   z-index: 1;
-  border-radius: 2.5rem;
   transform: scale(-1, -1);
 }
 
@@ -285,12 +284,6 @@ body {
 .light-mode .triangle-bg-svg path:first-child {
   fill: #f8f8f8;
 }
-
-.icon-container {
-  transition: transform 0.3s;
-  transform: translate(2px, -2px);
-}
-
-.sticky-section {
+3.sticky-section {
   transition: opacity 0.3s ease;
 }

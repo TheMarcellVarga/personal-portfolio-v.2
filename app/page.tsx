@@ -14,6 +14,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import Header from "./header";
 import Footer from "./footer";
+import { ArrowRightIcon } from "@heroicons/react/24/solid";
+// import Globe from "react-globe.gl";
 
 const projects = [
   {
@@ -250,25 +252,53 @@ export default function Page() {
 
   return (
     <div
-      className={`px-4 pb-4 transition-colors duration-200 ease-in-out bg-sky-950`}
+      className={`px-4 pb-4 transition-colors duration-200 ease-in-out bg-gray-200`}
     >
       <Header isOpen={isOpen} setIsOpen={setIsOpen} />
-      <main className="flex flex-col items-center justify-between h-screen m-4 gap-1">
-        <div className="flex-grow pb-12 w-full flex flex-row items-center justify-strech gap-2 fade-top-bottom">
-          <div className="absolute w-fit h-screen z-20 pl-8 flex flex-col items-center justify-center">
-            <div className="flex flex-row w-full text-7xl lg:text-8xl bg-clip-text font-b items-center justify-start text-slate-50 ">
-              Hey, I'm&nbsp;
-              <span className="text-custom-blue font-bold">Marcell Varga</span>
+      <main className="flex flex-col items-center justify-between h-screen mt-2 m-4 gap-1 ">
+        <div className="flex-grow pb-8 w-full flex flex-row items-center justify-strech gap-2 fade-top-bottom">
+          <div className="absolute w-fit h-screen z-20 pl-12 pt-4 flex flex-col items-start justify-center">
+            <div className="flex flex-row w-full lg:text-8xl bg-clip-text font-b items-baseline justify-start">
+              <span className="text-gray-700 text-6xl">Hey, I'm&nbsp;</span>
+              <span className="text-custom-blue font-bold text-7xl">
+                Marcell Varga
+              </span>
             </div>
-            <div className="flex w-full text-4xl font-light items-center justify-start m-4 text-slate-50 ">
+            <div className="flex w-full text-4xl font-light items-center justify-start my-4 text-custom-blue">
               UX & Frontend engineer
             </div>
+            {/* <div className="flex w-full text-xl font-light items-center justify-start my-4 text-gray-700">
+              Crafting seamless digital experiences.
+            </div> */}
+          </div>
+          <div className="absolute bottom-40 left-12 z-20 pl-8">
+            {/* <button className="px-5 py-2 text-white rounded-full bg-custom-blue hover:bg-custom-blue/90 transition-colors duration-300 ease-in-out min-w-32">
+              Projects
+            </button> */}
+            {/* <button className="relative px-5 py-2 text-gray-50 rounded-full group overflow-hidden min-w-32">
+                <span className="relative z-10 transition-colors duration-300 group-hover:text-custom-blue">
+                  Projects
+                </span>
+                <div className="absolute inset-0 bg-custom-blue rounded-full"></div>
+                <div
+                  className="absolute inset-0 bg-gray-50 rounded-full transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-bottom"
+                ></div>
+                <div className="absolute inset-0 border-2 border-custom-blue rounded-full"></div>
+              </button> */}
+            <button className="relative px-5 py-2 text-custom-blue rounded-full group overflow-hidden min-w-36 flex items-center justify-center">
+              <span className="relative z-10 transition-colors duration-300 group-hover:text-gray-50 mr-2">
+                Projects
+              </span>
+              <ArrowRightIcon className="w-5 h-5 relative z-10 transition-colors duration-300 group-hover:text-gray-50" />
+              <div className="absolute inset-0 border-2 border-custom-blue rounded-full"></div>
+              <div className="absolute inset-0 bg-custom-blue rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+            </button>
           </div>
 
           <div className="relative w-full h-full flex justify-end">
-            <div className="relative w-full h-full flex justify-end main-container rounded-2lg">
+            <div className="relative w-full h-full flex justify-end main-container">
               <svg
-                className={`triangle-bg-svg ${"dark-mode"}`}
+                className={`triangle-bg-svg ${"dark-mode rounded-[36px] bg-gray-100"}`}
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -315,15 +345,15 @@ export default function Page() {
         className="sticky h-[400vh] top-0 flex flex-col items-center justify-between gap-1 w-full transition-opacity duration-300"
       >
         <div className="flex w-4/5 h-screen text-5xl font-medium items-center justify-start">
-          <h2 className="text-2xl font-light text-justify m-8 leading-relaxed text-slate-50 ">
+          <h2 className="text-2xl font-light text-justify m-8 leading-relaxed text-custom-blue ">
             {typedText}
           </h2>
         </div>
       </section>
-      <div className="flex justify-center items-center">
-        <section className="flex flex-col items-center justify-between mt-4 mb-4 gap-24 w-4/5">
+      <div className="flex justify-center items-center ">
+        <section className="flex flex-col items-center justify-between mt-4 mb-4 gap-24 w-4/5 ">
           {/* New Experience Section */}
-          <article className="mt-8 w-full p-4">
+          <article className="mt-8 w-full p-4 ">
             <h2 className="text-custom-blue text-sm font-bold mb-4 tracking-wider uppercase">
               Experience
             </h2>
@@ -369,15 +399,28 @@ export default function Page() {
             <div className="w-full h-full flex justify-center items-center">
               <div className="w-full flex flex-col gap-12">
                 {projects.map((project) => (
-                  <div
-                    key={project.title}
-                    className="w-full flex group relative overflow-hidden"
-                  >
+                  <div key={project.title} className="w-full transform-gpu">
                     <Link
                       href={project.link}
-                      className={`w-full flex flex-col md:flex-row px-4 md:px-8 py-6 md:py-4 lg:py-4.5 2xl:py-8 rounded-2xl transition-all duration-200 ease-in-out ${"bg-white/10 backdrop-blur-md shadow-lg hover:bg-white/20 hover:shadow-xl border border-white/20 hover:border-white/30"}`}
+                      className={`
+                        w-full 
+                        flex flex-col md:flex-row 
+                        px-4 md:px-8 py-6 md:py-4 lg:py-4.5 2xl:py-8 
+                        rounded-2xl 
+                        transition-all duration-300 ease-out 
+                        bg-gray-100/90
+                        hover:bg-neutral-100/95
+                        hover:scale-[1.02] 
+                        hover:-translate-y-1
+                        hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]
+                        relative
+                        overflow-hidden
+                        border border-transparent
+                        group
+                      `}
                     >
-                      <div className="w-full md:w-fit relative overflow-hidden flex justify-center md:justify-start items-center">
+                      {/* Image container */}
+                      <div className="w-full md:w-fit relative overflow-hidden flex justify-center md:justify-start items-center group-hover:scale-[1.01] transition-transform duration-300">
                         <div className="w-[275px] sm:w-[250px] md:w-[300px] relative rounded-lg overflow-hidden">
                           <Image
                             src={project.image}
@@ -391,14 +434,14 @@ export default function Page() {
                       </div>
                       <div className="flex flex-col p-4 md:p-6 pb-0 md:pb-6 gap-2 md:gap-2 w-full">
                         <div className="w-fit">
-                          <div className="text-xl md:text-2xl text-slate-50">
+                          <div className="text-xl md:text-2xl text-custom-blue font-bold">
                             {project.title}
                           </div>
-                          <div className="text-sm md:text-base text-slate-50">
+                          <div className="text-sm md:text-base text-custom-blue">
                             {project.subTitle}
                           </div>
                         </div>
-                        <div className="text-base font-light text-justify text-slate-50">
+                        <div className="text-base font-light text-justify text-custom-blue">
                           <div className="text-sm md:text-base">
                             {project.description}
                           </div>
@@ -418,7 +461,7 @@ export default function Page() {
                         <div className="flex justify-center items-center absolute inset-0 bg-transparent pointer-events-none transition-transform duration-300 ease-in-out origin-left group-hover:translate-x-5">
                           <FontAwesomeIcon
                             icon={faChevronRight}
-                            className="w-6 h-6 text-gray-500 group-hover:text-slate-100 transition-colors duration-700 ease-in-out"
+                            className="w-6 h-6 text-custom-blue group-hover:text-custom-blue transition-colors duration-700 ease-in-out"
                           />
                         </div>
                       </div>
@@ -432,25 +475,27 @@ export default function Page() {
             <h2 className="text-custom-blue text-sm font-bold mb-4 tracking-wider uppercase">
               History
             </h2>
-            <div className="flex flex-col gap-12">
+            <div className="flex flex-col gap-12 ">
               {history.map((item, index) => (
                 <div key={index} className="flex flex-col md:flex-row">
                   <div className="w-full md:w-1/2">
-                    <h3 className="text-xl text-slate-50">{item.company}</h3>
+                    <h3 className="text-xl font-bold text-custom-blue">
+                      {item.company}
+                    </h3>
                   </div>
                   <div className="w-full md:w-1/2">
                     <div className="flex flex-col gap-4">
                       <div>
-                        <h3 className="text-lg text-slate-50">
+                        <h3 className="text-lg font-semibold text-custom-blue">
                           {item.jobTitle}
                         </h3>
-                        <h4 className="text-base font-light text-slate-50">
+                        <h4 className="text-base font-normal italic text-custom-blue">
                           {item.time.start} -{" "}
                           {item.time.end ? item.time.end : "Present"}
                         </h4>
                       </div>
                       <div>
-                        <div className="text-sm text-left md:text-left text-slate-50 ">
+                        <div className="text-sm text-left md:text-left text-custom-blue ">
                           {item.description.map((desc, index) => (
                             <p key={index} className="py-2">
                               {desc}
@@ -471,10 +516,24 @@ export default function Page() {
                   href="/Marcell-Varga-CV.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex justify-start items-center gap-2 text-slate-50 hover:text-custom-blue dark:hover:text-custom-teal"
+                  className={`flex justify-start items-center gap-2 text-custom-blue hover:text-custom-blue transition-all duration-300 ease-in-out ${
+                    isHover ? "transform scale-105" : ""
+                  }`}
                 >
-                  <span>View Full Resume</span>
-                  <div className={isHover ? "icon-container" : ""}>
+                  <span className="relative inline-block overflow-hidden">
+                    View Full Resume
+                    <span
+                      className={`absolute bottom-0 left-0 w-full h-0.5 bg-custom-blue transform ${
+                        isHover ? "translate-x-0" : "translate-x-[-100%]"
+                      } transition-transform duration-300 ease-in-out`}
+                    ></span>
+                  </span>
+                  <div
+                    style={{
+                      transition: "transform 0.3s",
+                      transform: isHover ? "translate(2px, -2px)" : "none",
+                    }}
+                  >
                     <OpenResumeIcon isHover={isHover} />
                   </div>
                 </a>
@@ -483,6 +542,30 @@ export default function Page() {
           </article>
         </section>
       </div>
+      {/* <section>
+        <div className="flex w-full items-center justify-center text-5xl mt-60">
+          <h3 className="text-2xl font-light text-justify leading-relaxed text-slate-900 dark:text-slate-50 ">
+            Current Location:&nbsp;
+            <span className="text-red-500 font-medium">
+              Copenhagen, Denmark
+            </span>
+          </h3>
+        </div>
+        <div className="flex items-center justify-center w-full">
+          <Globe
+            ref={globeRef}
+            globeImageUrl={"//unpkg.com/three-globe/example/img/earth-day.jpg"}
+            pointsData={[copenhagen]}
+            pointLabel="name"
+            pointColor={() => "#FF4444"}
+            backgroundColor="rgba(0,0,0,0)"
+            width={size.width} // Use the width of the window as the width of the Globe
+            height={size.height} // Use the height of the window as the height of the Globe
+            animateIn={true} // Enable auto rotation
+          />
+        </div>
+      </section> */}
+
       <Footer
         isOpen={isOpen}
         setIsOpen={setIsOpen}
