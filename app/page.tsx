@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import IndexSigAnimatedIcon from "../public/icons/indexSigAnimated";
@@ -250,11 +250,63 @@ export default function Page() {
 
   const size = useWindowSize();
 
+  const scrollToHome = useCallback(() => {
+    if (stickySectionRef.current) {
+      const aboutLocation = 0;
+
+      window.scrollTo({
+        top: aboutLocation,
+        behavior: "smooth",
+      });
+    }
+  }, []);
+
+  const scrollToAbout = useCallback(() => {
+    if (stickySectionRef.current) {
+      const aboutLocation = 2800 - 1;
+
+      window.scrollTo({
+        top: aboutLocation,
+        behavior: "smooth",
+      });
+    }
+  }, []);
+
+  const scrollToWork = useCallback(() => {
+    if (stickySectionRef.current) {
+      const workLocation = 4350 - 1;
+
+      window.scrollTo({
+        top: workLocation,
+        behavior: "smooth",
+      });
+    }
+  }, []);
+
+  const scrollToContact = useCallback(() => {
+    if (stickySectionRef.current) {
+      const contactLocation = 6380 - 1;
+
+      window.scrollTo({
+        top: contactLocation,
+        behavior: "smooth",
+      });
+    }
+  }, []);
+
   return (
     <div
       className={`px-4 pb-4 transition-colors duration-200 ease-in-out bg-gray-200`}
     >
-      <Header isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Header
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        scrollToHome={scrollToHome}
+        scrollToAbout={scrollToAbout}
+        scrollToWork={scrollToWork}
+        scrollToContact={scrollToContact}
+      />
+
       <main className="flex flex-col items-center justify-between h-screen mt-2 m-4 gap-1 ">
         <div className="flex-grow pb-8 w-full flex flex-row items-center justify-strech gap-2 fade-top-bottom">
           <div className="absolute mt-4 w-fit h-screen z-20 pl-12 pt-4 flex flex-col items-start justify-center">
@@ -264,37 +316,26 @@ export default function Page() {
                 Marcell Varga
               </span>
             </div>
-            <div className="flex w-full text-4xl font-light items-center justify-start my-4 text-custom-blue">
+            <div className="flex w-full text-4xl font-light items-center justify-start my-2 text-custom-blue">
               UX & Frontend engineer
             </div>
-            <div className="flex w-full text-lg font-light items-center justify-start mt-34 italic text-gray-400">
-              - Crafting digital journeys that captivate and engage.
+            <div className="flex w-full text-lg font-light items-center justify-start mt-34 italic text-custom-blue/40">
+              I craft digital journeys that captivate and engage.
             </div>
-          </div>
-          <div className="absolute bottom-40 left-12 z-20 pl-8">
-            {/* <button className="px-5 py-2 text-white rounded-full bg-custom-blue hover:bg-custom-blue/90 transition-colors duration-300 ease-in-out min-w-32">
-              Projects
-            </button> */}
-            {/* <button className="relative px-5 py-2 text-gray-50 rounded-full group overflow-hidden min-w-32">
-                <span className="relative z-10 transition-colors duration-300 group-hover:text-custom-blue">
+
+            {/* Button positioned at the bottom */}
+            <div className="absolute bottom-36 left-3 pl-8">
+
+              <button className="relative px-5 py-2 text-custom-blue rounded-full group overflow-hidden min-w-36 flex items-center justify-center">
+                <span className="relative z-10 transition-colors duration-300 group-hover:text-gray-50 mr-2">
                   Projects
                 </span>
-                <div className="absolute inset-0 bg-custom-blue rounded-full"></div>
-                <div
-                  className="absolute inset-0 bg-gray-50 rounded-full transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-bottom"
-                ></div>
+                <ArrowRightIcon className="w-5 h-5 relative z-10 transition-colors duration-300 group-hover:text-gray-50" />
                 <div className="absolute inset-0 border-2 border-custom-blue rounded-full"></div>
-              </button> */}
-            <button className="relative px-5 py-2 text-custom-blue rounded-full group overflow-hidden min-w-36 flex items-center justify-center">
-              <span className="relative z-10 transition-colors duration-300 group-hover:text-gray-50 mr-2">
-                Projects
-              </span>
-              <ArrowRightIcon className="w-5 h-5 relative z-10 transition-colors duration-300 group-hover:text-gray-50" />
-              <div className="absolute inset-0 border-2 border-custom-blue rounded-full"></div>
-              <div className="absolute inset-0 bg-custom-blue rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-            </button>
+                <div className="absolute inset-0 bg-custom-blue rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              </button>
+            </div>
           </div>
-
           <div className="relative w-full h-full flex justify-end">
             <div className="relative w-full h-full flex justify-end main-container">
               <svg
@@ -542,30 +583,6 @@ export default function Page() {
           </article>
         </section>
       </div>
-      {/* <section>
-        <div className="flex w-full items-center justify-center text-5xl mt-60">
-          <h3 className="text-2xl font-light text-justify leading-relaxed text-slate-900 dark:text-slate-50 ">
-            Current Location:&nbsp;
-            <span className="text-red-500 font-medium">
-              Copenhagen, Denmark
-            </span>
-          </h3>
-        </div>
-        <div className="flex items-center justify-center w-full">
-          <Globe
-            ref={globeRef}
-            globeImageUrl={"//unpkg.com/three-globe/example/img/earth-day.jpg"}
-            pointsData={[copenhagen]}
-            pointLabel="name"
-            pointColor={() => "#FF4444"}
-            backgroundColor="rgba(0,0,0,0)"
-            width={size.width} // Use the width of the window as the width of the Globe
-            height={size.height} // Use the height of the window as the height of the Globe
-            animateIn={true} // Enable auto rotation
-          />
-        </div>
-      </section> */}
-
       <Footer
         isOpen={isOpen}
         setIsOpen={setIsOpen}

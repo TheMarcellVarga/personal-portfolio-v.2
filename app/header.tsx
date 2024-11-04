@@ -8,9 +8,20 @@ import { useState, useEffect } from "react";
 interface HeaderProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  scrollToHome: () => void;
+  scrollToAbout: () => void;
+  scrollToWork: () => void;
+  scrollToContact: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ isOpen, setIsOpen }) => {
+const Header: React.FC<HeaderProps> = ({
+  isOpen,
+  setIsOpen,
+  scrollToHome,
+  scrollToAbout,
+  scrollToWork,
+  scrollToContact,
+}) => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollTop, setLastScrollTop] = useState(0);
 
@@ -49,7 +60,13 @@ const Header: React.FC<HeaderProps> = ({ isOpen, setIsOpen }) => {
     >
       <div className="flex items-center">
         {/* Icon */}
-        <Link href="/ ">
+        <Link
+          href="/"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToHome();
+          }}
+        >
           <IndexSigAnimatedIcon isOpen={isOpen} />
         </Link>
       </div>
@@ -112,7 +129,13 @@ const Header: React.FC<HeaderProps> = ({ isOpen, setIsOpen }) => {
               isOpen ? "block" : "hidden"
             } md:flex items-center space-x-4 transition-all duration-300 ease-in-out`}
           >
-            <Link href="/about">
+            <Link
+              href="/about"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToAbout();
+              }}
+            >
               <div
                 className="relative inline-block text-sm font-medium text-custom-blue tracking-wider  group"
                 style={{ color: isOpen ? "#eeeeee" : "" }}
@@ -121,7 +144,13 @@ const Header: React.FC<HeaderProps> = ({ isOpen, setIsOpen }) => {
                 <span className="absolute bottom-0 left-0 w-full h-0.5 bg-custom-blue transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
               </div>
             </Link>
-            <Link href="/work">
+            <Link
+              href="/work"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToWork();
+              }}
+            >
               <div
                 className="relative inline-block text-sm font-medium text-custom-blue tracking-wider  group"
                 style={{ color: isOpen ? "#eeeeee" : "" }}
@@ -130,7 +159,13 @@ const Header: React.FC<HeaderProps> = ({ isOpen, setIsOpen }) => {
                 <span className="absolute bottom-0 left-0 w-full h-0.5 bg-custom-blue transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
               </div>
             </Link>
-            <Link href="/contact">
+            <Link
+              href="/contact"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToContact();
+              }}
+            >
               <div
                 className="relative inline-block text-sm font-medium text-custom-blue tracking-wider  group"
                 style={{ color: isOpen ? "#eeeeee" : "" }}
