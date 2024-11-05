@@ -4,14 +4,15 @@ import DarkModeIcon from "@/public/icons/darkMode";
 import IndexSigAnimatedIcon from "@/public/icons/indexSigAnimated";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 interface HeaderProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-  scrollToHome: () => void;
-  scrollToAbout: () => void;
-  scrollToWork: () => void;
-  scrollToContact: () => void;
+  scrollToHome?: () => void;
+  scrollToAbout?: () => void;
+  scrollToWork?: () => void;
+  scrollToContact?: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -22,25 +23,33 @@ const Header: React.FC<HeaderProps> = ({
   scrollToWork,
   scrollToContact,
 }) => {
+  const router = useRouter();
+
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollTop, setLastScrollTop] = useState(0);
+  const [pendingScrollAction, setPendingScrollAction] = useState<
+    (() => void) | null
+  >(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const st = window.pageYOffset || document.documentElement.scrollTop;
-      if (st > lastScrollTop) {
-        // downscroll code
-        setIsVisible(false);
-      } else {
-        // upscroll code
-        setIsVisible(true);
-      }
-      setLastScrollTop(st <= 0 ? 0 : st); // For Mobile or negative scrolling
-    };
+    if (pendingScrollAction) {
+      pendingScrollAction();
+      setPendingScrollAction(null);
+    }
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollTop]);
+
+  const handleScroll = () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+      setIsVisible(false);
+    } else {
+      setIsVisible(true);
+    }
+    setLastScrollTop(scrollTop);
+  };
 
   const [showTooltip, setShowTooltip] = useState(false);
 
@@ -50,6 +59,31 @@ const Header: React.FC<HeaderProps> = ({
 
   const handleMouseLeave = () => {
     setShowTooltip(false); // Hide tooltip on mouse leave
+  };
+
+  useEffect(() => {
+    if (pendingScrollAction) {
+      pendingScrollAction();
+      setPendingScrollAction(null);
+    }
+  }, [pendingScrollAction]);
+
+  const handleNavigation = async (
+    path: string,
+    scrollAction: (() => void) | undefined
+  ) => {
+    if (window.location.pathname !== path) {
+      await router.push(path);
+
+      // Wait for the navigation to complete
+      await new Promise((resolve) => setTimeout(resolve, 100));
+
+      if (scrollAction) {
+        scrollAction();
+      }
+    } else if (scrollAction) {
+      scrollAction();
+    }
   };
 
   return (
@@ -64,7 +98,7 @@ const Header: React.FC<HeaderProps> = ({
           href="/"
           onClick={(e) => {
             e.preventDefault();
-            scrollToHome();
+            scrollToHome && scrollToHome();
           }}
         >
           <IndexSigAnimatedIcon isOpen={isOpen} />
@@ -129,11 +163,23 @@ const Header: React.FC<HeaderProps> = ({
               isOpen ? "block" : "hidden"
             } md:flex items-center space-x-4 transition-all duration-300 ease-in-out`}
           >
-            <Link
+            {/* <Link
               href="/about"
               onClick={(e) => {
                 e.preventDefault();
-                scrollToAbout();
+                handleNavigation("/about", scrollToAbout);
+              }}
+            > */}
+            <Link
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavigation("/", () => {
+                  window.scrollTo({
+                    top: 2800 - 1,
+                    behavior: "smooth",
+                  });
+                });
               }}
             >
               <div
@@ -145,10 +191,15 @@ const Header: React.FC<HeaderProps> = ({
               </div>
             </Link>
             <Link
-              href="/work"
+              href="/"
               onClick={(e) => {
                 e.preventDefault();
-                scrollToWork();
+                handleNavigation("/", () => {
+                  window.scrollTo({
+                    top: 4350 - 1,
+                    behavior: "smooth",
+                  });
+                });
               }}
             >
               <div
@@ -160,10 +211,15 @@ const Header: React.FC<HeaderProps> = ({
               </div>
             </Link>
             <Link
-              href="/contact"
+              href="/"
               onClick={(e) => {
                 e.preventDefault();
-                scrollToContact();
+                handleNavigation("/", () => {
+                  window.scrollTo({
+                    top: 6380 - 1,
+                    behavior: "smooth",
+                  });
+                });
               }}
             >
               <div

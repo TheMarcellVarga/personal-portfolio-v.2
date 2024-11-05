@@ -308,38 +308,33 @@ const ESS = () => {
     }
   }, [isDarkMode]);
 
-
-
   return (
-    <div className={`px-4 pb-4 ${isDarkMode ? 'bg-gradient-dark' : 'bg-gradient-light'} transition-colors duration-200 ease-in-out`}>
-      <Header
-        isDarkMode={isDarkMode}
-        setIsDarkMode={setIsDarkMode}
-        isOpen={isOpen}
-        setIsOpen={setIsDarkMode}
-      />
+    <div
+      className={`px-4 pb-4 transition-colors duration-200 ease-in-out bg-gray-200`}
+    >
+      <Header isOpen={isOpen} setIsOpen={setIsDarkMode} />
       <main className="flex flex-col items-center justify-between m-4 gap-1 w-full">
         <div className="flex-grow pb-12 w-full flex flex-row items-center justify-center gap-2">
           <section className="flex flex-col items-center justify-between my-4 gap-24 w-4/5">
             {/* New Experience Section */}
             <article className="mt-8 w-full p-4">
-              <h2 className="text-slate-900 dark:text-slate-50 text-3xl font-bold">
+              <h2 className="text-custom-blue text-3xl font-bold">
                 European Study Solution
               </h2>
-              <h2 className="text-custom-blue text-md font-bold mb-4 tracking-wider uppercase">
+              <h2 className="text-gray-700 text-md font-bold mb-4 tracking-wider uppercase">
                 Student Agency
               </h2>
               <div className="flex flex-col gap-12">
                 {history.map((item, index) => (
                   <div key={index} className="flex">
                     <div className="flex flex-col gap-2">
-                      <h3 className="text-xl text-black dark:text-white">
+                      <h3 className="text-xl text-custom-blue">
                         {item.title}
                       </h3>
-                      <h3 className="text-lg text-black dark:text-white">
+                      <h3 className="text-lg text-custom-blue">
                         {item.subTitle}
                       </h3>
-                      <h4 className="text-base font-light text-black dark:text-white">
+                      <h4 className="text-base font-light text-custom-blue">
                         <Image
                           src={item.content.picture}
                           alt={item.content.text}
@@ -351,7 +346,7 @@ const ESS = () => {
                         />
                         {item.content.text}
                       </h4>
-                      <div className="text-sm text-black dark:text-white ">
+                      <div className="text-sm text-custom-blue ">
                         {item.description.map((desc, descIndex) => (
                           <div key={descIndex}>
                             <p className="pt-2 text-lg">{desc.title}</p>
@@ -415,7 +410,7 @@ const ESS = () => {
                                 : null}
                             </div>{" "}
                             {/* Render subTitle and subText alternatively with spacing */}
-                            <div className="text-sm text-gray-600 dark:text-gray-300">
+                            <div className="text-sm text-custom-blue">
                               {Array.isArray(desc.subTitle) &&
                                 Array.isArray(desc.subText) &&
                                 Array.isArray(desc.subPicture) &&
@@ -437,7 +432,7 @@ const ESS = () => {
                                           />
                                         </div>
                                       )}
-                                      <h4 className="text-base mb-1 text-gray-900 dark:text-gray-100">
+                                      <h4 className="text-base mb-1 text-custom-blue">
                                         {title}
                                       </h4>
                                       <p>{desc.subText?.[index] || ""}</p>
@@ -483,10 +478,10 @@ const ESS = () => {
         <div className="pb-32 flex flex-col items-center justify-start"></div>
       </main>
       <Footer
-        isDarkMode={isDarkMode}
-        setIsDarkMode={setIsDarkMode}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
+        isHover={isHover}
+        setIsHover={setIsHover}
       />
     </div>
   );

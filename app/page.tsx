@@ -293,7 +293,7 @@ export default function Page() {
       });
     }
   }, []);
-
+  
   return (
     <div
       className={`px-4 pb-4 transition-colors duration-200 ease-in-out bg-gray-200`}
@@ -324,7 +324,7 @@ export default function Page() {
             </div>
 
             {/* Button positioned at the bottom */}
-            <div className="absolute bottom-36 left-3 pl-8">
+            <div className="absolute bottom-36 left-0 pl-10">
 
               <button className="relative px-5 py-2 text-custom-blue rounded-full group overflow-hidden min-w-36 flex items-center justify-center">
                 <span className="relative z-10 transition-colors duration-300 group-hover:text-gray-50 mr-2">
