@@ -336,7 +336,7 @@ const ESS = () => {
                       <h3 className="text-lg text-custom-blue">
                         {item.subTitle}
                       </h3>
-                      <h4 className="text-base font-light text-custom-blue">
+                      <h4 className="text-base font-light text-custom-blue rounded-md">
                         <Image
                           src={item.content.picture}
                           alt={item.content.text}
