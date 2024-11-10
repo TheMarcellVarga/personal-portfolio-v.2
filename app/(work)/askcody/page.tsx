@@ -10,6 +10,10 @@ import LinkedInIcon from "@/public/icons/linkedin";
 import MouseScrollIcon from "@/public/icons/mouseScroll";
 import Header from "../../header";
 import Footer from "../../footer";
+import { projects } from "../../page";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 const history = [
   {
@@ -25,33 +29,28 @@ const history = [
         text: [
           "AskCody is a company specializing in efficient meeting management through digital solutions. Their philosophy is based on improving the workplace experience, thus increasing employee productivity and satisfaction. Their main product is a cloud-based, flexible and secure solution for creating and managing meetings for office spaces, therefore creating a controlled distribution of the employees. Their platform also makes it possible to edit, track and analyze the meetings. However, our client is addressing major challenge due to the change in corporate office culture.",
         ],
-        picture: [],
       },
       {
         title: "Problem",
         text: [
           "After the COVID-19 pandemic, the concept of workplaces has changed. More and more companies are in the process of transition from static to hybrid office environments. With this transition a new problem arises. Office resource management tools are simply not suitable for the new era of hybrid transformation.",
         ],
-        picture: [],
       },
       {
         title: "Objective",
         text: [
           "To help companies address this issue, we will investigate developing a software solution which will capitalize on utilizing all the company's resources while providing flexible work arrangements for its employees.",
         ],
-        picture: [],
       },
       {
         title: "Design Thinking",
         text: [
           "Our choice of development method for the project was Design Thinking as it can help us systematically extract, teach, learn and apply human centric techniques to solve problems in a creative and innovative way. By using Design Thinking we will ensure that the focus is kept on the users' needs and values, and that it is a human-centered procedure.",
         ],
-        picture: [],
       },
       {
         title: "Empathize",
-        text: [],
-        picture: [],
+
         subTitle: ["Interviews", "", "Personas", "", ""],
         subText: [
           "We prepared a thorough interview guide and carefully selected the possible participants, as it would greatly influence the result. We believed that the best source to extract information from would be from personnel of the corporate offices.",
@@ -72,7 +71,7 @@ const history = [
         text: [
           "After finding the core issues to be solved, we analyze our observations from our users and funnel our thoughts down to make it more tangible. To do this we are synthesizing our findings so we can define the problem.",
         ],
-        picture: [],
+
         subTitle: ["Point of View", "", "", "", ""],
         subText: [
           "Since our project was revolving around exploring what are the crucial issues and how they could act as an obstacle for digital-first work environment, we had to define what the exact problems are, using an actionable problem statements.",
@@ -91,8 +90,7 @@ const history = [
       },
       {
         title: "Ideate",
-        text: [],
-        picture: [],
+
         subTitle: [
           "Crazy 8s",
           "",
@@ -116,8 +114,8 @@ const history = [
           "",
         ],
         subText: [
-          "Having sufficient data made it easy for us to start ideating on the show structure for the product and with it the functionalities which will provide a solution for different user types.´",
-          "First, we are stating our goal, which in our case was to discover the potential functionality of the product. To fulfill this, we developed ideas under a short, predetermined amount of time and later validated them among us.´",
+          "Having sufficient data made it easy for us to start ideating on the show structure for the product and with it the functionalities which will provide a solution for different user types.",
+          "First, we are stating our goal, which in our case was to discover the potential functionality of the product. To fulfill this, we developed ideas under a short, predetermined amount of time and later validated them among us.",
           "",
           "",
           "Our next step was to conduct a card sorting study. We have created cards based on our previous brainstorming sessions, where we were discussing taxonomically low-level features and other aspects of the future system.",
@@ -162,7 +160,7 @@ const history = [
       {
         title: "Prototype",
         text: [""],
-        picture: [],
+
         subTitle: ["Sketches", "", ""],
         subText: [
           "We had started to create initial sketches to capture our vision and get an overview of the page structure. We're also able to visualize the information architecture and project the user behaviors.",
@@ -196,7 +194,6 @@ const history = [
         text: [
           "We have created design assets and components respecting the Microsoft design language, Fluent, due to our platform of implementation.",
         ],
-        picture: [],
       },
       {
         title: "",
@@ -207,12 +204,12 @@ const history = [
       },
       {
         title: "",
-        text: [],
+
         picture: ["/images/legacy/AC-Images/Figure19.1.png"],
       },
       {
         title: "",
-        text: [],
+
         picture: ["/images/legacy/AC-Images/Figure19.2.png"],
       },
       {
@@ -220,7 +217,6 @@ const history = [
         text: [
           "Despite them being a way to interpret the brand itself, it also helps capturing feeling, which we want to make the users feel when they are using our solution. Using it properly can improve how the users perceive and interact with the interface. AskCody's main color is a shade of blue, which is notoriously stand for calmness or serenity. This exactly captures what our goal is with our product by contributing to the establishment of a structured and orderly environment.",
         ],
-        picture: [],
       },
       {
         title: "High-Fidelity Mockups",
@@ -235,7 +231,7 @@ const history = [
       },
       {
         title: "",
-        text: [],
+
         picture: [
           "/images/legacy/AC-Images/Figure23.png",
           "/images/legacy/AC-Images/Figure23.1.png",
@@ -243,7 +239,7 @@ const history = [
       },
       {
         title: "",
-        text: [],
+
         picture: [
           "/images/legacy/AC-Images/Figure26.png",
           "/images/legacy/AC-Images/Figure27.png",
@@ -251,7 +247,7 @@ const history = [
       },
       {
         title: "",
-        text: [],
+
         picture: [
           "/images/legacy/AC-Images/Figure28.png",
           "/images/legacy/AC-Images/Figure29.png",
@@ -259,7 +255,7 @@ const history = [
       },
       {
         title: "",
-        text: [],
+
         picture: [
           "/images/legacy/AC-Images/Figure30.png",
           "/images/legacy/AC-Images/Figure33.png",
@@ -300,9 +296,9 @@ const history = [
       },
       {
         title: "",
-        text: [],
+
         picture: [
-          "/images/legacy/AC-Images/Figure40.1.png",
+          "/images/legacy/AC-Images/Figure40.2.png",
           "/images/legacy/AC-Images/Figure40.2.png",
         ],
       },
@@ -311,7 +307,6 @@ const history = [
         text: [
           "The results of our testing sessions were better than we anticipated. The key targets we were aiming for are recognized by the users in the way that we thought they would. This confirmed our solutions are validity.",
         ],
-        picture: [],
       },
       {
         title: "Realization",
@@ -319,7 +314,6 @@ const history = [
           "The solution was carried out using HTML, CSS, JavaScript. We utilized React as Front-end framework, by having React-Bootstrap as our library. This was due to it is being Microsoft's recommended tool for building Team's applications.",
           "React being a lightweight library, allowed us a flexible and rapid process.",
         ],
-        picture: [],
       },
       {
         title: "Summary",
@@ -327,19 +321,19 @@ const history = [
           "To summarize, we have created an innovative concept for AskCody to solve the issue of resource management and flexible transformation in the office management area.",
           "We had carried out a centralized solution existing part of AskCody's ecosystem integrated into Microsoft Teams to manage office resources, while providing an overview of the company both for the employees and the managers in the rising trend of hybrid work environments.",
         ],
-        picture: [],
       },
     ],
   },
 ];
 
 const AskCody = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isHover, setIsHover] = useState(false);
 
   return (
     <div
-      className={`px-4 pb-4 bg-gradient-dark transition-colors duration-200 ease-in-out`}
+      className={`px-4 pb-4 transition-colors duration-200 ease-in-out bg-gray-200`}
     >
       <Header isOpen={isOpen} setIsOpen={setIsOpen} />
       <main className="flex flex-col items-center justify-between m-4 gap-1 w-full">
@@ -347,23 +341,19 @@ const AskCody = () => {
           <section className="flex flex-col items-center justify-between my-4 gap-24 w-4/5">
             {/* New Experience Section */}
             <article className="mt-8 w-full p-4">
-              <h2 className="text-slate-900 dark:text-slate-50 text-3xl font-bold">
-                AskCody
-              </h2>
-              <h2 className="text-custom-blue text-md font-bold mb-4 tracking-wider uppercase">
+              <h2 className="text-custom-blue text-3xl font-bold">AskCody</h2>
+              <h2 className="text-gray-700 text-md font-bold mb-4 tracking-wider uppercase">
                 Hybrid Office Manager
               </h2>
               <div className="flex flex-col gap-12">
                 {history.map((item, index) => (
                   <div key={index} className="flex">
                     <div className="flex flex-col gap-2">
-                      <h3 className="text-xl text-black dark:text-white">
-                        {item.title}
-                      </h3>
-                      <h3 className="text-lg text-black dark:text-white">
+                      <h3 className="text-xl text-custom-blue">{item.title}</h3>
+                      <h3 className="text-lg text-custom-blue">
                         {item.subTitle}
                       </h3>
-                      <h4 className="text-base font-light text-black dark:text-white">
+                      <h4 className="text-base font-light text-custom-blue">
                         <Image
                           src={item.content.picture}
                           alt={item.content.text}
@@ -371,98 +361,172 @@ const AskCody = () => {
                           width={300}
                           height={200}
                           objectFit="cover"
+                          className="rounded-lg"
                         />
                         {item.content.text}
                       </h4>
-                      <div className="text-sm text-black dark:text-white ">
+                      <div className="text-sm text-custom-blue ">
                         {item.description.map((desc, descIndex) => (
                           <div key={descIndex}>
-                            <p className="pt-2 text-lg">{desc.title}</p>
-                            <div className="py-2">
-                              {Array.isArray(desc.text) ? (
-                                desc.text.map((text, index) => (
-                                  <React.Fragment key={index}>
-                                    <p>{text}</p>
-                                    {index !== desc.text.length - 1 && (
-                                      <span
-                                        style={{
-                                          marginLeft: "-1em",
-                                          display: "inline-block",
-                                        }}
-                                      />
-                                    )}
-                                  </React.Fragment>
-                                ))
-                              ) : (
-                                <p>{desc.text || ""}</p>
-                              )}
-                            </div>
-                            <div className="mt-2 flex flex-wrap justify-center items-start w-full">
+                            <p
+                              className={`${
+                                descIndex === 0 ? "pt-2" : "pt-8"
+                              } text-xl font-bold`}
+                            >
+                              {desc.title}
+                            </p>
+                            {desc.text && (
+                              <div className="py-2">
+                                {Array.isArray(desc.text) ? (
+                                  desc.text.map((text, index) => (
+                                    <React.Fragment key={index}>
+                                      {text && <p>{text}</p>}
+                                      {index !==
+                                        (desc.text?.length ?? 0) - 1 && (
+                                        <span
+                                          style={{
+                                            marginLeft: "-1em",
+                                            display: "inline-block",
+                                          }}
+                                        />
+                                      )}
+                                    </React.Fragment>
+                                  ))
+                                ) : (
+                                  <p>{desc.text}</p>
+                                )}
+                              </div>
+                            )}{" "}
+                            <div className="mt-4 flex flex-wrap justify-center items-center w-full gap-8">
                               {Array.isArray(desc.picture)
-                                ? desc.picture.flatMap((group, groupIndex) =>
-                                    Array.isArray(group) ? (
+                                ? desc.picture
+                                    .reduce(
+                                      (rows: any[], curr, index, array) => {
+                                        const isPartOfPair =
+                                          curr === array[index + 1];
+                                        const isSecondOfPair =
+                                          curr === array[index - 1];
+
+                                        if (isSecondOfPair) return rows;
+
+                                        const lastRow = rows[rows.length - 1];
+                                        if (!lastRow || lastRow.length >= 3) {
+                                          rows.push([
+                                            { url: curr, isPair: isPartOfPair },
+                                          ]);
+                                        } else {
+                                          lastRow.push({
+                                            url: curr,
+                                            isPair: isPartOfPair,
+                                          });
+                                        }
+                                        return rows;
+                                      },
+                                      []
+                                    )
+                                    .map((row, rowIndex) => (
                                       <div
-                                        key={groupIndex}
-                                        className="flex space-x-4"
+                                        key={rowIndex}
+                                        className="flex flex-row justify-center items-center gap-8 w-full"
                                       >
-                                        {group.map(
-                                          (pictureUrl, pictureIndex) => (
-                                            <Image
-                                              key={`${groupIndex}-${pictureIndex}`}
-                                              src={pictureUrl}
-                                              alt={`Group Picture ${
-                                                pictureIndex + 1
-                                              }`}
-                                              layout="fixed"
-                                              width={150} // Fixed width for all images
-                                              height={100} // Fixed height for all images
-                                              objectFit="cover"
-                                              className="mx-2" // Margin around each image for spacing
-                                            />
+                                        {row.map(
+                                          (
+                                            item: {
+                                              url: string | StaticImport;
+                                              isPair: boolean;
+                                            },
+                                            pictureIndex: number
+                                          ) => (
+                                            <div
+                                              key={`${rowIndex}-${pictureIndex}`}
+                                              className={`bg-gray-100 p-4 rounded-md ${
+                                                item.isPair
+                                                  ? "w-[calc(90%+2rem)]" // Width for paired images
+                                                  : row.length === 3
+                                                  ? "w-[30%]" // Width for 3-image rows
+                                                  : row.length === 1
+                                                  ? "w-[66%]" // Wider width for single images
+                                                  : "w-[45%]" // Width for 2-image rows
+                                              } flex items-center`}
+                                            >
+                                              <div className="w-full relative aspect-[16/9]">
+                                                <Image
+                                                  src={item.url}
+                                                  alt={`Picture ${
+                                                    pictureIndex + 1
+                                                  }`}
+                                                  fill
+                                                  className="object-contain rounded-md"
+                                                  sizes={
+                                                    item.isPair
+                                                      ? "(max-width: 768px) 100vw, calc(90vw + 2rem)"
+                                                      : row.length === 1
+                                                      ? "(max-width: 768px) 100vw, 75vw"
+                                                      : "(max-width: 768px) 100vw, 45vw"
+                                                  }
+                                                />
+                                              </div>
+                                            </div>
                                           )
                                         )}
                                       </div>
-                                    ) : (
-                                      <Image
-                                        key={groupIndex}
-                                        src={group}
-                                        alt="Single Picture"
-                                        layout="fixed"
-                                        width={150} // Fixed width for single images
-                                        height={100} // Fixed height for single images
-                                        objectFit="cover"
-                                        className="mx-4" // Margin around the single image for spacing
-                                      />
-                                    )
-                                  )
+                                    ))
                                 : null}
-                            </div>{" "}
+                            </div>
                             {/* Render subTitle and subText alternatively with spacing */}
-                            <div className="text-sm text-gray-600 dark:text-gray-300">
+                            <div className="text-sm text-custom-blue">
                               {Array.isArray(desc.subTitle) &&
                                 Array.isArray(desc.subText) &&
                                 Array.isArray(desc.subPicture) &&
                                 desc.subTitle.map((title, index) => (
-                                  <div key={index} className="mb-2">
-                                    {/* Add margin-bottom for spacing */}
+                                  <div key={index} className="">
                                     <React.Fragment>
                                       {/* Render subPicture using Next.js Image component */}
                                       {desc.subPicture?.[index] && (
-                                        <div className="my-4 px-16">
-                                          <Image
-                                            src={desc.subPicture[index] ?? ""} // Provide a fallback image source
-                                            alt={`Sub-picture ${index}`}
-                                            layout="responsive"
-                                            width={150} // Adjust the width as needed
-                                            height={100} // Adjust the height as needed
-                                            objectFit="cover"
-                                          />
+                                        <div className="py-4 flex flex-wrap justify-center items-center w-full gap-8">
+                                          {(() => {
+                                            const currentPic =
+                                              desc.subPicture[index];
+                                            const nextPic =
+                                              desc.subPicture[index + 1];
+                                            const isPartOfPair =
+                                              currentPic === nextPic;
+                                            const isSingleImage = !isPartOfPair;
+
+                                            return (
+                                              <div className="flex flex-row justify-center items-center gap-8 w-full">
+                                                <div
+                                                  className={`bg-gray-100 p-4 rounded-md ${
+                                                    isPartOfPair
+                                                      ? "w-[calc(90%+2rem)]" // Width for paired images
+                                                      : "w-[75%]" // Wider width for single images
+                                                  } flex items-center`}
+                                                >
+                                                  <div className="w-full relative aspect-[16/9]">
+                                                    <Image
+                                                      src={currentPic ?? ""}
+                                                      alt={`Sub-picture ${index}`}
+                                                      fill
+                                                      className="object-contain rounded-md"
+                                                      sizes={
+                                                        isPartOfPair
+                                                          ? "(max-width: 768px) 100vw, calc(90vw + 2rem)"
+                                                          : "(max-width: 768px) 100vw, 75vw"
+                                                      }
+                                                    />
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            );
+                                          })()}
                                         </div>
                                       )}
-                                      <h4 className="text-base mb-1 text-gray-900 dark:text-gray-100">
-                                        {title}
-                                      </h4>
-                                      <p>{desc.subText?.[index] || ""}</p>
+                                      {title && (
+                                        <h4 className="text-base mb-1 font-semibold text-custom-blue">
+                                          {title}
+                                        </h4>
+                                      )}
+                                      <p className={index > 0 && !title ? "my-4" : ""}>{desc.subText?.[index] || ""}</p>
                                     </React.Fragment>
                                   </div>
                                 ))}
@@ -502,7 +566,73 @@ const AskCody = () => {
             </article>
           </section>
         </div>
-        <div className="pb-32 flex flex-col items-center justify-start"></div>
+        <div className="pb-8 flex flex-col items-center justify-start w-4/5">
+          <h2 className="text-custom-blue text-2xl font-bold mb-4">
+            More Projects
+          </h2>
+          <div className="flex flex-col gap-6 w-full justify-center items-center">
+            {projects
+              .filter((project) => project.title !== "AskCody")
+              .map((project, index) => (
+                <div
+                  key={index}
+                  className="w-full transform-gpu flex justify-center items-center"
+                >
+                  <Link
+                    href={project.link}
+                    className={`
+                      w-full
+                      max-w-lg
+                      flex flex-row 
+                      px-4 py-3 
+                      rounded-lg 
+                      transition-all duration-300 ease-out 
+                      bg-gray-100/90
+                      hover:bg-neutral-100/95
+                      hover:scale-[1.02] 
+                      hover:-translate-y-1
+                      hover:shadow-[0_4px_15px_rgba(2,66,92,0.12)]
+                      relative
+                      overflow-hidden
+                      border border-transparent
+                      group
+                      gap-2
+                    `}
+                  >
+                    {/* Image container */}
+                    <div className="w-1/4 relative overflow-hidden flex justify-center items-center group-hover:scale-[1.01] transition-transform duration-300">
+                      <div className="w-full h-full relative rounded-lg overflow-hidden">
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          layout="responsive"
+                          width={80}
+                          height={80}
+                          objectFit="cover"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex flex-col p-2 w-3/4 justify-center">
+                      <div className="text-lg text-custom-blue font-bold">
+                        {project.title}
+                      </div>
+                      <div className="text-sm text-custom-blue">
+                        {project.subTitle}
+                      </div>
+                    </div>
+                    <div className="w-8 relative overflow-hidden">
+                      <div className="flex justify-center items-center absolute inset-0 bg-transparent pointer-events-none transition-transform duration-300 ease-in-out origin-left group-hover:translate-x-2">
+                        <FontAwesomeIcon
+                          icon={faChevronRight}
+                          className="w-4 h-4 text-custom-blue group-hover:text-custom-blue transition-colors duration-700 ease-in-out"
+                        />
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              ))}
+          </div>
+        </div>
       </main>
       <Footer
         isOpen={isOpen}

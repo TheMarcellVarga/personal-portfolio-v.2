@@ -10,6 +10,10 @@ import LinkedInIcon from "@/public/icons/linkedin";
 import MouseScrollIcon from "@/public/icons/mouseScroll";
 import Header from "../../header";
 import Footer from "../../footer";
+import { projects } from "../../page";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 const history = [
   {
@@ -328,9 +332,7 @@ const ESS = () => {
                 {history.map((item, index) => (
                   <div key={index} className="flex">
                     <div className="flex flex-col gap-2">
-                      <h3 className="text-xl text-custom-blue">
-                        {item.title}
-                      </h3>
+                      <h3 className="text-xl text-custom-blue">{item.title}</h3>
                       <h3 className="text-lg text-custom-blue">
                         {item.subTitle}
                       </h3>
@@ -371,42 +373,78 @@ const ESS = () => {
                             </div>
                             <div className="mt-2 flex flex-wrap justify-center items-center w-full">
                               {Array.isArray(desc.picture)
-                                ? desc.picture.flatMap((group, groupIndex) =>
-                                    Array.isArray(group) ? (
+                                ? desc.picture
+                                    .reduce(
+                                      (rows: any[], curr, index, array) => {
+                                        const isPartOfPair =
+                                          curr === array[index + 1];
+                                        const isSecondOfPair =
+                                          curr === array[index - 1];
+
+                                        if (isSecondOfPair) return rows;
+
+                                        const lastRow = rows[rows.length - 1];
+                                        if (!lastRow || lastRow.length >= 3) {
+                                          rows.push([
+                                            { url: curr, isPair: isPartOfPair },
+                                          ]);
+                                        } else {
+                                          lastRow.push({
+                                            url: curr,
+                                            isPair: isPartOfPair,
+                                          });
+                                        }
+                                        return rows;
+                                      },
+                                      []
+                                    )
+                                    .map((row, rowIndex) => (
                                       <div
-                                        key={groupIndex}
-                                        className="flex justify-center items-center space-x-4"
+                                        key={rowIndex}
+                                        className="flex flex-row justify-center items-center gap-8 w-full"
                                       >
-                                        {group.map(
-                                          (pictureUrl, pictureIndex) => (
-                                            <Image
-                                              key={`${groupIndex}-${pictureIndex}`}
-                                              src={pictureUrl}
-                                              alt={`Group Picture ${
-                                                pictureIndex + 1
-                                              }`}
-                                              layout="fixed"
-                                              width={250} // Fixed width for all images
-                                              height={200} // Fixed height for all images
-                                              objectFit="cover"
-                                              className="rounded-lg" // Apply large border-radius and existing margin
-                                            />
+                                        {row.map(
+                                          (
+                                            item: {
+                                              url: string | StaticImport;
+                                              isPair: boolean;
+                                            },
+                                            pictureIndex: number
+                                          ) => (
+                                            <div
+                                              key={`${rowIndex}-${pictureIndex}`}
+                                              className={`bg-gray-100 p-4 rounded-md ${
+                                                item.isPair
+                                                  ? "w-[calc(90%+2rem)]" // Width for paired images
+                                                  : row.length === 3
+                                                  ? "w-[30%]" // Width for 3-image rows
+                                                  : row.length === 1
+                                                  ? "w-[66%]" // Wider width for single images
+                                                  : "w-[45%]" // Width for 2-image rows
+                                              } flex items-center`}
+                                            >
+                                              <div className="w-full relative aspect-[16/9]">
+                                                <Image
+                                                  src={item.url}
+                                                  alt={`Picture ${
+                                                    pictureIndex + 1
+                                                  }`}
+                                                  fill
+                                                  className="object-contain rounded-md"
+                                                  sizes={
+                                                    item.isPair
+                                                      ? "(max-width: 768px) 100vw, calc(90vw + 2rem)"
+                                                      : row.length === 1
+                                                      ? "(max-width: 768px) 100vw, 75vw"
+                                                      : "(max-width: 768px) 100vw, 45vw"
+                                                  }
+                                                />
+                                              </div>
+                                            </div>
                                           )
                                         )}
                                       </div>
-                                    ) : (
-                                      <Image
-                                        key={groupIndex}
-                                        src={group}
-                                        alt="Single Picture"
-                                        layout="fixed"
-                                        width={150} // Fixed width for single images
-                                        height={100} // Fixed height for single images
-                                        objectFit="cover"
-                                        className="rounded-lg mx-4" // Apply large border-radius and existing margin
-                                      />
-                                    )
-                                  )
+                                    ))
                                 : null}
                             </div>{" "}
                             {/* Render subTitle and subText alternatively with spacing */}
@@ -415,30 +453,63 @@ const ESS = () => {
                                 Array.isArray(desc.subText) &&
                                 Array.isArray(desc.subPicture) &&
                                 desc.subTitle.map((title, index) => (
-                                  <div key={index} className="mb-2">
-                                    {/* Add margin-bottom for spacing */}
+                                  <div key={index} className="">
                                     <React.Fragment>
                                       {/* Render subPicture using Next.js Image component */}
                                       {desc.subPicture?.[index] && (
-                                        <div className="my-4 px-16">
-                                          <Image
-                                            src={desc.subPicture[index] ?? ""}
-                                            alt={`Sub-picture ${index}`}
-                                            layout="responsive"
-                                            width={150} // Adjust the width as needed
-                                            height={100} // Adjust the height as needed
-                                            objectFit="cover"
-                                            className="rounded-lg" // Apply large border-radius
-                                          />
+                                        <div className="py-4 flex flex-wrap justify-center items-center w-full gap-8">
+                                          {(() => {
+                                            const currentPic =
+                                              desc.subPicture[index];
+                                            const nextPic =
+                                              desc.subPicture[index + 1];
+                                            const isPartOfPair =
+                                              currentPic === nextPic;
+                                            const isSingleImage = !isPartOfPair;
+
+                                            return (
+                                              <div className="flex flex-row justify-center items-center gap-8 w-full">
+                                                <div
+                                                  className={`bg-gray-100 p-4 rounded-md ${
+                                                    isPartOfPair
+                                                      ? "w-[calc(90%+2rem)]" // Width for paired images
+                                                      : "w-[75%]" // Wider width for single images
+                                                  } flex items-center`}
+                                                >
+                                                  <div className="w-full relative aspect-[16/9]">
+                                                    <Image
+                                                      src={currentPic ?? ""}
+                                                      alt={`Sub-picture ${index}`}
+                                                      fill
+                                                      className="object-contain rounded-md"
+                                                      sizes={
+                                                        isPartOfPair
+                                                          ? "(max-width: 768px) 100vw, calc(90vw + 2rem)"
+                                                          : "(max-width: 768px) 100vw, 75vw"
+                                                      }
+                                                    />
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            );
+                                          })()}
                                         </div>
                                       )}
-                                      <h4 className="text-base mb-1 text-custom-blue">
-                                        {title}
-                                      </h4>
-                                      <p>{desc.subText?.[index] || ""}</p>
+                                      {title && (
+                                        <h4 className="text-base mb-1 font-semibold text-custom-blue">
+                                          {title}
+                                        </h4>
+                                      )}
+                                      <p
+                                        className={
+                                          index > 0 && !title ? "my-4" : ""
+                                        }
+                                      >
+                                        {desc.subText?.[index] || ""}
+                                      </p>
                                     </React.Fragment>
                                   </div>
-                                ))}
+                                ))}{" "}
                             </div>{" "}
                             {/* Render subPicture if it exists
                             {(desc.subPicture || []).length > 0 && (
@@ -475,7 +546,73 @@ const ESS = () => {
             </article>
           </section>
         </div>
-        <div className="pb-32 flex flex-col items-center justify-start"></div>
+        <div className="pb-8 flex flex-col items-center justify-start w-4/5">
+          <h2 className="text-custom-blue text-2xl font-bold mb-4">
+            More Projects
+          </h2>
+          <div className="flex flex-col gap-6 w-full justify-center items-center">
+            {projects
+              .filter((project) => project.title !== "European Study Solution")
+              .map((project, index) => (
+                <div
+                  key={index}
+                  className="w-full transform-gpu flex justify-center items-center"
+                >
+                  <Link
+                    href={project.link}
+                    className={`
+                      w-full
+                      max-w-lg
+                      flex flex-row 
+                      px-4 py-3 
+                      rounded-lg 
+                      transition-all duration-300 ease-out 
+                      bg-gray-100/90
+                      hover:bg-neutral-100/95
+                      hover:scale-[1.02] 
+                      hover:-translate-y-1
+                      hover:shadow-[0_4px_15px_rgba(2,66,92,0.12)]
+                      relative
+                      overflow-hidden
+                      border border-transparent
+                      group
+                      gap-2
+                    `}
+                  >
+                    {/* Image container */}
+                    <div className="w-1/4 relative overflow-hidden flex justify-center items-center group-hover:scale-[1.01] transition-transform duration-300">
+                      <div className="w-full h-full relative rounded-lg overflow-hidden">
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          layout="responsive"
+                          width={80}
+                          height={80}
+                          objectFit="cover"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex flex-col p-2 w-3/4 justify-center">
+                      <div className="text-lg text-custom-blue font-bold">
+                        {project.title}
+                      </div>
+                      <div className="text-sm text-custom-blue">
+                        {project.subTitle}
+                      </div>
+                    </div>
+                    <div className="w-8 relative overflow-hidden">
+                      <div className="flex justify-center items-center absolute inset-0 bg-transparent pointer-events-none transition-transform duration-300 ease-in-out origin-left group-hover:translate-x-2">
+                        <FontAwesomeIcon
+                          icon={faChevronRight}
+                          className="w-4 h-4 text-custom-blue group-hover:text-custom-blue transition-colors duration-700 ease-in-out"
+                        />
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              ))}
+          </div>
+        </div>{" "}
       </main>
       <Footer
         isOpen={isOpen}

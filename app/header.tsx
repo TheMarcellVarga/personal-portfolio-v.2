@@ -98,7 +98,12 @@ const Header: React.FC<HeaderProps> = ({
           href="/"
           onClick={(e) => {
             e.preventDefault();
-            scrollToHome && scrollToHome();
+            handleNavigation("/", () => {
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+            });
           }}
         >
           <IndexSigAnimatedIcon isOpen={isOpen} />

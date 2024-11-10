@@ -17,7 +17,7 @@ import Footer from "./footer";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 // import Globe from "react-globe.gl";
 
-const projects = [
+export const projects = [
   {
     title: "European Study Solution",
     subTitle: "Student Agency",
@@ -326,7 +326,10 @@ export default function Page() {
             {/* Button positioned at the bottom */}
             <div className="absolute bottom-36 left-0 pl-10">
 
-              <button className="relative px-5 py-2 text-custom-blue rounded-full group overflow-hidden min-w-36 flex items-center justify-center">
+              <button 
+                onClick={scrollToWork}
+                className="relative px-5 py-2 text-custom-blue rounded-full group overflow-hidden min-w-36 flex items-center justify-center"
+              >
                 <span className="relative z-10 transition-colors duration-300 group-hover:text-gray-50 mr-2">
                   Projects
                 </span>

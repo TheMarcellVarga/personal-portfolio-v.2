@@ -10,6 +10,10 @@ import LinkedInIcon from "@/public/icons/linkedin";
 import MouseScrollIcon from "@/public/icons/mouseScroll";
 import Header from "../../header";
 import Footer from "../../footer";
+import { projects } from "../../page";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 const history = [
   {
@@ -94,9 +98,7 @@ const history = [
       },
       {
         title: "Define",
-        text: [
-          "",
-        ],
+        text: [""],
         picture: [],
         subTitle: [
           "Human-centric problem fomulations",
@@ -110,10 +112,7 @@ const history = [
           "To support the idea and process we had reformulated the statement once again by creating questions from the one sentence insights",
           "To fully determine the scope of the project, we have conducted content inventory, to include the all the necessary elements of the project.",
         ],
-        subPicture: [
-          "",
-          "/images/legacy/CS-Images/Figure7.png",
-        ],
+        subPicture: ["", "/images/legacy/CS-Images/Figure7.png"],
       },
       {
         title: "Ideate",
@@ -121,32 +120,18 @@ const history = [
           "After getting connected with the users and understand what they want and need, we are kicking off the ideation phase.",
         ],
         picture: [],
-        subTitle: [
-          "Brainstorm",
-          "",
-          "",
-          "Information Architecture",
-          "",
-        ],
+        subTitle: ["Brainstorm", "", "", "Information Architecture", ""],
         subText: [
           "As a result of our inspiring brainstorming session, ended up with ideas based on both the user research results and the human-centered formulations.",
           "One of the most important result was proceeding with the dashboard styled design as we believed it could incorporate the most tools and usability.",
           "Moreover, to accomplish this we stumbled upon applying elements of glassmorphism to help emphasize on the objects.",
-          "Our goal was to establish the information architecture in a way to make sure that the users can get their tasks done by spending the least amount of effort as possible, resulting in a satisfying, pleasant experience. This was carried out by provide the user with a clear and assorted information, which is being accompanied by well-defined suitable font type, size and color."
+          "Our goal was to establish the information architecture in a way to make sure that the users can get their tasks done by spending the least amount of effort as possible, resulting in a satisfying, pleasant experience. This was carried out by provide the user with a clear and assorted information, which is being accompanied by well-defined suitable font type, size and color.",
         ],
-        subPicture: [
-          "",
-          "",
-          "",
-          "",
-          "/images/legacy/CS-Images/Figure11.png",
-        ],
+        subPicture: ["", "", "", "", "/images/legacy/CS-Images/Figure11.png"],
       },
       {
         title: "Prototype",
-        text: [
-          "",
-        ],
+        text: [""],
         picture: [],
         subTitle: [
           "Sketches",
@@ -189,7 +174,7 @@ const history = [
           "",
           "",
           "",
-          "Our final solution resulted in having a simple one-color background, as we believed this was can the user focus the most on the content, which will facilitate the process of fulfilling any task."
+          "Our final solution resulted in having a simple one-color background, as we believed this was can the user focus the most on the content, which will facilitate the process of fulfilling any task.",
         ],
         subPicture: [
           "",
@@ -227,18 +212,14 @@ const history = [
           "Our project was coded using HTML, CSS and JavaScript. Additionally, we utilized Tailwind as our choice of CSS Framework, which resulted in a swift and efficient workflow.",
           "As we were creating a web app for service, having the feature of being able to sign up and log in is an essential part. We established this feature therefore the users can access the platform in the easiest way possible",
         ],
-        picture: [
-          "/images/legacy/CS-Images/Figure24.png",
-        ],
+        picture: ["/images/legacy/CS-Images/Figure24.png"],
       },
       {
         title: "",
         text: [
           "We started off the sign-up sequence by designing with the objective the ask for the most essential data from the user which is inevitable. For the subsequent steps we had to utilize our research and evaluate which lead us to include multiple user input.",
         ],
-        picture: [
-          "/images/legacy/CS-Images/Figure25.png",
-        ],
+        picture: ["/images/legacy/CS-Images/Figure25.png"],
       },
       {
         title: "Summary",
@@ -295,35 +276,28 @@ const Catchscan = () => {
   }, [isDarkMode]);
 
   return (
-    <div className={`px-4 pb-4 ${isDarkMode ? 'bg-gradient-dark' : 'bg-gradient-light'} transition-colors duration-200 ease-in-out`}>
-      <Header
-        isDarkMode={isDarkMode}
-        setIsDarkMode={setIsDarkMode}
-        isOpen={isOpen}
-        setIsOpen={setIsDarkMode}
-      />
+    <div
+      className={`px-4 pb-4 transition-colors duration-200 ease-in-out bg-gray-200`}
+    >
+      <Header isOpen={isOpen} setIsOpen={setIsDarkMode} />
       <main className="flex flex-col items-center justify-between m-4 gap-1 w-full">
         <div className="flex-grow pb-12 w-full flex flex-row items-center justify-center gap-2">
           <section className="flex flex-col items-center justify-between my-4 gap-24 w-4/5">
             {/* New Experience Section */}
             <article className="mt-8 w-full p-4">
-              <h2 className="text-slate-900 dark:text-slate-50 text-3xl font-bold">
-                CatchScan
-              </h2>
-              <h2 className="text-custom-blue text-md font-bold mb-4 tracking-wider uppercase">
+              <h2 className="text-custom-blue text-3xl font-bold">CatchScan</h2>
+              <h2 className="text-gray-700 text-md font-bold mb-4 tracking-wider uppercase">
                 Copyright Protection SaaS
               </h2>
               <div className="flex flex-col gap-12">
                 {history.map((item, index) => (
                   <div key={index} className="flex">
                     <div className="flex flex-col gap-2">
-                      <h3 className="text-xl text-black dark:text-white">
-                        {item.title}
-                      </h3>
-                      <h3 className="text-lg text-black dark:text-white">
+                      <h3 className="text-xl text-custom-blue">{item.title}</h3>
+                      <h3 className="text-lg text-custom-blue">
                         {item.subTitle}
                       </h3>
-                      <h4 className="text-base font-light text-black dark:text-white">
+                      <h4 className="text-base font-light text-custom-blue">
                         <Image
                           src={item.content.picture}
                           alt={item.content.text}
@@ -334,7 +308,7 @@ const Catchscan = () => {
                         />
                         {item.content.text}
                       </h4>
-                      <div className="text-sm text-black dark:text-white ">
+                      <div className="text-sm text-custom-blue ">
                         {item.description.map((desc, descIndex) => (
                           <div key={descIndex}>
                             <p className="pt-2 text-lg">{desc.title}</p>
@@ -357,72 +331,142 @@ const Catchscan = () => {
                                 <p>{desc.text || ""}</p>
                               )}
                             </div>
-                            <div className="mt-2 flex flex-wrap justify-center items-start w-full">
+                            <div className="mt-2 flex flex-wrap justify-center items-center w-full">
                               {Array.isArray(desc.picture)
-                                ? desc.picture.flatMap((group, groupIndex) =>
-                                    Array.isArray(group) ? (
+                                ? desc.picture
+                                    .reduce(
+                                      (rows: any[], curr, index, array) => {
+                                        const isPartOfPair =
+                                          curr === array[index + 1];
+                                        const isSecondOfPair =
+                                          curr === array[index - 1];
+
+                                        if (isSecondOfPair) return rows;
+
+                                        const lastRow = rows[rows.length - 1];
+                                        if (!lastRow || lastRow.length >= 3) {
+                                          rows.push([
+                                            { url: curr, isPair: isPartOfPair },
+                                          ]);
+                                        } else {
+                                          lastRow.push({
+                                            url: curr,
+                                            isPair: isPartOfPair,
+                                          });
+                                        }
+                                        return rows;
+                                      },
+                                      []
+                                    )
+                                    .map((row, rowIndex) => (
                                       <div
-                                        key={groupIndex}
-                                        className="flex space-x-4"
+                                        key={rowIndex}
+                                        className="flex flex-row justify-center items-center gap-8 w-full"
                                       >
-                                        {group.map(
-                                          (pictureUrl, pictureIndex) => (
-                                            <Image
-                                              key={`${groupIndex}-${pictureIndex}`}
-                                              src={pictureUrl}
-                                              alt={`Group Picture ${
-                                                pictureIndex + 1
-                                              }`}
-                                              layout="fixed"
-                                              width={150} // Fixed width for all images
-                                              height={100} // Fixed height for all images
-                                              objectFit="cover"
-                                              className="mx-2" // Margin around each image for spacing
-                                            />
+                                        {row.map(
+                                          (
+                                            item: {
+                                              url: string | StaticImport;
+                                              isPair: boolean;
+                                            },
+                                            pictureIndex: number
+                                          ) => (
+                                            <div
+                                              key={`${rowIndex}-${pictureIndex}`}
+                                              className={`bg-gray-100 p-4 rounded-md ${
+                                                item.isPair
+                                                  ? "w-[calc(90%+2rem)]" // Width for paired images
+                                                  : row.length === 3
+                                                  ? "w-[30%]" // Width for 3-image rows
+                                                  : row.length === 1
+                                                  ? "w-[66%]" // Wider width for single images
+                                                  : "w-[45%]" // Width for 2-image rows
+                                              } flex items-center`}
+                                            >
+                                              <div className="w-full relative aspect-[16/9]">
+                                                <Image
+                                                  src={item.url}
+                                                  alt={`Picture ${
+                                                    pictureIndex + 1
+                                                  }`}
+                                                  fill
+                                                  className="object-contain rounded-md"
+                                                  sizes={
+                                                    item.isPair
+                                                      ? "(max-width: 768px) 100vw, calc(90vw + 2rem)"
+                                                      : row.length === 1
+                                                      ? "(max-width: 768px) 100vw, 75vw"
+                                                      : "(max-width: 768px) 100vw, 45vw"
+                                                  }
+                                                />
+                                              </div>
+                                            </div>
                                           )
                                         )}
                                       </div>
-                                    ) : (
-                                      <Image
-                                        key={groupIndex}
-                                        src={group}
-                                        alt="Single Picture"
-                                        layout="fixed"
-                                        width={150} // Fixed width for single images
-                                        height={100} // Fixed height for single images
-                                        objectFit="cover"
-                                        className="mx-4" // Margin around the single image for spacing
-                                      />
-                                    )
-                                  )
+                                    ))
                                 : null}
                             </div>{" "}
                             {/* Render subTitle and subText alternatively with spacing */}
-                            <div className="text-sm text-gray-600 dark:text-gray-300">
+                            <div className="text-sm text-custom-blue">
                               {Array.isArray(desc.subTitle) &&
                                 Array.isArray(desc.subText) &&
                                 Array.isArray(desc.subPicture) &&
                                 desc.subTitle.map((title, index) => (
-                                  <div key={index} className="mb-2">
-                                    {/* Add margin-bottom for spacing */}
+                                  <div key={index} className="">
                                     <React.Fragment>
                                       {/* Render subPicture using Next.js Image component */}
                                       {desc.subPicture?.[index] && (
-                                        <div className="my-4 px-16">
-                                          <Image
-                                            src={desc.subPicture[index] ?? ""} // Provide a fallback image source
-                                            alt={`Sub-picture ${index}`}
-                                            layout="responsive"
-                                            width={150} // Adjust the width as needed
-                                            height={100} // Adjust the height as needed
-                                            objectFit="cover"
-                                          />
+                                        <div className="py-4 flex flex-wrap justify-center items-center w-full gap-8">
+                                          {(() => {
+                                            const currentPic =
+                                              desc.subPicture[index];
+                                            const nextPic =
+                                              desc.subPicture[index + 1];
+                                            const isPartOfPair =
+                                              currentPic === nextPic;
+                                            const isSingleImage = !isPartOfPair;
+
+                                            return (
+                                              <div className="flex flex-row justify-center items-center gap-8 w-full">
+                                                <div
+                                                  className={`bg-gray-100 p-4 rounded-md ${
+                                                    isPartOfPair
+                                                      ? "w-[calc(90%+2rem)]" // Width for paired images
+                                                      : "w-[75%]" // Wider width for single images
+                                                  } flex items-center`}
+                                                >
+                                                  <div className="w-full relative aspect-[16/9]">
+                                                    <Image
+                                                      src={currentPic ?? ""}
+                                                      alt={`Sub-picture ${index}`}
+                                                      fill
+                                                      className="object-contain rounded-md"
+                                                      sizes={
+                                                        isPartOfPair
+                                                          ? "(max-width: 768px) 100vw, calc(90vw + 2rem)"
+                                                          : "(max-width: 768px) 100vw, 75vw"
+                                                      }
+                                                    />
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            );
+                                          })()}
                                         </div>
                                       )}
-                                      <h4 className="text-base mb-1 text-gray-900 dark:text-gray-100">
-                                        {title}
-                                      </h4>
-                                      <p>{desc.subText?.[index] || ""}</p>
+                                      {title && (
+                                        <h4 className="text-base mb-1 font-semibold text-custom-blue">
+                                          {title}
+                                        </h4>
+                                      )}
+                                      <p
+                                        className={
+                                          index > 0 && !title ? "my-4" : ""
+                                        }
+                                      >
+                                        {desc.subText?.[index] || ""}
+                                      </p>
                                     </React.Fragment>
                                   </div>
                                 ))}
@@ -462,7 +506,73 @@ const Catchscan = () => {
             </article>
           </section>
         </div>
-        <div className="pb-32 flex flex-col items-center justify-start"></div>
+        <div className="pb-8 flex flex-col items-center justify-start w-4/5">
+          <h2 className="text-custom-blue text-2xl font-bold mb-4">
+            More Projects
+          </h2>
+          <div className="flex flex-col gap-6 w-full justify-center items-center">
+            {projects
+              .filter((project) => project.title !== "CatchScan")
+              .map((project, index) => (
+                <div
+                  key={index}
+                  className="w-full transform-gpu flex justify-center items-center"
+                >
+                  <Link
+                    href={project.link}
+                    className={`
+                      w-full
+                      max-w-lg
+                      flex flex-row 
+                      px-4 py-3 
+                      rounded-lg 
+                      transition-all duration-300 ease-out 
+                      bg-gray-100/90
+                      hover:bg-neutral-100/95
+                      hover:scale-[1.02] 
+                      hover:-translate-y-1
+                      hover:shadow-[0_4px_15px_rgba(2,66,92,0.12)]
+                      relative
+                      overflow-hidden
+                      border border-transparent
+                      group
+                      gap-2
+                    `}
+                  >
+                    {/* Image container */}
+                    <div className="w-1/4 relative overflow-hidden flex justify-center items-center group-hover:scale-[1.01] transition-transform duration-300">
+                      <div className="w-full h-full relative rounded-lg overflow-hidden">
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          layout="responsive"
+                          width={80}
+                          height={80}
+                          objectFit="cover"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex flex-col p-2 w-3/4 justify-center">
+                      <div className="text-lg text-custom-blue font-bold">
+                        {project.title}
+                      </div>
+                      <div className="text-sm text-custom-blue">
+                        {project.subTitle}
+                      </div>
+                    </div>
+                    <div className="w-8 relative overflow-hidden">
+                      <div className="flex justify-center items-center absolute inset-0 bg-transparent pointer-events-none transition-transform duration-300 ease-in-out origin-left group-hover:translate-x-2">
+                        <FontAwesomeIcon
+                          icon={faChevronRight}
+                          className="w-4 h-4 text-custom-blue group-hover:text-custom-blue transition-colors duration-700 ease-in-out"
+                        />
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              ))}
+          </div>
+        </div>
       </main>
       <Footer
         isOpen={isOpen}
