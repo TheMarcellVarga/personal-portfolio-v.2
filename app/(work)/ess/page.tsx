@@ -149,35 +149,35 @@ const history = [
         text: [
           "According to the footer design, we have tried to display the most important links from the website they should look for, if they missed it on the page, also the agency’s contact information.",
         ],
-        picture: [["/images/legacy/ESS-Images/Picture 9.png"]],
+        picture: ["/images/legacy/ESS-Images/Picture 9.png"],
       },
       {
         title: "",
         text: [
           "Moving to the service page, the most convenient solution we came up with is a vertical sidebar on the left with variety of tabs. On the right side, we placed a container with information, which can be changed by using the tabs",
         ],
-        picture: [["/images/legacy/ESS-Images/Picture 10.png"]],
+        picture: ["/images/legacy/ESS-Images/Picture 10.png"],
       },
       {
         title: "",
         text: [
           "We placed a page for the universities, where content and visuals play an important role, therefore it was our task to make it informative, while being easily readable. Since we have different universities' information, we tried to make the layout template that should suit all of them.",
         ],
-        picture: [["/images/legacy/ESS-Images/Picture 11.2.png"]],
+        picture: ["/images/legacy/ESS-Images/Picture 11.2.png"],
       },
       {
         title: "Lo-Fi",
         text: [
           "Following additional client meetings, we showcased the partner universities on the landing page based on feedback. This inspired us to display them on the university page as well, whereby clicking on the icon of the institution, the content will change accordingly.",
         ],
-        picture: [["/images/legacy/ESS-Images/Picture 12.1.png"]],
+        picture: ["/images/legacy/ESS-Images/Picture 12.1.png"],
       },
       {
         title: "",
         text: [
           "As a follow-up, we also placed a price scale, to highlight the advantage of using the service of our client by studying in European universities over Americans.",
         ],
-        picture: [["/images/legacy/ESS-Images/Picture 12.2.png"]],
+        picture: ["/images/legacy/ESS-Images/Picture 12.2.png"],
       },
       {
         title: "",
@@ -189,19 +189,19 @@ const history = [
       {
         title: "Surface Plane",
         text: [],
-        picture: [["/images/legacy/ESS-Images/FivePlane1.png"]],
+        picture: ["/images/legacy/ESS-Images/FivePlane1.png"],
       },
       {
         title: "",
         text: [
           "After making the structure of wireframes and elements that should be on the page, we reached the Surface Plane. Here we placed our attention to the sensory design to produce a finished design, where content, functionality and aesthetics came together.",
         ],
-        picture: [[]],
+        picture: [],
       },
       {
         title: "Mockup",
         text: [],
-        picture: [["/images/legacy/ESS-Images/Picture 13.1.png"]],
+        picture: ["/images/legacy/ESS-Images/Picture 13.1.png"],
       },
       {
         title: "",
@@ -209,21 +209,21 @@ const history = [
           "We have made the last iteration of combining our ideas, client wishes, and research to make the final product, with most of the necessary design assets and components.",
           "In the review section, we displayed place for 3 upcoming customer review, which in the future can be expanded with the use of a slide function.",
         ],
-        picture: [["/images/legacy/ESS-Images/Picture 13.2.png"]],
+        picture: ["/images/legacy/ESS-Images/Picture 13.2.png"],
       },
       {
         title: "",
         text: [
           "Reading plenty of text can result in fatigue. Placing pictures of the schools can uplift their mood and leave a cheerful impression on the users. Afterall, they sometimes speak more than words",
         ],
-        picture: [["/images/legacy/ESS-Images/Picture 13.3.png"]],
+        picture: ["/images/legacy/ESS-Images/Picture 13.3.png"],
       },
       {
         title: "",
         text: [
           "Lastly, but not least, the contact us page, provides is satisfying confirmation to eliminate any uncertainty if their application was submitted.",
         ],
-        picture: [["/images/legacy/ESS-Images/Picture 13.4.png"]],
+        picture: ["/images/legacy/ESS-Images/Picture 13.1.png"],
       },
       {
         title: "Responsive Design",
@@ -233,7 +233,7 @@ const history = [
         picture: [
           "/images/legacy/ESS-Images/Picture 14.1.png",
           "/images/legacy/ESS-Images/Picture 14.2.png",
-          "/images/legacy/ESS-Images/Picture 14.2.png",
+          "/images/legacy/ESS-Images/Picture 14.3.png",
         ],
       },
       {
@@ -336,7 +336,7 @@ const ESS = () => {
                       <h3 className="text-lg text-custom-blue">
                         {item.subTitle}
                       </h3>
-                      <h4 className="text-base font-light text-custom-blue rounded-md">
+                      <h4 className="text-base font-light text-custom-blue">
                         <Image
                           src={item.content.picture}
                           alt={item.content.text}
@@ -371,7 +371,7 @@ const ESS = () => {
                                 <p>{desc.text || ""}</p>
                               )}
                             </div>
-                            <div className="mt-2 flex flex-wrap justify-center items-center w-full">
+                            <div className="mt-4 flex flex-wrap justify-center items-center w-full gap-8">
                               {Array.isArray(desc.picture)
                                 ? desc.picture
                                     .reduce(
@@ -446,7 +446,7 @@ const ESS = () => {
                                       </div>
                                     ))
                                 : null}
-                            </div>{" "}
+                            </div>
                             {/* Render subTitle and subText alternatively with spacing */}
                             <div className="text-sm text-custom-blue">
                               {Array.isArray(desc.subTitle) &&
@@ -509,7 +509,7 @@ const ESS = () => {
                                       </p>
                                     </React.Fragment>
                                   </div>
-                                ))}{" "}
+                                ))}
                             </div>{" "}
                             {/* Render subPicture if it exists
                             {(desc.subPicture || []).length > 0 && (
@@ -552,7 +552,7 @@ const ESS = () => {
           </h2>
           <div className="flex flex-col gap-6 w-full justify-center items-center">
             {projects
-              .filter((project) => project.title !== "European Study Solution")
+              .filter((project) => project.title !== "AskCody")
               .map((project, index) => (
                 <div
                   key={index}
@@ -612,7 +612,7 @@ const ESS = () => {
                 </div>
               ))}
           </div>
-        </div>{" "}
+        </div>
       </main>
       <Footer
         isOpen={isOpen}
