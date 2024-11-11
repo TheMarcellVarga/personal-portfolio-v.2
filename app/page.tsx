@@ -3,6 +3,10 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import IndexSigAnimatedIcon from "../public/icons/indexSigAnimated";
+import IndexSig from "../public/icons/indexSig.svg";
+import DarkModeIcon from "../public/icons/darkMode";
+import LinkedInIcon from "../public/icons/linkedin";
 import OpenResumeIcon from "../public/icons/openResume";
 import MouseScrollIcon from "@/public/icons/mouseScroll";
 import useWindowSize from "./useWindowSize";
@@ -289,7 +293,7 @@ export default function Page() {
       });
     }
   }, []);
-  
+
   return (
     <div
       className={`px-4 pb-4 transition-colors duration-200 ease-in-out bg-gray-200`}
@@ -321,11 +325,7 @@ export default function Page() {
 
             {/* Button positioned at the bottom */}
             <div className="absolute bottom-36 left-0 pl-10">
-
-              <button 
-                onClick={scrollToWork}
-                className="relative px-5 py-2 text-custom-blue rounded-full group overflow-hidden min-w-36 flex items-center justify-center"
-              >
+              <button className="relative px-5 py-2 text-custom-blue rounded-full group overflow-hidden min-w-36 flex items-center justify-center">
                 <span className="relative z-10 transition-colors duration-300 group-hover:text-gray-50 mr-2">
                   Projects
                 </span>
@@ -439,29 +439,34 @@ export default function Page() {
             <div className="w-full h-full flex justify-center items-center">
               <div className="w-full flex flex-col gap-12">
                 {projects.map((project) => (
-                  <div key={project.title} className="w-full transform-gpu">
+                  <div
+                    key={project.title}
+                    className="w-full max-w-[400px] md:max-w-none mx-auto transform-gpu"
+                  >
+                    {" "}
+                    {/* Added max-width for mobile */}
                     <Link
                       href={project.link}
                       className={`
-                        w-full 
-                        flex flex-col md:flex-row 
-                        px-4 md:px-8 py-6 md:py-4 lg:py-4.5 2xl:py-8 
-                        rounded-2xl 
-                        transition-all duration-300 ease-out 
-                        bg-gray-100/90
-                        hover:bg-neutral-100/95
-                        hover:scale-[1.02] 
-                        hover:-translate-y-1
-                        hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]
-                        relative
-                        overflow-hidden
-                        border border-transparent
-                        group
-                      `}
+            w-full 
+            flex flex-col md:flex-row
+            px-4 md:px-8 py-6 md:py-4 lg:py-4.5 2xl:py-8
+            rounded-2xl 
+            transition-all duration-300 ease-out 
+            bg-gray-100/90
+            hover:bg-neutral-100/95
+            hover:scale-[1.02] 
+            hover:-translate-y-1
+            hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]
+            relative
+            overflow-hidden
+            border border-transparent
+            group
+          `}
                     >
                       {/* Image container */}
-                      <div className="w-full md:w-fit relative overflow-hidden flex justify-center md:justify-start items-center group-hover:scale-[1.01] transition-transform duration-300">
-                        <div className="w-[275px] sm:w-[250px] md:w-[300px] relative rounded-lg overflow-hidden">
+                      <div className="w-full md:w-fit mb-4 md:mb-0 relative overflow-hidden flex justify-center md:justify-start items-center group-hover:scale-[1.01] transition-transform duration-300">
+                        <div className="w-full md:w-[300px] max-w-[300px] mx-auto relative rounded-lg overflow-hidden">
                           <Image
                             src={project.image}
                             alt={project.title}
@@ -469,15 +474,17 @@ export default function Page() {
                             width={300}
                             height={200}
                             objectFit="cover"
+                            className="w-full h-full"
                           />
                         </div>
                       </div>
-                      <div className="flex flex-col p-4 md:p-6 pb-0 md:pb-6 gap-2 md:gap-2 w-full">
+
+                      <div className="flex flex-col p-2 md:p-6 gap-2 md:gap-2 w-full">
                         <div className="w-fit">
-                          <div className="text-xl md:text-2xl text-custom-blue font-bold">
+                          <div className="text-xl md:text-2xl text-custom-blue font-bold text-left">
                             {project.title}
                           </div>
-                          <div className="text-sm md:text-base text-custom-blue">
+                          <div className="text-sm md:text-base text-custom-blue text-left">
                             {project.subTitle}
                           </div>
                         </div>
@@ -486,7 +493,7 @@ export default function Page() {
                             {project.description}
                           </div>
                         </div>
-                        <div className="flex flex-wrap gap-1.5 md:gap-1.5 mt-1 md:mt-0">
+                        <div className="flex flex-wrap gap-1.5 md:gap-1.5 mt-1 md:mt-0 justify-start">
                           {project.skills.map((skill) => (
                             <div
                               key={skill}
@@ -497,8 +504,10 @@ export default function Page() {
                           ))}
                         </div>
                       </div>
-                      <div className="w-32 relative overflow-hidden">
-                        <div className="flex justify-center items-center absolute inset-0 bg-transparent pointer-events-none transition-transform duration-300 ease-in-out origin-left group-hover:translate-x-5">
+
+                      {/* Arrow container - hidden on small screens */}
+                      <div className="hidden md:block w-32 h-auto relative overflow-hidden">
+                        <div className="flex justify-start items-center absolute inset-0 bg-transparent pointer-events-none transition-transform duration-300 ease-in-out origin-left group-hover:translate-x-5">
                           <FontAwesomeIcon
                             icon={faChevronRight}
                             className="w-6 h-6 text-custom-blue group-hover:text-custom-blue transition-colors duration-700 ease-in-out"
@@ -509,7 +518,7 @@ export default function Page() {
                   </div>
                 ))}
               </div>
-            </div>
+            </div>{" "}
           </article>
           <article className="w-full p-4">
             <h2 className="text-custom-blue text-sm font-bold mb-4 tracking-wider uppercase">
