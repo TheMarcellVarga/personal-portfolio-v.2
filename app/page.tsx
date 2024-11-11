@@ -33,9 +33,9 @@ export const projects = [
     description:
       "SaaS dashboard for an automated copyright protection platform in order to protect content creators intellectual works. User-friendly interface to utilise their in-house algorithm the fullest.",
     skills: [
-      "HTML",
-      "CSS",
-      "JavaScript",
+      // "HTML",
+      // "CSS",
+      // "JavaScript",
       "Tailwind CSS",
       "Atomic Design",
       "Design System",
@@ -49,9 +49,9 @@ export const projects = [
     description:
       "Flexible office resource management for hybrid work environments, To optimise space resources and automate ad-hoc tasks to enhance employee productivity developed as a Microsoft Teams Integration.",
     skills: [
-      "HTML",
-      "CSS",
-      "JavaScript",
+      // "HTML",
+      // "CSS",
+      // "JavaScript",
       "TypeScript",
       "React-Bootstrap",
       "Fluent UI",
@@ -238,7 +238,8 @@ export default function Page() {
   }, []);
 
   const [isOpen, setIsOpen] = useState(false); // State for other purposes (e.g., menu open)
-  const [isHover, setIsHover] = useState(false);
+  const [resumeHover, setResumeHover] = useState(false);
+  const [footerHover, setFooterHover] = useState(false);
 
   useEffect(() => {
     if (globeRef.current) {
@@ -441,17 +442,21 @@ export default function Page() {
                 {projects.map((project) => (
                   <div
                     key={project.title}
-                    className="w-full max-w-[400px] md:max-w-none mx-auto transform-gpu"
+                    className="w-full max-w-[400px] sm:max-w-none mx-auto transform-gpu"
                   >
-                    {" "}
-                    {/* Added max-width for mobile */}
                     <Link
                       href={project.link}
                       className={`
             w-full 
-            flex flex-col md:flex-row
-            px-4 md:px-8 py-6 md:py-4 lg:py-4.5 2xl:py-8
-            rounded-2xl 
+            flex flex-col 
+            sm:flex-row
+            px-4 py-3
+            sm:px-4 sm:py-3
+            md:px-8 md:py-6 
+            lg:py-8 2xl:py-10
+            rounded-lg
+            sm:rounded-xl 
+            md:rounded-2xl
             transition-all duration-300 ease-out 
             bg-gray-100/90
             hover:bg-neutral-100/95
@@ -462,38 +467,88 @@ export default function Page() {
             overflow-hidden
             border border-transparent
             group
+            items-center
           `}
                     >
                       {/* Image container */}
-                      <div className="w-full md:w-fit mb-4 md:mb-0 relative overflow-hidden flex justify-center md:justify-start items-center group-hover:scale-[1.01] transition-transform duration-300">
-                        <div className="w-full md:w-[300px] max-w-[300px] mx-auto relative rounded-lg overflow-hidden">
+                      <div
+                        className="
+    w-full 
+    sm:w-1/4 
+    md:w-[300px]
+    mb-4 sm:mb-0 
+    relative 
+    flex items-center justify-center
+    group-hover:scale-[1.01] transition-transform duration-300
+    px-8 sm:px-0  // Add this line for horizontal padding on mobile
+  "
+                      >
+                        <div
+                          className="
+      w-full
+      aspect-[3/2]
+      sm:w-full sm:h-full
+      md:aspect-[3/2]
+      relative rounded-lg overflow-hidden
+    "
+                        >
                           <Image
                             src={project.image}
                             alt={project.title}
-                            layout="responsive"
-                            width={300}
-                            height={200}
+                            layout={
+                              size.width &&
+                              size.width >= 640 &&
+                              size.width < 768
+                                ? "responsive"
+                                : "fill"
+                            }
+                            width={
+                              size.width &&
+                              size.width >= 640 &&
+                              size.width < 768
+                                ? 80
+                                : undefined
+                            }
+                            height={
+                              size.width &&
+                              size.width >= 640 &&
+                              size.width < 768
+                                ? 80
+                                : undefined
+                            }
                             objectFit="cover"
                             className="w-full h-full"
                           />
                         </div>
                       </div>
-
-                      <div className="flex flex-col p-2 md:p-6 gap-2 md:gap-2 w-full">
+                      <div
+                        className="
+            flex flex-col 
+            p-2 
+            sm:p-2 sm:pl-4
+            md:p-6 md:pl-8
+            gap-2 
+            w-full 
+            sm:w-2/3 
+            md:w-full
+            h-full
+            justify-center
+          "
+                      >
                         <div className="w-fit">
-                          <div className="text-xl md:text-2xl text-custom-blue font-bold text-left">
+                          <div className="text-lg sm:text-lg md:text-2xl text-custom-blue font-bold text-left">
                             {project.title}
                           </div>
                           <div className="text-sm md:text-base text-custom-blue text-left">
                             {project.subTitle}
                           </div>
                         </div>
-                        <div className="text-base font-light text-justify text-custom-blue">
+                        <div className="text-base font-light text-justify text-custom-blue hidden md:block">
                           <div className="text-sm md:text-base">
                             {project.description}
                           </div>
                         </div>
-                        <div className="flex flex-wrap gap-1.5 md:gap-1.5 mt-1 md:mt-0 justify-start">
+                        <div className="flex flex-wrap gap-1.5 mt-1 md:mt-2 justify-start">
                           {project.skills.map((skill) => (
                             <div
                               key={skill}
@@ -505,12 +560,12 @@ export default function Page() {
                         </div>
                       </div>
 
-                      {/* Arrow container - hidden on small screens */}
-                      <div className="hidden md:block w-32 h-auto relative overflow-hidden">
-                        <div className="flex justify-start items-center absolute inset-0 bg-transparent pointer-events-none transition-transform duration-300 ease-in-out origin-left group-hover:translate-x-5">
+                      {/* Arrow container - visible on sm screens and up */}
+                      <div className="hidden sm:flex w-8 md:w-16 h-full items-center justify-center relative">
+                        <div className="flex justify-center items-center transition-transform duration-300 ease-in-out origin-left group-hover:translate-x-2">
                           <FontAwesomeIcon
                             icon={faChevronRight}
-                            className="w-6 h-6 text-custom-blue group-hover:text-custom-blue transition-colors duration-700 ease-in-out"
+                            className="w-4 md:w-6 h-4 md:h-6 text-custom-blue group-hover:text-custom-blue transition-colors duration-700 ease-in-out"
                           />
                         </div>
                       </div>
@@ -558,32 +613,32 @@ export default function Page() {
               ))}
               <div
                 className="flex justify-start items-center gap-2"
-                onMouseEnter={() => setIsHover(true)}
-                onMouseLeave={() => setIsHover(false)}
+                onMouseEnter={() => setResumeHover(true)}
+                onMouseLeave={() => setResumeHover(false)}
               >
                 <a
                   href="/Marcell-Varga-CV.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`flex justify-start items-center gap-2 text-custom-blue hover:text-custom-blue transition-all duration-300 ease-in-out ${
-                    isHover ? "transform scale-105" : ""
+                    resumeHover ? "transform scale-105" : ""
                   }`}
                 >
                   <span className="relative inline-block overflow-hidden">
                     View Full Resume
                     <span
                       className={`absolute bottom-0 left-0 w-full h-0.5 bg-custom-blue transform ${
-                        isHover ? "translate-x-0" : "translate-x-[-100%]"
+                        resumeHover ? "translate-x-0" : "translate-x-[-100%]"
                       } transition-transform duration-300 ease-in-out`}
                     ></span>
                   </span>
                   <div
                     style={{
                       transition: "transform 0.3s",
-                      transform: isHover ? "translate(2px, -2px)" : "none",
+                      transform: resumeHover ? "translate(2px, -2px)" : "none",
                     }}
                   >
-                    <OpenResumeIcon isHover={isHover} />
+                    <OpenResumeIcon isHover={resumeHover} />
                   </div>
                 </a>
               </div>
@@ -594,8 +649,8 @@ export default function Page() {
       <Footer
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        isHover={isHover}
-        setIsHover={setIsHover}
+        isHover={footerHover}
+        setIsHover={setFooterHover}
       />
     </div>
   );
