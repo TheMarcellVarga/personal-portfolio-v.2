@@ -3,10 +3,6 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import IndexSigAnimatedIcon from "../public/icons/indexSigAnimated";
-import IndexSig from "../public/icons/indexSig.svg";
-import DarkModeIcon from "../public/icons/darkMode";
-import LinkedInIcon from "../public/icons/linkedin";
 import OpenResumeIcon from "../public/icons/openResume";
 import MouseScrollIcon from "@/public/icons/mouseScroll";
 import useWindowSize from "./useWindowSize";

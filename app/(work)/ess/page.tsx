@@ -3,11 +3,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import DarkModeIcon from "@/public/icons/darkMode";
-import GitHubIcon from "@/public/icons/github";
-import IndexSigAnimatedIcon from "@/public/icons/indexSigAnimated";
-import LinkedInIcon from "@/public/icons/linkedin";
-import MouseScrollIcon from "@/public/icons/mouseScroll";
 import Header from "../../header";
 import Footer from "../../footer";
 import { projects } from "../../page";
@@ -111,11 +106,9 @@ const history = [
           "Besides, at the very beginning of the website, we had a similar vision of displaying a full-width picture or slide show gallery.",
         ],
         picture: [
-          [
-            "/images/legacy/ESS-Images/Picture 6.1.png",
-            "/images/legacy/ESS-Images/Picture 6.2.png",
-            "/images/legacy/ESS-Images/Picture 6.3.png",
-          ],
+          "/images/legacy/ESS-Images/Picture 6.1.png",
+          "/images/legacy/ESS-Images/Picture 6.2.png",
+          "/images/legacy/ESS-Images/Picture 6.3.png",
         ],
       },
       {
@@ -124,12 +117,10 @@ const history = [
           "Since the landing page is what will catch the user's interest from the very second, therefore we made multiple different prototype, where we clarified what ESS is about and what service they provide, including the key points of their service.",
         ],
         picture: [
-          [
-            "/images/legacy/ESS-Images/Picture 7.1.png",
-            "/images/legacy/ESS-Images/Picture 7.2.png",
-            "/images/legacy/ESS-Images/Picture 7.3.png",
-            "/images/legacy/ESS-Images/Picture 7.4.png",
-          ],
+          "/images/legacy/ESS-Images/Picture 7.1.png",
+          "/images/legacy/ESS-Images/Picture 7.2.png",
+          "/images/legacy/ESS-Images/Picture 7.3.png",
+          "/images/legacy/ESS-Images/Picture 7.4.png",
         ],
       },
       {
@@ -138,10 +129,8 @@ const history = [
           "We considered implementing a section where the reviews of the company would be shown. Our idea was to display these as a card element in accordance with the Gestalt Principles.",
         ],
         picture: [
-          [
-            "/images/legacy/ESS-Images/Picture 8.1.png",
-            "/images/legacy/ESS-Images/Picture 8.2.png",
-          ],
+          "/images/legacy/ESS-Images/Picture 8.1.png",
+          "/images/legacy/ESS-Images/Picture 8.2.png",
         ],
       },
       {
@@ -232,7 +221,14 @@ const history = [
         ],
         picture: [
           "/images/legacy/ESS-Images/Picture 14.1.png",
+          "/images/legacy/ESS-Images/Picture 14.1.png",
+          "/images/legacy/ESS-Images/Picture 14.1.png",
           "/images/legacy/ESS-Images/Picture 14.2.png",
+          "/images/legacy/ESS-Images/Picture 14.2.png",
+
+          "/images/legacy/ESS-Images/Picture 14.2.png",
+          "/images/legacy/ESS-Images/Picture 14.3.png",
+          "/images/legacy/ESS-Images/Picture 14.3.png",
           "/images/legacy/ESS-Images/Picture 14.3.png",
         ],
       },
@@ -351,47 +347,96 @@ const ESS = () => {
                       <div className="text-sm text-custom-blue ">
                         {item.description.map((desc, descIndex) => (
                           <div key={descIndex}>
-                            <p className="pt-2 text-lg">{desc.title}</p>
-                            <div className="py-2">
-                              {Array.isArray(desc.text) ? (
-                                desc.text.map((text, index) => (
-                                  <React.Fragment key={index}>
-                                    <p>{text}</p>
-                                    {index !== desc.text.length - 1 && (
-                                      <span
-                                        style={{
-                                          marginLeft: "-1em",
-                                          display: "inline-block",
-                                        }}
-                                      />
-                                    )}
-                                  </React.Fragment>
-                                ))
-                              ) : (
-                                <p>{desc.text || ""}</p>
-                              )}
-                            </div>
+                            <p
+                              className={`${
+                                descIndex === 0 ? "pt-2" : "pt-8"
+                              } text-xl font-bold`}
+                            >
+                              {desc.title}
+                            </p>
+                            {desc.text && (
+                              <div className="py-2">
+                                {Array.isArray(desc.text) ? (
+                                  desc.text.map((text, index) => (
+                                    <React.Fragment key={index}>
+                                      {text && <p>{text}</p>}
+                                      {index !==
+                                        (desc.text?.length ?? 0) - 1 && (
+                                        <span
+                                          style={{
+                                            marginLeft: "-1em",
+                                            display: "inline-block",
+                                          }}
+                                        />
+                                      )}
+                                    </React.Fragment>
+                                  ))
+                                ) : (
+                                  <p>{desc.text}</p>
+                                )}
+                              </div>
+                            )}{" "}
                             <div className="mt-4 flex flex-wrap justify-center items-center w-full gap-8">
                               {Array.isArray(desc.picture)
                                 ? desc.picture
                                     .reduce(
                                       (rows: any[], curr, index, array) => {
-                                        const isPartOfPair =
+                                        // Check for triple occurrence
+                                        const isTriple =
+                                          curr === array[index + 1] &&
+                                          curr === array[index + 2];
+                                        const isSecondOfTriple =
+                                          curr === array[index - 1] &&
                                           curr === array[index + 1];
-                                        const isSecondOfPair =
+                                        const isThirdOfTriple =
+                                          curr === array[index - 2] &&
                                           curr === array[index - 1];
 
-                                        if (isSecondOfPair) return rows;
+                                        // Check for pair occurrence
+                                        const isPartOfPair =
+                                          curr === array[index + 1] &&
+                                          !isTriple &&
+                                          !isSecondOfTriple;
+                                        const isSecondOfPair =
+                                          curr === array[index - 1] &&
+                                          !isSecondOfTriple &&
+                                          !isThirdOfTriple;
+
+                                        // Determine height multiplier
+                                        const heightMultiplier =
+                                          isTriple ||
+                                          isSecondOfTriple ||
+                                          isThirdOfTriple
+                                            ? 3
+                                            : isPartOfPair || isSecondOfPair
+                                            ? 2
+                                            : 1;
+
+                                        // Skip if this is not the first occurrence
+                                        if (
+                                          isSecondOfPair ||
+                                          isSecondOfTriple ||
+                                          isThirdOfTriple
+                                        )
+                                          return rows;
 
                                         const lastRow = rows[rows.length - 1];
                                         if (!lastRow || lastRow.length >= 3) {
                                           rows.push([
-                                            { url: curr, isPair: isPartOfPair },
+                                            {
+                                              url: curr,
+                                              isPair: isPartOfPair,
+                                              isTriple: isTriple,
+                                              heightMultiplier:
+                                                heightMultiplier,
+                                            },
                                           ]);
                                         } else {
                                           lastRow.push({
                                             url: curr,
                                             isPair: isPartOfPair,
+                                            isTriple: isTriple,
+                                            heightMultiplier: heightMultiplier,
                                           });
                                         }
                                         return rows;
@@ -408,13 +453,15 @@ const ESS = () => {
                                             item: {
                                               url: string | StaticImport;
                                               isPair: boolean;
+                                              isTriple: boolean;
+                                              heightMultiplier: 1 | 2 | 3;
                                             },
                                             pictureIndex: number
                                           ) => (
                                             <div
                                               key={`${rowIndex}-${pictureIndex}`}
                                               className={`bg-gray-100 p-4 rounded-md ${
-                                                item.isPair
+                                                item.isPair || item.isTriple
                                                   ? "w-[calc(90%+2rem)]" // Width for paired images
                                                   : row.length === 3
                                                   ? "w-[30%]" // Width for 3-image rows
@@ -423,7 +470,16 @@ const ESS = () => {
                                                   : "w-[45%]" // Width for 2-image rows
                                               } flex items-center`}
                                             >
-                                              <div className="w-full relative aspect-[16/9]">
+                                              <div
+                                                className={`w-full relative ${
+                                                  item.heightMultiplier === 3
+                                                    ? "aspect-[16/36]" // Triple height for tripled images
+                                                    : item.heightMultiplier ===
+                                                      2
+                                                    ? "aspect-[16/18]" // Double height for paired images
+                                                    : "aspect-[16/9]" // Normal height for single images
+                                                }`}
+                                              >
                                                 <Image
                                                   src={item.url}
                                                   alt={`Picture ${
@@ -432,7 +488,7 @@ const ESS = () => {
                                                   fill
                                                   className="object-contain rounded-md"
                                                   sizes={
-                                                    item.isPair
+                                                    item.isPair || item.isTriple
                                                       ? "(max-width: 768px) 100vw, calc(90vw + 2rem)"
                                                       : row.length === 1
                                                       ? "(max-width: 768px) 100vw, 75vw"
@@ -446,7 +502,7 @@ const ESS = () => {
                                       </div>
                                     ))
                                 : null}
-                            </div>
+                            </div>{" "}
                             {/* Render subTitle and subText alternatively with spacing */}
                             <div className="text-sm text-custom-blue">
                               {Array.isArray(desc.subTitle) &&
@@ -546,23 +602,26 @@ const ESS = () => {
             </article>
           </section>
         </div>
-        <div className="pb-8 flex flex-col items-center justify-start w-4/5">
-          <h2 className="text-custom-blue text-2xl font-bold mb-4">
-            More Projects
-          </h2>
-          <div className="flex flex-col gap-6 w-full justify-center items-center">
-            {projects
-              .filter((project) => project.title !== "AskCody")
-              .map((project, index) => (
-                <div
-                  key={index}
-                  className="w-full transform-gpu flex justify-center items-center"
-                >
-                  <Link
-                    href={project.link}
-                    className={`
+        <div className="pb-8 flex flex-col items-center w-4/5">
+          <div className="w-full border-t border-gray-300 opacity-60 mt-8 mb-8"></div>
+          <div className="w-full max-w-lg">
+            <h2 className="text-custom-blue text-2xl font-bold mb-8 text-center">
+              More Projects
+            </h2>
+            <div className="flex flex-col gap-6 w-full">
+              {projects
+                .filter(
+                  (project) => project.title !== "European Study Solution"
+                )
+                .map((project, index) => (
+                  <div
+                    key={index}
+                    className="w-full transform-gpu flex justify-start items-center"
+                  >
+                    <Link
+                      href={project.link}
+                      className={`
                       w-full
-                      max-w-lg
                       flex flex-row 
                       px-4 py-3 
                       rounded-lg 
@@ -578,39 +637,40 @@ const ESS = () => {
                       group
                       gap-2
                     `}
-                  >
-                    {/* Image container */}
-                    <div className="w-1/4 relative overflow-hidden flex justify-center items-center group-hover:scale-[1.01] transition-transform duration-300">
-                      <div className="w-full h-full relative rounded-lg overflow-hidden">
-                        <Image
-                          src={project.image}
-                          alt={project.title}
-                          layout="responsive"
-                          width={80}
-                          height={80}
-                          objectFit="cover"
-                        />
+                    >
+                      {/* Image container */}
+                      <div className="w-1/4 relative overflow-hidden flex justify-center items-center group-hover:scale-[1.01] transition-transform duration-300">
+                        <div className="w-full h-full relative rounded-lg overflow-hidden">
+                          <Image
+                            src={project.image}
+                            alt={project.title}
+                            layout="responsive"
+                            width={80}
+                            height={80}
+                            objectFit="cover"
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex flex-col p-2 w-3/4 justify-center">
-                      <div className="text-lg text-custom-blue font-bold">
-                        {project.title}
+                      <div className="flex flex-col p-2 w-3/4 justify-center">
+                        <div className="text-lg text-custom-blue font-bold">
+                          {project.title}
+                        </div>
+                        <div className="text-sm text-custom-blue">
+                          {project.subTitle}
+                        </div>
                       </div>
-                      <div className="text-sm text-custom-blue">
-                        {project.subTitle}
+                      <div className="w-8 relative overflow-hidden">
+                        <div className="flex justify-center items-center absolute inset-0 bg-transparent pointer-events-none transition-transform duration-300 ease-in-out origin-left group-hover:translate-x-2">
+                          <FontAwesomeIcon
+                            icon={faChevronRight}
+                            className="w-4 h-4 text-custom-blue group-hover:text-custom-blue transition-colors duration-700 ease-in-out"
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div className="w-8 relative overflow-hidden">
-                      <div className="flex justify-center items-center absolute inset-0 bg-transparent pointer-events-none transition-transform duration-300 ease-in-out origin-left group-hover:translate-x-2">
-                        <FontAwesomeIcon
-                          icon={faChevronRight}
-                          className="w-4 h-4 text-custom-blue group-hover:text-custom-blue transition-colors duration-700 ease-in-out"
-                        />
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              ))}
+                    </Link>
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
       </main>
