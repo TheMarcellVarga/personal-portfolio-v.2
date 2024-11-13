@@ -310,22 +310,26 @@ export default function Page() {
 
       <main className="flex flex-col items-center justify-between h-screen mt-2 m-4 gap-1 ">
         <div className="flex-grow pb-8 w-full flex flex-row items-center justify-strech gap-2 fade-top-bottom">
-          <div className="absolute mt-4 w-fit h-screen z-20 pl-12 pt-4 flex flex-col items-start justify-center">
-            <div className="flex flex-row w-full lg:text-8xl bg-clip-text font-b items-baseline justify-start">
-              <span className="text-gray-700 text-6xl">Hey, I'm&nbsp;</span>
-              <span className="text-custom-blue font-bold text-7xl">
+          <div className="absolute mt-4 w-fit h-screen z-20 ml-4 md:pl-12 pl-4 pb-32 md:pb-24 md:pt-4 flex flex-col items-start justify-center">
+            <div className="flex flex-col md:flex-row w-full lg:text-8xl bg-clip-text items-baseline justify-start">
+              <span className="text-gray-700 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                Hey, I'm&nbsp;
+              </span>
+              <span className="text-custom-blue font-bold text-[44px] leading-[50px] sm:text-5xl md:text-6xl lg:text-7xl">
                 Marcell Varga
               </span>
             </div>
-            <div className="flex w-full text-4xl font-light items-center justify-start my-2 text-custom-blue">
+            <div className="flex w-full text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light items-center justify-start mb-3 md:mb-0 md:my-2 text-custom-blue">
               UX & Frontend engineer
             </div>
-            <div className="flex w-full text-lg font-light items-center justify-start mt-34 italic text-custom-blue/40">
-              I craft digital journeys that captivate and engage.
+            <div className="flex flex-col sm:flex-row w-full text-sm sm:text-sm md:text-base lg:text-lg font-light items-start justify-start mt-34 italic text-custom-blue/40">
+              <span className="sm:hidden">I craft digital journeys that</span>
+              <span className="sm:hidden font-semibold">captivate and engage.</span>
+              <span className="hidden sm:block">I craft digital journeys that captivate and engage.</span>
             </div>
 
             {/* Button positioned at the bottom */}
-            <div className="absolute bottom-36 left-0 pl-10">
+            <div className="absolute bottom-36 md:bottom-36 left-0 pl-4 md:pl-10">
               <button className="relative px-5 py-2 text-custom-blue rounded-full group overflow-hidden min-w-36 flex items-center justify-center">
                 <span className="relative z-10 transition-colors duration-300 group-hover:text-gray-50 mr-2">
                   Projects
@@ -337,17 +341,44 @@ export default function Page() {
             </div>
           </div>
           <div className="relative w-full h-full flex justify-end">
-            <div className="relative w-full h-full flex justify-end main-container">
+            <div className="relative w-full h-2/12 md:h-full flex justify-end main-container">
               <svg
-                className={`triangle-bg-svg ${"dark-mode rounded-[36px] bg-gray-100"}`}
+                className={`triangle-bg-svg ${" rounded-[36px] bg-gray-100"} `}
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path d="M1750 -2009L335 786H0V-109Z" />
                 <path
+                  className="hidden md:block"
+                  d="M1750 -2009L335 786H0V-109Z"
+                />
+                <path
+                  className="hidden md:block gradient-path"
                   d="M1750 -2009L335 786H0V-109Z"
                   fill="url(#paint0_linear_364_239)"
                 />
+
+                {/* Tablet/medium mobile path (half size) */}
+                <path
+                  className="hidden sm:block md:hidden"
+                  d="M875 -1004.5L167.5 393H0V-54.5Z"
+                />
+                <path
+                  className="hidden sm:block md:hidden gradient-path"
+                  d="M875 -1004.5L167.5 693H0V-54.5Z"
+                  fill="url(#paint0_linear_364_239)"
+                />
+
+                {/* Small mobile path (quarter size) */}
+                <path
+                  className="block sm:hidden"
+                  d="M437.5 -502.25L83.75 696.5H0V-27.25Z"
+                />
+                <path
+                  className="block sm:hidden gradient-path"
+                  d="M177.5 0L-13.75 592.5H0V-27.25Z"
+                  fill="url(#paint0_linear_364_239)"
+                />
+
                 <defs>
                   <linearGradient
                     id="paint0_linear_364_239"
@@ -364,7 +395,7 @@ export default function Page() {
                 </defs>
               </svg>
             </div>
-            <div className="absolute md:w-80 lg:w-96 bottom-0 right-16 transform z-10">
+            <div className="absolute w-48 sm:w-48 md:w-80 lg:w-96 bottom-0 right-3 md:right-16 transform z-10">
               <Image
                 src="/images/personalpageprofilealt.png"
                 alt="Profile Picture"
