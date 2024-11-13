@@ -123,41 +123,59 @@ const Header: React.FC<HeaderProps> = ({
         <div className={`nav-overlay ${isOpen ? "open" : ""}`}>
           <div
             className={`${
-              isOpen ? "block lg:text-3xl" : "hidden"
-            } md:flex space-x-4 h-full mt-16`}
+              isOpen ? "flex flex-col space-y-8 items-start" : "hidden"
+            } md:flex md:flex-row md:space-x-4 md:space-y-0 h-full mt-16`}
           >
             <Link href="/about">
               <div
-                className={`text-xl md:text-sm font-medium ${
-                  isOpen ? "lg:text-3xl" : ""
+                className={`relative inline-block font-medium tracking-wider group ${
+                  isOpen
+                    ? "text-5xl md:text-6xl lg:text-7xl text-gray-100"
+                    : "text-lg md:text-xl lg:text-2xl text-custom-blue"
                 }`}
-                style={{ color: isOpen ? "#eeeeee" : "inherit" }}
               >
                 About
+                <span
+                  className={`absolute bottom-0 left-0 w-full h-0.5 transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100 ${
+                    isOpen ? "bg-gray-100" : "bg-custom-blue"
+                  }`}
+                ></span>
               </div>
             </Link>
             <Link href="/work">
               <div
-                className={`text-xl md:text-sm font-medium ${
-                  isOpen ? "lg:text-3xl" : ""
+                className={`relative inline-block font-medium tracking-wider group ${
+                  isOpen
+                    ? "text-5xl md:text-6xl lg:text-7xl text-gray-100"
+                    : "text-lg md:text-xl lg:text-2xl text-custom-blue"
                 }`}
-                style={{ color: isOpen ? "#eeeeee" : "inherit" }}
               >
                 Work
+                <span
+                  className={`absolute bottom-0 left-0 w-full h-0.5 transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100 ${
+                    isOpen ? "bg-gray-100" : "bg-custom-blue"
+                  }`}
+                ></span>
               </div>
             </Link>
             <Link href="/contact">
               <div
-                className={`text-xl md:text-sm font-medium ${
-                  isOpen ? "lg:text-3xl" : ""
+                className={`relative inline-block font-medium tracking-wider group ${
+                  isOpen
+                    ? "text-5xl md:text-6xl lg:text-7xl text-gray-100"
+                    : "text-lg md:text-xl lg:text-2xl text-custom-blue"
                 }`}
-                style={{ color: isOpen ? "#eeeeee" : "inherit" }}
               >
                 Contact
+                <span
+                  className={`absolute bottom-0 left-0 w-full h-0.5 transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100 ${
+                    isOpen ? "bg-gray-100" : "bg-custom-blue"
+                  }`}
+                ></span>
               </div>
             </Link>
           </div>
-        </div>
+        </div>{" "}
         <div
           className={`${
             isOpen ? "hidden" : "block"
