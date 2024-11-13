@@ -307,7 +307,6 @@ export default function Page() {
         scrollToWork={scrollToWork}
         scrollToContact={scrollToContact}
       />
-
       <main className="flex flex-col items-center justify-between h-screen mt-2 m-4 gap-1 ">
         <div className="flex-grow pb-8 w-full flex flex-row items-center justify-strech gap-2 fade-top-bottom">
           <div className="absolute mt-4 w-fit h-screen z-20 ml-4 md:pl-12 pl-4 pb-32 md:pb-24 md:pt-4 flex flex-col items-start justify-center">
@@ -324,8 +323,12 @@ export default function Page() {
             </div>
             <div className="flex flex-col sm:flex-row w-full text-sm sm:text-sm md:text-base lg:text-lg font-light items-start justify-start mt-34 italic text-custom-blue/40">
               <span className="sm:hidden">I craft digital journeys that</span>
-              <span className="sm:hidden font-semibold">captivate and engage.</span>
-              <span className="hidden sm:block">I craft digital journeys that captivate and engage.</span>
+              <span className="sm:hidden font-semibold">
+                captivate and engage.
+              </span>
+              <span className="hidden sm:block">
+                I craft digital journeys that captivate and engage.
+              </span>
             </div>
 
             {/* Button positioned at the bottom */}
@@ -677,6 +680,90 @@ export default function Page() {
           </article>
         </section>
       </div>
+      {/* Contact Section */}
+      <section className="flex justify-center items-center mb-24">
+        <div className="flex flex-col items-center justify-between gap-24 w-4/5">
+          <article className="w-full p-4">
+            <h2 className="text-custom-blue text-sm font-bold mb-4 tracking-wider uppercase">
+              Contact
+            </h2>
+            <div className="flex flex-col gap-8">
+              <div className="flex flex-col md:flex-row gap-8">
+                {/* Email Contact */}
+                <a
+                  href="mailto:themarcellvarga@gmail.com"
+                  className="group w-full md:w-1/2 bg-gray-100/90 rounded-lg p-6 
+                  transition-all duration-300 ease-out
+                  hover:bg-neutral-100/95 
+                  hover:scale-[1.02] 
+                  hover:-translate-y-1 
+                  hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]
+                  relative overflow-hidden border border-transparent"
+                >
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <h3 className="text-xl font-bold text-custom-blue mb-2">
+                        Email
+                      </h3>
+                      <span className="text-custom-blue hover:text-custom-blue/80 transition-colors duration-300">
+                        themarcellvarga@gmail.com
+                      </span>
+                    </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-8 w-8 text-custom-blue opacity-50 group-hover:opacity-80 transition-opacity duration-300"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </div>
+                </a>
+
+                {/* LinkedIn Contact */}
+                <a
+                  href="https://www.linkedin.com/in/marcellvarga/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group w-full md:w-1/2 bg-gray-100/90 rounded-lg p-6 
+                  transition-all duration-300 ease-out
+                  hover:bg-neutral-100/95 
+                  hover:scale-[1.02] 
+                  hover:-translate-y-1 
+                  hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]
+                  relative overflow-hidden border border-transparent"
+                >
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <h3 className="text-xl font-bold text-custom-blue mb-2">
+                        LinkedIn
+                      </h3>
+                      <span className="text-custom-blue hover:text-custom-blue/80 transition-colors duration-300">
+                        Marcell Varga
+                      </span>
+                    </div>
+                    <LinkedInIcon className="h-8 w-8 text-custom-blue opacity-50 group-hover:opacity-80 transition-opacity duration-300" />
+                  </div>
+                </a>
+              </div>
+
+              {/* Message */}
+              <div className="w-full bg-gray-100/90 rounded-lg p-6 hover:bg-neutral-100/95 transition-all duration-300">
+                <p className="text-custom-blue text-center">
+                  I'm always open to discussing new projects, creative ideas, or
+                  opportunities to be part of your visions.
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
       <Footer
         isOpen={isOpen}
         setIsOpen={setIsOpen}
