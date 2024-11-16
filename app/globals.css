@@ -293,3 +293,54 @@ body {
 3.sticky-section {
   transition: opacity 0.3s ease;
 }
+
+/* Add to your global.css */
+html.has-scroll-smooth {
+  overflow: hidden;
+}
+
+.has-scroll-smooth body {
+  overflow: hidden;
+}
+
+.has-scroll-smooth [data-scroll-container] {
+  min-height: 100vh;
+}
+
+[data-scroll-direction="horizontal"] [data-scroll-container] {
+  height: 100vh;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.visible {
+  opacity: 1 !important;
+}
+/* In your global.css */
+@media (max-width: 767px) {
+  [data-scroll] {
+    /* Mobile-specific scroll behavior */
+    transform: none !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  [data-scroll] {
+    /* Tablet-specific scroll behavior */
+  }
+}
+
+/* In your global.css */
+@media (max-width: 767px) {
+  /* Mobile styles */
+  .locomotive-scroll {
+    /* Custom mobile scroll behavior */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Tablet styles */
+  .locomotive-scroll {
+    /* Custom tablet scroll behavior */
+  }
+}

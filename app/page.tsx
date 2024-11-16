@@ -12,9 +12,23 @@ import MouseScrollIcon from "@/public/icons/mouseScroll";
 import useWindowSize from "./useWindowSize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+
+interface HeaderProps {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+  scrollToHome?: () => void;
+  scrollToAbout?: () => void;
+  scrollToWork?: () => void;
+  scrollToContact?: () => void;
+  className?: string;
+  "data-scroll"?: boolean;
+  "data-scroll-sticky"?: boolean;
+  "data-scroll-target"?: string;
+}
 import Header from "./header";
 import Footer from "./footer";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
+import useLocomotive from "./useLocomotive";
 // import Globe from "react-globe.gl";
 
 export const projects = [
@@ -149,22 +163,20 @@ const textToType =
 export default function Page() {
   const globeRef = useRef<any>();
 
+  const { scrollPositionLocomotive } = useLocomotive();
+
+  console.log(scrollPositionLocomotive);
+
   const stickySectionRef = useRef<HTMLDivElement>(null);
 
   const [typedText, setTypedText] = useState("");
   const [typingCompleted, setTypingCompleted] = useState(false);
 
   useEffect(() => {
-    let initialScrollPosition: number | null = null;
-    let typingProgress = 0;
-    let previousScrollPosition = 0;
-
     const handleScroll = () => {
-      if (stickySectionRef.current && initialScrollPosition !== null) {
-        const currentScrollPosition = window.scrollY;
-        const scrollDistance = currentScrollPosition;
-
-        console.log(scrollDistance);
+      if (scrollPositionLocomotive !== undefined) {
+        const scrollDistance = scrollPositionLocomotive;
+        console.log("Scroll Distance:", scrollDistance); // Debug log
 
         const typingStart = 550; // Start typing at this scroll distance
         const maxScrollForTyping = 2250; // Complete typing at this scroll distance
@@ -172,12 +184,28 @@ export default function Page() {
         const fadeDuration = 400; // Duration of the fade effect
         const zIndexThreshold = 3600; // Threshold above which zIndex becomes -99
 
-        // Apply zIndex based on scroll distance
-        if (stickySectionRef.current) {
+        // Find the sticky section
+        const stickySection = document.querySelector(
+          "[data-scroll-section].sticky"
+        ) as HTMLElement;
+
+        if (stickySection) {
+          // Handle z-index
           if (scrollDistance > zIndexThreshold) {
-            stickySectionRef.current.style.zIndex = "-99";
+            stickySection.style.zIndex = "-99";
           } else {
-            stickySectionRef.current.style.zIndex = "";
+            stickySection.style.zIndex = "1";
+          }
+
+          // Handle opacity
+          if (scrollDistance >= fadeStart) {
+            const opacity = Math.max(
+              0,
+              1 - (scrollDistance - fadeStart) / fadeDuration
+            );
+            stickySection.style.opacity = opacity.toString();
+          } else {
+            stickySection.style.opacity = "1";
           }
         }
 
@@ -198,22 +226,18 @@ export default function Page() {
 
         // Handle typing animation
         if (scrollDistance < typingStart) {
-          // Reset text when scrolling above the typing start position
           setTypedText("");
           setTypingCompleted(false);
         } else if (!typingCompleted) {
           if (scrollDistance >= maxScrollForTyping) {
-            setTypedText(textToType); // Ensure full text is displayed
+            setTypedText(textToType);
             setTypingCompleted(true);
           } else {
-            // Calculate typing progress based on scroll distance
             const typingProgress = Math.min(
               1,
               (scrollDistance - typingStart) /
                 (maxScrollForTyping - typingStart)
             );
-
-            // Update typed text based on progress
             const newText = textToType.slice(
               0,
               Math.floor(typingProgress * textToType.length)
@@ -223,19 +247,13 @@ export default function Page() {
         }
       }
     };
-    window.addEventListener("scroll", handleScroll);
 
-    // Set the initial scroll position when the component mounts
-    initialScrollPosition = window.scrollY;
-
-    setTimeout(() => {
-      handleScroll();
-    }, 0);
+    handleScroll(); // Call handleScroll initially
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      // Cleanup function (if needed)
     };
-  }, []);
+  }, [scrollPositionLocomotive, typingCompleted]);
 
   const [isOpen, setIsOpen] = useState(false); // State for other purposes (e.g., menu open)
   const [resumeHover, setResumeHover] = useState(false);
@@ -297,6 +315,8 @@ export default function Page() {
 
   return (
     <div
+      id="main-container"
+      data-scroll-container
       className={`px-4 pb-4 transition-colors duration-200 ease-in-out bg-gray-200`}
     >
       <Header
@@ -307,7 +327,11 @@ export default function Page() {
         scrollToWork={scrollToWork}
         scrollToContact={scrollToContact}
       />
-      <main className="flex flex-col items-center justify-between h-screen mt-2 m-4 gap-1 ">
+      <main
+        data-scroll-section
+        data-scroll-section-id="hero"
+        className="flex flex-col items-center justify-between h-screen mt-2 m-4 gap-1 "
+      >
         <div className="flex-grow pb-8 w-full flex flex-row items-center justify-strech gap-2 fade-top-bottom">
           <div className="absolute mt-4 w-fit h-screen z-20 ml-4 md:pl-12 pl-4 pb-32 md:pb-24 md:pt-4 flex flex-col items-start justify-center">
             <div className="flex flex-col md:flex-row w-full lg:text-8xl bg-clip-text items-baseline justify-start">
@@ -416,17 +440,22 @@ export default function Page() {
       </main>
       {/* Drive Section */}
       <section
-        ref={stickySectionRef}
-        className="sticky h-[400vh] top-0 flex flex-col items-center justify-between gap-1 w-full transition-opacity duration-300"
+        data-scroll-section
+        data-scroll-section-id="about" // Add this
+        data-scroll-offset="100" // Add this for better trigger timing
+        className="sticky h-[400vh] top-0 flex flex-col items-center justify-between gap-1 w-full transition-all duration-300"
       >
         <div className="flex w-4/5 h-screen text-5xl font-medium items-center justify-start">
-          <h2 className="text-2xl font-light text-justify m-8 leading-relaxed text-custom-blue ">
+          <h2 className="text-2xl font-light text-justify m-8 leading-relaxed text-custom-blue">
             {typedText}
           </h2>
         </div>
       </section>
-      <div className="flex justify-center items-center ">
-        <section className="flex flex-col items-center justify-between mt-4 mb-4 gap-24 w-4/5 ">
+      <section
+        data-scroll-section
+        className="flex justify-center items-center "
+      >
+        <div className="flex flex-col items-center justify-between mt-4 mb-4 gap-24 w-4/5 ">
           {/* New Experience Section */}
           <article className="mt-8 w-full p-4 ">
             <h2 className="text-custom-blue text-sm font-bold mb-4 tracking-wider uppercase">
@@ -678,10 +707,15 @@ export default function Page() {
               </div>
             </div>
           </article>
-        </section>
-      </div>
+        </div>
+      </section>
       {/* Contact Section */}
-      <section className="flex justify-center items-center mb-24">
+      <section
+        data-scroll-section
+        data-scroll-section-id="contact" // Add this
+        data-scroll-offset="50" // Add this for smoother reveal
+        className="flex justify-center items-center mb-24"
+      >
         <div className="flex flex-col items-center justify-between gap-24 w-4/5">
           <article className="w-full p-4">
             <h2 className="text-custom-blue text-sm font-bold mb-4 tracking-wider uppercase">
