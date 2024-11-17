@@ -603,50 +603,50 @@ export default function Page() {
                     <Link
                       href={project.link}
                       className={`
-            w-full 
-            flex flex-col 
-            sm:flex-row
-            px-4 py-3
-            sm:px-4 sm:py-3
-            md:px-8 md:py-6 
-            lg:py-8 2xl:py-10
-            rounded-lg
-            sm:rounded-xl 
-            md:rounded-2xl
-            transition-all duration-300 ease-out 
-            bg-gray-100/90
-            hover:bg-neutral-100/95
-            hover:scale-[1.02] 
-            hover:-translate-y-1
-            hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]
-            relative
-            overflow-hidden
-            border border-transparent
-            group
-            items-center
-          `}
+                        w-full 
+                        flex flex-col 
+                        sm:flex-row
+                        px-4 py-3
+                        sm:px-4 sm:py-3
+                        md:px-8 md:py-6 
+                        lg:py-8 2xl:py-10
+                        rounded-lg
+                        sm:rounded-xl 
+                        md:rounded-2xl
+                        transition-all duration-300 ease-out 
+                        bg-gray-100/90
+                        hover:bg-neutral-100/95
+                        hover:scale-[1.02] 
+                        hover:-translate-y-1
+                        hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]
+                        relative
+                        overflow-hidden
+                        border border-transparent
+                        group
+                        items-center
+                      `}
                     >
                       {/* Image container */}
                       <div
                         className="
-    w-full 
-    sm:w-1/4 
-    md:w-[300px]
-    mb-4 sm:mb-0 
-    relative 
-    flex items-center justify-center
-    group-hover:scale-[1.01] transition-transform duration-300
-    px-8 sm:px-0  // Add this line for horizontal padding on mobile
-  "
+                          w-full 
+                          sm:w-1/4 
+                          md:w-[300px]
+                          mb-4 sm:mb-0 
+                          relative 
+                          flex items-center justify-center
+                          group-hover:scale-[1.01] transition-transform duration-300
+                          px-8 sm:px-0  // Add this line for horizontal padding on mobile
+                        "
                       >
                         <div
                           className="
-      w-full
-      aspect-[3/2]
-      sm:w-full sm:h-full
-      md:aspect-[3/2]
-      relative rounded-lg overflow-hidden
-    "
+                            w-full
+                            aspect-[3/2]
+                            sm:w-full sm:h-full
+                            md:aspect-[3/2]
+                            relative rounded-lg overflow-hidden
+                          "
                         >
                           <Image
                             src={project.image}
@@ -679,17 +679,17 @@ export default function Page() {
                       </div>
                       <div
                         className="
-            flex flex-col 
-            p-2 
-            sm:p-2 sm:pl-4
-            md:p-6 md:pl-8
-            gap-2 
-            w-full 
-            sm:w-2/3 
-            md:w-full
-            h-full
-            justify-center
-          "
+                          flex flex-col 
+                          p-2 
+                          sm:p-2 sm:pl-4
+                          md:p-6 md:pl-8
+                          gap-2 
+                          w-full 
+                          sm:w-2/3 
+                          md:w-full
+                          h-full
+                          justify-center
+                        "
                       >
                         <div className="w-fit">
                           <div className="text-lg sm:text-lg md:text-2xl text-custom-blue font-bold text-left">
