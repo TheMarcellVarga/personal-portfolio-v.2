@@ -416,12 +416,17 @@ export default function Page() {
         className="flex flex-col items-center justify-between h-screen mt-2 m-4 gap-1 "
       >
         <div
-          data-scroll
+          data-scroll-section
           data-scroll-speed="1"
           data-scroll-delay="0.2"
           className="flex-grow pb-8 w-full flex flex-row items-center justify-strech gap-2 fade-top-bottom"
         >
-          <div className="absolute mt-4 w-fit h-screen z-20 ml-4 md:pl-12 pl-4 pb-32 md:pb-24 md:pt-4 flex flex-col items-start justify-center">
+          <div
+            data-scroll
+            data-scroll-speed="1"
+            data-scroll-delay="0.2"
+            className="absolute mt-4 w-fit h-screen z-20 ml-4 md:pl-12 pl-4 pb-32 md:pb-24 md:pt-4 flex flex-col items-start justify-center"
+          >
             <div className="flex flex-col md:flex-row w-full lg:text-8xl bg-clip-text items-baseline justify-start">
               <span className="text-gray-700 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
                 Hey, I'm&nbsp;
