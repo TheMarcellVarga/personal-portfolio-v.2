@@ -163,9 +163,7 @@ const textToType =
 export default function Page() {
   const globeRef = useRef<any>();
 
-  const { scrollPositionLocomotive } = useLocomotive();
-
-  console.log(scrollPositionLocomotive);
+  const { scrollPositionLocomotive, updateScroll } = useLocomotive();
 
   const stickySectionRef = useRef<HTMLDivElement>(null);
 
@@ -173,87 +171,172 @@ export default function Page() {
   const [typingCompleted, setTypingCompleted] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (scrollPositionLocomotive !== undefined) {
-        const scrollDistance = scrollPositionLocomotive;
-        console.log("Scroll Distance:", scrollDistance); // Debug log
+    const handlePageShow = () => {
+      updateScroll();
+    };
 
-        const typingStart = 550; // Start typing at this scroll distance
-        const maxScrollForTyping = 2250; // Complete typing at this scroll distance
-        const fadeStart = 2800; // Start fading at this scroll distance
-        const fadeDuration = 400; // Duration of the fade effect
-        const zIndexThreshold = 3600; // Threshold above which zIndex becomes -99
+    window.addEventListener("pageshow", handlePageShow);
+    return () => window.removeEventListener("pageshow", handlePageShow);
+  }, [updateScroll]);
 
-        // Find the sticky section
-        const stickySection = document.querySelector(
-          "[data-scroll-section].sticky"
-        ) as HTMLElement;
-
-        if (stickySection) {
-          // Handle z-index
-          if (scrollDistance > zIndexThreshold) {
-            stickySection.style.zIndex = "-99";
-          } else {
-            stickySection.style.zIndex = "1";
-          }
-
-          // Handle opacity
-          if (scrollDistance >= fadeStart) {
-            const opacity = Math.max(
-              0,
-              1 - (scrollDistance - fadeStart) / fadeDuration
-            );
-            stickySection.style.opacity = opacity.toString();
-          } else {
-            stickySection.style.opacity = "1";
-          }
-        }
-
-        if (scrollDistance >= fadeStart) {
-          const opacity = Math.max(
-            0,
-            1 - (scrollDistance - fadeStart) / fadeDuration
-          );
-
-          if (stickySectionRef.current) {
-            stickySectionRef.current.style.opacity = opacity.toString();
-          }
-        } else {
-          if (stickySectionRef.current) {
-            stickySectionRef.current.style.opacity = "1";
-          }
-        }
-
-        // Handle typing animation
-        if (scrollDistance < typingStart) {
-          setTypedText("");
-          setTypingCompleted(false);
-        } else if (!typingCompleted) {
-          if (scrollDistance >= maxScrollForTyping) {
-            setTypedText(textToType);
-            setTypingCompleted(true);
-          } else {
-            const typingProgress = Math.min(
-              1,
-              (scrollDistance - typingStart) /
-                (maxScrollForTyping - typingStart)
-            );
-            const newText = textToType.slice(
-              0,
-              Math.floor(typingProgress * textToType.length)
-            );
-            setTypedText(newText);
-          }
-        }
+  // Visibility change handler
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        updateScroll();
       }
     };
 
-    handleScroll(); // Call handleScroll initially
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () =>
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, [updateScroll]);
+
+  // Resize handler
+  useEffect(() => {
+    const handleResize = () => {
+      updateScroll();
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [updateScroll]);
+
+  // Visibility change and load handler
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        setTimeout(() => {
+          updateScroll();
+        }, 50);
+      }
+    };
+
+    const handlePageShow = () => {
+      setTimeout(() => {
+        updateScroll();
+      }, 50);
+    };
+
+    window.addEventListener("pageshow", handlePageShow);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      // Cleanup function (if needed)
+      window.removeEventListener("pageshow", handlePageShow);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, [scrollPositionLocomotive, typingCompleted]);
+  }, [updateScroll]);
+
+  useEffect(() => {
+    let animationFrameId: number;
+
+    const handleScroll = () => {
+      // Cancel any pending animation frame
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+
+      // Schedule the next animation frame
+      animationFrameId = requestAnimationFrame(() => {
+        if (scrollPositionLocomotive !== undefined) {
+          const scrollDistance = scrollPositionLocomotive;
+
+          // Scroll distance constants
+          const typingStart = 550;
+          const maxScrollForTyping = 2250;
+          const fadeStart = 2800;
+          const fadeEnd = fadeStart + 400;
+          const zIndexThreshold = 3600;
+
+          // Cache the sticky section element
+          const stickySection = document.querySelector(
+            "[data-scroll-section].sticky"
+          ) as HTMLElement;
+
+          if (stickySection) {
+            // Handle z-index with optimization
+            const newZIndex = scrollDistance > zIndexThreshold ? "-99" : "1";
+            if (stickySection.style.zIndex !== newZIndex) {
+              stickySection.style.zIndex = newZIndex;
+            }
+
+            // Calculate opacity with optimization
+            let opacity = 1;
+            if (scrollDistance >= fadeStart && scrollDistance <= fadeEnd) {
+              const fadeProgress =
+                (scrollDistance - fadeStart) / (fadeEnd - fadeStart);
+              opacity = 1 - fadeProgress;
+            } else if (scrollDistance > fadeEnd) {
+              opacity = 0;
+            }
+
+            // Apply opacity only if it has changed
+            const opacityString = Math.max(0, Math.min(1, opacity)).toString();
+            if (stickySection.style.opacity !== opacityString) {
+              stickySection.style.opacity = opacityString;
+
+              // Update typed text element opacity
+              const typedTextElement = stickySection.querySelector(
+                "h2"
+              ) as HTMLElement;
+              if (typedTextElement) {
+                typedTextElement.style.opacity = opacityString;
+              }
+            }
+          }
+
+          // Handle typing animation with optimization
+          let newTypedText = "";
+          let newTypingCompleted = false;
+
+          if (scrollDistance < typingStart) {
+            newTypedText = "";
+            newTypingCompleted = false;
+          } else if (scrollDistance > maxScrollForTyping) {
+            newTypedText = textToType;
+            newTypingCompleted = true;
+          } else {
+            const progress =
+              (scrollDistance - typingStart) /
+              (maxScrollForTyping - typingStart);
+            const clampedProgress = Math.max(0, Math.min(1, progress));
+            const textLength = Math.floor(clampedProgress * textToType.length);
+            newTypedText = textToType.slice(0, textLength);
+            newTypingCompleted = false;
+          }
+
+          // Only update state if values have changed
+          setTypedText((prevText) => {
+            if (prevText !== newTypedText) {
+              return newTypedText;
+            }
+            return prevText;
+          });
+
+          setTypingCompleted((prevCompleted) => {
+            if (prevCompleted !== newTypingCompleted) {
+              return newTypingCompleted;
+            }
+            return prevCompleted;
+          });
+        }
+      });
+    };
+
+    // Add scroll event listener with passive flag for better performance
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    // Initial call to set up initial state
+    handleScroll();
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [scrollPositionLocomotive, textToType]); // Added textToType to dependencies
 
   const [isOpen, setIsOpen] = useState(false); // State for other purposes (e.g., menu open)
   const [resumeHover, setResumeHover] = useState(false);
@@ -332,7 +415,12 @@ export default function Page() {
         data-scroll-section-id="hero"
         className="flex flex-col items-center justify-between h-screen mt-2 m-4 gap-1 "
       >
-        <div className="flex-grow pb-8 w-full flex flex-row items-center justify-strech gap-2 fade-top-bottom">
+        <div
+          data-scroll
+          data-scroll-speed="1"
+          data-scroll-delay="0.2"
+          className="flex-grow pb-8 w-full flex flex-row items-center justify-strech gap-2 fade-top-bottom"
+        >
           <div className="absolute mt-4 w-fit h-screen z-20 ml-4 md:pl-12 pl-4 pb-32 md:pb-24 md:pt-4 flex flex-col items-start justify-center">
             <div className="flex flex-col md:flex-row w-full lg:text-8xl bg-clip-text items-baseline justify-start">
               <span className="text-gray-700 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
@@ -441,18 +529,20 @@ export default function Page() {
       {/* Drive Section */}
       <section
         data-scroll-section
-        data-scroll-section-id="about" // Add this
-        data-scroll-offset="100" // Add this for better trigger timing
+        data-scroll-section-id="about"
+        data-scroll-offset="50" // Add this for better trigger timing
         className="sticky h-[400vh] top-0 flex flex-col items-center justify-between gap-1 w-full transition-all duration-300"
       >
         <div className="flex w-4/5 h-screen text-5xl font-medium items-center justify-start">
-          <h2 className="text-2xl font-light text-justify m-8 leading-relaxed text-custom-blue">
+          <h2 className="text-2xl font-light text-justify m-8 leading-relaxed text-custom-blue transition-opacity duration-300">
             {typedText}
           </h2>
         </div>
       </section>
       <section
         data-scroll-section
+        data-scroll-section-id="about"
+        data-scroll-offset="50" // Add this for better trigger timing
         className="flex justify-center items-center "
       >
         <div className="flex flex-col items-center justify-between mt-4 mb-4 gap-24 w-4/5 ">
@@ -495,14 +585,12 @@ export default function Page() {
             </div>
           </article>
           <article className="w-full flex flex-col p-4">
-            <div>
-              <h2 className="text-custom-blue text-sm font-bold mb-6 tracking-wider uppercase">
-                Projects
-              </h2>
-            </div>
+            <h2 className="text-custom-blue text-sm font-bold mb-6 tracking-wider uppercase">
+              Projects
+            </h2>
             <div className="w-full h-full flex justify-center items-center">
               <div className="w-full flex flex-col gap-12">
-                {projects.map((project) => (
+                {projects.map((project, index) => (
                   <div
                     key={project.title}
                     className="w-full max-w-[400px] sm:max-w-none mx-auto transform-gpu"
@@ -759,7 +847,6 @@ export default function Page() {
                     </svg>
                   </div>
                 </a>
-
                 {/* LinkedIn Contact */}
                 <a
                   href="https://www.linkedin.com/in/marcellvarga/"

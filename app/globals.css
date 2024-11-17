@@ -344,3 +344,82 @@ html.has-scroll-smooth {
     /* Custom tablet scroll behavior */
   }
 }
+
+/* Base styles for smooth scroll */
+html.has-scroll-smooth {
+  overflow: hidden;
+}
+
+.has-scroll-smooth body {
+  overflow: hidden;
+}
+
+.has-scroll-smooth [data-scroll-container] {
+  min-height: 100vh;
+}
+
+/* Make elements with only data-scroll and data-scroll-speed visible by default */
+[data-scroll][data-scroll-speed] {
+  opacity: 1 !important;
+  transform: none;
+  will-change: transform;
+}
+
+/* Animation styles only apply to elements with specific animation types */
+[data-scroll="fade"],
+[data-scroll="fade-up"],
+[data-scroll="fade-down"],
+[data-scroll="fade-left"],
+[data-scroll="fade-right"] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: transform 1s cubic-bezier(0.165, 0.84, 0.44, 1),
+              opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Revealed states for animated elements */
+[data-scroll="fade"].is-revealed,
+[data-scroll="fade-up"].is-revealed,
+[data-scroll="fade-down"].is-revealed,
+[data-scroll="fade-left"].is-revealed,
+[data-scroll="fade-right"].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Specific animation starting positions */
+[data-scroll="fade-up"] {
+  transform: translateY(50px);
+}
+
+[data-scroll="fade-down"] {
+  transform: translateY(-50px);
+}
+
+[data-scroll="fade-left"] {
+  transform: translateX(-50px);
+}
+
+[data-scroll="fade-right"] {
+  transform: translateX(50px);
+}
+
+/* Speed-based animations */
+.is-scrolling-fast [data-scroll] {
+  transition-duration: 0.6s;
+}
+
+.is-scrolling-slow [data-scroll] {
+  transition-duration: 1.2s;
+}
+
+/* Make sure sections are always visible */
+[data-scroll-section] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Ensure visibility */
+.visible {
+  opacity: 1 !important;
+}

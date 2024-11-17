@@ -22,12 +22,37 @@ const config: Config = {
         "custom-blue": "#176B87",
         "custom-teal": "#4FD5CC",
       },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        fadeInLeft: {
+          '0%': { opacity: '0', transform: 'translateX(-20px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        fadeInRight: {
+          '0%': { opacity: '0', transform: 'translateX(20px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+      },
+      animation: {
+        fadeIn: 'fadeIn 0.5s ease-out forwards',
+        fadeInLeft: 'fadeInLeft 0.5s ease-out forwards',
+        fadeInRight: 'fadeInRight 0.5s ease-out forwards',
+      },
+      transitionProperty: {
+        'scroll': 'transform, opacity',
+      },
+      transitionTimingFunction: {
+        'scroll': 'cubic-bezier(0.165, 0.84, 0.44, 1)',
+      },
+      transitionDuration: {
+        'scroll': '1s',
+      },
     },
   },
-  variants: {
-    extend: {},
-  },
-  darkMode: "class", // Ensure dark mode is enabled
+  darkMode: "class",
   plugins: [],
 };
 
