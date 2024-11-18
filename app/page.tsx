@@ -598,6 +598,11 @@ export default function Page() {
                 {projects.map((project, index) => (
                   <div
                     key={project.title}
+                    data-scroll
+                    data-scroll-speed="0.2"
+                    data-scroll-delay="0.2"
+                    data-scroll-repeat="true"
+                    data-scroll-class="fade-in"
                     className="w-full max-w-[400px] sm:max-w-none mx-auto transform-gpu"
                   >
                     <Link
@@ -767,37 +772,24 @@ export default function Page() {
                   </div>
                 </div>
               ))}
-              <div
-                className="flex justify-start items-center gap-2"
-                onMouseEnter={() => setResumeHover(true)}
-                onMouseLeave={() => setResumeHover(false)}
-              >
+              <div className="flex justify-start items-center gap-2">
                 <a
                   href="/Marcell-Varga-CV.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`flex justify-start items-center gap-2 text-custom-blue hover:text-custom-blue transition-all duration-300 ease-in-out ${
-                    resumeHover ? "transform scale-105" : ""
-                  }`}
+                  className="relative px-5 py-2 text-custom-blue rounded-full group overflow-hidden min-w-36 flex items-center justify-center"
                 >
-                  <span className="relative inline-block overflow-hidden">
+                  <span className="relative z-10 transition-colors duration-300 group-hover:text-gray-50 mr-2">
                     View Full Resume
-                    <span
-                      className={`absolute bottom-0 left-0 w-full h-0.5 bg-custom-blue transform ${
-                        resumeHover ? "translate-x-0" : "translate-x-[-100%]"
-                      } transition-transform duration-300 ease-in-out`}
-                    ></span>
                   </span>
-                  <div
-                    style={{
-                      transition: "transform 0.3s",
-                      transform: resumeHover ? "translate(2px, -2px)" : "none",
-                    }}
-                  >
-                    <OpenResumeIcon isHover={resumeHover} />
-                  </div>
+                  <OpenResumeIcon 
+                    isHover={false}
+                    className="w-4 h-4 relative z-10 transition-colors duration-300 group-hover:text-gray-50"
+                  />
+                  <div className="absolute inset-0 border-2 border-custom-blue rounded-full"></div>
+                  <div className="absolute inset-0 bg-custom-blue rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                 </a>
-              </div>
+              </div>{" "}
             </div>
           </article>
         </div>
@@ -811,6 +803,8 @@ export default function Page() {
       >
         <div className="flex flex-col items-center justify-between gap-24 w-4/5">
           <article className="w-full p-4">
+            <div className="w-full border-t border-gray-300 opacity-60 mb-24"></div>
+
             <h2 className="text-custom-blue text-sm font-bold mb-4 tracking-wider uppercase">
               Contact
             </h2>

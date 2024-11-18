@@ -85,15 +85,6 @@ export default function useLocomotive(
               onScroll(scroll.y);
             }
 
-            // Update scroll direction classes
-            const scrollingClass =
-              direction === "up" ? "is-scrolling-up" : "is-scrolling-down";
-            document.documentElement.classList.remove(
-              "is-scrolling-up",
-              "is-scrolling-down"
-            );
-            document.documentElement.classList.add(scrollingClass);
-
             // Update velocity classes
             const velocityClass =
               velocity > 1.5 ? "is-scrolling-fast" : "is-scrolling-slow";
@@ -102,6 +93,15 @@ export default function useLocomotive(
               "is-scrolling-slow"
             );
             document.documentElement.classList.add(velocityClass);
+
+            // Update scroll direction classes
+            const scrollingClass =
+              direction === "up" ? "is-scrolling-up" : "is-scrolling-down";
+            document.documentElement.classList.remove(
+              "is-scrolling-up",
+              "is-scrolling-down"
+            );
+            document.documentElement.classList.add(scrollingClass);
           }
         );
 
