@@ -425,25 +425,27 @@ export default function Page() {
             data-scroll
             data-scroll-speed="1"
             data-scroll-delay="0.2"
-            className="absolute mt-4 w-fit h-screen z-20 ml-4 md:pl-12 pl-4 pb-32 md:pb-24 md:pt-4 flex flex-col items-start justify-center"
+            className="absolute mt-4 max-w-[90vw] md:max-w-[80vw] h-screen z-20 ml-4 md:pl-12 pl-4 pb-32 md:pb-24 md:pt-4 flex flex-col items-start justify-center overflow-x-hidden"
           >
-            <div className="flex flex-col md:flex-row w-full lg:text-8xl bg-clip-text items-baseline justify-start">
-              <span className="text-gray-700 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+            <div className="flex flex-col md:flex-row max-w-full lg:text-8xl bg-clip-text items-baseline justify-start">
+              <span className="text-gray-700 text-2xl sm:text-3xl md:text-4xl lg:text-5xl whitespace-nowrap">
                 Hey, I'm&nbsp;
               </span>
-              <span className="text-custom-blue font-bold text-[44px] leading-[50px] sm:text-5xl md:text-6xl lg:text-7xl">
+              <span className="text-custom-blue font-bold text-[44px] leading-[50px] sm:text-5xl md:text-6xl lg:text-7xl whitespace-nowrap">
                 Marcell Varga
               </span>
             </div>
-            <div className="flex w-full text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light items-center justify-start mb-3 md:mb-0 md:my-2 text-custom-blue">
+            <div className="flex max-w-full text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light items-center justify-start mb-3 md:mb-0 md:my-2 text-custom-blue whitespace-nowrap">
               UX & Frontend engineer
             </div>
-            <div className="flex flex-col sm:flex-row w-full text-sm sm:text-sm md:text-base lg:text-lg font-light items-start justify-start mt-34 italic text-custom-blue/40">
-              <span className="sm:hidden">I craft digital journeys that</span>
-              <span className="sm:hidden font-semibold">
+            <div className="flex flex-col sm:flex-row max-w-full text-sm sm:text-sm md:text-base lg:text-lg font-light items-start justify-start mt-34 italic text-custom-blue/40">
+              <span className="sm:hidden whitespace-nowrap">
+                I craft digital journeys that
+              </span>
+              <span className="sm:hidden font-semibold whitespace-nowrap">
                 captivate and engage.
               </span>
-              <span className="hidden sm:block">
+              <span className="hidden sm:block whitespace-nowrap">
                 I craft digital journeys that captivate and engage.
               </span>
             </div>
@@ -459,7 +461,7 @@ export default function Page() {
                 <div className="absolute inset-0 bg-custom-blue rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </button>
             </div>
-          </div>
+          </div>{" "}
           <div className="relative w-full h-full flex justify-end">
             <div className="relative w-full h-2/12 md:h-full flex justify-end main-container">
               <svg
@@ -508,9 +510,9 @@ export default function Page() {
                     y2="250.252"
                     gradientUnits="userSpaceOnUse"
                   >
-                    <stop stop-color="#02425C" />
-                    <stop offset="0.475" stop-color="#0F172A" />
-                    <stop offset="1" stop-color="#001822" />
+                    <stop stopColor="#02425C" />
+                    <stop offset="0.475" stopColor="#0F172A" />
+                    <stop offset="1" stopColor="#001822" />
                   </linearGradient>
                 </defs>
               </svg>
@@ -519,10 +521,9 @@ export default function Page() {
               <Image
                 src="/images/personalpageprofilealt.png"
                 alt="Profile Picture"
-                layout="responsive"
                 width={300}
                 height={300}
-                objectFit="cover"
+                className="w-full h-full object-cover"
               />
             </div>
           </div>
@@ -656,29 +657,21 @@ export default function Page() {
                           <Image
                             src={project.image}
                             alt={project.title}
-                            layout={
-                              size.width &&
-                              size.width >= 640 &&
-                              size.width < 768
-                                ? "responsive"
-                                : "fill"
-                            }
                             width={
                               size.width &&
                               size.width >= 640 &&
                               size.width < 768
                                 ? 80
-                                : undefined
+                                : 300
                             }
                             height={
                               size.width &&
                               size.width >= 640 &&
                               size.width < 768
                                 ? 80
-                                : undefined
+                                : 300
                             }
-                            objectFit="cover"
-                            className="w-full h-full"
+                            className="w-full h-full object-cover"
                           />
                         </div>
                       </div>
@@ -772,17 +765,17 @@ export default function Page() {
                   </div>
                 </div>
               ))}
-              <div className="flex justify-start items-center gap-2">
+              <div className="flex justify-center items-center gap-2 w-full mt-2 sm:mt-6 mb-4 sm:mb-6">
                 <a
                   href="/Marcell-Varga-CV.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative px-5 py-2 text-custom-blue rounded-full group overflow-hidden min-w-36 flex items-center justify-center"
+                  className="relative px-6 py-2.5 text-custom-blue rounded-full group overflow-hidden min-w-[240px] sm:min-w-[260px] flex items-center justify-center" // Set to 240px with slightly wider on larger screens
                 >
                   <span className="relative z-10 transition-colors duration-300 group-hover:text-gray-50 mr-2">
                     View Full Resume
                   </span>
-                  <OpenResumeIcon 
+                  <OpenResumeIcon
                     isHover={false}
                     className="w-4 h-4 relative z-10 transition-colors duration-300 group-hover:text-gray-50"
                   />
