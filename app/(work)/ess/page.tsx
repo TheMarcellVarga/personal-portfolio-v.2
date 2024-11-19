@@ -9,6 +9,7 @@ import { projects } from "../../page";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import useLocomotive from "../../useLocomotive";
 
 const history = [
   {
@@ -267,9 +268,43 @@ const history = [
 ];
 
 const ESS = () => {
+  const { scrollPositionLocomotive, updateScroll } = useLocomotive();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isHover, setIsHover] = useState(false);
+
+  // Add scroll update effects
+  useEffect(() => {
+    const handlePageShow = () => {
+      updateScroll();
+    };
+
+    window.addEventListener("pageshow", handlePageShow);
+    return () => window.removeEventListener("pageshow", handlePageShow);
+  }, [updateScroll]);
+
+  // Visibility change handler
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        updateScroll();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () =>
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, [updateScroll]);
+
+  // Resize handler
+  useEffect(() => {
+    const handleResize = () => {
+      updateScroll();
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [updateScroll]);
 
   useEffect(() => {
     // Function to set isDarkMode based on user preference
@@ -310,15 +345,39 @@ const ESS = () => {
 
   return (
     <div
+      id="main-container"
+      data-scroll-container
       className={`px-4 pb-4 transition-colors duration-200 ease-in-out bg-gray-200`}
     >
       <Header isOpen={isOpen} setIsOpen={setIsDarkMode} />
-      <main className="flex flex-col items-center justify-between m-4 gap-1 w-full">
-        <div className="flex-grow pb-12 w-full flex flex-row items-center justify-center gap-2">
-          <section className="flex flex-col items-center justify-between my-4 gap-24 w-4/5">
+      <main
+        data-scroll-section
+        data-scroll-section-id="hero"
+        className="flex flex-col items-center justify-between m-4 gap-1 w-full"
+      >
+        <div
+          data-scroll
+          data-scroll-speed="1"
+          data-scroll-delay="0.2"
+          className="flex-grow pb-12 w-full flex flex-row items-center justify-center gap-2"
+        >
+          <section
+            data-scroll-section
+            data-scroll-section-id="project-details"
+            className="flex flex-col items-center justify-between my-4 gap-24 w-4/5"
+          >
             {/* New Experience Section */}
-            <article className="mt-8 w-full p-4">
-              <h2 className="text-custom-blue text-3xl font-bold">
+            <article
+              data-scroll
+              data-scroll-speed="0.5"
+              data-scroll-delay="0.1"
+              className="mt-8 w-full p-4"
+            >
+              <h2
+                data-scroll
+                data-scroll-speed="1"
+                className="text-custom-blue text-3xl font-bold"
+              >
                 European Study Solution
               </h2>
               <h2 className="text-gray-700 text-md font-bold mb-4 tracking-wider uppercase">
