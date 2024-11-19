@@ -392,11 +392,10 @@ useEffect(() => {
                         <Image
                           src={item.content.picture}
                           alt={item.content.text}
-                          layout="responsive"
-                          width={300}
-                          height={200}
-                          objectFit="cover"
-                          className="rounded-lg"
+                          width={1200}
+                          height={800}
+                          className="w-full h-auto object-cover rounded-lg"
+                          priority
                         />
                         {item.content.text}
                       </h4>
@@ -592,8 +591,9 @@ useEffect(() => {
                                                     <Image
                                                       src={currentPic ?? ""}
                                                       alt={`Sub-picture ${index}`}
-                                                      fill
-                                                      className="object-contain rounded-md"
+                                                      width={1200}
+                                                      height={800}
+                                                      className="w-full h-auto object-contain rounded-md"
                                                       sizes={
                                                         isPartOfPair
                                                           ? "(max-width: 768px) 100vw, calc(90vw + 2rem)"
@@ -698,10 +698,9 @@ useEffect(() => {
                           <Image
                             src={project.image}
                             alt={project.title}
-                            layout="responsive"
-                            width={80}
-                            height={80}
-                            objectFit="cover"
+                            width={300}
+                            height={300}
+                            className="w-full h-full object-cover rounded-lg"
                           />
                         </div>
                       </div>

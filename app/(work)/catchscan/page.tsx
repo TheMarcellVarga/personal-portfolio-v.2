@@ -351,10 +351,9 @@ const Catchscan = () => {
                         <Image
                           src={item.content.picture}
                           alt={item.content.text}
-                          layout="responsive"
+                          className="w-full h-auto object-cover rounded-md"
                           width={300}
                           height={200}
-                          objectFit="cover"
                         />
                         {item.content.text}
                       </h4>
@@ -656,10 +655,9 @@ const Catchscan = () => {
                           <Image
                             src={project.image}
                             alt={project.title}
-                            layout="responsive"
+                            className="w-full h-full object-cover rounded-lg"
                             width={80}
                             height={80}
-                            objectFit="cover"
                           />
                         </div>
                       </div>

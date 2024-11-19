@@ -389,9 +389,9 @@ const ESS = () => {
                         <Image
                           src={item.content.picture}
                           alt={item.content.text}
+                          className="object-cover w-full h-auto"
                           width={300}
                           height={200}
-                          className="w-full h-full object-cover rounded-lg"
                         />
                         {item.content.text}
                       </h4>
@@ -695,9 +695,9 @@ const ESS = () => {
                           <Image
                             src={project.image}
                             alt={project.title}
+                            className="object-cover w-full h-auto"
                             width={80}
                             height={80}
-                            className="w-full h-full object-cover"
                           />
                         </div>
                       </div>
