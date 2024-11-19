@@ -9,6 +9,7 @@ import { projects } from "../../page";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import useLocomotive from "../../useLocomotive";
 
 const history = [
   {
@@ -325,13 +326,52 @@ const AskCody = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isHover, setIsHover] = useState(false);
+  const { scrollPositionLocomotive, updateScroll } = useLocomotive();
+
+  // Add scroll update effects
+useEffect(() => {
+  const handlePageShow = () => {
+    updateScroll();
+  };
+
+  window.addEventListener("pageshow", handlePageShow);
+  return () => window.removeEventListener("pageshow", handlePageShow);
+}, [updateScroll]);
+
+// Visibility change handler
+useEffect(() => {
+  const handleVisibilityChange = () => {
+    if (document.visibilityState === "visible") {
+      updateScroll();
+    }
+  };
+
+  document.addEventListener("visibilitychange", handleVisibilityChange);
+  return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+}, [updateScroll]);
+
+// Resize handler
+useEffect(() => {
+  const handleResize = () => {
+    updateScroll();
+  };
+
+  window.addEventListener("resize", handleResize);
+  return () => window.removeEventListener("resize", handleResize);
+}, [updateScroll]);
 
   return (
     <div
+      id="main-container"
+      data-scroll-container
       className={`px-4 pb-4 transition-colors duration-200 ease-in-out bg-gray-200`}
     >
       <Header isOpen={isOpen} setIsOpen={setIsOpen} />
-      <main className="flex flex-col items-center justify-between m-4 gap-1 w-full">
+      <main
+        data-scroll-container
+        data-scroll-section-id="hero"
+        className="flex flex-col items-center justify-between m-4 gap-1 w-full"
+      >
         <div className="flex-grow pb-12 w-full flex flex-row items-center justify-center gap-2">
           <section className="flex flex-col items-center justify-between my-4 gap-24 w-4/5">
             {/* New Experience Section */}
