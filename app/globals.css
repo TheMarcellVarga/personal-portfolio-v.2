@@ -433,10 +433,8 @@ html.has-scroll-smooth {
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.7s ease-out;
-  overflow-x: hidden;
-  width: 100%;
-  max-width: 100vw;
 }
+
 
 /* Add these classes for scroll direction handling */
 html.is-scrolling-up [data-scroll].fade-in {

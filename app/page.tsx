@@ -427,9 +427,9 @@ export default function Page() {
             data-scroll-delay="0.2"
             className="absolute mt-4 max-w-[90vw] md:max-w-[80vw] h-screen z-20 ml-4 md:pl-12 pl-4 pb-32 md:pb-24 md:pt-4 flex flex-col items-start justify-center overflow-x-hidden"
           >
-            <div className="flex flex-col md:flex-row max-w-full lg:text-8xl bg-clip-text items-baseline justify-start">
-              <span className="text-gray-700 text-2xl sm:text-3xl md:text-4xl lg:text-5xl whitespace-nowrap">
-                Hey, I'm&nbsp;
+            <div className="flex flex-col md:flex-col max-w-full lg:text-8xl bg-clip-text items-baseline justify-start">
+              <span className="text-gray-700 font-light text-base sm:text-lg md:text-xl lg:text-2xl pb-2 whitespace-nowrap">
+                Hey there!, I'm&nbsp;
               </span>
               <span className="text-custom-blue font-bold text-[44px] leading-[50px] sm:text-5xl md:text-6xl lg:text-7xl whitespace-nowrap">
                 Marcell Varga
@@ -438,7 +438,7 @@ export default function Page() {
             <div className="flex max-w-full text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light items-center justify-start mb-3 md:mb-0 md:my-2 text-custom-blue whitespace-nowrap">
               UX & Frontend engineer
             </div>
-            <div className="flex flex-col sm:flex-row max-w-full text-sm sm:text-sm md:text-base lg:text-lg font-light items-start justify-start mt-34 italic text-custom-blue/40">
+            <div className="flex flex-col sm:flex-row max-w-full text-sm sm:text-sm md:text-base lg:text-lg font-light items-start justify-start mt-34 pt-2 italic text-custom-blue/40">
               <span className="sm:hidden whitespace-nowrap">
                 I craft digital journeys that
               </span>
@@ -600,11 +600,12 @@ export default function Page() {
                   <div
                     key={project.title}
                     data-scroll
+                    data-scroll-projects
                     data-scroll-speed="0.2"
                     data-scroll-delay="0.2"
                     data-scroll-repeat="true"
                     data-scroll-class="fade-in"
-                    className="w-full max-w-[400px] sm:max-w-none mx-auto transform-gpu"
+                    className="w-full max-w-[400px] sm:max-w-none mx-auto transform-gpu hover:scale-[1.02] transition-all duration-300"
                   >
                     <Link
                       href={project.link}
