@@ -91,9 +91,6 @@ const Header: React.FC<HeaderProps> = ({
       className={`sticky-header flex justify-between items-center w-full p-4 transition-opacity duration-500 ${
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
-      data-scroll
-      data-scroll-sticky
-      data-scroll-target="#main-container"
     >
       <div className="flex items-center">
         {/* Icon */}
