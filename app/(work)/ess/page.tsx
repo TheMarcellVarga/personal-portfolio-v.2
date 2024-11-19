@@ -355,9 +355,7 @@ const ESS = () => {
         data-scroll-section-id="hero"
         className="flex flex-col items-center justify-between m-4 gap-1 w-full"
       >
-        <div
-          className="flex-grow pb-12 w-full flex flex-row items-center justify-center gap-2"
-        >
+        <div className="flex-grow pb-12 w-full flex flex-row items-center justify-center gap-2">
           <section
             data-scroll-section
             data-scroll-section-id="project-details"
@@ -366,7 +364,7 @@ const ESS = () => {
             {/* New Experience Section */}
             <article
               data-scroll
-              data-scroll-speed="0.1"  // Reduced from 0.5 to minimize space distortion
+              data-scroll-speed="0.1" // Reduced from 0.5 to minimize space distortion
               className="mt-8 w-full p-4"
             >
               <h2
@@ -391,11 +389,9 @@ const ESS = () => {
                         <Image
                           src={item.content.picture}
                           alt={item.content.text}
-                          layout="responsive"
                           width={300}
                           height={200}
-                          objectFit="cover"
-                          className="rounded-lg" // Apply large border-radius
+                          className="w-full h-full object-cover rounded-lg"
                         />
                         {item.content.text}
                       </h4>
@@ -699,10 +695,9 @@ const ESS = () => {
                           <Image
                             src={project.image}
                             alt={project.title}
-                            layout="responsive"
                             width={80}
                             height={80}
-                            objectFit="cover"
+                            className="w-full h-full object-cover"
                           />
                         </div>
                       </div>
