@@ -351,14 +351,11 @@ const ESS = () => {
     >
       <Header isOpen={isOpen} setIsOpen={setIsDarkMode} />
       <main
-        data-scroll-section
+        data-scroll-container
         data-scroll-section-id="hero"
         className="flex flex-col items-center justify-between m-4 gap-1 w-full"
       >
         <div
-          data-scroll
-          data-scroll-speed="1"
-          data-scroll-delay="0.2"
           className="flex-grow pb-12 w-full flex flex-row items-center justify-center gap-2"
         >
           <section
@@ -369,8 +366,7 @@ const ESS = () => {
             {/* New Experience Section */}
             <article
               data-scroll
-              data-scroll-speed="0.5"
-              data-scroll-delay="0.1"
+              data-scroll-speed="0.1"  // Reduced from 0.5 to minimize space distortion
               className="mt-8 w-full p-4"
             >
               <h2
