@@ -350,7 +350,12 @@ export default function Page() {
     }
   }, []);
 
+  const [isMobile, setIsMobile] = useState(false);
   const size = useWindowSize();
+
+  useEffect(() => {
+    setIsMobile(window?.innerWidth <= 768);
+  }, [size.width]);
 
   const scrollToHome = useCallback(() => {
     if (stickySectionRef.current) {
@@ -400,216 +405,261 @@ export default function Page() {
     <div
       id="main-container"
       data-scroll-container
-      className={`px-4 pb-4 transition-colors duration-200 ease-in-out bg-gray-200`}
+      className={`
+    px-4 pb-4 
+    transition-colors duration-200 
+    ease-in-out 
+    bg-gray-200 
+    relative
+    scroll-smooth
+  `}
     >
-      <Header
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        scrollToHome={scrollToHome}
-        scrollToAbout={scrollToAbout}
-        scrollToWork={scrollToWork}
-        scrollToContact={scrollToContact}
+      {/* The Sigma Pattern - Let's see Paul Allen's background pattern */}
+      <div
+        className="
+      absolute inset-0 
+      opacity-[0.04] 
+      bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] 
+      [background-size:16px_16px] 
+      pointer-events-none
+      before:absolute 
+      before:inset-0 
+      before:bg-gradient-to-b 
+      before:from-transparent 
+      before:to-gray-200/50 
+      before:backdrop-blur-[1px]
+      motion-safe:transition-opacity
+      motion-safe:duration-700
+      scroll-smooth
+    "
+        style={{ zIndex: 0 }}
+        aria-hidden="true"
       />
-      <main
-        data-scroll-section
-        data-scroll-section-id="hero"
-        className="flex flex-col items-center justify-between h-screen mt-2 m-4 gap-1 "
-      >
-        <div
+
+      <div className="relative z-1">
+        <Header
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          scrollToHome={scrollToHome}
+          scrollToAbout={scrollToAbout}
+          scrollToWork={scrollToWork}
+          scrollToContact={scrollToContact}
+        />
+        <main
           data-scroll-section
-          data-scroll-speed="1"
-          data-scroll-delay="0.2"
-          className="flex-grow pb-8 w-full flex flex-row items-center justify-strech gap-2 fade-top-bottom"
+          data-scroll-section-id="hero"
+          className="flex flex-col items-center justify-between h-screen mt-2 m-4 gap-1 "
         >
           <div
             data-scroll
             data-scroll-speed="1"
             data-scroll-delay="0.2"
-            className="absolute mt-4 max-w-[90vw] md:max-w-[80vw] h-screen z-20 ml-4 md:pl-12 pl-4 pb-32 md:pb-24 md:pt-4 flex flex-col items-start justify-center overflow-x-hidden"
+            className="flex-grow pb-8 w-full flex flex-row items-center justify-strech gap-2 fade-top-bottom"
           >
-            <div className="flex flex-col md:flex-col max-w-full lg:text-8xl bg-clip-text items-baseline justify-start">
-              <span className="text-gray-700 font-light text-base sm:text-lg md:text-xl lg:text-2xl pb-2 whitespace-nowrap">
-                Hey there!, I'm&nbsp;
-              </span>
-              <span className="text-custom-blue font-bold text-[44px] leading-[50px] sm:text-5xl md:text-6xl lg:text-7xl whitespace-nowrap">
-                Marcell Varga
-              </span>
-            </div>
-            <div className="flex max-w-full text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light items-center justify-start mb-3 md:mb-0 md:my-2 text-custom-blue whitespace-nowrap">
-              UX & Frontend engineer
-            </div>
-            <div className="flex flex-col sm:flex-row max-w-full text-sm sm:text-sm md:text-base lg:text-lg font-light items-start justify-start mt-34 pt-2 italic text-custom-blue/40">
-              <span className="sm:hidden whitespace-nowrap">
-                I craft digital journeys that
-              </span>
-              <span className="sm:hidden font-semibold whitespace-nowrap">
-                captivate and engage.
-              </span>
-              <span className="hidden sm:block whitespace-nowrap">
-                I craft digital journeys that captivate and engage.
-              </span>
-            </div>
-
-            {/* Button positioned at the bottom */}
-            <div className="absolute bottom-36 md:bottom-36 left-0 pl-4 md:pl-10">
-              <button className="relative px-5 py-2 text-custom-blue rounded-full group overflow-hidden min-w-36 flex items-center justify-center">
-                <span className="relative z-10 transition-colors duration-300 group-hover:text-gray-50 mr-2">
-                  Projects
+            <div
+              data-scroll
+              data-scroll-speed="1"
+              data-scroll-delay="0.2"
+              className="absolute mt-4 max-w-[90vw] md:max-w-[80vw] h-screen z-20 ml-4 md:pl-12 pl-4 pb-32 md:pb-24 md:pt-4 flex flex-col items-start justify-center overflow-x-hidden"
+            >
+              <div className="flex flex-col md:flex-col max-w-full lg:text-8xl bg-clip-text items-baseline justify-start">
+                <span className="text-gray-700 font-light text-base sm:text-lg md:text-xl lg:text-2xl pb-2 whitespace-nowrap">
+                  Hey there!, I'm&nbsp;
                 </span>
-                <ArrowRightIcon className="w-5 h-5 relative z-10 transition-colors duration-300 group-hover:text-gray-50" />
-                <div className="absolute inset-0 border-2 border-custom-blue rounded-full"></div>
-                <div className="absolute inset-0 bg-custom-blue rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-              </button>
-            </div>
-          </div>{" "}
-          <div className="relative w-full h-full flex justify-end">
-            <div className="relative w-full h-2/12 md:h-full flex justify-end main-container">
-              <svg
-                className={`triangle-bg-svg ${" rounded-[36px] bg-gray-100"} `}
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+                <span className="text-custom-blue font-bold text-[44px] leading-[50px] sm:text-5xl md:text-6xl lg:text-7xl whitespace-nowrap">
+                  Marcell Varga
+                </span>
+              </div>
+              <div className="flex max-w-full text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light items-center justify-start mb-3 md:mb-0 md:my-2 text-custom-blue whitespace-nowrap">
+                UX & Frontend engineer
+              </div>
+              <div className="flex flex-col sm:flex-row max-w-full text-sm sm:text-sm md:text-base lg:text-lg font-light items-start justify-start mt-34 pt-2 italic text-custom-blue/40">
+                <span className="sm:hidden whitespace-nowrap">
+                  I craft digital journeys that
+                </span>
+                <span className="sm:hidden font-semibold whitespace-nowrap">
+                  captivate and engage.
+                </span>
+                <span className="hidden sm:block whitespace-nowrap">
+                  I craft digital journeys that captivate and engage.
+                </span>
+              </div>
+
+              {/* Button positioned at the bottom */}
+              <div className="absolute bottom-36 md:bottom-36 left-0 pl-4 md:pl-10">
+                <button className="relative px-5 py-2 text-custom-blue rounded-full group overflow-hidden min-w-36 flex items-center justify-center">
+                  <span className="relative z-10 transition-colors duration-300 group-hover:text-gray-50 mr-2">
+                    Projects
+                  </span>
+                  <ArrowRightIcon className="w-5 h-5 relative z-10 transition-colors duration-300 group-hover:text-gray-50" />
+                  <div className="absolute inset-0 border-2 border-custom-blue rounded-full"></div>
+                  <div className="absolute inset-0 bg-custom-blue rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                </button>
+              </div>
+            </div>{" "}
+            <div className="relative w-full h-full flex justify-end">
+              <div className="relative w-full h-2/12 md:h-full flex justify-end main-container">
+                <svg
+                  className={`rounded-[36px] bg-gray-100 `}
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: "auto",
+                    right: 0,
+                    width: "100%",
+                    height: "100%",
+                    zIndex: 1,
+                    transform: isMobile ? "scale(-1, -1)" : "scale(-1, -1)",
+                  }}
+                >
+                  <path
+                    className="hidden md:block"
+                    d="M1750 -2009L335 786H0V-109Z"
+                  />
+                  <path
+                    className="hidden md:block gradient-path"
+                    d="M1750 -2009L335 786H0V-109Z"
+                    fill="url(#paint0_linear_364_239)"
+                  />
+
+                  {/* Tablet/medium mobile path (half size) */}
+                  <path
+                    className="hidden sm:block md:hidden"
+                    d="M875 -1004.5L167.5 393H0V-54.5Z"
+                  />
+                  <path
+                    className="hidden sm:block md:hidden gradient-path"
+                    d="M875 -1004.5L167.5 693H0V-54.5Z"
+                    fill="url(#paint0_linear_364_239)"
+                  />
+
+                  {/* Small mobile path (quarter size) */}
+                  <path
+                    className="block sm:hidden"
+                    d="M437.5 -502.25L83.75 696.5H0V-27.25Z"
+                  />
+                  <path
+                    className="block sm:hidden gradient-path"
+                    d="M177.5 0L-13.75 592.5H0V-27.25Z"
+                    fill="url(#paint0_linear_364_239)"
+                  />
+
+                  <defs>
+                    <linearGradient
+                      id="paint0_linear_364_239"
+                      x1="665"
+                      y1="-109"
+                      x2="-184.317"
+                      y2="250.252"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop stopColor="#02425C" />
+                      <stop offset="0.475" stopColor="#0F172A" />
+                      <stop offset="1" stopColor="#001822" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <div
+                data-scroll
+                data-scroll-speed="0.4"
+                data-scroll-delay="0.1"
+                className="absolute w-48 sm:w-48 md:w-80 lg:w-96 bottom-0 right-3 md:right-16 transform z-10"
               >
-                <path
-                  className="hidden md:block"
-                  d="M1750 -2009L335 786H0V-109Z"
+                <Image
+                  src="/images/personalpageprofilealt.png"
+                  alt="Profile Picture"
+                  width={300}
+                  height={300}
+                  className="w-full h-full object-cover"
                 />
-                <path
-                  className="hidden md:block gradient-path"
-                  d="M1750 -2009L335 786H0V-109Z"
-                  fill="url(#paint0_linear_364_239)"
-                />
-
-                {/* Tablet/medium mobile path (half size) */}
-                <path
-                  className="hidden sm:block md:hidden"
-                  d="M875 -1004.5L167.5 393H0V-54.5Z"
-                />
-                <path
-                  className="hidden sm:block md:hidden gradient-path"
-                  d="M875 -1004.5L167.5 693H0V-54.5Z"
-                  fill="url(#paint0_linear_364_239)"
-                />
-
-                {/* Small mobile path (quarter size) */}
-                <path
-                  className="block sm:hidden"
-                  d="M437.5 -502.25L83.75 696.5H0V-27.25Z"
-                />
-                <path
-                  className="block sm:hidden gradient-path"
-                  d="M177.5 0L-13.75 592.5H0V-27.25Z"
-                  fill="url(#paint0_linear_364_239)"
-                />
-
-                <defs>
-                  <linearGradient
-                    id="paint0_linear_364_239"
-                    x1="665"
-                    y1="-109"
-                    x2="-184.317"
-                    y2="250.252"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stopColor="#02425C" />
-                    <stop offset="0.475" stopColor="#0F172A" />
-                    <stop offset="1" stopColor="#001822" />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-            <div className="absolute w-48 sm:w-48 md:w-80 lg:w-96 bottom-0 right-3 md:right-16 transform z-10">
-              <Image
-                src="/images/personalpageprofilealt.png"
-                alt="Profile Picture"
-                width={300}
-                height={300}
-                className="w-full h-full object-cover"
-              />
+              </div>
             </div>
           </div>
-        </div>
-        <div className="pb-32 flex flex-col items-center justify-start">
-          <MouseScrollIcon isOpen={isOpen} />
-        </div>
-      </main>
-      {/* Drive Section */}
-      <section
-        data-scroll-section
-        data-scroll-section-id="about"
-        data-scroll-offset="50" // Add this for better trigger timing
-        className="sticky h-[400vh] top-0 flex flex-col items-center justify-between gap-1 w-full transition-all duration-300"
-      >
-        <div className="flex w-4/5 h-screen text-5xl font-medium items-center justify-start">
-          <h2 className="text-2xl font-light text-justify m-8 leading-relaxed text-custom-blue transition-opacity duration-300">
-            {typedText}
-          </h2>
-        </div>
-      </section>
-      <section
-        data-scroll-section
-        data-scroll-section-id="about"
-        data-scroll-offset="50" // Add this for better trigger timing
-        className="flex justify-center items-center "
-      >
-        <div className="flex flex-col items-center justify-between mt-4 mb-4 gap-24 w-4/5 ">
-          {/* New Experience Section */}
-          <article className="mt-8 w-full p-4 ">
-            <h2 className="text-custom-blue text-sm font-bold mb-4 tracking-wider uppercase">
-              Experience
+          <div className="pb-32 flex flex-col items-center justify-start">
+            <MouseScrollIcon isOpen={isOpen} />
+          </div>
+        </main>
+        {/* Drive Section */}
+        <section
+          data-scroll-section
+          data-scroll-section-id="about"
+          data-scroll-offset="50" // Add this for better trigger timing
+          className="sticky h-[400vh] top-0 flex flex-col items-center justify-between gap-1 w-full transition-all duration-300"
+        >
+          <div className="flex w-4/5 h-screen text-5xl font-medium items-center justify-start">
+            <h2 className="text-2xl font-light text-justify m-8 leading-relaxed text-custom-blue transition-opacity duration-300">
+              {typedText}
             </h2>
-            <div className="flex flex-wrap gap-2">
-              {[
-                "User Interface (UI) Design",
-                "User Experience (UX) Design",
-                "User Research",
-                "Usability Testing",
-                "HTML / CSS",
-                "JavaScript / TypeScript",
-                "Tailwind CSS",
-                "React",
-                "Next.js",
-                "Node.js",
-                "Express",
-                "Git (Gitlab & Github)",
-                "Svelte",
-                "SvelteKit",
-                "Vue",
-                "Adobe CC Suite",
-                "Figma",
-                "Sketch",
-                "Vercel",
-                "Docker",
-                "PostgreSQL",
-              ].map((skill) => (
-                <div
-                  key={skill}
-                  className="bg-custom-blue text-custom-teal text-sm px-2.5 py-1 rounded-lg"
-                >
-                  {skill}
-                </div>
-              ))}
-            </div>
-          </article>
-          <article className="w-full flex flex-col p-4">
-            <h2 className="text-custom-blue text-sm font-bold mb-6 tracking-wider uppercase">
-              Projects
-            </h2>
-            <div className="w-full h-full flex justify-center items-center">
-              <div className="w-full flex flex-col gap-12">
-                {projects.map((project, index) => (
+          </div>
+        </section>
+        <section
+          data-scroll-section
+          data-scroll-section-id="about"
+          data-scroll-offset="50" // Add this for better trigger timing
+          className="flex justify-center items-center "
+        >
+          <div className="flex flex-col items-center justify-between mt-4 mb-4 gap-24 w-4/5 ">
+            {/* New Experience Section */}
+            <article className="mt-8 w-full p-4 ">
+              <h2 className="text-custom-blue text-sm font-bold mb-4 tracking-wider uppercase">
+                Experience
+              </h2>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "User Interface (UI) Design",
+                  "User Experience (UX) Design",
+                  "User Research",
+                  "Usability Testing",
+                  "HTML / CSS",
+                  "JavaScript / TypeScript",
+                  "Tailwind CSS",
+                  "React",
+                  "Next.js",
+                  "Node.js",
+                  "Express",
+                  "Git (Gitlab & Github)",
+                  "Svelte",
+                  "SvelteKit",
+                  "Vue",
+                  "Adobe CC Suite",
+                  "Figma",
+                  "Sketch",
+                  "Vercel",
+                  "Docker",
+                  "PostgreSQL",
+                ].map((skill) => (
                   <div
-                    key={project.title}
-                    data-scroll
-                    data-scroll-projects
-                    data-scroll-speed="0.2"
-                    data-scroll-delay="0.2"
-                    data-scroll-repeat="true"
-                    data-scroll-class="fade-in"
-                    className="w-full max-w-[400px] sm:max-w-none mx-auto transform-gpu hover:scale-[1.02] transition-all duration-300"
+                    key={skill}
+                    className="bg-custom-blue text-custom-teal text-sm px-2.5 py-1 rounded-lg"
                   >
-                    <Link
-                      href={project.link}
-                      className={`
+                    {skill}
+                  </div>
+                ))}
+              </div>
+            </article>
+            <article className="w-full flex flex-col p-4">
+              <h2 className="text-custom-blue text-sm font-bold mb-6 tracking-wider uppercase">
+                Projects
+              </h2>
+              <div className="w-full h-full flex justify-center items-center">
+                <div className="w-full flex flex-col gap-12">
+                  {projects.map((project, index) => (
+                    <div
+                      key={project.title}
+                      data-scroll
+                      data-scroll-projects
+                      data-scroll-speed="0.2"
+                      data-scroll-delay="0.2"
+                      data-scroll-repeat="true"
+                      data-scroll-class="fade-in"
+                      className="w-full max-w-[400px] sm:max-w-none mx-auto transform-gpu hover:scale-[1.02] transition-all duration-300"
+                    >
+                      <Link
+                        href={project.link}
+                        className={`
                         w-full 
                         flex flex-col 
                         sm:flex-row
@@ -632,10 +682,10 @@ export default function Page() {
                         group
                         items-center
                       `}
-                    >
-                      {/* Image container */}
-                      <div
-                        className="
+                      >
+                        {/* Image container */}
+                        <div
+                          className="
                           w-full 
                           sm:w-1/4 
                           md:w-[300px]
@@ -645,39 +695,39 @@ export default function Page() {
                           group-hover:scale-[1.01] transition-transform duration-300
                           px-8 sm:px-0  // Add this line for horizontal padding on mobile
                         "
-                      >
-                        <div
-                          className="
+                        >
+                          <div
+                            className="
                             w-full
                             aspect-[3/2]
                             sm:w-full sm:h-full
                             md:aspect-[3/2]
                             relative rounded-lg overflow-hidden
                           "
-                        >
-                          <Image
-                            src={project.image}
-                            alt={project.title}
-                            width={
-                              size.width &&
-                              size.width >= 640 &&
-                              size.width < 768
-                                ? 80
-                                : 300
-                            }
-                            height={
-                              size.width &&
-                              size.width >= 640 &&
-                              size.width < 768
-                                ? 80
-                                : 300
-                            }
-                            className="w-full h-full object-cover"
-                          />
+                          >
+                            <Image
+                              src={project.image}
+                              alt={project.title}
+                              width={
+                                size.width &&
+                                size.width >= 640 &&
+                                size.width < 768
+                                  ? 80
+                                  : 300
+                              }
+                              height={
+                                size.width &&
+                                size.width >= 640 &&
+                                size.width < 768
+                                  ? 80
+                                  : 300
+                              }
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div
-                        className="
+                        <div
+                          className="
                           flex flex-col 
                           p-2 
                           sm:p-2 sm:pl-4
@@ -689,144 +739,170 @@ export default function Page() {
                           h-full
                           justify-center
                         "
-                      >
-                        <div className="w-fit">
-                          <div className="text-lg sm:text-lg md:text-2xl text-custom-blue font-bold text-left">
-                            {project.title}
-                          </div>
-                          <div className="text-sm md:text-base text-custom-blue text-left">
-                            {project.subTitle}
-                          </div>
-                        </div>
-                        <div className="text-base font-light text-justify text-custom-blue hidden md:block">
-                          <div className="text-sm md:text-base">
-                            {project.description}
-                          </div>
-                        </div>
-                        <div className="flex flex-wrap gap-1.5 mt-1 md:mt-2 justify-start">
-                          {project.skills.map((skill) => (
-                            <div
-                              key={skill}
-                              className="bg-custom-blue text-custom-teal text-xs px-2 py-1 rounded-md"
-                            >
-                              {skill}
+                        >
+                          <div className="w-fit">
+                            <div className="text-lg sm:text-lg md:text-2xl text-custom-blue font-bold text-left">
+                              {project.title}
                             </div>
-                          ))}
+                            <div className="text-sm md:text-base text-custom-blue text-left">
+                              {project.subTitle}
+                            </div>
+                          </div>
+                          <div className="text-base font-light text-justify text-custom-blue hidden md:block">
+                            <div className="text-sm md:text-base">
+                              {project.description}
+                            </div>
+                          </div>
+                          <div className="flex flex-wrap gap-1.5 mt-1 md:mt-2 justify-start">
+                            {project.skills.map((skill) => (
+                              <div
+                                key={skill}
+                                className="bg-custom-blue text-custom-teal text-xs px-2 py-1 rounded-md"
+                              >
+                                {skill}
+                              </div>
+                            ))}
+                          </div>
                         </div>
-                      </div>
 
-                      {/* Arrow container - visible on sm screens and up */}
-                      <div className="hidden sm:flex w-8 md:w-16 h-full items-center justify-center relative">
-                        <div className="flex justify-center items-center transition-transform duration-300 ease-in-out origin-left group-hover:translate-x-2">
-                          <FontAwesomeIcon
-                            icon={faChevronRight}
-                            className="w-4 md:w-6 h-4 md:h-6 text-custom-blue group-hover:text-custom-blue transition-colors duration-700 ease-in-out"
-                          />
+                        {/* Arrow container - visible on sm screens and up */}
+                        <div className="hidden sm:flex w-8 md:w-16 h-full items-center justify-center relative">
+                          <div className="flex justify-center items-center transition-transform duration-300 ease-in-out origin-left group-hover:translate-x-2">
+                            <FontAwesomeIcon
+                              icon={faChevronRight}
+                              className="w-4 md:w-6 h-4 md:h-6 text-custom-blue group-hover:text-custom-blue transition-colors duration-700 ease-in-out"
+                            />
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              </div>{" "}
+            </article>
+            <article className="w-full p-4">
+              <h2 className="text-custom-blue text-sm font-bold mb-4 tracking-wider uppercase">
+                History
+              </h2>
+              <div className="flex flex-col gap-12 ">
+                {history.map((item, index) => (
+                  <div key={index} className="flex flex-col md:flex-row">
+                    <div className="w-full md:w-1/2">
+                      <h3 className="text-xl font-bold text-custom-blue">
+                        {item.company}
+                      </h3>
+                    </div>
+                    <div className="w-full md:w-1/2">
+                      <div className="flex flex-col gap-4">
+                        <div>
+                          <h3 className="text-lg font-semibold text-custom-blue">
+                            {item.jobTitle}
+                          </h3>
+                          <h4 className="text-base font-normal italic text-custom-blue">
+                            {item.time.start} -{" "}
+                            {item.time.end ? item.time.end : "Present"}
+                          </h4>
+                        </div>
+                        <div>
+                          <div className="text-sm text-left md:text-left text-custom-blue ">
+                            {item.description.map((desc, index) => (
+                              <p key={index} className="py-2">
+                                {desc}
+                              </p>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                    </Link>
+                    </div>
                   </div>
                 ))}
+                <div className="flex justify-center items-center gap-2 w-full mt-2 sm:mt-6 mb-4 sm:mb-6">
+                  <a
+                    href="/Marcell-Varga-CV.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative px-6 py-2.5 text-custom-blue rounded-full group overflow-hidden min-w-[240px] sm:min-w-[260px] flex items-center justify-center" // Set to 240px with slightly wider on larger screens
+                  >
+                    <span className="relative z-10 transition-colors duration-300 group-hover:text-gray-50 mr-2">
+                      View Full Resume
+                    </span>
+                    <OpenResumeIcon
+                      isHover={false}
+                      className="w-4 h-4 relative z-10 transition-colors duration-300 group-hover:text-gray-50"
+                    />
+                    <div className="absolute inset-0 border-2 border-custom-blue rounded-full"></div>
+                    <div className="absolute inset-0 bg-custom-blue rounded-full transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-bottom"></div>
+                  </a>
+                </div>{" "}
               </div>
-            </div>{" "}
-          </article>
-          <article className="w-full p-4">
-            <h2 className="text-custom-blue text-sm font-bold mb-4 tracking-wider uppercase">
-              History
-            </h2>
-            <div className="flex flex-col gap-12 ">
-              {history.map((item, index) => (
-                <div key={index} className="flex flex-col md:flex-row">
-                  <div className="w-full md:w-1/2">
-                    <h3 className="text-xl font-bold text-custom-blue">
-                      {item.company}
-                    </h3>
-                  </div>
-                  <div className="w-full md:w-1/2">
-                    <div className="flex flex-col gap-4">
-                      <div>
-                        <h3 className="text-lg font-semibold text-custom-blue">
-                          {item.jobTitle}
-                        </h3>
-                        <h4 className="text-base font-normal italic text-custom-blue">
-                          {item.time.start} -{" "}
-                          {item.time.end ? item.time.end : "Present"}
-                        </h4>
-                      </div>
-                      <div>
-                        <div className="text-sm text-left md:text-left text-custom-blue ">
-                          {item.description.map((desc, index) => (
-                            <p key={index} className="py-2">
-                              {desc}
-                            </p>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-              <div className="flex justify-center items-center gap-2 w-full mt-2 sm:mt-6 mb-4 sm:mb-6">
-                <a
-                  href="/Marcell-Varga-CV.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative px-6 py-2.5 text-custom-blue rounded-full group overflow-hidden min-w-[240px] sm:min-w-[260px] flex items-center justify-center" // Set to 240px with slightly wider on larger screens
-                >
-                  <span className="relative z-10 transition-colors duration-300 group-hover:text-gray-50 mr-2">
-                    View Full Resume
-                  </span>
-                  <OpenResumeIcon
-                    isHover={false}
-                    className="w-4 h-4 relative z-10 transition-colors duration-300 group-hover:text-gray-50"
-                  />
-                  <div className="absolute inset-0 border-2 border-custom-blue rounded-full"></div>
-                  <div className="absolute inset-0 bg-custom-blue rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-                </a>
-              </div>{" "}
-            </div>
-          </article>
-        </div>
-      </section>
-      {/* Contact Section */}
-      <section
-        data-scroll-section
-        data-scroll-section-id="contact" // Add this
-        data-scroll-offset="50" // Add this for smoother reveal
-        className="flex justify-center items-center mb-24"
-      >
-        <div className="flex flex-col items-center justify-between gap-24 w-4/5">
-          <article className="w-full p-4">
-            <div className="w-full border-t border-gray-300 opacity-60 mb-24"></div>
+            </article>
+          </div>
+        </section>
+        {/* Contact Section */}
+        <section
+          data-scroll-section
+          data-scroll-section-id="contact"
+          className="flex justify-center items-center mb-24 transform hover:scale-[1.01] transition-all duration-500"
+        >
+          <div className="flex flex-col items-center justify-between gap-24 w-4/5">
+            {/* SPICY GRADIENT DIVIDER THAT HITS DIFFERENT */}
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-custom-blue/60 to-transparent" />
 
-            <h2 className="text-custom-blue text-sm font-bold mb-4 tracking-wider uppercase">
-              Contact
-            </h2>
-            <div className="flex flex-col gap-8">
-              <div className="flex flex-col md:flex-row gap-8">
-                {/* Email Contact */}
-                <a
-                  href="mailto:themarcellvarga@gmail.com"
-                  className="group w-full md:w-1/2 bg-gray-100/90 rounded-lg p-6 
-                  transition-all duration-300 ease-out
-                  hover:bg-neutral-100/95 
-                  hover:scale-[1.02] 
-                  hover:-translate-y-1 
-                  hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]
-                  relative overflow-hidden border border-transparent"
-                >
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <h3 className="text-xl font-bold text-custom-blue mb-2">
-                        Email
-                      </h3>
-                      <span className="text-custom-blue hover:text-custom-blue/80 transition-colors duration-300">
-                        themarcellvarga@gmail.com
-                      </span>
-                    </div>
+            {/* CHAD MESSAGE BOX */}
+            <div
+              className="w-full bg-gradient-to-br from-gray-100/95 to-gray-100/90 rounded-2xl p-8 
+      shadow-[0_8px_30px_rgba(2,66,92,0.08)]
+      hover:shadow-[0_15px_60px_rgba(2,66,92,0.15)]
+      transition-all duration-500 relative overflow-hidden group backdrop-blur-sm"
+            >
+              {/* ABSOLUTE SIGMA PATTERN */}
+              <div
+                className="absolute inset-0 opacity-5 bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] [background-size:16px_16px] pointer-events-none 
+        group-hover:scale-[1.5] transition-transform duration-1000"
+              />
+
+              {/* GIGACHAD TEXT */}
+              <div className="relative z-10 transform group-hover:scale-[1.02] transition-transform duration-500">
+                <h2 className="text-3xl md:text-4xl font-bold text-custom-blue text-center mb-6 tracking-tight">
+                  Let's Build Something{" "}
+                  <span className="text-custom-blue/80">Legendary</span> 🚀
+                </h2>
+                <p className="text-custom-blue text-center font-bold text-lg md:text-xl max-w-3xl mx-auto">
+                  Ready to transform your vision into digital reality? I turn
+                  coffee into code and dreams into deployments.
+                </p>
+              </div>
+            </div>
+
+            {/* CONTACT OPTIONS THAT SLAP HARDER THAN YOUR PRE-WORKOUT */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+              {/* EMAIL - FOR THE SERIOUS BUSINESS GAINZ */}
+              <a
+                href="mailto:themarcellvarga@gmail.com"
+                className="group bg-gradient-to-br from-gray-100/95 to-gray-100/90 rounded-2xl p-8
+          transform hover:scale-[1.02] hover:-translate-y-1
+          transition-all duration-300 ease-out
+          hover:shadow-[0_15px_60px_rgba(2,66,92,0.15)]
+          relative overflow-hidden"
+              >
+                <div
+                  className="absolute inset-0 bg-gradient-to-r from-custom-blue/0 via-custom-blue/0 to-custom-blue/0 
+          group-hover:from-custom-blue/[0.03] group-hover:via-custom-blue/[0.03] group-hover:to-custom-blue/0
+          transition-all duration-700"
+                ></div>
+                <div className="flex justify-between items-center relative z-10">
+                  <div>
+                    <h3 className="text-2xl font-bold text-custom-blue mb-2">
+                      Drop an Email
+                    </h3>
+                    <span className="text-custom-blue/80 text-lg hover:text-custom-blue transition-colors duration-300">
+                      themarcellvarga@gmail.com
+                    </span>
+                  </div>
+                  <div className="transform group-hover:rotate-12 transition-transform duration-300">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-8 w-8 text-custom-blue opacity-50 group-hover:opacity-80 transition-opacity duration-300"
+                      className="h-10 w-10 text-custom-blue opacity-50 group-hover:opacity-80 transition-all duration-300"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -839,51 +915,49 @@ export default function Page() {
                       />
                     </svg>
                   </div>
-                </a>
-                {/* LinkedIn Contact */}
-                <a
-                  href="https://www.linkedin.com/in/marcellvarga/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group w-full md:w-1/2 bg-gray-100/90 rounded-lg p-6 
-                  transition-all duration-300 ease-out
-                  hover:bg-neutral-100/95 
-                  hover:scale-[1.02] 
-                  hover:-translate-y-1 
-                  hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]
-                  relative overflow-hidden border border-transparent"
-                >
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <h3 className="text-xl font-bold text-custom-blue mb-2">
-                        LinkedIn
-                      </h3>
-                      <span className="text-custom-blue hover:text-custom-blue/80 transition-colors duration-300">
-                        Marcell Varga
-                      </span>
-                    </div>
-                    <LinkedInIcon className="h-8 w-8 text-custom-blue opacity-50 group-hover:opacity-80 transition-opacity duration-300" />
-                  </div>
-                </a>
-              </div>
+                </div>
+              </a>
 
-              {/* Message */}
-              <div className="w-full bg-gray-100/90 rounded-lg p-6 hover:bg-neutral-100/95 transition-all duration-300">
-                <p className="text-custom-blue text-center">
-                  I'm always open to discussing new projects, creative ideas, or
-                  opportunities to be part of your visions.
-                </p>
-              </div>
+              {/* LINKEDIN - FOR THE NETWORKING BEAST MODE */}
+              <a
+                href="https://www.linkedin.com/in/marcellvarga/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group bg-gradient-to-br from-gray-100/95 to-gray-100/90 rounded-2xl p-8
+          transform hover:scale-[1.02] hover:-translate-y-1
+          transition-all duration-300 ease-out
+          hover:shadow-[0_15px_60px_rgba(2,66,92,0.15)]
+          relative overflow-hidden"
+              >
+                <div
+                  className="absolute inset-0 bg-gradient-to-r from-custom-blue/0 via-custom-blue/0 to-custom-blue/0 
+          group-hover:from-custom-blue/[0.03] group-hover:via-custom-blue/[0.03] group-hover:to-custom-blue/0
+          transition-all duration-700"
+                ></div>
+                <div className="flex justify-between items-center relative z-10">
+                  <div>
+                    <h3 className="text-2xl font-bold text-custom-blue mb-2">
+                      Connect on LinkedIn
+                    </h3>
+                    <span className="text-custom-blue/80 text-lg hover:text-custom-blue transition-colors duration-300">
+                      Marcell Varga
+                    </span>
+                  </div>
+                  <div className="transform group-hover:rotate-12 transition-transform duration-300">
+                    <LinkedInIcon className="h-10 w-10 text-custom-blue opacity-50 group-hover:opacity-80 transition-all duration-300" />
+                  </div>
+                </div>
+              </a>
             </div>
-          </article>
-        </div>
-      </section>
-      <Footer
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        isHover={footerHover}
-        setIsHover={setFooterHover}
-      />
+          </div>
+        </section>{" "}
+        <Footer
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          isHover={footerHover}
+          setIsHover={setFooterHover}
+        />
+      </div>
     </div>
   );
 }
