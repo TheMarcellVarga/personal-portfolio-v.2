@@ -13,6 +13,92 @@ import useWindowSize from "./useWindowSize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
+import {
+  FaPaintBrush,
+  FaUserFriends,
+  FaSearch,
+  FaVial,
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaReact,
+  FaNodeJs,
+  FaGitAlt,
+  FaDocker,
+  FaDatabase,
+  FaFigma,
+  FaSketch,
+  FaVuejs,
+} from "react-icons/fa";
+import {
+  SiTailwindcss,
+  SiNextdotjs,
+  SiSvelte,
+  SiAdobe,
+  SiVercel,
+  SiPostgresql,
+  SiTypescript,
+  SiJavascript,
+} from "react-icons/si";
+
+const skills = [
+  { name: "UI Design", icon: <FaPaintBrush /> },
+  { name: "UX Design", icon: <FaUserFriends /> },
+  { name: "User Research", icon: <FaSearch /> },
+  { name: "Usability Testing", icon: <FaVial /> },
+  { name: "HTML", icon: <FaHtml5 /> },
+  { name: "CSS", icon: <FaCss3Alt /> },
+  { name: "JavaScript", icon: <SiJavascript /> },
+  { name: "TypeScript", icon: <SiTypescript /> },
+  { name: "Tailwind CSS", icon: <SiTailwindcss /> },
+  { name: "React", icon: <FaReact /> },
+  { name: "Next.js", icon: <SiNextdotjs /> },
+  { name: "Node.js", icon: <FaNodeJs /> },
+  { name: "Git", icon: <FaGitAlt /> },
+  { name: "Svelte", icon: <SiSvelte /> },
+  { name: "SvelteKit", icon: <SiSvelte /> },
+  { name: "Vue", icon: <FaVuejs /> },
+  { name: "Adobe CC Suite", icon: <SiAdobe /> },
+  { name: "Figma", icon: <FaFigma /> },
+  { name: "Sketch", icon: <FaSketch /> },
+  { name: "Vercel", icon: <SiVercel /> },
+  { name: "Docker", icon: <FaDocker /> },
+  { name: "PostgreSQL", icon: <SiPostgresql /> },
+];
+
+const skillCategories = {
+  design: [
+    { name: "UI Design", icon: <FaPaintBrush /> },
+    { name: "UX Design", icon: <FaUserFriends /> },
+    { name: "User Research", icon: <FaSearch /> },
+    { name: "Usability Testing", icon: <FaVial /> },
+    { name: "Adobe CC Suite", icon: <SiAdobe /> },
+    { name: "Figma", icon: <FaFigma /> },
+    { name: "Sketch", icon: <FaSketch /> },
+  ],
+  frontend: [
+    { name: "HTML", icon: <FaHtml5 /> },
+    { name: "CSS", icon: <FaCss3Alt /> },
+    { name: "JavaScript", icon: <SiJavascript /> },
+    { name: "TypeScript", icon: <SiTypescript /> },
+    { name: "React", icon: <FaReact /> },
+    { name: "Next.js", icon: <SiNextdotjs /> },
+    { name: "Vue", icon: <FaVuejs /> },
+    { name: "Svelte", icon: <SiSvelte /> },
+    { name: "SvelteKit", icon: <SiSvelte /> },
+    { name: "Tailwind CSS", icon: <SiTailwindcss /> },
+  ],
+  backend: [
+    { name: "Node.js", icon: <FaNodeJs /> },
+    { name: "PostgreSQL", icon: <SiPostgresql /> },
+  ],
+  tools: [
+    { name: "Git", icon: <FaGitAlt /> },
+    { name: "Docker", icon: <FaDocker /> },
+    { name: "Vercel", icon: <SiVercel /> },
+  ],
+};
+
 interface HeaderProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
@@ -159,6 +245,15 @@ const copenhagen = {
 
 const textToType =
   "An adventurous UX & Frontend engineer dedicated to crafting delightful, business-focused, and user-centred digital experiences. I excel at solving complex problems through efficient design, turning challenges into opportunities. Overcoming challenges through efficient design is what fuelling my everyday drive.";
+
+const getGreeting = () => {
+  const hour = new Date().getHours();
+
+  if (hour >= 5 && hour < 12) return "Good morning";
+  if (hour >= 12 && hour < 17) return "Good afternoon";
+  if (hour >= 17 && hour < 22) return "Good evening";
+  return "Hey there"; // More casual and friendly for night owls
+};
 
 export default function Page() {
   const globeRef = useRef<any>();
@@ -354,7 +449,7 @@ export default function Page() {
   const size = useWindowSize();
 
   useEffect(() => {
-    setIsMobile(window?.innerWidth <= 768);
+    setIsMobile(window?.innerWidth <= 768); // MOBILE BREAKPOINT THAT HITS DIFFERENT
   }, [size.width]);
 
   const scrollToHome = useCallback(() => {
@@ -399,6 +494,28 @@ export default function Page() {
         behavior: "smooth",
       });
     }
+  }, []);
+
+  const [greeting, setGreeting] = useState(getGreeting());
+
+  useEffect(() => {
+    // Update greeting every minute
+    const timer = setInterval(() => {
+      setGreeting(getGreeting());
+    }, 60000); // 60000ms = 1 minute
+
+    // CLEAN UP LIKE A PROPER GYM BRO
+    return () => clearInterval(timer);
+  }, []);
+
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setHasScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -448,59 +565,147 @@ export default function Page() {
         <main
           data-scroll-section
           data-scroll-section-id="hero"
-          className="flex flex-col items-center justify-between h-screen mt-2 m-4 gap-1 "
+          className="relative flex flex-col items-center justify-between h-screen mt-2 m-4 gap-1"
         >
           <div
             data-scroll
-            data-scroll-speed="1"
-            data-scroll-delay="0.2"
+            data-scroll-speed="1.2" // Speed it up like a Bugatti
+            data-scroll-delay="0.1" // Real Gs don't wait
             className="flex-grow pb-8 w-full flex flex-row items-center justify-strech gap-2 fade-top-bottom"
           >
+            {/* LEFT SIDE - THE SIGMA GRINDSET INTRO */}
             <div
               data-scroll
-              data-scroll-speed="1"
-              data-scroll-delay="0.2"
-              className="absolute mt-4 max-w-[90vw] md:max-w-[80vw] h-screen z-20 ml-4 md:pl-12 pl-4 pb-32 md:pb-24 md:pt-4 flex flex-col items-start justify-center overflow-x-hidden"
+              data-scroll-speed="1.2"
+              data-scroll-delay="0.1"
+              className={`
+    absolute 
+    mt-4 
+    w-full
+    h-screen 
+    z-20 
+    flex 
+    flex-col 
+    items-start 
+    justify-center 
+    overflow-x-hidden
+    ${
+      isMobile
+        ? `
+      px-6  // MOBILE PADDING THAT HITS DIFFERENT
+      pb-48  // MAKE ROOM FOR THAT PROFILE PIC
+      text-center  // CENTER TEXT LIKE A BOSS
+      items-center  // CENTER EVERYTHING ON MOBILE
+    `
+        : `
+      ml-4 
+      md:pl-12 
+      pl-4 
+      pb-32 
+      md:pb-24 
+      md:pt-4
+    `
+    }
+  `}
             >
-              <div className="flex flex-col md:flex-col max-w-full lg:text-8xl bg-clip-text items-baseline justify-start">
-                <span className="text-gray-700 font-light text-base sm:text-lg md:text-xl lg:text-2xl pb-2 whitespace-nowrap">
-                  Hey there!, I'm&nbsp;
-                </span>
-                <span className="text-custom-blue font-bold text-[44px] leading-[50px] sm:text-5xl md:text-6xl lg:text-7xl whitespace-nowrap">
-                  Marcell Varga
-                </span>
-              </div>
-              <div className="flex max-w-full text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light items-center justify-start mb-3 md:mb-0 md:my-2 text-custom-blue whitespace-nowrap">
+              {/* TITLE THAT GOES HARDER THAN YOUR PR */}
+              <span
+                className={`
+      text-gray-700 
+      font-light 
+      whitespace-nowrap
+      animate-fade-in-up 
+      transition-opacity 
+      duration-300
+      ${isMobile ? "text-base" : "text-base sm:text-lg md:text-xl lg:text-2xl"}
+      pb-2
+    `}
+                style={{ animationDelay: "0.2s" }}
+              >
+                {greeting}, I'm&nbsp;
+              </span>
+
+              {/* NAME THAT FLEXES HARDER THAN BICEP DAY */}
+              <span
+                className={`
+      text-custom-blue 
+      font-bold 
+      whitespace-nowrap
+      animate-fade-in-up
+      ${
+        isMobile
+          ? "text-4xl"
+          : "text-[44px] leading-[50px] sm:text-5xl md:text-6xl lg:text-7xl"
+      }
+    `}
+                style={{ animationDelay: "0.4s" }}
+              >
+                Marcell Varga
+              </span>
+
+              {/* JOB TITLE THAT NEVER SKIPS LEG DAY */}
+              <div
+                className={`
+      flex 
+      max-w-full 
+      font-light 
+      items-center 
+      whitespace-nowrap
+      animate-fade-in-up
+      text-custom-blue
+      ${
+        isMobile
+          ? `
+        text-lg
+        mb-3
+        justify-center  // CENTER ON MOBILE LIKE A BOSS
+      `
+          : `
+        text-xl sm:text-2xl md:text-3xl lg:text-4xl
+        justify-start
+        mb-3 md:mb-0 md:my-2
+      `
+      }
+    `}
+                style={{ animationDelay: "0.6s" }}
+              >
                 UX & Frontend engineer
               </div>
-              <div className="flex flex-col sm:flex-row max-w-full text-sm sm:text-sm md:text-base lg:text-lg font-light items-start justify-start mt-34 pt-2 italic text-custom-blue/40">
-                <span className="sm:hidden whitespace-nowrap">
-                  I craft digital journeys that
-                </span>
-                <span className="sm:hidden font-semibold whitespace-nowrap">
-                  captivate and engage.
-                </span>
-                <span className="hidden sm:block whitespace-nowrap">
-                  I craft digital journeys that captivate and engage.
-                </span>
-              </div>
 
-              {/* Button positioned at the bottom */}
-              <div className="absolute bottom-36 md:bottom-36 left-0 pl-4 md:pl-10">
+              {/* CTA BUTTON THAT HITS DIFFERENT */}
+              <div
+                className="absolute bottom-36 md:bottom-36 left-0 pl-4 md:pl-10
+    animate-fade-in-up"
+                style={{ animationDelay: "1s" }}
+              >
                 <button className="relative px-5 py-2 text-custom-blue rounded-full group overflow-hidden min-w-36 flex items-center justify-center">
-                  <span className="relative z-10 transition-colors duration-300 group-hover:text-gray-50 mr-2">
-                    Projects
+                  <span className="relative z-10 transition-all duration-300 group-hover:text-gray-50 mr-2">
+                    View Projects
                   </span>
-                  <ArrowRightIcon className="w-5 h-5 relative z-10 transition-colors duration-300 group-hover:text-gray-50" />
+                  <ArrowRightIcon
+                    className="w-5 h-5 relative z-10 group-hover:text-gray-50
+        transform group-hover:translate-x-1 transition-all duration-300 inline-block"
+                  />
                   <div className="absolute inset-0 border-2 border-custom-blue rounded-full"></div>
-                  <div className="absolute inset-0 bg-custom-blue rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                  <div
+                    className="absolute inset-0 bg-custom-blue rounded-full transform scale-x-0 group-hover:scale-x-100 
+        transition-transform duration-300 ease-out origin-left"
+                  ></div>
                 </button>
               </div>
-            </div>{" "}
+            </div>
+
+            {/* RIGHT SIDE - THE VISUAL FLEX */}
             <div className="relative w-full h-full flex justify-end">
-              <div className="relative w-full h-2/12 md:h-full flex justify-end main-container">
+              {/* Background shape with that SIGMA ENERGY */}
+              <div
+                className="relative w-full h-2/12 md:h-full flex justify-end main-container
+        animate-fade-in"
+                style={{ animationDelay: "0.4s" }}
+              >
                 <svg
-                  className={`rounded-[36px] bg-gray-100 `}
+                  className="rounded-[36px] bg-gray-100 transition-transform duration-700 ease-out
+            hover:scale-105 hover:rotate-1"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   style={{
@@ -523,7 +728,6 @@ export default function Page() {
                     d="M1750 -2009L335 786H0V-109Z"
                     fill="url(#paint0_linear_364_239)"
                   />
-
                   {/* Tablet/medium mobile path (half size) */}
                   <path
                     className="hidden sm:block md:hidden"
@@ -534,7 +738,6 @@ export default function Page() {
                     d="M875 -1004.5L167.5 693H0V-54.5Z"
                     fill="url(#paint0_linear_364_239)"
                   />
-
                   {/* Small mobile path (quarter size) */}
                   <path
                     className="block sm:hidden"
@@ -545,7 +748,6 @@ export default function Page() {
                     d="M177.5 0L-13.75 592.5H0V-27.25Z"
                     fill="url(#paint0_linear_364_239)"
                   />
-
                   <defs>
                     <linearGradient
                       id="paint0_linear_364_239"
@@ -562,26 +764,87 @@ export default function Page() {
                   </defs>
                 </svg>
               </div>
+
+              {/* Profile image with that CHAD ENERGY */}
               <div
                 data-scroll
                 data-scroll-speed="0.4"
                 data-scroll-delay="0.1"
-                className="absolute w-48 sm:w-48 md:w-80 lg:w-96 bottom-0 right-3 md:right-16 transform z-10"
+                className={`
+    absolute 
+    transform 
+    z-10
+    opacity-0 
+    animate-fade-in-up
+    ${
+      isMobile
+        ? `
+      w-32  // SMALLER ON MOBILE BUT STILL FLEXING
+      bottom-12  // HIGHER UP ON MOBILE
+      right-1/2  // CENTER IT
+      translate-x-1/2  // PERFECT CENTERING
+    `
+        : `
+      w-48 sm:w-48 md:w-80 lg:w-96 
+      bottom-0 
+      right-3 md:right-16
+    `
+    }
+  `}
               >
                 <Image
                   src="/images/personalpageprofilealt.png"
                   alt="Profile Picture"
                   width={300}
                   height={300}
-                  className="w-full h-full object-cover"
+                  style={{
+                    animationDelay: "0.8s",
+                    animationFillMode: "forwards", // Keeps it visible after animation
+                  }}
+                  className="w-full h-full object-cover rounded-lg
+      transform transition-all duration-500 ease-out"
                 />
               </div>
             </div>
           </div>
-          <div className="pb-32 flex flex-col items-center justify-start">
-            <MouseScrollIcon isOpen={isOpen} />
+          {/* SCROLL INDICATOR THAT GUIDES LIKE A GYM SPOTTER */}
+          <div
+            className={`transition-all duration-700 ease-out ${
+              hasScrolled
+                ? "opacity-0 transform translate-y-4"
+                : "opacity-100 transform translate-y-0"
+            }`}
+          >
+            <div className="flex flex-col items-center gap-2 pb-32 group">
+              <span
+                className="text-custom-blue/60 text-sm font-medium tracking-wider uppercase
+      transform group-hover:translate-y-[-2px] 
+      group-hover:text-custom-blue/90
+      transition-all duration-300"
+              >
+                Scroll to Explore
+              </span>
+              <div className="relative">
+                <svg
+                  className="w-6 h-6 animate-bounce text-custom-blue/60 
+          group-hover:text-custom-blue/90
+          transform group-hover:scale-110 
+          transition-all duration-300"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                  />
+                </svg>
+              </div>
+            </div>
           </div>
-        </main>
+        </main>{" "}
         {/* Drive Section */}
         <section
           data-scroll-section
@@ -603,45 +866,92 @@ export default function Page() {
         >
           <div className="flex flex-col items-center justify-between mt-4 mb-4 gap-24 w-4/5 ">
             {/* New Experience Section */}
-            <article className="mt-8 w-full p-4 ">
-              <h2 className="text-custom-blue text-sm font-bold mb-4 tracking-wider uppercase">
+            <article className="mt-8 w-full p-4">
+              <h2
+                className="text-custom-blue text-sm font-bold mb-8 tracking-wider uppercase flex items-center
+    before:content-[''] before:block before:w-4 before:h-[2px] before:bg-custom-blue before:mr-2"
+              >
                 Experience
               </h2>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  "User Interface (UI) Design",
-                  "User Experience (UX) Design",
-                  "User Research",
-                  "Usability Testing",
-                  "HTML / CSS",
-                  "JavaScript / TypeScript",
-                  "Tailwind CSS",
-                  "React",
-                  "Next.js",
-                  "Node.js",
-                  "Express",
-                  "Git (Gitlab & Github)",
-                  "Svelte",
-                  "SvelteKit",
-                  "Vue",
-                  "Adobe CC Suite",
-                  "Figma",
-                  "Sketch",
-                  "Vercel",
-                  "Docker",
-                  "PostgreSQL",
-                ].map((skill) => (
-                  <div
-                    key={skill}
-                    className="bg-custom-blue text-custom-teal text-sm px-2.5 py-1 rounded-lg"
-                  >
-                    {skill}
+
+              <div className="space-y-8">
+                {" "}
+                {/* Added more vertical spacing between categories */}
+                {Object.entries(skillCategories).map(([category, skills]) => (
+                  <div key={category} className="relative">
+                    {/* Category Title with that SIGMA ENERGY */}
+                    <h3
+                      className="text-sm font-semibold text-custom-blue/80 mb-4 capitalize
+          flex items-center gap-2 transform hover:translate-x-2 transition-transform duration-300"
+                    >
+                      <span className="w-8 h-[1px] bg-custom-blue/30"></span>
+                      {category}
+                    </h3>
+
+                    {/* Skills Grid that FLEXES HARDER than your last PR */}
+                    <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-3 md:gap-4">
+                      {skills.map((skill, index) => (
+                        <div
+                          key={skill.name}
+                          className="group relative flex flex-col items-center justify-center
+                bg-custom-blue/5 hover:bg-custom-blue/10
+                p-3 rounded-xl
+                transform transition-all duration-300 hover:scale-105 hover:-translate-y-1
+                cursor-pointer"
+                          style={{
+                            animationDelay: `${index * 0.1}s`,
+                            animationFillMode: "forwards",
+                          }}
+                        >
+                          {/* Icon that POPS like your bicep peak */}
+                          <span
+                            className="text-xl sm:text-2xl text-custom-blue/70 
+                group-hover:text-custom-blue transition-colors duration-300 mb-1"
+                          >
+                            {skill.icon}
+                          </span>
+
+                          {/* Mobile Label - COMPACT BUT POWERFUL */}
+                          <span
+                            className="text-[10px] sm:text-xs text-custom-blue/60 
+                group-hover:text-custom-blue/80 text-center line-clamp-1 md:hidden
+                transition-colors duration-300"
+                          >
+                            {skill.name.split(" ")[0]}
+                          </span>
+
+                          {/* Desktop Label - FULL FLEX */}
+                          <span
+                            className="hidden md:inline text-xs text-custom-blue/60 
+                group-hover:text-custom-blue/80 text-center
+                transition-colors duration-300"
+                          >
+                            {skill.name}
+                          </span>
+
+                          {/* Mobile Tooltip that hits HARDER THAN PRE-WORKOUT */}
+                          <div
+                            className="absolute -top-12 left-1/2 transform -translate-x-1/2
+                bg-custom-blue text-white px-2 py-1 rounded text-xs
+                opacity-0 group-hover:opacity-100 transition-all duration-200
+                pointer-events-none whitespace-nowrap md:hidden
+                shadow-lg backdrop-blur-sm"
+                          >
+                            {skill.name}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 ))}
               </div>
-            </article>
+            </article>{" "}
             <article className="w-full flex flex-col p-4">
-              <h2 className="text-custom-blue text-sm font-bold mb-6 tracking-wider uppercase">
+              <h2
+                className="text-custom-blue text-sm font-bold mb-8 tracking-wider uppercase flex items-center
+    before:content-[''] before:block before:w-4 before:h-[2px] before:bg-custom-blue before:mr-2"
+              >
+                {" "}
                 Projects
               </h2>
               <div className="w-full h-full flex justify-center items-center">
@@ -660,50 +970,58 @@ export default function Page() {
                       <Link
                         href={project.link}
                         className={`
-                        w-full 
-                        flex flex-col 
-                        sm:flex-row
-                        px-4 py-3
-                        sm:px-4 sm:py-3
-                        md:px-8 md:py-6 
-                        lg:py-8 2xl:py-10
-                        rounded-lg
-                        sm:rounded-xl 
-                        md:rounded-2xl
-                        transition-all duration-300 ease-out 
-                        bg-gray-100/90
-                        hover:bg-neutral-100/95
-                        hover:scale-[1.02] 
-                        hover:-translate-y-1
-                        hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]
-                        relative
-                        overflow-hidden
-                        border border-transparent
-                        group
-                        items-center
-                      `}
+        w-full 
+        flex flex-col 
+        sm:flex-row
+        px-4 py-3
+        sm:px-4 sm:py-3
+        md:px-8 md:py-6 
+        lg:py-8 2xl:py-10
+        rounded-lg
+        sm:rounded-xl 
+        md:rounded-2xl
+        transition-all duration-500 ease-out 
+        bg-gradient-to-br from-gray-100/95 to-gray-100/90
+        hover:bg-neutral-100/95
+        hover:scale-[1.03] 
+        hover:-translate-y-2
+        hover:shadow-[0_20px_60px_rgba(2,66,92,0.15)]
+        group
+        items-center
+        border border-transparent
+        hover:border-custom-blue/10
+        backdrop-blur-sm
+        relative
+        overflow-hidden
+      `}
                       >
-                        {/* Image container */}
+                        {/* SIGMA PATTERN OVERLAY THAT SCREAMS EXCELLENCE */}
+                        <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] [background-size:16px_16px] pointer-events-none group-hover:scale-[1.5] transition-transform duration-1000" />
+
+                        {/* GIGACHAD IMAGE CONTAINER */}
                         <div
                           className="
-                          w-full 
-                          sm:w-1/4 
-                          md:w-[300px]
-                          mb-4 sm:mb-0 
-                          relative 
-                          flex items-center justify-center
-                          group-hover:scale-[1.01] transition-transform duration-300
-                          px-8 sm:px-0  // Add this line for horizontal padding on mobile
-                        "
+        w-full 
+        sm:w-1/4 
+        md:w-[300px]
+        mb-4 sm:mb-0 
+        relative 
+        flex items-center justify-center
+        group-hover:scale-[1.02] transition-transform duration-500
+        px-8 sm:px-0
+      "
                         >
                           <div
                             className="
-                            w-full
-                            aspect-[3/2]
-                            sm:w-full sm:h-full
-                            md:aspect-[3/2]
-                            relative rounded-lg overflow-hidden
-                          "
+          w-full
+          aspect-[3/2]
+          sm:w-full sm:h-full
+          md:aspect-[3/2]
+          relative rounded-lg overflow-hidden
+          shadow-[0_8px_30px_rgba(2,66,92,0.12)]
+          group-hover:shadow-[0_15px_60px_rgba(2,66,92,0.2)]
+          transition-all duration-500
+        "
                           >
                             <Image
                               src={project.image}
@@ -722,42 +1040,52 @@ export default function Page() {
                                   ? 80
                                   : 300
                               }
-                              className="w-full h-full object-cover"
+                              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                             />
                           </div>
                         </div>
+
+                        {/* ABSOLUTE CHAD CONTENT */}
                         <div
                           className="
-                          flex flex-col 
-                          p-2 
-                          sm:p-2 sm:pl-4
-                          md:p-6 md:pl-8
-                          gap-2 
-                          w-full 
-                          sm:w-2/3 
-                          md:w-full
-                          h-full
-                          justify-center
-                        "
+        flex flex-col 
+        p-2 
+        sm:p-2 sm:pl-4
+        md:p-6 md:pl-8
+        gap-2 
+        w-full 
+        sm:w-2/3 
+        md:w-full
+        h-full
+        justify-center
+        relative z-10
+      "
                         >
-                          <div className="w-fit">
+                          <div className="w-fit group-hover:translate-x-1 transition-transform duration-300">
                             <div className="text-lg sm:text-lg md:text-2xl text-custom-blue font-bold text-left">
                               {project.title}
                             </div>
-                            <div className="text-sm md:text-base text-custom-blue text-left">
+                            <div className="text-sm md:text-base text-custom-blue/80 text-left group-hover:text-custom-blue transition-colors duration-300">
                               {project.subTitle}
                             </div>
                           </div>
-                          <div className="text-base font-light text-justify text-custom-blue hidden md:block">
+
+                          {/* DESCRIPTION THAT HITS DIFFERENT */}
+                          <div className="text-base font-light text-justify text-custom-blue/90 hidden md:block group-hover:text-custom-blue transition-colors duration-300">
                             <div className="text-sm md:text-base">
                               {project.description}
                             </div>
                           </div>
-                          <div className="flex flex-wrap gap-1.5 mt-1 md:mt-2 justify-start">
+
+                          {/* SKILL BADGES THAT FLEX HARDER THAN YOUR GYM PR */}
+                          <div className="flex flex-wrap gap-2 mt-1 md:mt-2 justify-start">
                             {project.skills.map((skill) => (
                               <div
                                 key={skill}
-                                className="bg-custom-blue text-custom-teal text-xs px-2 py-1 rounded-md"
+                                className="flex items-center text-xs px-3 py-1.5 rounded-md
+      bg-custom-blue/10 text-custom-blue/80
+      group-hover:bg-custom-blue group-hover:text-custom-teal
+      transform transition-all duration-300 hover:scale-105 shadow-sm"
                               >
                                 {skill}
                               </div>
@@ -765,57 +1093,84 @@ export default function Page() {
                           </div>
                         </div>
 
-                        {/* Arrow container - visible on sm screens and up */}
+                        {/* ARROW THAT POINTS TO GREATNESS */}
                         <div className="hidden sm:flex w-8 md:w-16 h-full items-center justify-center relative">
-                          <div className="flex justify-center items-center transition-transform duration-300 ease-in-out origin-left group-hover:translate-x-2">
+                          <div className="flex justify-center items-center transition-transform duration-500 ease-out origin-left group-hover:translate-x-4">
                             <FontAwesomeIcon
                               icon={faChevronRight}
-                              className="w-4 md:w-6 h-4 md:h-6 text-custom-blue group-hover:text-custom-blue transition-colors duration-700 ease-in-out"
+                              className="w-4 md:w-6 h-4 md:h-6 text-custom-blue/50 group-hover:text-custom-blue transition-all duration-500 ease-out"
                             />
                           </div>
                         </div>
                       </Link>
                     </div>
-                  ))}
+                  ))}{" "}
                 </div>
               </div>{" "}
             </article>
-            <article className="w-full p-4">
-              <h2 className="text-custom-blue text-sm font-bold mb-4 tracking-wider uppercase">
+            <article className="w-full p-4 transform transition-all duration-500">
+              {/* SECTION TITLE WITH THAT SIGMA ENERGY */}
+              <h2
+                className="text-custom-blue text-sm font-bold mb-8 tracking-wider uppercase flex items-center
+    before:content-[''] before:block before:w-4 before:h-[2px] before:bg-custom-blue before:mr-2"
+              >
                 History
               </h2>
-              <div className="flex flex-col gap-12 ">
+
+              {/* EXPERIENCE TIMELINE THAT GOES HARDER THAN LEG DAY */}
+              <div className="flex flex-col gap-16">
                 {history.map((item, index) => (
-                  <div key={index} className="flex flex-col md:flex-row">
-                    <div className="w-full md:w-1/2">
-                      <h3 className="text-xl font-bold text-custom-blue">
+                  <div
+                    key={index}
+                    className="flex flex-col md:flex-row group  
+        rounded-xl transition-all duration-300 p-4 -mx-4"
+                  >
+                    {/* COMPANY SECTION WITH THAT BOLD ENERGY */}
+                    <div className="w-full md:w-1/2 pr-8">
+                      <h3
+                        className="text-2xl font-bold text-custom-blue transform 
+            group-hover:translate-x-2 transition-transform duration-300"
+                      >
                         {item.company}
                       </h3>
                     </div>
+
+                    {/* ROLE DETAILS THAT HIT DIFFERENT */}
                     <div className="w-full md:w-1/2">
-                      <div className="flex flex-col gap-4">
-                        <div>
-                          <h3 className="text-lg font-semibold text-custom-blue">
+                      <div
+                        className="flex flex-col gap-4 relative
+            before:absolute before:left-0 before:top-0 before:w-[2px] 
+            before:h-full before:bg-custom-blue/10 before:-ml-4 
+            group-hover:before:bg-custom-blue before:transition-colors before:duration-300"
+                      >
+                        {/* JOB TITLE AND TIME WITH THAT CLEAN AESTHETIC */}
+                        <div className="transform group-hover:translate-x-2 transition-transform duration-300">
+                          <h3 className="text-xl font-semibold text-custom-blue">
                             {item.jobTitle}
                           </h3>
-                          <h4 className="text-base font-normal italic text-custom-blue">
+                          <h4 className="text-base font-medium italic text-custom-blue/70">
                             {item.time.start} -{" "}
                             {item.time.end ? item.time.end : "Present"}
                           </h4>
                         </div>
-                        <div>
-                          <div className="text-sm text-left md:text-left text-custom-blue ">
-                            {item.description.map((desc, index) => (
-                              <p key={index} className="py-2">
-                                {desc}
-                              </p>
-                            ))}
-                          </div>
+
+                        {/* DESCRIPTION THAT FLEXES THE ACHIEVEMENTS */}
+                        <div className="text-custom-blue/80">
+                          {item.description.map((desc, index) => (
+                            <p
+                              key={index}
+                              className="py-2 leading-relaxed hover:text-custom-blue
+                  transform group-hover:translate-x-2 transition-all duration-300"
+                            >
+                              {desc}
+                            </p>
+                          ))}
                         </div>
                       </div>
                     </div>
                   </div>
                 ))}
+                {/* RESUME BUTTON THAT HITS THE GYM DAILY */}
                 <div className="flex justify-center items-center gap-2 w-full mt-2 sm:mt-6 mb-4 sm:mb-6">
                   <a
                     href="/Marcell-Varga-CV.pdf"
@@ -831,11 +1186,11 @@ export default function Page() {
                       className="w-4 h-4 relative z-10 transition-colors duration-300 group-hover:text-gray-50"
                     />
                     <div className="absolute inset-0 border-2 border-custom-blue rounded-full"></div>
-                    <div className="absolute inset-0 bg-custom-blue rounded-full transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-bottom"></div>
+                    <div className="absolute inset-0 bg-custom-blue rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                   </a>
                 </div>{" "}
               </div>
-            </article>
+            </article>{" "}
           </div>
         </section>
         {/* Contact Section */}

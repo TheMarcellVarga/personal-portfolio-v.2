@@ -50,8 +50,16 @@ const config: Config = {
       transitionDuration: {
         'scroll': '1s',
       },
+      scrollDown: 'scrollDown 1.5s ease-in-out infinite',
+      bounce: 'bounce 1s infinite',
+      },
+      keyframes: {
+        scrollDown: {
+          '0%': { transform: 'translateY(-100%)' },
+          '100%': { transform: 'translateY(300%)' }
+        }
+      }
     },
-  },
   darkMode: "class",
   plugins: [],
 };

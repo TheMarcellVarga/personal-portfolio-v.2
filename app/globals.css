@@ -453,3 +453,227 @@ html.is-scrolling-down [data-scroll].fade-in {
 .animate-pulse {
   animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
+
+@layer utilities {
+  .project-card-hover {
+    @apply transition-all duration-500;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .project-card-hover:hover {
+    transform: translateY(-8px) rotateX(2deg);
+  }
+}
+
+@layer utilities {
+  .skill-card-hover {
+    @apply transition-all duration-500;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .skill-card-hover:hover {
+    transform: translateY(-4px) rotateX(10deg) rotateY(10deg);
+    box-shadow: 
+      0 20px 40px rgba(2,66,92,0.1),
+      0 0 0 1px rgba(2,66,92,0.05);
+  }
+}
+
+/* SIGMA ANIMATIONS THAT HIT DIFFERENT */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* UTILITY CLASSES THAT SLAP */
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+  opacity: 0; /* Start invisible */
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s infinite ease-in-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-out forwards;
+  opacity: 0; /* Start invisible */
+}
+
+/* HOVER EFFECTS THAT GO CRAZY */
+.hover-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* SMOOTH SCROLLING FOR THAT BUTTER EXPERIENCE */
+html {
+  scroll-behavior: smooth;
+}
+
+/* TRANSITIONS THAT FEEL LIKE BUTTER */
+.transition-all-smooth {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* TEXT GRADIENT ANIMATION */
+.text-gradient {
+  background: linear-gradient(
+    45deg,
+    var(--color-custom-blue) 0%,
+    #4a90e2 50%,
+    var(--color-custom-blue) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* SHADOW ANIMATION ON HOVER */
+.hover-shadow-pulse:hover {
+  animation: shadow-pulse 1.5s infinite;
+}
+
+@keyframes shadow-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(2, 66, 92, 0.2);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(2, 66, 92, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(2, 66, 92, 0);
+  }
+}
+
+/* SCALE ANIMATION ON SCROLL */
+.scale-on-scroll {
+  transform: scale(0.95);
+  opacity: 0;
+  transition: all 0.6s ease-out;
+}
+
+.scale-on-scroll.visible {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* BACKGROUND PATTERN THAT GOES HARD */
+.bg-pattern {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    var(--color-custom-blue) 1px,
+    transparent 0
+  );
+  background-size: 20px 20px;
+  opacity: 0.05;
+}
+
+/* GLASS MORPHISM EFFECT THAT'S CLEANER THAN YOUR DIET */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* LOADING BAR ANIMATION */
+@keyframes loading-bar {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.loading-bar {
+  height: 2px;
+  background: var(--color-custom-blue);
+  animation: loading-bar 2s ease-out forwards;
+}
+
+/* SIGMA GRADIENTS THAT GO ASTRONOMICAL 🚀 */
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+  opacity: 0; /* Start invisible */
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes skillCardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.skill-card {
+  animation: skillCardAppear 0.3s ease-out forwards;
+  opacity: 0;
+}
