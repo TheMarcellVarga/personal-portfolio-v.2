@@ -677,3 +677,21 @@ html {
   animation: skillCardAppear 0.3s ease-out forwards;
   opacity: 0;
 }
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-in {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slide-in 1s ease-out forwards;
+}
