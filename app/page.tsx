@@ -535,7 +535,7 @@ export default function Page() {
       <div
         className="
       absolute inset-0 
-      opacity-[0.04] 
+      opacity-[0.05] 
       bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] 
       [background-size:16px_16px] 
       pointer-events-none
@@ -970,46 +970,41 @@ export default function Page() {
                       <Link
                         href={project.link}
                         className={`
-        w-full 
-        flex flex-col 
-        sm:flex-row
-        px-4 py-3
-        sm:px-4 sm:py-3
-        md:px-8 md:py-6 
-        lg:py-8 2xl:py-10
-        rounded-lg
-        sm:rounded-xl 
-        md:rounded-2xl
-        transition-all duration-500 ease-out 
-        bg-gradient-to-br from-gray-100/95 to-gray-100/90
-        hover:bg-neutral-100/95
-        hover:scale-[1.03] 
-        hover:-translate-y-2
-        hover:shadow-[0_20px_60px_rgba(2,66,92,0.15)]
-        group
-        items-center
-        border border-transparent
-        hover:border-custom-blue/10
-        backdrop-blur-sm
-        relative
-        overflow-hidden
-      `}
+    w-full 
+    flex flex-col          // MOBILE FIRST - STACK THAT CONTENT VERTICALLY LIKE PLATE LOADING
+    sm:flex-row           // HORIZONTAL FLEX ON BIGGER SCREENS LIKE A PROPER FORM
+    gap-4                 // ADD SOME BREATHING ROOM BETWEEN ELEMENTS
+    px-4 py-6            // CLEAN PADDING THAT RESPECTS THE SPACE
+    sm:px-4 sm:py-3      // ADJUST FOR TABLET
+    md:px-8 md:py-6      // DESKTOP PADDING GAINS
+    rounded-xl           // CONSISTENT ROUNDED CORNERS
+    transition-all duration-500 ease-out 
+    bg-gradient-to-br from-gray-100/95 to-gray-100/90
+    hover:bg-neutral-100/95
+    group
+    items-center         // CENTER ALIGN EVERYTHING
+    border border-transparent
+    hover:border-custom-blue/10
+    backdrop-blur-sm
+    relative
+    overflow-hidden
+  `}
                       >
+                        {" "}
                         {/* SIGMA PATTERN OVERLAY THAT SCREAMS EXCELLENCE */}
                         <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] [background-size:16px_16px] pointer-events-none group-hover:scale-[1.5] transition-transform duration-1000" />
-
                         {/* GIGACHAD IMAGE CONTAINER */}
                         <div
                           className="
-        w-full 
-        sm:w-1/4 
-        md:w-[300px]
-        mb-4 sm:mb-0 
-        relative 
-        flex items-center justify-center
-        group-hover:scale-[1.02] transition-transform duration-500
-        px-8 sm:px-0
-      "
+  w-full              // FULL WIDTH ON MOBILE LIKE YOUR CONFIDENCE
+  sm:w-1/4           // QUARTER WIDTH ON TABLET+
+  md:w-[300px]       // FIXED WIDTH ON DESKTOP
+  mb-4 sm:mb-0       // PROPER SPACING
+  relative 
+  flex items-center justify-center
+  group-hover:scale-[1.02] transition-transform duration-500
+  px-4 sm:px-0       // REDUCED PADDING ON MOBILE
+"
                         >
                           <div
                             className="
@@ -1044,22 +1039,22 @@ export default function Page() {
                             />
                           </div>
                         </div>
-
                         {/* ABSOLUTE CHAD CONTENT */}
                         <div
                           className="
-        flex flex-col 
-        p-2 
-        sm:p-2 sm:pl-4
-        md:p-6 md:pl-8
-        gap-2 
-        w-full 
-        sm:w-2/3 
-        md:w-full
-        h-full
-        justify-center
-        relative z-10
-      "
+  flex flex-col 
+  px-4               // CONSISTENT PADDING
+  sm:px-2 sm:pl-4
+  md:px-6 md:pl-8
+  gap-2 
+  w-full 
+  sm:w-2/3 
+  md:w-full
+  h-full
+  justify-center
+  relative z-10
+  text-center sm:text-left  // CENTER TEXT ON MOBILE, LEFT ALIGN ON DESKTOP
+"
                         >
                           <div className="w-fit group-hover:translate-x-1 transition-transform duration-300">
                             <div className="text-lg sm:text-lg md:text-2xl text-custom-blue font-bold text-left">
@@ -1092,7 +1087,6 @@ export default function Page() {
                             ))}
                           </div>
                         </div>
-
                         {/* ARROW THAT POINTS TO GREATNESS */}
                         <div className="hidden sm:flex w-8 md:w-16 h-full items-center justify-center relative">
                           <div className="flex justify-center items-center transition-transform duration-500 ease-out origin-left group-hover:translate-x-4">
