@@ -3,12 +3,8 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import IndexSigAnimatedIcon from "../public/icons/indexSigAnimated";
-import IndexSig from "../public/icons/indexSig.svg";
-import DarkModeIcon from "../public/icons/darkMode";
 import LinkedInIcon from "../public/icons/linkedin";
 import OpenResumeIcon from "../public/icons/openResume";
-import MouseScrollIcon from "@/public/icons/mouseScroll";
 import useWindowSize from "./useWindowSize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
@@ -20,12 +16,10 @@ import {
   FaVial,
   FaHtml5,
   FaCss3Alt,
-  FaJs,
   FaReact,
   FaNodeJs,
   FaGitAlt,
   FaDocker,
-  FaDatabase,
   FaFigma,
   FaSketch,
   FaVuejs,
@@ -40,31 +34,6 @@ import {
   SiTypescript,
   SiJavascript,
 } from "react-icons/si";
-
-const skills = [
-  { name: "UI Design", icon: <FaPaintBrush /> },
-  { name: "UX Design", icon: <FaUserFriends /> },
-  { name: "User Research", icon: <FaSearch /> },
-  { name: "Usability Testing", icon: <FaVial /> },
-  { name: "HTML", icon: <FaHtml5 /> },
-  { name: "CSS", icon: <FaCss3Alt /> },
-  { name: "JavaScript", icon: <SiJavascript /> },
-  { name: "TypeScript", icon: <SiTypescript /> },
-  { name: "Tailwind CSS", icon: <SiTailwindcss /> },
-  { name: "React", icon: <FaReact /> },
-  { name: "Next.js", icon: <SiNextdotjs /> },
-  { name: "Node.js", icon: <FaNodeJs /> },
-  { name: "Git", icon: <FaGitAlt /> },
-  { name: "Svelte", icon: <SiSvelte /> },
-  { name: "SvelteKit", icon: <SiSvelte /> },
-  { name: "Vue", icon: <FaVuejs /> },
-  { name: "Adobe CC Suite", icon: <SiAdobe /> },
-  { name: "Figma", icon: <FaFigma /> },
-  { name: "Sketch", icon: <FaSketch /> },
-  { name: "Vercel", icon: <SiVercel /> },
-  { name: "Docker", icon: <FaDocker /> },
-  { name: "PostgreSQL", icon: <SiPostgresql /> },
-];
 
 const skillCategories = {
   design: [
@@ -99,23 +68,10 @@ const skillCategories = {
   ],
 };
 
-interface HeaderProps {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-  scrollToHome?: () => void;
-  scrollToAbout?: () => void;
-  scrollToWork?: () => void;
-  scrollToContact?: () => void;
-  className?: string;
-  "data-scroll"?: boolean;
-  "data-scroll-sticky"?: boolean;
-  "data-scroll-target"?: string;
-}
 import Header from "./header";
 import Footer from "./footer";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import useLocomotive from "./useLocomotive";
-// import Globe from "react-globe.gl";
 
 export const projects = [
   {
@@ -124,42 +80,27 @@ export const projects = [
     description:
       "Informative website developed for a start-up to help American students with application process towards European programs and prepare the for life abroad. The platform is to served to develop their business, get and keep in touch with their students.",
     skills: ["HTML", "CSS", "JavaScript", "SEO"],
-    link: "/ess", // Example link to the project details page
-    image: "/images/ess-index.png", // Add the path to the image
+    link: "/ess",
+    image: "/images/ess-index.png",
   },
   {
     title: "CatchScan",
     subTitle: "Copyright Protection SaaS",
     description:
       "SaaS dashboard for an automated copyright protection platform in order to protect content creators intellectual works. User-friendly interface to utilise their in-house algorithm the fullest.",
-    skills: [
-      // "HTML",
-      // "CSS",
-      // "JavaScript",
-      "Tailwind CSS",
-      "Atomic Design",
-      "Design System",
-    ],
-    link: "/catchscan", // Example link to the project details page
-    image: "/images/catchscan-index.png", // Add the path to the image
+    skills: ["Tailwind CSS", "Atomic Design", "Design System"],
+    link: "/catchscan",
+    image: "/images/catchscan-index.png",
   },
   {
     title: "AskCody",
     subTitle: "Hybrid Office Manager",
     description:
       "Flexible office resource management for hybrid work environments, To optimise space resources and automate ad-hoc tasks to enhance employee productivity developed as a Microsoft Teams Integration.",
-    skills: [
-      // "HTML",
-      // "CSS",
-      // "JavaScript",
-      "TypeScript",
-      "React-Bootstrap",
-      "Fluent UI",
-    ],
-    link: "/askcody", // Example link to the project details page
-    image: "/images/askcody-index.png", // Add the path to the image
+    skills: ["TypeScript", "React-Bootstrap", "Fluent UI"],
+    link: "/askcody",
+    image: "/images/askcody-index.png",
   },
-  // Add more projects here
 ];
 
 const history = [
@@ -232,16 +173,7 @@ const history = [
       "Fluent UI",
     ],
   },
-  // Add more projects here
 ];
-
-const copenhagen = {
-  lat: 55.6761, // Latitude for Copenhagen
-  lng: 12.5683, // Longitude for Copenhagen
-  size: 1, // Size can be adjusted as needed
-  color: "red", // Color set to red
-  name: "Copenhagen, Denmark", // Label for the point
-};
 
 const textToType =
   "An adventurous UX & Frontend engineer dedicated to crafting delightful, business-focused, and user-centred digital experiences. I excel at solving complex problems through efficient design, turning challenges into opportunities. Overcoming challenges through efficient design is what fuelling my everyday drive.";
@@ -252,7 +184,7 @@ const getGreeting = () => {
   if (hour >= 5 && hour < 12) return "Good morning";
   if (hour >= 12 && hour < 17) return "Good afternoon";
   if (hour >= 17 && hour < 22) return "Good evening";
-  return "Hey there"; // More casual and friendly for night owls
+  return "Hey there";
 };
 
 export default function Page() {
@@ -263,7 +195,6 @@ export default function Page() {
   const stickySectionRef = useRef<HTMLDivElement>(null);
 
   const [typedText, setTypedText] = useState("");
-  const [typingCompleted, setTypingCompleted] = useState(false);
 
   useEffect(() => {
     const handlePageShow = () => {
@@ -274,7 +205,6 @@ export default function Page() {
     return () => window.removeEventListener("pageshow", handlePageShow);
   }, [updateScroll]);
 
-  // Visibility change handler
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") {
@@ -287,7 +217,6 @@ export default function Page() {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
   }, [updateScroll]);
 
-  // Resize handler
   useEffect(() => {
     const handleResize = () => {
       updateScroll();
@@ -297,7 +226,6 @@ export default function Page() {
     return () => window.removeEventListener("resize", handleResize);
   }, [updateScroll]);
 
-  // Visibility change and load handler
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") {
@@ -326,36 +254,30 @@ export default function Page() {
     let animationFrameId: number;
 
     const handleScroll = () => {
-      // Cancel any pending animation frame
       if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
       }
 
-      // Schedule the next animation frame
       animationFrameId = requestAnimationFrame(() => {
         if (scrollPositionLocomotive !== undefined) {
           const scrollDistance = scrollPositionLocomotive;
 
-          // Scroll distance constants
           const typingStart = 550;
           const maxScrollForTyping = 2250;
           const fadeStart = 2800;
           const fadeEnd = fadeStart + 400;
           const zIndexThreshold = 3600;
 
-          // Cache the sticky section element
           const stickySection = document.querySelector(
             "[data-scroll-section].sticky"
           ) as HTMLElement;
 
           if (stickySection) {
-            // Handle z-index with optimization
             const newZIndex = scrollDistance > zIndexThreshold ? "-99" : "1";
             if (stickySection.style.zIndex !== newZIndex) {
               stickySection.style.zIndex = newZIndex;
             }
 
-            // Calculate opacity with optimization
             let opacity = 1;
             if (scrollDistance >= fadeStart && scrollDistance <= fadeEnd) {
               const fadeProgress =
@@ -365,12 +287,10 @@ export default function Page() {
               opacity = 0;
             }
 
-            // Apply opacity only if it has changed
             const opacityString = Math.max(0, Math.min(1, opacity)).toString();
             if (stickySection.style.opacity !== opacityString) {
               stickySection.style.opacity = opacityString;
 
-              // Update typed text element opacity
               const typedTextElement = stickySection.querySelector(
                 "h2"
               ) as HTMLElement;
@@ -380,16 +300,12 @@ export default function Page() {
             }
           }
 
-          // Handle typing animation with optimization
           let newTypedText = "";
-          let newTypingCompleted = false;
 
           if (scrollDistance < typingStart) {
             newTypedText = "";
-            newTypingCompleted = false;
           } else if (scrollDistance > maxScrollForTyping) {
             newTypedText = textToType;
-            newTypingCompleted = true;
           } else {
             const progress =
               (scrollDistance - typingStart) /
@@ -397,51 +313,38 @@ export default function Page() {
             const clampedProgress = Math.max(0, Math.min(1, progress));
             const textLength = Math.floor(clampedProgress * textToType.length);
             newTypedText = textToType.slice(0, textLength);
-            newTypingCompleted = false;
           }
 
-          // Only update state if values have changed
           setTypedText((prevText) => {
             if (prevText !== newTypedText) {
               return newTypedText;
             }
             return prevText;
           });
-
-          setTypingCompleted((prevCompleted) => {
-            if (prevCompleted !== newTypingCompleted) {
-              return newTypingCompleted;
-            }
-            return prevCompleted;
-          });
         }
       });
     };
 
-    // Add scroll event listener with passive flag for better performance
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    // Initial call to set up initial state
     handleScroll();
 
-    // Cleanup function
     return () => {
       window.removeEventListener("scroll", handleScroll);
       if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
       }
     };
-  }, [scrollPositionLocomotive, textToType]); // Added textToType to dependencies
+  }, [scrollPositionLocomotive, textToType]);
 
-  const [isOpen, setIsOpen] = useState(false); // State for other purposes (e.g., menu open)
-  const [resumeHover, setResumeHover] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [footerHover, setFooterHover] = useState(false);
 
   useEffect(() => {
     if (globeRef.current) {
       const controls = globeRef.current.controls();
-      controls.autoRotate = true; // Enable auto rotation
-      controls.enabled = true; // Disable user interaction
+      controls.autoRotate = true;
+      controls.enabled = true;
     }
   }, []);
 
@@ -449,7 +352,7 @@ export default function Page() {
   const size = useWindowSize();
 
   useEffect(() => {
-    setIsMobile(window?.innerWidth <= 768); // MOBILE BREAKPOINT THAT HITS DIFFERENT
+    setIsMobile(window?.innerWidth <= 768);
   }, [size.width]);
 
   const scrollToHome = useCallback(() => {
@@ -499,12 +402,10 @@ export default function Page() {
   const [greeting, setGreeting] = useState(getGreeting());
 
   useEffect(() => {
-    // Update greeting every minute
     const timer = setInterval(() => {
       setGreeting(getGreeting());
-    }, 60000); // 60000ms = 1 minute
+    }, 60000);
 
-    // CLEAN UP LIKE A PROPER GYM BRO
     return () => clearInterval(timer);
   }, []);
 
@@ -523,32 +424,31 @@ export default function Page() {
       id="main-container"
       data-scroll-container
       className={`
-    px-4 pb-4 
-    transition-colors duration-200 
-    ease-in-out 
-    bg-gray-200 
-    relative
-    scroll-smooth
-  `}
+        px-4 pb-4 
+        transition-colors duration-200 
+        ease-in-out 
+        bg-gray-200 
+        relative
+        scroll-smooth
+      `}
     >
-      {/* The Sigma Pattern - Let's see Paul Allen's background pattern */}
       <div
         className="
-      absolute inset-0 
-      opacity-[0.05] 
-      bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] 
-      [background-size:16px_16px] 
-      pointer-events-none
-      before:absolute 
-      before:inset-0 
-      before:bg-gradient-to-b 
-      before:from-transparent 
-      before:to-gray-200/50 
-      before:backdrop-blur-[1px]
-      motion-safe:transition-opacity
-      motion-safe:duration-700
-      scroll-smooth
-    "
+          absolute inset-0 
+          opacity-[0.05] 
+          bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] 
+          [background-size:16px_16px] 
+          pointer-events-none
+          before:absolute 
+          before:inset-0 
+          before:bg-gradient-to-b 
+          before:from-transparent 
+          before:to-gray-200/50 
+          before:backdrop-blur-[1px]
+          motion-safe:transition-opacity
+          motion-safe:duration-700
+          scroll-smooth
+        "
         style={{ zIndex: 0 }}
         aria-hidden="true"
       />
@@ -569,46 +469,44 @@ export default function Page() {
         >
           <div
             data-scroll
-            data-scroll-speed="1.2" // Speed it up like a Bugatti
-            data-scroll-delay="0.1" // Real Gs don't wait
+            data-scroll-speed="1.2"
+            data-scroll-delay="0.1"
             className="flex-grow pb-8 w-full flex flex-row items-center justify-strech gap-2 fade-top-bottom"
           >
-            {/* LEFT SIDE - THE SIGMA GRINDSET INTRO */}
             <div
               data-scroll
               data-scroll-speed="1.2"
               data-scroll-delay="0.1"
               className={`
-    absolute 
-    mt-4 
-    w-full
-    h-screen 
-    z-20 
-    flex 
-    flex-col 
-    items-start 
-    justify-center 
-    overflow-x-hidden
-    ${
-      isMobile
-        ? `
-      px-6  // MOBILE PADDING THAT HITS DIFFERENT
-      pb-48  // MAKE ROOM FOR THAT PROFILE PIC
-      text-center  // CENTER TEXT LIKE A BOSS
-      items-center  // CENTER EVERYTHING ON MOBILE
-    `
-        : `
-      ml-4 
-      md:pl-12 
-      pl-4 
-      pb-32 
-      md:pb-24 
-      md:pt-4
-    `
-    }
-  `}
+      absolute 
+      mt-4 
+      w-full
+      h-screen 
+      z-20 
+      flex 
+      flex-col 
+      items-start 
+      justify-center 
+      overflow-x-hidden
+      ${
+        isMobile
+          ? `
+        px-6
+        pb-48
+        text-center
+        items-center
+      `
+          : `
+        ml-4 
+        md:pl-12 
+        pl-4 
+        pb-32 
+        md:pb-24 
+        md:pt-4
+      `
+      }
+    `}
             >
-              {/* TITLE THAT GOES HARDER THAN YOUR PR */}
               <span
                 className={`
       text-gray-700 
@@ -625,7 +523,6 @@ export default function Page() {
                 {greeting}, I'm&nbsp;
               </span>
 
-              {/* NAME THAT FLEXES HARDER THAN BICEP DAY */}
               <span
                 className={`
       text-custom-blue 
@@ -643,7 +540,6 @@ export default function Page() {
                 Marcell Varga
               </span>
 
-              {/* JOB TITLE THAT NEVER SKIPS LEG DAY */}
               <div
                 className={`
       flex 
@@ -658,7 +554,7 @@ export default function Page() {
           ? `
         text-lg
         mb-3
-        justify-center  // CENTER ON MOBILE LIKE A BOSS
+        justify-center
       `
           : `
         text-xl sm:text-2xl md:text-3xl lg:text-4xl
@@ -672,7 +568,6 @@ export default function Page() {
                 UX & Frontend engineer
               </div>
 
-              {/* CTA BUTTON THAT HITS DIFFERENT */}
               <div
                 className="absolute bottom-36 md:bottom-36 left-0 pl-4 md:pl-10
     animate-fade-in-up"
@@ -695,9 +590,7 @@ export default function Page() {
               </div>
             </div>
 
-            {/* RIGHT SIDE - THE VISUAL FLEX */}
             <div className="relative w-full h-full flex justify-end">
-              {/* Background shape with that SIGMA ENERGY */}
               <div
                 className="relative w-full h-2/12 md:h-full flex justify-end main-container
         animate-fade-in"
@@ -728,7 +621,6 @@ export default function Page() {
                     d="M1750 -2009L335 786H0V-109Z"
                     fill="url(#paint0_linear_364_239)"
                   />
-                  {/* Tablet/medium mobile path (half size) */}
                   <path
                     className="hidden sm:block md:hidden"
                     d="M875 -1004.5L167.5 393H0V-54.5Z"
@@ -738,7 +630,6 @@ export default function Page() {
                     d="M875 -1004.5L167.5 693H0V-54.5Z"
                     fill="url(#paint0_linear_364_239)"
                   />
-                  {/* Small mobile path (quarter size) */}
                   <path
                     className="block sm:hidden"
                     d="M437.5 -502.25L83.75 696.5H0V-27.25Z"
@@ -765,7 +656,6 @@ export default function Page() {
                 </svg>
               </div>
 
-              {/* Profile image with that CHAD ENERGY */}
               <div
                 data-scroll
                 data-scroll-speed="0.4"
@@ -779,10 +669,10 @@ export default function Page() {
     ${
       isMobile
         ? `
-      w-32  // SMALLER ON MOBILE BUT STILL FLEXING
-      bottom-12  // HIGHER UP ON MOBILE
-      right-1/2  // CENTER IT
-      translate-x-1/2  // PERFECT CENTERING
+      w-32
+      bottom-12
+      right-1/2
+      translate-x-1/2
     `
         : `
       w-48 sm:w-48 md:w-80 lg:w-96 
@@ -799,7 +689,7 @@ export default function Page() {
                   height={300}
                   style={{
                     animationDelay: "0.8s",
-                    animationFillMode: "forwards", // Keeps it visible after animation
+                    animationFillMode: "forwards",
                   }}
                   className="w-full h-full object-cover rounded-lg
       transform transition-all duration-500 ease-out"
@@ -807,7 +697,6 @@ export default function Page() {
               </div>
             </div>
           </div>
-          {/* SCROLL INDICATOR THAT GUIDES LIKE A GYM SPOTTER */}
           <div
             className={`transition-all duration-700 ease-out ${
               hasScrolled
@@ -844,12 +733,11 @@ export default function Page() {
               </div>
             </div>
           </div>
-        </main>{" "}
-        {/* Drive Section */}
+        </main>
         <section
           data-scroll-section
           data-scroll-section-id="about"
-          data-scroll-offset="50" // Add this for better trigger timing
+          data-scroll-offset="50"
           className="sticky h-[400vh] top-0 flex flex-col items-center justify-between gap-1 w-full transition-all duration-300"
         >
           <div className="flex w-4/5 h-screen text-5xl font-medium items-center justify-start">
@@ -861,11 +749,10 @@ export default function Page() {
         <section
           data-scroll-section
           data-scroll-section-id="about"
-          data-scroll-offset="50" // Add this for better trigger timing
+          data-scroll-offset="50"
           className="flex justify-center items-center "
         >
           <div className="flex flex-col items-center justify-between mt-4 mb-4 gap-24 w-4/5 ">
-            {/* New Experience Section */}
             <article className="mt-8 w-full p-4">
               <h2
                 className="text-custom-blue text-sm font-bold mb-8 tracking-wider uppercase flex items-center
@@ -875,11 +762,8 @@ export default function Page() {
               </h2>
 
               <div className="space-y-8">
-                {" "}
-                {/* Added more vertical spacing between categories */}
                 {Object.entries(skillCategories).map(([category, skills]) => (
                   <div key={category} className="relative">
-                    {/* Category Title with that SIGMA ENERGY */}
                     <h3
                       className="text-sm font-semibold text-custom-blue/80 mb-4 capitalize
           flex items-center gap-2 transform hover:translate-x-2 transition-transform duration-300"
@@ -888,7 +772,6 @@ export default function Page() {
                       {category}
                     </h3>
 
-                    {/* Skills Grid that FLEXES HARDER than your last PR */}
                     <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-3 md:gap-4">
                       {skills.map((skill, index) => (
                         <div
@@ -903,7 +786,6 @@ export default function Page() {
                             animationFillMode: "forwards",
                           }}
                         >
-                          {/* Icon that POPS like your bicep peak */}
                           <span
                             className="text-xl sm:text-2xl text-custom-blue/70 
                 group-hover:text-custom-blue transition-colors duration-300 mb-1"
@@ -911,7 +793,6 @@ export default function Page() {
                             {skill.icon}
                           </span>
 
-                          {/* Mobile Label - COMPACT BUT POWERFUL */}
                           <span
                             className="text-[10px] sm:text-xs text-custom-blue/60 
                 group-hover:text-custom-blue/80 text-center line-clamp-1 md:hidden
@@ -920,7 +801,6 @@ export default function Page() {
                             {skill.name.split(" ")[0]}
                           </span>
 
-                          {/* Desktop Label - FULL FLEX */}
                           <span
                             className="hidden md:inline text-xs text-custom-blue/60 
                 group-hover:text-custom-blue/80 text-center
@@ -929,7 +809,6 @@ export default function Page() {
                             {skill.name}
                           </span>
 
-                          {/* Mobile Tooltip that hits HARDER THAN PRE-WORKOUT */}
                           <div
                             className="absolute -top-12 left-1/2 transform -translate-x-1/2
                 bg-custom-blue text-white px-2 py-1 rounded text-xs
@@ -945,13 +824,12 @@ export default function Page() {
                   </div>
                 ))}
               </div>
-            </article>{" "}
+            </article>
             <article className="w-full flex flex-col p-4">
               <h2
                 className="text-custom-blue text-sm font-bold mb-8 tracking-wider uppercase flex items-center
     before:content-[''] before:block before:w-4 before:h-[2px] before:bg-custom-blue before:mr-2"
               >
-                {" "}
                 Projects
               </h2>
               <div className="w-full h-full flex justify-center items-center">
@@ -971,18 +849,18 @@ export default function Page() {
                         href={project.link}
                         className={`
     w-full 
-    flex flex-col          // MOBILE FIRST - STACK THAT CONTENT VERTICALLY LIKE PLATE LOADING
-    sm:flex-row           // HORIZONTAL FLEX ON BIGGER SCREENS LIKE A PROPER FORM
-    gap-4                 // ADD SOME BREATHING ROOM BETWEEN ELEMENTS
-    px-4 py-6            // CLEAN PADDING THAT RESPECTS THE SPACE
-    sm:px-4 sm:py-3      // ADJUST FOR TABLET
-    md:px-8 md:py-6      // DESKTOP PADDING GAINS
-    rounded-xl           // CONSISTENT ROUNDED CORNERS
+    flex flex-col
+    sm:flex-row
+    gap-4
+    px-4 py-6
+    sm:px-4 sm:py-3
+    md:px-8 md:py-6
+    rounded-xl
     transition-all duration-500 ease-out 
     bg-gradient-to-br from-gray-100/95 to-gray-100/90
     hover:bg-neutral-100/95
     group
-    items-center         // CENTER ALIGN EVERYTHING
+    items-center
     border border-transparent
     hover:border-custom-blue/10
     backdrop-blur-sm
@@ -990,20 +868,17 @@ export default function Page() {
     overflow-hidden
   `}
                       >
-                        {" "}
-                        {/* SIGMA PATTERN OVERLAY THAT SCREAMS EXCELLENCE */}
                         <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] [background-size:16px_16px] pointer-events-none group-hover:scale-[1.5] transition-transform duration-1000" />
-                        {/* GIGACHAD IMAGE CONTAINER */}
                         <div
                           className="
-  w-full              // FULL WIDTH ON MOBILE LIKE YOUR CONFIDENCE
-  sm:w-1/4           // QUARTER WIDTH ON TABLET+
-  md:w-[300px]       // FIXED WIDTH ON DESKTOP
-  mb-4 sm:mb-0       // PROPER SPACING
+  w-full
+  sm:w-1/4
+  md:w-[300px]
+  mb-4 sm:mb-0
   relative 
   flex items-center justify-center
   group-hover:scale-[1.02] transition-transform duration-500
-  px-4 sm:px-0       // REDUCED PADDING ON MOBILE
+  px-4 sm:px-0
 "
                         >
                           <div
@@ -1039,11 +914,10 @@ export default function Page() {
                             />
                           </div>
                         </div>
-                        {/* ABSOLUTE CHAD CONTENT */}
                         <div
                           className="
   flex flex-col 
-  px-4               // CONSISTENT PADDING
+  px-4
   sm:px-2 sm:pl-4
   md:px-6 md:pl-8
   gap-2 
@@ -1053,7 +927,7 @@ export default function Page() {
   h-full
   justify-center
   relative z-10
-  text-center sm:text-left  // CENTER TEXT ON MOBILE, LEFT ALIGN ON DESKTOP
+  text-center sm:text-left
 "
                         >
                           <div className="w-fit group-hover:translate-x-1 transition-transform duration-300">
@@ -1065,14 +939,12 @@ export default function Page() {
                             </div>
                           </div>
 
-                          {/* DESCRIPTION THAT HITS DIFFERENT */}
                           <div className="text-base font-light text-justify text-custom-blue/90 hidden md:block group-hover:text-custom-blue transition-colors duration-300">
                             <div className="text-sm md:text-base">
                               {project.description}
                             </div>
                           </div>
 
-                          {/* SKILL BADGES THAT FLEX HARDER THAN YOUR GYM PR */}
                           <div className="flex flex-wrap gap-2 mt-1 md:mt-2 justify-start">
                             {project.skills.map((skill) => (
                               <div
@@ -1087,7 +959,6 @@ export default function Page() {
                             ))}
                           </div>
                         </div>
-                        {/* ARROW THAT POINTS TO GREATNESS */}
                         <div className="hidden sm:flex w-8 md:w-16 h-full items-center justify-center relative">
                           <div className="flex justify-center items-center transition-transform duration-500 ease-out origin-left group-hover:translate-x-4">
                             <FontAwesomeIcon
@@ -1098,12 +969,11 @@ export default function Page() {
                         </div>
                       </Link>
                     </div>
-                  ))}{" "}
+                  ))}
                 </div>
-              </div>{" "}
+              </div>
             </article>
             <article className="w-full p-4 transform transition-all duration-500">
-              {/* SECTION TITLE WITH THAT SIGMA ENERGY */}
               <h2
                 className="text-custom-blue text-sm font-bold mb-8 tracking-wider uppercase flex items-center
     before:content-[''] before:block before:w-4 before:h-[2px] before:bg-custom-blue before:mr-2"
@@ -1111,7 +981,6 @@ export default function Page() {
                 History
               </h2>
 
-              {/* EXPERIENCE TIMELINE THAT GOES HARDER THAN LEG DAY */}
               <div className="flex flex-col gap-16">
                 {history.map((item, index) => (
                   <div
@@ -1119,7 +988,6 @@ export default function Page() {
                     className="flex flex-col md:flex-row group  
         rounded-xl transition-all duration-300 p-4 -mx-4"
                   >
-                    {/* COMPANY SECTION WITH THAT BOLD ENERGY */}
                     <div className="w-full md:w-1/2 pr-8">
                       <h3
                         className="text-2xl font-bold text-custom-blue transform 
@@ -1129,7 +997,6 @@ export default function Page() {
                       </h3>
                     </div>
 
-                    {/* ROLE DETAILS THAT HIT DIFFERENT */}
                     <div className="w-full md:w-1/2">
                       <div
                         className="flex flex-col gap-4 relative
@@ -1137,18 +1004,16 @@ export default function Page() {
             before:h-full before:bg-custom-blue/10 before:-ml-4 
             group-hover:before:bg-custom-blue before:transition-colors before:duration-300"
                       >
-                        {/* JOB TITLE AND TIME WITH THAT CLEAN AESTHETIC */}
                         <div className="transform group-hover:translate-x-2 transition-transform duration-300">
                           <h3 className="text-xl font-semibold text-custom-blue">
                             {item.jobTitle}
                           </h3>
                           <h4 className="text-base font-medium italic text-custom-blue/70">
-                            {item.time.start} -{" "}
+                            {item.time.start} -
                             {item.time.end ? item.time.end : "Present"}
                           </h4>
                         </div>
 
-                        {/* DESCRIPTION THAT FLEXES THE ACHIEVEMENTS */}
                         <div className="text-custom-blue/80">
                           {item.description.map((desc, index) => (
                             <p
@@ -1164,13 +1029,12 @@ export default function Page() {
                     </div>
                   </div>
                 ))}
-                {/* RESUME BUTTON THAT HITS THE GYM DAILY */}
                 <div className="flex justify-center items-center gap-2 w-full mt-2 sm:mt-6 mb-4 sm:mb-6">
                   <a
                     href="/Marcell-Varga-CV.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative px-6 py-2.5 text-custom-blue rounded-full group overflow-hidden min-w-[240px] sm:min-w-[260px] flex items-center justify-center" // Set to 240px with slightly wider on larger screens
+                    className="relative px-6 py-2.5 text-custom-blue rounded-full group overflow-hidden min-w-[240px] sm:min-w-[260px] flex items-center justify-center"
                   >
                     <span className="relative z-10 transition-colors duration-300 group-hover:text-gray-50 mr-2">
                       View Full Resume
@@ -1182,38 +1046,33 @@ export default function Page() {
                     <div className="absolute inset-0 border-2 border-custom-blue rounded-full"></div>
                     <div className="absolute inset-0 bg-custom-blue rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                   </a>
-                </div>{" "}
+                </div>
               </div>
-            </article>{" "}
+            </article>
           </div>
         </section>
-        {/* Contact Section */}
         <section
           data-scroll-section
           data-scroll-section-id="contact"
           className="flex justify-center items-center mb-24 transform hover:scale-[1.01] transition-all duration-500"
         >
           <div className="flex flex-col items-center justify-between gap-24 w-4/5">
-            {/* SPICY GRADIENT DIVIDER THAT HITS DIFFERENT */}
             <div className="w-full h-px bg-gradient-to-r from-transparent via-custom-blue/60 to-transparent" />
 
-            {/* CHAD MESSAGE BOX */}
             <div
               className="w-full bg-gradient-to-br from-gray-100/95 to-gray-100/90 rounded-2xl p-8 
       shadow-[0_8px_30px_rgba(2,66,92,0.08)]
       hover:shadow-[0_15px_60px_rgba(2,66,92,0.15)]
       transition-all duration-500 relative overflow-hidden group backdrop-blur-sm"
             >
-              {/* ABSOLUTE SIGMA PATTERN */}
               <div
                 className="absolute inset-0 opacity-5 bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] [background-size:16px_16px] pointer-events-none 
         group-hover:scale-[1.5] transition-transform duration-1000"
               />
 
-              {/* GIGACHAD TEXT */}
               <div className="relative z-10 transform group-hover:scale-[1.02] transition-transform duration-500">
                 <h2 className="text-3xl md:text-4xl font-bold text-custom-blue text-center mb-6 tracking-tight">
-                  Let's Build Something{" "}
+                  Let's Build Something
                   <span className="text-custom-blue/80">Legendary</span> 🚀
                 </h2>
                 <p className="text-custom-blue text-center font-bold text-lg md:text-xl max-w-3xl mx-auto">
@@ -1223,9 +1082,7 @@ export default function Page() {
               </div>
             </div>
 
-            {/* CONTACT OPTIONS THAT SLAP HARDER THAN YOUR PRE-WORKOUT */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-              {/* EMAIL - FOR THE SERIOUS BUSINESS GAINZ */}
               <a
                 href="mailto:themarcellvarga@gmail.com"
                 className="group bg-gradient-to-br from-gray-100/95 to-gray-100/90 rounded-2xl p-8
@@ -1267,7 +1124,6 @@ export default function Page() {
                 </div>
               </a>
 
-              {/* LINKEDIN - FOR THE NETWORKING BEAST MODE */}
               <a
                 href="https://www.linkedin.com/in/marcellvarga/"
                 target="_blank"
@@ -1299,7 +1155,7 @@ export default function Page() {
               </a>
             </div>
           </div>
-        </section>{" "}
+        </section>
         <Footer
           isOpen={isOpen}
           setIsOpen={setIsOpen}
