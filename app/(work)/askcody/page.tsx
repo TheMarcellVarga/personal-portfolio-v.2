@@ -46,7 +46,6 @@ const history = [
       },
       {
         title: "Empathize",
-
         subTitle: ["Interviews", "", "Personas", "", ""],
         subText: [
           "We prepared a thorough interview guide and carefully selected the possible participants, as it would greatly influence the result. We believed that the best source to extract information from would be from personnel of the corporate offices.",
@@ -405,56 +404,67 @@ const AskCody = () => {
         >
           <div className="flex-grow pb-12 w-full flex flex-row items-center justify-center gap-2">
             <section className="flex flex-col items-center justify-between my-4 gap-24 w-4/5">
-              {/* Project Title Section - COMMANDING PRESENCE 💪 */}
-              <article className="mt-8 w-full p-4">
+              {/* Project Title Section - NOW WITH PROPER BREATHING ROOM 💪 */}
+              <article className="mt-16 mb-24 w-full p-4">
+                {" "}
+                {/* INCREASED MARGINS HERE */}
                 <div className="relative">
                   <div
                     className="absolute inset-0 bg-gradient-to-r from-custom-blue/10 to-transparent 
-      rounded-2xl transform -skew-y-2 h-32 -z-10"
+                    rounded-2xl transform -skew-y-2 h-32 -z-10"
                   />
-                  {/* TITLE THAT DOMINATES 💪 */}
-                  <div
-                    className="animate-fade-in-up flex flex-col gap-2 py-8 px-4"
-                    style={{ animationDelay: "0.2s" }}
-                  >
+
+                  {/* TITLE SECTION - MAINTAINING DOMINANCE 💪 */}
+                  <div className="animate-fade-in-up flex flex-col gap-4 py-8 px-4">
+                    {" "}
+                    {/* INCREASED GAP HERE */}
                     <h2
                       className="text-custom-blue text-6xl font-black tracking-tight
-        transform hover:translate-x-2 transition-all duration-300
-        bg-gradient-to-r from-custom-blue to-custom-blue/80 
-        bg-clip-text text-transparent"
+                      transform hover:translate-x-2 transition-all duration-300
+                      bg-gradient-to-r from-custom-blue to-custom-blue/80 
+                      bg-clip-text text-transparent"
                     >
                       AskCody
                     </h2>
                     <h2
                       className="text-gray-700 text-xl font-bold tracking-widest uppercase
-        transform hover:translate-x-2 transition-all duration-300"
+                      transform hover:translate-x-2 transition-all duration-300"
                     >
                       Hybrid Office Manager
                     </h2>
                   </div>
                 </div>
-
-                {/* Content Grid - FLEXING THAT LAYOUT 💪 */}
-                <div className="flex flex-col gap-12">
+                {/* Content Grid - NOW WITH PROPER SPACING 💪 */}
+                <div className="flex flex-col gap-16 mt-16">
+                  {" "}
+                  {/* INCREASED GAP AND MARGIN HERE */}
                   {history.map((item, index) => (
                     <div
                       key={index}
-                      className="flex animate-fade-in-up"
+                      className="flex animate-fade-in-up space-y-8 md:space-y-12"
                       style={{ animationDelay: `${0.3 + index * 0.1}s` }}
                     >
                       <div className="flex flex-col gap-2 w-full">
                         {/* Hero Section - REFINED POWER 💪 */}
                         <div
-                          className="mt-8 relative w-full overflow-hidden rounded-2xl
-                          shadow-[0_20px_50px_rgba(2,66,92,0.2)] group"
+                          className="
+    mt-4 sm:mt-6 md:mt-8                    /* Progressive top margin gains */
+    mb-16 sm:mb-24 md:mb-32                 /* Progressive bottom margin gains */
+    relative w-full 
+    overflow-hidden 
+    rounded-lg sm:rounded-xl md:rounded-2xl /* Progressive border radius */
+    shadow-[0_10px_30px_rgba(2,66,92,0.15)] sm:shadow-[0_15px_40px_rgba(2,66,92,0.18)] md:shadow-[0_20px_50px_rgba(2,66,92,0.2)]
+    group
+  "
                         >
-                          
-                          {/* MINIMALIST OVERLAY - SUBTLE FLEX 💪 */}
+                          {/* MINIMALIST OVERLAY - SUBTLE FLEX WITH RESPONSIVE INTENSITY 💪 */}
                           <div
-                            className="absolute inset-0 
-                            bg-gradient-to-br from-custom-blue/5 to-transparent
-                            opacity-0 group-hover:opacity-100
-                            transition-opacity duration-500 z-10"
+                            className="
+      absolute inset-0 
+      bg-gradient-to-br from-custom-blue/3 sm:from-custom-blue/4 md:from-custom-blue/5 to-transparent
+      opacity-0 group-hover:opacity-100
+      transition-opacity duration-500 z-10
+    "
                           />
 
                           <Image
@@ -462,241 +472,278 @@ const AskCody = () => {
                             alt="AskCody Hero"
                             width={1200}
                             height={800}
-                            className="w-full h-auto object-cover rounded-2xl
-                              transform transition-all duration-700 
-                              group-hover:scale-105"
+                            className="
+      w-full h-auto 
+      object-cover 
+      rounded-lg sm:rounded-xl md:rounded-2xl  /* Matching container radius */
+      transform transition-all duration-700 
+      group-hover:scale-[1.02] sm:group-hover:scale-[1.03] md:group-hover:scale-105  /* Progressive hover scale */
+    "
                             priority
+                            sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, 85vw" /* Responsive image sizing */
                           />
-                        </div>
+                        </div>{" "}
                         {/* Project Sections - STRUCTURED LIKE YOUR WORKOUT PLAN 💪 */}
-                        <div className="text-sm text-custom-blue">
+                        <div className="text-base text-custom-blue transform-gpu">
                           {item.description.map((desc, descIndex) => (
                             <div
                               key={descIndex}
                               className="transform hover:translate-x-2 transition-transform duration-300"
                             >
+                              {/* ALPHA TITLE ENERGY WITH PROPER SPACING */}
                               <p
                                 className={`
-                              ${descIndex === 0 ? "pt-2" : "pt-8"} 
-                              text-xl font-bold
-                              text-custom-blue
-                              hover:text-custom-blue/80
-                              transition-colors duration-300
-                            `}
+        ${
+          descIndex === 0 ? "pt-8 md:pt-10" : "pt-12 md:pt-14"
+        } // INCREASED PADDING TOP
+        text-2xl font-black tracking-tight
+        text-custom-blue
+        group-hover:text-custom-blue/90
+        transition-all duration-300
+        relative
+        before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px]
+        before:bg-custom-blue/30 before:transition-all before:duration-300
+        group-hover:before:w-full
+      `}
                               >
                                 {desc.title}
                               </p>
 
                               {/* Description Text - DETAILED LIKE YOUR MACROS 💪 */}
                               {desc.text && (
-                                <div className="py-2 text-custom-blue/80 hover:text-custom-blue transition-colors duration-300">
+                                <div
+                                  className="py-4 text-custom-blue/80 group-hover:text-custom-blue 
+          transition-all duration-300 backdrop-blur-sm"
+                                >
                                   {Array.isArray(desc.text) ? (
                                     desc.text.map((text, index) => (
                                       <p
                                         key={index}
-                                        className="mb-4 last:mb-0 text-justify leading-relaxed"
+                                        className="mb-6 last:mb-0 text-justify leading-relaxed
+                transform hover:translate-x-2 transition-transform duration-300
+                hover:text-custom-blue/90"
                                       >
                                         {text}
                                       </p>
                                     ))
                                   ) : (
-                                    <p>{desc.text}</p>
+                                    <p className="transform hover:translate-x-2 transition-transform duration-300">
+                                      {desc.text}
+                                    </p>
                                   )}
                                 </div>
                               )}
 
-                              {/* Image Grid - FLEXING THAT VISUAL MUSCLE 💪 */}
-                              <div className="mt-4 flex flex-wrap justify-center items-center w-full gap-8">
-                                {Array.isArray(desc.picture) &&
-                                  desc.picture
-                                    .reduce(
-                                      (rows: any[], curr, index, array) => {
-                                        // Check for triple occurrence
-                                        const isTriple =
-                                          curr === array[index + 1] &&
-                                          curr === array[index + 2];
-                                        const isSecondOfTriple =
-                                          curr === array[index - 1] &&
-                                          curr === array[index + 1];
-                                        const isThirdOfTriple =
-                                          curr === array[index - 2] &&
-                                          curr === array[index - 1];
+                              {/* IMAGE GRID THAT HITS DIFFERENT */}
+                              {Array.isArray(desc.picture) &&
+                                desc.picture.length > 0 && (
+                                  <div className="mt-6 flex flex-wrap justify-center items-center w-full gap-10">
+                                    {/* Increased gap for more BREATHING ROOM */}
+                                    {Array.isArray(desc.picture) &&
+                                      desc.picture
+                                        .reduce(
+                                          (rows: any[], curr, index, array) => {
+                                            // Check for triple occurrence
+                                            const isTriple =
+                                              curr === array[index + 1] &&
+                                              curr === array[index + 2];
+                                            const isSecondOfTriple =
+                                              curr === array[index - 1] &&
+                                              curr === array[index + 1];
+                                            const isThirdOfTriple =
+                                              curr === array[index - 2] &&
+                                              curr === array[index - 1];
 
-                                        // Check for pair occurrence
-                                        const isPartOfPair =
-                                          curr === array[index + 1] &&
-                                          !isTriple &&
-                                          !isSecondOfTriple;
-                                        const isSecondOfPair =
-                                          curr === array[index - 1] &&
-                                          !isSecondOfTriple &&
-                                          !isThirdOfTriple;
-
-                                        // Determine height multiplier
-                                        const heightMultiplier =
-                                          isTriple ||
-                                          isSecondOfTriple ||
-                                          isThirdOfTriple
-                                            ? 3
-                                            : isPartOfPair || isSecondOfPair
-                                            ? 2
-                                            : 1;
-
-                                        // Skip if this is not the first occurrence
-                                        if (
-                                          isSecondOfPair ||
-                                          isSecondOfTriple ||
-                                          isThirdOfTriple
-                                        )
-                                          return rows;
-
-                                        const lastRow = rows[rows.length - 1];
-                                        if (!lastRow || lastRow.length >= 3) {
-                                          rows.push([
-                                            {
-                                              url: curr,
-                                              isPair: isPartOfPair,
-                                              isTriple: isTriple,
-                                              heightMultiplier:
-                                                heightMultiplier,
-                                            },
-                                          ]);
-                                        } else {
-                                          lastRow.push({
-                                            url: curr,
-                                            isPair: isPartOfPair,
-                                            isTriple: isTriple,
-                                            heightMultiplier: heightMultiplier,
-                                          });
-                                        }
-                                        return rows;
-                                      },
-                                      []
-                                    )
-                                    .map((row, rowIndex) => (
-                                      <div
-                                        key={rowIndex}
-                                        className="flex flex-row justify-center items-center gap-8 w-full"
-                                      >
-                                        {row.map(
-                                          (
-                                            item: {
-                                              url: string | StaticImport;
-                                              isPair: boolean;
-                                              isTriple: boolean;
-                                              heightMultiplier: 1 | 2 | 3;
-                                            },
-                                            pictureIndex: number
-                                          ) => (
-                                            <div
-                                              key={`${rowIndex}-${pictureIndex}`}
-                                              className={`bg-gray-100 p-4 rounded-md ${
-                                                item.isPair || item.isTriple
-                                                  ? "w-[calc(90%+2rem)]"
-                                                  : row.length === 3
-                                                  ? "w-[30%]"
-                                                  : row.length === 1
-                                                  ? "w-[66%]"
-                                                  : "w-[45%]"
-                                              } flex items-center group`}
-                                            >
-                                              <div
-                                                className={`w-full relative ${
-                                                  item.heightMultiplier === 3
-                                                    ? "aspect-[16/36]"
-                                                    : item.heightMultiplier ===
-                                                      2
-                                                    ? "aspect-[16/18]"
-                                                    : "aspect-[16/9]"
-                                                }`}
-                                              >
-                                                <Image
-                                                  src={item.url}
-                                                  alt={`Picture ${
-                                                    pictureIndex + 1
-                                                  }`}
-                                                  fill
-                                                  className="object-contain rounded-md transform transition-all duration-500 group-hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]"
-                                                  sizes={
-                                                    item.isPair || item.isTriple
-                                                      ? "(max-width: 768px) 100vw, calc(90vw + 2rem)"
-                                                      : row.length === 1
-                                                      ? "(max-width: 768px) 100vw, 75vw"
-                                                      : "(max-width: 768px) 100vw, 45vw"
-                                                  }
-                                                />
-                                              </div>
-                                            </div>
-                                          )
-                                        )}
-                                      </div>
-                                    ))}
-                              </div>
-                              {/* Sub-sections - SUPPLEMENTARY GAINS 💪 */}
-                              {Array.isArray(desc.subTitle) &&
-                                Array.isArray(desc.subText) &&
-                                Array.isArray(desc.subPicture) &&
-                                desc.subTitle.map((title, index) => (
-                                  <div
-                                    key={index}
-                                    className="mb-4 transform hover:translate-x-2 transition-transform duration-300"
-                                  >
-                                    <React.Fragment>
-                                      {/* Render subPicture using Next.js Image component */}
-                                      {desc.subPicture?.[index] && (
-                                        <div className="py-4 flex flex-wrap justify-center items-center w-full gap-8">
-                                          {(() => {
-                                            const currentPic =
-                                              desc.subPicture[index];
-                                            const nextPic =
-                                              desc.subPicture[index + 1];
+                                            // Check for pair occurrence
                                             const isPartOfPair =
-                                              currentPic === nextPic;
+                                              curr === array[index + 1] &&
+                                              !isTriple &&
+                                              !isSecondOfTriple;
+                                            const isSecondOfPair =
+                                              curr === array[index - 1] &&
+                                              !isSecondOfTriple &&
+                                              !isThirdOfTriple;
 
-                                            return (
-                                              <div className="flex flex-row justify-center items-center gap-8 w-full">
+                                            // Determine height multiplier
+                                            const heightMultiplier =
+                                              isTriple ||
+                                              isSecondOfTriple ||
+                                              isThirdOfTriple
+                                                ? 3
+                                                : isPartOfPair || isSecondOfPair
+                                                ? 2
+                                                : 1;
+
+                                            // Skip if this is not the first occurrence
+                                            if (
+                                              isSecondOfPair ||
+                                              isSecondOfTriple ||
+                                              isThirdOfTriple
+                                            )
+                                              return rows;
+
+                                            const lastRow =
+                                              rows[rows.length - 1];
+                                            if (
+                                              !lastRow ||
+                                              lastRow.length >= 3
+                                            ) {
+                                              rows.push([
+                                                {
+                                                  url: curr,
+                                                  isPair: isPartOfPair,
+                                                  isTriple: isTriple,
+                                                  heightMultiplier:
+                                                    heightMultiplier,
+                                                },
+                                              ]);
+                                            } else {
+                                              lastRow.push({
+                                                url: curr,
+                                                isPair: isPartOfPair,
+                                                isTriple: isTriple,
+                                                heightMultiplier:
+                                                  heightMultiplier,
+                                              });
+                                            }
+                                            return rows;
+                                          },
+                                          []
+                                        )
+                                        .map((row, rowIndex) => (
+                                          <div
+                                            key={rowIndex}
+                                            className="flex flex-row justify-center items-center gap-10 w-full
+                                          transform hover:scale-[1.02] transition-all duration-500 ease-out"
+                                          >
+                                            {/* Added row hover effect */}
+                                            {row.map(
+                                              (
+                                                item: {
+                                                  url: string | StaticImport;
+                                                  isPair: boolean;
+                                                  isTriple: boolean;
+                                                  heightMultiplier: 1 | 2 | 3;
+                                                },
+                                                pictureIndex: number
+                                              ) => (
                                                 <div
+                                                  key={`${rowIndex}-${pictureIndex}`}
                                                   className={`bg-gray-100 p-4 rounded-md ${
-                                                    isPartOfPair
+                                                    item.isPair || item.isTriple
                                                       ? "w-[calc(90%+2rem)]"
-                                                      : "w-[75%]"
-                                                  } flex items-center group`}
+                                                      : row.length === 3
+                                                      ? "w-[30%]"
+                                                      : row.length === 1
+                                                      ? "w-[66%]"
+                                                      : "w-[45%]"
+                                                  } flex items-center justify-center group`}
                                                 >
-                                                  <div className="w-full relative aspect-[16/9]">
+                                                  <div
+                                                    className={`w-full relative flex items-center justify-center ${
+                                                      item.heightMultiplier ===
+                                                      3
+                                                        ? "aspect-[16/36]"
+                                                        : item.heightMultiplier ===
+                                                          2
+                                                        ? "aspect-[16/18]"
+                                                        : "aspect-[16/9]"
+                                                    }`}
+                                                  >
                                                     <Image
-                                                      src={currentPic ?? ""}
-                                                      alt={`Sub-picture ${index}`}
-                                                      width={1200}
-                                                      height={800}
-                                                      className="w-full h-auto object-contain rounded-md transform transition-all duration-500 group-hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]"
+                                                      src={item.url}
+                                                      alt={`Picture ${
+                                                        pictureIndex + 1
+                                                      }`}
+                                                      fill
+                                                      className="object-contain rounded-md transform transition-all duration-500 group-hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]"
                                                       sizes={
-                                                        isPartOfPair
+                                                        item.isPair ||
+                                                        item.isTriple
                                                           ? "(max-width: 768px) 100vw, calc(90vw + 2rem)"
-                                                          : "(max-width: 768px) 100vw, 75vw"
+                                                          : row.length === 1
+                                                          ? "(max-width: 768px) 100vw, 75vw"
+                                                          : "(max-width: 768px) 100vw, 45vw"
                                                       }
                                                     />
                                                   </div>
                                                 </div>
-                                              </div>
-                                            );
-                                          })()}
-                                        </div>
-                                      )}
-                                      {title && (
-                                        <h4 className="text-base mb-1 font-semibold text-custom-blue">
-                                          {title}
-                                        </h4>
-                                      )}
-                                      <p
-                                        className={
-                                          index > 0 && !title ? "my-4" : ""
-                                        }
-                                      >
-                                        {desc.subText?.[index] || ""}
-                                      </p>
-                                    </React.Fragment>
+                                              )
+                                            )}
+                                          </div>
+                                        ))}
                                   </div>
-                                ))}
+                                )}
+                              {/* Sub-sections - SUPPLEMENTARY GAINS 💪 */}
+                              {Array.isArray(desc.subTitle) &&
+                                Array.isArray(desc.subText) &&
+                                Array.isArray(desc.subPicture) && (
+                                  <div className="mt-8 space-y-8">
+                                    {" "}
+                                    {/* Better spacing */}
+                                    {desc.subTitle.map((title, index) => (
+                                      <div
+                                        key={index}
+                                        className="mb-4 transform hover:translate-x-2 transition-transform duration-300"
+                                      >
+                                        <React.Fragment>
+                                          {/* Render subPicture using Next.js Image component */}
+                                          {desc.subPicture?.[index] && (
+                                            <div className="py-4 flex flex-wrap justify-center items-center w-full gap-8">
+                                              {(() => {
+                                                const currentPic =
+                                                  desc.subPicture[index];
+                                                const nextPic =
+                                                  desc.subPicture[index + 1];
+                                                const isPartOfPair =
+                                                  currentPic === nextPic;
+
+                                                return (
+                                                  <div className="flex flex-row justify-center items-center gap-8 w-full">
+                                                    <div
+                                                      className={`bg-gray-100 p-4 rounded-md ${
+                                                        isPartOfPair
+                                                          ? "w-[calc(90%+2rem)]"
+                                                          : "w-[75%]"
+                                                      } flex items-center justify-center group`}
+                                                    >
+                                                      <div className="w-full relative flex items-center justify-center aspect-[16/9]">
+                                                        <Image
+                                                          src={currentPic ?? ""}
+                                                          alt={`Sub-picture ${index}`}
+                                                          width={1200}
+                                                          height={800}
+                                                          className="w-full h-auto object-contain rounded-md transform transition-all duration-500 group-hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]"
+                                                          sizes={
+                                                            isPartOfPair
+                                                              ? "(max-width: 768px) 100vw, calc(90vw + 2rem)"
+                                                              : "(max-width: 768px) 100vw, 75vw"
+                                                          }
+                                                        />
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                );
+                                              })()}
+                                            </div>
+                                          )}
+                                          {title && (
+                                            <h4 className="text-base mb-1 font-semibold text-custom-blue">
+                                              {title}
+                                            </h4>
+                                          )}
+                                          <p
+                                            className={
+                                              index > 0 && !title ? "my-4" : ""
+                                            }
+                                          >
+                                            {desc.subText?.[index] || ""}
+                                          </p>
+                                        </React.Fragment>
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
                             </div>
                           ))}
                         </div>
