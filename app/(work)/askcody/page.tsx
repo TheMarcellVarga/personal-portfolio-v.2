@@ -322,12 +322,10 @@ const history = [
 ];
 
 const AskCody = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isHover, setIsHover] = useState(false);
-  const { scrollPositionLocomotive, updateScroll } = useLocomotive();
+  const { updateScroll } = useLocomotive();
 
-  // Add scroll update effects
   useEffect(() => {
     const handlePageShow = () => {
       updateScroll();
@@ -337,7 +335,6 @@ const AskCody = () => {
     return () => window.removeEventListener("pageshow", handlePageShow);
   }, [updateScroll]);
 
-  // Visibility change handler
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") {
@@ -350,7 +347,6 @@ const AskCody = () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
   }, [updateScroll]);
 
-  // Resize handler
   useEffect(() => {
     const handleResize = () => {
       updateScroll();
@@ -373,7 +369,6 @@ const AskCody = () => {
       scroll-smooth
     `}
     >
-      {/* The Sigma Pattern Background - AESTHETIC GAINS 💪 */}
       <div
         className="
         absolute inset-0 
@@ -404,20 +399,14 @@ const AskCody = () => {
         >
           <div className="flex-grow pb-12 w-full flex flex-row items-center justify-center gap-2">
             <section className="flex flex-col items-center justify-between my-4 gap-24 w-4/5">
-              {/* Project Title Section - NOW WITH PROPER BREATHING ROOM 💪 */}
               <article className="mt-16 mb-24 w-full p-4">
-                {" "}
-                {/* INCREASED MARGINS HERE */}
                 <div className="relative">
                   <div
                     className="absolute inset-0 bg-gradient-to-r from-custom-blue/10 to-transparent 
                     rounded-2xl transform -skew-y-2 h-32 -z-10"
                   />
 
-                  {/* TITLE SECTION - MAINTAINING DOMINANCE 💪 */}
                   <div className="animate-fade-in-up flex flex-col gap-4 py-8 px-4">
-                    {" "}
-                    {/* INCREASED GAP HERE */}
                     <h2
                       className="text-custom-blue text-6xl font-black tracking-tight
                       transform hover:translate-x-2 transition-all duration-300
@@ -434,10 +423,7 @@ const AskCody = () => {
                     </h2>
                   </div>
                 </div>
-                {/* Content Grid - NOW WITH PROPER SPACING 💪 */}
                 <div className="flex flex-col gap-16 mt-16">
-                  {" "}
-                  {/* INCREASED GAP AND MARGIN HERE */}
                   {history.map((item, index) => (
                     <div
                       key={index}
@@ -445,19 +431,17 @@ const AskCody = () => {
                       style={{ animationDelay: `${0.3 + index * 0.1}s` }}
                     >
                       <div className="flex flex-col gap-2 w-full">
-                        {/* Hero Section - REFINED POWER 💪 */}
                         <div
                           className="
-    mt-4 sm:mt-6 md:mt-8                    /* Progressive top margin gains */
-    mb-16 sm:mb-24 md:mb-32                 /* Progressive bottom margin gains */
+    mt-4 sm:mt-6 md:mt-8
+    mb-16 sm:mb-24 md:mb-32
     relative w-full 
     overflow-hidden 
-    rounded-lg sm:rounded-xl md:rounded-2xl /* Progressive border radius */
+    rounded-lg sm:rounded-xl md:rounded-2xl
     shadow-[0_10px_30px_rgba(2,66,92,0.15)] sm:shadow-[0_15px_40px_rgba(2,66,92,0.18)] md:shadow-[0_20px_50px_rgba(2,66,92,0.2)]
     group
   "
                         >
-                          {/* MINIMALIST OVERLAY - SUBTLE FLEX WITH RESPONSIVE INTENSITY 💪 */}
                           <div
                             className="
       absolute inset-0 
@@ -475,27 +459,23 @@ const AskCody = () => {
                             className="
       w-full h-auto 
       object-cover 
-      rounded-lg sm:rounded-xl md:rounded-2xl  /* Matching container radius */
+      rounded-lg sm:rounded-xl md:rounded-2xl
       transform transition-all duration-700 
-      group-hover:scale-[1.02] sm:group-hover:scale-[1.03] md:group-hover:scale-105  /* Progressive hover scale */
+      group-hover:scale-[1.02] sm:group-hover:scale-[1.03] md:group-hover:scale-105
     "
                             priority
-                            sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, 85vw" /* Responsive image sizing */
+                            sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, 85vw"
                           />
-                        </div>{" "}
-                        {/* Project Sections - STRUCTURED LIKE YOUR WORKOUT PLAN 💪 */}
+                        </div>
                         <div className="text-base text-custom-blue transform-gpu">
                           {item.description.map((desc, descIndex) => (
                             <div
                               key={descIndex}
                               className="transform hover:translate-x-2 transition-transform duration-300"
                             >
-                              {/* ALPHA TITLE ENERGY WITH PROPER SPACING */}
                               <p
                                 className={`
-        ${
-          descIndex === 0 ? "pt-8 md:pt-10" : "pt-12 md:pt-14"
-        } // INCREASED PADDING TOP
+        ${descIndex === 0 ? "pt-8 md:pt-10" : "pt-12 md:pt-14"}
         text-2xl font-black tracking-tight
         text-custom-blue
         group-hover:text-custom-blue/90
@@ -509,7 +489,6 @@ const AskCody = () => {
                                 {desc.title}
                               </p>
 
-                              {/* Description Text - DETAILED LIKE YOUR MACROS 💪 */}
                               {desc.text && (
                                 <div
                                   className="py-4 text-custom-blue/80 group-hover:text-custom-blue 
@@ -534,16 +513,13 @@ const AskCody = () => {
                                 </div>
                               )}
 
-                              {/* IMAGE GRID THAT HITS DIFFERENT */}
                               {Array.isArray(desc.picture) &&
                                 desc.picture.length > 0 && (
                                   <div className="mt-6 flex flex-wrap justify-center items-center w-full gap-10">
-                                    {/* Increased gap for more BREATHING ROOM */}
                                     {Array.isArray(desc.picture) &&
                                       desc.picture
                                         .reduce(
                                           (rows: any[], curr, index, array) => {
-                                            // Check for triple occurrence
                                             const isTriple =
                                               curr === array[index + 1] &&
                                               curr === array[index + 2];
@@ -554,7 +530,6 @@ const AskCody = () => {
                                               curr === array[index - 2] &&
                                               curr === array[index - 1];
 
-                                            // Check for pair occurrence
                                             const isPartOfPair =
                                               curr === array[index + 1] &&
                                               !isTriple &&
@@ -564,7 +539,6 @@ const AskCody = () => {
                                               !isSecondOfTriple &&
                                               !isThirdOfTriple;
 
-                                            // Determine height multiplier
                                             const heightMultiplier =
                                               isTriple ||
                                               isSecondOfTriple ||
@@ -574,7 +548,6 @@ const AskCody = () => {
                                                 ? 2
                                                 : 1;
 
-                                            // Skip if this is not the first occurrence
                                             if (
                                               isSecondOfPair ||
                                               isSecondOfTriple ||
@@ -616,7 +589,6 @@ const AskCody = () => {
                                             className="flex flex-row justify-center items-center gap-10 w-full
                                           transform hover:scale-[1.02] transition-all duration-500 ease-out"
                                           >
-                                            {/* Added row hover effect */}
                                             {row.map(
                                               (
                                                 item: {
@@ -674,20 +646,16 @@ const AskCody = () => {
                                         ))}
                                   </div>
                                 )}
-                              {/* Sub-sections - SUPPLEMENTARY GAINS 💪 */}
                               {Array.isArray(desc.subTitle) &&
                                 Array.isArray(desc.subText) &&
                                 Array.isArray(desc.subPicture) && (
                                   <div className="mt-8 space-y-8">
-                                    {" "}
-                                    {/* Better spacing */}
                                     {desc.subTitle.map((title, index) => (
                                       <div
                                         key={index}
                                         className="mb-4 transform hover:translate-x-2 transition-transform duration-300"
                                       >
                                         <React.Fragment>
-                                          {/* Render subPicture using Next.js Image component */}
                                           {desc.subPicture?.[index] && (
                                             <div className="py-4 flex flex-wrap justify-center items-center w-full gap-8">
                                               {(() => {
@@ -754,10 +722,8 @@ const AskCody = () => {
               </article>
             </section>
           </div>
-          {/* More Projects Section - WIDESCREEN FLEX 💪 */}
           <section className="w-full flex justify-center items-center mb-16">
             <div className="flex flex-col items-center w-4/5 max-w-2xl">
-              {/* SPICY GRADIENT DIVIDER */}
               <div className="w-full h-px bg-gradient-to-r from-transparent via-custom-blue/60 to-transparent mb-8" />
 
               <h2 className="text-custom-blue text-xl font-bold mb-6">
@@ -792,10 +758,8 @@ const AskCody = () => {
                 overflow-hidden
               `}
                       >
-                        {/* Subtle Pattern */}
                         <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] [background-size:16px_16px] pointer-events-none group-hover:scale-[1.5] transition-transform duration-1000" />
 
-                        {/* WIDESCREEN Image */}
                         <div className="w-32 relative overflow-hidden flex justify-center items-center group-hover:scale-[1.01] transition-transform duration-300">
                           <div className="w-full h-full relative rounded-md overflow-hidden shadow-sm">
                             <Image
@@ -808,7 +772,6 @@ const AskCody = () => {
                           </div>
                         </div>
 
-                        {/* Streamlined Content */}
                         <div className="flex flex-col flex-grow gap-1">
                           <div className="flex items-center justify-between">
                             <div>
@@ -820,7 +783,6 @@ const AskCody = () => {
                               </p>
                             </div>
 
-                            {/* Compact Arrow */}
                             <div className="flex items-center transition-transform duration-300 ease-out group-hover:translate-x-1">
                               <FontAwesomeIcon
                                 icon={faChevronRight}
@@ -834,7 +796,7 @@ const AskCody = () => {
                   ))}
               </div>
             </div>
-          </section>{" "}
+          </section>
         </main>
         <Footer
           isOpen={isOpen}
