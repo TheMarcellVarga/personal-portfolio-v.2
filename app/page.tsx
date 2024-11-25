@@ -72,6 +72,7 @@ import Header from "./header";
 import Footer from "./footer";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import useLocomotive from "./useLocomotive";
+import DevelopmentBanner from './developmentBanner';
 
 export const projects = [
   {
@@ -420,18 +421,7 @@ export default function Page() {
   }, []);
 
   return (
-    <div
-      id="main-container"
-      data-scroll-container
-      className={`
-        px-4 pb-4 
-        transition-colors duration-200 
-        ease-in-out 
-        bg-gray-200 
-        relative
-        scroll-smooth
-      `}
-    >
+    <div id="main-container" data-scroll-container className={`...`}>
       <div
         className="
           absolute inset-0 
@@ -1162,6 +1152,8 @@ export default function Page() {
           isHover={footerHover}
           setIsHover={setFooterHover}
         />
+
+      <DevelopmentBanner />
       </div>
     </div>
   );
