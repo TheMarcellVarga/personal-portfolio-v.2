@@ -1072,7 +1072,7 @@ export default function Page() {
 
               <div className="relative z-10 transform group-hover:scale-[1.02] transition-transform duration-500">
                 <h2 className="text-3xl md:text-4xl font-bold text-custom-blue text-center mb-6 tracking-tight">
-                  Let's Build Something
+                  Let's Build Something&nbsp;
                   <span className="text-custom-blue/80">Legendary</span> 🚀
                 </h2>
                 <p className="text-custom-blue text-center font-bold text-lg md:text-xl max-w-3xl mx-auto">
