@@ -405,18 +405,19 @@ const AskCody = () => {
                     rounded-2xl transform -skew-y-2 h-32 -z-10"
                   />
 
-                  <div className="animate-fade-in-up flex flex-col gap-4 py-8 px-4">
+                  <div className="animate-fade-in-up flex flex-col gap-1 py-8 px-4">
                     <h2
-                      className="text-custom-blue text-6xl font-black tracking-tight
-                      transition-all duration-300
+                      className="text-custom-blue text-6xl font-extrabold tracking-tight
+                      transform hover:translate-x-2 transition-all duration-300
                       bg-gradient-to-r from-custom-blue to-custom-blue/80 
-                      bg-clip-text text-transparent"
+                      bg-clip-text text-transparent
+                      leading-tight"
                     >
                       AskCody
                     </h2>
                     <h2
                       className="text-gray-700 text-xl font-bold tracking-widest uppercase
-                      transition-all duration-300"
+                      transform hover:translate-x-2 transition-all duration-300"
                     >
                       Hybrid Office Manager
                     </h2>
@@ -432,36 +433,35 @@ const AskCody = () => {
                       <div className="flex flex-col gap-2 w-full">
                         <div
                           className="
-    mt-4 sm:mt-6 md:mt-8
-    mb-16 sm:mb-24 md:mb-32
-    relative w-full 
-    overflow-hidden 
-    rounded-lg sm:rounded-xl md:rounded-2xl
-    shadow-[0_10px_30px_rgba(2,66,92,0.15)] sm:shadow-[0_15px_40px_rgba(2,66,92,0.18)] md:shadow-[0_20px_50px_rgba(2,66,92,0.2)]
-    group
-  "
+                            mt-4 sm:mt-6 md:mt-8
+                            mb-16 sm:mb-24 md:mb-32
+                            relative w-full 
+                            overflow-hidden 
+                            rounded-lg sm:rounded-xl md:rounded-2xl
+                            shadow-[0_10px_30px_rgba(2,66,92,0.15)] sm:shadow-[0_15px_40px_rgba(2,66,92,0.18)] md:shadow-[0_20px_50px_rgba(2,66,92,0.2)]
+                            group
+                          "
                         >
                           <div
                             className="
-      absolute inset-0 
-      bg-gradient-to-br from-custom-blue/3 sm:from-custom-blue/4 md:from-custom-blue/5 to-transparent
-      opacity-0 group-hover:opacity-100
-      transition-opacity duration-500 z-10
-    "
+                              absolute inset-0 
+                              bg-gradient-to-br from-custom-blue/3 sm:from-custom-blue/4 md:from-custom-blue/5 to-transparent
+                              opacity-0 group-hover:opacity-100
+                              transition-opacity duration-500 z-10
+                            "
                           />
-
                           <Image
-                            src={history[0].content.picture}
-                            alt="AskCody Hero"
+                            src={item.content.picture}
+                            alt="ESS Hero"
                             width={1200}
                             height={800}
                             className="
-      w-full h-auto 
-      object-cover 
-      rounded-lg sm:rounded-xl md:rounded-2xl
-      transition-all duration-300
-      group-hover:scale-[1.02] sm:group-hover:scale-[1.03] md:group-hover:scale-105
-    "
+                              w-full h-auto 
+                              object-cover 
+                              rounded-lg sm:rounded-xl md:rounded-2xl
+                              transform transition-all duration-700 
+                              group-hover:scale-[1.02] sm:group-hover:scale-[1.03] md:group-hover:scale-105
+                            "
                             priority
                             sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, 85vw"
                           />
@@ -474,40 +474,46 @@ const AskCody = () => {
                             >
                               <p
                                 className={`
-        ${descIndex === 0 ? "pt-8 md:pt-10" : "pt-12 md:pt-14"}
-        text-2xl font-black tracking-tight
-        text-custom-blue
-        transition-all duration-300
-        relative
-      `}
+                                  ${
+                                    descIndex === 0
+                                      ? "pt-8 md:pt-10"
+                                      : "pt-12 md:pt-14"
+                                  }
+                                  text-2xl font-extrabold tracking-tight
+                                  text-custom-blue
+                                  group-hover:text-custom-blue/90
+                                  transition-all duration-300
+                                  relative
+                                  before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px]
+                                  before:bg-custom-blue/30 before:transition-all before:duration-300
+                                  group-hover:before:w-full
+                                `}
                               >
                                 {desc.title}
                               </p>
-
                               {desc.text && (
                                 <div
                                   className="py-4 text-custom-blue/80 group-hover:text-custom-blue 
-          transition-all duration-300 backdrop-blur-sm"
+                                  transition-all duration-300 backdrop-blur-sm"
                                 >
                                   {Array.isArray(desc.text) ? (
                                     desc.text.map((text, index) => (
                                       <p
                                         key={index}
                                         className="mb-6 last:mb-0 text-justify leading-relaxed
-                                        transition-all duration-300
-                                        text-custom-blue/80"
+                                        transform hover:translate-x-2 transition-transform duration-300
+                                        hover:text-custom-blue/90"
                                       >
                                         {text}
                                       </p>
                                     ))
                                   ) : (
-                                    <p className="transition-transform duration-300">
+                                    <p className="transform hover:translate-x-2 transition-transform duration-300">
                                       {desc.text}
                                     </p>
                                   )}
                                 </div>
                               )}
-
                               {Array.isArray(desc.picture) &&
                                 desc.picture.length > 0 && (
                                   <div className="mt-6 flex flex-wrap justify-center items-center w-full gap-10">
@@ -582,7 +588,7 @@ const AskCody = () => {
                                           <div
                                             key={rowIndex}
                                             className="flex flex-row justify-center items-center gap-10 w-full
-  transition-all duration-300"
+              transform hover:scale-[1.02] transition-all duration-500 ease-out"
                                           >
                                             {row.map(
                                               (
@@ -604,7 +610,7 @@ const AskCody = () => {
                                                       : row.length === 1
                                                       ? "w-[66%]"
                                                       : "w-[45%]"
-                                                  } flex items-center justify-center transition-all duration-300`}
+                                                  } flex items-center justify-center group`}
                                                 >
                                                   <div
                                                     className={`w-full relative flex items-center justify-center ${
@@ -668,13 +674,14 @@ const AskCody = () => {
                                                         isPartOfPair
                                                           ? "w-[calc(90%+2rem)]"
                                                           : "w-[75%]"
-                                                      } flex items-center justify-center transition-all duration-300`}
+                                                      } flex items-center justify-center group`}
                                                     >
                                                       <div className="w-full relative flex items-center justify-center aspect-[16/9]">
                                                         <Image
                                                           src={currentPic ?? ""}
                                                           alt={`Sub-picture ${index}`}
-                                                          className="object-contain rounded-md transition-all duration-300"
+                                                          fill
+                                                          className="object-contain rounded-md transform transition-all duration-500 group-hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]"
                                                           sizes={
                                                             isPartOfPair
                                                               ? "(max-width: 768px) 100vw, calc(90vw + 2rem)"
@@ -718,14 +725,14 @@ const AskCody = () => {
           <section className="w-full flex justify-center items-center mb-16">
             <div className="flex flex-col items-center w-4/5 max-w-2xl">
               <div className="w-full h-px bg-gradient-to-r from-transparent via-custom-blue/60 to-transparent mb-8" />
-
               <h2 className="text-custom-blue text-xl font-bold mb-6">
                 More Projects
               </h2>
-
               <div className="w-full flex flex-col gap-4">
                 {projects
-                  .filter((project) => project.title !== "AskCody")
+                  .filter(
+                    (project) => project.title !== "European Study Solution"
+                  )
                   .map((project, index) => (
                     <div
                       key={project.title}
@@ -734,25 +741,24 @@ const AskCody = () => {
                       <Link
                         href={project.link}
                         className={`
-                w-full 
-                flex flex-row           
-                gap-4                 
-                px-4 py-3      
-                rounded-lg           
-                transition-all duration-300 ease-out 
-                bg-gradient-to-br from-gray-100/95 to-gray-100/90
-                hover:bg-neutral-100/95
-                group
-                items-center         
-                border border-transparent
-                hover:border-custom-blue/10
-                backdrop-blur-sm
-                relative
-                overflow-hidden
-              `}
+                          w-full 
+                          flex flex-row           
+                          gap-4                 
+                          px-4 py-3      
+                          rounded-lg           
+                          transition-all duration-300 ease-out 
+                          bg-gradient-to-br from-gray-100/95 to-gray-100/90
+                          hover:bg-neutral-100/95
+                          group
+                          items-center         
+                          border border-transparent
+                          hover:border-custom-blue/10
+                          backdrop-blur-sm
+                          relative
+                          overflow-hidden
+                        `}
                       >
                         <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] [background-size:16px_16px] pointer-events-none group-hover:scale-[1.5] transition-transform duration-1000" />
-
                         <div className="w-32 relative overflow-hidden flex justify-center items-center group-hover:scale-[1.01] transition-transform duration-300">
                           <div className="w-full h-full relative rounded-md overflow-hidden shadow-sm">
                             <Image
@@ -764,7 +770,6 @@ const AskCody = () => {
                             />
                           </div>
                         </div>
-
                         <div className="flex flex-col flex-grow gap-1">
                           <div className="flex items-center justify-between">
                             <div>
@@ -775,7 +780,6 @@ const AskCody = () => {
                                 {project.subTitle}
                               </p>
                             </div>
-
                             <div className="flex items-center transition-transform duration-300 ease-out group-hover:translate-x-1">
                               <FontAwesomeIcon
                                 icon={faChevronRight}

@@ -350,12 +350,13 @@ const ESS = () => {
                     className="absolute inset-0 bg-gradient-to-r from-custom-blue/10 to-transparent 
                     rounded-2xl transform -skew-y-2 h-32 -z-10"
                   />
-                  <div className="animate-fade-in-up flex flex-col gap-4 py-8 px-4">
+                  <div className="animate-fade-in-up flex flex-col gap-1 py-8 px-4">
                     <h2
-                      className="text-custom-blue text-6xl font-black tracking-tight
+                      className="text-custom-blue text-6xl font-extrabold tracking-tight
                       transform hover:translate-x-2 transition-all duration-300
                       bg-gradient-to-r from-custom-blue to-custom-blue/80 
-                      bg-clip-text text-transparent"
+                      bg-clip-text text-transparent
+                      leading-tight"
                     >
                       European Study Solution
                     </h2>
@@ -423,7 +424,7 @@ const ESS = () => {
                                       ? "pt-8 md:pt-10"
                                       : "pt-12 md:pt-14"
                                   }
-                                  text-2xl font-black tracking-tight
+                                  text-2xl font-extrabold tracking-tight
                                   text-custom-blue
                                   group-hover:text-custom-blue/90
                                   transition-all duration-300

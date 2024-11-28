@@ -314,10 +314,11 @@ const Catchscan = () => {
                   />
                   <div className="animate-fade-in-up flex flex-col gap-4 py-8 px-4">
                     <h2
-                      className="text-custom-blue text-6xl font-black tracking-tight
+                      className="text-custom-blue text-6xl font-extrabold tracking-tight
                       transition-all duration-300
                       bg-gradient-to-r from-custom-blue to-custom-blue/80 
-                      bg-clip-text text-transparent"
+                      bg-clip-text text-transparent
+                      leading-tight"
                     >
                       CatchScan
                     </h2>
@@ -380,16 +381,20 @@ const Catchscan = () => {
                             >
                               <p
                                 className={`
-                                  ${
-                                    descIndex === 0
-                                      ? "pt-8 md:pt-10"
-                                      : "pt-12 md:pt-14"
-                                  }
-                                  text-2xl font-black tracking-tight
-                                  text-custom-blue
-                                  transition-all duration-300
-                                  relative
-                                `}
+                                ${
+                                  descIndex === 0
+                                    ? "pt-8 md:pt-10"
+                                    : "pt-12 md:pt-14"
+                                }
+                                text-2xl font-extrabold tracking-tight
+                                text-custom-blue
+                                group-hover:text-custom-blue/90
+                                transition-all duration-300
+                                relative
+                                before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px]
+                                before:bg-custom-blue/30 before:transition-all before:duration-300
+                                group-hover:before:w-full
+                              `}
                               >
                                 {desc.title}
                               </p>
