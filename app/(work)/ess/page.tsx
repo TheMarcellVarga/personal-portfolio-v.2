@@ -414,7 +414,7 @@ const ESS = () => {
                           {item.description.map((desc, descIndex) => (
                             <div
                               key={descIndex}
-                              className="transform hover:translate-x-2 transition-transform duration-300"
+                              className="transition-transform duration-300"
                             >
                               <p
                                 className={`
@@ -573,7 +573,7 @@ const ESS = () => {
                                                         pictureIndex + 1
                                                       }`}
                                                       fill
-                                                      className="object-contain rounded-md transform transition-all duration-500 group-hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]"
+                                                      className="object-contain rounded-md transition-all duration-300"
                                                       sizes={
                                                         item.isPair ||
                                                         item.isTriple

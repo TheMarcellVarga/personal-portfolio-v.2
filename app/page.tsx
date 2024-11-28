@@ -980,7 +980,6 @@ export default function Page() {
               >
                 History
               </h2>
-
               <div className="flex flex-col gap-16">
                 {history.map((item, index) => (
                   <div
@@ -991,7 +990,7 @@ export default function Page() {
                     <div className="w-full md:w-1/2 pr-8">
                       <h3
                         className="text-2xl font-bold text-custom-blue transform 
-            group-hover:translate-x-2 transition-transform duration-300"
+            group-hover:translate-x-1 transition-transform duration-300"
                       >
                         {item.company}
                       </h3>
@@ -1002,14 +1001,14 @@ export default function Page() {
                         className="flex flex-col gap-4 relative
             before:absolute before:left-0 before:top-0 before:w-[2px] 
             before:h-full before:bg-custom-blue/10 before:-ml-4 
-            group-hover:before:bg-custom-blue before:transition-colors before:duration-300"
+            before:transition-colors before:duration-300"
                       >
-                        <div className="transform group-hover:translate-x-2 transition-transform duration-300">
+                        <div>
                           <h3 className="text-xl font-semibold text-custom-blue">
                             {item.jobTitle}
                           </h3>
                           <h4 className="text-base font-medium italic text-custom-blue/70">
-                            {item.time.start} -
+                            {item.time.start} -{" "}
                             {item.time.end ? item.time.end : "Present"}
                           </h4>
                         </div>
@@ -1019,7 +1018,7 @@ export default function Page() {
                             <p
                               key={index}
                               className="py-2 leading-relaxed hover:text-custom-blue
-                  transform group-hover:translate-x-2 transition-all duration-300"
+                  transition-colors duration-300"
                             >
                               {desc}
                             </p>
@@ -1029,24 +1028,6 @@ export default function Page() {
                     </div>
                   </div>
                 ))}
-                <div className="flex justify-center items-center gap-2 w-full mt-2 sm:mt-6 mb-4 sm:mb-6">
-                  <a
-                    href="/Marcell-Varga-CV.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative px-6 py-2.5 text-custom-blue rounded-full group overflow-hidden min-w-[240px] sm:min-w-[260px] flex items-center justify-center"
-                  >
-                    <span className="relative z-10 transition-colors duration-300 group-hover:text-gray-50 mr-2">
-                      View Full Resume
-                    </span>
-                    <OpenResumeIcon
-                      isHover={false}
-                      className="w-4 h-4 relative z-10 transition-colors duration-300 group-hover:text-gray-50"
-                    />
-                    <div className="absolute inset-0 border-2 border-custom-blue rounded-full"></div>
-                    <div className="absolute inset-0 bg-custom-blue rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-                  </a>
-                </div>
               </div>
             </article>
           </div>
@@ -1054,108 +1035,69 @@ export default function Page() {
         <section
           data-scroll-section
           data-scroll-section-id="contact"
-          className="flex justify-center items-center mb-24 transform hover:scale-[1.01] transition-all duration-500"
+          className="flex justify-center items-center mt-12 mb-24 transform hover:scale-[1.01] transition-all duration-500"
         >
-          <div className="flex flex-col items-center justify-between gap-24 w-4/5">
-            <div className="w-full h-px bg-gradient-to-r from-transparent via-custom-blue/60 to-transparent" />
+          <div className="relative w-4/5 max-w-4xl">
+            {/* Content Container */}
+            <div className="relative bg-gray-100/90 rounded-xl p-8 md:p-12 border border-custom-blue/10">
+              <div className="flex flex-col md:flex-row gap-8 items-center">
+                <div className="relative z-10 transform group-hover:scale-[1.02] transition-transform duration-500">
+                  <h2 className="text-3xl md:text-4xl font-bold text-custom-blue text-left mb-6 tracking-tight">
+                    Building Beyond&nbsp;
+                    <span className="text-custom-blue/80">Boundaries</span> 🚀
+                  </h2>
+                  <p className="text-custom-blue text-left font-bold text-lg md:text-xl max-w-3xl">
+                    Full-stack excellence meets design innovation. Let's
+                    architect solutions that make an impact.
+                  </p>
+                </div>
 
-            <div
-              className="w-full bg-gradient-to-br from-gray-100/95 to-gray-100/90 rounded-2xl p-8 
-      shadow-[0_8px_30px_rgba(2,66,92,0.08)]
-      hover:shadow-[0_15px_60px_rgba(2,66,92,0.15)]
-      transition-all duration-500 relative overflow-hidden group backdrop-blur-sm"
-            >
-              <div
-                className="absolute inset-0 opacity-5 bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] [background-size:16px_16px] pointer-events-none 
-        group-hover:scale-[1.5] transition-transform duration-1000"
-              />
+                <div className="flex-1 flex justify-center md:justify-end">
+                  <a
+                    href="mailto:themarcellvarga@gmail.com"
+                    className="relative px-5 py-2 text-custom-blue rounded-full group overflow-hidden min-w-36 flex items-center justify-center"
+                  >
+                    <span className="relative z-10 transition-all duration-300 group-hover:text-gray-50 mr-2">
+                      Get&nbsp;in&nbsp;Touch
+                    </span>
+                    <ArrowRightIcon
+                      className="w-5 h-5 relative z-10 group-hover:text-gray-50
+              transform group-hover:translate-x-1 transition-all duration-300"
+                    />
+                    <div className="absolute inset-0 border-2 border-custom-blue rounded-full"></div>
+                    <div
+                      className="absolute inset-0 bg-custom-blue rounded-full transform scale-x-0 group-hover:scale-x-100 
+              transition-transform duration-300 ease-out origin-left"
+                    ></div>
+                  </a>
+                </div>
+              </div>
 
-              <div className="relative z-10 transform group-hover:scale-[1.02] transition-transform duration-500">
-                <h2 className="text-3xl md:text-4xl font-bold text-custom-blue text-center mb-6 tracking-tight">
-                  Let's Build Something&nbsp;
-                  <span className="text-custom-blue/80">Legendary</span> 🚀
-                </h2>
-                <p className="text-custom-blue text-center font-bold text-lg md:text-xl max-w-3xl mx-auto">
-                  Ready to transform your vision into digital reality? I turn
-                  coffee into code and dreams into deployments.
-                </p>
+              <div className="mt-8 pt-8 border-t border-custom-blue/10">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                  <a
+                    href="https://www.linkedin.com/in/marcellvarga/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-custom-blue/60 hover:text-custom-blue transition-all duration-300"
+                  >
+                    <LinkedInIcon className="w-5 h-5" />
+                    <span className="text-sm">Let's connect</span>
+                  </a>
+                  <a
+                    href="/Marcell-Varga-CV.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-custom-blue/60 hover:text-custom-blue transition-all duration-300"
+                  >
+                    <OpenResumeIcon className="w-5 h-5" isHover={false} />
+                    <span className="text-sm">Check out my Resume</span>
+                  </a>
+                </div>
               </div>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-              <a
-                href="mailto:themarcellvarga@gmail.com"
-                className="group bg-gradient-to-br from-gray-100/95 to-gray-100/90 rounded-2xl p-8
-          transform hover:scale-[1.02] hover:-translate-y-1
-          transition-all duration-300 ease-out
-          hover:shadow-[0_15px_60px_rgba(2,66,92,0.15)]
-          relative overflow-hidden"
-              >
-                <div
-                  className="absolute inset-0 bg-gradient-to-r from-custom-blue/0 via-custom-blue/0 to-custom-blue/0 
-          group-hover:from-custom-blue/[0.03] group-hover:via-custom-blue/[0.03] group-hover:to-custom-blue/0
-          transition-all duration-700"
-                ></div>
-                <div className="flex justify-between items-center relative z-10">
-                  <div>
-                    <h3 className="text-2xl font-bold text-custom-blue mb-2">
-                      Drop an Email
-                    </h3>
-                    <span className="text-custom-blue/80 text-lg hover:text-custom-blue transition-colors duration-300">
-                      themarcellvarga@gmail.com
-                    </span>
-                  </div>
-                  <div className="transform group-hover:rotate-12 transition-transform duration-300">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-10 w-10 text-custom-blue opacity-50 group-hover:opacity-80 transition-all duration-300"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </a>
-
-              <a
-                href="https://www.linkedin.com/in/marcellvarga/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group bg-gradient-to-br from-gray-100/95 to-gray-100/90 rounded-2xl p-8
-          transform hover:scale-[1.02] hover:-translate-y-1
-          transition-all duration-300 ease-out
-          hover:shadow-[0_15px_60px_rgba(2,66,92,0.15)]
-          relative overflow-hidden"
-              >
-                <div
-                  className="absolute inset-0 bg-gradient-to-r from-custom-blue/0 via-custom-blue/0 to-custom-blue/0 
-          group-hover:from-custom-blue/[0.03] group-hover:via-custom-blue/[0.03] group-hover:to-custom-blue/0
-          transition-all duration-700"
-                ></div>
-                <div className="flex justify-between items-center relative z-10">
-                  <div>
-                    <h3 className="text-2xl font-bold text-custom-blue mb-2">
-                      Connect on LinkedIn
-                    </h3>
-                    <span className="text-custom-blue/80 text-lg hover:text-custom-blue transition-colors duration-300">
-                      Marcell Varga
-                    </span>
-                  </div>
-                  <div className="transform group-hover:rotate-12 transition-transform duration-300">
-                    <LinkedInIcon className="h-10 w-10 text-custom-blue opacity-50 group-hover:opacity-80 transition-all duration-300" />
-                  </div>
-                </div>
-              </a>
-            </div>
           </div>
-        </section>
+        </section>{" "}
         <Footer
           isOpen={isOpen}
           setIsOpen={setIsOpen}

@@ -315,7 +315,7 @@ const Catchscan = () => {
                   <div className="animate-fade-in-up flex flex-col gap-4 py-8 px-4">
                     <h2
                       className="text-custom-blue text-6xl font-black tracking-tight
-                      transform hover:translate-x-2 transition-all duration-300
+                      transition-all duration-300
                       bg-gradient-to-r from-custom-blue to-custom-blue/80 
                       bg-clip-text text-transparent"
                     >
@@ -323,7 +323,7 @@ const Catchscan = () => {
                     </h2>
                     <h2
                       className="text-gray-700 text-xl font-bold tracking-widest uppercase
-                      transform hover:translate-x-2 transition-all duration-300"
+                      transition-all duration-300"
                     >
                       Copyright Protection SaaS
                     </h2>
@@ -365,7 +365,7 @@ const Catchscan = () => {
                               w-full h-auto 
                               object-cover 
                               rounded-lg sm:rounded-xl md:rounded-2xl
-                              transform transition-all duration-700 
+                              transition-all duration-300
                               group-hover:scale-[1.02] sm:group-hover:scale-[1.03] md:group-hover:scale-105
                             "
                             priority
@@ -376,7 +376,7 @@ const Catchscan = () => {
                           {item.description.map((desc, descIndex) => (
                             <div
                               key={descIndex}
-                              className="transform hover:translate-x-2 transition-transform duration-300"
+                              className="transition-transform duration-300"
                             >
                               <p
                                 className={`
@@ -387,12 +387,8 @@ const Catchscan = () => {
                                   }
                                   text-2xl font-black tracking-tight
                                   text-custom-blue
-                                  group-hover:text-custom-blue/90
                                   transition-all duration-300
                                   relative
-                                  before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px]
-                                  before:bg-custom-blue/30 before:transition-all before:duration-300
-                                  group-hover:before:w-full
                                 `}
                               >
                                 {desc.title}
@@ -407,8 +403,8 @@ const Catchscan = () => {
                                       <p
                                         key={index}
                                         className="mb-6 last:mb-0 text-justify leading-relaxed
-                                        transform hover:translate-x-2 transition-transform duration-300
-                                        hover:text-custom-blue/90"
+                                        transition-all duration-300
+                                        text-custom-blue/80"
                                       >
                                         {text}
                                       </p>
@@ -494,7 +490,7 @@ const Catchscan = () => {
                                           <div
                                             key={rowIndex}
                                             className="flex flex-row justify-center items-center gap-10 w-full
-              transform hover:scale-[1.02] transition-all duration-500 ease-out"
+                                            transition-all duration-300"
                                           >
                                             {row.map(
                                               (
@@ -516,7 +512,7 @@ const Catchscan = () => {
                                                       : row.length === 1
                                                       ? "w-[66%]"
                                                       : "w-[45%]"
-                                                  } flex items-center justify-center group`}
+                                                  } flex items-center justify-center transition-all duration-300`}
                                                 >
                                                   <div
                                                     className={`w-full relative flex items-center justify-center ${
@@ -580,14 +576,14 @@ const Catchscan = () => {
                                                         isPartOfPair
                                                           ? "w-[calc(90%+2rem)]"
                                                           : "w-[75%]"
-                                                      } flex items-center justify-center group`}
+                                                      } flex items-center justify-center transition-all duration-300`}
                                                     >
                                                       <div className="w-full relative flex items-center justify-center aspect-[16/9]">
                                                         <Image
                                                           src={currentPic ?? ""}
                                                           alt={`Sub-picture ${index}`}
                                                           fill
-                                                          className="object-contain rounded-md transform transition-all duration-500 group-hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]"
+                                                          className="object-contain rounded-md transition-all duration-300"
                                                           sizes={
                                                             isPartOfPair
                                                               ? "(max-width: 768px) 100vw, calc(90vw + 2rem)"
