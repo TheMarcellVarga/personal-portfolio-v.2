@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import LinkedInIcon from "../public/icons/linkedin";
 import OpenResumeIcon from "../public/icons/openResume";
-import useWindowSize from "./useWindowSize";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
@@ -72,6 +71,7 @@ import Header from "./header";
 import Footer from "./footer";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import useLocomotive from "./useLocomotive";
+import useWindowSize from "./useWindowSize";
 
 export const projects = [
   {
@@ -366,12 +366,29 @@ export default function Page() {
     }
   }, []);
 
-  const [isMobile, setIsMobile] = useState(false);
-  const size = useWindowSize();
+  const [isMobile, setIsMobile] = useState(() => {
+    // Only run on client side
+    if (typeof window !== "undefined") {
+      return window.innerWidth <= 768;
+    }
+    return false; // Default to false for server-side rendering
+  });
 
   useEffect(() => {
-    setIsMobile(window?.innerWidth <= 768);
-  }, [size.width]);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Set initial value
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []); // Remove size.width dependency
+
+  const size = useWindowSize();
 
   const scrollToHome = useCallback(() => {
     if (stickySectionRef.current) {
@@ -470,41 +487,62 @@ export default function Page() {
         style={{ zIndex: 0 }}
         aria-hidden="true"
       />
-
       {showLegacyNotice && (
         <div
           onMouseEnter={() => setIsHoveringLegacyNotice(true)}
           onMouseLeave={() => setIsHoveringLegacyNotice(false)}
           className={`
-      fixed bottom-4 right-4 
-      max-w-sm w-full
+      fixed 
+      z-50
+      transition-all duration-500 ease-out
+      ${isNoticeVisible ? "opacity-100" : "opacity-0 translate-y-4"}
+      
+      /* Mobile First Positioning */
+      bottom-4 
+      left-4 
+      right-4
+      sm:left-auto 
+      sm:right-4
+      
+      /* Width Control */
+      w-auto
+      sm:max-w-sm
+      
+      /* Container Styling */
       bg-gray-100/90
       text-custom-blue 
       rounded-xl
       shadow-lg 
       backdrop-blur-sm 
       border border-custom-blue/10
-      transform transition-all duration-500 ease-out
-      animate-slide-up
-      z-50
-      flex flex-col sm:flex-row items-center justify-between
+      
+      /* Padding Adjustments */
+      p-3
+      sm:p-4
+      
+      /* Layout */
+      flex 
+      flex-col 
+      sm:flex-row 
+      items-center 
       gap-2
-      p-4
+      
+      /* Background Pattern */
       before:absolute 
       before:inset-0 
       before:opacity-[0.02] 
       before:bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] 
       before:[background-size:16px_16px] 
       before:pointer-events-none
-      ${isNoticeVisible ? "opacity-100" : "opacity-0 translate-y-4"}
+      before:rounded-xl
     `}
         >
-          <div className="flex-1">
-            <p className="text-lg font-bold text-custom-blue">
-              🚧 Website under development but ready to explore!
+          <div className="flex-1 w-full sm:w-auto">
+            <p className="text-base sm:text-lg font-bold text-custom-blue text-center sm:text-left">
+              🚧 Website under development
             </p>
-            <p className="text-sm text-custom-blue/80 mt-1">
-              Want to see the legacy version?{" "}
+            <p className="text-xs sm:text-sm text-custom-blue/80 mt-1 text-center sm:text-left">
+              Ready to explore! Want to see the legacy version?{" "}
               <a
                 href="YOUR_LEGACY_SITE_URL"
                 target="_blank"
@@ -515,14 +553,23 @@ export default function Page() {
               </a>
             </p>
           </div>
+
           <button
             onClick={() => setShowLegacyNotice(false)}
             className="text-custom-blue/60 hover:text-custom-blue transition-colors duration-300
-              p-2 hover:bg-custom-blue/5 rounded-lg"
+        p-1.5 sm:p-2 
+        hover:bg-custom-blue/5 
+        rounded-lg
+        absolute 
+        top-2 
+        right-2
+        sm:relative
+        sm:top-auto
+        sm:right-auto"
             aria-label="Close notification"
           >
             <svg
-              className="w-5 h-5"
+              className="w-4 h-4 sm:w-5 sm:h-5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -536,7 +583,7 @@ export default function Page() {
             </svg>
           </button>
         </div>
-      )}
+      )}{" "}
       <div className="relative z-1">
         <Header
           isOpen={isOpen}
@@ -558,9 +605,6 @@ export default function Page() {
             className="flex-grow pb-8 w-full flex flex-row items-center justify-strech gap-2 fade-top-bottom"
           >
             <div
-              data-scroll
-              data-scroll-speed="1.2"
-              data-scroll-delay="0.1"
               className={`
       absolute 
       mt-4 
@@ -681,8 +725,7 @@ export default function Page() {
                 style={{ animationDelay: "0.4s" }}
               >
                 <svg
-                  className="rounded-[36px] bg-gray-100 transition-transform duration-700 ease-out
-            hover:scale-105 hover:rotate-1"
+                  className="rounded-[36px] bg-gray-100 transition-transform duration-700 ease-out hover:scale-105 hover:rotate-1"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   style={{
@@ -697,11 +740,20 @@ export default function Page() {
                   }}
                 >
                   <path
-                    className="hidden md:block"
+                    className="hidden 2xl:block"
+                    d="M2500 -2800L470 1100H0V-150Z"
+                  />
+                  <path
+                    className="hidden 2xl:block gradient-path"
+                    d="M2500 -2800L470 1100H0V-150Z"
+                    fill="url(#paint0_linear_364_239)"
+                  />
+                  <path
+                    className="hidden md:block 2xl:hidden"
                     d="M1750 -2009L335 786H0V-109Z"
                   />
                   <path
-                    className="hidden md:block gradient-path"
+                    className="hidden md:block 2xl:hidden gradient-path"
                     d="M1750 -2009L335 786H0V-109Z"
                     fill="url(#paint0_linear_364_239)"
                   />
@@ -737,7 +789,7 @@ export default function Page() {
                       <stop offset="1" stopColor="#001822" />
                     </linearGradient>
                   </defs>
-                </svg>
+                </svg>{" "}
               </div>
 
               <div
@@ -1069,12 +1121,12 @@ export default function Page() {
                   <div
                     key={index}
                     className="flex flex-col md:flex-row group  
-        rounded-xl transition-all duration-300 p-4 -mx-4"
+    rounded-xl transition-all duration-300 p-4 -mx-4"
                   >
                     <div className="w-full md:w-1/2 pr-8">
                       <h3
                         className="text-2xl font-bold text-custom-blue transform 
-            group-hover:translate-x-1 transition-transform duration-300"
+        group-hover:translate-x-1 transition-transform duration-300"
                       >
                         {item.company}
                       </h3>
@@ -1083,11 +1135,12 @@ export default function Page() {
                     <div className="w-full md:w-1/2">
                       <div
                         className="flex flex-col gap-4 relative
-            before:absolute before:left-0 before:top-0 before:w-[2px] 
-            before:h-full before:bg-custom-blue/10 before:-ml-4 
-            before:transition-colors before:duration-300"
+        before:absolute before:left-0 before:top-0 before:w-[2px] 
+        before:h-full before:bg-custom-blue/10 before:-ml-4 
+        before:transition-all before:duration-300
+        group-hover:before:bg-custom-blue"
                       >
-                        <div>
+                        <div className="transition-colors duration-300 group-hover:text-custom-blue">
                           <h3 className="text-xl font-semibold text-custom-blue">
                             {item.jobTitle}
                           </h3>
@@ -1101,8 +1154,8 @@ export default function Page() {
                           {item.description.map((desc, index) => (
                             <p
                               key={index}
-                              className="py-2 leading-relaxed hover:text-custom-blue
-                  transition-colors duration-300"
+                              className="py-2 leading-relaxed
+              transition-colors duration-300"
                             >
                               {desc}
                             </p>
@@ -1122,7 +1175,6 @@ export default function Page() {
           className="flex justify-center items-center mt-12 mb-24 transform hover:scale-[1.01] transition-all duration-500"
         >
           <div className="relative w-4/5 max-w-4xl">
-            {/* Content Container */}
             <div className="relative bg-gray-100/90 rounded-xl p-8 md:p-12 border border-custom-blue/10">
               <div className="flex flex-col md:flex-row gap-8 items-center">
                 <div className="relative z-10 transform group-hover:scale-[1.02] transition-transform duration-500">
