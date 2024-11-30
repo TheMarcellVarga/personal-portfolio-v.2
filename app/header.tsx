@@ -31,16 +31,6 @@ const Header: React.FC<HeaderProps> = ({
     (() => void) | null
   >(null);
 
-  useEffect(() => {
-    if (pendingScrollAction) {
-      pendingScrollAction();
-      setPendingScrollAction(null);
-    }
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollTop]);
-
   const handleScroll = () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     if (scrollTop > lastScrollTop && scrollTop > 100) {
@@ -50,6 +40,16 @@ const Header: React.FC<HeaderProps> = ({
     }
     setLastScrollTop(scrollTop);
   };
+
+  useEffect(() => {
+    if (pendingScrollAction) {
+      pendingScrollAction();
+      setPendingScrollAction(null);
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollTop, handleScroll, pendingScrollAction]);
 
   const [showTooltip, setShowTooltip] = useState(false);
 
