@@ -7,8 +7,6 @@ import LinkedInIcon from "../public/icons/linkedin";
 import OpenResumeIcon from "../public/icons/openResume";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { projects } from './data/projects';
-import { history } from './data/history';
 
 import {
   FaPaintBrush,
@@ -74,6 +72,108 @@ import Footer from "./footer";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import useLocomotive from "./useLocomotive";
 import useWindowSize from "./useWindowSize";
+
+export const projects = [
+  {
+    title: "European Study Solution",
+    subTitle: "Student Agency",
+    description:
+      "Informative website developed for a start-up to help American students with application process towards European programs and prepare the for life abroad. The platform is to served to develop their business, get and keep in touch with their students.",
+    skills: ["HTML", "CSS", "JavaScript", "SEO"],
+    link: "/ess",
+    image: "/images/ess-index.png",
+  },
+  {
+    title: "CatchScan",
+    subTitle: "Copyright Protection SaaS",
+    description:
+      "SaaS dashboard for an automated copyright protection platform in order to protect content creators intellectual works. User-friendly interface to utilise their in-house algorithm the fullest.",
+    skills: ["Tailwind CSS", "Atomic Design", "Design System"],
+    link: "/catchscan",
+    image: "/images/catchscan-index.png",
+  },
+  {
+    title: "AskCody",
+    subTitle: "Hybrid Office Manager",
+    description:
+      "Flexible office resource management for hybrid work environments, To optimise space resources and automate ad-hoc tasks to enhance employee productivity developed as a Microsoft Teams Integration.",
+    skills: ["TypeScript", "React-Bootstrap", "Fluent UI"],
+    link: "/askcody",
+    image: "/images/askcody-index.png",
+  },
+];
+
+const history = [
+  {
+    company: "AXON Networks",
+    jobTitle: "UX & Frontend Engineer",
+    time: {
+      start: "Oct 2022",
+      end: "",
+    },
+    description: [
+      "Contributed to AXON Orchestrator development, focusing on UX/UI design and frontend development within cross-functional teams.",
+      "Created interactive prototypes and established design system for in-house development.",
+      "Collaborated with Analytics team to integrate AI/ML solutions into products, enhancing product functionality.",
+      "Participated in the full product development cycle from UX/UI design, through Frontend Development to successful deployments.",
+    ],
+    skills: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "TypeScript",
+      "React-Bootstrap",
+      "Fluent UI",
+    ],
+  },
+  {
+    company: "MapsPeople",
+    jobTitle: "UX Designer Intern",
+    time: {
+      start: "Jan 2022",
+      end: "Apr 2022",
+    },
+    description: [
+      "Enhanced Maps Indoors CMS through research and development of interactive, animated prototypes.",
+      "Executed tasks via Jira, including project management and documentation.",
+      "Leveraged the company Design System, contributing to its evolution",
+      "Prioritized delivery efficiency using Auto-Layout.",
+      "Designed cross-platform solutions for both desktop and mobile, with a focus on accessibility.",
+      "Acquired interdisciplinary skills working within a SaaS company team.",
+    ],
+    skills: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "TypeScript",
+      "React-Bootstrap",
+      "Fluent UI",
+    ],
+  },
+  {
+    company: "University College of Northen Denmark",
+    jobTitle: "Multimedia Design",
+    time: {
+      start: "Sept 2020",
+      end: "Jun 2022",
+    },
+    description: [
+      "UX/UI Design and Elective Specialization: Focused on enhancing UI/UX design skills through practical projects. This aligns with the importance of a well-crafted website or app for user satisfaction.",
+      "Front-End Web Development: Engaged in hands-on experience building applications. Emphasis was placed on the design-to-code process and creating visually appealing, easy-to-use interfaces.",
+      "Content Production: Involved in creating content that meets user needs and ensures a positive user experience. This reflects the ongoing process of UX design.",
+      "Collaboration and Project Management: Worked collaboratively with real companies within Reflective Practice-based Learning (RPL). Applied user research methodologies and usability testing to improve product functionality.",
+      "Reflective Practice-based Learning: Executed projects in collaboration with real companies. Applied UX/UI design principles to real-world challenges, enhancing the design-to-code process.",
+    ],
+    skills: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "TypeScript",
+      "React-Bootstrap",
+      "Fluent UI",
+    ],
+  },
+];
 
 const textToType =
   "An adventurous UX & Frontend engineer dedicated to crafting delightful, business-focused, and user-centred digital experiences. I excel at solving complex problems through efficient design, turning challenges into opportunities. Overcoming challenges through efficient design is what fuelling my everyday drive.";
