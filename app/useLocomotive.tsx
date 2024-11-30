@@ -1,18 +1,21 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Lenis from "@studio-freight/lenis";
+import LocomotiveScroll from "locomotive-scroll";
+import "locomotive-scroll/dist/locomotive-scroll.css";
 
 export default function useLocomotive(
   onScroll?: (scrollPositionLocomotive: number) => void
 ) {
-  const [scrollPositionLocomotive, setscrollPositionLocomotive] = useState<number>(0);
-  const [lenis, setLenis] = useState<Lenis | null>(null);
+  const [scrollPositionLocomotive, setscrollPositionLocomotive] =
+    useState<number>(0);
+  const [locomotiveScroll, setLocomotiveScroll] =
+    useState<LocomotiveScroll | null>(null);
 
   useEffect(() => {
-    let instance: Lenis | null = null;
+    let instance: LocomotiveScroll | null = null;
 
-    const initLenis = async () => {
+    const initLocomotiveScroll = async () => {
       if (typeof window === "undefined") return;
 
       try {
@@ -28,26 +31,29 @@ export default function useLocomotive(
         // Store the current scroll position before initialization
         const currentScroll = window.scrollY;
 
-        instance = new Lenis({
-          wrapper: window,
-          content: scrollEl,
-          lerp: 0.1,
-          duration: 1.2,
-          orientation: "vertical",
-          gestureOrientation: "vertical",
-          smoothWheel: true,
-          wheelMultiplier: 1,
-          touchMultiplier: 2,
-          infinite: false,
+        instance = new LocomotiveScroll({
+          lenisOptions: {
+            wrapper: window,
+            content: scrollEl,
+            lerp: 0.1,
+            duration: 1.2,
+            orientation: "vertical",
+            gestureOrientation: "vertical",
+            smoothWheel: true,
+            wheelMultiplier: 1,
+            touchMultiplier: 2,
+            infinite: false,
+          },
         });
 
-        setLenis(instance);
+        setLocomotiveScroll(instance);
 
         // Immediately scroll to the current position
         setTimeout(() => {
           window.scrollTo(0, currentScroll);
-          instance?.scrollTo(currentScroll, {
-            immediate: true,
+          (instance as any).scrollTo(currentScroll, {
+            duration: 0,
+            disableLerp: true,
           });
         }, 50);
 
@@ -62,46 +68,51 @@ export default function useLocomotive(
 
         window.addEventListener("scroll", handleScroll, { passive: true });
 
-        // Raf loop using arrow function
-        const raf = (time: number): void => {
-          instance?.raf(time);
-          requestAnimationFrame(raf);
-        };
-        
-        requestAnimationFrame(raf);
+        // Enhanced scroll event handling
+        (instance as any).on(
+          "scroll",
+          ({
+            scroll,
+            direction,
+            velocity,
+          }: {
+            scroll: { x: number; y: number };
+            direction: "up" | "down";
+            velocity: number;
+          }) => {
+            setscrollPositionLocomotive(scroll.y);
+            if (onScroll) {
+              onScroll(scroll.y);
+            }
 
-        // Handle scroll events with Lenis
-        instance.on('scroll', ({ scroll, velocity, direction, progress }: any) => {
-          setscrollPositionLocomotive(scroll);
-          if (onScroll) {
-            onScroll(scroll);
+            // Update velocity classes
+            const velocityClass =
+              velocity > 1.5 ? "is-scrolling-fast" : "is-scrolling-slow";
+            document.documentElement.classList.remove(
+              "is-scrolling-fast",
+              "is-scrolling-slow"
+            );
+            document.documentElement.classList.add(velocityClass);
+
+            // Update scroll direction classes
+            const scrollingClass =
+              direction === "up" ? "is-scrolling-up" : "is-scrolling-down";
+            document.documentElement.classList.remove(
+              "is-scrolling-up",
+              "is-scrolling-down"
+            );
+            document.documentElement.classList.add(scrollingClass);
           }
-
-          // Update velocity classes
-          const velocityClass = velocity > 1.5 ? "is-scrolling-fast" : "is-scrolling-slow";
-          document.documentElement.classList.remove(
-            "is-scrolling-fast",
-            "is-scrolling-slow"
-          );
-          document.documentElement.classList.add(velocityClass);
-
-          // Update scroll direction classes
-          const scrollingClass =
-            direction === 1 ? "is-scrolling-down" : "is-scrolling-up";
-          document.documentElement.classList.remove(
-            "is-scrolling-up",
-            "is-scrolling-down"
-          );
-          document.documentElement.classList.add(scrollingClass);
-        });
+        );
 
         // Handle resize
         const handleResize = () => {
           if (instance) {
-            instance.resize();
+            (instance as any).update();
             const currentPosition = window.scrollY;
-            instance.scrollTo(currentPosition, {
-              immediate: true,
+            (instance as any).scrollTo(currentPosition, {
+              duration: 0,
+              disableLerp: true,
             });
           }
         };
@@ -122,11 +133,11 @@ export default function useLocomotive(
           window.removeEventListener("load", handleResize);
         };
       } catch (error) {
-        console.error("Error initializing Lenis:", error);
+        console.error("Error initializing LocomotiveScroll:", error);
       }
     };
 
-    initLenis();
+    initLocomotiveScroll();
 
     return () => {
       if (instance) {
@@ -137,10 +148,11 @@ export default function useLocomotive(
 
   // Expose a method to manually update scroll position
   const updateScroll = () => {
-    if (lenis) {
+    if (locomotiveScroll) {
       const currentPosition = window.scrollY;
-      lenis.scrollTo(currentPosition, {
-        immediate: true,
+      (locomotiveScroll as any).scrollTo(currentPosition, {
+        duration: 0,
+        disableLerp: true,
       });
     }
   };
