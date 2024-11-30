@@ -339,12 +339,10 @@ export default function Page() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [footerHover, setFooterHover] = useState(false);
-  // At the top of your Page component, add this state
   const [showLegacyNotice, setShowLegacyNotice] = useState(true);
   const [isNoticeVisible, setIsNoticeVisible] = useState(true);
   const [isHoveringLegacyNotice, setIsHoveringLegacyNotice] = useState(false);
 
-  // Add this useEffect to handle the auto-hide
   useEffect(() => {
     if (showLegacyNotice && !isHoveringLegacyNotice) {
       const timer = setTimeout(() => {
@@ -367,11 +365,10 @@ export default function Page() {
   }, []);
 
   const [isMobile, setIsMobile] = useState(() => {
-    // Only run on client side
     if (typeof window !== "undefined") {
       return window.innerWidth <= 768;
     }
-    return false; // Default to false for server-side rendering
+    return false;
   });
 
   useEffect(() => {
@@ -379,14 +376,12 @@ export default function Page() {
       setIsMobile(window.innerWidth <= 768);
     };
 
-    // Set initial value
     handleResize();
 
     window.addEventListener("resize", handleResize);
 
-    // Cleanup
     return () => window.removeEventListener("resize", handleResize);
-  }, []); // Remove size.width dependency
+  }, []);
 
   const size = useWindowSize();
 
