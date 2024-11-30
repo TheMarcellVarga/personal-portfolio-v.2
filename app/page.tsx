@@ -339,6 +339,24 @@ export default function Page() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [footerHover, setFooterHover] = useState(false);
+  // At the top of your Page component, add this state
+  const [showLegacyNotice, setShowLegacyNotice] = useState(true);
+  const [isNoticeVisible, setIsNoticeVisible] = useState(true);
+  const [isHoveringLegacyNotice, setIsHoveringLegacyNotice] = useState(false);
+
+  // Add this useEffect to handle the auto-hide
+  useEffect(() => {
+    if (showLegacyNotice && !isHoveringLegacyNotice) {
+      const timer = setTimeout(() => {
+        setIsNoticeVisible(false);
+        setTimeout(() => {
+          setShowLegacyNotice(false);
+        }, 500);
+      }, 10000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [showLegacyNotice, isHoveringLegacyNotice]);
 
   useEffect(() => {
     if (globeRef.current) {
@@ -453,6 +471,72 @@ export default function Page() {
         aria-hidden="true"
       />
 
+      {showLegacyNotice && (
+        <div
+          onMouseEnter={() => setIsHoveringLegacyNotice(true)}
+          onMouseLeave={() => setIsHoveringLegacyNotice(false)}
+          className={`
+      fixed bottom-4 right-4 
+      max-w-sm w-full
+      bg-gray-100/90
+      text-custom-blue 
+      rounded-xl
+      shadow-lg 
+      backdrop-blur-sm 
+      border border-custom-blue/10
+      transform transition-all duration-500 ease-out
+      animate-slide-up
+      z-50
+      flex flex-col sm:flex-row items-center justify-between
+      gap-2
+      p-4
+      before:absolute 
+      before:inset-0 
+      before:opacity-[0.02] 
+      before:bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] 
+      before:[background-size:16px_16px] 
+      before:pointer-events-none
+      ${isNoticeVisible ? "opacity-100" : "opacity-0 translate-y-4"}
+    `}
+        >
+          <div className="flex-1">
+            <p className="text-lg font-bold text-custom-blue">
+              🚧 Website under development but ready to explore!
+            </p>
+            <p className="text-sm text-custom-blue/80 mt-1">
+              Want to see the legacy version?{" "}
+              <a
+                href="YOUR_LEGACY_SITE_URL"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-custom-blue hover:text-custom-teal underline transition-colors duration-300"
+              >
+                Click here
+              </a>
+            </p>
+          </div>
+          <button
+            onClick={() => setShowLegacyNotice(false)}
+            className="text-custom-blue/60 hover:text-custom-blue transition-colors duration-300
+              p-2 hover:bg-custom-blue/5 rounded-lg"
+            aria-label="Close notification"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+      )}
       <div className="relative z-1">
         <Header
           isOpen={isOpen}
