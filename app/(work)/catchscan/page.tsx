@@ -280,8 +280,7 @@ const Catchscan = () => {
       <div
         className="
           absolute inset-0 
-          opacity-[0.05] 
-          bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] 
+          bg-[radial-gradient(rgba(2,66,92,0.07)_1.5px,transparent_1.5px)]
           [background-size:16px_16px] 
           pointer-events-none
           before:absolute 

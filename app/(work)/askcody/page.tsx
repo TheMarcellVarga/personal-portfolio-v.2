@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import useLocomotive from "../../useLocomotive";
-import { projects } from '../../data/projects';
+import { projects } from "../../data/projects";
 
 const history = [
   {
@@ -372,21 +372,20 @@ const AskCody = () => {
     >
       <div
         className="
-        absolute inset-0 
-        opacity-[0.05] 
-        bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] 
-        [background-size:16px_16px] 
-        pointer-events-none
-        before:absolute 
-        before:inset-0 
-        before:bg-gradient-to-b 
-        before:from-transparent 
-        before:to-gray-200/50 
-        before:backdrop-blur-[1px]
-        motion-safe:transition-opacity
-        motion-safe:duration-700
-        scroll-smooth
-      "
+          absolute inset-0 
+          bg-[radial-gradient(rgba(2,66,92,0.07)_1.5px,transparent_1.5px)]
+          [background-size:16px_16px] 
+          pointer-events-none
+          before:absolute 
+          before:inset-0 
+          before:bg-gradient-to-b 
+          before:from-transparent 
+          before:to-gray-200/50 
+          before:backdrop-blur-[1px]
+          motion-safe:transition-opacity
+          motion-safe:duration-700
+          scroll-smooth
+        "
         style={{ zIndex: 0 }}
         aria-hidden="true"
       />

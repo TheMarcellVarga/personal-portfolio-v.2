@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "../../header";
 import Footer from "../../footer";
-import { projects } from '../../data/projects';
+import { projects } from "../../data/projects";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
@@ -318,8 +318,7 @@ const ESS = () => {
       <div
         className="
           absolute inset-0 
-          opacity-[0.05] 
-          bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] 
+          bg-[radial-gradient(rgba(2,66,92,0.07)_1.5px,transparent_1.5px)]
           [background-size:16px_16px] 
           pointer-events-none
           before:absolute 

@@ -7,8 +7,8 @@ import LinkedInIcon from "../public/icons/linkedin";
 import OpenResumeIcon from "../public/icons/openResume";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { projects } from './data/projects';
-import { history } from './data/history';
+import { projects } from "./data/projects";
+import { history } from "./data/history";
 
 import {
   FaPaintBrush,
@@ -365,8 +365,7 @@ export default function Page() {
       <div
         className="
           absolute inset-0 
-          opacity-[0.05] 
-          bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] 
+          bg-[radial-gradient(rgba(2,66,92,0.07)_1.5px,transparent_1.5px)]
           [background-size:16px_16px] 
           pointer-events-none
           before:absolute 
