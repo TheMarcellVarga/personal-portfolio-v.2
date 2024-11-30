@@ -335,7 +335,7 @@ export default function Page() {
         cancelAnimationFrame(animationFrameId);
       }
     };
-  }, [scrollPositionLocomotive, textToType]);
+  }, [scrollPositionLocomotive]); // Remove textToType from dependencies
 
   const [isOpen, setIsOpen] = useState(false);
   const [footerHover, setFooterHover] = useState(false);
@@ -643,7 +643,7 @@ export default function Page() {
     `}
                 style={{ animationDelay: "0.2s" }}
               >
-                {greeting}, I'm&nbsp;
+                {greeting}, I&apos;m&nbsp;
               </span>
 
               <span
@@ -1178,7 +1178,7 @@ export default function Page() {
                     <span className="text-custom-blue/80">Boundaries</span> 🚀
                   </h2>
                   <p className="text-custom-blue text-left font-bold text-lg md:text-xl max-w-3xl">
-                    Full-stack excellence meets design innovation. Let's
+                    Full-stack excellence meets design innovation. Let&apos;s
                     architect solutions that make an impact.
                   </p>
                 </div>
@@ -1213,7 +1213,7 @@ export default function Page() {
                     className="flex items-center gap-2 text-custom-blue/60 hover:text-custom-blue transition-all duration-300"
                   >
                     <LinkedInIcon className="w-5 h-5" />
-                    <span className="text-sm">Let's connect</span>
+                    <span className="text-sm">Let&apos;s connect</span>
                   </a>
                   <a
                     href="/Marcell-Varga-CV.pdf"
