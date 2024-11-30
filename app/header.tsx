@@ -3,7 +3,7 @@
 import DarkModeIcon from "@/public/icons/darkMode";
 import IndexSigAnimatedIcon from "@/public/icons/indexSigAnimated";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 
 interface HeaderProps {
@@ -24,14 +24,11 @@ const Header: React.FC<HeaderProps> = ({
   scrollToContact,
 }) => {
   const router = useRouter();
-
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollTop, setLastScrollTop] = useState(0);
-  const [pendingScrollAction, setPendingScrollAction] = useState<
-    (() => void) | null
-  >(null);
+  const [pendingScrollAction, setPendingScrollAction] = useState<(() => void) | null>(null);
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     if (scrollTop > lastScrollTop && scrollTop > 100) {
       setIsVisible(false);
@@ -39,7 +36,7 @@ const Header: React.FC<HeaderProps> = ({
       setIsVisible(true);
     }
     setLastScrollTop(scrollTop);
-  };
+  }, [lastScrollTop]);
 
   useEffect(() => {
     if (pendingScrollAction) {
