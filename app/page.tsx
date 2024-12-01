@@ -438,7 +438,7 @@ export default function Page() {
             <p className="text-xs sm:text-sm text-custom-blue/80 mt-1 text-center sm:text-left">
               Ready to explore! Want to see the legacy version?{" "}
               <a
-                href="YOUR_LEGACY_SITE_URL"
+                href="https://personal-portfolio-v-1.vercel.app"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-custom-blue hover:text-custom-teal underline transition-colors duration-300"
