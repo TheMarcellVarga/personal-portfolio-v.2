@@ -250,7 +250,7 @@ export default function Page() {
         setTimeout(() => {
           setShowLegacyNotice(false);
         }, 500);
-      }, 10000);
+      }, 7500);
 
       return () => clearTimeout(timer);
     }
@@ -436,7 +436,7 @@ export default function Page() {
               🚧 Website under development
             </p>
             <p className="text-xs sm:text-sm text-custom-blue/80 mt-1 text-center sm:text-left">
-              Ready to explore! Want to see the legacy version?{" "}
+              Want to see the legacy version?{" "}
               <a
                 href="https://personal-portfolio-v-1.vercel.app"
                 target="_blank"
