@@ -26,7 +26,9 @@ const Header: React.FC<HeaderProps> = ({
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollTop, setLastScrollTop] = useState(0);
-  const [pendingScrollAction, setPendingScrollAction] = useState<(() => void) | null>(null);
+  const [pendingScrollAction, setPendingScrollAction] = useState<
+    (() => void) | null
+  >(null);
 
   const handleScroll = useCallback(() => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -86,7 +88,7 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <header
       className={`sticky-header flex justify-between items-center w-full p-4 transition-opacity duration-500 ${
-        isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+        isVisible && !isOpen ? "opacity-100" : isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >
       <div className="flex items-center">
@@ -120,54 +122,50 @@ const Header: React.FC<HeaderProps> = ({
         <div className={`nav-overlay ${isOpen ? "open" : ""}`}>
           <div
             className={`${
-              isOpen ? "flex flex-col space-y-8 items-start" : "hidden"
-            } md:flex md:flex-row md:space-x-4 md:space-y-0 h-full mt-16`}
+              isOpen
+                ? "flex flex-col space-y-12 items-center justify-center w-full px-6"
+                : "hidden"
+            } md:flex md:flex-row md:space-x-4 md:space-y-0`}
           >
             <Link href="/about">
               <div
-                className={`relative inline-block font-medium tracking-wider group ${
+                className={`relative inline-block group w-full text-center ${
                   isOpen
-                    ? "text-5xl md:text-6xl lg:text-7xl text-gray-100"
+                    ? "text-3xl font-semibold text-custom-blue/90 active:text-custom-blue"
                     : "text-lg md:text-xl lg:text-2xl text-custom-blue"
                 }`}
               >
                 About
                 <span
-                  className={`absolute bottom-0 left-0 w-full h-0.5 transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100 ${
-                    isOpen ? "bg-gray-100" : "bg-custom-blue"
-                  }`}
+                  className={`absolute -bottom-2 left-0 w-full h-[2px] transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100 bg-custom-blue`}
                 ></span>
               </div>
             </Link>
             <Link href="/work">
               <div
-                className={`relative inline-block font-medium tracking-wider group ${
+                className={`relative inline-block group w-full text-center ${
                   isOpen
-                    ? "text-5xl md:text-6xl lg:text-7xl text-gray-100"
+                    ? "text-3xl font-semibold text-custom-blue/90 active:text-custom-blue"
                     : "text-lg md:text-xl lg:text-2xl text-custom-blue"
                 }`}
               >
                 Work
                 <span
-                  className={`absolute bottom-0 left-0 w-full h-0.5 transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100 ${
-                    isOpen ? "bg-gray-100" : "bg-custom-blue"
-                  }`}
+                  className={`absolute -bottom-2 left-0 w-full h-[2px] transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100 bg-custom-blue`}
                 ></span>
               </div>
             </Link>
             <Link href="/contact">
               <div
-                className={`relative inline-block font-medium tracking-wider group ${
+                className={`relative inline-block group w-full text-center ${
                   isOpen
-                    ? "text-5xl md:text-6xl lg:text-7xl text-gray-100"
+                    ? "text-3xl font-semibold text-custom-blue/90 active:text-custom-blue"
                     : "text-lg md:text-xl lg:text-2xl text-custom-blue"
                 }`}
               >
                 Contact
                 <span
-                  className={`absolute bottom-0 left-0 w-full h-0.5 transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100 ${
-                    isOpen ? "bg-gray-100" : "bg-custom-blue"
-                  }`}
+                  className={`absolute -bottom-2 left-0 w-full h-[2px] transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100 bg-custom-blue`}
                 ></span>
               </div>
             </Link>

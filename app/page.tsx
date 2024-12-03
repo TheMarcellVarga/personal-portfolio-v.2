@@ -245,12 +245,15 @@ export default function Page() {
 
   useEffect(() => {
     if (showLegacyNotice && !isHoveringLegacyNotice) {
-      const timer = setTimeout(() => {
-        setIsNoticeVisible(false);
-        setTimeout(() => {
-          setShowLegacyNotice(false);
-        }, 500);
-      }, 7500);
+      const timer = setTimeout(
+        () => {
+          setIsNoticeVisible(false);
+          setTimeout(() => {
+            setShowLegacyNotice(false);
+          }, 500);
+        },
+        isMobile ? 5000 : 7500
+      );
 
       return () => clearTimeout(timer);
     }
@@ -501,7 +504,7 @@ export default function Page() {
             <div
               className={`
       absolute 
-      mt-4 
+      mt-12 
       w-full
       h-screen 
       z-20 
@@ -515,7 +518,7 @@ export default function Page() {
           ? `
         px-6
         pb-48
-        text-center
+        text-center 
         items-center
       `
           : `
@@ -531,7 +534,9 @@ export default function Page() {
             >
               <span
                 className={`
-      text-gray-700 
+      text-gray-700
+      w-full
+      text-start
       font-light 
       whitespace-nowrap
       animate-fade-in-up 
@@ -544,27 +549,29 @@ export default function Page() {
               >
                 {greeting}, I&apos;m&nbsp;
               </span>
-
               <span
                 className={`
+                  font-bold
+                        w-full
+      text-start
       text-custom-blue 
-      font-bold 
       whitespace-nowrap
       animate-fade-in-up
       ${
         isMobile
           ? "text-4xl"
-          : "text-[44px] leading-[50px] sm:text-5xl md:text-6xl lg:text-7xl"
+          : "text-[44px] leading-[50px] text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
       }
     `}
                 style={{ animationDelay: "0.4s" }}
               >
                 Marcell Varga
               </span>
-
               <div
                 className={`
       flex 
+            w-full
+      text-start
       max-w-full 
       font-light 
       items-center 
@@ -576,7 +583,7 @@ export default function Page() {
           ? `
         text-lg
         mb-3
-        justify-center
+        justify-start 
       `
           : `
         text-xl sm:text-2xl md:text-3xl lg:text-4xl
@@ -589,24 +596,63 @@ export default function Page() {
               >
                 UX & Frontend engineer
               </div>
-
               <div
-                className="absolute bottom-36 md:bottom-36 left-0 pl-4 md:pl-10
+                className={`
+    flex flex-col sm:flex-row 
+    w-full
+
+    text-sm sm:text-base md:text-base lg:text-lg
+    font-light 
+    items-start 
+    justify-start 
+    mt-2 md:mt-8
+    text-custom-blue/60
+    transform 
+    animate-fade-in-up
+    group
+    transition-all duration-300
+    hover:text-custom-blue/80
+  `}
+                style={{ animationDelay: "0.8s" }}
+              >
+                {/* Mobile version (split into two lines) */}
+                <span className="sm:hidden text-left group-hover:translate-x-1 transition-transform duration-300">
+                  {" "}
+                  {/* Added text-left */}
+                  Crafting intuitive digital experiences where
+                </span>
+                <span className="sm:hidden text-left font-medium text-custom-blue/70 group-hover:translate-x-1 transition-transform duration-300">
+                  {" "}
+                  {/* Added text-left */}
+                  design meets engineering excellence
+                </span>
+
+                {/* Desktop version (single line) */}
+                <span className="hidden text-left sm:block italic group-hover:translate-x-1 transition-transform duration-300">
+                  Crafting intuitive digital experiences where
+                  <br />
+                  <span className="font-medium text-custom-blue/70">
+                    design meets engineering excellence
+                  </span>
+                </span>
+              </div>{" "}
+              <div
+                className="absolute bottom-40 md:bottom-44 left-0 pl-6 md:pl-10
     animate-fade-in-up"
                 style={{ animationDelay: "1s" }}
               >
-                <button className="relative px-5 py-2 text-custom-blue rounded-full group overflow-hidden min-w-36 flex items-center justify-center">
-                  <span className="relative z-10 transition-all duration-300 group-hover:text-gray-50 mr-2">
+                <button className="relative flex px-3 sm:px-5 py-1.5 sm:py-2 text-custom-blue rounded-full group overflow-hidden min-w-28 sm:min-w-36 items-center justify-center">
+                  <span className="relative z-10 transition-all duration-300 group-hover:text-gray-50 mr-2 text-sm sm:text-base">
                     View Projects
                   </span>
                   <ArrowRightIcon
-                    className="w-5 h-5 relative z-10 group-hover:text-gray-50
-        transform group-hover:translate-x-1 transition-all duration-300 inline-block"
+                    className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover:text-gray-50
+    transform group-hover:translate-x-1 transition-all duration-300 inline-block"
                   />
                   <div className="absolute inset-0 border-2 border-custom-blue rounded-full"></div>
                   <div
                     className="absolute inset-0 bg-custom-blue rounded-full transform scale-x-0 group-hover:scale-x-100 
-        transition-transform duration-300 ease-out origin-left"
+    transition-transform duration-300 ease-out origin-left"
                   ></div>
                 </button>
               </div>
@@ -685,7 +731,6 @@ export default function Page() {
                   </defs>
                 </svg>{" "}
               </div>
-
               <div
                 data-scroll
                 data-scroll-speed="0.4"
@@ -696,16 +741,18 @@ export default function Page() {
     z-10
     opacity-0 
     animate-fade-in-up
+    
     ${
       isMobile
         ? `
-      w-32
-      bottom-12
-      right-1/2
+      w-40
+      bottom-0
+      right-4
+      md:right-1/2
       translate-x-1/2
     `
         : `
-      w-48 sm:w-48 md:w-80 lg:w-96 
+      w-40 sm:w-48 md:w-80 lg:w-96 
       bottom-0 
       right-3 md:right-16
     `
@@ -724,7 +771,7 @@ export default function Page() {
                   className="w-full h-full object-cover rounded-lg
       transform transition-all duration-500 ease-out"
                 />
-              </div>
+              </div>{" "}
             </div>
           </div>
           <div
@@ -741,7 +788,7 @@ export default function Page() {
       group-hover:text-custom-blue/90
       transition-all duration-300"
               >
-                Scroll to Explore
+                {isMobile ? "Swipe to Explore" : "Scroll to Explore"}
               </span>
               <div className="relative">
                 <svg
@@ -770,8 +817,8 @@ export default function Page() {
           data-scroll-offset="50"
           className="sticky h-[400vh] top-0 flex flex-col items-center justify-between gap-1 w-full transition-all duration-300"
         >
-          <div className="flex w-4/5 h-screen text-5xl font-medium items-center justify-start">
-            <h2 className="text-2xl font-light text-justify m-8 leading-relaxed text-custom-blue transition-opacity duration-300">
+          <div className="flex md:w-4/5 h-screen text-5xl font-medium items-center justify-start">
+            <h2 className="text-2xl font-light text-left md:text-justify m-8 leading-relaxed text-custom-blue transition-opacity duration-300">
               {typedText}
             </h2>
           </div>
@@ -1072,11 +1119,11 @@ export default function Page() {
             <div className="relative bg-gray-100/90 rounded-xl p-8 md:p-12 border border-custom-blue/10">
               <div className="flex flex-col md:flex-row gap-8 items-center">
                 <div className="relative z-10 transform group-hover:scale-[1.02] transition-transform duration-500">
-                  <h2 className="text-3xl md:text-4xl font-bold text-custom-blue text-left mb-6 tracking-tight">
+                  <h2 className="text-xl md:text-4xl font-bold text-custom-blue text-left mb-6 tracking-tight">
                     Building Beyond&nbsp;
                     <span className="text-custom-blue/80">Boundaries</span> 🚀
                   </h2>
-                  <p className="text-custom-blue text-left font-bold text-lg md:text-xl max-w-3xl">
+                  <p className="text-custom-blue text-left font-bold text-base md:text-xl max-w-3xl">
                     Full-stack excellence meets design innovation. Let&apos;s
                     architect solutions that make an impact.
                   </p>
