@@ -235,7 +235,7 @@ export default function Page() {
         cancelAnimationFrame(animationFrameId);
       }
     };
-  }, [scrollPositionLocomotive]); // Remove textToType from dependencies
+  }, [scrollPositionLocomotive]);
 
   const [isOpen, setIsOpen] = useState(false);
   const [footerHover, setFooterHover] = useState(false);
@@ -764,6 +764,7 @@ export default function Page() {
                   alt="Profile Picture"
                   width={300}
                   height={300}
+                  priority={true}
                   style={{
                     animationDelay: "0.8s",
                     animationFillMode: "forwards",
