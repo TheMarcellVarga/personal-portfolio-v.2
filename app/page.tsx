@@ -78,6 +78,15 @@ import useWindowSize from "./useWindowSize";
 const textToType =
   "An adventurous UX & Frontend engineer dedicated to crafting delightful, business-focused, and user-centred digital experiences. I excel at solving complex problems through efficient design, turning challenges into opportunities. Overcoming challenges through efficient design is what fuelling my everyday drive.";
 
+const getGreeting = () => {
+  const hour = new Date().getHours();
+
+  if (hour >= 5 && hour < 12) return "Good morning";
+  if (hour >= 12 && hour < 17) return "Good afternoon";
+  if (hour >= 17 && hour < 22) return "Good evening";
+  return "Hey there";
+};
+
 export default function Page() {
   const globeRef = useRef<any>();
 
@@ -258,24 +267,25 @@ export default function Page() {
     }
   }, []);
 
-  const getInitialMobileState = () => {
-    if (typeof window === 'undefined') return false;
-    return window.innerWidth <= 768;
-  };
-  
-  const [isMobile, setIsMobile] = useState(getInitialMobileState);
-  
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window !== "undefined") {
+      return window.innerWidth <= 768;
+    }
+    return false;
+  });
+
   useEffect(() => {
-    setIsMobile(window.innerWidth <= 768);
-    
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-  
+
+    handleResize();
+
     window.addEventListener("resize", handleResize);
+
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  
+
   const size = useWindowSize();
 
   const scrollToHome = useCallback(() => {
@@ -322,26 +332,9 @@ export default function Page() {
     }
   }, []);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [greeting, setGreeting] = useState(getGreeting());
 
   useEffect(() => {
-    setIsLoading(false);
-  }, []);
-
-  const [greeting, setGreeting] = useState("Hey there");
-
-  useEffect(() => {
-    const getGreeting = () => {
-      const hour = new Date().getHours();
-
-      if (hour >= 5 && hour < 12) return "Good morning";
-      if (hour >= 12 && hour < 17) return "Good afternoon";
-      if (hour >= 17 && hour < 22) return "Good evening";
-      return "Hey there";
-    };
-
-    setGreeting(getGreeting());
-
     const timer = setInterval(() => {
       setGreeting(getGreeting());
     }, 60000);
@@ -358,16 +351,6 @@ export default function Page() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  if (!isClient) {
-    return null; // or a loading spinner
-  }
 
   return (
     <div
@@ -549,11 +532,23 @@ export default function Page() {
       }
     `}
             >
-              {!isLoading && (
-                <span className="text-gray-700 w-full text-start font-light whitespace-nowrap animate-fade-in-up transition-opacity duration-300">
-                  {greeting}, I&apos;m&nbsp;
-                </span>
-              )}
+              <span
+                className={`
+      text-gray-700
+      w-full
+      text-start
+      font-light 
+      whitespace-nowrap
+      animate-fade-in-up 
+      transition-opacity 
+      duration-300
+      ${isMobile ? "text-base" : "text-base sm:text-lg md:text-xl lg:text-2xl"}
+      pb-2
+    `}
+                style={{ animationDelay: "0.2s" }}
+              >
+                {greeting}, I&apos;m&nbsp;
+              </span>
               <span
                 className={`
                   font-bold
@@ -562,7 +557,11 @@ export default function Page() {
       text-custom-blue 
       whitespace-nowrap
       animate-fade-in-up
-      text-4xl sm:text-5xl md:text-6xl lg:text-7xl
+      ${
+        isMobile
+          ? "text-4xl"
+          : "text-[44px] leading-[50px] text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
+      }
     `}
                 style={{ animationDelay: "0.4s" }}
               >
@@ -765,12 +764,12 @@ export default function Page() {
                   alt="Profile Picture"
                   width={300}
                   height={300}
-                  priority
                   style={{
                     animationDelay: "0.8s",
                     animationFillMode: "forwards",
                   }}
-                  className="w-full h-full object-cover rounded-lg transform transition-all duration-500 ease-out"
+                  className="w-full h-full object-cover rounded-lg
+      transform transition-all duration-500 ease-out"
                 />
               </div>{" "}
             </div>
