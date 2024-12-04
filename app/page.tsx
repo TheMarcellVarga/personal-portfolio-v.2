@@ -759,12 +759,11 @@ export default function Page() {
     }
   `}
               >
-                <Image
+                <img
                   src="/images/personalpageprofilealt.png"
                   alt="Profile Picture"
                   width={300}
                   height={300}
-                  priority={true}
                   style={{
                     animationDelay: "0.8s",
                     animationFillMode: "forwards",
@@ -971,7 +970,7 @@ export default function Page() {
           transition-all duration-500
         "
                           >
-                            <Image
+                            <img
                               src={project.image}
                               alt={project.title}
                               width={

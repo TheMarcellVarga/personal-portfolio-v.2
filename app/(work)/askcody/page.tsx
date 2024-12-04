@@ -323,6 +323,7 @@ const history = [
   },
 ];
 
+
 const AskCody = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isHover, setIsHover] = useState(false);
@@ -451,7 +452,7 @@ const AskCody = () => {
                               transition-opacity duration-500 z-10
                             "
                           />
-                          <Image
+                          <img
                             src={item.content.picture}
                             alt="ESS Hero"
                             width={1200}
@@ -463,7 +464,6 @@ const AskCody = () => {
                               transform transition-all duration-700 
                               group-hover:scale-[1.02] sm:group-hover:scale-[1.03] md:group-hover:scale-105
                             "
-                            priority
                             sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, 85vw"
                           />
                         </div>
@@ -624,12 +624,11 @@ const AskCody = () => {
                                                         : "aspect-[16/9]"
                                                     }`}
                                                   >
-                                                    <Image
-                                                      src={item.url}
+                                                    <img
+                                                      src={typeof item.url === 'string' ? item.url : (item.url as any).src}
                                                       alt={`Picture ${
                                                         pictureIndex + 1
                                                       }`}
-                                                      fill
                                                       className="object-contain rounded-md transition-all duration-300"
                                                       sizes={
                                                         item.isPair ||
@@ -678,16 +677,10 @@ const AskCody = () => {
                                                       } flex items-center justify-center group`}
                                                     >
                                                       <div className="w-full relative flex items-center justify-center aspect-[16/9]">
-                                                        <Image
+                                                        <img
                                                           src={currentPic ?? ""}
                                                           alt={`Sub-picture ${index}`}
-                                                          fill
                                                           className="object-contain rounded-md transform transition-all duration-500 group-hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]"
-                                                          sizes={
-                                                            isPartOfPair
-                                                              ? "(max-width: 768px) 100vw, calc(90vw + 2rem)"
-                                                              : "(max-width: 768px) 100vw, 75vw"
-                                                          }
                                                         />
                                                       </div>
                                                     </div>
@@ -762,7 +755,7 @@ const AskCody = () => {
                         <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] [background-size:16px_16px] pointer-events-none group-hover:scale-[1.5] transition-transform duration-1000" />
                         <div className="w-32 relative overflow-hidden flex justify-center items-center group-hover:scale-[1.01] transition-transform duration-300">
                           <div className="w-full h-full relative rounded-md overflow-hidden shadow-sm">
-                            <Image
+                            <img
                               src={project.image}
                               alt={project.title}
                               width={160}
