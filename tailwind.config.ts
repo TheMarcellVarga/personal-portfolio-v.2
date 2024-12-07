@@ -6,6 +6,7 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       backgroundImage: {
@@ -35,11 +36,17 @@ const config: Config = {
           '0%': { opacity: '0', transform: 'translateX(20px)' },
           '100%': { opacity: '1', transform: 'translateX(0)' },
         },
+        scrollDown: {
+          '0%': { transform: 'translateY(-100%)' },
+          '100%': { transform: 'translateY(300%)' }
+        }
       },
       animation: {
         fadeIn: 'fadeIn 0.5s ease-out forwards',
         fadeInLeft: 'fadeInLeft 0.5s ease-out forwards',
         fadeInRight: 'fadeInRight 0.5s ease-out forwards',
+        scrollDown: 'scrollDown 1.5s ease-in-out infinite',
+        bounce: 'bounce 1s infinite'
       },
       transitionProperty: {
         'scroll': 'transform, opacity',
@@ -49,18 +56,9 @@ const config: Config = {
       },
       transitionDuration: {
         'scroll': '1s',
-      },
-      scrollDown: 'scrollDown 1.5s ease-in-out infinite',
-      bounce: 'bounce 1s infinite',
-      },
-      keyframes: {
-        scrollDown: {
-          '0%': { transform: 'translateY(-100%)' },
-          '100%': { transform: 'translateY(300%)' }
-        }
       }
     },
-  darkMode: "class",
+  },
   plugins: [],
 };
 
