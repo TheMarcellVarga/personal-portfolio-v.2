@@ -373,7 +373,7 @@ export default function Page() {
           pointer-events-none
           before:absolute 
           before:inset-0 
-          before:bg-gradient-to-b 
+          before:bg-linear-to-b 
           before:from-transparent 
           before:to-gray-200/50 
           before:backdrop-blur-[1px]
@@ -410,7 +410,7 @@ export default function Page() {
       text-custom-blue 
       rounded-xl
       shadow-lg 
-      backdrop-blur-sm 
+      backdrop-blur-xs 
       border border-custom-blue/10
       
       /* Padding Adjustments */
@@ -499,7 +499,7 @@ export default function Page() {
             data-scroll
             data-scroll-speed="1.2"
             data-scroll-delay="0.1"
-            className="flex-grow pb-8 w-full flex flex-row items-center justify-strech gap-2 fade-top-bottom"
+            className="grow pb-8 w-full flex flex-row items-center justify-strech gap-2 fade-top-bottom"
           >
             <div
               className={`
@@ -891,7 +891,7 @@ export default function Page() {
                 bg-custom-blue text-white px-2 py-1 rounded text-xs
                 opacity-0 group-hover:opacity-100 transition-all duration-200
                 pointer-events-none whitespace-nowrap md:hidden
-                shadow-lg backdrop-blur-sm"
+                shadow-lg backdrop-blur-xs"
                           >
                             {skill.name}
                           </div>
@@ -934,13 +934,13 @@ export default function Page() {
     md:px-8 md:py-6
     rounded-xl
     transition-all duration-500 ease-out 
-    bg-gradient-to-br from-gray-100/95 to-gray-100/90
+    bg-linear-to-br from-gray-100/95 to-gray-100/90
     hover:bg-neutral-100/95
     group
     items-center
     border border-transparent
     hover:border-custom-blue/10
-    backdrop-blur-sm
+    backdrop-blur-xs
     relative
     overflow-hidden
   `}
@@ -961,9 +961,9 @@ export default function Page() {
                           <div
                             className="
           w-full
-          aspect-[3/2]
+          aspect-3/2
           sm:w-full sm:h-full
-          md:aspect-[3/2]
+          md:aspect-3/2
           relative rounded-lg overflow-hidden
           shadow-[0_8px_30px_rgba(2,66,92,0.12)]
           group-hover:shadow-[0_15px_60px_rgba(2,66,92,0.2)]

@@ -323,7 +323,6 @@ const history = [
   },
 ];
 
-
 const AskCody = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isHover, setIsHover] = useState(false);
@@ -379,7 +378,7 @@ const AskCody = () => {
           pointer-events-none
           before:absolute 
           before:inset-0 
-          before:bg-gradient-to-b 
+          before:bg-linear-to-b 
           before:from-transparent 
           before:to-gray-200/50 
           before:backdrop-blur-[1px]
@@ -398,31 +397,42 @@ const AskCody = () => {
           data-scroll-section-id="hero"
           className="flex flex-col items-center justify-between m-4 gap-1 w-full"
         >
-          <div className="flex-grow pb-12 w-full flex flex-row items-center justify-center gap-2">
+          <div className="grow pb-12 w-full flex flex-row items-center justify-center gap-2">
             <section className="flex flex-col items-center justify-between my-4 gap-24 w-4/5">
               <article className="mt-16 mb-24 w-full p-4">
                 <div className="relative">
-                  <div
-                    className="absolute inset-0 bg-gradient-to-r from-custom-blue/10 to-transparent 
-                    rounded-2xl transform -skew-y-2 h-32 -z-10"
-                  />
-
-                  <div className="animate-fade-in-up flex flex-col gap-1 py-8 px-4">
-                    <h2
-                      className="text-custom-blue text-6xl font-extrabold tracking-tight
-                      transform hover:translate-x-2 transition-all duration-300
-                      bg-gradient-to-r from-custom-blue to-custom-blue/80 
-                      bg-clip-text text-transparent
-                      leading-tight"
-                    >
-                      AskCody
-                    </h2>
-                    <h2
-                      className="text-gray-700 text-xl font-bold tracking-widest uppercase
-                      transform hover:translate-x-2 transition-all duration-300"
-                    >
-                      Hybrid Office Manager
-                    </h2>
+                  <div className="animate-fade-in-up flex flex-row justify-between items-start py-8 px-4">
+                    <div className="flex flex-col gap-1 w-full">
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center sm:gap-0 w-full">
+                        <div className="flex flex-col sm:gap-2 w-full">
+                          <div className="flex flex-row justify-between items-center w-full">
+                            <h2
+                              className="text-5xl sm:text-6xl font-extrabold tracking-tight
+              transform hover:translate-x-2 transition-all duration-300
+              bg-linear-to-r from-custom-blue to-custom-blue/80 
+              bg-clip-text text-transparent
+              leading-tight"
+                            >
+                              AskCody
+                            </h2>
+                            <span
+                              className="text-lg sm:text-2xl font-bold text-gray-500
+              transform hover:translate-x-2 transition-all duration-300
+                              self-start sm:self-center
+              mt-5 sm:mt-0"
+                            >
+                              2021
+                            </span>
+                          </div>
+                          <h2
+                            className="text-gray-700 text-xl font-bold tracking-widest uppercase
+            transform hover:translate-x-2 transition-all duration-300"
+                          >
+                            Hybrid Office Manager
+                          </h2>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="flex flex-col gap-16 mt-16">
@@ -447,7 +457,7 @@ const AskCody = () => {
                           <div
                             className="
                               absolute inset-0 
-                              bg-gradient-to-br from-custom-blue/3 sm:from-custom-blue/4 md:from-custom-blue/5 to-transparent
+                              bg-linear-to-br from-custom-blue/3 sm:from-custom-blue/4 md:from-custom-blue/5 to-transparent
                               opacity-0 group-hover:opacity-100
                               transition-opacity duration-500 z-10
                             "
@@ -495,7 +505,7 @@ const AskCody = () => {
                               {desc.text && (
                                 <div
                                   className="py-4 text-custom-blue/80 group-hover:text-custom-blue 
-                                  transition-all duration-300 backdrop-blur-sm"
+                                  transition-all duration-300 backdrop-blur-xs"
                                 >
                                   {Array.isArray(desc.text) ? (
                                     desc.text.map((text, index) => (
@@ -617,15 +627,21 @@ const AskCody = () => {
                                                     className={`w-full relative flex items-center justify-center ${
                                                       item.heightMultiplier ===
                                                       3
-                                                        ? "aspect-[16/36]"
+                                                        ? "aspect-16/36"
                                                         : item.heightMultiplier ===
                                                           2
-                                                        ? "aspect-[16/18]"
-                                                        : "aspect-[16/9]"
+                                                        ? "aspect-16/18"
+                                                        : "aspect-16/9"
                                                     }`}
                                                   >
                                                     <img
-                                                      src={typeof item.url === 'string' ? item.url : (item.url as any).src}
+                                                      src={
+                                                        typeof item.url ===
+                                                        "string"
+                                                          ? item.url
+                                                          : (item.url as any)
+                                                              .src
+                                                      }
                                                       alt={`Picture ${
                                                         pictureIndex + 1
                                                       }`}
@@ -676,7 +692,7 @@ const AskCody = () => {
                                                           : "w-[75%]"
                                                       } flex items-center justify-center group`}
                                                     >
-                                                      <div className="w-full relative flex items-center justify-center aspect-[16/9]">
+                                                      <div className="w-full relative flex items-center justify-center aspect-16/9">
                                                         <img
                                                           src={currentPic ?? ""}
                                                           alt={`Sub-picture ${index}`}
@@ -718,7 +734,7 @@ const AskCody = () => {
           </div>
           <section className="w-full flex justify-center items-center mb-16">
             <div className="flex flex-col items-center w-4/5 max-w-2xl">
-              <div className="w-full h-px bg-gradient-to-r from-transparent via-custom-blue/60 to-transparent mb-8" />
+              <div className="w-full h-px bg-linear-to-r from-transparent via-custom-blue/60 to-transparent mb-8" />
               <h2 className="text-custom-blue text-xl font-bold mb-6">
                 More Projects
               </h2>
@@ -741,20 +757,20 @@ const AskCody = () => {
                           px-4 py-3      
                           rounded-lg           
                           transition-all duration-300 ease-out 
-                          bg-gradient-to-br from-gray-100/95 to-gray-100/90
+                          bg-linear-to-br from-gray-100/95 to-gray-100/90
                           hover:bg-neutral-100/95
                           group
                           items-center         
                           border border-transparent
                           hover:border-custom-blue/10
-                          backdrop-blur-sm
+                          backdrop-blur-xs
                           relative
                           overflow-hidden
                         `}
                       >
                         <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] [background-size:16px_16px] pointer-events-none group-hover:scale-[1.5] transition-transform duration-1000" />
                         <div className="w-32 relative overflow-hidden flex justify-center items-center group-hover:scale-[1.01] transition-transform duration-300">
-                          <div className="w-full h-full relative rounded-md overflow-hidden shadow-sm">
+                          <div className="w-full h-full relative rounded-md overflow-hidden shadow-xs">
                             <img
                               src={project.image}
                               alt={project.title}
@@ -764,7 +780,7 @@ const AskCody = () => {
                             />
                           </div>
                         </div>
-                        <div className="flex flex-col flex-grow gap-1">
+                        <div className="flex flex-col grow gap-1">
                           <div className="flex items-center justify-between">
                             <div>
                               <h3 className="text-lg font-bold text-custom-blue group-hover:text-custom-blue/90 transition-colors duration-300">
