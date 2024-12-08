@@ -702,14 +702,10 @@ export default function Page() {
                 </svg>{" "}
               </div>
               <div
-                data-scroll
-                data-scroll-speed="0.4"
-                data-scroll-delay="0.1"
                 className={`
     absolute 
     transform 
     z-10
-    opacity-0 
     animate-fade-in-up
     
       w-40 sm:w-48 md:w-80 lg:w-96 
@@ -746,11 +742,9 @@ export default function Page() {
       group-hover:text-custom-blue/90
       transition-all duration-300"
               >
-                {isMobile ? (
-                  <span className="sm:hidden">Swipe to Explore</span>
-                ) : (
-                  <span className="hidden sm:inline">Scroll to Explore</span>
-                )}
+                <span className="sm:hidden">
+                  {isMobile ? "Swipe" : "Scroll"} to explore
+                </span>
               </span>
               <div className="relative">
                 <svg
