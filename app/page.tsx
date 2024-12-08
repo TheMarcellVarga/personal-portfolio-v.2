@@ -742,9 +742,7 @@ export default function Page() {
       group-hover:text-custom-blue/90
       transition-all duration-300"
               >
-                <span className="sm:hidden">
-                  {isMobile ? "Swipe" : "Scroll"} to explore
-                </span>
+                {isMobile ? "Swipe" : "Scroll"} to explore
               </span>
               <div className="relative">
                 <svg
