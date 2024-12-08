@@ -395,37 +395,44 @@ const AskCody = () => {
         <main
           data-scroll-container
           data-scroll-section-id="hero"
-          className="flex flex-col items-center justify-between m-4 gap-1 w-full"
+          className="flex flex-col items-center justify-between sm:m-4 gap-1 w-full"
         >
           <div className="grow pb-12 w-full flex flex-row items-center justify-center gap-2">
             <section className="flex flex-col items-center justify-between my-4 gap-24 w-4/5">
-              <article className="mt-16 mb-24 w-full p-4">
+              <article className="mt-16 mb-24 w-full sm:p-4">
                 <div className="relative">
-                  <div className="animate-fade-in-up flex flex-row justify-between items-start py-8 px-4">
+                  <div className="animate-fade-in-up flex flex-row justify-between items-start sm:py-8 sm:px-4">
                     <div className="flex flex-col gap-1 w-full">
-                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center sm:gap-0 w-full">
-                        <div className="flex flex-col sm:gap-2 w-full">
-                          <div className="flex flex-row justify-between items-center w-full">
+                      <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-4 sm:gap-0">
+                        <div className="flex flex-col gap-1 sm:gap-2 w-full ">
+                          <div className="flex flex-row justify-between items-center w-full gap-2 sm:gap-0">
                             <h2
-                              className="text-5xl sm:text-6xl font-extrabold tracking-tight
+                              className="text-4xl sm:text-6xl font-extrabold tracking-tight
               transform hover:translate-x-2 transition-all duration-300
               bg-linear-to-r from-custom-blue to-custom-blue/80 
               bg-clip-text text-transparent
-              leading-tight"
+              leading-tight
+              text-center sm:text-left"
                             >
                               AskCody
                             </h2>
                             <span
-                              className="text-lg sm:text-2xl font-bold text-gray-500
-              transform hover:translate-x-2 transition-all duration-300
-                              self-start sm:self-center
-              mt-5 sm:mt-0"
+                              className="
+                                px-3 sm:px-4 py-1
+                                rounded-full 
+                                bg-custom-blue/5 
+                                text-sm sm:text-xl
+                                text-custom-blue/60
+                                transform hover:-translate-x-2 
+                                transition-all duration-300
+                                self-center
+                              "
                             >
                               2022
                             </span>
                           </div>
                           <h2
-                            className="text-gray-700 text-xl font-bold tracking-widest uppercase
+                            className="text-gray-700 text-sm sm:text-xl font-bold tracking-widest uppercase
             transform hover:translate-x-2 transition-all duration-300"
                           >
                             Hybrid Office Manager

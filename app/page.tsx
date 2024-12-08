@@ -1007,11 +1007,18 @@ export default function Page() {
   text-center sm:text-left
 "
                         >
-                          <div className="w-fit group-hover:translate-x-1 transition-transform duration-300">
-                            <div className="text-lg sm:text-lg md:text-2xl text-custom-blue font-bold text-left">
-                              {project.title}
+                          <div className="w-full sm:w-full group-hover:translate-x-1 transition-transform duration-300">
+                            <div className="flex flex-row items-center justify-between w-full">
+                              <div className="text-lg sm:text-lg md:text-2xl text-custom-blue font-bold text-left">
+                                {project.title}
+                              </div>
+                              <div className="flex flex-row items-center justify-end ml-auto">
+                                <span className="px-2 py-1 rounded-full bg-custom-blue/5 text-xs text-custom-blue/60">
+                                  {project.date}
+                                </span>
+                              </div>
                             </div>
-                            <div className="text-sm md:text-base text-custom-blue/80 text-left group-hover:text-custom-blue transition-colors duration-300">
+                            <div className="flex-1 text-sm md:text-base text-custom-blue/80 text-left group-hover:text-custom-blue transition-colors duration-300">
                               {project.subTitle}
                             </div>
                           </div>
