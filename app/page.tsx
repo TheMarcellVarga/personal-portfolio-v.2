@@ -474,10 +474,10 @@ export default function Page() {
         <Header
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-          scrollToHome={scrollToHome}
-          scrollToAbout={scrollToAbout}
-          scrollToWork={scrollToWork}
-          scrollToContact={scrollToContact}
+          // scrollToHome={scrollToHome}
+          // scrollToAbout={scrollToAbout}
+          // scrollToWork={scrollToWork}
+          // scrollToContact={scrollToContact}
         />
         <main
           data-scroll-section
@@ -872,6 +872,7 @@ export default function Page() {
                       key={project.title}
                       data-scroll
                       data-scroll-projects
+                      data-scroll-section-id="projectsContent"
                       data-scroll-speed="0.2"
                       data-scroll-delay="0.2"
                       data-scroll-repeat="true"
