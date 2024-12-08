@@ -1040,9 +1040,10 @@ export default function Page() {
                     <div className="w-full md:w-1/2">
                       <div
                         className="flex flex-col gap-4 relative
-        before:absolute before:left-0 before:top-0 before:w-[2px] 
-        before:h-full before:bg-custom-blue/10 before:-ml-4 
+        before:absolute before:left-0 before:w-[2px] 
+        before:h-[calc(100%+1rem)] before:bg-custom-blue/10 before:-ml-4 
         before:transition-all before:duration-300
+        before:-top-4 sm:before:top-0
         group-hover:before:bg-custom-blue"
                       >
                         <div className="transition-colors duration-300 group-hover:text-custom-blue">
