@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @variant dark (&:is(.dark *));
 
@@ -75,14 +75,6 @@
   }
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
   *,
   ::after,
@@ -110,67 +102,32 @@
 
   &:hover {
     transform: translateY(-4px) rotateX(10deg) rotateY(10deg);
-    box-shadow:
-      0 20px 40px rgba(2, 66, 92, 0.1),
+    box-shadow: 0 20px 40px rgba(2, 66, 92, 0.1),
       0 0 0 1px rgba(2, 66, 92, 0.05);
   }
 }
 
 @layer utilities {
-  /* :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-} */
-
-  /* Light mode */
   body {
     background-color: white;
     color: black;
   }
 
-  /* Dark mode */
   .dark body {
     background-color: black;
     color: white;
   }
 
-  /* globals.css */
   .svg-pink {
     fill: pink;
   }
 
-  /* In your CSS file */
   .light .dark-mode-icon {
     fill: #ffffff;
   }
 
   .dark .dark-mode-icon {
-    fill: #ffffff; /* Dark mode color */
+    fill: #ffffff;
   }
 
   @-webkit-keyframes animate-svg-stroke-1 {
@@ -260,7 +217,6 @@ body {
     animation: animate-svg-stroke-3 1s ease-in-out 1.24s both;
   }
 
-  /* In globals.css */
   .nav-overlay {
     position: fixed;
     top: 0;
@@ -272,7 +228,7 @@ body {
     transition: all 0.3s ease-out;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center the menu items vertically */
+    justify-content: center;
     align-items: center;
     padding: 2rem;
     z-index: 2;
@@ -283,61 +239,53 @@ body {
     transform: translateX(0);
   }
 
-  /* Hamburger menu with increased z-index when open */
   .md\:hidden {
     cursor: pointer;
-    z-index: 2; /* Default z-index */
+    z-index: 2;
   }
 
   .md\:hidden.open {
-    z-index: 5; /* Increased z-index when open */
+    z-index: 5;
   }
 
-  /* Hamburger menu lines */
   .md\:hidden > div {
     transition: all 0.3s ease;
   }
 
-  /* Top line of the hamburger menu */
   .md\:hidden > div:nth-child(1) {
     transform-origin: center;
   }
 
-  /* Middle line of the hamburger menu */
   .md\:hidden > div:nth-child(2) {
     transform-origin: center;
   }
 
-  /* Bottom line of the hamburger menu */
   .md\:hidden > div:nth-child(3) {
     transform-origin: center;
   }
 
-  /* Animation for the hamburger menu to become a cross */
   .md\:hidden.open > div:nth-child(1) {
     transform: translateY(6px) rotate(45deg);
   }
 
   .md\:hidden.open > div:nth-child(2) {
     opacity: 0;
-    transition: none !important; /* Ensures no transition */
+    transition: none !important;
   }
 
   .md\:hidden.open > div:nth-child(3) {
     transform: translateY(-6px) rotate(-45deg);
   }
 
-  /* Hamburger menu with increased z-index when open */
   .md\:hidden {
     cursor: pointer;
-    z-index: 2; /* Default z-index */
+    z-index: 2;
   }
 
   .md\:hidden.open {
-    z-index: 5; /* Increased z-index when open */
+    z-index: 5;
   }
 
-  /* CSS for the close button */
   .close-btn {
     position: absolute;
     top: 1rem;
@@ -349,16 +297,15 @@ body {
     cursor: pointer;
   }
 
-  /* globals.css */
   .sticky-header {
     position: sticky;
     top: 0;
-    z-index: 1000; /* Ensure the header stays on top of other content */
+    z-index: 1000;
     overflow: visible;
   }
 
   .pink-svg {
-    filter: hue-rotate(300deg); /* Adjust the degree value as needed */
+    filter: hue-rotate(300deg);
   }
 
   @keyframes moveDown {
@@ -366,12 +313,12 @@ body {
       transform: translateY(0);
     }
     100% {
-      transform: translateY(15px); /* Adjust the value as needed */
+      transform: translateY(15px);
     }
   }
 
   .animate-moveDown {
-    animation: moveDown 2s infinite alternate ease-in-out; /* Adjust the duration as needed */
+    animation: moveDown 2s infinite alternate ease-in-out;
   }
 
   .globe-container {
@@ -379,12 +326,12 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 500px; /* Adjust based on your desired height */
+    height: 500px;
   }
 
   @media (max-width: 768px) {
     .triangle-bg-svg {
-      transform: scale(-1, -1); /* Scale for mobile devices */
+      transform: scale(-1, -1);
     }
   }
 
@@ -399,7 +346,6 @@ body {
     transition: opacity 0.3s ease;
   }
 
-  /* Add to your global.css */
   html.has-scroll-smooth {
     overflow: hidden;
   }
@@ -412,7 +358,7 @@ body {
     min-height: 100vh;
   }
 
-  [data-scroll-direction='horizontal'] [data-scroll-container] {
+  [data-scroll-direction="horizontal"] [data-scroll-container] {
     height: 100vh;
     display: inline-block;
     white-space: nowrap;
@@ -421,36 +367,27 @@ body {
   .visible {
     opacity: 1 !important;
   }
-  /* In your global.css */
   @media (max-width: 767px) {
     [data-scroll] {
-      /* Mobile-specific scroll behavior */
       transform: none !important;
     }
   }
 
   @media (min-width: 768px) and (max-width: 1024px) {
     [data-scroll] {
-      /* Tablet-specific scroll behavior */
     }
   }
 
-  /* In your global.css */
   @media (max-width: 767px) {
-    /* Mobile styles */
     .locomotive-scroll {
-      /* Custom mobile scroll behavior */
     }
   }
 
   @media (min-width: 768px) and (max-width: 1024px) {
-    /* Tablet styles */
     .locomotive-scroll {
-      /* Custom tablet scroll behavior */
     }
   }
 
-  /* Base styles for smooth scroll */
   html.has-scroll-smooth {
     overflow: hidden;
   }
@@ -463,54 +400,48 @@ body {
     min-height: 100vh;
   }
 
-  /* Make elements with only data-scroll and data-scroll-speed visible by default */
   [data-scroll][data-scroll-speed] {
     opacity: 1 !important;
     transform: none;
     will-change: transform;
   }
 
-  /* Animation styles only apply to elements with specific animation types */
-  [data-scroll='fade'],
-  [data-scroll='fade-up'],
-  [data-scroll='fade-down'],
-  [data-scroll='fade-left'],
-  [data-scroll='fade-right'] {
+  [data-scroll="fade"],
+  [data-scroll="fade-up"],
+  [data-scroll="fade-down"],
+  [data-scroll="fade-left"],
+  [data-scroll="fade-right"] {
     opacity: 0;
     transform: translateY(20px);
-    transition:
-      transform 1s cubic-bezier(0.165, 0.84, 0.44, 1),
+    transition: transform 1s cubic-bezier(0.165, 0.84, 0.44, 1),
       opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
 
-  /* Revealed states for animated elements */
-  [data-scroll='fade'].is-revealed,
-  [data-scroll='fade-up'].is-revealed,
-  [data-scroll='fade-down'].is-revealed,
-  [data-scroll='fade-left'].is-revealed,
-  [data-scroll='fade-right'].is-revealed {
+  [data-scroll="fade"].is-revealed,
+  [data-scroll="fade-up"].is-revealed,
+  [data-scroll="fade-down"].is-revealed,
+  [data-scroll="fade-left"].is-revealed,
+  [data-scroll="fade-right"].is-revealed {
     opacity: 1;
     transform: none;
   }
 
-  /* Specific animation starting positions */
-  [data-scroll='fade-up'] {
+  [data-scroll="fade-up"] {
     transform: translateY(50px);
   }
 
-  [data-scroll='fade-down'] {
+  [data-scroll="fade-down"] {
     transform: translateY(-50px);
   }
 
-  [data-scroll='fade-left'] {
+  [data-scroll="fade-left"] {
     transform: translateX(-50px);
   }
 
-  [data-scroll='fade-right'] {
+  [data-scroll="fade-right"] {
     transform: translateX(50px);
   }
 
-  /* Speed-based animations */
   .is-scrolling-fast [data-scroll] {
     transition-duration: 0.6s;
   }
@@ -519,13 +450,11 @@ body {
     transition-duration: 1.2s;
   }
 
-  /* Make sure sections are always visible */
   [data-scroll-section] {
     opacity: 1 !important;
     transform: none !important;
   }
 
-  /* Ensure visibility */
   .visible {
     opacity: 1 !important;
   }
@@ -541,7 +470,6 @@ body {
     transition: all 0.7s ease-out;
   }
 
-  /* Add these classes for scroll direction handling */
   html.is-scrolling-up [data-scroll].fade-in {
     opacity: 0 !important;
     transform: translateY(-20px) !important;
@@ -581,7 +509,6 @@ body {
   }
 }
 
-/* SIGMA ANIMATIONS THAT HIT DIFFERENT */
 @keyframes fade-in-up {
   0% {
     opacity: 0;
@@ -624,10 +551,9 @@ body {
   }
 }
 
-/* UTILITY CLASSES THAT SLAP */
 .animate-fade-in-up {
   animation: fade-in-up 0.8s ease-out forwards;
-  opacity: 0; /* Start invisible */
+  opacity: 0;
 }
 
 .animate-bounce-slow {
@@ -636,26 +562,22 @@ body {
 
 .animate-fade-in {
   animation: fadeIn 1s ease-out forwards;
-  opacity: 0; /* Start invisible */
+  opacity: 0;
 }
 
-/* HOVER EFFECTS THAT GO CRAZY */
 .hover-gradient {
   background-size: 200% 200%;
   animation: gradient-shift 3s ease infinite;
 }
 
-/* SMOOTH SCROLLING FOR THAT BUTTER EXPERIENCE */
 html {
   scroll-behavior: smooth;
 }
 
-/* TRANSITIONS THAT FEEL LIKE BUTTER */
 .transition-all-smooth {
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* TEXT GRADIENT ANIMATION */
 .text-gradient {
   background: linear-gradient(
     45deg,
@@ -670,7 +592,6 @@ html {
   animation: gradient-shift 3s ease infinite;
 }
 
-/* SHADOW ANIMATION ON HOVER */
 .hover-shadow-pulse:hover {
   animation: shadow-pulse 1.5s infinite;
 }
@@ -687,7 +608,6 @@ html {
   }
 }
 
-/* SCALE ANIMATION ON SCROLL */
 .scale-on-scroll {
   transform: scale(0.95);
   opacity: 0;
@@ -699,7 +619,6 @@ html {
   opacity: 1;
 }
 
-/* BACKGROUND PATTERN THAT GOES HARD */
 .bg-pattern {
   background-image: radial-gradient(
     circle at 1px 1px,
@@ -710,7 +629,6 @@ html {
   opacity: 0.05;
 }
 
-/* GLASS MORPHISM EFFECT THAT'S CLEANER THAN YOUR DIET */
 .glass-effect {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
@@ -718,7 +636,6 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* LOADING BAR ANIMATION */
 @keyframes loading-bar {
   0% {
     width: 0%;
@@ -734,8 +651,6 @@ html {
   animation: loading-bar 2s ease-out forwards;
 }
 
-/* SIGMA GRADIENTS THAT GO ASTRONOMICAL 🚀 */
-
 @keyframes fade-in-up {
   0% {
     opacity: 0;
@@ -749,7 +664,7 @@ html {
 
 .animate-fade-in-up {
   animation: fade-in-up 0.8s ease-out forwards;
-  opacity: 0; /* Start invisible */
+  opacity: 0;
 }
 
 @keyframes slideIn {
