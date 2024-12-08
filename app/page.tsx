@@ -74,6 +74,7 @@ import Footer from "./footer";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import useLocomotive from "./useLocomotive";
 import useWindowSize from "./useWindowSize";
+import { useIsMobile } from "./isMobile";
 
 const textToType =
   "An adventurous UX & Frontend engineer dedicated to crafting delightful, business-focused, and user-centred digital experiences. I excel at solving complex problems through efficient design, turning challenges into opportunities. Overcoming challenges through efficient design is what fuelling my everyday drive.";
@@ -243,21 +244,26 @@ export default function Page() {
   const [isNoticeVisible, setIsNoticeVisible] = useState(true);
   const [isHoveringLegacyNotice, setIsHoveringLegacyNotice] = useState(false);
 
+  const isMobile = useIsMobile();
+  const MOBILE_TIMER_DURATION = 5000;
+  const DESKTOP_TIMER_DURATION = 7500;
+
   useEffect(() => {
     if (showLegacyNotice && !isHoveringLegacyNotice) {
-      const timer = setTimeout(
-        () => {
-          setIsNoticeVisible(false);
-          setTimeout(() => {
-            setShowLegacyNotice(false);
-          }, 500);
-        },
-        isMobile ? 5000 : 7500
-      );
+      const timerDuration = isMobile
+        ? MOBILE_TIMER_DURATION
+        : DESKTOP_TIMER_DURATION;
+
+      const timer = setTimeout(() => {
+        setIsNoticeVisible(false);
+        setTimeout(() => {
+          setShowLegacyNotice(false);
+        }, 500);
+      }, timerDuration);
 
       return () => clearTimeout(timer);
     }
-  }, [showLegacyNotice, isHoveringLegacyNotice]);
+  }, [showLegacyNotice, isHoveringLegacyNotice, isMobile]);
 
   useEffect(() => {
     if (globeRef.current) {
@@ -265,25 +271,6 @@ export default function Page() {
       controls.autoRotate = true;
       controls.enabled = true;
     }
-  }, []);
-
-  const [isMobile, setIsMobile] = useState(() => {
-    if (typeof window !== "undefined") {
-      return window.innerWidth <= 768;
-    }
-    return false;
-  });
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const size = useWindowSize();
@@ -311,11 +298,13 @@ export default function Page() {
   }, []);
 
   const scrollToWork = useCallback(() => {
-    if (stickySectionRef.current) {
-      const workLocation = 4350 - 1;
-
+    const workSection = document.querySelector(
+      '[data-scroll-section-id="projects"]'
+    );
+    if (workSection) {
+      const offset = workSection.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({
-        top: workLocation,
+        top: offset,
         behavior: "smooth",
       });
     }
@@ -513,37 +502,26 @@ export default function Page() {
       items-start 
       justify-center 
       overflow-x-hidden
-      ${
-        isMobile
-          ? `
-        px-6
-        pb-48
-        text-center 
-        items-center
-      `
-          : `
         ml-4 
         md:pl-12 
         pl-4 
         pb-32 
         md:pb-24 
         md:pt-4
-      `
-      }
     `}
             >
               <span
                 className={`
       text-gray-700
-      w-full
+     
       text-start
       font-light 
       whitespace-nowrap
       animate-fade-in-up 
       transition-opacity 
       duration-300
-      ${isMobile ? "text-base" : "text-base sm:text-lg md:text-xl lg:text-2xl"}
-      pb-2
+      text-base sm:text-lg md:text-xl lg:text-2xl
+      sm:pb-4
     `}
                 style={{ animationDelay: "0.2s" }}
               >
@@ -552,16 +530,12 @@ export default function Page() {
               <span
                 className={`
                   font-bold
-                        w-full
+                        
       text-start
       text-custom-blue 
       whitespace-nowrap
       animate-fade-in-up
-      ${
-        isMobile
-          ? "text-4xl"
-          : "text-[44px] leading-[50px] text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
-      }
+      text-[44px] leading-[50px] text-4xl sm:text-5xl md:text-6xl lg:text-7xl
     `}
                 style={{ animationDelay: "0.4s" }}
               >
@@ -570,7 +544,7 @@ export default function Page() {
               <div
                 className={`
       flex 
-            w-full
+            
       text-start
       max-w-full 
       font-light 
@@ -578,19 +552,9 @@ export default function Page() {
       whitespace-nowrap
       animate-fade-in-up
       text-custom-blue
-      ${
-        isMobile
-          ? `
-        text-lg
-        mb-3
-        justify-start 
-      `
-          : `
         text-xl sm:text-2xl md:text-3xl lg:text-4xl
         justify-start
-        mb-3 md:mb-0 md:my-2
-      `
-      }
+        mb-2 md:mb-0 md:my-4
     `}
                 style={{ animationDelay: "0.6s" }}
               >
@@ -637,11 +601,17 @@ export default function Page() {
                 </span>
               </div>{" "}
               <div
-                className="absolute bottom-40 md:bottom-44 left-0 pl-6 md:pl-10
+                className="absolute bottom-40 md:bottom-44 left-0 pl-4 sm:pl-6 md:pl-10
     animate-fade-in-up"
                 style={{ animationDelay: "1s" }}
               >
-                <button className="relative flex px-3 sm:px-5 py-1.5 sm:py-2 text-custom-blue rounded-full group overflow-hidden min-w-28 sm:min-w-36 items-center justify-center">
+                <button
+                  onClick={scrollToWork}
+                  className="relative flex px-5 py-2 text-custom-blue rounded-full group 
+    overflow-hidden min-w-28 sm:min-w-36 items-center justify-center
+    cursor-pointer
+    transition-all duration-300 ease-out"
+                >
                   <span className="relative z-10 transition-all duration-300 group-hover:text-gray-50 mr-2 text-sm sm:text-base">
                     View Projects
                   </span>
@@ -660,7 +630,7 @@ export default function Page() {
 
             <div className="relative w-full h-full flex justify-end">
               <div
-                className="relative w-full h-2/12 md:h-full flex justify-end main-container
+                className="relative w-full h-full md:h-full flex justify-end main-container
         animate-fade-in"
                 style={{ animationDelay: "0.4s" }}
               >
@@ -676,7 +646,7 @@ export default function Page() {
                     width: "100%",
                     height: "100%",
                     zIndex: 1,
-                    transform: isMobile ? "scale(-1, -1)" : "scale(-1, -1)",
+                    transform: "scale(-1, -1)",
                   }}
                 >
                   <path
@@ -742,21 +712,9 @@ export default function Page() {
     opacity-0 
     animate-fade-in-up
     
-    ${
-      isMobile
-        ? `
-      w-40
-      bottom-0
-      right-4
-      md:right-1/2
-      translate-x-1/2
-    `
-        : `
       w-40 sm:w-48 md:w-80 lg:w-96 
       bottom-0 
       right-3 md:right-16
-    `
-    }
   `}
               >
                 <img
@@ -788,7 +746,11 @@ export default function Page() {
       group-hover:text-custom-blue/90
       transition-all duration-300"
               >
-                {isMobile ? "Swipe to Explore" : "Scroll to Explore"}
+                {isMobile ? (
+                  <span className="sm:hidden">Swipe to Explore</span>
+                ) : (
+                  <span className="hidden sm:inline">Scroll to Explore</span>
+                )}
               </span>
               <div className="relative">
                 <svg
@@ -825,7 +787,7 @@ export default function Page() {
         </section>
         <section
           data-scroll-section
-          data-scroll-section-id="about"
+          data-scroll-section-id="projects"
           data-scroll-offset="50"
           className="flex justify-center items-center "
         >
