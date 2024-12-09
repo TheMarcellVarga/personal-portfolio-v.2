@@ -186,7 +186,7 @@ const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Desktop navigation */}
-        <div className={`${isOpen ? 'hidden' : 'block'} md:flex items-center space-x-4 transition-all duration-300 ease-in-out`}>
+        <div className={`hidden md:flex items-center space-x-4 transition-all duration-300 ease-in-out`}>
           <Link
             href="/"
             onClick={(e) => {
