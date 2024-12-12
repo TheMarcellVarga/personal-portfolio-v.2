@@ -857,7 +857,10 @@ export default function Page() {
                 ))}
               </div>
             </article>
-            <article className="w-full flex flex-col p-4">
+            <article
+              data-scroll-section-id="projectsContent"
+              className="w-full flex flex-col p-4"
+            >
               <h2
                 className="text-custom-blue text-sm font-bold mb-8 tracking-wider uppercase flex items-center
     before:content-[''] before:block before:w-4 before:h-[2px] before:bg-custom-blue before:mr-2"
@@ -871,7 +874,6 @@ export default function Page() {
                       key={project.title}
                       data-scroll
                       data-scroll-projects
-                      data-scroll-section-id="projectsContent"
                       data-scroll-speed="0.2"
                       data-scroll-delay="0.2"
                       data-scroll-repeat="true"

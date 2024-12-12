@@ -69,12 +69,12 @@ const Header: React.FC<HeaderProps> = ({
 
   const handleWorkScroll = () => {
     const workSection = document.querySelector(
-      '[data-scroll-section-id="projects"]'
+      '[data-scroll-section-id="projectsContent"]'
     );
     if (workSection) {
       const offset = workSection.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({
-        top: offset + 20,
+        top: offset - 50,
         behavior: "smooth",
       });
     }
@@ -134,7 +134,7 @@ const Header: React.FC<HeaderProps> = ({
                 : "hidden"
             } md:flex md:flex-row md:space-x-4 md:space-y-0`}
           >
-            <Link href="/about">
+            <Link href="/">
               <div
                 onClick={(e) => {
                   e.preventDefault();
@@ -150,7 +150,7 @@ const Header: React.FC<HeaderProps> = ({
                 <span className="absolute -bottom-2 left-0 w-full h-[2px] transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100 bg-custom-blue"></span>
               </div>
             </Link>
-            <Link href="/work">
+            <Link href="/">
               <div
                 onClick={(e) => {
                   e.preventDefault();
@@ -166,7 +166,7 @@ const Header: React.FC<HeaderProps> = ({
                 <span className="absolute -bottom-2 left-0 w-full h-[2px] transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100 bg-custom-blue"></span>
               </div>
             </Link>
-            <Link href="/contact">
+            <Link href="/">
               <div
                 onClick={(e) => {
                   e.preventDefault();
