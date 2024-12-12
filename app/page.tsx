@@ -609,16 +609,17 @@ export default function Page() {
                   onClick={scrollToWork}
                   className="relative flex px-5 py-2 text-custom-blue rounded-full group 
     overflow-hidden min-w-28 sm:min-w-36 items-center justify-center
-    cursor-pointer
-    transition-all duration-300 ease-out"
+    cursor-pointer"
                 >
-                  <span className="relative z-10 transition-all duration-300 group-hover:text-gray-50 mr-2 text-sm sm:text-base">
-                    View Projects
-                  </span>
-                  <ArrowRightIcon
-                    className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover:text-gray-50
-    transform group-hover:translate-x-1 transition-all duration-300 inline-block"
-                  />
+                  <div className="relative z-10 flex items-center justify-center transition-all duration-300 ease-out">
+                    <span className="relative z-10 transition-all duration-300 ease-out group-hover:text-gray-50 mr-2">
+                      View Projects
+                    </span>
+                    <ArrowRightIcon
+                      className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 transition-all duration-300 ease-out group-hover:text-gray-50
+        transform group-hover:translate-x-1"
+                    />
+                  </div>
                   <div className="absolute inset-0 border-2 border-custom-blue rounded-full"></div>
                   <div
                     className="absolute inset-0 bg-custom-blue rounded-full transform scale-x-0 group-hover:scale-x-100 
