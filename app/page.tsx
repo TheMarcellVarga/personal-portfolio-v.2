@@ -883,89 +883,73 @@ export default function Page() {
                       <Link
                         href={project.link}
                         className={`
-    w-full 
-    flex flex-col
-    sm:flex-row
-    gap-4
-    px-4 py-6
-    sm:px-4 sm:py-3
-    md:px-8 md:py-6
-    rounded-xl
-    transition-all duration-500 ease-out 
-    bg-linear-to-br from-gray-100/95 to-gray-100/90
-    hover:bg-neutral-100/95
-    group
-    items-center
-    border border-transparent
-    hover:border-custom-blue/10
-    backdrop-blur-xs
-    relative
-    overflow-hidden
-  `}
+        w-full 
+        flex flex-col
+        sm:flex-row
+        gap-4
+        px-4 py-6
+        sm:px-4 sm:py-3
+        md:px-8 md:py-6
+        rounded-xl
+        transition-all duration-500 ease-out 
+        ${
+          project.inProgress
+            ? "bg-gradient-to-br from-custom-blue/10 via-custom-teal/10 to-custom-blue/10"
+            : "bg-linear-to-br from-gray-100/95 to-gray-100/90"
+        }
+        hover:bg-neutral-100/95
+        group
+        items-center
+        border border-transparent
+        ${
+          project.inProgress
+            ? "border-custom-blue/20"
+            : "hover:border-custom-blue/10"
+        }
+        backdrop-blur-xs
+        relative
+        overflow-hidden
+      `}
                       >
-                        <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] [background-size:16px_16px] pointer-events-none group-hover:scale-[1.5] transition-transform duration-1000" />
-                        <div
-                          className="
-  w-full
-  sm:w-1/4
-  md:w-[300px]
-  mb-4 sm:mb-0
-  relative 
-  flex items-center justify-center
-  group-hover:scale-[1.02] transition-transform duration-500
-  px-4 sm:px-0
-"
-                        >
-                          <div
-                            className="
-          w-full
-          aspect-3/2
-          sm:w-full sm:h-full
-          md:aspect-3/2
-          relative rounded-lg overflow-hidden
-          shadow-[0_8px_30px_rgba(2,66,92,0.12)]
-          group-hover:shadow-[0_15px_60px_rgba(2,66,92,0.2)]
-          transition-all duration-500
-        "
-                          >
-                            <img
-                              src={project.image}
-                              alt={project.title}
-                              width={
-                                size.width &&
-                                size.width >= 640 &&
-                                size.width < 768
-                                  ? 80
-                                  : 300
-                              }
-                              height={
-                                size.width &&
-                                size.width >= 640 &&
-                                size.width < 768
-                                  ? 80
-                                  : 300
-                              }
-                              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-                            />
+                        {project.inProgress && (
+                          <div className="absolute top-0 right-0 bg-custom-blue text-white px-2 py-1 text-xs rounded-bl-lg">
+                            Coming Soon
                           </div>
+                        )}
+
+                        <div className="w-full sm:w-1/4 md:w-[300px] mb-4 sm:mb-0 relative flex items-center justify-center group-hover:scale-[1.02] transition-transform duration-500 px-4 sm:px-0">
+                          {project.inProgress ? (
+                            <div className="w-full aspect-3/2 sm:w-full sm:h-full md:aspect-3/2 relative rounded-lg overflow-hidden bg-gradient-to-br from-custom-blue/20 via-custom-teal/20 to-custom-blue/20 flex items-center justify-center">
+                              <div className="text-6xl animate-pulse">🚀</div>
+                              <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_20%,_#ffffff_120%)] opacity-20"></div>
+                            </div>
+                          ) : (
+                            <div className="w-full aspect-3/2 sm:w-full sm:h-full md:aspect-3/2 relative rounded-lg overflow-hidden shadow-[0_8px_30px_rgba(2,66,92,0.12)] group-hover:shadow-[0_15px_60px_rgba(2,66,92,0.2)] transition-all duration-500">
+                              <img
+                                src={project.image}
+                                alt={project.title}
+                                width={
+                                  size.width &&
+                                  size.width >= 640 &&
+                                  size.width < 768
+                                    ? 80
+                                    : 300
+                                }
+                                height={
+                                  size.width &&
+                                  size.width >= 640 &&
+                                  size.width < 768
+                                    ? 80
+                                    : 300
+                                }
+                                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                              />
+                            </div>
+                          )}
                         </div>
-                        <div
-                          className="
-  flex flex-col 
-  px-4
-  sm:px-2 sm:pl-4
-  md:px-6 md:pl-8
-  gap-2 
-  w-full 
-  sm:w-2/3 
-  md:w-full
-  h-full
-  justify-center
-  relative z-10
-  text-center sm:text-left
-"
-                        >
-                          <div className="w-full sm:w-full group-hover:translate-x-1 transition-transform duration-300">
+
+                        <div className="flex flex-col px-4 sm:px-2 sm:pl-4 md:px-6 md:pl-8 gap-2 w-full sm:w-2/3 md:w-full h-full justify-center relative z-10 text-center sm:text-left">
+                          <div className="w-full sm:w-full transition-transform duration-300">
                             <div className="flex flex-row items-center justify-between w-full">
                               <div className="text-lg sm:text-lg md:text-2xl text-custom-blue font-bold text-left">
                                 {project.title}
@@ -992,26 +976,32 @@ export default function Page() {
                               <div
                                 key={skill}
                                 className="flex items-center text-xs px-3 py-1.5 rounded-md
-      bg-custom-blue/10 text-custom-blue/80
-      group-hover:bg-custom-blue group-hover:text-custom-teal
-      transform transition-all duration-300 hover:scale-105 shadow-sm"
+                bg-custom-blue/10 text-custom-blue/80
+                group-hover:bg-custom-blue group-hover:text-custom-teal
+                transform transition-all duration-300 hover:scale-105 shadow-sm"
                               >
                                 {skill}
                               </div>
                             ))}
                           </div>
                         </div>
-                        <div className="hidden sm:flex w-8 md:w-16 h-full items-center justify-center relative">
-                          <div className="flex justify-center items-center transition-transform duration-500 ease-out origin-left group-hover:translate-x-4">
-                            <FontAwesomeIcon
-                              icon={faChevronRight}
-                              className="w-4 md:w-6 h-4 md:h-6 text-custom-blue/50 group-hover:text-custom-blue transition-all duration-500 ease-out"
-                            />
+
+                        {!project.inProgress && (
+                          <div className="hidden sm:flex w-8 md:w-16 h-full items-center justify-center relative">
+                            <div className="flex justify-center items-center transition-transform duration-500 ease-out origin-left group-hover:translate-x-4">
+                              <FontAwesomeIcon
+                                icon={faChevronRight}
+                                className="w-4 md:w-6 h-4 md:h-6 text-custom-blue/50 group-hover:text-custom-blue transition-all duration-500 ease-out"
+                              />
+                            </div>
                           </div>
-                        </div>
+                        )}
+                        {project.inProgress && (
+                          <div className="hidden sm:block w-8 md:w-16 h-full"></div>
+                        )}
                       </Link>
                     </div>
-                  ))}
+                  ))}{" "}
                 </div>
               </div>
             </article>

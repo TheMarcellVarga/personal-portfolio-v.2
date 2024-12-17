@@ -1,5 +1,16 @@
 export const projects = [
     {
+      title: "Upcoming Project",
+      subTitle: "Exciting New Venture",
+      date: "In Progress",
+      description:
+        "A groundbreaking project currently in development. Stay tuned for an innovative solution that pushes the boundaries of technology and design.",
+      skills: ["Coming Soon"],
+      link: "http://github.com/TheMarcellVarga",
+      image: "/images/upcoming-project.png",
+      inProgress: true
+    },
+    {
       title: "European Study Solution",
       subTitle: "Student Agency",
       date: "2021",
