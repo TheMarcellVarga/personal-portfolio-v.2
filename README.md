@@ -1,4 +1,3 @@
-```markdown
 # Personal Portfolio
 
 Welcome to my personal portfolio! This project showcases my skills and projects as a UX & Frontend Engineer. It is built using modern web technologies and demonstrates my ability to create intuitive and engaging digital experiences.
