@@ -1114,7 +1114,7 @@ export default function Page() {
                     <span className="text-sm">Let&apos;s connect</span>
                   </a>
                   <a
-                    href="/MarcellVargaCV.pdf"
+                    href="/Marcell-Varga-CV.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 text-custom-blue/60 hover:text-custom-blue transition-all duration-300"
