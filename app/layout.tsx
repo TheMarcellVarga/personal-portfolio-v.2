@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
+import PostHogProvider from "./providers/PostHogProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
   },
   description: "Marcell Varga Portfolio | UX & Frontend Engineer",
 };
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,9 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {children}
-        <SpeedInsights />
-        <Analytics />
+        <PostHogProvider>
+          {children}
+          <SpeedInsights />
+          <Analytics />
+        </PostHogProvider>
       </body>
     </html>
   );
