@@ -34,6 +34,12 @@ import {
   SiPostgresql,
   SiTypescript,
   SiJavascript,
+  SiAngular,
+  SiExpress,
+  SiPython,
+  SiDjango,
+  SiMysql,
+  SiMongodb,
 } from "react-icons/si";
 
 const skillCategories = {
@@ -53,6 +59,7 @@ const skillCategories = {
     { name: "TypeScript", icon: <SiTypescript /> },
     { name: "React", icon: <FaReact /> },
     { name: "Next.js", icon: <SiNextdotjs /> },
+    { name: "Angular", icon: <SiAngular /> },
     { name: "Vue", icon: <FaVuejs /> },
     { name: "Svelte", icon: <SiSvelte /> },
     { name: "SvelteKit", icon: <SiSvelte /> },
@@ -60,7 +67,12 @@ const skillCategories = {
   ],
   backend: [
     { name: "Node.js", icon: <FaNodeJs /> },
+    { name: "Express", icon: <SiExpress /> },
+    { name: "Python", icon: <SiPython /> },
+    { name: "Django", icon: <SiDjango /> },
+    { name: "SQL", icon: <SiMysql /> },
     { name: "PostgreSQL", icon: <SiPostgresql /> },
+    { name: "MongoDB", icon: <SiMongodb /> },
   ],
   tools: [
     { name: "Git", icon: <FaGitAlt /> },
