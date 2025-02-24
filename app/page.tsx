@@ -2,7 +2,6 @@
 
 import { useRef, useEffect, useState, useCallback } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import LinkedInIcon from "../public/icons/linkedin";
 import OpenResumeIcon from "../public/icons/openResume";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
