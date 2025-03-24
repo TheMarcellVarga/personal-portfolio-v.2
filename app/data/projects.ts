@@ -4,7 +4,7 @@ export const projects = [
       subTitle: "Exciting New Venture",
       date: "In Progress",
       description:
-        "A groundbreaking project currently in development. Stay tuned for an innovative solution that pushes the boundaries of technology and design.",
+        "A groundbreaking projects currently in development. Look here for my upcoming projects and innovations that push the boundaries of technology and design.",
       skills: ["Coming Soon"],
       link: "http://github.com/TheMarcellVarga",
       image: "/images/upcoming-project.png",
