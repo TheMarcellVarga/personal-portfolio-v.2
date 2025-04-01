@@ -33,7 +33,12 @@ function PostHogInitializer() {
         capture_pageview: false, // We'll handle this manually
         autocapture: true,
         persistence: 'localStorage',
-        disable_session_recording: true,
+        disable_session_recording: false, // Enable session recording
+        session_recording: {
+          maskAllInputs: false, // Set to true to mask all input values by default
+          maskTextSelector: '[data-ph-mask]', // Add this attribute to elements that contain sensitive data
+          recordCrossOriginIframes: false,
+        },
       });
     }
   }, []);
