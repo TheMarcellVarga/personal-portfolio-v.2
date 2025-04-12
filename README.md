@@ -111,7 +111,7 @@ I'm always open to new opportunities and collaborations. Feel free to reach out:
 
 - **Email:** [themarcellvarga@gmail.com](mailto:themarcellvarga@gmail.com)
 - **LinkedIn:** [Marcell Varga](https://www.linkedin.com/in/marcellvarga/)
-- **Resume:** [Download PDF](https://marcellvarga.com/Marcell-Varga-CV.pdf)
+- **Resume:** [Download PDF](https://marcellvarga.com/MarcellVargaCV.pdf)
 
 ## Development
 
