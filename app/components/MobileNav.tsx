@@ -157,7 +157,7 @@ export default function MobileNav({
           </a>
           
           <a 
-            href="/Marcell-Varga-CV.pdf"
+            href="/MarcellVargaCV.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="text-text-tertiary hover:text-text-primary transition-colors duration-200"
