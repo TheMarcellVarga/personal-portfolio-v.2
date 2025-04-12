@@ -50,7 +50,7 @@ To run this project locally, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/personal-portfolio-v.2.git
+   git clone https://github.com/TheMarcellVarga/personal-portfolio-v.2.git
    ```
 
 2. Navigate to the project directory:
@@ -111,7 +111,7 @@ I'm always open to new opportunities and collaborations. Feel free to reach out:
 
 - **Email:** [themarcellvarga@gmail.com](mailto:themarcellvarga@gmail.com)
 - **LinkedIn:** [Marcell Varga](https://www.linkedin.com/in/marcellvarga/)
-- **Resume:** [Download PDF](https://your-portfolio-url/Marcell-Varga-CV.pdf)
+- **Resume:** [Download PDF](https://marcellvarga.com/Marcell-Varga-CV.pdf)
 
 ## Development
 
