@@ -94,6 +94,8 @@ import History from "./components/History";
 import Contact from "./components/Contact";
 import LegacyNotice from "./components/LegacyNotice";
 import MotionPreference from "./components/MotionPreference";
+import ThemeToggle from "./components/ThemeToggle";
+import BackToTop from "./components/BackToTop";
 
 export default function Page() {
   const globeRef = useRef<any>();
@@ -229,6 +231,8 @@ export default function Page() {
       `}
     >
       <MotionPreference />
+      <ThemeToggle />
+      <BackToTop showAfter={600} />
 
       <div
         className="
@@ -256,11 +260,10 @@ export default function Page() {
         <Header
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-          // Pass scroll functions when you update Header component to accept these
-          // scrollToHome={scrollToHome}
-          // scrollToAbout={scrollToAbout}
-          // scrollToWork={scrollToWork}
-          // scrollToContact={scrollToContact}
+          scrollToHome={scrollToHome}
+          scrollToAbout={scrollToAbout}
+          scrollToWork={scrollToWork}
+          scrollToContact={scrollToContact}
         />
         
         <Hero scrollToWork={scrollToWork} />

@@ -767,3 +767,79 @@ html.reduce-motion *::after {
     transform: translateY(0);
   }
 }
+
+:root {
+  /* Light mode colors */
+  --custom-blue: #02425C;
+  --custom-teal: #80FFDB;
+  --background-primary: #f3f4f6; /* gray-200 */
+  --text-primary: #02425C;
+  --text-secondary: rgba(2, 66, 92, 0.8);
+  --text-tertiary: rgba(2, 66, 92, 0.6);
+  --card-background: rgba(249, 250, 251, 0.95); /* gray-100/95 */
+  --card-border: rgba(2, 66, 92, 0.1);
+  --card-hover: rgba(245, 246, 247, 0.95);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark mode colors */
+    --custom-blue: #80FFDB;
+    --custom-teal: #02425C;
+    --background-primary: #0f172a; /* slate-900 */
+    --text-primary: #80FFDB;
+    --text-secondary: rgba(128, 255, 219, 0.8);
+    --text-tertiary: rgba(128, 255, 219, 0.6);
+    --card-background: rgba(15, 23, 42, 0.95); /* slate-900/95 */
+    --card-border: rgba(128, 255, 219, 0.1);
+    --card-hover: rgba(30, 41, 59, 0.95); /* slate-800/95 */
+  }
+}
+
+html.dark {
+  /* Dark mode colors for manual toggle */
+  --custom-blue: #80FFDB;
+  --custom-teal: #02425C;
+  --background-primary: #0f172a; /* slate-900 */
+  --text-primary: #80FFDB;
+  --text-secondary: rgba(128, 255, 219, 0.8);
+  --text-tertiary: rgba(128, 255, 219, 0.6);
+  --card-background: rgba(15, 23, 42, 0.95); /* slate-900/95 */
+  --card-border: rgba(128, 255, 219, 0.1);
+  --card-hover: rgba(30, 41, 59, 0.95); /* slate-800/95 */
+}
+
+/* Apply variables to text and backgrounds */
+body {
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.text-custom-blue {
+  color: var(--text-primary);
+}
+
+.text-custom-blue\/80, .text-custom-blue\/70 {
+  color: var(--text-secondary);
+}
+
+.text-custom-blue\/60, .text-custom-blue\/50 {
+  color: var(--text-tertiary);
+}
+
+.bg-gray-200 {
+  background-color: var(--background-primary);
+}
+
+.bg-gray-100\/90, .bg-gray-100\/95, .from-gray-100\/95, .to-gray-100\/90 {
+  background-color: var(--card-background);
+}
+
+.hover\:bg-neutral-100\/95:hover {
+  background-color: var(--card-hover);
+}
+
+.border-custom-blue\/10, .hover\:border-custom-blue\/10:hover {
+  border-color: var(--card-border);
+}
