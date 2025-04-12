@@ -96,6 +96,8 @@ import LegacyNotice from "./components/LegacyNotice";
 import MotionPreference from "./components/MotionPreference";
 import ThemeToggle from "./components/ThemeToggle";
 import BackToTop from "./components/BackToTop";
+import MouseTrailer from "./components/MouseTrailer";
+import Blog from "./components/Blog";
 
 export default function Page() {
   const globeRef = useRef<any>();
@@ -233,6 +235,7 @@ export default function Page() {
       <MotionPreference />
       <ThemeToggle />
       <BackToTop showAfter={600} />
+      <MouseTrailer />
 
       <div
         className="
@@ -280,6 +283,7 @@ export default function Page() {
           <div className="flex flex-col items-center justify-between mt-4 mb-4 gap-24 w-4/5">
             <Skills />
             <Projects />
+            <Blog />
             <History />
           </div>
         </section>
