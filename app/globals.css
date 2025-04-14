@@ -950,3 +950,14 @@ html.reduce-motion *::after {
 html.dark {
   /* Remove dark mode overrides */
 }
+
+/* Custom hover effects */
+.group:hover .skill-pill {
+  background-color: #176B87 !important; 
+  color: white !important;
+}
+
+.skill-pill:hover {
+  background-color: #176B87 !important;
+  color: white !important;
+}
