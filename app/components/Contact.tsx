@@ -30,10 +30,10 @@ export default function Contact() {
                 aria-label="Send email to Marcell Varga"
               >
                 <div className="relative z-10 flex items-center justify-center transition-transform duration-300 ease-out transform group-hover:translate-x-0">
-                  <span className="transition-colors duration-300 ease-out group-hover:text-gray-50 mr-2">
+                  <span className="transition-colors duration-300 ease-out group-hover:text-white mr-2">
                     Get&nbsp;in&nbsp;Touch
                   </span>
-                  <ArrowRightIcon className="w-5 h-5 transition-all duration-300 ease-out group-hover:text-gray-50 transform group-hover:translate-x-1" />
+                  <ArrowRightIcon className="w-5 h-5 transition-all duration-300 ease-out group-hover:text-white transform group-hover:translate-x-1" />
                 </div>
                 <div className="absolute inset-0 border-2 border-custom-blue rounded-full"></div>
                 <div className="absolute inset-0 bg-custom-blue rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></div>
