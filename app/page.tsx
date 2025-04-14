@@ -233,7 +233,8 @@ export default function Page() {
       `}
     >
       <MotionPreference />
-      <ThemeToggle />
+      {/* Temporarily removed ThemeToggle */}
+      {/* <ThemeToggle /> */}
       <BackToTop showAfter={600} />
       <MouseTrailer />
 
@@ -283,7 +284,8 @@ export default function Page() {
           <div className="flex flex-col items-center justify-between mt-4 mb-4 gap-24 w-4/5">
             <Skills />
             <Projects />
-            <Blog />
+            {/* Temporarily removed Blog */}
+            {/* <Blog /> */}
             <History />
           </div>
         </section>
