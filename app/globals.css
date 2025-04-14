@@ -110,7 +110,7 @@
 @layer utilities {
   body {
     background-color: #f3f4f6; /* Restore original gray-200 */
-    color: #02425C; /* Restore original blue */
+    color: #176B87; /* Restore original blue */
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
@@ -765,15 +765,15 @@ html.reduce-motion *::after {
 
 /* Remove the variable-based colors and restore original colors */
 .text-custom-blue {
-  color: #02425C; /* Original custom blue */
+  color: #176B87; /* Original custom blue */
 }
 
 .text-custom-blue\/80, .text-custom-blue\/70 {
-  color: rgba(2, 66, 92, 0.8);
+  color: rgba(23, 107, 135, 0.8);
 }
 
 .text-custom-blue\/60, .text-custom-blue\/50 {
-  color: rgba(2, 66, 92, 0.6);
+  color: rgba(23, 107, 135, 0.6);
 }
 
 .bg-gray-200 {
@@ -789,7 +789,7 @@ html.reduce-motion *::after {
 }
 
 .border-custom-blue\/10, .hover\:border-custom-blue\/10:hover {
-  border-color: rgba(2, 66, 92, 0.1); /* Original border color */
+  border-color: rgba(23, 107, 135, 0.1); /* Original border color */
 }
 
 /* Microinteractions & Animations */
@@ -931,15 +931,15 @@ html.reduce-motion *::after {
 
 /* Define or update specific colors as needed */
 :root {
-  --color-custom-blue: #02425C;
-  --color-custom-blue-rgb: 2, 66, 92;
+  --color-custom-blue: #176B87;
+  --color-custom-blue-rgb: 23, 107, 135;
   --color-custom-teal: #4fd5cc;
-  --text-primary: #02425C;
-  --text-secondary: rgba(2, 66, 92, 0.8);
-  --text-tertiary: rgba(2, 66, 92, 0.6);
+  --text-primary: #176B87;
+  --text-secondary: rgba(23, 107, 135, 0.8);
+  --text-tertiary: rgba(23, 107, 135, 0.6);
   --background-primary: #f3f4f6;
   --background-secondary: rgba(249, 250, 251, 0.95);
-  --border-color: rgba(2, 66, 92, 0.1);
+  --border-color: rgba(23, 107, 135, 0.1);
 }
 
 /* Remove dark mode color scheme */
