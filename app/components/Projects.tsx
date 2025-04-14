@@ -161,9 +161,8 @@ export default function Projects() {
                     {project.skills.map((skill) => (
                       <div
                         key={skill}
-                        className="flex items-center text-xs px-3 py-1.5 rounded-md
+                        className="skill-pill flex items-center text-xs px-3 py-1.5 rounded-md
                           bg-custom-blue/10 text-custom-blue/80
-                          group-hover:bg-custom-blue group-hover:text-white
                           transform transition-all duration-300 hover:scale-105 shadow-sm"
                       >
                         {skill}
