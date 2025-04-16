@@ -1,6 +1,6 @@
 export const projects = [
     {
-      title: "Upcoming Project",
+      title: "Upcoming Projects",
       subTitle: "Exciting New Venture",
       date: "In Progress",
       description:
