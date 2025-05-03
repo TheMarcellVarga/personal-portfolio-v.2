@@ -4,24 +4,15 @@ import IndexSigAnimatedIcon from "@/public/icons/indexSigAnimated";
 import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import MobileNav from "./components/MobileNav";
 
 interface HeaderProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-  scrollToHome?: () => void;
-  scrollToAbout?: () => void;
-  scrollToWork?: () => void;
-  scrollToContact?: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ 
-  isOpen, 
+  isOpen,
   setIsOpen,
-  scrollToHome: externalScrollToHome,
-  scrollToAbout: externalScrollToAbout,
-  scrollToWork: externalScrollToWork,
-  scrollToContact: externalScrollToContact
 }) => {
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(true);
@@ -53,18 +44,19 @@ const Header: React.FC<HeaderProps> = ({
     } else {
       scrollAction();
     }
-    setIsOpen(false);
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 50);
   };
 
-  // Use external scroll functions if provided, otherwise use internal ones
-  const handleHomeScroll = externalScrollToHome || (() => {
+  const handleHomeScroll = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
-  });
+  };
 
-  const handleAboutScroll = externalScrollToAbout || (() => {
+  const handleAboutScroll = () => {
     const aboutSection = document.querySelector(
       '[data-scroll-section-id="about"]'
     );
@@ -75,9 +67,9 @@ const Header: React.FC<HeaderProps> = ({
         behavior: "smooth",
       });
     }
-  });
+  };
 
-  const handleWorkScroll = externalScrollToWork || (() => {
+  const handleWorkScroll = () => {
     const workSection = document.querySelector(
       '[data-scroll-section-id="projectsContent"]'
     );
@@ -88,9 +80,9 @@ const Header: React.FC<HeaderProps> = ({
         behavior: "smooth",
       });
     }
-  });
+  };
 
-  const handleContactScroll = externalScrollToContact || (() => {
+  const handleContactScroll = () => {
     const contactSection = document.querySelector(
       '[data-scroll-section-id="contact"]'
     );
@@ -101,7 +93,7 @@ const Header: React.FC<HeaderProps> = ({
         behavior: "smooth",
       });
     }
-  });
+  };
 
   return (
     <header
@@ -112,6 +104,7 @@ const Header: React.FC<HeaderProps> = ({
           ? "opacity-100"
           : "opacity-0 pointer-events-none"
       }`}
+      style={{ zIndex: isOpen ? 11 : 5 }}
     >
       <div className="flex items-center">
         <Link
@@ -124,18 +117,82 @@ const Header: React.FC<HeaderProps> = ({
           <IndexSigAnimatedIcon isOpen={isOpen} />
         </Link>
       </div>
-      
       <nav className="flex items-center">
-        {/* Mobile Navigation */}
-        <div className="md:hidden">
-          <MobileNav 
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            scrollToHome={handleHomeScroll}
-            scrollToAbout={handleAboutScroll}
-            scrollToWork={handleWorkScroll}
-            scrollToContact={handleContactScroll}
-          />
+        {/* Mobile menu button */}
+        <div
+          className={`md:hidden ${isOpen ? "open" : ""}`}
+          onClick={() => setIsOpen(!isOpen)}
+          style={{ zIndex: isOpen ? 11 : 2 }}
+        >
+          <div className="w-6 h-0.5 bg-slate-400 mb-1"></div>
+          <div className="w-6 h-0.5 bg-slate-400 mb-1"></div>
+          <div className="w-6 h-0.5 bg-slate-400"></div>
+        </div>
+
+        {/* Mobile menu overlay */}
+        <div 
+          className={`nav-overlay ${isOpen ? "open" : ""}`}
+          style={{ 
+            zIndex: isOpen ? 10 : -1,
+            pointerEvents: isOpen ? 'auto' : 'none'
+          }}
+        >
+          <div
+            className={`${
+              isOpen
+                ? "flex flex-col space-y-12 items-center justify-center w-full px-6"
+                : "hidden"
+            } md:flex md:flex-row md:space-x-4 md:space-y-0`}
+          >
+            <Link href="/">
+              <div
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavigation("/", handleAboutScroll);
+                }}
+                className={`relative inline-block group w-full text-center ${
+                  isOpen
+                    ? "text-3xl font-semibold text-custom-blue/90 active:text-custom-blue"
+                    : "text-lg md:text-xl lg:text-2xl text-custom-blue"
+                }`}
+              >
+                About
+                <span className="absolute -bottom-2 left-0 w-full h-[2px] transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100 bg-custom-blue"></span>
+              </div>
+            </Link>
+            <Link href="/">
+              <div
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavigation("/", handleWorkScroll);
+                }}
+                className={`relative inline-block group w-full text-center ${
+                  isOpen
+                    ? "text-3xl font-semibold text-custom-blue/90 active:text-custom-blue"
+                    : "text-lg md:text-xl lg:text-2xl text-custom-blue"
+                }`}
+              >
+                Work
+                <span className="absolute -bottom-2 left-0 w-full h-[2px] transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100 bg-custom-blue"></span>
+              </div>
+            </Link>
+            <Link href="/">
+              <div
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavigation("/", handleContactScroll);
+                }}
+                className={`relative inline-block group w-full text-center ${
+                  isOpen
+                    ? "text-3xl font-semibold text-custom-blue/90 active:text-custom-blue"
+                    : "text-lg md:text-xl lg:text-2xl text-custom-blue"
+                }`}
+              >
+                Contact
+                <span className="absolute -bottom-2 left-0 w-full h-[2px] transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100 bg-custom-blue"></span>
+              </div>
+            </Link>
+          </div>
         </div>
 
         {/* Desktop navigation */}
@@ -147,9 +204,11 @@ const Header: React.FC<HeaderProps> = ({
               handleNavigation("/", handleAboutScroll);
             }}
           >
-            <div className={`relative inline-block text-md font-medium tracking-wider group text-text-primary`}>
+            <div className={`relative inline-block text-md font-medium tracking-wider group ${
+              isOpen ? 'text-[#eeeeee]' : 'text-custom-blue'
+            }`}>
               About
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-text-primary transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-custom-blue transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
             </div>
           </Link>
 
@@ -160,9 +219,11 @@ const Header: React.FC<HeaderProps> = ({
               handleNavigation("/", handleWorkScroll);
             }}
           >
-            <div className={`relative inline-block text-md font-medium tracking-wider group text-text-primary`}>
+            <div className={`relative inline-block text-md font-medium tracking-wider group ${
+              isOpen ? 'text-[#eeeeee]' : 'text-custom-blue'
+            }`}>
               Work
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-text-primary transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-custom-blue transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
             </div>
           </Link>
 
@@ -173,9 +234,11 @@ const Header: React.FC<HeaderProps> = ({
               handleNavigation("/", handleContactScroll);
             }}
           >
-            <div className={`relative inline-block text-md font-medium tracking-wider group text-text-primary`}>
+            <div className={`relative inline-block text-md font-medium tracking-wider group ${
+              isOpen ? 'text-[#eeeeee]' : 'text-custom-blue'
+            }`}>
               Contact
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-text-primary transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-custom-blue transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
             </div>
           </Link>
         </div>

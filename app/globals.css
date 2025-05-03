@@ -226,27 +226,33 @@
     height: 100%;
     background-color: rgba(245, 245, 245, 0.98);
     transform: translateX(100%);
-    transition: all 0.3s ease-out;
+    transition: transform 0.3s ease-out, visibility 0s 0.3s;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 2rem;
-    z-index: 2;
+    z-index: -1;
     backdrop-filter: blur(8px);
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
   }
 
   .nav-overlay.open {
     transform: translateX(0);
+    visibility: visible;
+    transition: transform 0.3s ease-out;
+    pointer-events: auto;
+    z-index: 10;
+    opacity: 1;
   }
 
   .md\:hidden {
     cursor: pointer;
-    z-index: 2;
   }
 
   .md\:hidden.open {
-    z-index: 5;
   }
 
   .md\:hidden > div {
@@ -278,15 +284,6 @@
     transform: translateY(-6px) rotate(-45deg);
   }
 
-  .md\:hidden {
-    cursor: pointer;
-    z-index: 2;
-  }
-
-  .md\:hidden.open {
-    z-index: 5;
-  }
-
   .close-btn {
     position: absolute;
     top: 1rem;
@@ -301,7 +298,6 @@
   .sticky-header {
     position: sticky;
     top: 0;
-    z-index: 1000;
     overflow: visible;
   }
 
@@ -763,36 +759,8 @@ html.reduce-motion *::after {
   }
 }
 
-/* Remove the variable-based colors and restore original colors */
-.text-custom-blue {
-  color: #176B87; /* Original custom blue */
-}
-
-.text-custom-blue\/80, .text-custom-blue\/70 {
-  color: rgba(23, 107, 135, 0.8);
-}
-
-.text-custom-blue\/60, .text-custom-blue\/50 {
-  color: rgba(23, 107, 135, 0.6);
-}
-
-.bg-gray-200 {
-  background-color: #f3f4f6; /* Original gray-200 */
-}
-
-.bg-gray-100\/90, .bg-gray-100\/95, .from-gray-100\/95, .to-gray-100\/90 {
-  background-color: rgba(249, 250, 251, 0.95); /* Original gray-100/95 */
-}
-
-.hover\:bg-neutral-100\/95:hover {
-  background-color: rgba(245, 246, 247, 0.95); /* Original hover color */
-}
-
-.border-custom-blue\/10, .hover\:border-custom-blue\/10:hover {
-  border-color: rgba(23, 107, 135, 0.1); /* Original border color */
-}
-
 /* Microinteractions & Animations */
+
 @keyframes pulse-soft {
   0%, 100% {
     opacity: 1;
