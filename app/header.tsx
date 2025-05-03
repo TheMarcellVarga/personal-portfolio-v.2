@@ -8,11 +8,19 @@ import { useRouter } from "next/navigation";
 interface HeaderProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  scrollToHome?: () => void;
+  scrollToAbout?: () => void;
+  scrollToWork?: () => void;
+  scrollToContact?: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ 
   isOpen,
   setIsOpen,
+  scrollToHome: propScrollToHome,
+  scrollToAbout: propScrollToAbout,
+  scrollToWork: propScrollToWork,
+  scrollToContact: propScrollToContact
 }) => {
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(true);
@@ -50,48 +58,64 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   const handleHomeScroll = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    if (propScrollToHome) {
+      propScrollToHome();
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
   };
 
   const handleAboutScroll = () => {
-    const aboutSection = document.querySelector(
-      '[data-scroll-section-id="about"]'
-    );
-    if (aboutSection) {
-      const targetOffset = 2250;
-      window.scrollTo({
-        top: targetOffset,
-        behavior: "smooth",
-      });
+    if (propScrollToAbout) {
+      propScrollToAbout();
+    } else {
+      const aboutSection = document.querySelector(
+        '[data-scroll-section-id="about"]'
+      );
+      if (aboutSection) {
+        const targetOffset = 2250;
+        window.scrollTo({
+          top: targetOffset,
+          behavior: "smooth",
+        });
+      }
     }
   };
 
   const handleWorkScroll = () => {
-    const workSection = document.querySelector(
-      '[data-scroll-section-id="projectsContent"]'
-    );
-    if (workSection) {
-      const offset = workSection.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({
-        top: offset - 50,
-        behavior: "smooth",
-      });
+    if (propScrollToWork) {
+      propScrollToWork();
+    } else {
+      const workSection = document.querySelector(
+        '[data-scroll-section-id="projectsContent"]'
+      );
+      if (workSection) {
+        const offset = workSection.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top: offset - 50,
+          behavior: "smooth",
+        });
+      }
     }
   };
 
   const handleContactScroll = () => {
-    const contactSection = document.querySelector(
-      '[data-scroll-section-id="contact"]'
-    );
-    if (contactSection) {
-      const offset = contactSection.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({
-        top: offset + 20,
-        behavior: "smooth",
-      });
+    if (propScrollToContact) {
+      propScrollToContact();
+    } else {
+      const contactSection = document.querySelector(
+        '[data-scroll-section-id="contact"]'
+      );
+      if (contactSection) {
+        const offset = contactSection.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top: offset + 20,
+          behavior: "smooth",
+        });
+      }
     }
   };
 
