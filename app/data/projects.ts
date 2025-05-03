@@ -7,7 +7,7 @@ export const projects = [
         "A groundbreaking projects currently in development. Look here for my upcoming projects and innovations that push the boundaries of technology and design.",
       skills: ["Coming Soon"],
       link: "http://github.com/TheMarcellVarga",
-      image: "/images/upcoming-project.png",
+      image: "🚀",
       inProgress: true
     },
     {
