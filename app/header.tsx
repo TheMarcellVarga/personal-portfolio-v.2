@@ -148,9 +148,9 @@ const Header: React.FC<HeaderProps> = ({
           onClick={() => setIsOpen(!isOpen)}
           style={{ zIndex: isOpen ? 11 : 2 }}
         >
-          <div className="w-6 h-0.5 bg-slate-400 mb-1"></div>
-          <div className="w-6 h-0.5 bg-slate-400 mb-1"></div>
-          <div className="w-6 h-0.5 bg-slate-400"></div>
+          <div className="w-6"></div>
+          <div className="w-6"></div>
+          <div className="w-6"></div>
         </div>
 
         {/* Mobile menu overlay */}
@@ -176,9 +176,10 @@ const Header: React.FC<HeaderProps> = ({
                 }}
                 className={`relative inline-block group w-full text-center ${
                   isOpen
-                    ? "text-3xl font-semibold text-custom-blue/90 active:text-custom-blue"
+                    ? "text-3xl font-semibold text-custom-blue/90 active:text-custom-blue animate-fade-in"
                     : "text-lg md:text-xl lg:text-2xl text-custom-blue"
                 }`}
+                style={isOpen ? { animationDelay: "0.1s" } : {}}
               >
                 About
                 <span className="absolute -bottom-2 left-0 w-full h-[2px] transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100 bg-custom-blue"></span>
@@ -192,9 +193,10 @@ const Header: React.FC<HeaderProps> = ({
                 }}
                 className={`relative inline-block group w-full text-center ${
                   isOpen
-                    ? "text-3xl font-semibold text-custom-blue/90 active:text-custom-blue"
+                    ? "text-3xl font-semibold text-custom-blue/90 active:text-custom-blue animate-fade-in"
                     : "text-lg md:text-xl lg:text-2xl text-custom-blue"
                 }`}
+                style={isOpen ? { animationDelay: "0.2s" } : {}}
               >
                 Work
                 <span className="absolute -bottom-2 left-0 w-full h-[2px] transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100 bg-custom-blue"></span>
@@ -208,9 +210,10 @@ const Header: React.FC<HeaderProps> = ({
                 }}
                 className={`relative inline-block group w-full text-center ${
                   isOpen
-                    ? "text-3xl font-semibold text-custom-blue/90 active:text-custom-blue"
+                    ? "text-3xl font-semibold text-custom-blue/90 active:text-custom-blue animate-fade-in"
                     : "text-lg md:text-xl lg:text-2xl text-custom-blue"
                 }`}
+                style={isOpen ? { animationDelay: "0.3s" } : {}}
               >
                 Contact
                 <span className="absolute -bottom-2 left-0 w-full h-[2px] transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100 bg-custom-blue"></span>
