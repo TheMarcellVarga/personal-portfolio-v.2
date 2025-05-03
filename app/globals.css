@@ -226,26 +226,22 @@
     height: 100%;
     background-color: rgba(245, 245, 245, 0.98);
     transform: translateX(100%);
-    transition: transform 0.3s ease-out, visibility 0s 0.3s;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-in-out;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 2rem;
-    z-index: -1;
+    z-index: 10;
     backdrop-filter: blur(8px);
-    visibility: hidden;
-    pointer-events: none;
     opacity: 0;
+    pointer-events: none;
   }
 
   .nav-overlay.open {
     transform: translateX(0);
-    visibility: visible;
-    transition: transform 0.3s ease-out;
-    pointer-events: auto;
-    z-index: 10;
     opacity: 1;
+    pointer-events: auto;
   }
 
   .md\:hidden {
@@ -256,32 +252,33 @@
   }
 
   .md\:hidden > div {
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: center;
+    height: 2px;
+    background-color: #176B87;
+    margin-bottom: 6px;
+    border-radius: 2px;
   }
 
-  .md\:hidden > div:nth-child(1) {
-    transform-origin: center;
-  }
-
-  .md\:hidden > div:nth-child(2) {
-    transform-origin: center;
-  }
-
-  .md\:hidden > div:nth-child(3) {
-    transform-origin: center;
+  .md\:hidden > div:last-child {
+    margin-bottom: 0;
   }
 
   .md\:hidden.open > div:nth-child(1) {
-    transform: translateY(6px) rotate(45deg);
+    transform: translateY(8px) rotate(45deg);
+    background-color: #176B87;
+    width: 100%;
   }
 
   .md\:hidden.open > div:nth-child(2) {
     opacity: 0;
-    transition: none !important;
+    transform: translateX(-20px);
   }
 
   .md\:hidden.open > div:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg);
+    transform: translateY(-8px) rotate(-45deg);
+    background-color: #176B87;
+    width: 100%;
   }
 
   .close-btn {
