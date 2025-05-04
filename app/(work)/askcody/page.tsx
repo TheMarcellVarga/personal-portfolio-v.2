@@ -764,28 +764,48 @@ const AskCody = () => {
                           px-4 py-3      
                           rounded-lg           
                           transition-all duration-300 ease-out 
-                          bg-linear-to-br from-gray-100/95 to-gray-100/90
+                          ${
+                            project.inProgress
+                              ? "bg-gradient-to-br from-custom-blue/10 via-custom-teal/10 to-custom-blue/10"
+                              : "bg-linear-to-br from-gray-100/95 to-gray-100/90"
+                          }
                           hover:bg-neutral-100/95
                           group
                           items-center         
                           border border-transparent
-                          hover:border-custom-blue/10
+                          ${
+                            project.inProgress
+                              ? "border-custom-blue/20"
+                              : "hover:border-custom-blue/10"
+                          }
                           backdrop-blur-xs
                           relative
                           overflow-hidden
                         `}
                       >
+                        {project.inProgress && (
+                          <div className="absolute top-0 right-0 bg-custom-blue text-white px-2 py-1 text-xs rounded-bl-lg">
+                            Coming Soon
+                          </div>
+                        )}
                         <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] [background-size:16px_16px] pointer-events-none group-hover:scale-[1.5] transition-transform duration-1000" />
                         <div className="w-32 relative overflow-hidden flex justify-center items-center group-hover:scale-[1.01] transition-transform duration-300">
-                          <div className="w-full h-full relative rounded-md overflow-hidden shadow-xs">
-                            <img
-                              src={project.image}
-                              alt={project.title}
-                              width={160}
-                              height={90}
-                              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                            />
-                          </div>
+                          {project.inProgress ? (
+                            <div className="w-full h-full aspect-video relative rounded-md overflow-hidden bg-gradient-to-br from-custom-blue/20 via-custom-teal/20 to-custom-blue/20 flex items-center justify-center">
+                              <div className="text-4xl animate-pulse" aria-hidden="true">🚀</div>
+                              <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_20%,_#ffffff_120%)] opacity-20"></div>
+                            </div>
+                          ) : (
+                            <div className="w-full h-full relative rounded-md overflow-hidden shadow-xs">
+                              <img
+                                src={project.image}
+                                alt={project.title}
+                                width={160}
+                                height={90}
+                                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                              />
+                            </div>
+                          )}
                         </div>
                         <div className="flex flex-col grow gap-1">
                           <div className="flex items-center justify-between">
