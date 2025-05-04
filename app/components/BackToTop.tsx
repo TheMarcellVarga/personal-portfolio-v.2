@@ -5,7 +5,9 @@ interface BackToTopProps {
   showAfter?: number; // Show after scrolling this many pixels
 }
 
-export default function BackToTop({ showAfter = 300 }: BackToTopProps) {
+export default function BackToTop({ 
+  showAfter = 300
+}: BackToTopProps) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -16,6 +18,9 @@ export default function BackToTop({ showAfter = 300 }: BackToTopProps) {
 
     // Add scroll event listener
     window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Run once on mount
+    handleScroll();
     
     // Clean up
     return () => {
@@ -30,21 +35,43 @@ export default function BackToTop({ showAfter = 300 }: BackToTopProps) {
     });
   };
 
-  if (!visible) return null;
+  // Calculate if we're near bottom of page
+  const [isNearBottom, setIsNearBottom] = useState(false);
+  
+  useEffect(() => {
+    const checkScrollPosition = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight;
+      const clientHeight = document.documentElement.clientHeight;
+      
+      // If we're within 200px of the bottom
+      const isBottom = scrollHeight - scrollTop - clientHeight < 200;
+      setIsNearBottom(isBottom);
+    };
+    
+    window.addEventListener('scroll', checkScrollPosition, { passive: true });
+    checkScrollPosition(); // Check on mount
+    
+    return () => {
+      window.removeEventListener('scroll', checkScrollPosition);
+    };
+  }, []);
 
   return (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-8 left-4 md:left-8 z-40 
+      className={`fixed left-4 md:left-8 z-40 
         p-3 rounded-full 
         bg-card-background backdrop-blur-sm
         border border-card-border
         shadow-lg 
         transition-all duration-300 ease-out
-        opacity-80 hover:opacity-100
+        hover:opacity-100
         hover:scale-110
         focus:outline-none focus:ring-2 focus:ring-custom-blue
-        transform translate-y-0 hover:translate-y-[-2px]"
+        transform translate-y-0 hover:translate-y-[-2px]
+        ${visible ? 'opacity-80' : 'opacity-0 pointer-events-none'}
+        ${isNearBottom ? 'bottom-22' : 'bottom-8'}`}
       aria-label="Back to top"
     >
       <ArrowUpIcon className="w-5 h-5 text-text-primary" />

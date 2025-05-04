@@ -13,7 +13,7 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ isHover }) => {
   return (
-    <div className="flex w-full justify-center">
+    <div className="flex w-full justify-center" data-footer>
       <div className="flex w-full flex-col">
         <div className="w-full border-t border-gray-300 opacity-60"></div>
         <div className="flex w-full flex-row justify-between items-center px-4 pt-4">
