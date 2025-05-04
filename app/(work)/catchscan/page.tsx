@@ -31,7 +31,7 @@ const history = [
       {
         title: "Problem",
         text: [
-          "Our client had created a beta version of their product, where their main focus was on the functionality itself, rather than the user experience. This led to broken user flows of the existing dashboard, resulting in an unpleasing, confusing experience, which doesn’t represent the company’s values.",
+          "Our client had created a beta version of their product, where their main focus was on the functionality itself, rather than the user experience. This led to broken user flows of the existing dashboard, resulting in an unpleasing, confusing experience, which doesn't represent the company's values.",
         ],
         picture: [],
       },
@@ -103,7 +103,7 @@ const history = [
           "Content Inventory",
         ],
         subText: [
-          "To make sure we fulfill the users needs and preferences, we have started with formulating problem from the users’ point of view.",
+          "To make sure we fulfill the users needs and preferences, we have started with formulating problem from the users' point of view.",
           "To simplify these formulations, we have narrowed them down by paraphrasing them into one sentence forms.",
           "To support the idea and process we had reformulated the statement once again by creating questions from the one sentence insights",
           "To fully determine the scope of the project, we have conducted content inventory, to include the all the necessary elements of the project.",
@@ -159,7 +159,7 @@ const history = [
           "Before we started the actual process of designing, we had decided on using Atomic Design as our choice of team collaboration methodology",
           "As the atomic design consists of components, our design process started with the smallest ones - Atoms",
           "By combining atoms together, we formed molecules. In our case as a molecules, we can consider buttons in navigation formed with an icon and text and cards with the buttons, texts, and images",
-          "Organisms are next phase of connection smaller elements. Putting together cards we create “libraries”, menu buttons - navigation",
+          "Organisms are next phase of connection smaller elements. Putting together cards we create \"libraries\", menu buttons - navigation",
           "Templates are already complex solutions. It is a combination of organisms, and it represents how the pages will look like",
           "Finally, the complete design with included content - pages",
           "",
@@ -673,28 +673,48 @@ const Catchscan = () => {
                           px-4 py-3      
                           rounded-lg           
                           transition-all duration-300 ease-out 
-                          bg-linear-to-br from-gray-100/95 to-gray-100/90
+                          ${
+                            project.inProgress
+                              ? "bg-gradient-to-br from-custom-blue/10 via-custom-teal/10 to-custom-blue/10"
+                              : "bg-linear-to-br from-gray-100/95 to-gray-100/90"
+                          }
                           hover:bg-neutral-100/95
                           group
                           items-center         
                           border border-transparent
-                          hover:border-custom-blue/10
+                          ${
+                            project.inProgress
+                              ? "border-custom-blue/20"
+                              : "hover:border-custom-blue/10"
+                          }
                           backdrop-blur-xs
                           relative
                           overflow-hidden
                         `}
                       >
+                        {project.inProgress && (
+                          <div className="absolute top-0 right-0 bg-custom-blue text-white px-2 py-1 text-xs rounded-bl-lg">
+                            Coming Soon
+                          </div>
+                        )}
                         <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] [background-size:16px_16px] pointer-events-none group-hover:scale-[1.5] transition-transform duration-1000" />
                         <div className="w-32 relative overflow-hidden flex justify-center items-center group-hover:scale-[1.01] transition-transform duration-300">
-                          <div className="w-full h-full relative rounded-md overflow-hidden shadow-xs">
-                            <img
-                              src={project.image}
-                              alt={project.title}
-                              width={160}
-                              height={90}
-                              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                            />
-                          </div>
+                          {project.inProgress ? (
+                            <div className="w-full h-full aspect-video relative rounded-md overflow-hidden bg-gradient-to-br from-custom-blue/20 via-custom-teal/20 to-custom-blue/20 flex items-center justify-center">
+                              <div className="text-4xl animate-pulse" aria-hidden="true">🚀</div>
+                              <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_20%,_#ffffff_120%)] opacity-20"></div>
+                            </div>
+                          ) : (
+                            <div className="w-full h-full relative rounded-md overflow-hidden shadow-xs">
+                              <img
+                                src={project.image}
+                                alt={project.title}
+                                width={160}
+                                height={90}
+                                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                              />
+                            </div>
+                          )}
                         </div>
                         <div className="flex flex-col grow gap-1">
                           <div className="flex items-center justify-between">
