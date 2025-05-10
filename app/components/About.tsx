@@ -104,9 +104,11 @@ export default function About({ scrollPositionLocomotive }: AboutProps) {
       data-scroll-offset="50"
       className="sticky h-[400vh] top-0 flex flex-col items-center justify-between gap-1 w-full transition-all duration-300"
     >
-      <div className="flex md:w-4/5 h-screen text-5xl font-medium items-center justify-start">
+      <div className="flex w-full sm:w-5/6 md:w-4/5 h-screen items-center justify-start px-4 sm:px-8">
         <h2 
-          className="text-2xl font-light text-left md:text-justify m-8 leading-relaxed text-custom-blue transition-opacity duration-300"
+          className="text-base sm:text-xl md:text-2xl font-light text-left md:text-justify 
+          leading-relaxed text-custom-blue transition-opacity duration-300
+          mx-2 sm:mx-4 md:m-8"
           aria-live="polite"
         >
           {typedText}

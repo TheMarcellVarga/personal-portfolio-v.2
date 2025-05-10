@@ -60,8 +60,8 @@ export default function BackToTop({
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed left-4 md:left-8 z-40 
-        p-3 rounded-full 
+      className={`fixed left-3 sm:left-4 md:left-8 z-40 
+        p-2 sm:p-3 rounded-full 
         bg-card-background backdrop-blur-sm
         border border-card-border
         shadow-lg 
@@ -71,10 +71,10 @@ export default function BackToTop({
         focus:outline-none focus:ring-2 focus:ring-custom-blue
         transform translate-y-0 hover:translate-y-[-2px]
         ${visible ? 'opacity-80' : 'opacity-0 pointer-events-none'}
-        ${isNearBottom ? 'bottom-22' : 'bottom-8'}`}
+        ${isNearBottom ? 'bottom-20 sm:bottom-22' : 'bottom-6 sm:bottom-8'}`}
       aria-label="Back to top"
     >
-      <ArrowUpIcon className="w-5 h-5 text-text-primary" />
+      <ArrowUpIcon className="w-4 h-4 sm:w-5 sm:h-5 text-text-primary" />
     </button>
   );
 } 
