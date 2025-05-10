@@ -42,7 +42,7 @@ export default function Hero({ scrollToWork }: HeroProps) {
     <main
       data-scroll-section
       data-scroll-section-id="hero"
-      className="relative flex flex-col items-center justify-between h-screen mt-2 m-4 gap-1"
+      className="relative flex flex-col items-center justify-between h-screen mt-2 mx-2 sm:m-4 gap-1"
     >
       <div
         data-scroll
@@ -53,7 +53,7 @@ export default function Hero({ scrollToWork }: HeroProps) {
         <div
           className={`
           absolute 
-          mt-12 
+          mt-8 sm:mt-12 
           w-full
           h-screen 
           z-20 
@@ -62,10 +62,10 @@ export default function Hero({ scrollToWork }: HeroProps) {
           items-start 
           justify-center 
           overflow-x-hidden
-          ml-4 
+          ml-2 sm:ml-4
           md:pl-12 
-          pl-4 
-          pb-32 
+          pl-2 sm:pl-4 
+          pb-24 sm:pb-32 
           md:pb-24 
           md:pt-4
         `}
@@ -79,8 +79,8 @@ export default function Hero({ scrollToWork }: HeroProps) {
           animate-fade-in-up 
           transition-opacity 
           duration-300
-          text-base sm:text-lg md:text-xl lg:text-2xl
-          sm:pb-4
+          text-sm sm:text-base md:text-xl lg:text-2xl
+          pb-1 sm:pb-4
         `}
             style={{ animationDelay: "0.2s" }}
             aria-live="polite"
@@ -94,7 +94,7 @@ export default function Hero({ scrollToWork }: HeroProps) {
           text-custom-blue 
           whitespace-nowrap
           animate-fade-in-up
-          text-[44px] leading-[50px] text-4xl sm:text-5xl md:text-6xl lg:text-7xl
+          text-3xl leading-8 sm:text-4xl sm:leading-[50px] md:text-6xl lg:text-7xl
         `}
             style={{ animationDelay: "0.4s" }}
           >
@@ -110,9 +110,9 @@ export default function Hero({ scrollToWork }: HeroProps) {
           whitespace-nowrap
           animate-fade-in-up
           text-custom-blue
-          text-xl sm:text-2xl md:text-3xl lg:text-4xl
+          text-lg sm:text-xl md:text-3xl lg:text-4xl
           justify-start
-          mb-2 md:mb-0 md:my-4
+          mt-1 mb-2 md:mb-0 md:my-4
         `}
             style={{ animationDelay: "0.6s" }}
           >
@@ -122,7 +122,7 @@ export default function Hero({ scrollToWork }: HeroProps) {
             className={`
           flex flex-col sm:flex-row 
           w-full
-          text-sm sm:text-base md:text-base lg:text-lg
+          text-xs sm:text-sm md:text-base lg:text-lg
           font-light 
           items-start 
           justify-start 
@@ -133,6 +133,7 @@ export default function Hero({ scrollToWork }: HeroProps) {
           group
           transition-all duration-300
           hover:text-custom-blue/80
+          pr-4 sm:pr-0
         `}
             style={{ animationDelay: "0.8s" }}
           >
@@ -154,15 +155,15 @@ export default function Hero({ scrollToWork }: HeroProps) {
             </span>
           </div>
           <div
-            className="absolute bottom-40 md:bottom-44 left-0 pl-4 sm:pl-6 md:pl-10
+            className="absolute bottom-24 sm:bottom-40 md:bottom-44 left-0 pl-2 sm:pl-6 md:pl-10
             animate-fade-in-up"
             style={{ animationDelay: "1s" }}
           >
             <button
               onClick={scrollToWork}
-              className="relative flex px-5 py-2 text-custom-blue rounded-full group 
-              overflow-hidden min-w-28 sm:min-w-36 items-center justify-center
-              cursor-pointer"
+              className="relative flex px-4 sm:px-5 py-2 text-custom-blue rounded-full group 
+              overflow-hidden min-w-24 sm:min-w-28 md:min-w-36 items-center justify-center
+              cursor-pointer text-sm sm:text-base"
               aria-label="View projects"
             >
               <div className="relative z-10 flex items-center justify-center transition-all duration-300 ease-out">
@@ -170,7 +171,7 @@ export default function Hero({ scrollToWork }: HeroProps) {
                   View Projects
                 </span>
                 <ArrowRightIcon
-                  className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 transition-all duration-300 ease-out group-hover:text-gray-50
+                  className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 relative z-10 transition-all duration-300 ease-out group-hover:text-gray-50
                   transform group-hover:translate-x-1"
                 />
               </div>

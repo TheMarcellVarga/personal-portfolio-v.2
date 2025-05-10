@@ -224,7 +224,7 @@ export default function Page() {
       id="main-container"
       data-scroll-container
       className={`
-        px-4 pb-4 
+        px-2 sm:px-4 pb-4 
         transition-colors duration-200 
         ease-in-out 
         bg-gray-200 
@@ -281,7 +281,7 @@ export default function Page() {
           className="flex justify-center items-center"
           ref={stickySectionRef}
         >
-          <div className="flex flex-col items-center justify-between mt-4 mb-4 gap-24 w-4/5">
+          <div className="flex flex-col items-center justify-between mt-4 mb-4 gap-16 sm:gap-24 w-full sm:w-4/5">
             <Skills />
             <Projects />
             {/* Temporarily removed Blog */}
