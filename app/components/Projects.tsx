@@ -110,7 +110,7 @@ export default function Projects() {
               >
                 <div className="w-full sm:w-1/4 md:w-[300px] mb-2 sm:mb-0 relative flex items-center justify-center group-hover:scale-[1.02] transition-transform duration-500 px-1 sm:px-0">
                   {project.inProgress ? (
-                    <div className="w-full aspect-3/2 sm:w-full sm:h-full md:aspect-3/2 relative rounded-lg overflow-hidden bg-gradient-to-br from-custom-blue/20 via-custom-teal/20 to-custom-blue/20 flex items-center justify-center">
+                    <div className="w-full aspect-3/2 sm:w-full sm:h-full md:aspect-3/2 relative rounded-lg overflow-hidden bg-gradient-to-br from-custom-blue/20 via-custom-teal/20 to-custom-blue/20 flex items-center justify-center shadow-[0_8px_30px_rgba(2,66,92,0.12)] group-hover:shadow-[0_15px_60px_rgba(2,66,92,0.2)] transition-all duration-500">
                       <div className="absolute top-0 right-0 z-10 bg-custom-blue text-white px-1 py-0.5 text-[8px] sm:text-xs rounded-bl-lg shadow-md">
                         Coming Soon
                       </div>
@@ -179,7 +179,15 @@ export default function Projects() {
                   </div>
                 )}
                 {project.inProgress && (
-                  <div className="hidden sm:block w-8 md:w-16 h-full"></div>
+                  <div className="hidden sm:flex w-8 md:w-16 h-full items-center justify-center relative">
+                    <div className="opacity-0">
+                      <FontAwesomeIcon
+                        icon={faChevronRight}
+                        className="w-4 md:w-6 h-4 md:h-6"
+                        aria-hidden="true"
+                      />
+                    </div>
+                  </div>
                 )}
               </Link>
             </div>
