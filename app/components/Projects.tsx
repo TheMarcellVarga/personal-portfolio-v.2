@@ -53,7 +53,8 @@ export default function Projects() {
 
   return (
     <article
-      data-scroll-section-id="projectsContent"
+      id="projects-content"
+      data-scroll-section-id="projects-content"
       className="w-full flex flex-col p-3 sm:p-4"
     >
       {/* Temporarily removed filter UI */}
