@@ -89,11 +89,9 @@ const Header: React.FC<HeaderProps> = ({
     if (propScrollToWork) {
       propScrollToWork();
     } else {
-      const workSection = document.querySelector(
-        '[data-scroll-section-id="projectsContent"]'
-      );
-      if (workSection) {
-        const offset = workSection.getBoundingClientRect().top + window.scrollY;
+      const projectsContent = document.getElementById('projects-content');
+      if (projectsContent) {
+        const offset = projectsContent.getBoundingClientRect().top + window.scrollY;
         window.scrollTo({
           top: offset - 50,
           behavior: "smooth",
@@ -106,16 +104,10 @@ const Header: React.FC<HeaderProps> = ({
     if (propScrollToContact) {
       propScrollToContact();
     } else {
-      const contactSection = document.querySelector(
-        '[data-scroll-section-id="contact"]'
-      );
-      if (contactSection) {
-        const offset = contactSection.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({
-          top: offset + 20,
-          behavior: "smooth",
-        });
-      }
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
+      });
     }
   };
 

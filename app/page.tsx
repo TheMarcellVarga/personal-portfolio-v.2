@@ -161,11 +161,9 @@ export default function Page() {
   }, []);
 
   const scrollToWork = useCallback(() => {
-    const workSection = document.querySelector(
-      '[data-scroll-section-id="projects"]'
-    );
-    if (workSection) {
-      const offset = workSection.getBoundingClientRect().top + window.scrollY;
+    const projectsContent = document.getElementById('projects-content');
+    if (projectsContent) {
+      const offset = projectsContent.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({
         top: offset,
         behavior: "smooth",
@@ -174,13 +172,11 @@ export default function Page() {
   }, []);
 
   const scrollToContact = useCallback(() => {
-    if (stickySectionRef.current) {
-      const contactLocation = 6380 - 1;
-      window.scrollTo({
-        top: contactLocation,
-        behavior: "smooth",
-      });
-    }
+    // Scroll to the bottom of the page
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth",
+    });
   }, []);
 
   const [hasScrolled, setHasScrolled] = useState(false);
