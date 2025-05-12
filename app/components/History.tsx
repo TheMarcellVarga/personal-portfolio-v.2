@@ -3,7 +3,7 @@ import { history } from '../data/history';
 
 export default function History() {
   return (
-    <article className="w-full p-2 sm:p-4 transform transition-all duration-500">
+    <article className="w-full p-3 sm:p-4 transform transition-all duration-500">
       <h2
         className="text-custom-blue text-xs sm:text-sm font-bold mb-6 sm:mb-8 tracking-wider uppercase flex items-center
         before:content-[''] before:block before:w-3 sm:before:w-4 before:h-[2px] before:bg-custom-blue before:mr-2"
@@ -15,7 +15,7 @@ export default function History() {
           <div
             key={index}
             className="flex flex-col md:flex-row group  
-            rounded-xl transition-all duration-300 p-2 sm:p-4 -mx-2 sm:-mx-4"
+            rounded-xl transition-all duration-300 p-3 sm:p-4 -mx-2 sm:-mx-4"
           >
             <div className="w-full md:w-1/2 pr-4 sm:pr-8 mb-2 md:mb-0">
               <h3
@@ -28,7 +28,7 @@ export default function History() {
 
             <div className="w-full md:w-1/2">
               <div
-                className="flex flex-col gap-3 sm:gap-4 relative
+                className="flex flex-col gap-4 sm:gap-4 relative
                 before:absolute before:left-0 before:w-[2px] 
                 before:h-[calc(100%+1rem)] before:bg-custom-blue/10 before:-ml-2 sm:before:-ml-4 
                 before:transition-all before:duration-300

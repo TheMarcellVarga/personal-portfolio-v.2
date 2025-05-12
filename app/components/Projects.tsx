@@ -54,13 +54,11 @@ export default function Projects() {
   return (
     <article
       data-scroll-section-id="projectsContent"
-      className="w-full flex flex-col p-2 sm:p-4"
+      className="w-full flex flex-col p-3 sm:p-4"
     >
       {/* Temporarily removed filter UI */}
-      <h2
-        className="text-custom-blue text-xs sm:text-sm font-bold mb-6 sm:mb-8 tracking-wider uppercase flex items-center
-        before:content-[''] before:block before:w-3 sm:before:w-4 before:h-[2px] before:bg-custom-blue before:mr-2"
-      >
+      <h2 className="text-custom-blue text-xs sm:text-sm font-bold mb-6 sm:mb-8 tracking-wider uppercase relative pl-6">
+        <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-custom-blue"></div>
         Projects
       </h2>
       
@@ -109,15 +107,12 @@ export default function Projects() {
                 `}
                 aria-label={`View ${project.title} project`}
               >
-                {project.inProgress && (
-                  <div className="absolute top-0 right-0 bg-custom-blue text-white px-2 py-1 text-[10px] sm:text-xs rounded-bl-lg">
-                    Coming Soon
-                  </div>
-                )}
-
                 <div className="w-full sm:w-1/4 md:w-[300px] mb-3 sm:mb-0 relative flex items-center justify-center group-hover:scale-[1.02] transition-transform duration-500 px-2 sm:px-0">
                   {project.inProgress ? (
                     <div className="w-full aspect-3/2 sm:w-full sm:h-full md:aspect-3/2 relative rounded-lg overflow-hidden bg-gradient-to-br from-custom-blue/20 via-custom-teal/20 to-custom-blue/20 flex items-center justify-center">
+                      <div className="absolute top-0 right-0 z-10 bg-custom-blue text-white px-2 py-1 text-[10px] sm:text-xs rounded-bl-lg shadow-md">
+                        Coming Soon
+                      </div>
                       <div className="text-4xl sm:text-6xl animate-pulse" aria-hidden="true">🚀</div>
                       <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_20%,_#ffffff_120%)] opacity-20"></div>
                     </div>
