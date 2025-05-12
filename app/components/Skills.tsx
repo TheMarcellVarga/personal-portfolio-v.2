@@ -72,7 +72,7 @@ const skillCategories = {
 
 export default function Skills() {
   return (
-    <article className="mt-8 w-full p-2 sm:p-4">
+    <article className="mt-8 w-full p-4 sm:p-4">
       <h2
         className="text-custom-blue text-xs sm:text-sm font-bold mb-6 sm:mb-8 tracking-wider uppercase flex items-center
         before:content-[''] before:block before:w-3 sm:before:w-4 before:h-[2px] before:bg-custom-blue before:mr-2"
@@ -97,7 +97,7 @@ export default function Skills() {
                   key={skill.name}
                   className="group relative flex flex-col items-center justify-center
                     bg-custom-blue/5 hover:bg-custom-blue/10
-                    p-2 sm:p-3 rounded-lg sm:rounded-xl
+                    p-3 sm:p-3 rounded-lg sm:rounded-xl
                     transform transition-all duration-300 hover:scale-105 hover:-translate-y-1
                     cursor-pointer"
                   style={{

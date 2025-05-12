@@ -22,7 +22,7 @@ export default function Blog() {
     <section
       data-scroll-section
       data-scroll-section-id="blog"
-      className="w-full flex flex-col p-2 sm:p-4"
+      className="w-full flex flex-col p-3 sm:p-4"
     >
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 sm:mb-8">
         <h2

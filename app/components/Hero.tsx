@@ -64,7 +64,7 @@ export default function Hero({ scrollToWork }: HeroProps) {
           overflow-x-hidden
           ml-2 sm:ml-4
           md:pl-12 
-          pl-2 sm:pl-4 
+          pl-4 sm:pl-4 
           pb-24 sm:pb-32 
           md:pb-24 
           md:pt-4
@@ -155,7 +155,7 @@ export default function Hero({ scrollToWork }: HeroProps) {
             </span>
           </div>
           <div
-            className="absolute bottom-24 sm:bottom-40 md:bottom-44 left-0 pl-2 sm:pl-6 md:pl-10
+            className="absolute bottom-36 sm:bottom-40 md:bottom-44 left-0 pl-4 sm:pl-6 md:pl-10
             animate-fade-in-up"
             style={{ animationDelay: "1s" }}
           >
