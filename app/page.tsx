@@ -173,10 +173,10 @@ export default function Page() {
 
   const scrollToContact = useCallback(() => {
     // Scroll to the bottom of the page
-    window.scrollTo({
+      window.scrollTo({
       top: document.documentElement.scrollHeight,
-      behavior: "smooth",
-    });
+        behavior: "smooth",
+      });
   }, []);
 
   const [hasScrolled, setHasScrolled] = useState(false);

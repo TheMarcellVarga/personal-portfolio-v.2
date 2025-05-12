@@ -104,10 +104,10 @@ const Header: React.FC<HeaderProps> = ({
     if (propScrollToContact) {
       propScrollToContact();
     } else {
-      window.scrollTo({
+        window.scrollTo({
         top: document.documentElement.scrollHeight,
-        behavior: "smooth",
-      });
+          behavior: "smooth",
+        });
     }
   };
 
