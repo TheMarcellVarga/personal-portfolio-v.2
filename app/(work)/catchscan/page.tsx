@@ -756,9 +756,9 @@ const Catchscan = () => {
                           </div>
                         )}
                         <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] [background-size:16px_16px] pointer-events-none group-hover:scale-[1.5] transition-transform duration-1000" />
-                        <div className="w-32 relative overflow-hidden flex justify-center items-center group-hover:scale-[1.01] transition-transform duration-300">
+                        <div className="w-32 h-20 relative overflow-hidden flex justify-center items-center group-hover:scale-[1.01] transition-transform duration-300">
                           {project.inProgress ? (
-                            <div className="w-full h-full aspect-video relative rounded-md overflow-hidden bg-gradient-to-br from-custom-blue/20 via-custom-teal/20 to-custom-blue/20 flex items-center justify-center">
+                            <div className="w-full h-full aspect-video relative rounded-md overflow-hidden bg-gradient-to-br from-custom-blue/20 via-custom-teal/20 to-custom-blue/20 flex items-center justify-center shadow-[0_4px_10px_rgba(2,66,92,0.12)] group-hover:shadow-[0_6px_15px_rgba(2,66,92,0.2)] transition-all duration-500">
                               <div className="text-4xl animate-pulse" aria-hidden="true">🚀</div>
                               <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_20%,_#ffffff_120%)] opacity-20"></div>
                             </div>
