@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "../../header";
@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import useLocomotive from "../../useLocomotive";
+import { useRouter } from "next/navigation";
 
 const history = [
   {
@@ -270,6 +271,56 @@ const ESS = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const { updateScroll } = useLocomotive();
+  const router = useRouter();
+
+  // Add navigation functions for the header
+  const scrollToHome = useCallback(async () => {
+    await router.push("/");
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }, 100);
+  }, [router]);
+
+  const scrollToAbout = useCallback(async () => {
+    await router.push("/");
+    setTimeout(() => {
+      const aboutSection = document.querySelector('[data-scroll-section-id="about"]');
+      if (aboutSection) {
+        const offset = aboutSection.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top: offset,
+          behavior: "smooth",
+        });
+      }
+    }, 100);
+  }, [router]);
+
+  const scrollToWork = useCallback(async () => {
+    await router.push("/");
+    setTimeout(() => {
+      const projectsContent = document.getElementById('projects-content');
+      if (projectsContent) {
+        const offset = projectsContent.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top: offset,
+          behavior: "smooth",
+        });
+      }
+    }, 100);
+  }, [router]);
+
+  const scrollToContact = useCallback(async () => {
+    await router.push("/");
+    setTimeout(() => {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
+      });
+    }, 100);
+  }, [router]);
 
   useEffect(() => {
     const handlePageShow = () => {
@@ -334,7 +385,14 @@ const ESS = () => {
         aria-hidden="true"
       />
       <div className="relative z-1">
-        <Header isOpen={isOpen} setIsOpen={setIsOpen} />
+        <Header 
+          isOpen={isOpen} 
+          setIsOpen={setIsOpen} 
+          scrollToHome={scrollToHome}
+          scrollToAbout={scrollToAbout}
+          scrollToWork={scrollToWork}
+          scrollToContact={scrollToContact}
+        />
         <main
           data-scroll-container
           data-scroll-section-id="hero"
