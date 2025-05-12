@@ -64,7 +64,7 @@ export default function Projects() {
       </h2>
       
       <div className="w-full h-full flex justify-center items-center">
-        <div className="w-full flex flex-col gap-8 sm:gap-12">
+        <div className="w-full flex flex-col gap-4 sm:gap-12">
           {projects.map((project, index) => (
             <div
               key={project.title}
@@ -74,7 +74,7 @@ export default function Projects() {
               data-scroll-delay="0.2"
               data-scroll-repeat="true"
               data-scroll-class="fade-in"
-              className="w-full max-w-[400px] sm:max-w-none mx-auto transform-gpu hover:scale-[1.02] transition-all duration-300"
+              className="w-full max-w-[350px] sm:max-w-none mx-auto transform-gpu hover:scale-[1.02] transition-all duration-300"
             >
               <Link
                 href={project.link}
@@ -82,8 +82,8 @@ export default function Projects() {
                   w-full 
                   flex flex-col
                   sm:flex-row
-                  gap-3 sm:gap-4
-                  px-3 py-4
+                  gap-2 sm:gap-4
+                  px-3 py-3
                   sm:px-4 sm:py-3
                   md:px-8 md:py-6
                   rounded-lg sm:rounded-xl
@@ -108,13 +108,13 @@ export default function Projects() {
                 `}
                 aria-label={`View ${project.title} project`}
               >
-                <div className="w-full sm:w-1/4 md:w-[300px] mb-3 sm:mb-0 relative flex items-center justify-center group-hover:scale-[1.02] transition-transform duration-500 px-2 sm:px-0">
+                <div className="w-full sm:w-1/4 md:w-[300px] mb-2 sm:mb-0 relative flex items-center justify-center group-hover:scale-[1.02] transition-transform duration-500 px-1 sm:px-0">
                   {project.inProgress ? (
                     <div className="w-full aspect-3/2 sm:w-full sm:h-full md:aspect-3/2 relative rounded-lg overflow-hidden bg-gradient-to-br from-custom-blue/20 via-custom-teal/20 to-custom-blue/20 flex items-center justify-center">
-                      <div className="absolute top-0 right-0 z-10 bg-custom-blue text-white px-2 py-1 text-[10px] sm:text-xs rounded-bl-lg shadow-md">
+                      <div className="absolute top-0 right-0 z-10 bg-custom-blue text-white px-1 py-0.5 text-[8px] sm:text-xs rounded-bl-lg shadow-md">
                         Coming Soon
                       </div>
-                      <div className="text-4xl sm:text-6xl animate-pulse" aria-hidden="true">🚀</div>
+                      <div className="text-3xl sm:text-6xl animate-pulse" aria-hidden="true">🚀</div>
                       <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_20%,_#ffffff_120%)] opacity-20"></div>
                     </div>
                   ) : (
@@ -130,7 +130,7 @@ export default function Projects() {
                   )}
                 </div>
 
-                <div className="flex flex-col px-2 sm:px-2 sm:pl-4 md:px-6 md:pl-8 gap-1 sm:gap-2 w-full sm:w-2/3 md:w-full h-full justify-center relative z-10 text-center sm:text-left">
+                <div className="flex flex-col px-1 sm:px-2 sm:pl-4 md:px-6 md:pl-8 gap-1 sm:gap-2 w-full sm:w-2/3 md:w-full h-full justify-center relative z-10 text-center sm:text-left">
                   <div className="w-full sm:w-full transition-transform duration-300">
                     <div className="flex flex-row items-center justify-between w-full">
                       <div className="text-base sm:text-lg md:text-2xl text-custom-blue font-bold text-left">
@@ -157,7 +157,7 @@ export default function Projects() {
                     {project.skills.map((skill) => (
                       <div
                         key={skill}
-                        className="skill-pill flex items-center text-[10px] sm:text-xs px-2 sm:px-3 py-1 sm:py-1.5 rounded-md
+                        className="skill-pill flex items-center text-[10px] sm:text-xs px-1.5 sm:px-3 py-0.5 sm:py-1.5 rounded-md
                           bg-custom-blue/10 text-custom-blue/80
                           transform transition-all duration-300 hover:scale-105 shadow-sm"
                       >
