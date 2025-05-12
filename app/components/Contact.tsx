@@ -7,13 +7,13 @@ export default function Contact() {
     <section
       data-scroll-section
       data-scroll-section-id="contact"
-      className="flex justify-center items-center mt-8 sm:mt-12 mb-16 sm:mb-24 transform hover:scale-[1.01] transition-all duration-500"
+      className="flex justify-center items-center mt-8 sm:mt-12 mb-12 sm:mb-24 transform hover:scale-[1.01] transition-all duration-500"
     >
-      <div className="relative w-full sm:w-4/5 max-w-4xl px-4 sm:px-0">
-        <div className="relative bg-gray-100/90 rounded-lg sm:rounded-xl p-6 sm:p-8 md:p-12 border border-custom-blue/10">
-          <div className="flex flex-col md:flex-row gap-6 sm:gap-8 items-center">
-            <div className="relative z-10 transform group-hover:scale-[1.02] transition-transform duration-500">
-              <h2 className="text-lg sm:text-xl md:text-4xl font-bold text-custom-blue text-left mb-4 sm:mb-6 tracking-tight">
+      <div className="relative w-full sm:w-4/5 max-w-4xl px-3 sm:px-0">
+        <div className="relative bg-gray-100/90 rounded-lg sm:rounded-xl p-5 sm:p-8 md:p-12 border border-custom-blue/10">
+          <div className="flex flex-col md:flex-row gap-5 sm:gap-8 items-start md:items-center">
+            <div className="relative z-10 w-full md:w-auto transform group-hover:scale-[1.02] transition-transform duration-500">
+              <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-custom-blue text-left mb-3 sm:mb-6 tracking-tight">
                 Building Beyond&nbsp;
                 <span className="text-custom-blue/80">Boundaries</span> 🚀
               </h2>
@@ -23,10 +23,10 @@ export default function Contact() {
               </p>
             </div>
 
-            <div className="flex-1 flex justify-center md:justify-end mt-2 sm:mt-0">
+            <div className="flex-1 flex justify-start md:justify-end mt-4 sm:mt-0">
               <a
                 href="mailto:themarcellvarga@gmail.com"
-                className="relative px-4 sm:px-5 py-2 text-custom-blue rounded-full group overflow-hidden min-w-32 sm:min-w-36 flex items-center justify-center text-sm sm:text-base"
+                className="relative px-4 sm:px-5 py-2.5 text-custom-blue rounded-full group overflow-hidden min-w-36 sm:min-w-36 flex items-center justify-center text-sm sm:text-base"
                 aria-label="Send email to Marcell Varga"
               >
                 <div className="relative z-10 flex items-center justify-center transition-transform duration-300 ease-out transform group-hover:translate-x-0">
@@ -41,8 +41,8 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-custom-blue/10">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+          <div className="mt-5 sm:mt-8 pt-5 sm:pt-8 border-t border-custom-blue/10">
+            <div className="flex flex-row flex-wrap sm:flex-row gap-4 justify-start md:justify-start">
               <a
                 href="https://www.linkedin.com/in/marcellvarga/"
                 target="_blank"

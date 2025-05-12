@@ -28,12 +28,8 @@ export default function History() {
 
             <div className="w-full md:w-1/2">
               <div
-                className="flex flex-col gap-2 sm:gap-4 relative
-                before:absolute before:left-0 before:w-[2px] 
-                before:h-[calc(100%+0.75rem)] before:bg-custom-blue/10 before:-ml-2 sm:before:-ml-4 
-                before:transition-all before:duration-300
-                before:-top-2 sm:before:top-0
-                group-hover:before:bg-custom-blue"
+                className="flex flex-col gap-2 sm:gap-4 relative pl-4 sm:pl-6 border-l-2 border-custom-blue/10
+                group-hover:border-custom-blue transition-colors duration-300"
               >
                 <div className="transition-colors duration-300 group-hover:text-custom-blue">
                   <h3 className="text-base sm:text-xl font-semibold text-custom-blue">
