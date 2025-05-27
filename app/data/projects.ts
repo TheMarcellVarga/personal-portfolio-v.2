@@ -11,6 +11,16 @@ export const projects = [
       inProgress: true
     },
     {
+      title: "Personal Finance App",
+      subTitle: "Financial Management Platform",
+      date: "2024",
+      description:
+        "A comprehensive personal finance web application that helps users manage their finances, track investments, receive AI-powered financial advice, and understand their financial health through an intuitive dashboard and advanced analytics.",
+      skills: ["Next.js 14", "TypeScript", "Tailwind CSS", "Clerk Auth", "Recharts", "shadcn/ui", "Zustand"],
+      link: "/personal-finance",
+      image: "/images/personal-finance-index.svg",
+    },
+    {
       title: "European Study Solution",
       subTitle: "Student Agency",
       date: "2021",
