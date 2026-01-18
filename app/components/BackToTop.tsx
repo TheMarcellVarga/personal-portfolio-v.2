@@ -62,8 +62,8 @@ export default function BackToTop({
       onClick={scrollToTop}
       className={`fixed left-3 sm:left-4 md:left-8 z-40 
         p-2 sm:p-3 rounded-full 
-        bg-card-background backdrop-blur-sm
-        border border-card-border
+        bg-gray-100/90 backdrop-blur-sm
+        border border-custom-blue/10
         shadow-lg 
         transition-all duration-300 ease-out
         hover:opacity-100
@@ -74,7 +74,7 @@ export default function BackToTop({
         ${isNearBottom ? 'bottom-20 sm:bottom-22' : 'bottom-6 sm:bottom-8'}`}
       aria-label="Back to top"
     >
-      <ArrowUpIcon className="w-4 h-4 sm:w-5 sm:h-5 text-text-primary" />
+      <ArrowUpIcon className="w-4 h-4 sm:w-5 sm:h-5 text-custom-blue" />
     </button>
   );
 } 

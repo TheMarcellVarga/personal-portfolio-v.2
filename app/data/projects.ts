@@ -1,10 +1,15 @@
 export const projects = [
     {
       title: "Upcoming Projects",
-      subTitle: "Exciting New Venture",
+      subTitle: "New product explorations",
       date: "In Progress",
       description:
-        "A groundbreaking projects currently in development. Look here for my upcoming projects and innovations that push the boundaries of technology and design.",
+        "A growing set of experiments focused on AI-assisted workflows, modern UX patterns, and storytelling through interactive interfaces.",
+      highlights: [
+        "Exploring rapid prototyping with modern UI stacks",
+        "Focus on measurable UX outcomes and iteration",
+        "Case studies and visuals landing soon"
+      ],
       skills: ["Coming Soon"],
       link: "http://github.com/TheMarcellVarga",
       image: "🚀",
@@ -12,30 +17,45 @@ export const projects = [
     },
     {
       title: "European Study Solution",
-      subTitle: "Student Agency",
+      subTitle: "Student mobility platform",
       date: "2021",
       description:
-        "Informative website developed for a start-up to help American students with application process towards European programs and prepare the for life abroad. The platform is to served to develop their business, get and keep in touch with their students.",
+        "Designed and built a responsive platform that helps students navigate European study programs with clear pathways, content structure, and trust-building UX.",
+      highlights: [
+        "Improved discoverability through refined IA",
+        "Crafted content-first layouts for clarity",
+        "Optimized for accessibility and SEO"
+      ],
       skills: ["HTML", "CSS", "JavaScript", "SEO"],
       link: "/ess",
       image: "/images/ess-index.png",
     },
     {
       title: "CatchScan",
-      subTitle: "Copyright Protection SaaS",
+      subTitle: "Copyright protection SaaS",
       date: "2021",
       description:
-        "SaaS dashboard for an automated copyright protection platform in order to protect content creators intellectual works. User-friendly interface to utilise their in-house algorithm the fullest.",
+        "A product dashboard for automated content protection, bringing complex scanning workflows into a clear, actionable UI for creators and teams.",
+      highlights: [
+        "Streamlined workflows for high-volume reviews",
+        "Established a modular, reusable component system",
+        "Aligned UI language with platform trust and security"
+      ],
       skills: ["Tailwind CSS", "Atomic Design", "Design System"],
       link: "/catchscan",
       image: "/images/catchscan-index.png",
     },
     {
       title: "AskCody",
-      subTitle: "Hybrid Office Manager",
+      subTitle: "Hybrid workplace manager",
       date: "2022",
       description:
-        "Flexible office resource management for hybrid work environments, To optimise space resources and automate ad-hoc tasks to enhance employee productivity developed as a Microsoft Teams Integration.",
+        "Hybrid workplace management built for Microsoft Teams, improving space utilization and coordinating daily tasks across distributed teams.",
+      highlights: [
+        "Integrated seamlessly into Teams workflows",
+        "Delivered consistent UX across complex modules",
+        "Focused on adoption and daily use patterns"
+      ],
       skills: ["TypeScript", "React-Bootstrap", "Fluent UI"],
       link: "/askcody",
       image: "/images/askcody-index.png",

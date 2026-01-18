@@ -35,16 +35,6 @@
 
   --transition-duration-scroll: 1s;
 
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
   @keyframes fadeInLeft {
     0% {
       opacity: 0;
@@ -336,7 +326,7 @@
   .light-mode .triangle-bg-svg path:first-child {
     fill: #f8f8f8;
   }
-  3.sticky-section {
+  .sticky-section {
     transition: opacity 0.3s ease;
   }
 
@@ -367,32 +357,6 @@
     }
   }
 
-  @media (min-width: 768px) and (max-width: 1024px) {
-    [data-scroll] {
-    }
-  }
-
-  @media (max-width: 767px) {
-    .locomotive-scroll {
-    }
-  }
-
-  @media (min-width: 768px) and (max-width: 1024px) {
-    .locomotive-scroll {
-    }
-  }
-
-  html.has-scroll-smooth {
-    overflow: hidden;
-  }
-
-  .has-scroll-smooth body {
-    overflow: hidden;
-  }
-
-  .has-scroll-smooth [data-scroll-container] {
-    min-height: 100vh;
-  }
 
   [data-scroll][data-scroll-speed] {
     opacity: 1 !important;
@@ -447,10 +411,6 @@
   [data-scroll-section] {
     opacity: 1 !important;
     transform: none !important;
-  }
-
-  .visible {
-    opacity: 1 !important;
   }
 
   .fade-in {
@@ -521,9 +481,11 @@
 @keyframes fadeIn {
   0% {
     opacity: 0;
+    transform: translateY(10px);
   }
   100% {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -639,22 +601,6 @@ html {
   animation: loading-bar 2s ease-out forwards;
 }
 
-@keyframes fade-in-up {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.8s ease-out forwards;
-  opacity: 0;
-}
-
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -708,7 +654,6 @@ html {
   animation: slide-in 1s ease-out forwards;
 }
 
-/* Reduced motion styles */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -718,42 +663,13 @@ html {
   }
 }
 
-html.reduce-motion *, 
-html.reduce-motion *::before, 
+html.reduce-motion *,
+html.reduce-motion *::before,
 html.reduce-motion *::after {
   animation-duration: 0.01ms !important;
   animation-iteration-count: 1 !important;
   transition-duration: 0.01ms !important;
   scroll-behavior: auto !important;
-}
-
-/* Animation classes */
-.animate-fade-in {
-  animation: fade-in 0.5s ease-out forwards;
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.5s ease-out forwards;
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fade-in-up {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* Microinteractions & Animations */
@@ -766,26 +682,6 @@ html.reduce-motion *::after {
   50% {
     opacity: 0.85;
     transform: scale(0.98);
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 

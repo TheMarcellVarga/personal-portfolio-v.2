@@ -57,6 +57,11 @@ export default function MouseTrailer() {
     return null;
   }
 
+  // Respect reduced motion preferences
+  if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return null;
+  }
+
   return (
     <div
       className={`mouse-trailer ${visible ? 'visible' : ''} ${isHovering ? 'hover' : ''}`}

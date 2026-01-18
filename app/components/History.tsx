@@ -1,4 +1,3 @@
-import React from 'react';
 import { history } from '../data/history';
 
 export default function History() {
@@ -8,7 +7,7 @@ export default function History() {
         className="text-custom-blue text-xs sm:text-sm font-bold mb-4 sm:mb-8 tracking-wider uppercase flex items-center
         before:content-[''] before:block before:w-3 sm:before:w-4 before:h-[2px] before:bg-custom-blue before:mr-2"
       >
-        History
+        Experience
       </h2>
       <div className="flex flex-col gap-8 sm:gap-16">
         {history.map((item, index) => (

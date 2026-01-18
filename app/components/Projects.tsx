@@ -4,52 +4,9 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import { projects } from "../data/projects";
 import useWindowSize from "../useWindowSize";
-// Temporarily removed filtering functionality
-// import { useState, useEffect, useMemo } from "react";
 
 export default function Projects() {
   const size = useWindowSize();
-  // Temporarily removed filtering state and logic
-  // const [selectedFilter, setSelectedFilter] = useState<string>("All");
-  // const [isFilterOpen, setIsFilterOpen] = useState(false);
-
-  // // Extract all unique skills from projects
-  // const allSkills = useMemo(() => {
-  //   const skillSet = new Set<string>();
-  //   projects.forEach(project => {
-  //     project.skills.forEach(skill => {
-  //       if (skill !== "Coming Soon") {
-  //         skillSet.add(skill);
-  //       }
-  //     });
-  //   });
-  //   return ["All", ...Array.from(skillSet).sort()];
-  // }, []);
-
-  // // Filter projects based on selected skill
-  // const filteredProjects = useMemo(() => {
-  //   if (selectedFilter === "All") {
-  //     return projects;
-  //   }
-  //   return projects.filter(project => 
-  //     project.skills.includes(selectedFilter)
-  //   );
-  // }, [selectedFilter]);
-
-  // // Close filter dropdown when clicking outside
-  // useEffect(() => {
-  //   const handleClickOutside = (event: MouseEvent) => {
-  //     const target = event.target as HTMLElement;
-  //     if (!target.closest('[data-filter-container]')) {
-  //       setIsFilterOpen(false);
-  //     }
-  //   };
-
-  //   document.addEventListener('mousedown', handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener('mousedown', handleClickOutside);
-  //   };
-  // }, []);
 
   return (
     <article
@@ -57,11 +14,13 @@ export default function Projects() {
       data-scroll-section-id="projects-content"
       className="w-full flex flex-col p-3 sm:p-4"
     >
-      {/* Temporarily removed filter UI */}
-      <h2 className="text-custom-blue text-xs sm:text-sm font-bold mb-6 sm:mb-8 tracking-wider uppercase relative pl-6">
+      <h2 className="text-custom-blue text-xs sm:text-sm font-bold mb-3 tracking-wider uppercase relative pl-6">
         <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-custom-blue"></div>
-        Projects
+        Selected Work
       </h2>
+      <p className="text-custom-blue/70 text-xs sm:text-sm md:text-base max-w-3xl mb-6 sm:mb-10">
+        A mix of product strategy, UX, and frontend execution across SaaS, platforms, and service design.
+      </p>
       
       <div className="w-full h-full flex justify-center items-center">
         <div className="w-full flex flex-col gap-4 sm:gap-12">
@@ -153,6 +112,17 @@ export default function Projects() {
                     </div>
                   </div>
 
+                  {project.highlights && project.highlights.length > 0 && (
+                    <div className="hidden md:flex flex-col gap-1 text-xs md:text-sm text-custom-blue/70 mt-2">
+                      {project.highlights.map((highlight) => (
+                        <div key={highlight} className="flex items-start gap-2">
+                          <span className="mt-[6px] h-[4px] w-[4px] rounded-full bg-custom-blue/50" />
+                          <span>{highlight}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
                   <div className="flex flex-wrap gap-1 sm:gap-2 mt-1 md:mt-2 justify-start">
                     {project.skills.map((skill) => (
                       <div
@@ -164,6 +134,9 @@ export default function Projects() {
                         {skill}
                       </div>
                     ))}
+                  </div>
+                  <div className="mt-2 text-[10px] sm:text-xs uppercase tracking-wide text-custom-blue/60 group-hover:text-custom-blue/90 transition-colors duration-300">
+                    {project.inProgress ? "Follow progress" : "View case study"}
                   </div>
                 </div>
 
@@ -193,6 +166,16 @@ export default function Projects() {
             </div>
           ))}
         </div>
+      </div>
+      <div className="mt-6 sm:mt-10 flex justify-center">
+        <Link
+          href="https://github.com/TheMarcellVarga"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs sm:text-sm font-semibold text-custom-blue/70 hover:text-custom-blue transition-colors duration-300"
+        >
+          More work on GitHub →
+        </Link>
       </div>
     </article>
   );
