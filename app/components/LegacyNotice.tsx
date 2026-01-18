@@ -90,10 +90,10 @@ export default function LegacyNotice() {
     >
       <div className="flex-1 w-full sm:w-auto">
         <p className="text-sm sm:text-base md:text-lg font-bold text-custom-blue text-center sm:text-left">
-          🚧 Website under development
+          ✨ Fresh portfolio refresh is live
         </p>
         <p className="text-xs sm:text-sm text-custom-blue/80 mt-0.5 sm:mt-1 text-center sm:text-left">
-          Want to see the legacy version?{" "}
+          Prefer the previous version?{" "}
           <a
             href="https://personal-portfolio-v-1.vercel.app"
             target="_blank"

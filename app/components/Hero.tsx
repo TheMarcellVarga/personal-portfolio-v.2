@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
+import Image from "next/image";
 import { useIsMobile } from "../isMobile";
-import useWindowSize from "../useWindowSize";
 
 interface HeroProps {
   scrollToWork: () => void;
@@ -20,7 +20,6 @@ export default function Hero({ scrollToWork }: HeroProps) {
   const [greeting, setGreeting] = useState(getGreeting());
   const [hasScrolled, setHasScrolled] = useState(false);
   const isMobile = useIsMobile();
-  const size = useWindowSize();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -116,7 +115,7 @@ export default function Hero({ scrollToWork }: HeroProps) {
         `}
             style={{ animationDelay: "0.6s" }}
           >
-            UX & Frontend engineer
+            UX & Frontend Engineer
           </div>
           <div
             className={`
@@ -139,18 +138,18 @@ export default function Hero({ scrollToWork }: HeroProps) {
           >
             {/* Mobile version (split into two lines) */}
             <span className="sm:hidden text-left group-hover:translate-x-1 transition-transform duration-300">
-              Crafting intuitive digital experiences where
+              Designing human-centered products that scale,
             </span>
             <span className="sm:hidden text-left font-medium text-custom-blue/70 group-hover:translate-x-1 transition-transform duration-300">
-              design meets engineering excellence
+              built with craft and clarity.
             </span>
 
-            {/* Desktop version (single line) */}
+            {/* Desktop version (two-line layout) */}
             <span className="hidden text-left sm:block italic group-hover:translate-x-1 transition-transform duration-300">
-              Crafting intuitive digital experiences where
+              Designing human-centered products that scale,
               <br />
               <span className="font-medium text-custom-blue/70">
-                design meets engineering excellence
+                built with craft and clarity.
               </span>
             </span>
           </div>
@@ -168,7 +167,7 @@ export default function Hero({ scrollToWork }: HeroProps) {
             >
               <div className="relative z-10 flex items-center justify-center transition-all duration-300 ease-out">
                 <span className="relative z-10 transition-all duration-300 ease-out group-hover:text-gray-50 mr-2">
-                  View Projects
+                  View Selected Work
                 </span>
                 <ArrowRightIcon
                   className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 relative z-10 transition-all duration-300 ease-out group-hover:text-gray-50
@@ -269,11 +268,13 @@ export default function Hero({ scrollToWork }: HeroProps) {
             right-3 md:right-16
           `}
           >
-            <img
+            <Image
               src="/images/personalpageprofilealt.png"
               alt="Marcell Varga - UX & Frontend Engineer"
-              width={300}
-              height={300}
+              width={384}
+              height={384}
+              priority
+              sizes="(max-width: 640px) 160px, (max-width: 768px) 192px, (max-width: 1024px) 320px, 384px"
               style={{
                 animationDelay: "0.8s",
                 animationFillMode: "forwards",

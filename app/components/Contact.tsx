@@ -14,12 +14,12 @@ export default function Contact() {
           <div className="flex flex-col md:flex-row gap-5 sm:gap-8 items-start md:items-center">
             <div className="relative z-10 w-full md:w-auto transform group-hover:scale-[1.02] transition-transform duration-500">
               <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-custom-blue text-left mb-3 sm:mb-6 tracking-tight">
-                Building Beyond&nbsp;
-                <span className="text-custom-blue/80">Boundaries</span> 🚀
+                Let&apos;s build something&nbsp;
+                <span className="text-custom-blue/80">remarkable</span>
               </h2>
               <p className="text-custom-blue text-left font-bold text-sm sm:text-base md:text-xl max-w-3xl">
-                Full-stack excellence meets design innovation. Let&apos;s
-                architect solutions that make an impact.
+                From early-stage ideas to polished releases, I help teams ship
+                products that feel intuitive and perform beautifully.
               </p>
             </div>
 

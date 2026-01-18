@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   FaPaintBrush,
   FaUserFriends,
@@ -79,6 +78,9 @@ export default function Skills() {
       >
         Experience
       </h2>
+      <p className="text-custom-blue/70 text-xs sm:text-sm md:text-base max-w-3xl mb-6 sm:mb-8">
+        A balanced toolkit spanning product discovery, UI engineering, and scalable design systems.
+      </p>
 
       <div className="space-y-6 sm:space-y-8">
         {Object.entries(skillCategories).map(([category, skills]) => (

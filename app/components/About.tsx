@@ -5,7 +5,7 @@ interface AboutProps {
 }
 
 const textToType =
-  "An adventurous UX & Frontend engineer dedicated to crafting delightful, business-focused, and user-centred digital experiences. I excel at solving complex problems through efficient design, turning challenges into opportunities. Overcoming challenges through efficient design is what fuelling my everyday drive.";
+  "I design and build thoughtful digital products where clarity, usability, and business goals align. From discovery to delivery, I translate complex problems into elegant, measurable experiences that teams can ship with confidence.";
 
 export default function About({ scrollPositionLocomotive }: AboutProps) {
   const [typedText, setTypedText] = useState("");
