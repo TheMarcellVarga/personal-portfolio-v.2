@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@tailwindcss/postcss": "^4.1.18",
     "@types/d3": "^7.4.3",
     "@types/node": "^20.19.30",
     "@types/react": "^18.3.27",
