@@ -799,12 +799,7 @@ const Catchscan = () => {
             </div>
           </section>
         </main>
-        <Footer
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          isHover={isHover}
-          setIsHover={setIsHover}
-        />
+        <Footer />
       </div>
     </div>
   );
