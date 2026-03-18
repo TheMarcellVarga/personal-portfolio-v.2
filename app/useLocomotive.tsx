@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import LocomotiveScroll from "locomotive-scroll";
 import "locomotive-scroll/dist/locomotive-scroll.css";
 
@@ -44,6 +44,7 @@ export default function useLocomotive(
 ) {
   const [scrollPositionLocomotive, setscrollPositionLocomotive] =
     useState<number>(0);
+  const scrollPositionRef = useRef(0);
   const [locomotiveScroll, setLocomotiveScroll] =
     useState<ScrollInstance | null>(null);
 
@@ -107,6 +108,7 @@ export default function useLocomotive(
         const handleScroll = () => {
           const scrollY = window.scrollY;
           setscrollPositionLocomotive(scrollY);
+          scrollPositionRef.current = scrollY;
           if (onScroll) {
             onScroll(scrollY);
           }
@@ -120,11 +122,12 @@ export default function useLocomotive(
             x: window.scrollX,
           };
 
-          const speed =
-            Math.abs(scroll.y - scrollPositionLocomotive) > 30 ? 2 : 1;
-          const direction = scroll.y > scrollPositionLocomotive ? 1 : -1;
+          const previousY = scrollPositionRef.current;
+          const speed = Math.abs(scroll.y - previousY) > 30 ? 2 : 1;
+          const direction = scroll.y > previousY ? 1 : -1;
 
           setscrollPositionLocomotive(scroll.y);
+          scrollPositionRef.current = scroll.y;
           if (onScroll) {
             onScroll(scroll.y);
           }

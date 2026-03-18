@@ -2,21 +2,21 @@ export const services = [
   {
     title: "Product Discovery",
     description:
-      "Clarify user needs, map opportunities, and align teams around measurable outcomes."
+      "Structure problem spaces, align stakeholders, and convert ambiguity into shippable opportunities.",
   },
   {
-    title: "UX & UI Design",
+    title: "UX & Interaction Design",
     description:
-      "Design intuitive flows, polished UI systems, and accessible interactions."
+      "Design intuitive, high-trust interfaces with clear hierarchy, fast decision paths, and accessibility built in.",
   },
   {
     title: "Design Systems",
     description:
-      "Build scalable component libraries that keep teams consistent and fast."
+      "Build and evolve robust component libraries that unify product quality across teams and releases.",
   },
   {
     title: "Frontend Delivery",
     description:
-      "Translate design into performant, maintainable interfaces with modern stacks."
-  }
+      "Implement polished experiences in modern frameworks with performance, maintainability, and scale in mind.",
+  },
 ];
