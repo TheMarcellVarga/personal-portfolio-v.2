@@ -1,15 +1,5 @@
-// work.tsx
-import React from "react";
-import Link from "next/link";
-import Header from "../page";
-import Footer from "../page";
+import { redirect } from "next/navigation";
 
-const Contact = () => {
-  return (
-    <>
-      <div>Contact</div>
-    </>
-  );
-};
-
-export default Contact;
+export default function ContactPage() {
+  redirect("/#contact");
+}

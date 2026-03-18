@@ -1,45 +1,53 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Marcell Varga | UX & Frontend Engineer',
-  description: 'Marcell Varga is a UX & Frontend engineer dedicated to crafting delightful, business-focused, and user-centered digital experiences.',
+  title: "Marcell Varga | Design Engineer in Singapore",
+  description:
+    "Portfolio of Marcell Varga, a Singapore-based design engineer blending UX strategy, frontend engineering, motion, and product systems into high-quality digital experiences.",
   keywords: [
-    'Marcell Varga', 
-    'UX Engineer', 
-    'Frontend Engineer', 
-    'Web Development', 
-    'UI Design', 
-    'User Experience', 
-    'React', 
-    'Next.js', 
-    'TypeScript', 
-    'Portfolio'
+    "Marcell Varga",
+    "Design Engineer",
+    "Frontend Engineer",
+    "UX Engineer",
+    "Singapore",
+    "Product Design",
+    "Next.js",
+    "TypeScript",
+    "Motion Design",
+    "Portfolio",
   ],
-  authors: [{ name: 'Marcell Varga', url: 'https://www.linkedin.com/in/marcellvarga/' }],
-  creator: 'Marcell Varga',
-  publisher: 'Marcell Varga',
-  metadataBase: new URL('https://marcellvarga.com'),
+  authors: [
+    {
+      name: "Marcell Varga",
+      url: "https://www.linkedin.com/in/marcellvarga/",
+    },
+  ],
+  creator: "Marcell Varga",
+  publisher: "Marcell Varga",
+  metadataBase: new URL("https://marcellvarga.com"),
   openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: 'https://marcellvarga.com',
-    title: 'Marcell Varga | UX & Frontend Engineer',
-    description: 'UX & Frontend engineer dedicated to crafting delightful, business-focused, and user-centered digital experiences.',
-    siteName: 'Marcell Varga Portfolio',
+    type: "website",
+    locale: "en_US",
+    url: "https://marcellvarga.com",
+    title: "Marcell Varga | Design Engineer in Singapore",
+    description:
+      "Singapore-based design engineer crafting ambitious interfaces with product thinking, frontend precision, and motion-led storytelling.",
+    siteName: "Marcell Varga Portfolio",
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: 'Marcell Varga - UX & Frontend Engineer',
+        alt: "Marcell Varga portfolio preview",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Marcell Varga | UX & Frontend Engineer',
-    description: 'UX & Frontend engineer dedicated to crafting delightful, business-focused, and user-centered digital experiences.',
-    images: ['/images/og-image.jpg'],
+    card: "summary_large_image",
+    title: "Marcell Varga | Design Engineer in Singapore",
+    description:
+      "Design engineer crafting ambitious interfaces with product thinking, frontend precision, and motion-led storytelling.",
+    images: ["/images/og-image.jpg"],
   },
   robots: {
     index: true,
@@ -47,15 +55,12 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
-  verification: {
-    google: 'replace-with-your-google-verification-code',
-  },
   alternates: {
-    canonical: 'https://marcellvarga.com',
+    canonical: "https://marcellvarga.com",
   },
-}; 
+};
