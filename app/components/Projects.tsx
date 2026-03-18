@@ -1,182 +1,182 @@
-import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+"use client";
+
+import { ArrowUpRightIcon } from "@heroicons/react/24/solid";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { useRef, useState } from "react";
 import { projects } from "../data/projects";
-import useWindowSize from "../useWindowSize";
+
+const clamp = (value: number, min: number, max: number) =>
+  Math.max(min, Math.min(max, value));
 
 export default function Projects() {
-  const size = useWindowSize();
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 92,
+    damping: 26,
+    mass: 0.35,
+  });
+  const rightPaneY = useTransform(smoothProgress, [0, 1], [0, -12]);
+
+  useMotionValueEvent(smoothProgress, "change", (value) => {
+    // Reserve a little leading/trailing pause for breathing room.
+    const staged = clamp((value - 0.06) / 0.88, 0, 0.999);
+    const next = Math.floor(staged * projects.length);
+    setActiveIndex(clamp(next, 0, projects.length - 1));
+  });
+
+  const activeProject = projects[activeIndex];
 
   return (
-    <article
-      id="projects-content"
-      data-scroll-section-id="projects-content"
-      className="w-full flex flex-col p-3 sm:p-4"
-    >
-      <h2 className="text-custom-blue text-xs sm:text-sm font-bold mb-3 tracking-wider uppercase relative pl-6">
-        <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-custom-blue"></div>
-        Selected Work
-      </h2>
-      <p className="text-custom-blue/70 text-xs sm:text-sm md:text-base max-w-3xl mb-6 sm:mb-10">
-        A mix of product strategy, UX, and frontend execution across SaaS, platforms, and service design.
-      </p>
-      
-      <div className="w-full h-full flex justify-center items-center">
-        <div className="w-full flex flex-col gap-4 sm:gap-12">
-          {projects.map((project, index) => (
-            <div
-              key={project.title}
-              data-scroll
-              data-scroll-projects
-              data-scroll-speed="0.2"
-              data-scroll-delay="0.2"
-              data-scroll-repeat="true"
-              data-scroll-class="fade-in"
-              className="w-full max-w-[350px] sm:max-w-none mx-auto transform-gpu hover:scale-[1.02] transition-all duration-300"
-            >
-              <Link
-                href={project.link}
-                className={`
-                  w-full 
-                  flex flex-col
-                  sm:flex-row
-                  gap-2 sm:gap-4
-                  px-3 py-3
-                  sm:px-4 sm:py-3
-                  md:px-8 md:py-6
-                  rounded-lg sm:rounded-xl
-                  transition-all duration-500 ease-out 
-                  ${
-                    project.inProgress
-                      ? "bg-gradient-to-br from-custom-blue/10 via-custom-teal/10 to-custom-blue/10"
-                      : "bg-linear-to-br from-gray-100/95 to-gray-100/90"
-                  }
-                  hover:bg-neutral-100/95
-                  group
-                  items-center
-                  border border-transparent
-                  ${
-                    project.inProgress
-                      ? "border-custom-blue/20"
-                      : "hover:border-custom-blue/10"
-                  }
-                  backdrop-blur-xs
-                  relative
-                  overflow-hidden
-                `}
-                aria-label={`View ${project.title} project`}
+    <section id="projects-content" ref={sectionRef} className="relative min-h-[360vh]">
+      <div className="sticky top-20 grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="flow-panel p-6 sm:p-7">
+          <h2 className="hairline text-2xl font-semibold text-custom-blue sm:text-3xl">
+            Selected work
+          </h2>
+          <p className="mt-4 text-sm leading-relaxed text-custom-blue/72 sm:text-base">
+            Scroll to move through featured projects.
+          </p>
+          <div className="mt-4 flex items-center gap-1.5">
+            {projects.map((project, index) => (
+              <div
+                key={`indicator-${project.title}`}
+                className={`h-1.5 rounded-full bg-custom-blue/30 transition-all duration-500 ${
+                  index === activeIndex ? "w-8 bg-custom-blue/70" : "w-2"
+                }`}
+              />
+            ))}
+          </div>
+
+          <div className="mt-6 space-y-2">
+            {projects.map((project, index) => (
+              <button
+                key={project.title}
+                onClick={() => setActiveIndex(index)}
+                className={`w-full rounded-xl border px-3 py-3 text-left transition-all duration-400 ${
+                  index === activeIndex
+                    ? "border-custom-blue/26 bg-custom-blue/8 shadow-[0_10px_30px_rgba(7,46,64,0.08)]"
+                    : "border-custom-blue/12 bg-white/72 hover:border-custom-blue/22"
+                }`}
               >
-                <div className="w-full sm:w-1/4 md:w-[300px] mb-2 sm:mb-0 relative flex items-center justify-center group-hover:scale-[1.02] transition-transform duration-500 px-1 sm:px-0">
-                  {project.inProgress ? (
-                    <div className="w-full aspect-3/2 sm:w-full sm:h-full md:aspect-3/2 relative rounded-lg overflow-hidden bg-gradient-to-br from-custom-blue/20 via-custom-teal/20 to-custom-blue/20 flex items-center justify-center shadow-[0_8px_30px_rgba(2,66,92,0.12)] group-hover:shadow-[0_15px_60px_rgba(2,66,92,0.2)] transition-all duration-500">
-                      <div className="absolute top-0 right-0 z-10 bg-custom-blue text-white px-1 py-0.5 text-[8px] sm:text-xs rounded-bl-lg shadow-md">
-                        Coming Soon
-                      </div>
-                      <div className="text-3xl sm:text-6xl animate-pulse" aria-hidden="true">🚀</div>
-                      <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_20%,_#ffffff_120%)] opacity-20"></div>
-                    </div>
-                  ) : (
-                    <div className="w-full aspect-3/2 sm:w-full sm:h-full md:aspect-3/2 relative rounded-lg overflow-hidden shadow-[0_8px_30px_rgba(2,66,92,0.12)] group-hover:shadow-[0_15px_60px_rgba(2,66,92,0.2)] transition-all duration-500">
-                      <Image
-                        src={project.image}
-                        alt={`${project.title} - ${project.subTitle}`}
-                        width={size.width && size.width >= 640 && size.width < 768 ? 80 : 300}
-                        height={size.width && size.width >= 640 && size.width < 768 ? 80 : 300}
-                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-                      />
-                    </div>
-                  )}
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-sm font-semibold text-custom-blue/88">
+                    {project.title}
+                  </span>
+                  <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-custom-blue/58">
+                    {project.date}
+                  </span>
                 </div>
+                <p className="mt-1 text-xs text-custom-blue/70">{project.subTitle}</p>
+              </button>
+            ))}
+          </div>
 
-                <div className="flex flex-col px-1 sm:px-2 sm:pl-4 md:px-6 md:pl-8 gap-1 sm:gap-2 w-full sm:w-2/3 md:w-full h-full justify-center relative z-10 text-center sm:text-left">
-                  <div className="w-full sm:w-full transition-transform duration-300">
-                    <div className="flex flex-row items-center justify-between w-full">
-                      <div className="text-base sm:text-lg md:text-2xl text-custom-blue font-bold text-left">
-                        {project.title}
-                      </div>
-                      <div className="flex flex-row items-center justify-end ml-auto">
-                        <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full bg-custom-blue/5 text-[10px] sm:text-xs text-custom-blue/60">
-                          {project.date}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex-1 text-xs sm:text-sm md:text-base text-custom-blue/80 text-left group-hover:text-custom-blue transition-colors duration-300">
-                      {project.subTitle}
-                    </div>
-                  </div>
-
-                  <div className="text-base font-light text-justify text-custom-blue/90 hidden md:block group-hover:text-custom-blue transition-colors duration-300">
-                    <div className="text-sm md:text-base">
-                      {project.description}
-                    </div>
-                  </div>
-
-                  {project.highlights && project.highlights.length > 0 && (
-                    <div className="hidden md:flex flex-col gap-1 text-xs md:text-sm text-custom-blue/70 mt-2">
-                      {project.highlights.map((highlight) => (
-                        <div key={highlight} className="flex items-start gap-2">
-                          <span className="mt-[6px] h-[4px] w-[4px] rounded-full bg-custom-blue/50" />
-                          <span>{highlight}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  <div className="flex flex-wrap gap-1 sm:gap-2 mt-1 md:mt-2 justify-start">
-                    {project.skills.map((skill) => (
-                      <div
-                        key={skill}
-                        className="skill-pill flex items-center text-[10px] sm:text-xs px-1.5 sm:px-3 py-0.5 sm:py-1.5 rounded-md
-                          bg-custom-blue/10 text-custom-blue/80
-                          transform transition-all duration-300 hover:scale-105 shadow-sm"
-                      >
-                        {skill}
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-2 text-[10px] sm:text-xs uppercase tracking-wide text-custom-blue/60 group-hover:text-custom-blue/90 transition-colors duration-300">
-                    {project.inProgress ? "Follow progress" : "View case study"}
-                  </div>
-                </div>
-
-                {!project.inProgress && (
-                  <div className="hidden sm:flex w-8 md:w-16 h-full items-center justify-center relative">
-                    <div className="flex justify-center items-center transition-transform duration-500 ease-out origin-left group-hover:translate-x-4">
-                      <FontAwesomeIcon
-                        icon={faChevronRight}
-                        className="w-4 md:w-6 h-4 md:h-6 text-custom-blue/50 group-hover:text-custom-blue transition-all duration-500 ease-out"
-                        aria-hidden="true"
-                      />
-                    </div>
-                  </div>
-                )}
-                {project.inProgress && (
-                  <div className="hidden sm:flex w-8 md:w-16 h-full items-center justify-center relative">
-                    <div className="opacity-0">
-                      <FontAwesomeIcon
-                        icon={faChevronRight}
-                        className="w-4 md:w-6 h-4 md:h-6"
-                        aria-hidden="true"
-                      />
-                    </div>
-                  </div>
-                )}
-              </Link>
-            </div>
-          ))}
+          <Link
+            href="https://github.com/TheMarcellVarga"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-custom-blue/70 transition-colors hover:text-custom-blue"
+          >
+            More on GitHub
+            <ArrowUpRightIcon className="h-4 w-4" />
+          </Link>
         </div>
+
+        <motion.div style={{ y: rightPaneY }} className="flow-panel relative min-h-[560px] overflow-hidden p-4 sm:p-5">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeProject.title}
+              initial={{ opacity: 0, y: 18, scale: 0.99 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12, scale: 0.99 }}
+              transition={{ duration: 0.62, ease: [0.22, 1, 0.36, 1] }}
+              className="flex h-full flex-col"
+            >
+              <div className="flow-card relative overflow-hidden rounded-[1.4rem] bg-white/70">
+                {activeProject.inProgress ? (
+                  <div className="flex aspect-[16/10] items-center justify-center bg-[radial-gradient(circle_at_20%_10%,rgba(79,213,204,0.26),transparent_50%),linear-gradient(135deg,rgba(23,107,135,0.26),rgba(79,213,204,0.2))]">
+                    <div className="flow-card rounded-full border-white/45 bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-custom-blue/80">
+                      In active build
+                    </div>
+                  </div>
+                ) : (
+                  <div className="relative aspect-[16/10]">
+                    <Image
+                      src={activeProject.image}
+                      alt={`${activeProject.title} preview`}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 52vw"
+                      className="object-cover"
+                    />
+                  </div>
+                )}
+              </div>
+
+              <div className="mt-5 flex-1">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <h3 className="text-2xl font-semibold text-custom-blue">{activeProject.title}</h3>
+                  <span className="flow-card rounded-full border-custom-blue/16 bg-white/75 px-2.5 py-1 text-xs font-medium uppercase tracking-[0.12em] text-custom-blue/62">
+                    {activeProject.date}
+                  </span>
+                </div>
+                <p className="mt-1 text-sm font-medium text-custom-blue/72 sm:text-base">
+                  {activeProject.subTitle}
+                </p>
+
+                <p className="mt-4 text-sm leading-relaxed text-custom-blue/75 sm:text-base">
+                  {activeProject.description}
+                </p>
+
+                <div className="mt-4 space-y-1.5">
+                  {activeProject.highlights?.map((item) => (
+                    <p key={item} className="text-sm text-custom-blue/67">
+                      {item}
+                    </p>
+                  ))}
+                </div>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {activeProject.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="flow-card rounded-md border-custom-blue/14 bg-custom-blue/6 px-2.5 py-1 text-xs font-medium text-custom-blue/75"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-5">
+                <Link
+                  href={activeProject.link}
+                  target={activeProject.inProgress ? "_blank" : undefined}
+                  rel={activeProject.inProgress ? "noopener noreferrer" : undefined}
+                  className="inline-flex items-center gap-1 text-sm font-semibold text-custom-blue/78 transition-colors hover:text-custom-blue"
+                >
+                  {activeProject.inProgress ? "Track progress" : "View case study"}
+                  <ArrowUpRightIcon className="h-4 w-4" />
+                </Link>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </motion.div>
       </div>
-      <div className="mt-6 sm:mt-10 flex justify-center">
-        <Link
-          href="https://github.com/TheMarcellVarga"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-xs sm:text-sm font-semibold text-custom-blue/70 hover:text-custom-blue transition-colors duration-300"
-        >
-          More work on GitHub →
-        </Link>
-      </div>
-    </article>
+    </section>
   );
 }

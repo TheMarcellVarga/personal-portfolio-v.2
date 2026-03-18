@@ -1,61 +1,58 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Marcell Varga | UX & Frontend Engineer',
-  description: 'Marcell Varga is a UX & Frontend engineer dedicated to crafting delightful, business-focused, and user-centered digital experiences.',
+  title: "Marcell Varga | UX & Frontend Engineer",
+  description:
+    "Portfolio of Marcell Varga, UX & Frontend Engineer building high-quality product experiences from strategy to scalable implementation.",
   keywords: [
-    'Marcell Varga', 
-    'UX Engineer', 
-    'Frontend Engineer', 
-    'Web Development', 
-    'UI Design', 
-    'User Experience', 
-    'React', 
-    'Next.js', 
-    'TypeScript', 
-    'Portfolio'
+    "Marcell Varga",
+    "UX Engineer",
+    "Frontend Engineer",
+    "Product Design",
+    "Design Systems",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Portfolio 2026",
   ],
-  authors: [{ name: 'Marcell Varga', url: 'https://www.linkedin.com/in/marcellvarga/' }],
-  creator: 'Marcell Varga',
-  publisher: 'Marcell Varga',
-  metadataBase: new URL('https://marcellvarga.com'),
+  authors: [
+    {
+      name: "Marcell Varga",
+      url: "https://www.linkedin.com/in/marcellvarga/",
+    },
+  ],
+  creator: "Marcell Varga",
+  publisher: "Marcell Varga",
+  metadataBase: new URL("https://marcellvarga.com"),
+  alternates: {
+    canonical: "https://marcellvarga.com",
+  },
   openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: 'https://marcellvarga.com',
-    title: 'Marcell Varga | UX & Frontend Engineer',
-    description: 'UX & Frontend engineer dedicated to crafting delightful, business-focused, and user-centered digital experiences.',
-    siteName: 'Marcell Varga Portfolio',
+    type: "website",
+    locale: "en_US",
+    url: "https://marcellvarga.com",
+    title: "Marcell Varga | UX & Frontend Engineer",
+    description:
+      "UX and frontend engineering focused on shipping elegant, measurable digital products.",
+    siteName: "Marcell Varga Portfolio",
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: "/images/personalpageprofilealt.png",
         width: 1200,
         height: 630,
-        alt: 'Marcell Varga - UX & Frontend Engineer',
+        alt: "Marcell Varga Portfolio",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Marcell Varga | UX & Frontend Engineer',
-    description: 'UX & Frontend engineer dedicated to crafting delightful, business-focused, and user-centered digital experiences.',
-    images: ['/images/og-image.jpg'],
+    card: "summary_large_image",
+    title: "Marcell Varga | UX & Frontend Engineer",
+    description:
+      "UX and frontend engineering focused on shipping elegant, measurable digital products.",
+    images: ["/images/personalpageprofilealt.png"],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
   },
-  verification: {
-    google: 'replace-with-your-google-verification-code',
-  },
-  alternates: {
-    canonical: 'https://marcellvarga.com',
-  },
-}; 
+};

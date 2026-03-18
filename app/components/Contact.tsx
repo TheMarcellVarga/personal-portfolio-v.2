@@ -1,72 +1,60 @@
+"use client";
+
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import LinkedInIcon from "../../public/icons/linkedin";
 import OpenResumeIcon from "../../public/icons/openResume";
 
 export default function Contact() {
   return (
-    <section
-      data-scroll-section
-      data-scroll-section-id="contact"
-      className="flex justify-center items-center mt-8 sm:mt-12 mb-12 sm:mb-24 transform hover:scale-[1.01] transition-all duration-500"
-    >
-      <div className="relative w-full sm:w-4/5 max-w-4xl px-3 sm:px-0">
-        <div className="relative bg-gray-100/90 rounded-lg sm:rounded-xl p-5 sm:p-8 md:p-12 border border-custom-blue/10">
-          <div className="flex flex-col md:flex-row gap-5 sm:gap-8 items-start md:items-center">
-            <div className="relative z-10 w-full md:w-auto transform group-hover:scale-[1.02] transition-transform duration-500">
-              <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-custom-blue text-left mb-3 sm:mb-6 tracking-tight">
-                Let&apos;s build something&nbsp;
-                <span className="text-custom-blue/80">remarkable</span>
-              </h2>
-              <p className="text-custom-blue text-left font-bold text-sm sm:text-base md:text-xl max-w-3xl">
-                From early-stage ideas to polished releases, I help teams ship
-                products that feel intuitive and perform beautifully.
-              </p>
-            </div>
+    <section id="contact" className="mx-auto mt-10 w-full max-w-[1200px] px-4 sm:px-6 lg:px-8">
+      <div className="flow-panel relative overflow-hidden px-6 py-7 sm:px-8 sm:py-9">
+        <div className="pointer-events-none absolute -right-24 -top-24 h-52 w-52 rounded-full bg-custom-teal/20 blur-3xl" />
 
-            <div className="flex-1 flex justify-start md:justify-end mt-4 sm:mt-0">
-              <a
-                href="mailto:themarcellvarga@gmail.com"
-                className="relative px-4 sm:px-5 py-2.5 text-custom-blue rounded-full group overflow-hidden min-w-36 sm:min-w-36 flex items-center justify-center text-sm sm:text-base"
-                aria-label="Send email to Marcell Varga"
-              >
-                <div className="relative z-10 flex items-center justify-center transition-transform duration-300 ease-out transform group-hover:translate-x-0">
-                  <span className="transition-colors duration-300 ease-out group-hover:text-white mr-2">
-                    Get&nbsp;in&nbsp;Touch
-                  </span>
-                  <ArrowRightIcon className="w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300 ease-out group-hover:text-white transform group-hover:translate-x-1" />
-                </div>
-                <div className="absolute inset-0 border-2 border-custom-blue rounded-full"></div>
-                <div className="absolute inset-0 bg-custom-blue rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></div>
-              </a>
-            </div>
+        <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <p className="text-xs uppercase tracking-[0.2em] text-custom-blue/55">
+              Contact
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold leading-tight text-custom-blue sm:text-4xl">
+              Let&apos;s build your next high-quality product experience.
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-custom-blue/72 sm:text-base">
+              Available for selected 2026 collaborations across UX strategy,
+              design systems, and frontend implementation.
+            </p>
           </div>
 
-          <div className="mt-5 sm:mt-8 pt-5 sm:pt-8 border-t border-custom-blue/10">
-            <div className="flex flex-row flex-wrap sm:flex-row gap-4 justify-start md:justify-start">
-              <a
-                href="https://www.linkedin.com/in/marcellvarga/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-custom-blue/60 hover:text-custom-blue transition-all duration-300"
-                aria-label="Connect on LinkedIn"
-              >
-                <LinkedInIcon className="w-4 h-4 sm:w-5 sm:h-5" />
-                <span className="text-xs sm:text-sm">Let&apos;s connect</span>
-              </a>
-              <a
-                href="/MarcellVargaCV.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-custom-blue/60 hover:text-custom-blue transition-all duration-300"
-                aria-label="View Resume"
-              >
-                <OpenResumeIcon className="w-4 h-4 sm:w-5 sm:h-5" isHover={false} />
-                <span className="text-xs sm:text-sm">Check out my Resume</span>
-              </a>
-            </div>
-          </div>
+          <a
+            href="mailto:themarcellvarga@gmail.com"
+            className="inline-flex w-fit items-center gap-2 rounded-md bg-custom-blue px-5 py-3 text-sm font-semibold uppercase tracking-[0.08em] transition-all duration-300 hover:-translate-y-0.5 hover:bg-custom-blue/90"
+            style={{ color: "#ffffff" }}
+          >
+            Get in touch
+            <ArrowRightIcon className="h-4 w-4" />
+          </a>
+        </div>
+
+        <div className="relative z-10 mt-7 flex flex-wrap items-center gap-5 border-t border-custom-blue/12 pt-5">
+          <a
+            href="https://www.linkedin.com/in/marcellvarga/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-medium text-custom-blue/70 transition-colors hover:text-custom-blue"
+          >
+            <LinkedInIcon className="h-4 w-4" />
+            Let&apos;s connect
+          </a>
+          <a
+            href="/MarcellVargaCV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-medium text-custom-blue/70 transition-colors hover:text-custom-blue"
+          >
+            <OpenResumeIcon className="h-3 w-3" isHover={false} />
+            Resume
+          </a>
         </div>
       </div>
     </section>
   );
-} 
+}

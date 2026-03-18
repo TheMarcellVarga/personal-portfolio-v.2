@@ -1,64 +1,63 @@
 export const projects = [
-    {
-      title: "Upcoming Projects",
-      subTitle: "New product explorations",
-      date: "In Progress",
-      description:
-        "A growing set of experiments focused on AI-assisted workflows, modern UX patterns, and storytelling through interactive interfaces.",
-      highlights: [
-        "Exploring rapid prototyping with modern UI stacks",
-        "Focus on measurable UX outcomes and iteration",
-        "Case studies and visuals landing soon"
-      ],
-      skills: ["Coming Soon"],
-      link: "http://github.com/TheMarcellVarga",
-      image: "🚀",
-      inProgress: true
-    },
-    {
-      title: "European Study Solution",
-      subTitle: "Student mobility platform",
-      date: "2021",
-      description:
-        "Designed and built a responsive platform that helps students navigate European study programs with clear pathways, content structure, and trust-building UX.",
-      highlights: [
-        "Improved discoverability through refined IA",
-        "Crafted content-first layouts for clarity",
-        "Optimized for accessibility and SEO"
-      ],
-      skills: ["HTML", "CSS", "JavaScript", "SEO"],
-      link: "/ess",
-      image: "/images/ess-index.png",
-    },
-    {
-      title: "CatchScan",
-      subTitle: "Copyright protection SaaS",
-      date: "2021",
-      description:
-        "A product dashboard for automated content protection, bringing complex scanning workflows into a clear, actionable UI for creators and teams.",
-      highlights: [
-        "Streamlined workflows for high-volume reviews",
-        "Established a modular, reusable component system",
-        "Aligned UI language with platform trust and security"
-      ],
-      skills: ["Tailwind CSS", "Atomic Design", "Design System"],
-      link: "/catchscan",
-      image: "/images/catchscan-index.png",
-    },
-    {
-      title: "AskCody",
-      subTitle: "Hybrid workplace manager",
-      date: "2022",
-      description:
-        "Hybrid workplace management built for Microsoft Teams, improving space utilization and coordinating daily tasks across distributed teams.",
-      highlights: [
-        "Integrated seamlessly into Teams workflows",
-        "Delivered consistent UX across complex modules",
-        "Focused on adoption and daily use patterns"
-      ],
-      skills: ["TypeScript", "React-Bootstrap", "Fluent UI"],
-      link: "/askcody",
-      image: "/images/askcody-index.png",
-    },
-  ];
-  
+  {
+    title: "AXON Orchestrator",
+    subTitle: "AI-enhanced analytics orchestration",
+    date: "2024-2026",
+    description:
+      "Designing and shipping workflow experiences for complex analytics and automation scenarios. Focused on high trust UX, scalable interface patterns, and frontend architecture.",
+    highlights: [
+      "Led UX-to-code delivery across cross-functional product squads",
+      "Expanded reusable patterns in the in-house design system",
+      "Improved decision speed through clearer task flows and information hierarchy",
+    ],
+    skills: ["UX Strategy", "TypeScript", "React", "Design Systems"],
+    link: "http://github.com/TheMarcellVarga",
+    image: "🚀",
+    inProgress: true,
+  },
+  {
+    title: "European Study Solution",
+    subTitle: "Student mobility platform",
+    date: "2021",
+    description:
+      "Designed and built a responsive platform that helps students navigate European study programs with clearer pathways, trust-building content, and stronger information architecture.",
+    highlights: [
+      "Improved discoverability through refined IA",
+      "Crafted content-first layouts for clarity",
+      "Optimized accessibility and SEO foundations",
+    ],
+    skills: ["HTML", "CSS", "JavaScript", "SEO"],
+    link: "/ess",
+    image: "/images/ess-index.png",
+  },
+  {
+    title: "CatchScan",
+    subTitle: "Copyright protection SaaS",
+    date: "2021",
+    description:
+      "Redesigned a complex scanning dashboard for content protection, translating power-user workflows into a clearer and faster day-to-day product experience.",
+    highlights: [
+      "Streamlined workflows for high-volume case review",
+      "Established modular UI patterns for consistency",
+      "Aligned visual language with trust and security goals",
+    ],
+    skills: ["Tailwind CSS", "Atomic Design", "Design System"],
+    link: "/catchscan",
+    image: "/images/catchscan-index.png",
+  },
+  {
+    title: "AskCody",
+    subTitle: "Hybrid workplace manager",
+    date: "2022",
+    description:
+      "Designed workplace management interactions in a Microsoft Teams context, balancing dense operational functionality with quick daily usability.",
+    highlights: [
+      "Integrated naturally into Teams workflows",
+      "Delivered consistent UX across large feature surface",
+      "Focused on adoption and repeated usage behavior",
+    ],
+    skills: ["TypeScript", "React", "Fluent UI"],
+    link: "/askcody",
+    image: "/images/askcody-index.png",
+  },
+];

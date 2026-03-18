@@ -2,8 +2,8 @@
 
 import IndexSigAnimatedIcon from "@/public/icons/indexSigAnimated";
 import Link from "next/link";
-import { useState, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface HeaderProps {
   isOpen: boolean;
@@ -14,254 +14,176 @@ interface HeaderProps {
   scrollToContact?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ 
+const Header: React.FC<HeaderProps> = ({
   isOpen,
   setIsOpen,
   scrollToHome: propScrollToHome,
   scrollToAbout: propScrollToAbout,
   scrollToWork: propScrollToWork,
-  scrollToContact: propScrollToContact
+  scrollToContact: propScrollToContact,
 }) => {
   const router = useRouter();
+  const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollTop, setLastScrollTop] = useState(0);
-
-  const handleScroll = useCallback(() => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    if (scrollTop > lastScrollTop && scrollTop > 100) {
-      setIsVisible(false);
-    } else {
-      setIsVisible(true);
-    }
-    setLastScrollTop(scrollTop);
-  }, [lastScrollTop]);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+    let lastY = window.scrollY;
 
-  const handleNavigation = async (
-    path: string,
-    scrollAction: () => void
-  ) => {
-    if (window.location.pathname !== path) {
-      await router.push(path);
-      await new Promise((resolve) => setTimeout(resolve, 100));
-      scrollAction();
-    } else {
-      scrollAction();
-    }
-    setTimeout(() => {
-      setIsOpen(false);
-    }, 50);
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      const scrollingUp = currentY < lastY;
+
+      if (currentY < 60 || scrollingUp || isOpen) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+
+      lastY = currentY;
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isOpen]);
+
+  const fallbackScroll = (id: string, offset = 0) => {
+    const section = document.getElementById(id);
+    if (!section) return;
+
+    const top = section.getBoundingClientRect().top + window.scrollY + offset;
+    window.scrollTo({ top, behavior: "smooth" });
   };
 
-  const handleHomeScroll = () => {
+  const scrollToHome = () => {
     if (propScrollToHome) {
       propScrollToHome();
-    } else {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+      return;
     }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleAboutScroll = () => {
+  const scrollToAbout = () => {
     if (propScrollToAbout) {
       propScrollToAbout();
-    } else {
-      const aboutSection = document.querySelector(
-        '[data-scroll-section-id="about"]'
-      );
-      if (aboutSection) {
-        const targetOffset = 2250;
-        window.scrollTo({
-          top: targetOffset,
-          behavior: "smooth",
-        });
-      }
+      return;
     }
+
+    fallbackScroll("about", -80);
   };
 
-  const handleWorkScroll = () => {
+  const scrollToWork = () => {
     if (propScrollToWork) {
       propScrollToWork();
-    } else {
-      const projectsContent = document.getElementById('projects-content');
-      if (projectsContent) {
-        const offset = projectsContent.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({
-          top: offset - 50,
-          behavior: "smooth",
-        });
-      }
+      return;
     }
+
+    fallbackScroll("work", -80);
   };
 
-  const handleContactScroll = () => {
+  const scrollToContact = () => {
     if (propScrollToContact) {
       propScrollToContact();
-    } else {
-        window.scrollTo({
-        top: document.documentElement.scrollHeight,
-          behavior: "smooth",
-        });
+      return;
     }
+
+    fallbackScroll("contact", -80);
   };
+
+  const navigateHomeAndRun = (action: () => void) => {
+    if (pathname !== "/") {
+      router.push("/");
+      window.setTimeout(action, 220);
+    } else {
+      action();
+    }
+    setIsOpen(false);
+  };
+
+  const navItems = [
+    { label: "About", onClick: () => navigateHomeAndRun(scrollToAbout) },
+    { label: "Work", onClick: () => navigateHomeAndRun(scrollToWork) },
+    { label: "Contact", onClick: () => navigateHomeAndRun(scrollToContact) },
+  ];
 
   return (
     <header
-      className={`sticky-header flex justify-between items-center w-full p-4 transition-opacity duration-500 ${
-        isVisible && !isOpen
-          ? "opacity-100"
-          : isOpen
-          ? "opacity-100"
-          : "opacity-0 pointer-events-none"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        isVisible || isOpen
+          ? "translate-y-0 opacity-100"
+          : "-translate-y-8 opacity-0 pointer-events-none"
       }`}
-      style={{ zIndex: isOpen ? 11 : 5 }}
     >
-      <div className="flex items-center">
-        <Link
-          href="/"
-          onClick={(e) => {
-            e.preventDefault();
-            handleNavigation("/", handleHomeScroll);
-          }}
-        >
-          <IndexSigAnimatedIcon isOpen={isOpen} />
-        </Link>
+      <div className="flow-panel mx-auto mt-3 w-[min(96%,1200px)] px-4 py-3">
+        <div className="flex items-center justify-between gap-6">
+          <Link
+            href="/"
+            onClick={(event) => {
+              event.preventDefault();
+              navigateHomeAndRun(scrollToHome);
+            }}
+            className="hover:opacity-70 transition-opacity"
+            aria-label="Go to homepage"
+          >
+            <IndexSigAnimatedIcon isOpen={isOpen} />
+          </Link>
+
+          <nav className="hidden items-center gap-8 md:flex">
+            {navItems.map((item) => (
+              <button
+                key={item.label}
+                onClick={item.onClick}
+                className="text-sm font-semibold tracking-wide text-custom-blue/78 transition-all duration-300 hover:-translate-y-0.5 hover:text-custom-blue"
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="group inline-flex h-10 w-10 items-center justify-center rounded-md border border-custom-blue/20 bg-white/90 text-custom-blue md:hidden"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+          >
+            <span className="relative h-3.5 w-4.5">
+              <span
+                className={`absolute left-0 top-0 h-0.5 w-full rounded bg-current transition-transform duration-300 ${
+                  isOpen ? "translate-y-[6px] rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-[6px] h-0.5 w-full rounded bg-current transition-opacity duration-300 ${
+                  isOpen ? "opacity-0" : "opacity-100"
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-[12px] h-0.5 w-full rounded bg-current transition-transform duration-300 ${
+                  isOpen ? "-translate-y-[6px] -rotate-45" : ""
+                }`}
+              />
+            </span>
+          </button>
+        </div>
       </div>
-      <nav className="flex items-center">
-        {/* Mobile menu button */}
-        <div
-          className={`md:hidden ${isOpen ? "open" : ""}`}
-          onClick={() => setIsOpen(!isOpen)}
-          style={{ zIndex: isOpen ? 11 : 2 }}
-        >
-          <div className="w-6"></div>
-          <div className="w-6"></div>
-          <div className="w-6"></div>
-        </div>
 
-        {/* Mobile menu overlay */}
-        <div 
-          className={`nav-overlay ${isOpen ? "open" : ""}`}
-          style={{ 
-            zIndex: isOpen ? 10 : -1,
-            pointerEvents: isOpen ? 'auto' : 'none'
-          }}
-        >
-          <div
-            className={`${
-              isOpen
-                ? "flex flex-col space-y-12 items-center justify-center w-full px-6"
-                : "hidden"
-            } md:flex md:flex-row md:space-x-4 md:space-y-0`}
-          >
-            <Link href="/">
-              <div
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavigation("/", handleAboutScroll);
-                }}
-                className={`relative inline-block group w-full text-center ${
-                  isOpen
-                    ? "text-3xl font-semibold text-custom-blue/90 active:text-custom-blue animate-fade-in"
-                    : "text-lg md:text-xl lg:text-2xl text-custom-blue"
-                }`}
-                style={isOpen ? { animationDelay: "0.1s" } : {}}
-              >
-                About
-                <span className="absolute -bottom-2 left-0 w-full h-[2px] transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100 bg-custom-blue"></span>
-              </div>
-            </Link>
-            <Link href="/">
-              <div
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavigation("/", handleWorkScroll);
-                }}
-                className={`relative inline-block group w-full text-center ${
-                  isOpen
-                    ? "text-3xl font-semibold text-custom-blue/90 active:text-custom-blue animate-fade-in"
-                    : "text-lg md:text-xl lg:text-2xl text-custom-blue"
-                }`}
-                style={isOpen ? { animationDelay: "0.2s" } : {}}
-              >
-                Work
-                <span className="absolute -bottom-2 left-0 w-full h-[2px] transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100 bg-custom-blue"></span>
-              </div>
-            </Link>
-            <Link href="/">
-              <div
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavigation("/", handleContactScroll);
-                }}
-                className={`relative inline-block group w-full text-center ${
-                  isOpen
-                    ? "text-3xl font-semibold text-custom-blue/90 active:text-custom-blue animate-fade-in"
-                    : "text-lg md:text-xl lg:text-2xl text-custom-blue"
-                }`}
-                style={isOpen ? { animationDelay: "0.3s" } : {}}
-              >
-                Contact
-                <span className="absolute -bottom-2 left-0 w-full h-[2px] transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100 bg-custom-blue"></span>
-              </div>
-            </Link>
-          </div>
-        </div>
-
-        {/* Desktop navigation */}
-        <div className={`hidden md:flex items-center space-x-4 transition-all duration-300 ease-in-out`}>
-          <Link
-            href="/"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavigation("/", handleAboutScroll);
-            }}
-          >
-            <div className={`relative inline-block text-md font-medium tracking-wider group ${
-              isOpen ? 'text-[#eeeeee]' : 'text-custom-blue'
-            }`}>
-              About
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-custom-blue transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
-            </div>
-          </Link>
-
-          <Link
-            href="/"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavigation("/", handleWorkScroll);
-            }}
-          >
-            <div className={`relative inline-block text-md font-medium tracking-wider group ${
-              isOpen ? 'text-[#eeeeee]' : 'text-custom-blue'
-            }`}>
-              Work
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-custom-blue transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
-            </div>
-          </Link>
-
-          <Link
-            href="/"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavigation("/", handleContactScroll);
-            }}
-          >
-            <div className={`relative inline-block text-md font-medium tracking-wider group ${
-              isOpen ? 'text-[#eeeeee]' : 'text-custom-blue'
-            }`}>
-              Contact
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-custom-blue transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"></span>
-            </div>
-          </Link>
-        </div>
-      </nav>
+      <div
+        className={`flow-panel mx-auto mt-3 w-[min(96%,1200px)] overflow-hidden transition-all duration-400 md:hidden ${
+          isOpen ? "max-h-64 p-4 opacity-100" : "max-h-0 p-0 opacity-0"
+        }`}
+      >
+        <nav className="flex flex-col gap-1">
+          {navItems.map((item, index) => (
+            <button
+              key={item.label}
+              onClick={item.onClick}
+              className="rounded-md px-3 py-3 text-left text-base font-semibold text-custom-blue/85 transition-all duration-300 hover:bg-custom-blue/8"
+              style={{ transitionDelay: `${index * 50}ms` }}
+            >
+              {item.label}
+            </button>
+          ))}
+        </nav>
+      </div>
     </header>
   );
 };
