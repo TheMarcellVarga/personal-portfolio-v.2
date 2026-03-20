@@ -1,8 +1,7 @@
 "use client";
 
-import GitHubIcon from "@/public/icons/github";
-import LinkedInIcon from "@/public/icons/linkedin";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 interface FooterProps {
   isOpen: boolean;
@@ -11,25 +10,60 @@ interface FooterProps {
   setIsHover: (isHover: boolean) => void;
 }
 
-const Footer: React.FC<FooterProps> = ({ isHover }) => {
+export default function Footer({ isHover }: FooterProps) {
+  const [currentTime, setCurrentTime] = useState("··:··");
+
+  useEffect(() => {
+    const formatTime = () =>
+      setCurrentTime(
+        new Date().toLocaleTimeString("en-SG", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false,
+          timeZone: "Asia/Singapore",
+        }),
+      );
+
+    formatTime();
+    const ticker = setInterval(formatTime, 1_000);
+    return () => clearInterval(ticker);
+  }, []);
+
   return (
-    <div className="flex w-full justify-center" data-footer>
-      <div className="flex w-full flex-col">
-        <div className="w-full border-t border-gray-300 opacity-60"></div>
-        <div className="flex w-full flex-row justify-between items-center px-4 pt-4">
-          <div className="flex text-gray-400 w-full text-sm">© {new Date().getFullYear()} Marcell Varga</div>
-          <div className="flex space-x-4">
-            <Link href="https://www.linkedin.com/in/marcellvarga/" target="_blank" rel="noopener noreferrer">
-              <LinkedInIcon className={`transition-colors duration-300 ${isHover ? "text-blue-600" : "text-gray-500"} hover:text-blue-600`} />
-            </Link>
-            <Link href="https://github.com/TheMarcellVarga" target="_blank" rel="noopener noreferrer">
-              <GitHubIcon className={`transition-colors duration-300 ${isHover ? "text-black" : "text-gray-500"} hover:text-black`} />
-            </Link>
-          </div>
+    <footer className="px-4 pb-8 pt-3 sm:px-6 lg:px-10">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 border-t border-custom-blue/10 pt-6 text-sm text-custom-blue/50 sm:flex-row sm:items-center sm:justify-between">
+        <p>
+          © {new Date().getFullYear()} Marcell Varga. UX, frontend, and product
+          craft with motion discipline.
+        </p>
+        <div className="flex items-center gap-4">
+          <span className="ml-auto mr-0 text-xs text-custom-blue/48 min-w-[135px]">
+           🇸🇬 &nbsp;Local Time: {currentTime}
+          </span>
+
+          <Link
+            href="https://www.linkedin.com/in/marcellvarga/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`transition duration-300 hover:text-custom-blue ${
+              isHover ? "text-custom-blue/70" : "text-custom-blue/50"
+            }`}
+          >
+            LinkedIn
+          </Link>
+          <Link
+            href="https://github.com/TheMarcellVarga"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`transition duration-300 hover:text-custom-blue ${
+              isHover ? "text-custom-blue/70" : "text-custom-blue/50"
+            }`}
+          >
+            GitHub
+          </Link>
         </div>
       </div>
-    </div>
+    </footer>
   );
-};
-
-export default Footer;
+}

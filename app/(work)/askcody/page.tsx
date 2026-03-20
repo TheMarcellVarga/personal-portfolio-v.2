@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import Header from "../../header";
 import Footer from "../../footer";
@@ -13,6 +12,8 @@ import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import useLocomotive from "../../useLocomotive";
 import { projects } from "../../data/projects";
 import { useRouter } from "next/navigation";
+
+const hideLegacyImages = true;
 
 const history = [
   {
@@ -527,20 +528,37 @@ const AskCody = () => {
                               transition-opacity duration-500 z-10
                             "
                           />
-                          <img
-                            src={item.content.picture}
-                            alt="ESS Hero"
-                            width={1200}
-                            height={800}
-                            className="
-                              w-full h-auto 
-                              object-cover 
-                              rounded-lg sm:rounded-xl md:rounded-2xl
-                              transform transition-all duration-700 
-                              group-hover:scale-[1.02] sm:group-hover:scale-[1.03] md:group-hover:scale-105
-                            "
-                            sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, 85vw"
-                          />
+                          {hideLegacyImages ? (
+                            <div className="relative flex min-h-[15rem] items-end overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl border border-white/70 bg-[linear-gradient(135deg,rgba(212,239,255,0.92),rgba(232,241,248,0.88),rgba(221,230,245,0.96))] p-6 sm:p-8">
+                              <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.72),transparent_30%),radial-gradient(circle_at_78%_14%,rgba(255,255,255,0.45),transparent_22%),linear-gradient(135deg,rgba(255,255,255,0.15),transparent_42%)]" />
+                              <div className="relative max-w-xl rounded-[1.5rem] border border-white/70 bg-white/36 p-5 backdrop-blur-md">
+                                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-custom-blue/50">
+                                  Case study archive
+                                </p>
+                                <p className="mt-3 text-2xl font-display tracking-[-0.05em] text-custom-blue">
+                                  AskCody visuals removed
+                                </p>
+                                <p className="mt-3 text-sm leading-7 text-custom-blue/68">
+                                  The old mockups were retired so the page now focuses on the strategy and interaction notes.
+                                </p>
+                              </div>
+                            </div>
+                          ) : (
+                            <img
+                              src={item.content.picture}
+                              alt="AskCody Hero"
+                              width={1200}
+                              height={800}
+                              className="
+                                w-full h-auto 
+                                object-cover 
+                                rounded-lg sm:rounded-xl md:rounded-2xl
+                                transform transition-all duration-700 
+                                group-hover:scale-[1.02] sm:group-hover:scale-[1.03] md:group-hover:scale-105
+                              "
+                              sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, 85vw"
+                            />
+                          )}
                         </div>
                         <div className="text-base text-custom-blue transform-gpu">
                           {item.description.map((desc, descIndex) => (
@@ -590,7 +608,8 @@ const AskCody = () => {
                                   )}
                                 </div>
                               )}
-                              {Array.isArray(desc.picture) &&
+                              {!hideLegacyImages &&
+                                Array.isArray(desc.picture) &&
                                 desc.picture.length > 0 && (
                                   <div className="mt-6 flex flex-wrap justify-center items-center w-full gap-10">
                                     {Array.isArray(desc.picture) &&
@@ -728,7 +747,8 @@ const AskCody = () => {
                                         ))}
                                   </div>
                                 )}
-                              {Array.isArray(desc.subTitle) &&
+                              {!hideLegacyImages &&
+                                Array.isArray(desc.subTitle) &&
                                 Array.isArray(desc.subText) &&
                                 Array.isArray(desc.subPicture) && (
                                   <div className="mt-8 space-y-8">
@@ -854,14 +874,13 @@ const AskCody = () => {
                               <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_20%,_#ffffff_120%)] opacity-20"></div>
                             </div>
                           ) : (
-                            <div className="w-full h-full relative rounded-md overflow-hidden shadow-xs">
-                              <img
-                                src={project.image}
-                                alt={project.title}
-                                width={160}
-                                height={90}
-                                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                              />
+                            <div className={`w-full h-full relative rounded-md overflow-hidden shadow-xs ${project.backgroundClass}`}>
+                              <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.62),transparent_32%),radial-gradient(circle_at_80%_10%,rgba(255,255,255,0.38),transparent_24%),linear-gradient(135deg,rgba(255,255,255,0.16),transparent_48%)]" />
+                              <div className="relative flex h-full w-full items-end p-3">
+                                <div className="rounded-full border border-white/65 bg-white/35 px-2.5 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-custom-blue/60 backdrop-blur-md">
+                                  {project.category}
+                                </div>
+                              </div>
                             </div>
                           )}
                         </div>
