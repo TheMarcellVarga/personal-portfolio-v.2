@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import LocomotiveScroll from "locomotive-scroll";
 import "locomotive-scroll/dist/locomotive-scroll.css";
 
@@ -46,15 +46,17 @@ export default function useLocomotive(
     useState<number>(0);
   const [locomotiveScroll, setLocomotiveScroll] =
     useState<ScrollInstance | null>(null);
+  const scrollPositionRef = useRef(0);
 
   useEffect(() => {
     let instance: ScrollInstance | null = null;
+    let scrollEl: HTMLElement | null = null;
 
     const initLocomotiveScroll = async () => {
       if (typeof window === "undefined") return;
 
       try {
-        const scrollEl = document.querySelector(
+        scrollEl = document.querySelector(
           "[data-scroll-container]"
         ) as HTMLElement;
 
@@ -63,7 +65,7 @@ export default function useLocomotive(
           return;
         }
 
-        const currentScroll = window.scrollY;
+        window.history.scrollRestoration = "manual";
 
         const options: ILocomotiveScrollOptions = {
           el: scrollEl,
@@ -95,9 +97,9 @@ export default function useLocomotive(
         setLocomotiveScroll(instance);
 
         setTimeout(() => {
-          window.scrollTo(0, currentScroll);
+          window.scrollTo(0, 0);
           if (instance) {
-            instance.scrollTo(currentScroll, {
+            instance.scrollTo(0, {
               duration: 0,
               immediate: true,
             });
@@ -106,24 +108,24 @@ export default function useLocomotive(
 
         const handleScroll = () => {
           const scrollY = window.scrollY;
+          scrollPositionRef.current = scrollY;
           setscrollPositionLocomotive(scrollY);
           if (onScroll) {
             onScroll(scrollY);
           }
         };
 
-        window.addEventListener("scroll", handleScroll, { passive: true });
-
-        scrollEl.addEventListener("scroll", (e) => {
+        const handleLocomotiveScroll = () => {
           const scroll = {
             y: window.scrollY,
             x: window.scrollX,
           };
 
-          const speed =
-            Math.abs(scroll.y - scrollPositionLocomotive) > 30 ? 2 : 1;
-          const direction = scroll.y > scrollPositionLocomotive ? 1 : -1;
+          const previous = scrollPositionRef.current;
+          const speed = Math.abs(scroll.y - previous) > 30 ? 2 : 1;
+          const direction = scroll.y > previous ? 1 : -1;
 
+          scrollPositionRef.current = scroll.y;
           setscrollPositionLocomotive(scroll.y);
           if (onScroll) {
             onScroll(scroll.y);
@@ -144,7 +146,7 @@ export default function useLocomotive(
             "is-scrolling-down"
           );
           document.documentElement.classList.add(scrollingClass);
-        });
+        };
 
         const handleResize = () => {
           if (instance) {
@@ -156,22 +158,38 @@ export default function useLocomotive(
           }
         };
 
-        window.addEventListener("resize", handleResize);
-        window.addEventListener("load", handleResize);
-
-        document.addEventListener("visibilitychange", () => {
+        const handleVisibilityChange = () => {
           if (document.visibilityState === "visible") {
             handleResize();
           }
-        });
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        scrollEl.addEventListener("scroll", handleLocomotiveScroll);
+        window.addEventListener("resize", handleResize);
+        window.addEventListener("load", handleResize);
+        document.addEventListener("visibilitychange", handleVisibilityChange);
+
+        return () => {
+          window.removeEventListener("scroll", handleScroll);
+          scrollEl?.removeEventListener("scroll", handleLocomotiveScroll);
+          window.removeEventListener("resize", handleResize);
+          window.removeEventListener("load", handleResize);
+          document.removeEventListener("visibilitychange", handleVisibilityChange);
+        };
       } catch (error) {
         console.error("Error initializing LocomotiveScroll:", error);
       }
     };
 
-    initLocomotiveScroll();
+    let cleanup: (() => void) | undefined;
+
+    initLocomotiveScroll().then((teardown) => {
+      cleanup = teardown;
+    });
 
     return () => {
+      cleanup?.();
       if (instance) {
         instance.destroy();
       }

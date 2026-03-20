@@ -1,4 +1,15 @@
-export const history = [
+export type HistoryItem = {
+  company: string;
+  jobTitle: string;
+  time: {
+    start: string;
+    end: string;
+  };
+  description: string[];
+  skills: string[];
+};
+
+export const history: HistoryItem[] = [
   {
     company: "AXON Networks",
     jobTitle: "UX & Frontend Engineer",
@@ -7,19 +18,11 @@ export const history = [
       end: "",
     },
     description: [
-      "Contributing to AXON Orchestrator development, focusing on UX/UI design and frontend development within cross-functional teams.",
-      "Creating interactive prototypes and establishing design system for in-house development.",
-      "Collaborating with Analytics team to integrate AI/ML solutions into products, enhancing product functionality.",
-      "Participating in the full product development cycle from UX/UI design, through Frontend Development to successful deployments.",
+      "Working across UX, UI, frontend implementation, and product iteration on AXON Orchestrator in close collaboration with engineering and analytics teams.",
+      "Building interactive prototypes and interface foundations that make complex workflows easier to reason about, discuss, and ship.",
+      "Bringing AI-leaning features and technical product thinking into the experience layer while keeping usability and clarity intact.",
     ],
-    skills: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "TypeScript",
-      "React-Bootstrap",
-      "Fluent UI",
-    ],
+    skills: ["UX", "React", "TypeScript", "Node.js", "AI-fluent UX"],
   },
   {
     company: "MapsPeople",
@@ -29,43 +32,24 @@ export const history = [
       end: "Apr 2022",
     },
     description: [
-      "Enhanced Maps Indoors CMS through research and development of interactive, animated prototypes.",
-      "Executed tasks via Jira, including project management and documentation.",
-      "Leveraged the company Design System, contributing to its evolution",
-      "Prioritized delivery efficiency using Auto-Layout.",
-      "Designed cross-platform solutions for both desktop and mobile, with a focus on accessibility.",
-      "Acquired interdisciplinary skills working within a SaaS company team.",
+      "Improved MapsIndoors CMS through research, exploration, and animated prototyping work that helped ideas become more tangible earlier in the process.",
+      "Contributed to a live design system and learned how accessibility, documentation, and product constraints shape real SaaS decisions.",
+      "Worked cross-functionally inside a shipping product team, tightening both execution speed and visual consistency.",
     ],
-    skills: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "TypeScript",
-      "React-Bootstrap",
-      "Fluent UI",
-    ],
+    skills: ["Figma", "Prototyping", "Accessibility", "SaaS UX"],
   },
   {
-    company: "University College of Northen Denmark",
+    company: "University College of Northern Denmark",
     jobTitle: "Multimedia Design",
     time: {
-      start: "Sept 2020",
+      start: "Aug 2020",
       end: "Jun 2022",
     },
     description: [
-      "UX/UI Design and Elective Specialization: Focused on enhancing UI/UX design skills through practical projects. This aligns with the importance of a well-crafted website or app for user satisfaction.",
-      "Front-End Web Development: Engaged in hands-on experience building applications. Emphasis was placed on the design-to-code process and creating visually appealing, easy-to-use interfaces.",
-      "Content Production: Involved in creating content that meets user needs and ensures a positive user experience. This reflects the ongoing process of UX design.",
-      "Collaboration and Project Management: Worked collaboratively with real companies within Reflective Practice-based Learning (RPL). Applied user research methodologies and usability testing to improve product functionality.",
-      "Reflective Practice-based Learning: Executed projects in collaboration with real companies. Applied UX/UI design principles to real-world challenges, enhancing the design-to-code process.",
+      "Built the foundations in UX, frontend development, content production, and design strategy through practical, company-connected projects.",
+      "Focused on the design-to-code handoff before it was a buzzword, learning how visual decisions, user needs, and implementation constraints shape each other.",
+      "Used research, testing, and reflective practice to solve real product problems with a strong bias toward clarity and craft.",
     ],
-    skills: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "TypeScript",
-      "React-Bootstrap",
-      "Fluent UI",
-    ],
+    skills: ["UX/UI", "Frontend", "Research", "Content Strategy"],
   },
 ];

@@ -1,14 +1,11 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import Image from "next/image";
 import { projects } from "../data/projects";
-import useWindowSize from "../useWindowSize";
 // Temporarily removed filtering functionality
 // import { useState, useEffect, useMemo } from "react";
 
 export default function Projects() {
-  const size = useWindowSize();
   // Temporarily removed filtering state and logic
   // const [selectedFilter, setSelectedFilter] = useState<string>("All");
   // const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -118,14 +115,21 @@ export default function Projects() {
                       <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_20%,_#ffffff_120%)] opacity-20"></div>
                     </div>
                   ) : (
-                    <div className="w-full aspect-3/2 sm:w-full sm:h-full md:aspect-3/2 relative rounded-lg overflow-hidden shadow-[0_8px_30px_rgba(2,66,92,0.12)] group-hover:shadow-[0_15px_60px_rgba(2,66,92,0.2)] transition-all duration-500">
-                      <Image
-                        src={project.image}
-                        alt={`${project.title} - ${project.subTitle}`}
-                        width={size.width && size.width >= 640 && size.width < 768 ? 80 : 300}
-                        height={size.width && size.width >= 640 && size.width < 768 ? 80 : 300}
-                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-                      />
+                    <div className={`w-full aspect-3/2 sm:w-full sm:h-full md:aspect-3/2 relative rounded-lg overflow-hidden shadow-[0_8px_30px_rgba(2,66,92,0.12)] group-hover:shadow-[0_15px_60px_rgba(2,66,92,0.2)] transition-all duration-500 ${project.backgroundClass}`}>
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.6),transparent_32%),radial-gradient(circle_at_80%_10%,rgba(255,255,255,0.38),transparent_24%),linear-gradient(135deg,rgba(255,255,255,0.18),transparent_48%)]" />
+                      <div className="relative flex h-full w-full flex-col justify-between p-4 sm:p-5">
+                        <span className="w-fit rounded-full border border-white/65 bg-white/35 px-2.5 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-custom-blue/60 backdrop-blur-md">
+                          Archive view
+                        </span>
+                        <div className="max-w-[12rem] rounded-[1rem] border border-white/65 bg-white/35 p-3 backdrop-blur-md">
+                          <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-custom-blue/50">
+                            {project.category}
+                          </p>
+                          <p className="mt-1 text-sm font-semibold text-custom-blue">
+                            {project.date}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>

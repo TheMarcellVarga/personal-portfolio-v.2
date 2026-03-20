@@ -54,9 +54,7 @@ export default function Contact() {
                 <span className="text-xs sm:text-sm">Let&apos;s connect</span>
               </a>
               <a
-                href="/MarcellVargaCV.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/resume"
                 className="flex items-center gap-2 text-custom-blue/60 hover:text-custom-blue transition-all duration-300"
                 aria-label="View Resume"
               >

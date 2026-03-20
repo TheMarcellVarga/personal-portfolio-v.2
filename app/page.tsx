@@ -1,300 +1,694 @@
 "use client";
 
-import { useRef, useEffect, useState, useCallback } from "react";
+import { startTransition, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import LinkedInIcon from "../public/icons/linkedin";
-import OpenResumeIcon from "../public/icons/openResume";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { projects } from "./data/projects";
-import { history } from "./data/history";
-
 import {
-  FaPaintBrush,
-  FaUserFriends,
-  FaSearch,
-  FaVial,
-  FaHtml5,
-  FaCss3Alt,
-  FaReact,
-  FaNodeJs,
-  FaGitAlt,
-  FaDocker,
-  FaFigma,
-  FaSketch,
-  FaVuejs,
-} from "react-icons/fa";
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import {
-  SiTailwindcss,
-  SiNextdotjs,
-  SiSvelte,
-  SiAdobe,
-  SiVercel,
-  SiPostgresql,
-  SiTypescript,
-  SiJavascript,
-  SiAngular,
-  SiExpress,
-  SiPython,
-  SiDjango,
-  SiMysql,
-  SiMongodb,
-} from "react-icons/si";
-
-const skillCategories = {
-  design: [
-    { name: "UI Design", icon: <FaPaintBrush /> },
-    { name: "UX Design", icon: <FaUserFriends /> },
-    { name: "User Research", icon: <FaSearch /> },
-    { name: "Usability Testing", icon: <FaVial /> },
-    { name: "Adobe CC Suite", icon: <SiAdobe /> },
-    { name: "Figma", icon: <FaFigma /> },
-    { name: "Sketch", icon: <FaSketch /> },
-  ],
-  frontend: [
-    { name: "HTML", icon: <FaHtml5 /> },
-    { name: "CSS", icon: <FaCss3Alt /> },
-    { name: "JavaScript", icon: <SiJavascript /> },
-    { name: "TypeScript", icon: <SiTypescript /> },
-    { name: "React", icon: <FaReact /> },
-    { name: "Next.js", icon: <SiNextdotjs /> },
-    { name: "Angular", icon: <SiAngular /> },
-    { name: "Vue", icon: <FaVuejs /> },
-    { name: "Svelte", icon: <SiSvelte /> },
-    { name: "SvelteKit", icon: <SiSvelte /> },
-    { name: "Tailwind CSS", icon: <SiTailwindcss /> },
-  ],
-  backend: [
-    { name: "Node.js", icon: <FaNodeJs /> },
-    { name: "Express", icon: <SiExpress /> },
-    { name: "Python", icon: <SiPython /> },
-    { name: "Django", icon: <SiDjango /> },
-    { name: "SQL", icon: <SiMysql /> },
-    { name: "PostgreSQL", icon: <SiPostgresql /> },
-    { name: "MongoDB", icon: <SiMongodb /> },
-  ],
-  tools: [
-    { name: "Git", icon: <FaGitAlt /> },
-    { name: "Docker", icon: <FaDocker /> },
-    { name: "Vercel", icon: <SiVercel /> },
-  ],
-};
-
+  ArrowRight,
+  ArrowUpRight,
+  Blocks,
+  Code2,
+  Download,
+  Github,
+  Linkedin,
+  Mail,
+  Rocket,
+  Sparkles,
+} from "lucide-react";
 import Header from "./header";
 import Footer from "./footer";
-import { ArrowRightIcon } from "@heroicons/react/24/solid";
-import useLocomotive from "./useLocomotive";
-import useWindowSize from "./useWindowSize";
-import { useIsMobile } from "./isMobile";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import History from "./components/History";
-import Contact from "./components/Contact";
-import LegacyNotice from "./components/LegacyNotice";
-import MotionPreference from "./components/MotionPreference";
-import ThemeToggle from "./components/ThemeToggle";
-import BackToTop from "./components/BackToTop";
-import MouseTrailer from "./components/MouseTrailer";
-import Blog from "./components/Blog";
+import { history } from "./data/history";
+import { projects } from "./data/projects";
 
-export default function Page() {
-  const globeRef = useRef<any>();
+const manifesto =
+  "I build interfaces that feel deliberate: design systems, motion details, frontend code, and product thinking in one lane.";
 
-  const { scrollPositionLocomotive, updateScroll } = useLocomotive();
+const capabilityCards = [
+  {
+    title: "I make systems feel alive",
+    body: "I turn rough ideas into interface systems with taste, tension, and enough structure for teams to extend without flattening them.",
+    icon: Blocks,
+  },
+  {
+    title: "I care about shipped feeling",
+    body: "Motion, responsiveness, accessibility, and implementation detail all matter. I care about how the live product feels, not just how the mockup looks.",
+    icon: Code2,
+  },
+  {
+    title: "Research without theater",
+    body: "I use interviews, testing, and iteration when they move the product forward. Useful insight beats a beautiful process doc.",
+    icon: Sparkles,
+  },
+  {
+    title: "Nerdy, but collaborative",
+    body: "I like the details, but I also like momentum. I work comfortably across design, engineering, and product without losing the plot.",
+    icon: Rocket,
+  },
+];
 
-  const stickySectionRef = useRef<HTMLDivElement>(null);
+const capabilityTags = [
+  "design systems",
+  "interaction design",
+  "motion details",
+  "frontend architecture",
+  "accessibility",
+  "prototyping",
+  "research",
+  "TypeScript",
+  "React / Next.js",
+  "SvelteKit",
+  "AI product flows",
+  "weird edge cases",
+];
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [footerHover, setFooterHover] = useState(false);
-  const [showLegacyNotice, setShowLegacyNotice] = useState(true);
-  const [isNoticeVisible, setIsNoticeVisible] = useState(true);
-  const [isHoveringLegacyNotice, setIsHoveringLegacyNotice] = useState(false);
+function fadeInUp(delay = 0) {
+  return {
+    initial: { opacity: 0, y: 28 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.2 },
+    transition: {
+      duration: 0.8,
+      delay,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
+  };
+}
 
-  const isMobile = useIsMobile();
-  const MOBILE_TIMER_DURATION = 5000;
-  const DESKTOP_TIMER_DURATION = 7500;
+function scrollToId(id: string, reducedMotion: boolean) {
+  const element = document.getElementById(id);
+  if (!element) return;
 
-  useEffect(() => {
-    if (showLegacyNotice && !isHoveringLegacyNotice) {
-      const timerDuration = isMobile
-        ? MOBILE_TIMER_DURATION
-        : DESKTOP_TIMER_DURATION;
+  element.scrollIntoView({
+    behavior: reducedMotion ? "auto" : "smooth",
+    block: "start",
+  });
+}
 
-      const timer = setTimeout(() => {
-        setIsNoticeVisible(false);
-        setTimeout(() => {
-          setShowLegacyNotice(false);
-        }, 500);
-      }, timerDuration);
-
-      return () => clearTimeout(timer);
-    }
-  }, [showLegacyNotice, isHoveringLegacyNotice, isMobile]);
-
-  useEffect(() => {
-    if (globeRef.current) {
-      const controls = globeRef.current.controls();
-      controls.autoRotate = true;
-      controls.enabled = true;
-    }
-  }, []);
-
-  const size = useWindowSize();
-
-  const scrollToHome = useCallback(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }, []);
-
-  const scrollToAbout = useCallback(() => {
-    if (stickySectionRef.current) {
-      const aboutLocation = 2800 - 1;
-      window.scrollTo({
-        top: aboutLocation,
-        behavior: "smooth",
-      });
-    }
-  }, []);
-
-  const scrollToWork = useCallback(() => {
-    const projectsContent = document.getElementById('projects-content');
-    if (projectsContent) {
-      const offset = projectsContent.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({
-        top: offset,
-        behavior: "smooth",
-      });
-    }
-  }, []);
-
-  const scrollToContact = useCallback(() => {
-    // Scroll to the bottom of the page
-      window.scrollTo({
-      top: document.documentElement.scrollHeight,
-        behavior: "smooth",
-      });
-  }, []);
-
-  const [hasScrolled, setHasScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setHasScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Optimize scroll update handlers
-  useEffect(() => {
-    const handleVisibilityOrPageShow = () => {
-      if (document.visibilityState === "visible" || !document.hidden) {
-        setTimeout(() => {
-          updateScroll();
-        }, 50);
-      }
-    };
-
-    const handleResize = () => {
-      updateScroll();
-    };
-
-    // Add event listeners for all cases that need scroll updates
-    window.addEventListener("pageshow", handleVisibilityOrPageShow);
-    document.addEventListener("visibilitychange", handleVisibilityOrPageShow);
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("pageshow", handleVisibilityOrPageShow);
-      document.removeEventListener("visibilitychange", handleVisibilityOrPageShow);
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [updateScroll]);
-
+function SectionLabel({
+  index,
+  label,
+  tone = "dark",
+}: {
+  index: string;
+  label: string;
+  tone?: "dark" | "light";
+}) {
+  const isLight = tone === "light";
   return (
     <div
-      id="main-container"
-      data-scroll-container
-      className={`
-        px-2 sm:px-4 pb-4 
-        transition-colors duration-200 
-        ease-in-out 
-        bg-gray-200 
-        relative
-        scroll-smooth
-      `}
+      className={`mb-6 flex items-center gap-4 text-[0.7rem] font-semibold uppercase tracking-[0.32em] ${
+        isLight ? "text-white/62" : "text-custom-blue/55"
+      }`}
     >
-      <MotionPreference />
-      {/* Temporarily removed ThemeToggle */}
-      {/* <ThemeToggle /> */}
-      <BackToTop showAfter={600} />
-      <MouseTrailer />
+      <span>{index}</span>
+      <span className={`h-px w-12 ${isLight ? "bg-white/20" : "bg-custom-blue/20"}`} />
+      <span>{label}</span>
+    </div>
+  );
+}
 
-      <div
-        className="
-          absolute inset-0 
-          bg-[radial-gradient(rgba(2,66,92,0.07)_1.5px,transparent_1.5px)]
-          [background-size:16px_16px] 
-          pointer-events-none
-          before:absolute 
-          before:inset-0 
-          before:bg-linear-to-b 
-          before:from-transparent 
-          before:to-gray-200/50 
-          before:backdrop-blur-[1px]
-          motion-safe:transition-opacity
-          motion-safe:duration-700
-          scroll-smooth
-        "
-        style={{ zIndex: 0 }}
-        aria-hidden="true"
+export default function Page() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [footerHover, setFooterHover] = useState(false);
+  const [typedText, setTypedText] = useState("");
+  const prefersReducedMotion = useReducedMotion();
+  const shouldReduceMotion = Boolean(prefersReducedMotion);
+
+  const heroRef = useRef<HTMLElement>(null);
+  const manifestoRef = useRef<HTMLElement>(null);
+  const capabilitiesRef = useRef<HTMLElement>(null);
+  const trajectoryRef = useRef<HTMLElement>(null);
+  const [activeTrajectoryIndex, setActiveTrajectoryIndex] = useState(0);
+
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroCopyY = useTransform(heroProgress, [0, 1], [0, -36]);
+  const heroPillsY = useTransform(heroProgress, [0, 1], [0, -18]);
+  const heroCardsY = useTransform(heroProgress, [0, 1], [0, -28]);
+  const heroCopyOpacity = useTransform(heroProgress, [0, 0.85], [1, 0.58]);
+  const portraitY = useTransform(heroProgress, [0, 1], [0, -80]);
+  const portraitRotate = useTransform(heroProgress, [0, 1], [0, -4]);
+  const portraitScale = useTransform(heroProgress, [0, 1], [1, 0.965]);
+  const haloScale = useTransform(heroProgress, [0, 1], [1, 1.14]);
+
+  const { scrollYProgress: manifestoProgress } = useScroll({
+    target: manifestoRef,
+    offset: ["start start", "end end"],
+  });
+  const { scrollYProgress: capabilitiesProgress } = useScroll({
+    target: capabilitiesRef,
+    offset: ["start start", "end end"],
+  });
+  const { scrollYProgress: trajectoryProgress } = useScroll({
+    target: trajectoryRef,
+    offset: ["start start", "end end"],
+  });
+  const manifestoOpacity = useTransform(manifestoProgress, [0, 0.08, 0.82, 1], [0.35, 1, 1, 0.24]);
+  const manifestoScale = useTransform(manifestoProgress, [0, 0.25, 1], [0.96, 1, 1.02]);
+  const manifestoGlow = useTransform(manifestoProgress, [0, 1], [0.15, 0.5]);
+  const capabilityTrackX = useTransform(capabilitiesProgress, [0, 1], ["0%", "-62%"]);
+
+  useMotionValueEvent(trajectoryProgress, "change", (value) => {
+    const nextIndex = Math.min(history.length - 1, Math.floor(value * history.length));
+
+    startTransition(() => {
+      setActiveTrajectoryIndex((current) => (current === nextIndex ? current : nextIndex));
+    });
+  });
+
+  useEffect(() => {
+    if (shouldReduceMotion) {
+      setTypedText(manifesto);
+    }
+  }, [shouldReduceMotion]);
+
+  useMotionValueEvent(manifestoProgress, "change", (value) => {
+    if (shouldReduceMotion) return;
+
+    const nextLength = Math.round(value * manifesto.length);
+    const nextText = manifesto.slice(0, nextLength);
+
+    startTransition(() => {
+      setTypedText((current) => (current === nextText ? current : nextText));
+    });
+  });
+
+  const scrollHome = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: shouldReduceMotion ? "auto" : "smooth" });
+  }, [shouldReduceMotion]);
+
+  const scrollAbout = useCallback(() => {
+    scrollToId("about", shouldReduceMotion);
+  }, [shouldReduceMotion]);
+
+  const scrollWork = useCallback(() => {
+    scrollToId("work", shouldReduceMotion);
+  }, [shouldReduceMotion]);
+
+  const scrollContact = useCallback(() => {
+    scrollToId("contact", shouldReduceMotion);
+  }, [shouldReduceMotion]);
+
+  const featuredProjects = useMemo(() => projects.filter((project) => !project.inProgress), []);
+  const activeTrajectoryItem = history[activeTrajectoryIndex];
+
+  return (
+    <div className="relative overflow-x-clip">
+      <div className="pointer-events-none fixed inset-0 -z-20 bg-[radial-gradient(circle_at_top_left,_rgba(76,207,255,0.16),_transparent_28%),radial-gradient(circle_at_20%_70%,_rgba(255,153,102,0.16),_transparent_34%),radial-gradient(circle_at_85%_18%,_rgba(17,27,40,0.12),_transparent_24%),linear-gradient(180deg,_#f8f1e8_0%,_#f6efe5_46%,_#fff8f1_100%)]" />
+      <div className="pointer-events-none fixed inset-0 -z-10 bg-[linear-gradient(rgba(17,27,40,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(17,27,40,0.04)_1px,transparent_1px)] bg-[size:92px_92px] [mask-image:radial-gradient(circle_at_center,black_45%,transparent_88%)]" />
+
+      <Header
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        scrollToHome={scrollHome}
+        scrollToAbout={scrollAbout}
+        scrollToWork={scrollWork}
+        scrollToContact={scrollContact}
       />
 
-      <LegacyNotice />
-
-      <div className="relative z-1">
-        <Header
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          scrollToHome={scrollToHome}
-          scrollToAbout={scrollToAbout}
-          scrollToWork={scrollToWork}
-          scrollToContact={scrollToContact}
-        />
-        
-        <Hero scrollToWork={scrollToWork} />
-        
-        <About scrollPositionLocomotive={scrollPositionLocomotive} />
-        
+      <main className="relative z-10 px-4 pb-12 pt-20 sm:px-6 lg:px-10">
         <section
-          data-scroll-section
-          data-scroll-section-id="projects"
-          data-scroll-offset="50"
-          className="flex justify-center items-center"
-          ref={stickySectionRef}
+          id="hero"
+          ref={heroRef}
+          className="mx-auto grid w-full max-w-7xl items-center gap-10 pb-10 pt-4 lg:min-h-[44rem] lg:grid-cols-[1.15fr_0.85fr] lg:gap-14 xl:min-h-[48rem] 2xl:min-h-[52rem]"
         >
-          <div className="flex flex-col items-center justify-between mt-4 mb-4 gap-16 sm:gap-24 w-full sm:w-4/5">
-            <Skills />
-            <Projects />
-            {/* Temporarily removed Blog */}
-            {/* <Blog /> */}
-            <History />
+          <div className="relative min-w-0">
+            {/* <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              style={shouldReduceMotion ? undefined : { y: heroPillsY }}
+              className="mb-6 flex flex-wrap gap-3"
+            >
+              {[
+                "Product Design",
+                "Design systems",
+                "Frontend",
+              ].map((pill) => (
+                <span
+                  key={pill}
+                  className="rounded-full border border-white/70 bg-white/65 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-custom-blue/70 shadow-[0_10px_30px_rgba(7,20,38,0.08)] backdrop-blur-xl"
+                >
+                  {pill}
+                </span>
+              ))}
+            </motion.div> */}
+
+            <motion.div
+              {...fadeInUp(0.05)}
+              style={shouldReduceMotion ? undefined : { y: heroCopyY, opacity: heroCopyOpacity }}
+              className="space-y-6"
+            >
+              <p className="font-display text-sm uppercase tracking-[0.4em] text-custom-blue/45">
+                UX & Frontend Engineer
+              </p>
+              <h1 className="max-w-[7.2ch] font-display text-[3.7rem] font-medium leading-[0.9] tracking-[-0.08em] text-custom-blue sm:text-[4.8rem] md:text-[5.7rem] lg:text-[5.9rem] xl:text-[6.7rem] 2xl:text-[7.6rem]">
+                Design the logic. Engineer the feeling.
+              </h1>
+              <p className="max-w-2xl text-base leading-7 text-custom-blue/72 sm:text-lg sm:leading-8">
+                Born in Denmark, now building from Singapore. I make product interfaces and the code behind them feel sharp.
+              </p>
+            </motion.div>
+
+            <motion.div
+              {...fadeInUp(0.12)}
+              className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap"
+            >
+              <button
+                onClick={scrollWork}
+                className="group inline-flex items-center justify-center gap-3 rounded-full bg-custom-blue px-6 py-3 text-sm font-semibold text-white shadow-[0_18px_50px_rgba(6,23,44,0.22)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#0f3555]"
+              >
+                View selected work
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
+              <Link
+                href="/resume"
+                className="inline-flex items-center justify-center gap-3 rounded-full border border-custom-blue/14 bg-white/70 px-6 py-3 text-sm font-semibold text-custom-blue shadow-[0_10px_30px_rgba(7,20,38,0.08)] backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-custom-blue/28 hover:bg-white"
+              >
+                Open resume
+                <Download className="h-4 w-4" />
+              </Link>
+            </motion.div>
+
+            {/* <motion.div
+              {...fadeInUp(0.18)}
+              style={shouldReduceMotion ? undefined : { y: heroCardsY }}
+              className="mt-8 flex flex-wrap gap-2"
+            >
+              {["Product UX", "Interface systems", "Motion + code"].map((item) => (
+                <span
+                  key={item}
+                  className="rounded-full border border-white/70 bg-white/65 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-custom-blue/65 shadow-[0_10px_30px_rgba(7,20,38,0.08)] backdrop-blur-xl"
+                >
+                  {item}
+                </span>
+              ))}
+            </motion.div> */}
+          </div>
+
+          <motion.div
+            style={shouldReduceMotion ? undefined : { y: portraitY, scale: portraitScale }}
+            className="relative mx-auto w-full max-w-[32rem]"
+          >
+            <motion.div
+              aria-hidden="true"
+              style={shouldReduceMotion ? undefined : { scale: haloScale }}
+              className="absolute inset-x-[12%] top-[4%] -z-10 aspect-square rounded-full bg-[radial-gradient(circle,_rgba(56,188,255,0.42)_0%,_rgba(56,188,255,0.12)_30%,_transparent_72%)] blur-3xl"
+            />
+            <motion.div
+              style={shouldReduceMotion ? undefined : { rotate: portraitRotate }}
+              className="glass-panel relative overflow-hidden rounded-[3rem] p-4 shadow-[0_40px_120px_rgba(7,20,38,0.16)]"
+            >
+              <div className="absolute inset-0 bg-[linear-gradient(145deg,rgba(255,255,255,0.66),rgba(255,255,255,0.1))]" />
+              <div className="relative rounded-[2.35rem] bg-[linear-gradient(160deg,#f0d3bc_0%,#8db5c9_46%,#263f55_100%)] p-5 pb-0">
+                <div className="absolute right-5 top-5 rounded-full border border-white/30 bg-white/12 px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white/80 backdrop-blur-md">
+                  Marcell Varga
+                </div>
+                <Image
+                  src="/images/personalpageprofilealt.png"
+                  alt="Portrait of Marcell Varga"
+                  width={960}
+                  height={1280}
+                  priority
+                  className="mx-auto h-auto w-full max-w-[26rem] object-contain"
+                />
+              </div>
+            </motion.div>
+
+          </motion.div>
+        </section>
+
+        <section
+          id="about"
+          ref={manifestoRef}
+          className="relative mx-auto mt-24 h-[240vh] w-full max-w-7xl"
+        >
+          <div className="sticky top-0 flex min-h-screen items-center py-12">
+            <motion.div
+              style={
+                shouldReduceMotion
+                  ? undefined
+                  : {
+                      opacity: manifestoOpacity,
+                      scale: manifestoScale,
+                    }
+              }
+              className="grid w-full gap-8 rounded-[3rem] border border-white/60 bg-[#071726]/92 p-8 text-white shadow-[0_40px_140px_rgba(5,16,32,0.28)] lg:p-12"
+            >
+              <div className="flex flex-col justify-between">
+                <div>
+                  <SectionLabel index="01" label="Manifesto" tone="light" />
+                  <motion.div
+                    style={shouldReduceMotion ? undefined : { opacity: manifestoGlow }}
+                    className="mb-8 h-px w-full bg-[linear-gradient(90deg,rgba(76,216,255,0.85),rgba(76,216,255,0.02))]"
+                  />
+                  <p
+                    className="max-w-4xl font-display text-[clamp(2rem,4vw,4.6rem)] leading-[1.02] tracking-[-0.06em] !text-[#f8fbff]"
+                    style={{
+                      color: "#f8fbff",
+                      WebkitTextFillColor: "#f8fbff",
+                      textShadow: "0 1px 0 rgba(255,255,255,0.06)",
+                    }}
+                  >
+                    {typedText}
+                    {!shouldReduceMotion && (
+                      <span className="ml-1 inline-block animate-pulse text-[#67d9ff]">|</span>
+                    )}
+                  </p>
+                </div>
+                <div className="mt-10 flex items-center gap-4 text-sm text-white/58">
+                  <span className="inline-flex h-2 w-2 rounded-full bg-[#67d9ff]" />
+                  Design, code, motion.
+                </div>
+              </div>
+            </motion.div>
           </div>
         </section>
-        
-        <Contact />
-        
-        <Footer
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          isHover={footerHover}
-          setIsHover={setFooterHover}
-        />
-      </div>
+
+        <section ref={capabilitiesRef} className="relative mt-24 h-[220vh] w-full">
+          <SectionLabel index="02" label="Capabilities" />
+          <div className="sticky top-0 flex min-h-screen items-center py-10">
+            <div className="w-full">
+              <motion.div
+                {...fadeInUp(0.04)}
+                className="mb-6 max-w-2xl"
+              >
+                <h2 className="max-w-[10ch] font-display text-[clamp(2.2rem,4vw,4.4rem)] leading-[0.95] tracking-[-0.06em] text-custom-blue">
+                  The useful overlap between taste and implementation.
+                </h2>
+                <p className="mt-4 max-w-xl text-sm leading-7 text-custom-blue/68">
+                  Interfaces, motion, systems, and frontend detail all need to line up. These are the pieces I actually care about.
+                </p>
+              </motion.div>
+
+              <div className="relative overflow-hidden rounded-[2.4rem] border border-white/60 bg-white/58 p-5 shadow-[0_28px_90px_rgba(7,20,38,0.08)] backdrop-blur-xl sm:p-6">
+                <div className="pointer-events-none absolute inset-x-6 top-6 h-px bg-custom-blue/10" />
+                <motion.div
+                  style={shouldReduceMotion ? undefined : { x: capabilityTrackX }}
+                  className="relative z-10 flex w-max gap-5 pr-8 will-change-transform"
+                >
+                  {capabilityCards.map((card, index) => {
+                    const Icon = card.icon;
+                    return (
+                      <motion.article
+                        key={card.title}
+                        {...fadeInUp(index * 0.05)}
+                        className={`flex h-[20rem] w-[min(82vw,28rem)] shrink-0 flex-col rounded-[2rem] border p-6 shadow-[0_24px_80px_rgba(7,20,38,0.08)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:shadow-[0_26px_90px_rgba(7,20,38,0.12)] ${
+                          index === 0
+                            ? "border-white/60 bg-[linear-gradient(145deg,rgba(255,250,245,0.9),rgba(255,233,219,0.7))]"
+                            : index === 1
+                              ? "border-white/60 bg-[linear-gradient(145deg,rgba(255,255,255,0.84),rgba(216,244,252,0.7))]"
+                              : index === 2
+                                ? "border-white/60 bg-[linear-gradient(145deg,rgba(245,248,252,0.92),rgba(232,238,246,0.74))]"
+                                : "border-white/60 bg-[linear-gradient(145deg,rgba(255,248,239,0.88),rgba(243,244,255,0.7))]"
+                        }`}
+                      >
+                        <div className="mb-8 inline-flex rounded-2xl border border-custom-blue/10 bg-custom-blue/6 p-3 text-custom-blue">
+                          <Icon className="h-5 w-5" />
+                        </div>
+                        <h2 className="font-display text-[clamp(1.8rem,3vw,2.7rem)] leading-tight tracking-[-0.05em] text-custom-blue">
+                          {card.title}
+                        </h2>
+                        <p className="mt-4 max-w-[24rem] text-sm leading-7 text-custom-blue/68">{card.body}</p>
+                        <div className="mt-auto flex flex-wrap gap-2 pt-5">
+                          {capabilityTags.slice(index * 3, index * 3 + 3).map((tag) => (
+                            <span
+                              key={tag}
+                              className="rounded-full border border-custom-blue/10 bg-white/65 px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-custom-blue/55"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </motion.article>
+                    );
+                  })}
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="work" className="mt-24 w-full">
+          <SectionLabel index="03" label="Selected Work" />
+          <motion.div {...fadeInUp(0.04)} className="mt-4 grid gap-4 lg:grid-cols-12">
+            {featuredProjects.map((project, index) => {
+              const isLarge = index === 0;
+              return (
+                <motion.article
+                  key={project.title}
+                  {...fadeInUp(index * 0.05)}
+                  className={`group overflow-hidden rounded-[2.3rem] border border-white/60 bg-white/62 shadow-[0_28px_90px_rgba(7,20,38,0.08)] backdrop-blur-2xl transition duration-300 hover:-translate-y-1 ${
+                    isLarge ? "lg:col-span-7 lg:row-span-2 min-h-[22rem]" : "lg:col-span-5 min-h-[11rem]"
+                  }`}
+                >
+                  <Link href={project.link} className="relative flex h-full min-h-[11rem] flex-col justify-between p-6 sm:p-7">
+                    <div className={`absolute inset-0 ${project.backgroundClass}`} />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.58),transparent_32%),radial-gradient(circle_at_80%_10%,rgba(255,255,255,0.32),transparent_24%),linear-gradient(135deg,rgba(255,255,255,0.12),transparent_48%)]" />
+                    <div className="relative flex items-center justify-between gap-3">
+                      <span className="rounded-full border border-white/70 bg-white/40 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-custom-blue/60 backdrop-blur-md">
+                        {project.category}
+                      </span>
+                      <span className="text-sm text-custom-blue/45">{project.date}</span>
+                    </div>
+                    <div className="relative mt-auto max-w-[28rem]">
+                      <h3 className={`font-display leading-[0.95] tracking-[-0.06em] text-custom-blue ${isLarge ? "text-[clamp(2.2rem,4vw,4rem)]" : "text-[clamp(1.8rem,3vw,2.5rem)]"}`}>
+                        {project.title}
+                      </h3>
+                      <p className="mt-2 max-w-xl text-sm leading-6 text-custom-blue/70">
+                        {project.subTitle}
+                      </p>
+                    </div>
+                    <div className="relative mt-4 inline-flex w-fit items-center gap-2 text-sm font-semibold text-custom-blue">
+                      Open
+                      <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    </div>
+                  </Link>
+                </motion.article>
+              );
+            })}
+          </motion.div>
+        </section>
+
+        <section ref={trajectoryRef} className="mt-20 w-full" style={{ minHeight: `${(history.length * 110) + 100}vh` }}>
+          <SectionLabel index="04" label="Trajectory" />
+          <div className="sticky top-0 flex min-h-screen items-center py-10">
+            <div className="grid w-full gap-6 lg:grid-cols-[0.86fr_1.14fr]">
+              <motion.div
+                {...fadeInUp(0.04)}
+                className="min-w-0 rounded-[2.4rem] border border-white/60 bg-[#081827] p-7 text-white shadow-[0_32px_110px_rgba(7,20,38,0.16)]"
+              >
+                <p className="font-display text-[clamp(1.9rem,2.8vw,3.2rem)] leading-tight tracking-[-0.06em]">
+                  Built in Denmark. Now shipping from Singapore.
+                </p>
+                <p className="mt-4 text-sm leading-7 text-white/70">
+                  Multimedia design first. Product work next. The timeline stays pinned while each step advances one by one, then holds on the last point so the section still has breathing room.
+                </p>
+                <div className="mt-8 flex flex-wrap gap-2 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-white/62">
+                  <span className="rounded-full border border-white/12 bg-white/6 px-3 py-1.5">
+                    Scroll-driven timeline
+                  </span>
+                  <span className="rounded-full border border-white/12 bg-white/6 px-3 py-1.5">
+                    Sticky section
+                  </span>
+                  <span className="rounded-full border border-white/12 bg-white/6 px-3 py-1.5">
+                    Last step holds
+                  </span>
+                </div>
+              </motion.div>
+
+              <div className="rounded-[2.4rem] border border-white/60 bg-white/66 p-5 shadow-[0_28px_90px_rgba(7,20,38,0.08)] backdrop-blur-xl sm:p-6">
+                <div className="grid gap-5 xl:grid-cols-[19rem_1fr]">
+                  <div className="relative rounded-[2rem] border border-custom-blue/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.9),rgba(244,247,250,0.72))] p-5 shadow-[0_16px_48px_rgba(7,20,38,0.05)]">
+                    <div className="pointer-events-none absolute bottom-5 left-10 top-5 w-px -translate-x-1/2 bg-custom-blue/10" />
+                    <div className="space-y-3">
+                      {history.map((item, index) => {
+                        const isActive = index === activeTrajectoryIndex;
+                        const isPast = index < activeTrajectoryIndex;
+
+                        return (
+                          <button
+                            key={`${item.company}-${item.time.start}`}
+                            type="button"
+                            className={`relative grid w-full grid-cols-[2.5rem_1fr] items-start gap-3 rounded-[1.4rem] py-3 pr-3 text-left transition duration-300 ${
+                              isActive
+                                ? "bg-white shadow-[0_12px_36px_rgba(7,20,38,0.08)]"
+                                : "hover:bg-white/70"
+                            }`}
+                            aria-pressed={isActive}
+                          >
+                            <span className="relative flex h-7 items-center justify-center">
+                              {isActive ? (
+                                <motion.span
+                                  layoutId="trajectory-dot"
+                                  className="relative z-10 h-2.5 w-2.5 rounded-full border-2 border-[#67d9ff] bg-[#67d9ff] shadow-[0_0_0_7px_rgba(103,217,255,0.15)]"
+                                />
+                              ) : (
+                                <span
+                                  className={`relative z-10 h-2.5 w-2.5 rounded-full border-2 transition duration-300 ${
+                                    isPast
+                                      ? "border-[#67d9ff]/65 bg-white"
+                                      : "border-custom-blue/18 bg-white"
+                                  }`}
+                                />
+                              )}
+                            </span>
+                            <span className="min-w-0 pt-0.5">
+                              <span className="block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-custom-blue/45">
+                                {item.time.start} {item.time.end ? `- ${item.time.end}` : "- Present"}
+                              </span>
+                              <span className="mt-1 block text-sm font-semibold text-custom-blue">
+                                {item.company}
+                              </span>
+                              <span className="mt-0.5 block text-[0.72rem] leading-5 text-custom-blue/60">
+                                {item.jobTitle}
+                              </span>
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <AnimatePresence mode="wait">
+                    <motion.article
+                      key={activeTrajectoryIndex}
+                      initial={{ opacity: 0, y: 18 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -14 }}
+                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                      className="relative overflow-hidden rounded-[2rem] border border-custom-blue/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.96),rgba(236,244,249,0.86))] p-6 shadow-[0_18px_55px_rgba(7,20,38,0.06)] sm:p-7"
+                    >
+                      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(103,217,255,0.16),transparent_24%),radial-gradient(circle_at_20%_10%,rgba(255,255,255,0.88),transparent_22%)]" />
+                      <div className="relative flex h-full flex-col">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.26em] text-custom-blue/45">
+                            {activeTrajectoryItem.time.start}{" "}
+                            {activeTrajectoryItem.time.end
+                              ? `- ${activeTrajectoryItem.time.end}`
+                              : "- Present"}
+                          </p>
+                          <span className="rounded-full border border-custom-blue/10 bg-custom-blue/5 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-custom-blue/55">
+                            Step {activeTrajectoryIndex + 1} of {history.length}
+                          </span>
+                        </div>
+                        <p className="mt-4 font-display text-[clamp(1.9rem,3vw,3rem)] leading-[0.96] tracking-[-0.06em] text-custom-blue">
+                          {activeTrajectoryItem.jobTitle}
+                        </p>
+                        <p className="mt-3 max-w-[38rem] text-sm leading-7 text-custom-blue/72">
+                          {activeTrajectoryItem.description[0]}
+                        </p>
+                        <p className="mt-3 max-w-[38rem] text-sm leading-7 text-custom-blue/72">
+                          {activeTrajectoryItem.description[1]}
+                        </p>
+                        <p className="mt-3 max-w-[38rem] text-sm leading-7 text-custom-blue/72">
+                          {activeTrajectoryItem.description[2]}
+                        </p>
+
+                        <div className="mt-auto flex flex-wrap gap-2 pt-6">
+                          {activeTrajectoryItem.skills.map((skill) => (
+                            <span
+                              key={skill}
+                              className="rounded-full border border-custom-blue/10 bg-white/70 px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-custom-blue/55"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.article>
+                  </AnimatePresence>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="contact"
+          className="mt-24 w-full"
+          onMouseEnter={() => setFooterHover(true)}
+          onMouseLeave={() => setFooterHover(false)}
+        >
+          <motion.div
+            {...fadeInUp(0.06)}
+            className="relative overflow-hidden rounded-[3rem] border border-white/60 bg-[#071726] p-8 text-white shadow-[0_40px_140px_rgba(7,20,38,0.26)] sm:p-12"
+          >
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(72,205,255,0.26),_transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.06),transparent_55%)]" />
+            <div className="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+              <div>
+                <SectionLabel index="05" label="Contact" tone="light" />
+                <h2 className="max-w-3xl font-display text-[clamp(2.6rem,5vw,5rem)] leading-[0.96] tracking-[-0.07em] text-white">
+                  Ready for the next ambitious build.
+                </h2>
+                <p className="mt-6 max-w-2xl text-lg leading-8 text-white/72">
+                  If you need a UX-minded engineer who can think visually, move fast in code, and care about the end product as much as the process, let’s talk.
+                </p>
+              </div>
+
+              <div className="grid gap-4 self-end">
+                <a
+                  href="mailto:themarcellvarga@gmail.com"
+                  className="group flex items-center justify-between rounded-[1.8rem] border border-white/12 bg-white/6 px-5 py-4 transition duration-300 hover:border-white/24 hover:bg-white/10"
+                >
+                  <span className="flex items-center gap-3">
+                    <Mail className="h-5 w-5 text-[#67d9ff]" />
+                    <span className="text-sm font-semibold uppercase tracking-[0.18em] text-white/80">
+                      themarcellvarga@gmail.com
+                    </span>
+                  </span>
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/marcellvarga/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between rounded-[1.8rem] border border-white/12 bg-white/6 px-5 py-4 transition duration-300 hover:border-white/24 hover:bg-white/10"
+                >
+                  <span className="flex items-center gap-3">
+                    <Linkedin className="h-5 w-5 text-[#67d9ff]" />
+                    <span className="text-sm font-semibold uppercase tracking-[0.18em] text-white/80">
+                      LinkedIn
+                    </span>
+                  </span>
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                </a>
+                <a
+                  href="https://github.com/TheMarcellVarga"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between rounded-[1.8rem] border border-white/12 bg-white/6 px-5 py-4 transition duration-300 hover:border-white/24 hover:bg-white/10"
+                >
+                  <span className="flex items-center gap-3">
+                    <Github className="h-5 w-5 text-[#67d9ff]" />
+                    <span className="text-sm font-semibold uppercase tracking-[0.18em] text-white/80">
+                      GitHub
+                    </span>
+                  </span>
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </section>
+      </main>
+
+      <Footer
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        isHover={footerHover}
+        setIsHover={setFooterHover}
+      />
     </div>
   );
 }
