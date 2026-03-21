@@ -216,11 +216,11 @@ export default function Page() {
         scrollToContact={scrollContact}
       />
 
-      <main className="relative z-10 px-4 pb-12 pt-20 sm:px-6 lg:px-10">
+      <main className="relative z-10 px-4 pb-8 pt-16 sm:px-6 sm:pb-12 sm:pt-20 lg:px-10">
         <section
           id="hero"
           ref={heroRef}
-          className="mx-auto grid w-full max-w-7xl items-center gap-10 pb-10 pt-4 lg:min-h-[44rem] lg:grid-cols-[1.15fr_0.85fr] lg:gap-14 xl:min-h-[48rem] 2xl:min-h-[52rem]"
+          className="mx-auto grid w-full max-w-7xl items-center gap-10 pb-10 pt-4 md:pb-16 lg:min-h-[40rem] lg:grid-cols-[1.15fr_0.85fr] lg:gap-14 xl:min-h-[48rem] 2xl:min-h-[52rem]"
         >
           <div className="relative min-w-0">
             {/* <motion.div
@@ -252,7 +252,7 @@ export default function Page() {
               <p className="font-display text-sm uppercase tracking-[0.4em] text-custom-blue/45">
                 UX & Frontend Engineer
               </p>
-              <h1 className="max-w-[7.2ch] font-display text-[3.7rem] font-medium leading-[0.9] tracking-[-0.08em] text-custom-blue sm:text-[4.8rem] md:text-[5.7rem] lg:text-[5.9rem] xl:text-[6.7rem] 2xl:text-[7.6rem]">
+              <h1 className="max-w-[7.2ch] font-display text-[2.8rem] font-medium leading-[0.9] tracking-[-0.08em] text-custom-blue sm:text-[3.8rem] md:text-[4.6rem] lg:text-[5.2rem] xl:text-[6.4rem] 2xl:text-[7.6rem]">
                 Design the logic. Engineer the feeling.
               </h1>
               <p className="max-w-2xl text-base leading-7 text-custom-blue/72 sm:text-lg sm:leading-8">
@@ -331,7 +331,7 @@ export default function Page() {
         <section
           id="about"
           ref={manifestoRef}
-          className="relative mx-auto mt-24 h-[240vh] w-full max-w-7xl"
+          className="relative mx-auto mt-16 h-[200vh] w-full max-w-7xl sm:mt-24 sm:h-[240vh]"
         >
           <div className="sticky top-0 flex min-h-screen items-center py-12">
             <motion.div
@@ -375,7 +375,7 @@ export default function Page() {
           </div>
         </section>
 
-        <section ref={capabilitiesRef} className="relative mt-24 h-[220vh] w-full">
+        <section ref={capabilitiesRef} className="relative mt-16 h-[180vh] w-full sm:mt-24 sm:h-[220vh]">
           <SectionLabel index="02" label="Capabilities" />
           <div className="sticky top-0 flex min-h-screen items-center py-10">
             <div className="w-full">
@@ -439,7 +439,7 @@ export default function Page() {
           </div>
         </section>
 
-        <section id="work" className="mt-24 w-full">
+        <section id="work" className="mt-16 w-full sm:mt-24">
           <SectionLabel index="03" label="Selected Work" />
           <motion.div {...fadeInUp(0.04)} className="mt-4 grid gap-4 lg:grid-cols-12">
             {featuredProjects.map((project, index) => {
@@ -480,7 +480,7 @@ export default function Page() {
           </motion.div>
         </section>
 
-        <section ref={trajectoryRef} className="mt-20 w-full" style={{ minHeight: `${(history.length * 110) + 100}vh` }}>
+        <section ref={trajectoryRef} className="mt-12 w-full sm:mt-20" style={{ minHeight: `${(history.length * 110) + 100}vh` }}>
           <SectionLabel index="04" label="Trajectory" />
           <div className="sticky top-0 flex min-h-screen items-center py-10">
             <div className="grid w-full gap-6 lg:grid-cols-[0.86fr_1.14fr]">
@@ -488,7 +488,7 @@ export default function Page() {
                 {...fadeInUp(0.04)}
                 className="min-w-0 rounded-[2.4rem] border border-white/60 bg-[#081827] p-7 text-white shadow-[0_32px_110px_rgba(7,20,38,0.16)]"
               >
-                <p className="font-display text-[clamp(1.9rem,2.8vw,3.2rem)] leading-tight tracking-[-0.06em]">
+                <p className="font-display text-[clamp(1.6rem,2.8vw,3.2rem)] leading-tight tracking-[-0.06em]">
                   Built in Denmark. Now shipping from Singapore.
                 </p>
                 <p className="mt-4 text-sm leading-7 text-white/70">
@@ -616,7 +616,7 @@ export default function Page() {
 
         <section
           id="contact"
-          className="mt-24 w-full"
+          className="mt-16 w-full sm:mt-24"
           onMouseEnter={() => setFooterHover(true)}
           onMouseLeave={() => setFooterHover(false)}
         >

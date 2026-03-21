@@ -109,7 +109,7 @@ export default function Header({
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-2 md:flex">
+        <nav className="hidden items-center gap-2 lg:flex">
           {items.map((item) => (
             <button
               key={item.label}
@@ -121,7 +121,7 @@ export default function Header({
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-3 lg:flex">
           <Link
             href="/resume"
             className="inline-flex items-center gap-2 rounded-full border border-custom-blue/12 bg-custom-blue/4 px-4 py-2 text-sm font-semibold text-custom-blue transition duration-300 hover:border-custom-blue/24 hover:bg-custom-blue/7"
@@ -133,7 +133,7 @@ export default function Header({
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-custom-blue/10 bg-custom-blue/4 text-custom-blue md:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-custom-blue/10 bg-custom-blue/4 text-custom-blue lg:hidden"
           aria-label={isOpen ? "Close navigation" : "Open navigation"}
           aria-expanded={isOpen}
         >
@@ -142,7 +142,7 @@ export default function Header({
       </div>
 
       {isOpen && (
-        <div className="mx-auto mt-3 w-full max-w-7xl rounded-[2rem] border border-white/60 bg-white/82 p-4 shadow-[0_28px_90px_rgba(7,20,38,0.12)] backdrop-blur-2xl md:hidden">
+        <div className="mx-auto mt-3 w-full max-w-7xl rounded-[2rem] border border-white/60 bg-white/82 p-4 shadow-[0_28px_90px_rgba(7,20,38,0.12)] backdrop-blur-2xl lg:hidden">
           <div className="grid gap-2">
             {items.map((item) => (
               <button
