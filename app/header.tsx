@@ -2,8 +2,9 @@
 
 import IndexSigAnimatedIcon from "@/public/icons/indexSigAnimated";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 
 interface HeaderProps {
   isOpen: boolean;
@@ -14,178 +15,155 @@ interface HeaderProps {
   scrollToContact?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({
+type NavItem = {
+  label: string;
+  path: string;
+  action?: () => void;
+};
+
+export default function Header({
   isOpen,
   setIsOpen,
-  scrollToHome: propScrollToHome,
-  scrollToAbout: propScrollToAbout,
-  scrollToWork: propScrollToWork,
-  scrollToContact: propScrollToContact,
-}) => {
+  scrollToHome,
+  scrollToAbout,
+  scrollToWork,
+  scrollToContact,
+}: HeaderProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    let lastY = window.scrollY;
+    let lastScroll = 0;
 
     const onScroll = () => {
-      const currentY = window.scrollY;
-      const scrollingUp = currentY < lastY;
+      const current = window.scrollY;
+      setIsScrolled(current > 12);
 
-      if (currentY < 60 || scrollingUp || isOpen) {
+      if (current < 48) {
         setIsVisible(true);
-      } else {
+      } else if (current > lastScroll) {
         setIsVisible(false);
+      } else {
+        setIsVisible(true);
       }
 
-      lastY = currentY;
+      lastScroll = current;
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
     return () => window.removeEventListener("scroll", onScroll);
-  }, [isOpen]);
+  }, []);
 
-  const fallbackScroll = (id: string, offset = 0) => {
-    const section = document.getElementById(id);
-    if (!section) return;
+  const navigate = useCallback(
+    async (item: NavItem) => {
+      if (pathname !== item.path) {
+        await router.push(item.path);
+        window.setTimeout(() => {
+          item.action?.();
+        }, 120);
+      } else {
+        item.action?.();
+      }
 
-    const top = section.getBoundingClientRect().top + window.scrollY + offset;
-    window.scrollTo({ top, behavior: "smooth" });
-  };
+      setIsOpen(false);
+    },
+    [pathname, router, setIsOpen]
+  );
 
-  const scrollToHome = () => {
-    if (propScrollToHome) {
-      propScrollToHome();
-      return;
-    }
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const scrollToAbout = () => {
-    if (propScrollToAbout) {
-      propScrollToAbout();
-      return;
-    }
-
-    fallbackScroll("about", -80);
-  };
-
-  const scrollToWork = () => {
-    if (propScrollToWork) {
-      propScrollToWork();
-      return;
-    }
-
-    fallbackScroll("work", -80);
-  };
-
-  const scrollToContact = () => {
-    if (propScrollToContact) {
-      propScrollToContact();
-      return;
-    }
-
-    fallbackScroll("contact", -80);
-  };
-
-  const navigateHomeAndRun = (action: () => void) => {
-    if (pathname !== "/") {
-      router.push("/");
-      window.setTimeout(action, 220);
-    } else {
-      action();
-    }
-    setIsOpen(false);
-  };
-
-  const navItems = [
-    { label: "About", onClick: () => navigateHomeAndRun(scrollToAbout) },
-    { label: "Work", onClick: () => navigateHomeAndRun(scrollToWork) },
-    { label: "Contact", onClick: () => navigateHomeAndRun(scrollToContact) },
+  const items: NavItem[] = [
+    { label: "Intro", path: "/", action: scrollToHome },
+    { label: "Manifesto", path: "/", action: scrollToAbout },
+    { label: "Work", path: "/", action: scrollToWork },
+    { label: "Contact", path: "/", action: scrollToContact },
   ];
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        isVisible || isOpen
-          ? "translate-y-0 opacity-100"
-          : "-translate-y-8 opacity-0 pointer-events-none"
+      className={`sticky-header px-4 py-4 sm:px-6 lg:px-10 ${
+        isVisible || isOpen ? "translate-y-0 opacity-100" : "-translate-y-6 opacity-0"
       }`}
     >
-      <div className="flow-panel mx-auto mt-3 w-[min(96%,1200px)] px-4 py-3">
-        <div className="flex items-center justify-between gap-6">
-          <Link
-            href="/"
-            onClick={(event) => {
-              event.preventDefault();
-              navigateHomeAndRun(scrollToHome);
-            }}
-            className="hover:opacity-70 transition-opacity"
-            aria-label="Go to homepage"
-          >
-            <IndexSigAnimatedIcon isOpen={isOpen} />
-          </Link>
-
-          <nav className="hidden items-center gap-8 md:flex">
-            {navItems.map((item) => (
-              <button
-                key={item.label}
-                onClick={item.onClick}
-                className="text-sm font-semibold tracking-wide text-custom-blue/78 transition-all duration-300 hover:-translate-y-0.5 hover:text-custom-blue"
-              >
-                {item.label}
-              </button>
-            ))}
-          </nav>
-
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="group inline-flex h-10 w-10 items-center justify-center rounded-md border border-custom-blue/20 bg-white/90 text-custom-blue md:hidden"
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-          >
-            <span className="relative h-3.5 w-4.5">
-              <span
-                className={`absolute left-0 top-0 h-0.5 w-full rounded bg-current transition-transform duration-300 ${
-                  isOpen ? "translate-y-[6px] rotate-45" : ""
-                }`}
-              />
-              <span
-                className={`absolute left-0 top-[6px] h-0.5 w-full rounded bg-current transition-opacity duration-300 ${
-                  isOpen ? "opacity-0" : "opacity-100"
-                }`}
-              />
-              <span
-                className={`absolute left-0 top-[12px] h-0.5 w-full rounded bg-current transition-transform duration-300 ${
-                  isOpen ? "-translate-y-[6px] -rotate-45" : ""
-                }`}
-              />
-            </span>
-          </button>
-        </div>
-      </div>
-
       <div
-        className={`flow-panel mx-auto mt-3 w-[min(96%,1200px)] overflow-hidden transition-all duration-400 md:hidden ${
-          isOpen ? "max-h-64 p-4 opacity-100" : "max-h-0 p-0 opacity-0"
+        className={`mx-auto flex w-full max-w-7xl items-center justify-between rounded-full border px-4 py-3 transition duration-300 sm:px-5 ${
+          isScrolled || isOpen
+            ? "border-white/60 bg-white/74 shadow-[0_16px_50px_rgba(7,20,38,0.12)] backdrop-blur-2xl"
+            : "border-white/36 bg-white/52 backdrop-blur-xl"
         }`}
       >
-        <nav className="flex flex-col gap-1">
-          {navItems.map((item, index) => (
+        <Link
+          href="/"
+          onClick={(event) => {
+            event.preventDefault();
+            void navigate(items[0]);
+          }}
+          className="flex items-center gap-3"
+          aria-label="Go to homepage"
+        >
+          <IndexSigAnimatedIcon isOpen={isOpen} />
+          <span className="hidden text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-custom-blue/48 sm:inline">
+            Marcell Varga
+          </span>
+        </Link>
+
+        <nav className="hidden items-center gap-2 lg:flex">
+          {items.map((item) => (
             <button
               key={item.label}
-              onClick={item.onClick}
-              className="rounded-md px-3 py-3 text-left text-base font-semibold text-custom-blue/85 transition-all duration-300 hover:bg-custom-blue/8"
-              style={{ transitionDelay: `${index * 50}ms` }}
+              onClick={() => void navigate(item)}
+              className="rounded-full px-4 py-2 text-sm font-semibold text-custom-blue/68 transition duration-300 hover:bg-custom-blue/6 hover:text-custom-blue"
             >
               {item.label}
             </button>
           ))}
         </nav>
+
+        <div className="hidden items-center gap-3 lg:flex">
+          <Link
+            href="/resume"
+            className="inline-flex items-center gap-2 rounded-full border border-custom-blue/12 bg-custom-blue/4 px-4 py-2 text-sm font-semibold text-custom-blue transition duration-300 hover:border-custom-blue/24 hover:bg-custom-blue/7"
+          >
+            Resume
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
+        </div>
+
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-custom-blue/10 bg-custom-blue/4 text-custom-blue lg:hidden"
+          aria-label={isOpen ? "Close navigation" : "Open navigation"}
+          aria-expanded={isOpen}
+        >
+          {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </div>
+
+      {isOpen && (
+        <div className="mx-auto mt-3 w-full max-w-7xl rounded-[2rem] border border-white/60 bg-white/82 p-4 shadow-[0_28px_90px_rgba(7,20,38,0.12)] backdrop-blur-2xl lg:hidden">
+          <div className="grid gap-2">
+            {items.map((item) => (
+              <button
+                key={item.label}
+                onClick={() => void navigate(item)}
+                className="flex items-center justify-between rounded-[1.4rem] border border-custom-blue/8 bg-custom-blue/3 px-4 py-3 text-left text-sm font-semibold uppercase tracking-[0.16em] text-custom-blue/78"
+              >
+                <span>{item.label}</span>
+                <ArrowUpRight className="h-4 w-4" />
+              </button>
+            ))}
+            <Link
+              href="/resume"
+              className="mt-2 flex items-center justify-between rounded-[1.4rem] border border-custom-blue/8 bg-custom-blue px-4 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white"
+            >
+              <span>Open Resume</span>
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      )}
     </header>
   );
-};
-
-export default Header;
+}
