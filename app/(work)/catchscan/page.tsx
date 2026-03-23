@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import Header from "../../header";
 import Footer from "../../footer";
@@ -450,7 +451,7 @@ const Catchscan = () => {
                               </div>
                             </div>
                           ) : (
-                            <img
+                            <Image
                               src={history[0].content.picture}
                               alt="CatchScan Hero"
                               width={1200}
@@ -624,7 +625,7 @@ const Catchscan = () => {
                                                         : "aspect-16/9"
                                                     }`}
                                                   >
-                                                    <img
+                                                    <Image
                                                       src={
                                                         typeof item.url ===
                                                         "string"
@@ -684,9 +685,10 @@ const Catchscan = () => {
                                                       } flex items-center justify-center transition-all duration-300`}
                                                     >
                                                       <div className="w-full relative flex items-center justify-center aspect-16/9">
-                                                        <img
+                                                        <Image
                                                           src={currentPic ?? ""}
                                                           alt={`Sub-picture ${index}`}
+                                                          fill
                                                           className="object-contain rounded-md transition-all duration-300"
                                                           sizes={
                                                             isPartOfPair
