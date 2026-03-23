@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import Header from "../../header";
 import Footer from "../../footer";
@@ -544,7 +545,7 @@ const AskCody = () => {
                               </div>
                             </div>
                           ) : (
-                            <img
+                            <Image
                               src={item.content.picture}
                               alt="AskCody Hero"
                               width={1200}
@@ -718,19 +719,19 @@ const AskCody = () => {
                                                         : "aspect-16/9"
                                                     }`}
                                                   >
-                                                    <img
-                                                      src={
-                                                        typeof item.url ===
-                                                        "string"
+                            <Image
+                              src={
+                                typeof item.url ===
+                                "string"
                                                           ? item.url
                                                           : (item.url as any)
                                                               .src
                                                       }
-                                                      alt={`Picture ${
-                                                        pictureIndex + 1
-                                                      }`}
-                                                      className="object-contain rounded-md transition-all duration-300"
-                                                      sizes={
+                              alt={`Picture ${
+                                pictureIndex + 1
+                              }`}
+                              className="object-contain rounded-md transition-all duration-300"
+                              sizes={
                                                         item.isPair ||
                                                         item.isTriple
                                                           ? "(max-width: 768px) 100vw, calc(90vw + 2rem)"
@@ -778,11 +779,13 @@ const AskCody = () => {
                                                       } flex items-center justify-center group`}
                                                     >
                                                       <div className="w-full relative flex items-center justify-center aspect-16/9">
-                                                        <img
-                                                          src={currentPic ?? ""}
-                                                          alt={`Sub-picture ${index}`}
-                                                          className="object-contain rounded-md transform transition-all duration-500 group-hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]"
-                                                        />
+                            <Image
+                              src={currentPic ?? ""}
+                              alt={`Sub-picture ${index}`}
+                              fill
+                              className="object-contain rounded-md transform transition-all duration-500 group-hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]"
+                              sizes="(max-width: 768px) 100vw, 75vw"
+                            />
                                                       </div>
                                                     </div>
                                                   </div>

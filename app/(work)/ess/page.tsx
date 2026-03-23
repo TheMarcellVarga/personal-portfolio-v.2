@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import Header from "../../header";
 import Footer from "../../footer";
@@ -487,7 +488,7 @@ const ESS = () => {
                               </div>
                             </div>
                           ) : (
-                            <img
+                            <Image
                               src={item.content.picture}
                               alt="ESS Hero"
                               width={1200}
@@ -669,7 +670,7 @@ const ESS = () => {
                                                         : "aspect-16/9"
                                                     }`}
                                                   >
-                                                    <img
+                                                    <Image
                                                       src={
                                                         typeof item.url ===
                                                         "string"
@@ -729,9 +730,10 @@ const ESS = () => {
                                                       } flex items-center justify-center group`}
                                                     >
                                                       <div className="w-full relative flex items-center justify-center aspect-16/9">
-                                                        <img
+                                                        <Image
                                                           src={currentPic ?? ""}
                                                           alt={`Sub-picture ${index}`}
+                                                          fill
                                                           className="object-contain rounded-md transform transition-all duration-500 group-hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]"
                                                           sizes={
                                                             isPartOfPair
