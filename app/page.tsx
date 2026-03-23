@@ -683,12 +683,7 @@ export default function Page() {
         </section>
       </main>
 
-      <Footer
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        isHover={footerHover}
-        setIsHover={setFooterHover}
-      />
+      <Footer isHover={footerHover} />
     </div>
   );
 }
