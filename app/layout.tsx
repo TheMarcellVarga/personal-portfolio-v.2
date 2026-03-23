@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/react";
 import PostHogProvider from "./providers/PostHogProvider";
 import { metadata } from "./metadata";
 import ScrollReset from "./components/ScrollReset";
+import DevelopmentBanner from "./components/DevelopmentBanner";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default function RootLayout({
         <PostHogProvider>
           <ScrollReset />
           {children}
+          <DevelopmentBanner />
           <SpeedInsights />
           <Analytics />
         </PostHogProvider>
