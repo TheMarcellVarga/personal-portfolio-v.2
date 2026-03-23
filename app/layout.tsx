@@ -1,9 +1,10 @@
+import { Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
-import { Manrope, Fraunces } from "next/font/google";
 import PostHogProvider from "./providers/PostHogProvider";
 import { metadata } from "./metadata";
+import ScrollReset from "./components/ScrollReset";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -11,9 +12,9 @@ const manrope = Manrope({
   display: "swap",
 });
 
-const fraunces = Fraunces({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  variable: "--font-space-grotesk",
   display: "swap",
 });
 
@@ -24,15 +25,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const shouldLoadVercelScripts = process.env.VERCEL === "1";
-
   return (
-    <html lang="en">
-      <body className={`${manrope.variable} ${fraunces.variable} antialiased`}>
+    <html lang="en" className={`${manrope.variable} ${spaceGrotesk.variable}`}>
+      <body className="font-body">
         <PostHogProvider>
+          <ScrollReset />
           {children}
-          {shouldLoadVercelScripts && <SpeedInsights />}
-          {shouldLoadVercelScripts && <Analytics />}
+          <SpeedInsights />
+          <Analytics />
         </PostHogProvider>
       </body>
     </html>
