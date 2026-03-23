@@ -4,13 +4,10 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 interface FooterProps {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-  isHover: boolean;
-  setIsHover: (isHover: boolean) => void;
+  isHover?: boolean;
 }
 
-export default function Footer({ isHover }: FooterProps) {
+export default function Footer({ isHover = false }: FooterProps) {
   const [currentTime, setCurrentTime] = useState("··:··");
 
   useEffect(() => {
