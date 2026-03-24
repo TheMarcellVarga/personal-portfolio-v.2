@@ -66,7 +66,7 @@ export const projects: Project[] = [
       "A new set of projects is coming into the portfolio, shaped by the move to Singapore, a stronger engineering stack, and a sharper design point of view.",
     highlight:
       "The next additions will likely be more technical, more opinionated, and more representative of where I am headed than where I started.",
-    skills: ["In Progress"],
+    skills: ["Coming Soon"],
     link: "http://github.com/TheMarcellVarga",
     image: "/images/personalpageprofilealt.png",
     category: "Now building",
