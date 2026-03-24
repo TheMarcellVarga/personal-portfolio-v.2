@@ -9,7 +9,7 @@ export default function DevelopmentBanner() {
     <div className="pointer-events-none fixed bottom-4 right-4 z-50 max-w-[calc(100vw-2rem)] sm:bottom-6 sm:right-6">
       <div
         role="status"
-        aria-label="Development mode indicator"
+        aria-label="Preview status indicator"
         className="relative overflow-hidden rounded-full border border-custom-blue/10 bg-white/78 px-4 py-3 shadow-[0_18px_60px_rgba(7,20,38,0.12)] backdrop-blur-xl"
       >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(76,207,255,0.18),transparent_45%),linear-gradient(135deg,rgba(255,255,255,0.45),transparent_62%)]" />
@@ -22,10 +22,10 @@ export default function DevelopmentBanner() {
 
           <div className="min-w-0">
             <p className="font-display text-[0.68rem] uppercase tracking-[0.32em] text-custom-blue/50">
-              Development mode
+              Preview version
             </p>
             <p className="mt-0.5 text-sm text-custom-blue/76">
-              Local preview build.
+              Updated content is still on the way.
             </p>
           </div>
 
