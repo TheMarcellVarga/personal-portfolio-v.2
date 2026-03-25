@@ -1,119 +1,48 @@
-import { useState, useEffect } from 'react';
+"use client";
 
-interface AboutProps {
-  scrollPositionLocomotive: number | undefined;
-}
+import { useRef, useState } from "react";
+import { motion, useScroll, useMotionValueEvent, useTransform } from "framer-motion";
 
 const textToType =
   "An adventurous UX & Frontend engineer dedicated to crafting delightful, business-focused, and user-centred digital experiences. I excel at solving complex problems through efficient design, turning challenges into opportunities. Overcoming challenges through efficient design is what fuelling my everyday drive.";
 
-export default function About({ scrollPositionLocomotive }: AboutProps) {
+export default function About() {
+  const containerRef = useRef<HTMLElement>(null);
   const [typedText, setTypedText] = useState("");
 
-  useEffect(() => {
-    let animationFrameId: number;
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
 
-    const handleScroll = () => {
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-      }
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    // 0.1 to 0.7 is typing, 0.7 to 1.0 is fading out/done
+    const start = 0.1;
+    const end = 0.7;
+    let progress = 0;
+    if (latest >= start && latest <= end) {
+      progress = (latest - start) / (end - start);
+    } else if (latest > end) {
+      progress = 1;
+    }
+    const length = Math.floor(progress * textToType.length);
+    setTypedText(textToType.slice(0, length));
+  });
 
-      animationFrameId = requestAnimationFrame(() => {
-        if (scrollPositionLocomotive !== undefined) {
-          const scrollDistance = scrollPositionLocomotive;
-
-          const typingStart = 550;
-          const maxScrollForTyping = 2250;
-          const fadeStart = 2800;
-          const fadeEnd = fadeStart + 400;
-          const zIndexThreshold = 3600;
-
-          const stickySection = document.querySelector(
-            "[data-scroll-section].sticky"
-          ) as HTMLElement;
-
-          if (stickySection) {
-            const newZIndex = scrollDistance > zIndexThreshold ? "-99" : "1";
-            if (stickySection.style.zIndex !== newZIndex) {
-              stickySection.style.zIndex = newZIndex;
-            }
-
-            let opacity = 1;
-            if (scrollDistance >= fadeStart && scrollDistance <= fadeEnd) {
-              const fadeProgress =
-                (scrollDistance - fadeStart) / (fadeEnd - fadeStart);
-              opacity = 1 - fadeProgress;
-            } else if (scrollDistance > fadeEnd) {
-              opacity = 0;
-            }
-
-            const opacityString = Math.max(0, Math.min(1, opacity)).toString();
-            if (stickySection.style.opacity !== opacityString) {
-              stickySection.style.opacity = opacityString;
-
-              const typedTextElement = stickySection.querySelector(
-                "h2"
-              ) as HTMLElement;
-              if (typedTextElement) {
-                typedTextElement.style.opacity = opacityString;
-              }
-            }
-          }
-
-          let newTypedText = "";
-
-          if (scrollDistance < typingStart) {
-            newTypedText = "";
-          } else if (scrollDistance > maxScrollForTyping) {
-            newTypedText = textToType;
-          } else {
-            const progress =
-              (scrollDistance - typingStart) /
-              (maxScrollForTyping - typingStart);
-            const clampedProgress = Math.max(0, Math.min(1, progress));
-            const textLength = Math.floor(clampedProgress * textToType.length);
-            newTypedText = textToType.slice(0, textLength);
-          }
-
-          setTypedText((prevText) => {
-            if (prevText !== newTypedText) {
-              return newTypedText;
-            }
-            return prevText;
-          });
-        }
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-      }
-    };
-  }, [scrollPositionLocomotive]);
+  const opacity = useTransform(scrollYProgress, [0.85, 1], [1, 0]);
 
   return (
-    <section
-      data-scroll-section
-      data-scroll-section-id="about"
-      data-scroll-offset="50"
-      className="sticky h-[400vh] top-0 flex flex-col items-center justify-between gap-1 w-full transition-all duration-300"
-    >
-      <div className="flex w-full sm:w-5/6 md:w-4/5 h-screen items-center justify-start px-4 sm:px-8">
-        <h2 
-          className="text-base sm:text-xl md:text-2xl font-light text-left md:text-justify 
-          leading-relaxed text-custom-blue transition-opacity duration-300
-          mx-2 sm:mx-4 md:m-8"
-          aria-live="polite"
-        >
-          {typedText}
-        </h2>
-      </div>
+    <section ref={containerRef} id="about" className="h-[300vh] relative w-full bg-black">
+      <motion.div 
+        style={{ opacity }}
+        className="sticky top-0 flex flex-col items-center justify-center h-screen w-full px-4 sm:px-8"
+      >
+        <div className="flex w-full sm:w-5/6 md:w-3/4 items-center justify-start">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-left leading-tight text-white tracking-tight mix-blend-difference">
+            {typedText}
+          </h2>
+        </div>
+      </motion.div>
     </section>
   );
-} 
+}

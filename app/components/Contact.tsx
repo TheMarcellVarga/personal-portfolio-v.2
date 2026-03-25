@@ -1,72 +1,91 @@
+"use client";
+
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import LinkedInIcon from "../../public/icons/linkedin";
 import OpenResumeIcon from "../../public/icons/openResume";
+import { motion } from "framer-motion";
 
 export default function Contact() {
   return (
     <section
-      data-scroll-section
-      data-scroll-section-id="contact"
-      className="flex justify-center items-center mt-8 sm:mt-12 mb-12 sm:mb-24 transform hover:scale-[1.01] transition-all duration-500"
+      id="contact"
+      className="flex justify-center items-center mt-20 mb-32 w-full z-20 px-4 md:px-8 lg:px-12"
     >
-      <div className="relative w-full sm:w-4/5 max-w-4xl px-3 sm:px-0">
-        <div className="relative bg-gray-100/90 rounded-lg sm:rounded-xl p-5 sm:p-8 md:p-12 border border-custom-blue/10">
-          <div className="flex flex-col md:flex-row gap-5 sm:gap-8 items-start md:items-center">
-            <div className="relative z-10 w-full md:w-auto transform group-hover:scale-[1.02] transition-transform duration-500">
-              <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-custom-blue text-left mb-3 sm:mb-6 tracking-tight">
-                Building Beyond&nbsp;
-                <span className="text-custom-blue/80">Boundaries</span> 🚀
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative w-full max-w-5xl"
+      >
+        {/* Subtle, premium glow */}
+        <div className="absolute -inset-1 bg-gradient-to-r from-brand-accent/5 via-white/5 to-transparent rounded-3xl blur-2xl opacity-50 group-hover:opacity-100 transition duration-1000" />
+        
+        <div className="relative bg-[#050505] rounded-3xl p-8 sm:p-12 md:p-16 border border-white/5 overflow-hidden">
+          
+          {/* Decorative geometric elements */}
+          <div className="absolute top-0 right-0 w-[30rem] h-[30rem] bg-brand-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+
+          <div className="flex flex-col md:flex-row gap-10 md:gap-16 items-start md:items-center relative z-10">
+            <div className="w-full md:flex-1">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-white text-left mb-6 tracking-tight">
+                Ready to build <br/>
+                <span className="text-gray-400">
+                  something exceptional?
+                </span>
               </h2>
-              <p className="text-custom-blue text-left font-bold text-sm sm:text-base md:text-xl max-w-3xl">
-                Full-stack excellence meets design innovation. Let&apos;s
-                architect solutions that make an impact.
+              <p className="text-gray-500 text-left text-sm sm:text-base max-w-lg leading-relaxed font-medium">
+                Let's architect solutions that make a lasting impact. Whether it's a new product or elevating an existing experience, I'm ready to help.
               </p>
             </div>
 
-            <div className="flex-1 flex justify-start md:justify-end mt-4 sm:mt-0">
+            <div className="flex-shrink-0 flex justify-start md:justify-end mt-2 sm:mt-0">
               <a
                 href="mailto:themarcellvarga@gmail.com"
-                className="relative px-4 sm:px-5 py-2.5 text-custom-blue rounded-full group overflow-hidden min-w-36 sm:min-w-36 flex items-center justify-center text-sm sm:text-base"
+                className="group relative flex items-center justify-center gap-3 px-8 py-4 bg-white text-black font-medium rounded-full overflow-hidden hover:scale-105 transition-all duration-300 shadow-[0_4px_14px_0_rgba(255,255,255,0.1)] hover:shadow-[0_6px_20px_rgba(255,255,255,0.15)]"
                 aria-label="Send email to Marcell Varga"
               >
-                <div className="relative z-10 flex items-center justify-center transition-transform duration-300 ease-out transform group-hover:translate-x-0">
-                  <span className="transition-colors duration-300 ease-out group-hover:text-white mr-2">
-                    Get&nbsp;in&nbsp;Touch
-                  </span>
-                  <ArrowRightIcon className="w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300 ease-out group-hover:text-white transform group-hover:translate-x-1" />
-                </div>
-                <div className="absolute inset-0 border-2 border-custom-blue rounded-full"></div>
-                <div className="absolute inset-0 bg-custom-blue rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></div>
+                <span className="relative z-10 text-sm">
+                  Start a Conversation
+                </span>
+                <ArrowRightIcon className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
               </a>
             </div>
           </div>
 
-          <div className="mt-5 sm:mt-8 pt-5 sm:pt-8 border-t border-custom-blue/10">
-            <div className="flex flex-row flex-wrap sm:flex-row gap-4 justify-start md:justify-start">
+          <div className="mt-12 sm:mt-16 pt-8 sm:pt-10 border-t border-white/5 relative z-10">
+            <div className="flex flex-row flex-wrap gap-8 justify-start">
               <a
                 href="https://www.linkedin.com/in/marcellvarga/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-custom-blue/60 hover:text-custom-blue transition-all duration-300"
+                className="group flex flex-col items-start gap-1.5 text-gray-500 hover:text-white transition-colors duration-300"
                 aria-label="Connect on LinkedIn"
               >
-                <LinkedInIcon className="w-4 h-4 sm:w-5 sm:h-5" />
-                <span className="text-xs sm:text-sm">Let&apos;s connect</span>
+                <div className="flex items-center gap-2.5">
+                  <LinkedInIcon className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" />
+                  <span className="text-sm font-medium text-gray-300 group-hover:text-white">LinkedIn</span>
+                </div>
+                <span className="text-xs ml-7.5 opacity-60">Professional Network</span>
               </a>
+              
               <a
                 href="/MarcellVargaCV.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-custom-blue/60 hover:text-custom-blue transition-all duration-300"
+                className="group flex flex-col items-start gap-1.5 text-gray-500 hover:text-white transition-colors duration-300 ml-4 sm:ml-8"
                 aria-label="View Resume"
               >
-                <OpenResumeIcon className="w-4 h-4 sm:w-5 sm:h-5" isHover={false} />
-                <span className="text-xs sm:text-sm">Check out my Resume</span>
+                <div className="flex items-center gap-2.5">
+                  <OpenResumeIcon className="w-5 h-5 opacity-70 group-hover:opacity-100 transition-opacity" isHover={false} />
+                  <span className="text-sm font-medium text-gray-300 group-hover:text-white">Resume</span>
+                </div>
+                <span className="text-xs ml-7.5 opacity-60">Download CV</span>
               </a>
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
-} 
+}

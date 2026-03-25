@@ -4,6 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
 import PostHogProvider from "./providers/PostHogProvider";
 import { metadata } from './metadata';
+import SmoothScrollProvider from "./providers/SmoothScrollProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +19,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <PostHogProvider>
-          {children}
-          <SpeedInsights />
-          <Analytics />
+          <SmoothScrollProvider>
+            {children}
+            <SpeedInsights />
+            <Analytics />
+          </SmoothScrollProvider>
         </PostHogProvider>
       </body>
     </html>

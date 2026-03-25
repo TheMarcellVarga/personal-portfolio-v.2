@@ -83,7 +83,6 @@ const skillCategories = {
 import Header from "./header";
 import Footer from "./footer";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
-import useLocomotive from "./useLocomotive";
 import useWindowSize from "./useWindowSize";
 import { useIsMobile } from "./isMobile";
 import Hero from "./components/Hero";
@@ -101,8 +100,6 @@ import Blog from "./components/Blog";
 
 export default function Page() {
   const globeRef = useRef<any>();
-
-  const { scrollPositionLocomotive, updateScroll } = useLocomotive();
 
   const stickySectionRef = useRef<HTMLDivElement>(null);
 
@@ -189,36 +186,9 @@ export default function Page() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Optimize scroll update handlers
-  useEffect(() => {
-    const handleVisibilityOrPageShow = () => {
-      if (document.visibilityState === "visible" || !document.hidden) {
-        setTimeout(() => {
-          updateScroll();
-        }, 50);
-      }
-    };
-
-    const handleResize = () => {
-      updateScroll();
-    };
-
-    // Add event listeners for all cases that need scroll updates
-    window.addEventListener("pageshow", handleVisibilityOrPageShow);
-    document.addEventListener("visibilitychange", handleVisibilityOrPageShow);
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("pageshow", handleVisibilityOrPageShow);
-      document.removeEventListener("visibilitychange", handleVisibilityOrPageShow);
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [updateScroll]);
-
   return (
     <div
       id="main-container"
-      data-scroll-container
       className={`
         px-2 sm:px-4 pb-4 
         transition-colors duration-200 
@@ -268,12 +238,10 @@ export default function Page() {
         
         <Hero scrollToWork={scrollToWork} />
         
-        <About scrollPositionLocomotive={scrollPositionLocomotive} />
+        <About />
         
         <section
-          data-scroll-section
-          data-scroll-section-id="projects"
-          data-scroll-offset="50"
+          id="projects"
           className="flex justify-center items-center"
           ref={stickySectionRef}
         >

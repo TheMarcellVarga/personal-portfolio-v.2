@@ -1,4 +1,7 @@
+"use client";
+
 import React from 'react';
+import { motion } from 'framer-motion';
 import {
   FaPaintBrush,
   FaUserFriends,
@@ -70,80 +73,88 @@ const skillCategories = {
   ],
 };
 
+const containerVariant = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05
+    }
+  }
+};
+
+const itemVariant = {
+  hidden: { opacity: 0, y: 15 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } }
+};
+
 export default function Skills() {
   return (
-    <article className="mt-8 w-full p-4 sm:p-4">
-      <h2
-        className="text-custom-blue text-xs sm:text-sm font-bold mb-6 sm:mb-8 tracking-wider uppercase flex items-center
-        before:content-[''] before:block before:w-3 sm:before:w-4 before:h-[2px] before:bg-custom-blue before:mr-2"
+    <article className="mt-24 mb-16 w-full p-4 md:p-8 lg:p-12 z-20">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="mb-20 flex flex-col items-center justify-center text-center max-w-2xl mx-auto"
       >
-        Experience
-      </h2>
+        <h2 className="text-gray-400 text-xs sm:text-sm font-medium tracking-[0.2em] uppercase mb-4">
+          Experience
+        </h2>
+        <div className="text-3xl sm:text-4xl md:text-5xl font-semibold text-white tracking-tight">
+          Tools & Capabilities
+        </div>
+      </motion.div>
 
-      <div className="space-y-6 sm:space-y-8">
+      <div className="space-y-20 max-w-5xl mx-auto">
         {Object.entries(skillCategories).map(([category, skills]) => (
           <div key={category} className="relative">
-            <h3
-              className="text-xs sm:text-sm font-semibold text-custom-blue/80 mb-3 sm:mb-4 capitalize
-              flex items-center gap-2 transform hover:translate-x-2 transition-transform duration-300"
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-6 mb-8"
             >
-              <span className="w-6 sm:w-8 h-[1px] bg-custom-blue/30"></span>
-              {category}
-            </h3>
+              <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-widest">
+                {category}
+              </h3>
+              <div className="h-[1px] flex-grow bg-gradient-to-r from-white/10 to-transparent"></div>
+            </motion.div>
 
-            <div className="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-2 sm:gap-3 md:gap-4">
-              {skills.map((skill, index) => (
-                <div
+            <motion.div 
+              variants={containerVariant}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              className="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 gap-4"
+            >
+              {skills.map((skill) => (
+                <motion.div
                   key={skill.name}
-                  className="group relative flex flex-col items-center justify-center
-                    bg-custom-blue/5 hover:bg-custom-blue/10
-                    p-3 sm:p-3 rounded-lg sm:rounded-xl
-                    transform transition-all duration-300 hover:scale-105 hover:-translate-y-1
-                    cursor-pointer"
-                  style={{
-                    animationDelay: `${index * 0.1}s`,
-                    animationFillMode: "forwards",
-                  }}
+                  variants={itemVariant}
+                  className="group relative flex flex-col items-center justify-center p-5 rounded-2xl bg-[#0a0a0a] border border-white/5 hover:border-white/10 hover:bg-[#111] transition-all duration-300 cursor-pointer"
                 >
                   <span
-                    className="text-lg xs:text-xl sm:text-2xl text-custom-blue/70 
-                    group-hover:text-custom-blue transition-colors duration-300 mb-1"
+                    className="text-2xl sm:text-3xl text-gray-500 group-hover:text-gray-200 transition-colors duration-300 mb-3"
                     aria-hidden="true"
                   >
                     {skill.icon}
                   </span>
 
-                  <span
-                    className="text-[8px] xs:text-[10px] sm:text-xs text-custom-blue/60 
-                    group-hover:text-custom-blue/80 text-center line-clamp-1 md:hidden
-                    transition-colors duration-300"
-                  >
-                    {skill.name.split(" ")[0]}
+                  <span className="text-[10px] sm:text-xs font-medium text-gray-500 group-hover:text-gray-300 text-center transition-colors duration-300">
+                    {skill.name.split(' ')[0]}
                   </span>
 
-                  <span
-                    className="hidden md:inline text-xs text-custom-blue/60 
-                    group-hover:text-custom-blue/80 text-center
-                    transition-colors duration-300"
-                  >
-                    {skill.name}
-                  </span>
-
-                  <div
-                    className="absolute -top-10 sm:-top-12 left-1/2 transform -translate-x-1/2
-                    bg-custom-blue text-white px-2 py-1 rounded text-[9px] xs:text-xs
-                    opacity-0 group-hover:opacity-100 transition-all duration-200
-                    pointer-events-none whitespace-nowrap md:hidden
-                    shadow-lg backdrop-blur-xs"
-                  >
+                  {/* Tooltip for small screens */}
+                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-[#1a1a1a] border border-white/10 text-gray-300 text-xs font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none sm:hidden whitespace-nowrap z-50 shadow-xl">
                     {skill.name}
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         ))}
       </div>
     </article>
   );
-} 
+}

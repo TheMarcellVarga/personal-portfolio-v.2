@@ -5,31 +5,30 @@ import LinkedInIcon from "@/public/icons/linkedin";
 import Link from "next/link";
 
 interface FooterProps {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-  isHover: boolean;
-  setIsHover: (isHover: boolean) => void;
+  isOpen?: boolean;
+  setIsOpen?: (isOpen: boolean) => void;
+  isHover?: boolean;
+  setIsHover?: (isHover: boolean) => void;
 }
 
-const Footer: React.FC<FooterProps> = ({ isHover }) => {
+export default function Footer({ isOpen, setIsOpen, isHover, setIsHover }: FooterProps) {
   return (
-    <div className="flex w-full justify-center" data-footer>
-      <div className="flex w-full flex-col">
-        <div className="w-full border-t border-gray-300 opacity-60"></div>
-        <div className="flex w-full flex-row justify-between items-center px-4 pt-4">
-          <div className="flex text-gray-400 w-full text-sm">© {new Date().getFullYear()} Marcell Varga</div>
-          <div className="flex space-x-4">
-            <Link href="https://www.linkedin.com/in/marcellvarga/" target="_blank" rel="noopener noreferrer">
-              <LinkedInIcon className={`transition-colors duration-300 ${isHover ? "text-blue-600" : "text-gray-500"} hover:text-blue-600`} />
+    <footer className="w-full flex justify-center pb-10 pt-6 z-20 relative px-6 sm:px-12 bg-black">
+      <div className="w-full flex flex-col items-center">
+        <div className="flex w-full flex-col sm:flex-row justify-between items-center max-w-7xl">
+          <div className="text-gray-500 text-xs sm:text-sm mb-6 sm:mb-0 font-medium">
+            © {new Date().getFullYear()} Marcell Varga. All rights reserved.
+          </div>
+          <div className="flex space-x-6">
+            <Link href="https://www.linkedin.com/in/marcellvarga/" target="_blank" rel="noopener noreferrer" className="group p-2 -m-2">
+              <LinkedInIcon className="text-gray-500 group-hover:text-white transition-colors duration-300 w-5 h-5" />
             </Link>
-            <Link href="https://github.com/TheMarcellVarga" target="_blank" rel="noopener noreferrer">
-              <GitHubIcon className={`transition-colors duration-300 ${isHover ? "text-black" : "text-gray-500"} hover:text-black`} />
+            <Link href="https://github.com/TheMarcellVarga" target="_blank" rel="noopener noreferrer" className="group p-2 -m-2">
+              <GitHubIcon className="text-gray-500 group-hover:text-white transition-colors duration-300 w-5 h-5" />
             </Link>
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   );
-};
-
-export default Footer;
+}
