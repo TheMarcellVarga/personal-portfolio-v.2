@@ -1,24 +1,27 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { SunIcon, MoonIcon } from '@heroicons/react/24/outline';
 
 export default function ThemeToggle() {
-  const [darkMode, setDarkMode] = useState<boolean | undefined>(undefined);
+  const [darkMode, setDarkMode] = useState<boolean | undefined>(() => {
+    if (typeof window === 'undefined') {
+      return undefined;
+    }
 
-  // Initialize theme based on user preference or system preference
-  useEffect(() => {
-    // Check for saved preference
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    // Set dark mode if explicitly saved, otherwise use system preference
+
     if (savedTheme === 'dark') {
-      setDarkMode(true);
-    } else if (savedTheme === 'light') {
-      setDarkMode(false);
-    } else {
-      setDarkMode(prefersDark);
+      return true;
     }
-  }, []);
+
+    if (savedTheme === 'light') {
+      return false;
+    }
+
+    return prefersDark;
+  });
 
   // Update the DOM when dark mode changes
   useEffect(() => {

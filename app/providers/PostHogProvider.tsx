@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname, useSearchParams } from 'next/navigation';
-import { useEffect, useState, type PropsWithChildren } from 'react';
+import { Suspense, useEffect, useState, type PropsWithChildren } from 'react';
 import posthog from 'posthog-js';
 import { PostHogProvider as OriginalPostHogProvider } from 'posthog-js/react';
 
@@ -56,22 +56,12 @@ function PostHogInitializer() {
 }
 
 export default function PostHogProvider({ children }: PropsWithChildren) {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    // Return children without PostHog during SSR
-    return <>{children}</>;
-  }
-
-  // On client-side, wrap with the proper PostHog provider
   return (
     <OriginalPostHogProvider client={posthog}>
       {children}
-      <PostHogInitializer />
+      <Suspense fallback={null}>
+        <PostHogInitializer />
+      </Suspense>
     </OriginalPostHogProvider>
   );
-} 
+}

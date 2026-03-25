@@ -2,9 +2,12 @@ import React from "react";
 
 interface IconProps {
   isOpen: boolean;
+  theme?: "light" | "dark";
 }
 
-const IndexSigAnimatedIcon: React.FC<IconProps> = ({ isOpen }) => {
+const IndexSigAnimatedIcon: React.FC<IconProps> = ({ isOpen, theme = "light" }) => {
+  const strokeColor = theme === "dark" ? (isOpen ? "#e2f5ff" : "#7dd3fc") : isOpen ? "#053B50" : "#176B87";
+
   return (
     <svg
       className="svg-elem-1"
@@ -16,13 +19,13 @@ const IndexSigAnimatedIcon: React.FC<IconProps> = ({ isOpen }) => {
     >
       <g clipPath="url(#clip0_18_152)">
         <path
-          stroke={isOpen ? "#053B50" : "#176B87"}
+          stroke={strokeColor}
           strokeLinecap="round"
           strokeLinejoin="round"
           d="M0.396973 36.3291C0.396973 36.3291 1.80464 21.811 13.6633 7.89246"
         />
         <path
-          stroke={isOpen ? "#053B50" : "#176B87"}
+          stroke={strokeColor}
           strokeLinecap="round"
           strokeLinejoin="round"
           d="M84.6029 0.378418C83.4907 1.72562 28.5188 31.0478 28.5188 31.0478C34.2765 18.2493 39.5275 5.38881 37.4414 4.87415C37.3274 4.8523 37.2096 4.85749 37.0982 4.88928C31.574 6.017 19.8186 16.4677 17.715 17.2805C17.665 17.3015 17.6107 17.3113 17.5561 17.3093C16.4821 17.2881 15.8514 13.5856 15.4907 9.68776"

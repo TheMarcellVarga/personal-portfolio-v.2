@@ -7,8 +7,10 @@ export default function MouseTrailer() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    
+    const frame = window.requestAnimationFrame(() => {
+      setMounted(true);
+    });
+
     const updatePosition = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
     };
@@ -41,12 +43,15 @@ export default function MouseTrailer() {
       document.addEventListener('mouseover', handleHoverableElements);
       
       return () => {
+        window.cancelAnimationFrame(frame);
         document.removeEventListener('mousemove', updatePosition);
         document.removeEventListener('mouseenter', handleMouseEnter);
         document.removeEventListener('mouseleave', handleMouseLeave);
         document.removeEventListener('mouseover', handleHoverableElements);
       };
     }
+
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   // Only render on client side
