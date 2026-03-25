@@ -4,18 +4,18 @@
   --font-display: var(--font-space-grotesk);
   --font-body: var(--font-manrope);
 
-  --color-custom-blue: #111b28;
-  --color-custom-teal: #4ccfff;
-  --color-card-background: rgba(255, 248, 240, 0.84);
-  --color-text-primary: #111b28;
+  --color-custom-blue: #0f2235;
+  --color-custom-teal: #67d9ff;
+  --color-card-background: rgba(13, 24, 39, 0.76);
+  --color-text-primary: #dbe7f3;
 }
 
 :root {
-  --page-background: #f6f0e7;
-  --page-surface: rgba(255, 249, 242, 0.72);
-  --page-surface-strong: rgba(255, 250, 245, 0.88);
-  --page-border: rgba(17, 27, 40, 0.08);
-  --page-shadow: 0 24px 90px rgba(17, 27, 40, 0.08);
+  --page-background: #04111d;
+  --page-surface: rgba(8, 20, 34, 0.58);
+  --page-surface-strong: rgba(10, 24, 39, 0.82);
+  --page-border: rgba(148, 163, 184, 0.14);
+  --page-shadow: 0 24px 90px rgba(2, 10, 20, 0.24);
 }
 
 @layer base {
@@ -66,8 +66,8 @@
   }
 
   ::selection {
-    background: rgba(255, 129, 68, 0.24);
-    color: var(--color-custom-blue);
+    background: rgba(103, 217, 255, 0.24);
+    color: #ffffff;
   }
 }
 
@@ -92,8 +92,8 @@
 
   .glass-panel {
     background: var(--page-surface);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(24px) saturate(140%);
     box-shadow: var(--page-shadow);
   }
 

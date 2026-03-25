@@ -3,11 +3,11 @@
 import { useState, useEffect } from 'react';
 
 export function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
-  const [isClient, setIsClient] = useState(false);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth <= 768 : false
+  );
 
   useEffect(() => {
-    setIsClient(true);
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
@@ -18,5 +18,5 @@ export function useIsMobile() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  return isClient ? isMobile : false;
+  return isMobile;
 }

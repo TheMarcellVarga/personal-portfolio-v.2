@@ -29,22 +29,21 @@ export default function Footer({ isHover = false }: FooterProps) {
 
   return (
     <footer className="px-4 pb-8 pt-3 sm:px-6 lg:px-10">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 border-t border-custom-blue/10 pt-6 text-sm text-custom-blue/50 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 border-t border-white/10 pt-6 text-sm text-slate-400 sm:flex-row sm:items-center sm:justify-between">
         <p>
-          © {new Date().getFullYear()} Marcell Varga. UX, frontend, and product
-          craft with motion discipline.
+          © {new Date().getFullYear()} Marcell Varga. Product design, frontend systems, and business-tech UX.
         </p>
         <div className="flex items-center gap-4">
-          <span className="ml-auto mr-0 text-xs text-custom-blue/48 min-w-[135px]">
-           🇸🇬 &nbsp;Local Time: {currentTime}
+          <span className="min-w-[135px] text-xs text-slate-500">
+            SG Local Time: {currentTime}
           </span>
 
           <Link
             href="https://www.linkedin.com/in/marcellvarga/"
             target="_blank"
             rel="noopener noreferrer"
-            className={`transition duration-300 hover:text-custom-blue ${
-              isHover ? "text-custom-blue/70" : "text-custom-blue/50"
+            className={`transition duration-300 hover:text-white ${
+              isHover ? "text-slate-200" : "text-slate-400"
             }`}
           >
             LinkedIn
@@ -53,8 +52,8 @@ export default function Footer({ isHover = false }: FooterProps) {
             href="https://github.com/TheMarcellVarga"
             target="_blank"
             rel="noopener noreferrer"
-            className={`transition duration-300 hover:text-custom-blue ${
-              isHover ? "text-custom-blue/70" : "text-custom-blue/50"
+            className={`transition duration-300 hover:text-white ${
+              isHover ? "text-slate-200" : "text-slate-400"
             }`}
           >
             GitHub
