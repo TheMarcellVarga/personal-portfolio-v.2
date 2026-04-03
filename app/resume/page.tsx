@@ -16,7 +16,7 @@ function InfoRow({
 }) {
   const content = (
     <span className="flex items-start gap-2.5">
-      <Icon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#67d9ff]" />
+      <Icon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-white/50" />
       <span>{label}</span>
     </span>
   );
@@ -48,7 +48,7 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 
 function Pill({ children }: { children: React.ReactNode }) {
   return (
-    <span className="rounded-full border border-custom-blue/10 bg-custom-blue/[0.04] px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.14em] text-custom-blue/70">
+    <span className="rounded-md border border-custom-blue/20 bg-custom-blue/[0.04] px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.14em] text-custom-blue/80">
       {children}
     </span>
   );
@@ -56,7 +56,7 @@ function Pill({ children }: { children: React.ReactNode }) {
 
 function SurfaceCard({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-[1.2rem] border border-custom-blue/10 bg-custom-blue/[0.03] p-4 shadow-[0_12px_30px_rgba(7,20,38,0.04)]">
+    <div className="rounded-[1.2rem] border border-custom-blue/10 bg-white/60 p-4 shadow-[0_8px_30px_rgba(11,17,26,0.03)] backdrop-blur-md">
       {children}
     </div>
   );
@@ -64,14 +64,14 @@ function SurfaceCard({ children }: { children: React.ReactNode }) {
 
 export default function ResumePage() {
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(77,141,180,0.14),_transparent_36%),linear-gradient(180deg,_#e7eff5_0%,_#f5f9fc_44%,_#edf4f9_100%)] px-4 py-6 sm:px-6 lg:px-10 print:bg-white print:px-0 print:py-0">
+    <main className="min-h-screen bg-[#fafafc] bg-[radial-gradient(circle_at_top_left,_rgba(0,113,227,0.03),_transparent_40%),linear-gradient(180deg,_rgba(255,255,255,0)_0%,_rgba(240,242,245,0.4)_100%)] px-4 py-6 sm:px-6 lg:px-10 print:bg-white print:px-0 print:py-0">
       <div className="mx-auto flex w-full max-w-5xl justify-end">
         <ResumeActions />
       </div>
 
       <article className="resume-sheet mx-auto mt-6 w-full max-w-[210mm] overflow-hidden rounded-[1.6rem] border border-white/75 bg-white shadow-[0_30px_90px_rgba(7,20,38,0.08)] print:mt-0 print:max-w-none print:rounded-none print:border-0 print:shadow-none">
         <div className="grid min-h-[297mm] grid-cols-1 lg:grid-cols-[62mm_1fr] print:min-h-[297mm] print:grid-cols-[62mm_1fr]">
-          <aside className="relative flex h-full flex-col overflow-hidden bg-[#0b1118] px-5 py-6 text-white before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_top,_rgba(106,211,248,0.16),_transparent_40%)] before:content-[''] print:px-4 print:py-4">
+          <aside className="relative flex h-full flex-col overflow-hidden bg-[#0b111a] px-5 py-6 text-white before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.06),_transparent_40%)] before:content-[''] print:px-4 print:py-4">
             <div className="relative z-10">
               <p className="text-[10px] font-semibold uppercase tracking-[0.34em] text-white/45">
                 2026 Portfolio CV
@@ -206,7 +206,7 @@ export default function ResumePage() {
                     <ul className="mt-3 space-y-1.5 text-[11px] leading-5 text-custom-blue/72">
                       {job.bullets.map((bullet) => (
                         <li key={bullet} className="flex gap-3">
-                          <span className="mt-[0.58rem] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-custom-teal" />
+                          <span className="mt-[0.58rem] inline-block h-[1px] w-2.5 shrink-0 bg-custom-blue/40" />
                           <span>{bullet}</span>
                         </li>
                       ))}

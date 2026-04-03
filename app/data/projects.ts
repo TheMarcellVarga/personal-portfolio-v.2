@@ -18,60 +18,60 @@ export const projects: Project[] = [
     subTitle: "Copyright protection SaaS",
     date: "2021",
     description:
-      "A dashboard concept for automated copyright protection, focused on helping creators monitor ownership issues through a clear, system-driven interface.",
+      "A high-performance dashboard for automated copyright protection. Designed to help creators effortlessly monitor and resolve ownership issues.",
     highlight:
-      "This project still stands out because it shows how I translate dense product logic into something visually ordered, calm under pressure, and ready for design-system thinking.",
-    skills: ["Design System", "Tailwind CSS", "Dashboard UX", "Atomic Design"],
+      "This project proves that dense, complex operational logic can be designed into a system that is visually flawless, incredibly fast, and scalable.",
+    skills: ["Design System", "Tailwind CSS", "Dashboard UX", "Atomic Architecture"],
     link: "/catchscan",
     image: "/images/catchscan-index.png",
-    category: "Product UX + frontend",
+    category: "Product Architecture",
     backgroundClass:
-      "bg-[radial-gradient(circle_at_top_left,_rgba(99,174,255,0.35),_transparent_30%),linear-gradient(160deg,_#d9e8ff_0%,_#cfe0ef_50%,_#bad4e4_100%)]",
+      "bg-[radial-gradient(circle_at_top_left,_rgba(11,17,26,0.03),_transparent_30%),linear-gradient(160deg,_#ffffff_0%,_#f2f5f8_50%,_#e6edf4_100%)]",
   },
   {
     title: "AskCody",
-    subTitle: "Hybrid office management in Microsoft Teams",
+    subTitle: "Hybrid office management inside Microsoft Teams",
     date: "2022",
     description:
-      "A hybrid workplace experience built around desk booking, room availability, and operational clarity inside the daily workflow of Microsoft Teams.",
+      "A frictionless hybrid workplace experience. Blends desk booking and operational clarity seamlessly into the Microsoft Teams enterprise workflow.",
     highlight:
-      "The value here is the ability to design for operational software without making it feel dead. It had to support complexity while staying fast, legible, and intuitive.",
-    skills: ["TypeScript", "React", "Fluent UI", "Enterprise UX"],
+      "Tackled the challenge of enterprise software: creating tools that handle supreme complexity without slowing down the user. Fast, legible, intuitive.",
+    skills: ["TypeScript", "React", "Fluent UI", "Enterprise Velocity"],
     link: "/askcody",
     image: "/images/askcody-index.png",
-    category: "Enterprise product",
+    category: "Enterprise Scale",
     backgroundClass:
-      "bg-[radial-gradient(circle_at_top_right,_rgba(76,214,255,0.28),_transparent_26%),linear-gradient(160deg,_#d8f5ff_0%,_#dce8ff_52%,_#c8dde8_100%)]",
+      "bg-[radial-gradient(circle_at_top_right,_rgba(11,17,26,0.03),_transparent_26%),linear-gradient(160deg,_#ffffff_0%,_#f0f4f9_52%,_#e0e9f2_100%)]",
   },
   {
     title: "European Study Solution",
-    subTitle: "Student agency and information platform",
+    subTitle: "Student agency platform",
     date: "2021",
     description:
-      "A conversion-oriented website for American students exploring education in Europe, designed to communicate trust, guidance, and a feeling of possibility.",
+      "A conversion-machine designed for American students aiming for Europe. Engineered to communicate absolute trust, guidance, and endless possibility.",
     highlight:
-      "This project captures an earlier part of my trajectory: storytelling, information design, and user trust shaped into a more persuasive digital journey.",
-    skills: ["HTML", "CSS", "JavaScript", "SEO"],
+      "A showcase in editorial web experience and storytelling. Built from the ground up to aggressively pull the user through a persuasive narrative.",
+    skills: ["Web Performance", "JavaScript", "SEO", "Conversion Strategy"],
     link: "/ess",
     image: "/images/ess-index.png",
-    category: "Editorial web experience",
+    category: "Web Experience",
     backgroundClass:
-      "bg-[radial-gradient(circle_at_20%_20%,_rgba(120,197,255,0.26),_transparent_28%),linear-gradient(160deg,_#ebf4ff_0%,_#dbe7f2_50%,_#cedee8_100%)]",
+      "bg-[radial-gradient(circle_at_20%_20%,_rgba(11,17,26,0.02),_transparent_28%),linear-gradient(160deg,_#ffffff_0%,_#f4f6fa_50%,_#e6ecef_100%)]",
   },
   {
-    title: "Upcoming Projects",
-    subTitle: "New chapter, new experiments",
-    date: "In Progress",
+    title: "Singapore & Beyond",
+    subTitle: "New chapter, maximum velocity",
+    date: "2026",
     description:
-      "A new set of projects is coming into the portfolio, shaped by the move to Singapore, a stronger engineering stack, and a sharper design point of view.",
+      "A slate of upcoming projects engineered in Singapore. Sharper technical stack, deeper design logic, and zero compromises on performance.",
     highlight:
-      "The next additions will likely be more technical, more opinionated, and more representative of where I am headed than where I started.",
-    skills: ["Coming Soon"],
+      "The next era is defined by extreme technical ambition, Apple-tier smoothness, and rapid execution. Watch this space.",
+    skills: ["Framer Motion", "Next.js 15", "Performance", "Velocity"],
     link: "http://github.com/TheMarcellVarga",
     image: "/images/personalpageprofilealt.png",
-    category: "Now building",
+    category: "Now Shipping",
     backgroundClass:
-      "bg-[radial-gradient(circle_at_40%_20%,_rgba(56,188,255,0.28),_transparent_26%),linear-gradient(160deg,_#e1f3ff_0%,_#d7eaf1_52%,_#bdd7df_100%)]",
+      "bg-[radial-gradient(circle_at_40%_20%,_rgba(0,113,227,0.04),_transparent_26%),linear-gradient(160deg,_#ffffff_0%,_#f7f9fc_52%,_#edf2f7_100%)]",
     inProgress: true,
   },
 ];

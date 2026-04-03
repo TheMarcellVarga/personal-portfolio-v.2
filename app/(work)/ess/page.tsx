@@ -360,30 +360,20 @@ const ESS = () => {
       data-scroll-container
       className={`
         px-4 pb-4 
-        transition-colors duration-200 
+        transition-colors duration-300 
         ease-in-out 
-        bg-gray-200 
+        bg-[#fafafc] 
         relative
         scroll-smooth
       `}
     >
       <div
         className="
-          absolute inset-0 
-          bg-[radial-gradient(rgba(2,66,92,0.07)_1.5px,transparent_1.5px)]
-          [background-size:16px_16px] 
+          absolute inset-0 -z-10
+          bg-[linear-gradient(rgba(11,17,26,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(11,17,26,0.02)_1px,transparent_1px)] bg-[size:100px_100px]
+          [mask-image:radial-gradient(circle_at_center,black_40%,transparent_80%)]
           pointer-events-none
-          before:absolute 
-          before:inset-0 
-          before:bg-linear-to-b 
-          before:from-transparent 
-          before:to-gray-200/50 
-          before:backdrop-blur-[1px]
-          motion-safe:transition-opacity
-          motion-safe:duration-700
-          scroll-smooth
         "
-        style={{ zIndex: 0 }}
         aria-hidden="true"
       />
       <div className="relative z-1">
@@ -459,8 +449,8 @@ const ESS = () => {
                             mb-16 sm:mb-24 md:mb-32
                             relative w-full 
                             overflow-hidden 
-                            rounded-lg sm:rounded-xl md:rounded-2xl
-                            shadow-[0_10px_30px_rgba(2,66,92,0.15)] sm:shadow-[0_15px_40px_rgba(2,66,92,0.18)] md:shadow-[0_20px_50px_rgba(2,66,92,0.2)]
+                            rounded-2xl sm:rounded-[2rem]
+                            glass-panel border-white/80 p-2 sm:p-4
                             group
                           "
                         >
@@ -473,17 +463,17 @@ const ESS = () => {
                             "
                           />
                           {hideLegacyImages ? (
-                            <div className="relative flex min-h-[15rem] items-end overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl border border-white/70 bg-[linear-gradient(135deg,rgba(198,228,255,0.9),rgba(232,241,248,0.88),rgba(214,230,239,0.96))] p-6 sm:p-8">
-                              <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.72),transparent_30%),radial-gradient(circle_at_78%_14%,rgba(255,255,255,0.45),transparent_22%),linear-gradient(135deg,rgba(255,255,255,0.15),transparent_42%)]" />
-                              <div className="relative max-w-xl rounded-[1.5rem] border border-white/70 bg-white/36 p-5 backdrop-blur-md">
+                            <div className="relative flex min-h-[15rem] items-center justify-center overflow-hidden rounded-[1.5rem] bg-[linear-gradient(145deg,rgba(255,255,255,0.95),rgba(248,250,252,0.8))] p-6 sm:p-8">
+                              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(0,113,227,0.05),transparent_40%)]" />
+                              <div className="relative max-w-xl rounded-[1.5rem] border border-white/60 bg-white/50 p-6 shadow-sm backdrop-blur-xl text-center">
                                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-custom-blue/50">
                                   Case study archive
                                 </p>
-                                <p className="mt-3 text-2xl font-display tracking-[-0.05em] text-custom-blue">
+                                <p className="mt-4 text-2xl font-display font-medium tracking-tight text-custom-blue">
                                   ESS visuals removed
                                 </p>
-                                <p className="mt-3 text-sm leading-7 text-custom-blue/68">
-                                  The old mockups were retired so the page now focuses on the write-up and process.
+                                <p className="mt-3 text-sm leading-relaxed text-custom-blue/70">
+                                  The old mockups were retired so the page now focuses on the strategy and interaction notes.
                                 </p>
                               </div>
                             </div>
@@ -649,7 +639,7 @@ const ESS = () => {
                                               ) => (
                                                 <div
                                                   key={`${rowIndex}-${pictureIndex}`}
-                                                  className={`bg-gray-100 p-4 rounded-md ${
+                                                  className={`glass-panel border-white/60 p-4 rounded-2xl shadow-[0_8px_30px_rgba(11,17,26,0.04)] bg-white/40 ${
                                                     item.isPair || item.isTriple
                                                       ? "w-[calc(90%+2rem)]"
                                                       : row.length === 3
@@ -657,7 +647,7 @@ const ESS = () => {
                                                       : row.length === 1
                                                       ? "w-[66%]"
                                                       : "w-[45%]"
-                                                  } flex items-center justify-center group`}
+                                                  } flex items-center justify-center transition-all duration-300`}
                                                 >
                                                   <div
                                                     className={`w-full relative flex items-center justify-center ${
@@ -723,11 +713,12 @@ const ESS = () => {
                                                 return (
                                                   <div className="flex flex-row justify-center items-center gap-8 w-full">
                                                     <div
-                                                      className={`bg-gray-100 p-4 rounded-md ${
+                                                    key={`${index}`}
+                                                    className={`glass-panel border-white/60 p-4 rounded-2xl shadow-[0_8px_30px_rgba(11,17,26,0.04)] bg-white/40 ${
                                                         isPartOfPair
                                                           ? "w-[calc(90%+2rem)]"
                                                           : "w-[75%]"
-                                                      } flex items-center justify-center group`}
+                                                      } flex items-center justify-center transition-all duration-300`}
                                                     >
                                                       <div className="w-full relative flex items-center justify-center aspect-16/9">
                                                         <Image
@@ -832,10 +823,10 @@ const ESS = () => {
                               <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_20%,_#ffffff_120%)] opacity-20"></div>
                             </div>
                           ) : (
-                            <div className={`w-full h-full relative rounded-md overflow-hidden shadow-xs ${project.backgroundClass}`}>
-                              <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.62),transparent_32%),radial-gradient(circle_at_80%_10%,rgba(255,255,255,0.38),transparent_24%),linear-gradient(135deg,rgba(255,255,255,0.16),transparent_48%)]" />
-                              <div className="relative flex h-full w-full items-end p-3">
-                                <div className="rounded-full border border-white/65 bg-white/35 px-2.5 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-custom-blue/60 backdrop-blur-md">
+                            <div className={`w-full h-full relative rounded-[1.5rem] overflow-hidden shadow-xs ${project.backgroundClass}`}>
+                              <div className="absolute inset-0 bg-[linear-gradient(145deg,rgba(255,255,255,0.6),rgba(255,255,255,0.1))]" />
+                              <div className="relative flex h-full w-full items-end p-4">
+                                <div className="rounded-full border border-white/60 bg-white/40 px-3 py-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-custom-blue/80 backdrop-blur-md">
                                   {project.category}
                                 </div>
                               </div>

@@ -10,7 +10,7 @@ export default function Contact() {
       className="flex justify-center items-center mt-8 sm:mt-12 mb-12 sm:mb-24 transform hover:scale-[1.01] transition-all duration-500"
     >
       <div className="relative w-full sm:w-4/5 max-w-4xl px-3 sm:px-0">
-        <div className="relative bg-gray-100/90 rounded-lg sm:rounded-xl p-5 sm:p-8 md:p-12 border border-custom-blue/10">
+        <div className="relative glass-panel rounded-2xl sm:rounded-[2rem] border border-white/80 bg-white/60 p-6 sm:p-8 md:p-12 shadow-[0_12px_40px_rgba(11,17,26,0.04)] backdrop-blur-xl group">
           <div className="flex flex-col md:flex-row gap-5 sm:gap-8 items-start md:items-center">
             <div className="relative z-10 w-full md:w-auto transform group-hover:scale-[1.02] transition-transform duration-500">
               <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-custom-blue text-left mb-3 sm:mb-6 tracking-tight">

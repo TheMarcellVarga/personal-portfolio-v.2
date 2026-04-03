@@ -88,10 +88,10 @@ export default function Header({
       }`}
     >
       <div
-        className={`mx-auto flex w-full max-w-7xl items-center justify-between rounded-full border px-4 py-3 transition duration-300 sm:px-5 ${
+        className={`mx-auto flex w-full max-w-7xl items-center justify-between rounded-full border px-4 py-3 transition-all duration-500 sm:px-5 ${
           isScrolled || isOpen
-            ? "border-white/60 bg-white/74 shadow-[0_16px_50px_rgba(7,20,38,0.12)] backdrop-blur-2xl"
-            : "border-white/36 bg-white/52 backdrop-blur-xl"
+            ? "border-white/90 bg-white/50 shadow-[0_16px_50px_rgba(11,17,26,0.06)] backdrop-blur-3xl"
+            : "border-transparent bg-transparent"
         }`}
       >
         <Link
@@ -100,7 +100,7 @@ export default function Header({
             event.preventDefault();
             void navigate(items[0]);
           }}
-          className="flex items-center gap-3"
+          className="flex items-center gap-3 transition-transform duration-300 hover:scale-[1.02]"
           aria-label="Go to homepage"
         >
           <IndexSigAnimatedIcon isOpen={isOpen} />
@@ -114,7 +114,7 @@ export default function Header({
             <button
               key={item.label}
               onClick={() => void navigate(item)}
-              className="rounded-full px-4 py-2 text-sm font-semibold text-custom-blue/68 transition duration-300 hover:bg-custom-blue/6 hover:text-custom-blue"
+              className="rounded-full px-4 py-2 text-sm font-semibold text-custom-blue/70 transition-all duration-300 hover:scale-[1.05] hover:bg-white/80 hover:text-custom-blue hover:shadow-sm"
             >
               {item.label}
             </button>
@@ -124,7 +124,7 @@ export default function Header({
         <div className="hidden items-center gap-3 lg:flex">
           <Link
             href="/resume"
-            className="inline-flex items-center gap-2 rounded-full border border-custom-blue/12 bg-custom-blue/4 px-4 py-2 text-sm font-semibold text-custom-blue transition duration-300 hover:border-custom-blue/24 hover:bg-custom-blue/7"
+            className="inline-flex items-center gap-2 rounded-full border border-custom-blue/10 bg-white/60 px-4 py-2 text-sm font-semibold text-custom-blue transition-all duration-300 hover:scale-[1.05] hover:border-custom-blue/20 hover:bg-white hover:shadow-sm"
           >
             Resume
             <ArrowUpRight className="h-4 w-4" />
@@ -133,7 +133,7 @@ export default function Header({
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-custom-blue/10 bg-custom-blue/4 text-custom-blue lg:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-custom-blue/10 bg-white/60 text-custom-blue transition-all duration-300 hover:scale-105 hover:bg-white lg:hidden"
           aria-label={isOpen ? "Close navigation" : "Open navigation"}
           aria-expanded={isOpen}
         >

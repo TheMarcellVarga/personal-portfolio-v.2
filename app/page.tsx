@@ -29,50 +29,54 @@ import { history } from "./data/history";
 import { projects } from "./data/projects";
 
 const manifesto =
-  "I build interfaces that feel deliberate: design systems, motion details, frontend code, and product thinking in one lane.";
+  "Danish precision. Singaporean velocity. I architect high-performance interfaces that don’t just look premium—they execute flawlessly.";
 
 const capabilityCards = [
   {
-    title: "I make systems feel alive",
-    body: "I turn rough ideas into interface systems with taste, tension, and enough structure for teams to extend without flattening them.",
+    title: "Engineering At Velocity",
+    body: "Shipping isn't a milestone; it's a cadence. I build highly stable, scalable interface architectures that allow teams to move incredibly fast without breaking the system layer.",
     icon: Blocks,
+    colSpan: "lg:col-span-2",
   },
   {
-    title: "I care about shipped feeling",
-    body: "Motion, responsiveness, accessibility, and implementation detail all matter. I care about how the live product feels, not just how the mockup looks.",
+    title: "Uncompromising Execution",
+    body: "Apple-tier smoothness, flawless accessibility, and absolute responsiveness. The gap between a good mockup and a great product is entirely in the implementation details.",
     icon: Code2,
+    colSpan: "lg:col-span-1",
   },
   {
-    title: "Research without theater",
-    body: "I use interviews, testing, and iteration when they move the product forward. Useful insight beats a beautiful process doc.",
+    title: "High-Signal Strategy",
+    body: "No bloated processes or design theater. I rely on rapid iteration, tactical user insight, and high-fidelity prototypes that act as sources of truth for engineering teams.",
     icon: Sparkles,
+    colSpan: "lg:col-span-1",
   },
   {
-    title: "Nerdy, but collaborative",
-    body: "I like the details, but I also like momentum. I work comfortably across design, engineering, and product without losing the plot.",
+    title: "Technical Product Sense",
+    body: "Interfaces don't exist in a vacuum. I work deeply with backend architecture and product requirements to ensure the UX is not just beautiful, but systematically sound.",
     icon: Rocket,
+    colSpan: "lg:col-span-2",
   },
 ];
 
 const capabilityTags = [
-  "design systems",
-  "interaction design",
-  "motion details",
-  "frontend architecture",
-  "accessibility",
-  "prototyping",
-  "research",
+  "system architecture",
+  "React & Next.js",
+  "framer-motion physics",
+  "performance optimization",
+  "WCAG 2.2",
+  "technical strategy",
+  "high-fps prototyping",
   "TypeScript",
-  "React / Next.js",
   "SvelteKit",
-  "AI product flows",
-  "weird edge cases",
+  "Docker & CI/CD",
+  "AI-fluent UX",
+  "complex state logic",
 ];
 
 function fadeInUp(delay = 0) {
   return {
-    initial: { opacity: 0, y: 28 },
-    whileInView: { opacity: 1, y: 0 },
+    initial: { opacity: 0, y: 28, scale: 0.96, filter: "blur(8px)" },
+    whileInView: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" },
     viewport: { once: true, amount: 0.2 },
     transition: {
       duration: 0.8,
@@ -81,6 +85,16 @@ function fadeInUp(delay = 0) {
     },
   };
 }
+
+const Word = ({ children, progress, range }: { children: React.ReactNode, progress: any, range: [number, number] }) => {
+  // Adjusted opacity floor from 0.5 to 0.6 to fix readability issue against light background
+  const opacity = useTransform(progress, range, [0.6, 1]);
+  return (
+    <motion.span style={{ opacity }} className="inline-block relative">
+      {children}
+    </motion.span>
+  );
+};
 
 function scrollToId(id: string, reducedMotion: boolean) {
   const element = document.getElementById(id);
@@ -118,7 +132,6 @@ function SectionLabel({
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false);
   const [footerHover, setFooterHover] = useState(false);
-  const [typedText, setTypedText] = useState("");
   const prefersReducedMotion = useReducedMotion();
   const shouldReduceMotion = Boolean(prefersReducedMotion);
 
@@ -132,54 +145,25 @@ export default function Page() {
     target: heroRef,
     offset: ["start start", "end start"],
   });
-  const heroCopyY = useTransform(heroProgress, [0, 1], [0, -36]);
-  const heroPillsY = useTransform(heroProgress, [0, 1], [0, -18]);
-  const heroCardsY = useTransform(heroProgress, [0, 1], [0, -28]);
-  const heroCopyOpacity = useTransform(heroProgress, [0, 0.85], [1, 0.58]);
-  const portraitY = useTransform(heroProgress, [0, 1], [0, -80]);
-  const portraitRotate = useTransform(heroProgress, [0, 1], [0, -4]);
-  const portraitScale = useTransform(heroProgress, [0, 1], [1, 0.965]);
-  const haloScale = useTransform(heroProgress, [0, 1], [1, 1.14]);
+  const heroCopyY = useTransform(heroProgress, [0, 1], [0, -120]);
+  const heroCopyOpacity = useTransform(heroProgress, [0, 0.4], [1, 0]);
+  const portraitY = useTransform(heroProgress, [0, 1], [0, 200]);
+  const portraitScale = useTransform(heroProgress, [0, 1], [1, 1.2]);
+  const portraitOpacity = useTransform(heroProgress, [0, 0.5], [1, 0.4]);
 
   const { scrollYProgress: manifestoProgress } = useScroll({
     target: manifestoRef,
-    offset: ["start start", "end end"],
-  });
-  const { scrollYProgress: capabilitiesProgress } = useScroll({
-    target: capabilitiesRef,
-    offset: ["start start", "end end"],
+    offset: ["start center", "end center"],
   });
   const { scrollYProgress: trajectoryProgress } = useScroll({
     target: trajectoryRef,
-    offset: ["start start", "end end"],
+    offset: ["start center", "end end"],
   });
-  const manifestoOpacity = useTransform(manifestoProgress, [0, 0.08, 0.82, 1], [0.35, 1, 1, 0.24]);
-  const manifestoScale = useTransform(manifestoProgress, [0, 0.25, 1], [0.96, 1, 1.02]);
-  const manifestoGlow = useTransform(manifestoProgress, [0, 1], [0.15, 0.5]);
-  const capabilityTrackX = useTransform(capabilitiesProgress, [0, 1], ["0%", "-62%"]);
 
   useMotionValueEvent(trajectoryProgress, "change", (value) => {
     const nextIndex = Math.min(history.length - 1, Math.floor(value * history.length));
-
     startTransition(() => {
       setActiveTrajectoryIndex((current) => (current === nextIndex ? current : nextIndex));
-    });
-  });
-
-  useEffect(() => {
-    if (shouldReduceMotion) {
-      setTypedText(manifesto);
-    }
-  }, [shouldReduceMotion]);
-
-  useMotionValueEvent(manifestoProgress, "change", (value) => {
-    if (shouldReduceMotion) return;
-
-    const nextLength = Math.round(value * manifesto.length);
-    const nextText = manifesto.slice(0, nextLength);
-
-    startTransition(() => {
-      setTypedText((current) => (current === nextText ? current : nextText));
     });
   });
 
@@ -203,9 +187,10 @@ export default function Page() {
   const activeTrajectoryItem = history[activeTrajectoryIndex];
 
   return (
-    <div className="relative overflow-x-clip">
-      <div className="pointer-events-none fixed inset-0 -z-20 bg-[radial-gradient(circle_at_top_left,_rgba(76,207,255,0.16),_transparent_28%),radial-gradient(circle_at_20%_70%,_rgba(255,153,102,0.16),_transparent_34%),radial-gradient(circle_at_85%_18%,_rgba(17,27,40,0.12),_transparent_24%),linear-gradient(180deg,_#f8f1e8_0%,_#f6efe5_46%,_#fff8f1_100%)]" />
-      <div className="pointer-events-none fixed inset-0 -z-10 bg-[linear-gradient(rgba(17,27,40,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(17,27,40,0.04)_1px,transparent_1px)] bg-[size:92px_92px] [mask-image:radial-gradient(circle_at_center,black_45%,transparent_88%)]" />
+    <div className="relative overflow-x-clip bg-[#fafafc]">
+      {/* Background patterns */}
+      <div className="pointer-events-none fixed inset-0 -z-20 bg-[radial-gradient(circle_at_top_left,_rgba(0,113,227,0.03),_transparent_40%),radial-gradient(circle_at_80%_80%,_rgba(11,17,26,0.02),_transparent_30%),linear-gradient(180deg,_rgba(255,255,255,0)_0%,_rgba(240,242,245,0.4)_100%)]" />
+      <div className="pointer-events-none fixed inset-0 -z-10 bg-[linear-gradient(rgba(11,17,26,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(11,17,26,0.02)_1px,transparent_1px)] bg-[size:100px_100px]" />
 
       <Header
         isOpen={isOpen}
@@ -216,262 +201,188 @@ export default function Page() {
         scrollToContact={scrollContact}
       />
 
-      <main className="relative z-10 px-4 pb-8 pt-16 sm:px-6 sm:pb-12 sm:pt-20 lg:px-10">
+      <main className="relative z-10 px-4 pb-8 pt-24 sm:px-6 sm:pb-12 sm:pt-32 lg:px-10">
         <section
           id="hero"
           ref={heroRef}
-          className="mx-auto grid w-full max-w-7xl items-center gap-10 pb-10 pt-4 md:pb-16 lg:min-h-[40rem] lg:grid-cols-[1.15fr_0.85fr] lg:gap-14 xl:min-h-[48rem] 2xl:min-h-[52rem]"
+          className="relative mx-auto flex w-full max-w-7xl flex-col items-center justify-center pt-10 text-center lg:min-h-[75vh] xl:min-h-[85vh] 2xl:min-h-[90vh]"
         >
-          <div className="relative min-w-0">
-            {/* <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              style={shouldReduceMotion ? undefined : { y: heroPillsY }}
-              className="mb-6 flex flex-wrap gap-3"
-            >
-              {[
-                "Product Design",
-                "Design systems",
-                "Frontend",
-              ].map((pill) => (
-                <span
-                  key={pill}
-                  className="rounded-full border border-white/70 bg-white/65 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-custom-blue/70 shadow-[0_10px_30px_rgba(7,20,38,0.08)] backdrop-blur-xl"
-                >
-                  {pill}
-                </span>
-              ))}
-            </motion.div> */}
-
-            <motion.div
-              {...fadeInUp(0.05)}
-              style={shouldReduceMotion ? undefined : { y: heroCopyY, opacity: heroCopyOpacity }}
-              className="space-y-6"
-            >
-              <p className="font-display text-sm uppercase tracking-[0.4em] text-custom-blue/45">
-                UX & Frontend Engineer
-              </p>
-              <h1 className="max-w-[7.2ch] font-display text-[2.8rem] font-medium leading-[0.9] tracking-[-0.08em] text-custom-blue sm:text-[3.8rem] md:text-[4.6rem] lg:text-[5.2rem] xl:text-[6.4rem] 2xl:text-[7.6rem]">
-                Design the logic. Engineer the feeling.
-              </h1>
-              <p className="max-w-2xl text-base leading-7 text-custom-blue/72 sm:text-lg sm:leading-8">
-                Born in Denmark, now building from Singapore. I make product interfaces and the code behind them feel sharp.
-              </p>
-            </motion.div>
-
-            <motion.div
-              {...fadeInUp(0.12)}
-              className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap"
-            >
+          {/* Main Hero Content - Layered ON TOP */}
+          <motion.div
+            {...fadeInUp(0.05)}
+            style={shouldReduceMotion ? undefined : { y: heroCopyY, opacity: heroCopyOpacity }}
+            className="relative z-20 flex flex-col items-center gap-6"
+          >
+            <div className="inline-block rounded-full border border-custom-blue/10 bg-white/70 px-5 py-2 font-display text-[0.65rem] font-bold uppercase tracking-[0.4em] text-custom-blue/75 backdrop-blur-md shadow-sm">
+              UX & Frontend Engineer • SG
+            </div>
+            <h1 className="max-w-[12ch] font-display text-[clamp(3.5rem,8vw,8rem)] font-medium leading-[0.9] tracking-[-0.06em] text-custom-blue">
+              Precision design.<br/>Absolute velocity.
+            </h1>
+            <p className="mt-4 max-w-2xl text-[clamp(1rem,1.6vw,1.1rem)] leading-relaxed text-custom-blue/75 px-4">
+              Danish design roots. Singapore ambition. Architecting interfaces that execute flawlessly and refuse to compromise on performance.
+            </p>
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap pb-10">
               <button
                 onClick={scrollWork}
-                className="group inline-flex items-center justify-center gap-3 rounded-full bg-custom-blue px-6 py-3 text-sm font-semibold text-white shadow-[0_18px_50px_rgba(6,23,44,0.22)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#0f3555]"
+                className="group inline-flex items-center justify-center gap-3 rounded-full bg-custom-blue px-8 py-4 text-sm font-semibold text-white shadow-[0_16px_45px_rgba(11,17,26,0.22)] transition-all duration-300 hover:scale-105 hover:bg-[#0071e3] hover:shadow-[0_22px_55px_rgba(0,113,227,0.3)]"
               >
-                View selected work
+                View Selected Work
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
               <Link
                 href="/resume"
-                className="inline-flex items-center justify-center gap-3 rounded-full border border-custom-blue/14 bg-white/70 px-6 py-3 text-sm font-semibold text-custom-blue shadow-[0_10px_30px_rgba(7,20,38,0.08)] backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-custom-blue/28 hover:bg-white"
+                className="inline-flex items-center justify-center gap-3 rounded-full border border-custom-blue/15 bg-white/80 px-8 py-4 text-sm font-semibold text-custom-blue shadow-[0_12px_35px_rgba(11,17,26,0.06)] backdrop-blur-xl transition-all duration-300 hover:scale-105 hover:border-custom-blue/35 hover:bg-white"
               >
-                Open resume
+                Inspect Spec Sheet
                 <Download className="h-4 w-4" />
               </Link>
-            </motion.div>
+            </div>
+          </motion.div>
 
-            {/* <motion.div
-              {...fadeInUp(0.18)}
-              style={shouldReduceMotion ? undefined : { y: heroCardsY }}
-              className="mt-8 flex flex-wrap gap-2"
-            >
-              {["Product UX", "Interface systems", "Motion + code"].map((item) => (
-                <span
-                  key={item}
-                  className="rounded-full border border-white/70 bg-white/65 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-custom-blue/65 shadow-[0_10px_30px_rgba(7,20,38,0.08)] backdrop-blur-xl"
-                >
-                  {item}
-                </span>
-              ))}
-            </motion.div> */}
-          </div>
-
+          {/* Portrait - Restored Image Rendering and Z-Index */}
           <motion.div
-            style={shouldReduceMotion ? undefined : { y: portraitY, scale: portraitScale }}
-            className="relative mx-auto w-full max-w-[32rem]"
+            style={shouldReduceMotion ? undefined : { y: portraitY, scale: portraitScale, opacity: portraitOpacity }}
+            className="absolute bottom-0 left-1/2 -z-10 h-full w-full -translate-x-1/2 overflow-hidden px-4"
           >
-            <motion.div
-              aria-hidden="true"
-              style={shouldReduceMotion ? undefined : { scale: haloScale }}
-              className="absolute inset-x-[12%] top-[4%] -z-10 aspect-square rounded-full bg-[radial-gradient(circle,_rgba(56,188,255,0.42)_0%,_rgba(56,188,255,0.12)_30%,_transparent_72%)] blur-3xl"
-            />
-            <motion.div
-              style={shouldReduceMotion ? undefined : { rotate: portraitRotate }}
-              className="glass-panel relative overflow-hidden rounded-[3rem] p-4 shadow-[0_40px_120px_rgba(7,20,38,0.16)]"
-            >
-              <div className="absolute inset-0 bg-[linear-gradient(145deg,rgba(255,255,255,0.66),rgba(255,255,255,0.1))]" />
-              <div className="relative rounded-[2.35rem] bg-[linear-gradient(160deg,#f0d3bc_0%,#8db5c9_46%,#263f55_100%)] p-5 pb-0">
-                <div className="absolute right-5 top-5 rounded-full border border-white/30 bg-white/12 px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white/80 backdrop-blur-md">
-                  Marcell Varga
-                </div>
-                <Image
-                  src="/images/personalpageprofilealt.png"
-                  alt="Portrait of Marcell Varga"
-                  width={960}
-                  height={1280}
-                  priority
-                  className="mx-auto h-auto w-full max-w-[26rem] object-contain"
-                />
-              </div>
-            </motion.div>
-
+            <div className="relative mx-auto h-full w-full max-w-5xl">
+              <Image
+                src="/images/personalpageprofilealt.png" 
+                alt="Portrait of Marcell Varga"
+                fill
+                priority
+                className="object-contain object-bottom opacity-25 filter blur-[0.5px] mix-blend-darken sm:opacity-40"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#fafafc] via-transparent to-transparent" />
+            </div>
           </motion.div>
         </section>
 
         <section
           id="about"
           ref={manifestoRef}
-          className="relative mx-auto mt-16 h-[200vh] w-full max-w-7xl sm:mt-24 sm:h-[240vh]"
+          className="relative mx-auto mt-20 h-auto w-full max-w-5xl sm:mt-32 xl:mt-48"
         >
-          <div className="sticky top-0 flex min-h-screen items-center py-12">
+          <div className="flex items-center justify-center py-20 pb-40">
             <motion.div
-              style={
-                shouldReduceMotion
-                  ? undefined
-                  : {
-                      opacity: manifestoOpacity,
-                      scale: manifestoScale,
-                    }
-              }
-              className="grid w-full gap-8 rounded-[3rem] border border-white/60 bg-[#071726]/92 p-8 text-white shadow-[0_40px_140px_rgba(5,16,32,0.28)] lg:p-12"
+              {...fadeInUp(0.1)}
+              className="glass-panel w-full rounded-[3.5rem] p-10 text-custom-blue shadow-[0_32px_90px_rgba(11,17,26,0.08)] sm:p-16 lg:p-24"
             >
-              <div className="flex flex-col justify-between">
-                <div>
-                  <SectionLabel index="01" label="Manifesto" tone="light" />
-                  <motion.div
-                    style={shouldReduceMotion ? undefined : { opacity: manifestoGlow }}
-                    className="mb-8 h-px w-full bg-[linear-gradient(90deg,rgba(76,216,255,0.85),rgba(76,216,255,0.02))]"
-                  />
-                  <p
-                    className="max-w-4xl font-display text-[clamp(2rem,4vw,4.6rem)] leading-[1.02] tracking-[-0.06em] !text-[#f8fbff]"
-                    style={{
-                      color: "#f8fbff",
-                      WebkitTextFillColor: "#f8fbff",
-                      textShadow: "0 1px 0 rgba(255,255,255,0.06)",
-                    }}
-                  >
-                    {typedText}
-                    {!shouldReduceMotion && (
-                      <span className="ml-1 inline-block animate-pulse text-[#67d9ff]">|</span>
-                    )}
-                  </p>
-                </div>
-                <div className="mt-10 flex items-center gap-4 text-sm text-white/58">
-                  <span className="inline-flex h-2 w-2 rounded-full bg-[#67d9ff]" />
-                  Design, code, motion.
-                </div>
+              <SectionLabel index="01" label="Manifesto" />
+              <div className="mb-12 h-px w-full bg-[linear-gradient(90deg,rgba(11,17,26,0.12),rgba(11,17,26,0.00))]" />
+              <p className="max-w-[40rem] font-display text-[clamp(2rem,3.8vw,3.8rem)] leading-[1.02] tracking-[-0.04em] flex flex-wrap gap-x-[1.2rem] gap-y-3">
+                {manifesto.split(" ").map((word, i, arr) => {
+                  const start = i / arr.length;
+                  const end = start + 1 / arr.length;
+                  return (
+                    <Word key={i} progress={manifestoProgress} range={[start, end]}>
+                      {word}
+                    </Word>
+                  );
+                })}
+              </p>
+              <div className="mt-20 flex items-center gap-5 text-sm font-bold uppercase tracking-widest text-custom-blue/55">
+                <span className="relative flex h-3 w-3">
+                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#0071e3] opacity-50" />
+                   <span className="relative inline-flex h-3 w-3 rounded-full bg-[#0071e3]" />
+                </span>
+                Design. Engineer. Execute.
               </div>
             </motion.div>
           </div>
         </section>
 
-        <section ref={capabilitiesRef} className="relative mt-16 h-[180vh] w-full sm:mt-24 sm:h-[220vh]">
+        <section ref={capabilitiesRef} className="relative mx-auto mt-20 w-full max-w-7xl sm:mt-32">
           <SectionLabel index="02" label="Capabilities" />
-          <div className="sticky top-0 flex min-h-screen items-center py-10">
-            <div className="w-full">
-              <motion.div
-                {...fadeInUp(0.04)}
-                className="mb-6 max-w-2xl"
-              >
-                <h2 className="max-w-[10ch] font-display text-[clamp(2.2rem,4vw,4.4rem)] leading-[0.95] tracking-[-0.06em] text-custom-blue">
-                  The useful overlap between taste and implementation.
-                </h2>
-                <p className="mt-4 max-w-xl text-sm leading-7 text-custom-blue/68">
-                  Interfaces, motion, systems, and frontend detail all need to line up. These are the pieces I actually care about.
-                </p>
-              </motion.div>
+          <div className="py-10">
+            <motion.div {...fadeInUp(0.04)} className="mb-14 max-w-3xl">
+              <h2 className="font-display text-[clamp(2.5rem,4.5vw,4.2rem)] leading-[0.95] tracking-[-0.05em] text-custom-blue">
+                The intersection of extreme precision and speed.
+              </h2>
+              <p className="mt-8 max-w-2xl text-[1.1rem] leading-relaxed text-custom-blue/70">
+                Interfaces, system architecture, motion physics, and frontend delivery perfectly aligned. I obsess over the mechanics so the user doesn't have to.
+              </p>
+            </motion.div>
 
-              <div className="relative overflow-hidden rounded-[2.4rem] border border-white/60 bg-white/58 p-5 shadow-[0_28px_90px_rgba(7,20,38,0.08)] backdrop-blur-xl sm:p-6">
-                <div className="pointer-events-none absolute inset-x-6 top-6 h-px bg-custom-blue/10" />
-                <motion.div
-                  style={shouldReduceMotion ? undefined : { x: capabilityTrackX }}
-                  className="relative z-10 flex w-max gap-5 pr-8 will-change-transform"
-                >
-                  {capabilityCards.map((card, index) => {
-                    const Icon = card.icon;
-                    return (
-                      <motion.article
-                        key={card.title}
-                        {...fadeInUp(index * 0.05)}
-                        className={`flex h-[20rem] w-[min(82vw,28rem)] shrink-0 flex-col rounded-[2rem] border p-6 shadow-[0_24px_80px_rgba(7,20,38,0.08)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:shadow-[0_26px_90px_rgba(7,20,38,0.12)] ${
-                          index === 0
-                            ? "border-white/60 bg-[linear-gradient(145deg,rgba(255,250,245,0.9),rgba(255,233,219,0.7))]"
-                            : index === 1
-                              ? "border-white/60 bg-[linear-gradient(145deg,rgba(255,255,255,0.84),rgba(216,244,252,0.7))]"
-                              : index === 2
-                                ? "border-white/60 bg-[linear-gradient(145deg,rgba(245,248,252,0.92),rgba(232,238,246,0.74))]"
-                                : "border-white/60 bg-[linear-gradient(145deg,rgba(255,248,239,0.88),rgba(243,244,255,0.7))]"
-                        }`}
-                      >
-                        <div className="mb-8 inline-flex rounded-2xl border border-custom-blue/10 bg-custom-blue/6 p-3 text-custom-blue">
-                          <Icon className="h-5 w-5" />
-                        </div>
-                        <h2 className="font-display text-[clamp(1.8rem,3vw,2.7rem)] leading-tight tracking-[-0.05em] text-custom-blue">
-                          {card.title}
-                        </h2>
-                        <p className="mt-4 max-w-[24rem] text-sm leading-7 text-custom-blue/68">{card.body}</p>
-                        <div className="mt-auto flex flex-wrap gap-2 pt-5">
-                          {capabilityTags.slice(index * 3, index * 3 + 3).map((tag) => (
-                            <span
-                              key={tag}
-                              className="rounded-full border border-custom-blue/10 bg-white/65 px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-custom-blue/55"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </motion.article>
-                    );
-                  })}
-                </motion.div>
-              </div>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {capabilityCards.map((card, index) => {
+                const Icon = card.icon;
+                return (
+                  <motion.article
+                    key={card.title}
+                    {...fadeInUp(index * 0.1)}
+                    className={`glass-panel group relative flex min-h-[22rem] flex-col overflow-hidden rounded-[2.8rem] bg-white/65 p-8 shadow-[0_16px_48px_rgba(11,17,26,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_70px_rgba(11,17,26,0.08)] ${card.colSpan}`}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <div className="relative z-10 flex h-full flex-col">
+                      <div className="mb-10 inline-flex h-15 w-15 items-center justify-center rounded-[1.2rem] border border-custom-blue/8 bg-white text-custom-blue shadow-sm transition-transform duration-500 group-hover:scale-110">
+                        <Icon className="h-7 w-7" />
+                      </div>
+                      <h2 className="font-display text-[2rem] font-medium leading-[1.05] tracking-[-0.04em] text-custom-blue sm:text-[2.2rem]">
+                        {card.title}
+                      </h2>
+                      <p className="mt-5 max-w-[28rem] text-[0.95rem] leading-relaxed text-custom-blue/72">
+                        {card.body}
+                      </p>
+                      <div className="mt-auto flex flex-wrap gap-2.5 pt-10">
+                        {capabilityTags.slice(index * 3, index * 3 + 3).map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full border border-custom-blue/12 bg-white/60 px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-custom-blue/65"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.article>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        <section id="work" className="mt-16 w-full sm:mt-24">
+        <section id="work" className="mx-auto mt-20 w-full max-w-7xl sm:mt-32">
           <SectionLabel index="03" label="Selected Work" />
-          <motion.div {...fadeInUp(0.04)} className="mt-4 grid gap-4 lg:grid-cols-12">
+          <motion.div {...fadeInUp(0.04)} className="mt-10 grid gap-8 lg:grid-cols-2">
             {featuredProjects.map((project, index) => {
-              const isLarge = index === 0;
               return (
                 <motion.article
                   key={project.title}
-                  {...fadeInUp(index * 0.05)}
-                  className={`group overflow-hidden rounded-[2.3rem] border border-white/60 bg-white/62 shadow-[0_28px_90px_rgba(7,20,38,0.08)] backdrop-blur-2xl transition duration-300 hover:-translate-y-1 ${
-                    isLarge ? "lg:col-span-7 lg:row-span-2 min-h-[22rem]" : "lg:col-span-5 min-h-[11rem]"
-                  }`}
+                  {...fadeInUp(index * 0.1)}
+                  className="glass-panel group relative min-h-[26rem] overflow-hidden rounded-[3rem] border-white/90 shadow-[0_32px_80px_rgba(11,17,26,0.06)] transition duration-700 hover:-translate-y-2 hover:shadow-[0_45px_100px_rgba(11,17,26,0.12)]"
                 >
-                  <Link href={project.link} className="relative flex h-full min-h-[11rem] flex-col justify-between p-6 sm:p-7">
-                    <div className={`absolute inset-0 ${project.backgroundClass}`} />
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.58),transparent_32%),radial-gradient(circle_at_80%_10%,rgba(255,255,255,0.32),transparent_24%),linear-gradient(135deg,rgba(255,255,255,0.12),transparent_48%)]" />
-                    <div className="relative flex items-center justify-between gap-3">
-                      <span className="rounded-full border border-white/70 bg-white/40 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-custom-blue/60 backdrop-blur-md">
+                  <Link href={project.link} className="relative flex h-full flex-col justify-between p-8 sm:p-12">
+                    {/* RESTORED PROJECT IMAGE RENDERING */}
+                    <div className="absolute inset-0 z-0">
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+                      <div className={`absolute inset-0 opacity-20 ${project.backgroundClass}`} />
+                    </div>
+                    
+                    <div className="relative z-10 flex items-center justify-between gap-4">
+                      <span className="rounded-full border border-white/40 bg-white/10 px-5 py-2 text-[0.72rem] font-bold uppercase tracking-[0.24em] text-white backdrop-blur-xl">
                         {project.category}
                       </span>
-                      <span className="text-sm text-custom-blue/45">{project.date}</span>
+                      <span className="text-[0.85rem] font-bold tracking-widest text-white/75">{project.date}</span>
                     </div>
-                    <div className="relative mt-auto max-w-[28rem]">
-                      <h3 className={`font-display leading-[0.95] tracking-[-0.06em] text-custom-blue ${isLarge ? "text-[clamp(2.2rem,4vw,4rem)]" : "text-[clamp(1.8rem,3vw,2.5rem)]"}`}>
+
+                    <div className="relative z-10 mt-auto transform transition-transform duration-700 group-hover:-translate-y-2">
+                      <h3 className="font-display text-[2.5rem] leading-[0.9] tracking-[-0.04em] text-white sm:text-[3.2rem] lg:text-[3.8rem]">
                         {project.title}
                       </h3>
-                      <p className="mt-2 max-w-xl text-sm leading-6 text-custom-blue/70">
+                      <p className="mt-4 max-w-md text-[1.1rem] leading-relaxed text-white/85">
                         {project.subTitle}
                       </p>
-                    </div>
-                    <div className="relative mt-4 inline-flex w-fit items-center gap-2 text-sm font-semibold text-custom-blue">
-                      Open
-                      <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                      <div className="mt-10 inline-flex w-fit items-center gap-3 rounded-full bg-white px-7 py-3 text-sm font-bold text-custom-blue transition-all duration-300 hover:bg-[#0071e3] hover:text-white">
+                        Read Case Study
+                        <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                      </div>
                     </div>
                   </Link>
                 </motion.article>
@@ -480,38 +391,41 @@ export default function Page() {
           </motion.div>
         </section>
 
-        <section ref={trajectoryRef} className="mt-12 w-full sm:mt-20" style={{ minHeight: `${(history.length * 110) + 100}vh` }}>
+        <section ref={trajectoryRef} className="mx-auto mt-20 w-full max-w-7xl sm:mt-40" style={{ minHeight: `${(history.length * 70) + 50}vh` }}>
           <SectionLabel index="04" label="Trajectory" />
-          <div className="sticky top-0 flex min-h-screen items-center py-10">
-            <div className="grid w-full gap-6 lg:grid-cols-[0.86fr_1.14fr]">
+          <div className="sticky top-10 flex min-h-[85vh] items-center py-10">
+            <div className="grid w-full gap-8 lg:grid-cols-[0.85fr_1.15fr]">
               <motion.div
                 {...fadeInUp(0.04)}
-                className="min-w-0 rounded-[2.4rem] border border-white/60 bg-[#081827] p-7 text-white shadow-[0_32px_110px_rgba(7,20,38,0.16)]"
+                className="glass-panel flex flex-col justify-center rounded-[3.2rem] border-white/70 bg-[#081827] p-10 text-white shadow-[0_45px_120px_rgba(7,20,38,0.22)] lg:p-12"
               >
-                <p className="font-display text-[clamp(1.6rem,2.8vw,3.2rem)] leading-tight tracking-[-0.06em]">
-                  Built in Denmark. Now shipping from Singapore.
+                <div className="inline-block rounded-full border border-white/12 bg-white/6 px-4 py-1 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[#00a2ff] mb-8">
+                   Engineering Path
+                </div>
+                <h2 className="font-display text-[clamp(2rem,3vw,3.2rem)] leading-[0.95] tracking-[-0.05em]">
+                  Built in Denmark.<br/>Now shipping from Singapore.
+                </h2>
+                <p className="mt-8 text-[1.05rem] leading-relaxed text-white/72">
+                  Multimedia design first. Product work next. My trajectory follows a pattern of extreme ownership and rapid technical adaptation.
                 </p>
-                <p className="mt-4 text-sm leading-7 text-white/70">
-                  Multimedia design first. Product work next. The timeline stays pinned while each step advances one by one, then holds on the last point so the section still has breathing room.
-                </p>
-                <div className="mt-8 flex flex-wrap gap-2 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-white/62">
-                  <span className="rounded-full border border-white/12 bg-white/6 px-3 py-1.5">
-                    Scroll-driven timeline
+                <div className="mt-12 flex flex-wrap gap-3.5 text-[0.68rem] font-bold uppercase tracking-[0.2em] text-white/65">
+                  <span className="rounded-full border border-white/18 bg-white/10 px-5 py-2.5">
+                    UX Strategy
                   </span>
-                  <span className="rounded-full border border-white/12 bg-white/6 px-3 py-1.5">
-                    Sticky section
+                  <span className="rounded-full border border-white/18 bg-white/10 px-5 py-2.5">
+                    Design Systems
                   </span>
-                  <span className="rounded-full border border-white/12 bg-white/6 px-3 py-1.5">
-                    Last step holds
+                  <span className="rounded-full border border-white/18 bg-white/10 px-5 py-2.5">
+                    Node.js & React
                   </span>
                 </div>
               </motion.div>
 
-              <div className="rounded-[2.4rem] border border-white/60 bg-white/66 p-5 shadow-[0_28px_90px_rgba(7,20,38,0.08)] backdrop-blur-xl sm:p-6">
-                <div className="grid gap-5 xl:grid-cols-[19rem_1fr]">
-                  <div className="relative rounded-[2rem] border border-custom-blue/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.9),rgba(244,247,250,0.72))] p-5 shadow-[0_16px_48px_rgba(7,20,38,0.05)]">
-                    <div className="pointer-events-none absolute bottom-5 left-10 top-5 w-px -translate-x-1/2 bg-custom-blue/10" />
-                    <div className="space-y-3">
+              <div className="glass-panel rounded-[3.2rem] border border-white/80 bg-white/70 p-6 shadow-[0_24px_90px_rgba(11,17,26,0.08)] sm:p-8 lg:p-10">
+                <div className="grid gap-8 h-full xl:grid-cols-[19rem_1fr]">
+                  <div className="relative rounded-[2.8rem] border border-custom-blue/8 bg-white/55 p-7 shadow-inner">
+                    <div className="pointer-events-none absolute bottom-8 left-[3.15rem] top-8 w-[2px] -translate-x-1/2 bg-custom-blue/10" />
+                    <div className="space-y-4">
                       {history.map((item, index) => {
                         const isActive = index === activeTrajectoryIndex;
                         const isPast = index < activeTrajectoryIndex;
@@ -520,38 +434,36 @@ export default function Page() {
                           <button
                             key={`${item.company}-${item.time.start}`}
                             type="button"
-                            className={`relative grid w-full grid-cols-[2.5rem_1fr] items-start gap-3 rounded-[1.4rem] py-3 pr-3 text-left transition duration-300 ${
+                            onClick={() => setActiveTrajectoryIndex(index)}
+                            className={`relative grid w-full grid-cols-[2.8rem_1fr] items-center gap-5 rounded-[1.6rem] py-4 pr-4 transition duration-500 ${
                               isActive
-                                ? "bg-white shadow-[0_12px_36px_rgba(7,20,38,0.08)]"
-                                : "hover:bg-white/70"
+                                ? "bg-white shadow-[0_12px_45px_rgba(11,17,26,0.08)]"
+                                : "hover:bg-white/45"
                             }`}
                             aria-pressed={isActive}
                           >
-                            <span className="relative flex h-7 items-center justify-center">
+                            <span className="relative flex h-8 items-center justify-center">
                               {isActive ? (
                                 <motion.span
-                                  layoutId="trajectory-dot"
-                                  className="relative z-10 h-2.5 w-2.5 rounded-full border-2 border-[#67d9ff] bg-[#67d9ff] shadow-[0_0_0_7px_rgba(103,217,255,0.15)]"
+                                  layoutId="trajectory-dot-v2"
+                                  className="relative z-10 h-3.5 w-3.5 rounded-full border-[3px] border-[#0071e3] bg-[#0071e3] shadow-[0_0_0_8px_rgba(0,113,227,0.18)]"
                                 />
                               ) : (
                                 <span
-                                  className={`relative z-10 h-2.5 w-2.5 rounded-full border-2 transition duration-300 ${
+                                  className={`relative z-10 h-3.5 w-3.5 rounded-full border-[3px] transition duration-500 ${
                                     isPast
-                                      ? "border-[#67d9ff]/65 bg-white"
-                                      : "border-custom-blue/18 bg-white"
+                                      ? "border-[#0071e3]/45 bg-white"
+                                      : "border-custom-blue/22 bg-white"
                                   }`}
                                 />
                               )}
                             </span>
-                            <span className="min-w-0 pt-0.5">
-                              <span className="block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-custom-blue/45">
+                            <span className="min-w-0 pr-2">
+                              <span className="block text-[0.68rem] font-bold uppercase tracking-[0.24em] text-custom-blue/45">
                                 {item.time.start} {item.time.end ? `- ${item.time.end}` : "- Present"}
                               </span>
-                              <span className="mt-1 block text-sm font-semibold text-custom-blue">
+                              <span className="mt-1 block text-[1rem] font-bold text-custom-blue truncate">
                                 {item.company}
-                              </span>
-                              <span className="mt-0.5 block text-[0.72rem] leading-5 text-custom-blue/60">
-                                {item.jobTitle}
                               </span>
                             </span>
                           </button>
@@ -563,48 +475,40 @@ export default function Page() {
                   <AnimatePresence mode="wait">
                     <motion.article
                       key={activeTrajectoryIndex}
-                      initial={{ opacity: 0, y: 18 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -14 }}
-                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                      className="relative overflow-hidden rounded-[2rem] border border-custom-blue/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.96),rgba(236,244,249,0.86))] p-6 shadow-[0_18px_55px_rgba(7,20,38,0.06)] sm:p-7"
+                      initial={{ opacity: 0, scale: 0.98, x: 15 }}
+                      animate={{ opacity: 1, scale: 1, x: 0 }}
+                      exit={{ opacity: 0, scale: 0.98, x: -15 }}
+                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      className="relative flex flex-col justify-center overflow-hidden rounded-[2.8rem] border border-white bg-white/85 p-8 shadow-[0_14px_50px_rgba(11,17,26,0.05)] lg:p-12"
                     >
-                      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(103,217,255,0.16),transparent_24%),radial-gradient(circle_at_20%_10%,rgba(255,255,255,0.88),transparent_22%)]" />
-                      <div className="relative flex h-full flex-col">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.26em] text-custom-blue/45">
-                            {activeTrajectoryItem.time.start}{" "}
-                            {activeTrajectoryItem.time.end
-                              ? `- ${activeTrajectoryItem.time.end}`
-                              : "- Present"}
-                          </p>
-                          <span className="rounded-full border border-custom-blue/10 bg-custom-blue/5 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-custom-blue/55">
-                            Step {activeTrajectoryIndex + 1} of {history.length}
-                          </span>
-                        </div>
-                        <p className="mt-4 font-display text-[clamp(1.9rem,3vw,3rem)] leading-[0.96] tracking-[-0.06em] text-custom-blue">
-                          {activeTrajectoryItem.jobTitle}
-                        </p>
-                        <p className="mt-3 max-w-[38rem] text-sm leading-7 text-custom-blue/72">
-                          {activeTrajectoryItem.description[0]}
-                        </p>
-                        <p className="mt-3 max-w-[38rem] text-sm leading-7 text-custom-blue/72">
-                          {activeTrajectoryItem.description[1]}
-                        </p>
-                        <p className="mt-3 max-w-[38rem] text-sm leading-7 text-custom-blue/72">
-                          {activeTrajectoryItem.description[2]}
-                        </p>
+                      <div className="flex flex-wrap items-center gap-4">
+                        <span className="rounded-full border border-custom-blue/12 bg-custom-blue/6 px-4 py-2 text-[0.68rem] font-bold uppercase tracking-[0.2em] text-custom-blue/65">
+                          {activeTrajectoryItem.time.start}{" "}
+                          {activeTrajectoryItem.time.end
+                            ? `- ${activeTrajectoryItem.time.end}`
+                            : "- Present"}
+                        </span>
+                      </div>
+                      <p className="mt-8 font-display text-[clamp(1.8rem,2.8vw,2.5rem)] leading-[0.98] tracking-[-0.04em] text-custom-blue">
+                        {activeTrajectoryItem.jobTitle}
+                      </p>
+                      <div className="mt-6 space-y-5">
+                        {activeTrajectoryItem.description.map((paragraph, index) => (
+                           <p key={index} className="max-w-[38rem] text-[1rem] leading-relaxed text-custom-blue/75">
+                             {paragraph}
+                           </p>
+                        ))}
+                      </div>
 
-                        <div className="mt-auto flex flex-wrap gap-2 pt-6">
-                          {activeTrajectoryItem.skills.map((skill) => (
-                            <span
-                              key={skill}
-                              className="rounded-full border border-custom-blue/10 bg-white/70 px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-custom-blue/55"
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
+                      <div className="mt-12 flex flex-wrap gap-2.5">
+                        {activeTrajectoryItem.skills.map((skill) => (
+                          <span
+                            key={skill}
+                            className="rounded-full border border-custom-blue/15 bg-white px-4 py-2 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-custom-blue/60 shadow-sm"
+                          >
+                            {skill}
+                          </span>
+                        ))}
                       </div>
                     </motion.article>
                   </AnimatePresence>
@@ -616,66 +520,66 @@ export default function Page() {
 
         <section
           id="contact"
-          className="mt-16 w-full sm:mt-24"
+          className="mx-auto mt-20 w-full max-w-7xl sm:mt-40"
           onMouseEnter={() => setFooterHover(true)}
           onMouseLeave={() => setFooterHover(false)}
         >
           <motion.div
             {...fadeInUp(0.06)}
-            className="relative overflow-hidden rounded-[3rem] border border-white/60 bg-[#071726] p-8 text-white shadow-[0_40px_140px_rgba(7,20,38,0.26)] sm:p-12"
+            className="relative overflow-hidden rounded-[3.5rem] border border-white/70 bg-[#071726] p-10 text-white shadow-[0_45px_150px_rgba(7,20,38,0.3)] sm:p-16 lg:p-24"
           >
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(72,205,255,0.26),_transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.06),transparent_55%)]" />
-            <div className="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(0,113,227,0.45),_transparent_45%),linear-gradient(135deg,rgba(255,255,255,0.08),transparent_60%)]" />
+            <div className="relative grid gap-14 lg:grid-cols-[1.25fr_0.75fr] items-center">
               <div>
                 <SectionLabel index="05" label="Contact" tone="light" />
-                <h2 className="max-w-3xl font-display text-[clamp(2.6rem,5vw,5rem)] leading-[0.96] tracking-[-0.07em] text-white">
-                  Ready for the next ambitious build.
+                <h2 className="max-w-xl font-display text-[clamp(3rem,6vw,5rem)] leading-[0.92] tracking-[-0.05em] text-white">
+                  Ready for the next bold build.
                 </h2>
-                <p className="mt-6 max-w-2xl text-lg leading-8 text-white/72">
-                  If you need a UX-minded engineer who can think visually, move fast in code, and care about the end product as much as the process, let’s talk.
+                <p className="mt-10 max-w-lg text-[1.2rem] leading-relaxed text-white/72">
+                  If you need a UX-minded engineer who can think visually, move fast in code, and perfect the end product, let’s talk.
                 </p>
               </div>
 
-              <div className="grid gap-4 self-end">
+              <div className="grid gap-6">
                 <a
                   href="mailto:themarcellvarga@gmail.com"
-                  className="group flex items-center justify-between rounded-[1.8rem] border border-white/12 bg-white/6 px-5 py-4 transition duration-300 hover:border-white/24 hover:bg-white/10"
+                  className="glass-panel group flex items-center justify-between rounded-[2rem] border-white/20 bg-white/10 px-8 py-7 transition-all duration-500 hover:-translate-y-2 hover:bg-white/22 hover:border-white/45 hover:shadow-[0_16px_50px_rgba(0,0,0,0.4)] w-full"
                 >
-                  <span className="flex items-center gap-3">
-                    <Mail className="h-5 w-5 text-[#67d9ff]" />
-                    <span className="text-sm font-semibold uppercase tracking-[0.18em] text-white/80">
-                      themarcellvarga@gmail.com
+                  <span className="flex items-center gap-5">
+                    <Mail className="h-7 w-7 text-white" />
+                    <span className="text-[1rem] font-bold uppercase tracking-[0.24em] text-white">
+                      Email
                     </span>
                   </span>
-                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  <ArrowUpRight className="h-6 w-6 text-white transition-transform duration-500 group-hover:translate-x-1.5 group-hover:-translate-y-1.5" />
                 </a>
                 <a
                   href="https://www.linkedin.com/in/marcellvarga/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between rounded-[1.8rem] border border-white/12 bg-white/6 px-5 py-4 transition duration-300 hover:border-white/24 hover:bg-white/10"
+                  className="glass-panel group flex items-center justify-between rounded-[2rem] border-white/20 bg-white/10 px-8 py-7 transition-all duration-500 hover:-translate-y-2 hover:bg-white/22 hover:border-white/45 hover:shadow-[0_16px_50px_rgba(0,0,0,0.4)] w-full"
                 >
-                  <span className="flex items-center gap-3">
-                    <Linkedin className="h-5 w-5 text-[#67d9ff]" />
-                    <span className="text-sm font-semibold uppercase tracking-[0.18em] text-white/80">
+                  <span className="flex items-center gap-5">
+                    <Linkedin className="h-7 w-7 text-white" />
+                    <span className="text-[1rem] font-bold uppercase tracking-[0.24em] text-white">
                       LinkedIn
                     </span>
                   </span>
-                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  <ArrowUpRight className="h-6 w-6 text-white transition-transform duration-500 group-hover:translate-x-1.5 group-hover:-translate-y-1.5" />
                 </a>
                 <a
                   href="https://github.com/TheMarcellVarga"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between rounded-[1.8rem] border border-white/12 bg-white/6 px-5 py-4 transition duration-300 hover:border-white/24 hover:bg-white/10"
+                  className="glass-panel group flex items-center justify-between rounded-[2rem] border-white/20 bg-white/10 px-8 py-7 transition-all duration-500 hover:-translate-y-2 hover:bg-white/22 hover:border-white/45 hover:shadow-[0_16px_50px_rgba(0,0,0,0.4)] w-full"
                 >
-                  <span className="flex items-center gap-3">
-                    <Github className="h-5 w-5 text-[#67d9ff]" />
-                    <span className="text-sm font-semibold uppercase tracking-[0.18em] text-white/80">
+                  <span className="flex items-center gap-5">
+                    <Github className="h-7 w-7 text-white" />
+                    <span className="text-[1rem] font-bold uppercase tracking-[0.24em] text-white">
                       GitHub
                     </span>
                   </span>
-                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  <ArrowUpRight className="h-6 w-6 text-white transition-transform duration-500 group-hover:translate-x-1.5 group-hover:-translate-y-1.5" />
                 </a>
               </div>
             </div>

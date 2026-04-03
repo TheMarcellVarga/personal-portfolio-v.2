@@ -54,13 +54,14 @@ export default function LegacyNotice() {
         sm:max-w-sm
         
         /* Container Styling */
-        bg-gray-100/90
+        glass-panel
+        bg-white/60
+        backdrop-blur-xl
+        border-white/80
         text-custom-blue 
-        rounded-lg
-        sm:rounded-xl
-        shadow-lg 
-        backdrop-blur-xs 
-        border border-custom-blue/10
+        rounded-xl
+        sm:rounded-2xl
+        shadow-[0_8px_30px_rgba(11,17,26,0.06)]
         
         /* Padding Adjustments */
         p-2.5

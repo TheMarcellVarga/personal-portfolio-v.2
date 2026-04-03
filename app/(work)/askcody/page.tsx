@@ -416,30 +416,21 @@ const AskCody = () => {
       id="main-container"
       data-scroll-container
       className={`
-      px-4 pb-4 
-      transition-colors duration-200 
-      ease-in-out 
-      bg-gray-200 
-      relative
-    `}
+        px-4 pb-4 
+        transition-colors duration-300 
+        ease-in-out 
+        bg-[#fafafc] 
+        relative
+        scroll-smooth
+      `}
     >
       <div
         className="
-          absolute inset-0 
-          bg-[radial-gradient(rgba(2,66,92,0.07)_1.5px,transparent_1.5px)]
-          [background-size:16px_16px] 
+          absolute inset-0 -z-10
+          bg-[linear-gradient(rgba(11,17,26,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(11,17,26,0.015)_1px,transparent_1px)] bg-[size:100px_100px]
+          [mask-image:radial-gradient(circle_at_top,black_60%,transparent_95%)]
           pointer-events-none
-          before:absolute 
-          before:inset-0 
-          before:bg-linear-to-b 
-          before:from-transparent 
-          before:to-gray-200/50 
-          before:backdrop-blur-[1px]
-          motion-safe:transition-opacity
-          motion-safe:duration-700
-          scroll-smooth
         "
-        style={{ zIndex: 0 }}
         aria-hidden="true"
       />
 
@@ -467,12 +458,7 @@ const AskCody = () => {
                         <div className="flex flex-col gap-1 sm:gap-2 w-full ">
                           <div className="flex flex-row justify-between items-center w-full gap-2 sm:gap-0">
                             <h2
-                              className="text-4xl sm:text-6xl font-extrabold tracking-tight
-              transform hover:translate-x-2 transition-all duration-300
-              bg-linear-to-r from-custom-blue to-custom-blue/80 
-              bg-clip-text text-transparent
-              leading-tight
-              text-center sm:text-left"
+                              className="font-display text-[clamp(2.8rem,6vw,4.5rem)] font-medium tracking-[-0.06em] text-custom-blue leading-[0.95]"
                             >
                               AskCody
                             </h2>
@@ -492,8 +478,7 @@ const AskCody = () => {
                             </span>
                           </div>
                           <h2
-                            className="text-gray-700 text-sm sm:text-xl font-bold tracking-widest uppercase
-            transform hover:translate-x-2 transition-all duration-300"
+                            className="text-custom-blue/60 text-[0.7rem] font-bold tracking-[0.32rem] uppercase mt-2"
                           >
                             Hybrid Office Manager
                           </h2>
@@ -516,31 +501,23 @@ const AskCody = () => {
                             mb-16 sm:mb-24 md:mb-32
                             relative w-full 
                             overflow-hidden 
-                            rounded-lg sm:rounded-xl md:rounded-2xl
-                            shadow-[0_10px_30px_rgba(2,66,92,0.15)] sm:shadow-[0_15px_40px_rgba(2,66,92,0.18)] md:shadow-[0_20px_50px_rgba(2,66,92,0.2)]
+                            rounded-2xl sm:rounded-[2rem]
+                            glass-panel border-white/80 p-2 sm:p-4
                             group
                           "
                         >
-                          <div
-                            className="
-                              absolute inset-0 
-                              bg-linear-to-br from-custom-blue/3 sm:from-custom-blue/4 md:from-custom-blue/5 to-transparent
-                              opacity-0 group-hover:opacity-100
-                              transition-opacity duration-500 z-10
-                            "
-                          />
                           {hideLegacyImages ? (
-                            <div className="relative flex min-h-[15rem] items-end overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl border border-white/70 bg-[linear-gradient(135deg,rgba(212,239,255,0.92),rgba(232,241,248,0.88),rgba(221,230,245,0.96))] p-6 sm:p-8">
-                              <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.72),transparent_30%),radial-gradient(circle_at_78%_14%,rgba(255,255,255,0.45),transparent_22%),linear-gradient(135deg,rgba(255,255,255,0.15),transparent_42%)]" />
-                              <div className="relative max-w-xl rounded-[1.5rem] border border-white/70 bg-white/36 p-5 backdrop-blur-md">
-                                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-custom-blue/50">
-                                  Case study archive
+                            <div className="relative flex min-h-[12rem] items-center justify-center overflow-hidden rounded-[2.5rem] bg-white/40 p-6 sm:p-12">
+                              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(0,113,227,0.03),transparent_40%)]" />
+                              <div className="relative max-w-xl text-center">
+                                <p className="text-[0.62rem] font-bold uppercase tracking-[0.32em] text-custom-blue/40">
+                                  Enterprise Strategy • 2022
                                 </p>
-                                <p className="mt-3 text-2xl font-display tracking-[-0.05em] text-custom-blue">
-                                  AskCody visuals removed
+                                <p className="mt-4 text-[clamp(1.5rem,3vw,2.2rem)] font-display font-medium tracking-tight text-custom-blue/80">
+                                  Interaction nodes archived
                                 </p>
-                                <p className="mt-3 text-sm leading-7 text-custom-blue/68">
-                                  The old mockups were retired so the page now focuses on the strategy and interaction notes.
+                                <p className="mt-3 text-[0.95rem] leading-relaxed text-custom-blue/60 max-w-sm mx-auto">
+                                  Refined focus on hybrid resource management, informational architecture, and corporate design system chapters.
                                 </p>
                               </div>
                             </div>
@@ -569,19 +546,7 @@ const AskCody = () => {
                             >
                               <p
                                 className={`
-                                  ${
-                                    descIndex === 0
-                                      ? "pt-8 md:pt-10"
-                                      : "pt-12 md:pt-14"
-                                  }
-                                  text-2xl font-extrabold tracking-tight
-                                  text-custom-blue
-                                  group-hover:text-custom-blue/90
-                                  transition-all duration-300
-                                  relative
-                                  before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px]
-                                  before:bg-custom-blue/30 before:transition-all before:duration-300
-                                  group-hover:before:w-full
+                                  font-display text-[clamp(1.8rem,3vw,2.4rem)] leading-[1.1] tracking-[-0.04em] text-custom-blue
                                 `}
                               >
                                 {desc.title}
@@ -595,9 +560,7 @@ const AskCody = () => {
                                     desc.text.map((text, index) => (
                                       <p
                                         key={index}
-                                        className="mb-6 last:mb-0 text-justify leading-relaxed
-                                        transform hover:translate-x-2 transition-transform duration-300
-                                        hover:text-custom-blue/90"
+                                        className="mb-8 last:mb-0 text-justify leading-relaxed text-[1.05rem] text-custom-blue/75"
                                       >
                                         {text}
                                       </p>
@@ -698,7 +661,7 @@ const AskCody = () => {
                                               ) => (
                                                 <div
                                                   key={`${rowIndex}-${pictureIndex}`}
-                                                  className={`bg-gray-100 p-4 rounded-md ${
+                                                  className={`glass-panel border-white/60 p-4 rounded-2xl shadow-[0_8px_30px_rgba(11,17,26,0.04)] bg-white/40 ${
                                                     item.isPair || item.isTriple
                                                       ? "w-[calc(90%+2rem)]"
                                                       : row.length === 3
@@ -772,11 +735,11 @@ const AskCody = () => {
                                                 return (
                                                   <div className="flex flex-row justify-center items-center gap-8 w-full">
                                                     <div
-                                                      className={`bg-gray-100 p-4 rounded-md ${
+                                                      className={`glass-panel border-white/60 p-4 rounded-2xl shadow-[0_8px_30px_rgba(11,17,26,0.04)] ${
                                                         isPartOfPair
                                                           ? "w-[calc(90%+2rem)]"
                                                           : "w-[75%]"
-                                                      } flex items-center justify-center group`}
+                                                      } flex items-center justify-center group bg-white/40`}
                                                     >
                                                       <div className="w-full relative flex items-center justify-center aspect-16/9">
                             <Image
@@ -877,10 +840,10 @@ const AskCody = () => {
                               <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_20%,_#ffffff_120%)] opacity-20"></div>
                             </div>
                           ) : (
-                            <div className={`w-full h-full relative rounded-md overflow-hidden shadow-xs ${project.backgroundClass}`}>
-                              <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.62),transparent_32%),radial-gradient(circle_at_80%_10%,rgba(255,255,255,0.38),transparent_24%),linear-gradient(135deg,rgba(255,255,255,0.16),transparent_48%)]" />
-                              <div className="relative flex h-full w-full items-end p-3">
-                                <div className="rounded-full border border-white/65 bg-white/35 px-2.5 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-custom-blue/60 backdrop-blur-md">
+                            <div className={`w-full h-full relative rounded-[1.5rem] overflow-hidden shadow-xs ${project.backgroundClass}`}>
+                              <div className="absolute inset-0 bg-[linear-gradient(145deg,rgba(255,255,255,0.6),rgba(255,255,255,0.1))]" />
+                              <div className="relative flex h-full w-full items-end p-4">
+                                <div className="rounded-full border border-white/60 bg-white/40 px-3 py-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-custom-blue/80 backdrop-blur-md">
                                   {project.category}
                                 </div>
                               </div>
