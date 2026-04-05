@@ -598,7 +598,7 @@ export default function Page() {
 
         <section
           id="contact"
-          className="mt-16 w-full sm:mt-24"
+          className="mx-auto mt-16 w-full max-w-7xl sm:mt-24"
           onMouseEnter={() => setFooterHover(true)}
           onMouseLeave={() => setFooterHover(false)}
         >
