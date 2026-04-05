@@ -36,21 +36,25 @@ const capabilityCards = [
     title: "I make systems feel alive",
     body: "I turn rough ideas into interface systems with taste, tension, and enough structure for teams to extend without flattening them.",
     icon: Blocks,
+    colSpan: "lg:col-span-2",
   },
   {
     title: "I care about shipped feeling",
     body: "Motion, responsiveness, accessibility, and implementation detail all matter. I care about how the live product feels, not just how the mockup looks.",
     icon: Code2,
+    colSpan: "lg:col-span-1",
   },
   {
     title: "Research without theater",
     body: "I use interviews, testing, and iteration when they move the product forward. Useful insight beats a beautiful process doc.",
     icon: Sparkles,
+    colSpan: "lg:col-span-1",
   },
   {
     title: "Nerdy, but collaborative",
     body: "I like the details, but I also like momentum. I work comfortably across design, engineering, and product without losing the plot.",
     icon: Rocket,
+    colSpan: "lg:col-span-2",
   },
 ];
 
@@ -124,7 +128,6 @@ export default function Page() {
 
   const heroRef = useRef<HTMLElement>(null);
   const manifestoRef = useRef<HTMLElement>(null);
-  const capabilitiesRef = useRef<HTMLElement>(null);
   const trajectoryRef = useRef<HTMLElement>(null);
   const [activeTrajectoryIndex, setActiveTrajectoryIndex] = useState(0);
 
@@ -145,10 +148,6 @@ export default function Page() {
     target: manifestoRef,
     offset: ["start start", "end end"],
   });
-  const { scrollYProgress: capabilitiesProgress } = useScroll({
-    target: capabilitiesRef,
-    offset: ["start start", "end end"],
-  });
   const { scrollYProgress: trajectoryProgress } = useScroll({
     target: trajectoryRef,
     offset: ["start start", "end end"],
@@ -156,7 +155,6 @@ export default function Page() {
   const manifestoOpacity = useTransform(manifestoProgress, [0, 0.08, 0.82, 1], [0.35, 1, 1, 0.24]);
   const manifestoScale = useTransform(manifestoProgress, [0, 0.25, 1], [0.96, 1, 1.02]);
   const manifestoGlow = useTransform(manifestoProgress, [0, 1], [0.15, 0.5]);
-  const capabilityTrackX = useTransform(capabilitiesProgress, [0, 1], ["0%", "-62%"]);
 
   useMotionValueEvent(trajectoryProgress, "change", (value) => {
     const nextIndex = Math.min(history.length - 1, Math.floor(value * history.length));
@@ -375,240 +373,224 @@ export default function Page() {
           </div>
         </section>
 
-        <section ref={capabilitiesRef} className="relative mt-16 h-[180vh] w-full sm:mt-24 sm:h-[220vh]">
+        <section className="relative mx-auto mt-20 w-full max-w-7xl sm:mt-32">
           <SectionLabel index="02" label="Capabilities" />
-          <div className="sticky top-0 flex min-h-screen items-center py-10">
-            <div className="w-full">
-              <motion.div
-                {...fadeInUp(0.04)}
-                className="mb-6 max-w-2xl"
-              >
-                <h2 className="max-w-[10ch] font-display text-[clamp(2.2rem,4vw,4.4rem)] leading-[0.95] tracking-[-0.06em] text-custom-blue">
-                  The useful overlap between taste and implementation.
-                </h2>
-                <p className="mt-4 max-w-xl text-sm leading-7 text-custom-blue/68">
-                  Interfaces, motion, systems, and frontend detail all need to line up. These are the pieces I actually care about.
-                </p>
-              </motion.div>
+          <div className="py-10">
+            <motion.div {...fadeInUp(0.04)} className="mb-14 max-w-3xl">
+              <h2 className="font-display text-[clamp(2.5rem,4.5vw,4.2rem)] leading-[0.95] tracking-[-0.05em] text-custom-blue">
+                The useful overlap between taste and implementation.
+              </h2>
+              <p className="mt-8 max-w-2xl text-[1.1rem] leading-relaxed text-custom-blue/70">
+                Interfaces, motion, systems, and frontend detail all need to line up. These are the pieces I actually care about.
+              </p>
+            </motion.div>
 
-              <div className="relative overflow-hidden rounded-[2.4rem] border border-white/60 bg-white/58 p-5 shadow-[0_28px_90px_rgba(7,20,38,0.08)] backdrop-blur-xl sm:p-6">
-                <div className="pointer-events-none absolute inset-x-6 top-6 h-px bg-custom-blue/10" />
-                <motion.div
-                  style={shouldReduceMotion ? undefined : { x: capabilityTrackX }}
-                  className="relative z-10 flex w-max gap-5 pr-8 will-change-transform"
-                >
-                  {capabilityCards.map((card, index) => {
-                    const Icon = card.icon;
-                    return (
-                      <motion.article
-                        key={card.title}
-                        {...fadeInUp(index * 0.05)}
-                        className={`flex h-[20rem] w-[min(82vw,28rem)] shrink-0 flex-col rounded-[2rem] border p-6 shadow-[0_24px_80px_rgba(7,20,38,0.08)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:shadow-[0_26px_90px_rgba(7,20,38,0.12)] ${
-                          index === 0
-                            ? "border-white/60 bg-[linear-gradient(145deg,rgba(255,250,245,0.9),rgba(255,233,219,0.7))]"
-                            : index === 1
-                              ? "border-white/60 bg-[linear-gradient(145deg,rgba(255,255,255,0.84),rgba(216,244,252,0.7))]"
-                              : index === 2
-                                ? "border-white/60 bg-[linear-gradient(145deg,rgba(245,248,252,0.92),rgba(232,238,246,0.74))]"
-                                : "border-white/60 bg-[linear-gradient(145deg,rgba(255,248,239,0.88),rgba(243,244,255,0.7))]"
-                        }`}
-                      >
-                        <div className="mb-8 inline-flex rounded-2xl border border-custom-blue/10 bg-custom-blue/6 p-3 text-custom-blue">
-                          <Icon className="h-5 w-5" />
-                        </div>
-                        <h2 className="font-display text-[clamp(1.8rem,3vw,2.7rem)] leading-tight tracking-[-0.05em] text-custom-blue">
-                          {card.title}
-                        </h2>
-                        <p className="mt-4 max-w-[24rem] text-sm leading-7 text-custom-blue/68">{card.body}</p>
-                        <div className="mt-auto flex flex-wrap gap-2 pt-5">
-                          {capabilityTags.slice(index * 3, index * 3 + 3).map((tag) => (
-                            <span
-                              key={tag}
-                              className="rounded-full border border-custom-blue/10 bg-white/65 px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-custom-blue/55"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </motion.article>
-                    );
-                  })}
-                </motion.div>
-              </div>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {capabilityCards.map((card, index) => {
+                const Icon = card.icon;
+
+                return (
+                  <motion.article
+                    key={card.title}
+                    {...fadeInUp(index * 0.1)}
+                    className={`glass-panel group relative flex min-h-[22rem] flex-col overflow-hidden rounded-[2.8rem] bg-white/65 p-8 shadow-[0_16px_48px_rgba(11,17,26,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_70px_rgba(11,17,26,0.08)] ${card.colSpan}`}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <div className="relative z-10 flex h-full flex-col">
+                      <div className="mb-10 inline-flex h-14 w-14 items-center justify-center rounded-[1.2rem] border border-custom-blue/8 bg-white text-custom-blue shadow-sm transition-transform duration-500 group-hover:scale-110">
+                        <Icon className="h-7 w-7" />
+                      </div>
+                      <h2 className="font-display text-[2rem] font-medium leading-[1.05] tracking-[-0.04em] text-custom-blue sm:text-[2.2rem]">
+                        {card.title}
+                      </h2>
+                      <p className="mt-5 max-w-[28rem] text-[0.95rem] leading-relaxed text-custom-blue/72">
+                        {card.body}
+                      </p>
+                      <div className="mt-auto flex flex-wrap gap-2.5 pt-10">
+                        {capabilityTags.slice(index * 3, index * 3 + 3).map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full border border-custom-blue/12 bg-white/60 px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-custom-blue/65"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.article>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        <section id="work" className="mt-16 w-full sm:mt-24">
+        <section id="work" className="mx-auto mt-20 w-full max-w-7xl sm:mt-32">
           <SectionLabel index="03" label="Selected Work" />
-          <motion.div {...fadeInUp(0.04)} className="mt-4 grid gap-4 lg:grid-cols-12">
-            {featuredProjects.map((project, index) => {
-              const isLarge = index === 0;
-              return (
-                <motion.article
-                  key={project.title}
-                  {...fadeInUp(index * 0.05)}
-                  className={`group overflow-hidden rounded-[2.3rem] border border-white/60 bg-white/62 shadow-[0_28px_90px_rgba(7,20,38,0.08)] backdrop-blur-2xl transition duration-300 hover:-translate-y-1 ${
-                    isLarge ? "lg:col-span-7 lg:row-span-2 min-h-[22rem]" : "lg:col-span-5 min-h-[11rem]"
-                  }`}
+          <motion.div {...fadeInUp(0.04)} className="mt-10 grid gap-8 lg:grid-cols-2">
+            {featuredProjects.map((project, index) => (
+              <motion.article
+                key={project.title}
+                {...fadeInUp(index * 0.1)}
+                className="glass-panel group relative min-h-[26rem] overflow-hidden rounded-[3rem] border-white/90 shadow-[0_32px_80px_rgba(11,17,26,0.06)] transition duration-700 hover:-translate-y-2 hover:shadow-[0_45px_100px_rgba(11,17,26,0.12)]"
+              >
+                <Link
+                  href={project.link}
+                  className="relative flex h-full flex-col justify-between p-8 sm:p-12"
+                  aria-label={`Open ${project.title}`}
                 >
-                  <Link href={project.link} className="relative flex h-full min-h-[11rem] flex-col justify-between p-6 sm:p-7">
-                    <div className={`absolute inset-0 ${project.backgroundClass}`} />
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.58),transparent_32%),radial-gradient(circle_at_80%_10%,rgba(255,255,255,0.32),transparent_24%),linear-gradient(135deg,rgba(255,255,255,0.12),transparent_48%)]" />
-                    <div className="relative flex items-center justify-between gap-3">
-                      <span className="rounded-full border border-white/70 bg-white/40 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-custom-blue/60 backdrop-blur-md">
-                        {project.category}
-                      </span>
-                      <span className="text-sm text-custom-blue/45">{project.date}</span>
+                  <div className="absolute inset-0">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+                    <div className={`absolute inset-0 opacity-20 ${project.backgroundClass}`} />
+                  </div>
+
+                  <div className="relative z-10 flex items-center justify-between gap-4">
+                    <span className="rounded-full border border-white/40 bg-white/10 px-5 py-2 text-[0.72rem] font-bold uppercase tracking-[0.24em] text-white backdrop-blur-xl">
+                      {project.category}
+                    </span>
+                    <span className="text-[0.85rem] font-bold tracking-widest text-white/75">{project.date}</span>
+                  </div>
+
+                  <div className="relative z-10 mt-auto transform transition-transform duration-700 group-hover:-translate-y-2">
+                    <h3 className="font-display text-[2.5rem] leading-[0.9] tracking-[-0.04em] text-white sm:text-[3.2rem] lg:text-[3.8rem]">
+                      {project.title}
+                    </h3>
+                    <p className="mt-4 max-w-md text-[1.1rem] leading-relaxed text-white/85">
+                      {project.highlight}
+                    </p>
+                    <div className="mt-10 inline-flex w-fit items-center gap-3 rounded-full bg-white px-7 py-3 text-sm font-bold text-custom-blue transition-all duration-300 hover:bg-[#0071e3] hover:text-white">
+                      Read Case Study
+                      <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                     </div>
-                    <div className="relative mt-auto max-w-[28rem]">
-                      <h3 className={`font-display leading-[0.95] tracking-[-0.06em] text-custom-blue ${isLarge ? "text-[clamp(2.2rem,4vw,4rem)]" : "text-[clamp(1.8rem,3vw,2.5rem)]"}`}>
-                        {project.title}
-                      </h3>
-                      <p className="mt-2 max-w-xl text-sm leading-6 text-custom-blue/70">
-                        {project.subTitle}
-                      </p>
-                    </div>
-                    <div className="relative mt-4 inline-flex w-fit items-center gap-2 text-sm font-semibold text-custom-blue">
-                      Open
-                      <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
-                    </div>
-                  </Link>
-                </motion.article>
-              );
-            })}
+                  </div>
+                </Link>
+              </motion.article>
+            ))}
           </motion.div>
         </section>
 
-        <section ref={trajectoryRef} className="mt-12 w-full sm:mt-20" style={{ minHeight: `${(history.length * 110) + 100}vh` }}>
+        <section ref={trajectoryRef} className="mx-auto mt-20 w-full max-w-7xl sm:mt-32" style={{ minHeight: `${(history.length * 110) + 100}vh` }}>
           <SectionLabel index="04" label="Trajectory" />
           <div className="sticky top-0 flex min-h-screen items-center py-10">
-            <div className="grid w-full gap-6 lg:grid-cols-[0.86fr_1.14fr]">
+            <div className="w-full space-y-6">
               <motion.div
                 {...fadeInUp(0.04)}
-                className="min-w-0 rounded-[2.4rem] border border-white/60 bg-[#081827] p-7 text-white shadow-[0_32px_110px_rgba(7,20,38,0.16)]"
+                className="glass-panel rounded-[2.5rem] bg-white/72 p-6 shadow-[0_18px_65px_rgba(11,17,26,0.07)] backdrop-blur-xl sm:p-8 lg:p-8"
               >
-                <p className="font-display text-[clamp(1.6rem,2.8vw,3.2rem)] leading-tight tracking-[-0.06em]">
-                  Built in Denmark. Now shipping from Singapore.
-                </p>
-                <p className="mt-4 text-sm leading-7 text-white/70">
-                  Multimedia design first. Product work next. The timeline stays pinned while each step advances one by one, then holds on the last point so the section still has breathing room.
-                </p>
-                <div className="mt-8 flex flex-wrap gap-2 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-white/62">
-                  <span className="rounded-full border border-white/12 bg-white/6 px-3 py-1.5">
-                    Scroll-driven timeline
-                  </span>
-                  <span className="rounded-full border border-white/12 bg-white/6 px-3 py-1.5">
-                    Sticky section
-                  </span>
-                  <span className="rounded-full border border-white/12 bg-white/6 px-3 py-1.5">
-                    Last step holds
-                  </span>
+                <div className="space-y-3">
+                  <div className="inline-flex rounded-full border border-custom-blue/10 bg-white/75 px-4 py-1 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/55">
+                    Engineering Path
+                  </div>
+                  <p className="font-display text-[clamp(1.75rem,2.8vw,2.8rem)] leading-[0.94] tracking-[-0.05em] text-custom-blue">
+                    Built in Denmark. Now shipping from Singapore.
+                  </p>
+                  <p className="max-w-2xl text-sm leading-7 text-custom-blue/68">
+                    Multimedia design first. Product work next. The timeline stays pinned while each step advances one by one.
+                  </p>
                 </div>
               </motion.div>
 
-              <div className="rounded-[2.4rem] border border-white/60 bg-white/66 p-5 shadow-[0_28px_90px_rgba(7,20,38,0.08)] backdrop-blur-xl sm:p-6">
-                <div className="grid gap-5 xl:grid-cols-[19rem_1fr]">
-                  <div className="relative rounded-[2rem] border border-custom-blue/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.9),rgba(244,247,250,0.72))] p-5 shadow-[0_16px_48px_rgba(7,20,38,0.05)]">
-                    <div className="pointer-events-none absolute bottom-5 left-10 top-5 w-px -translate-x-1/2 bg-custom-blue/10" />
-                    <div className="space-y-3">
-                      {history.map((item, index) => {
-                        const isActive = index === activeTrajectoryIndex;
-                        const isPast = index < activeTrajectoryIndex;
+              <div className="grid gap-8 lg:grid-cols-[1fr_2fr] lg:items-start">
+                <div className="glass-panel relative h-full rounded-[2.8rem] bg-white/70 p-7 shadow-[0_12px_45px_rgba(11,17,26,0.06)]">
+                  <div className="pointer-events-none absolute bottom-8 left-[3rem] top-8 w-[2px] -translate-x-1/2 bg-custom-blue/10" />
+                  <div className="space-y-4">
+                    {history.map((item, index) => {
+                      const isActive = index === activeTrajectoryIndex;
+                      const isPast = index < activeTrajectoryIndex;
 
-                        return (
-                          <button
-                            key={`${item.company}-${item.time.start}`}
-                            type="button"
-                            className={`relative grid w-full grid-cols-[2.5rem_1fr] items-start gap-3 rounded-[1.4rem] py-3 pr-3 text-left transition duration-300 ${
-                              isActive
-                                ? "bg-white shadow-[0_12px_36px_rgba(7,20,38,0.08)]"
-                                : "hover:bg-white/70"
-                            }`}
-                            aria-pressed={isActive}
-                          >
-                            <span className="relative flex h-7 items-center justify-center">
-                              {isActive ? (
-                                <motion.span
-                                  layoutId="trajectory-dot"
-                                  className="relative z-10 h-2.5 w-2.5 rounded-full border-2 border-[#67d9ff] bg-[#67d9ff] shadow-[0_0_0_7px_rgba(103,217,255,0.15)]"
-                                />
-                              ) : (
-                                <span
-                                  className={`relative z-10 h-2.5 w-2.5 rounded-full border-2 transition duration-300 ${
-                                    isPast
-                                      ? "border-[#67d9ff]/65 bg-white"
-                                      : "border-custom-blue/18 bg-white"
-                                  }`}
-                                />
-                              )}
-                            </span>
-                            <span className="min-w-0 pt-0.5">
-                              <span className="block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-custom-blue/45">
-                                {item.time.start} {item.time.end ? `- ${item.time.end}` : "- Present"}
-                              </span>
-                              <span className="mt-1 block text-sm font-semibold text-custom-blue">
-                                {item.company}
-                              </span>
-                              <span className="mt-0.5 block text-[0.72rem] leading-5 text-custom-blue/60">
-                                {item.jobTitle}
-                              </span>
-                            </span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  <AnimatePresence mode="wait">
-                    <motion.article
-                      key={activeTrajectoryIndex}
-                      initial={{ opacity: 0, y: 18 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -14 }}
-                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                      className="relative overflow-hidden rounded-[2rem] border border-custom-blue/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.96),rgba(236,244,249,0.86))] p-6 shadow-[0_18px_55px_rgba(7,20,38,0.06)] sm:p-7"
-                    >
-                      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(103,217,255,0.16),transparent_24%),radial-gradient(circle_at_20%_10%,rgba(255,255,255,0.88),transparent_22%)]" />
-                      <div className="relative flex h-full flex-col">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.26em] text-custom-blue/45">
-                            {activeTrajectoryItem.time.start}{" "}
-                            {activeTrajectoryItem.time.end
-                              ? `- ${activeTrajectoryItem.time.end}`
-                              : "- Present"}
-                          </p>
-                          <span className="rounded-full border border-custom-blue/10 bg-custom-blue/5 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-custom-blue/55">
-                            Step {activeTrajectoryIndex + 1} of {history.length}
+                      return (
+                        <button
+                          key={`${item.company}-${item.time.start}`}
+                          type="button"
+                          onClick={() => setActiveTrajectoryIndex(index)}
+                          className={`relative grid w-full grid-cols-[2.5rem_1fr] items-start gap-3 rounded-[1.4rem] py-3 pr-3 text-left transition duration-300 ${
+                            isActive
+                              ? "bg-white shadow-[0_12px_45px_rgba(11,17,26,0.08)]"
+                              : "hover:bg-white/45"
+                          }`}
+                          aria-pressed={isActive}
+                        >
+                          <span className="relative flex h-7 items-center justify-center">
+                            {isActive ? (
+                              <motion.span
+                                layoutId="trajectory-dot-v2"
+                                className="relative z-10 h-2.5 w-2.5 rounded-full border-2 border-[#67d9ff] bg-[#67d9ff] shadow-[0_0_0_7px_rgba(103,217,255,0.15)]"
+                              />
+                            ) : (
+                              <span
+                                className={`relative z-10 h-2.5 w-2.5 rounded-full border-2 transition duration-300 ${
+                                  isPast
+                                    ? "border-[#67d9ff]/65 bg-white"
+                                    : "border-custom-blue/18 bg-white"
+                                }`}
+                              />
+                            )}
                           </span>
-                        </div>
-                        <p className="mt-4 font-display text-[clamp(1.9rem,3vw,3rem)] leading-[0.96] tracking-[-0.06em] text-custom-blue">
-                          {activeTrajectoryItem.jobTitle}
-                        </p>
-                        <p className="mt-3 max-w-[38rem] text-sm leading-7 text-custom-blue/72">
-                          {activeTrajectoryItem.description[0]}
-                        </p>
-                        <p className="mt-3 max-w-[38rem] text-sm leading-7 text-custom-blue/72">
-                          {activeTrajectoryItem.description[1]}
-                        </p>
-                        <p className="mt-3 max-w-[38rem] text-sm leading-7 text-custom-blue/72">
-                          {activeTrajectoryItem.description[2]}
-                        </p>
-
-                        <div className="mt-auto flex flex-wrap gap-2 pt-6">
-                          {activeTrajectoryItem.skills.map((skill) => (
-                            <span
-                              key={skill}
-                              className="rounded-full border border-custom-blue/10 bg-white/70 px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-custom-blue/55"
-                            >
-                              {skill}
+                          <span className="min-w-0 pr-2">
+                            <span className="block text-[0.68rem] font-bold uppercase tracking-[0.24em] text-custom-blue/45">
+                              {item.time.start} {item.time.end ? `- ${item.time.end}` : "- Present"}
                             </span>
-                          ))}
-                        </div>
-                      </div>
-                    </motion.article>
-                  </AnimatePresence>
+                            <span className="mt-1 block truncate text-[1rem] font-bold text-custom-blue">
+                              {item.company}
+                            </span>
+                            <span className="mt-0.5 block text-[0.72rem] leading-5 text-custom-blue/60">
+                              {item.jobTitle}
+                            </span>
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
+
+                <AnimatePresence mode="wait">
+                  <motion.article
+                    key={activeTrajectoryIndex}
+                    initial={{ opacity: 0, scale: 0.98, x: 15 }}
+                    animate={{ opacity: 1, scale: 1, x: 0 }}
+                    exit={{ opacity: 0, scale: 0.98, x: -15 }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    className="glass-panel relative flex flex-col justify-start overflow-hidden rounded-[2.8rem] bg-white/72 p-8 shadow-[0_12px_45px_rgba(11,17,26,0.06)] lg:p-10"
+                  >
+                    <div className="flex flex-wrap items-center gap-4">
+                      <span className="rounded-full border border-custom-blue/12 bg-custom-blue/6 px-4 py-2 text-[0.68rem] font-bold uppercase tracking-[0.2em] text-custom-blue/65">
+                        {activeTrajectoryItem.time.start}{" "}
+                        {activeTrajectoryItem.time.end
+                          ? `- ${activeTrajectoryItem.time.end}`
+                          : "- Present"}
+                      </span>
+                      <span className="rounded-full border border-custom-blue/10 bg-white px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-custom-blue/55">
+                        Step {activeTrajectoryIndex + 1} of {history.length}
+                      </span>
+                    </div>
+                    <p className="mt-8 font-display text-[clamp(1.8rem,2.8vw,2.5rem)] leading-[0.98] tracking-[-0.04em] text-custom-blue">
+                      {activeTrajectoryItem.jobTitle}
+                    </p>
+                    <div className="mt-6 space-y-5">
+                      {activeTrajectoryItem.description.map((paragraph, index) => (
+                        <p key={index} className="max-w-[38rem] text-[1rem] leading-relaxed text-custom-blue/75">
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+
+                    <div className="mt-12 flex flex-wrap gap-2.5">
+                      {activeTrajectoryItem.skills.map((skill) => (
+                        <span
+                          key={skill}
+                          className="rounded-full border border-custom-blue/15 bg-white px-4 py-2 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-custom-blue/60 shadow-sm"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </motion.article>
+                </AnimatePresence>
               </div>
             </div>
           </div>
