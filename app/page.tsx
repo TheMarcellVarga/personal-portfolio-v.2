@@ -27,6 +27,8 @@ import Header from "./header";
 import Footer from "./footer";
 import { history } from "./data/history";
 import { projects } from "./data/projects";
+import { SectionLabel } from "./components/SectionLabel";
+import { PageBackground } from "./components/PageBackground";
 
 const manifesto =
   "I build interfaces that feel deliberate: design systems, motion details, frontend code, and product thinking in one lane.";
@@ -94,29 +96,6 @@ function scrollToId(id: string, reducedMotion: boolean) {
     behavior: reducedMotion ? "auto" : "smooth",
     block: "start",
   });
-}
-
-function SectionLabel({
-  index,
-  label,
-  tone = "dark",
-}: {
-  index: string;
-  label: string;
-  tone?: "dark" | "light";
-}) {
-  const isLight = tone === "light";
-  return (
-    <div
-      className={`mb-6 flex items-center gap-4 text-[0.7rem] font-semibold uppercase tracking-[0.32em] ${
-        isLight ? "text-white/62" : "text-custom-blue/55"
-      }`}
-    >
-      <span>{index}</span>
-      <span className={`h-px w-12 ${isLight ? "bg-white/20" : "bg-custom-blue/20"}`} />
-      <span>{label}</span>
-    </div>
-  );
 }
 
 export default function Page() {
@@ -239,8 +218,7 @@ export default function Page() {
 
   return (
     <div className="relative overflow-x-clip">
-      <div className="pointer-events-none fixed inset-0 -z-20 bg-[radial-gradient(circle_at_top_left,_rgba(76,207,255,0.16),_transparent_28%),radial-gradient(circle_at_20%_70%,_rgba(255,153,102,0.16),_transparent_34%),radial-gradient(circle_at_85%_18%,_rgba(17,27,40,0.12),_transparent_24%),linear-gradient(180deg,_#f8f1e8_0%,_#f6efe5_46%,_#fff8f1_100%)]" />
-      <div className="pointer-events-none fixed inset-0 -z-10 bg-[linear-gradient(rgba(17,27,40,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(17,27,40,0.04)_1px,transparent_1px)] bg-[size:92px_92px] [mask-image:radial-gradient(circle_at_center,black_45%,transparent_88%)]" />
+      <PageBackground />
 
       <Header
         isOpen={isOpen}

@@ -1,18 +1,18 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowLeft, ArrowUpRight, Calendar, Tag } from "lucide-react";
 import Header from "../../header";
 import Footer from "../../footer";
 import { projects } from "../../data/projects";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
-import useLocomotive from "../../useLocomotive";
+import { PageBackground } from "../../components/PageBackground";
+import { SectionLabel } from "../../components/SectionLabel";
 import { useRouter } from "next/navigation";
 
-const hideLegacyImages = true;
+const hideLegacyImages = false;
 
 const history = [
   {
@@ -269,607 +269,200 @@ const history = [
   },
 ];
 
-const ESS = () => {
+function fadeInUp(delay = 0) {
+  return {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.2 },
+    transition: {
+      duration: 0.6,
+      delay,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  };
+}
+
+export default function ESSPage() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isHover, setIsHover] = useState(false);
-  const { updateScroll } = useLocomotive();
   const router = useRouter();
+  const projectData = projects.find((p) => p.title === "European Study Solution")!;
 
-  // Add navigation functions for the header
-  const scrollToHome = useCallback(async () => {
-    await router.push("/");
-    setTimeout(() => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    }, 100);
+  const handleBack = useCallback(() => {
+    router.push("/#work");
   }, [router]);
-
-  const scrollToAbout = useCallback(async () => {
-    await router.push("/");
-    setTimeout(() => {
-      const aboutSection = document.querySelector('[data-scroll-section-id="about"]');
-      if (aboutSection) {
-        const offset = aboutSection.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({
-          top: offset,
-          behavior: "smooth",
-        });
-      }
-    }, 100);
-  }, [router]);
-
-  const scrollToWork = useCallback(async () => {
-    await router.push("/");
-    setTimeout(() => {
-      const projectsContent = document.getElementById('projects-content');
-      if (projectsContent) {
-        const offset = projectsContent.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({
-          top: offset,
-          behavior: "smooth",
-        });
-      }
-    }, 100);
-  }, [router]);
-
-  const scrollToContact = useCallback(async () => {
-    await router.push("/");
-    setTimeout(() => {
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: "smooth",
-      });
-    }, 100);
-  }, [router]);
-
-  useEffect(() => {
-    const handlePageShow = () => {
-      updateScroll();
-    };
-
-    window.addEventListener("pageshow", handlePageShow);
-    return () => window.removeEventListener("pageshow", handlePageShow);
-  }, [updateScroll]);
-
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible") {
-        updateScroll();
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () =>
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-  }, [updateScroll]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      updateScroll();
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [updateScroll]);
 
   return (
-    <div
-      id="main-container"
-      data-scroll-container
-      className={`
-        px-4 pb-4 
-        transition-colors duration-200 
-        ease-in-out 
-        bg-gray-200 
-        relative
-        scroll-smooth
-      `}
-    >
-      <div
-        className="
-          absolute inset-0 
-          bg-[radial-gradient(rgba(2,66,92,0.07)_1.5px,transparent_1.5px)]
-          [background-size:16px_16px] 
-          pointer-events-none
-          before:absolute 
-          before:inset-0 
-          before:bg-linear-to-b 
-          before:from-transparent 
-          before:to-gray-200/50 
-          before:backdrop-blur-[1px]
-          motion-safe:transition-opacity
-          motion-safe:duration-700
-          scroll-smooth
-        "
-        style={{ zIndex: 0 }}
-        aria-hidden="true"
+    <div className="relative overflow-x-clip">
+      <PageBackground />
+      
+      <Header 
+        isOpen={isOpen} 
+        setIsOpen={setIsOpen} 
+        activeSection="Work"
       />
-      <div className="relative z-1">
-        <Header 
-          isOpen={isOpen} 
-          setIsOpen={setIsOpen} 
-          scrollToHome={scrollToHome}
-          scrollToAbout={scrollToAbout}
-          scrollToWork={scrollToWork}
-          scrollToContact={scrollToContact}
-        />
-        <main
-          data-scroll-container
-          data-scroll-section-id="hero"
-          className="flex flex-col items-center justify-between sm:m-4 gap-1 w-full"
-        >
-          <div className="grow pb-12 w-full flex flex-row items-center justify-center gap-2">
-            <section className="flex flex-col items-center justify-between my-4 gap-24 w-4/5">
-              <article className="mt-16 mb-24 w-full sm:p-4">
-                <div className="relative">
-                  <div className="animate-fade-in-up flex flex-row justify-between items-start sm:py-8 sm:px-4">
-                    <div className="flex flex-col gap-1 w-full">
-                      <div className="flex flex-col sm:flex-row justify-between items-center w-full gap-4 sm:gap-0">
-                        <div className="flex flex-col gap-1 sm:gap-2 w-full ">
-                          <div className="flex flex-row justify-between items-center w-full gap-2 sm:gap-0">
-                            <h2
-                              className="text-4xl sm:text-6xl font-extrabold tracking-tight
-              transform hover:translate-x-2 transition-all duration-300
-              bg-linear-to-r from-custom-blue to-custom-blue/80 
-              bg-clip-text text-transparent
-              leading-tight
-              text-center sm:text-left"
-                            >
-                              European Study Solution
-                            </h2>
-                            <span
-                              className="
-                                px-3 sm:px-4 py-1
-                                rounded-full 
-                                bg-custom-blue/5 
-                                text-sm sm:text-xl
-                                text-custom-blue/60
-                                transform hover:-translate-x-2 
-                                transition-all duration-300
-                                self-center
-                              "
-                            >
-                              2021
-                            </span>
-                          </div>
-                          <h2
-                            className="text-gray-700 text-sm sm:text-xl font-bold tracking-widest uppercase
-            transform hover:translate-x-2 transition-all duration-300"
-                          >
-                            Student Agency
-                          </h2>
-                        </div>
-                      </div>
-                    </div>
-                  </div>{" "}
+
+      <main className="relative z-10 px-4 pb-20 pt-24 sm:px-6 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <motion.button
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            onClick={handleBack}
+            className="group mb-12 flex items-center gap-2 text-sm font-semibold text-custom-blue/60 transition-colors hover:text-custom-blue"
+          >
+            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+            Back to work
+          </motion.button>
+
+          <header className="mb-20 grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
+            <motion.div {...fadeInUp(0)}>
+              <SectionLabel index="Project" label="Case Study" />
+              <h1 className="font-display text-[clamp(2.5rem,6vw,5.5rem)] font-medium leading-[0.9] tracking-[-0.06em] text-custom-blue">
+                {projectData.title}
+              </h1>
+              <p className="mt-8 max-w-2xl text-lg leading-relaxed text-custom-blue/72">
+                {projectData.description}
+              </p>
+            </motion.div>
+
+            <motion.div 
+              {...fadeInUp(0.1)}
+              className="flex flex-col gap-6 lg:pt-16"
+            >
+              <div className="grid grid-cols-2 gap-8">
+                <div className="space-y-1">
+                  <p className="flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/45">
+                    <Calendar className="h-3 w-3" /> Date
+                  </p>
+                  <p className="text-sm font-semibold text-custom-blue">{projectData.date}</p>
                 </div>
-                <div className="flex flex-col gap-16 mt-16">
-                  {history.map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex animate-fade-in-up space-y-8 md:space-y-12"
-                      style={{ animationDelay: `${0.3 + index * 0.1}s` }}
-                    >
-                      <div className="flex flex-col gap-2 w-full">
-                        <div
-                          className="
-                            mt-4 sm:mt-6 md:mt-8
-                            mb-16 sm:mb-24 md:mb-32
-                            relative w-full 
-                            overflow-hidden 
-                            rounded-lg sm:rounded-xl md:rounded-2xl
-                            shadow-[0_10px_30px_rgba(2,66,92,0.15)] sm:shadow-[0_15px_40px_rgba(2,66,92,0.18)] md:shadow-[0_20px_50px_rgba(2,66,92,0.2)]
-                            group
-                          "
-                        >
-                          <div
-                            className="
-                              absolute inset-0 
-                              bg-linear-to-br from-custom-blue/3 sm:from-custom-blue/4 md:from-custom-blue/5 to-transparent
-                              opacity-0 group-hover:opacity-100
-                              transition-opacity duration-500 z-10
-                            "
-                          />
-                          {hideLegacyImages ? (
-                            <div className="relative flex min-h-[15rem] items-end overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl border border-white/70 bg-[linear-gradient(135deg,rgba(198,228,255,0.9),rgba(232,241,248,0.88),rgba(214,230,239,0.96))] p-6 sm:p-8">
-                              <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.72),transparent_30%),radial-gradient(circle_at_78%_14%,rgba(255,255,255,0.45),transparent_22%),linear-gradient(135deg,rgba(255,255,255,0.15),transparent_42%)]" />
-                              <div className="relative max-w-xl rounded-[1.5rem] border border-white/70 bg-white/36 p-5 backdrop-blur-md">
-                                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-custom-blue/50">
-                                  Case study archive
-                                </p>
-                                <p className="mt-3 text-2xl font-display tracking-[-0.05em] text-custom-blue">
-                                  ESS visuals removed
-                                </p>
-                                <p className="mt-3 text-sm leading-7 text-custom-blue/68">
-                                  The old mockups were retired so the page now focuses on the write-up and process.
-                                </p>
-                              </div>
-                            </div>
-                          ) : (
-                            <Image
-                              src={item.content.picture}
-                              alt="ESS Hero"
-                              width={1200}
-                              height={800}
-                              className="
-                                w-full h-auto 
-                                object-cover 
-                                rounded-lg sm:rounded-xl md:rounded-2xl
-                                transform transition-all duration-700 
-                                group-hover:scale-[1.02] sm:group-hover:scale-[1.03] md:group-hover:scale-105
-                              "
-                              sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, 85vw"
-                            />
-                          )}
-                        </div>
-                        <div className="text-base text-custom-blue transform-gpu">
-                          {item.description.map((desc, descIndex) => (
-                            <div
-                              key={descIndex}
-                              className="transition-transform duration-300"
-                            >
-                              <p
-                                className={`
-                                  ${
-                                    descIndex === 0
-                                      ? "pt-8 md:pt-10"
-                                      : "pt-12 md:pt-14"
-                                  }
-                                  text-2xl font-extrabold tracking-tight
-                                  text-custom-blue
-                                  group-hover:text-custom-blue/90
-                                  transition-all duration-300
-                                  relative
-                                  before:absolute before:bottom-0 before:left-0 before:w-0 before:h-[2px]
-                                  before:bg-custom-blue/30 before:transition-all before:duration-300
-                                  group-hover:before:w-full
-                                `}
-                              >
-                                {desc.title}
-                              </p>
-                              {desc.text && (
-                                <div
-                                  className="py-4 text-custom-blue/80 group-hover:text-custom-blue 
-                                  transition-all duration-300 backdrop-blur-xs"
-                                >
-                                  {Array.isArray(desc.text) ? (
-                                    desc.text.map((text, index) => (
-                                      <p
-                                        key={index}
-                                        className="mb-6 last:mb-0 text-justify leading-relaxed
-                                        transform hover:translate-x-2 transition-transform duration-300
-                                        hover:text-custom-blue/90"
-                                      >
-                                        {text}
-                                      </p>
-                                    ))
-                                  ) : (
-                                    <p className="transform hover:translate-x-2 transition-transform duration-300">
-                                      {desc.text}
-                                    </p>
-                                  )}
-                                </div>
-                              )}
-                              {!hideLegacyImages &&
-                                Array.isArray(desc.picture) &&
-                                desc.picture.length > 0 && (
-                                  <div className="mt-6 flex flex-wrap justify-center items-center w-full gap-10">
-                                    {Array.isArray(desc.picture) &&
-                                      desc.picture
-                                        .reduce(
-                                          (rows: any[], curr, index, array) => {
-                                            const isTriple =
-                                              curr === array[index + 1] &&
-                                              curr === array[index + 2];
-                                            const isSecondOfTriple =
-                                              curr === array[index - 1] &&
-                                              curr === array[index + 1];
-                                            const isThirdOfTriple =
-                                              curr === array[index - 2] &&
-                                              curr === array[index - 1];
-
-                                            const isPartOfPair =
-                                              curr === array[index + 1] &&
-                                              !isTriple &&
-                                              !isSecondOfTriple;
-                                            const isSecondOfPair =
-                                              curr === array[index - 1] &&
-                                              !isSecondOfTriple &&
-                                              !isThirdOfTriple;
-
-                                            const heightMultiplier =
-                                              isTriple ||
-                                              isSecondOfTriple ||
-                                              isThirdOfTriple
-                                                ? 3
-                                                : isPartOfPair || isSecondOfPair
-                                                ? 2
-                                                : 1;
-
-                                            if (
-                                              isSecondOfPair ||
-                                              isSecondOfTriple ||
-                                              isThirdOfTriple
-                                            )
-                                              return rows;
-
-                                            const lastRow =
-                                              rows[rows.length - 1];
-                                            if (
-                                              !lastRow ||
-                                              lastRow.length >= 3
-                                            ) {
-                                              rows.push([
-                                                {
-                                                  url: curr,
-                                                  isPair: isPartOfPair,
-                                                  isTriple: isTriple,
-                                                  heightMultiplier:
-                                                    heightMultiplier,
-                                                },
-                                              ]);
-                                            } else {
-                                              lastRow.push({
-                                                url: curr,
-                                                isPair: isPartOfPair,
-                                                isTriple: isTriple,
-                                                heightMultiplier:
-                                                  heightMultiplier,
-                                              });
-                                            }
-                                            return rows;
-                                          },
-                                          []
-                                        )
-                                        .map((row, rowIndex) => (
-                                          <div
-                                            key={rowIndex}
-                                            className={`
-                                            flex flex-row 
-                                            ${
-                                              desc.title === "Responsive Design"
-                                                ? "items-start"
-                                                : "items-center"
-                                            }
-                                            justify-center gap-10 w-full
-                                            transform hover:scale-[1.02] transition-all duration-500 ease-out
-                                          `}
-                                          >
-                                            {row.map(
-                                              (
-                                                item: {
-                                                  url: string | StaticImport;
-                                                  isPair: boolean;
-                                                  isTriple: boolean;
-                                                  heightMultiplier: 1 | 2 | 3;
-                                                },
-                                                pictureIndex: number
-                                              ) => (
-                                                <div
-                                                  key={`${rowIndex}-${pictureIndex}`}
-                                                  className={`bg-gray-100 p-4 rounded-md ${
-                                                    item.isPair || item.isTriple
-                                                      ? "w-[calc(90%+2rem)]"
-                                                      : row.length === 3
-                                                      ? "w-[30%]"
-                                                      : row.length === 1
-                                                      ? "w-[66%]"
-                                                      : "w-[45%]"
-                                                  } flex items-center justify-center group`}
-                                                >
-                                                  <div
-                                                    className={`w-full relative flex items-center justify-center ${
-                                                      item.heightMultiplier ===
-                                                      3
-                                                        ? "aspect-16/36"
-                                                        : item.heightMultiplier ===
-                                                          2
-                                                        ? "aspect-16/18"
-                                                        : "aspect-16/9"
-                                                    }`}
-                                                  >
-                                                    <Image
-                                                      src={
-                                                        typeof item.url ===
-                                                        "string"
-                                                          ? item.url
-                                                          : (item.url as any)
-                                                              .src
-                                                      }
-                                                      alt={`Picture ${
-                                                        pictureIndex + 1
-                                                      }`}
-                                                      className="object-contain rounded-md transition-all duration-300"
-                                                      sizes={
-                                                        item.isPair ||
-                                                        item.isTriple
-                                                          ? "(max-width: 768px) 100vw, calc(90vw + 2rem)"
-                                                          : row.length === 1
-                                                          ? "(max-width: 768px) 100vw, 75vw"
-                                                          : "(max-width: 768px) 100vw, 45vw"
-                                                      }
-                                                    />
-                                                  </div>
-                                                </div>
-                                              )
-                                            )}
-                                          </div>
-                                        ))}
-                                  </div>
-                                )}
-                              {!hideLegacyImages &&
-                                Array.isArray(desc.subTitle) &&
-                                Array.isArray(desc.subText) &&
-                                Array.isArray(desc.subPicture) && (
-                                  <div className="mt-8 space-y-8">
-                                    {desc.subTitle.map((title, index) => (
-                                      <div
-                                        key={index}
-                                        className="mb-4 transform hover:translate-x-2 transition-transform duration-300"
-                                      >
-                                        <React.Fragment>
-                                          {desc.subPicture?.[index] && (
-                                            <div className="py-4 flex flex-wrap justify-center items-center w-full gap-8">
-                                              {(() => {
-                                                const currentPic =
-                                                  desc.subPicture[index];
-                                                const nextPic =
-                                                  desc.subPicture[index + 1];
-                                                const isPartOfPair =
-                                                  currentPic === nextPic;
-
-                                                return (
-                                                  <div className="flex flex-row justify-center items-center gap-8 w-full">
-                                                    <div
-                                                      className={`bg-gray-100 p-4 rounded-md ${
-                                                        isPartOfPair
-                                                          ? "w-[calc(90%+2rem)]"
-                                                          : "w-[75%]"
-                                                      } flex items-center justify-center group`}
-                                                    >
-                                                      <div className="w-full relative flex items-center justify-center aspect-16/9">
-                                                        <Image
-                                                          src={currentPic ?? ""}
-                                                          alt={`Sub-picture ${index}`}
-                                                          fill
-                                                          className="object-contain rounded-md transform transition-all duration-500 group-hover:shadow-[0_8px_30px_rgba(2,66,92,0.12)]"
-                                                          sizes={
-                                                            isPartOfPair
-                                                              ? "(max-width: 768px) 100vw, calc(90vw + 2rem)"
-                                                              : "(max-width: 768px) 100vw, 75vw"
-                                                          }
-                                                        />
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                );
-                                              })()}
-                                            </div>
-                                          )}
-                                          {title && (
-                                            <h4 className="text-base mb-1 font-semibold text-custom-blue">
-                                              {title}
-                                            </h4>
-                                          )}
-                                          <p
-                                            className={
-                                              index > 0 && !title ? "my-4" : ""
-                                            }
-                                          >
-                                            {desc.subText?.[index] || ""}
-                                          </p>
-                                        </React.Fragment>
-                                      </div>
-                                    ))}
-                                  </div>
-                                )}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                <div className="space-y-1">
+                  <p className="flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/45">
+                    <Tag className="h-3 w-3" /> Category
+                  </p>
+                  <p className="text-sm font-semibold text-custom-blue">{projectData.category}</p>
                 </div>
-              </article>
-            </section>
-          </div>
-          <section className="w-full flex justify-center items-center mb-16">
-            <div className="flex flex-col items-center w-4/5 max-w-2xl">
-              <div className="w-full h-px bg-linear-to-r from-transparent via-custom-blue/60 to-transparent mb-8" />
-              <h2 className="text-custom-blue text-xl font-bold mb-6">
-                More Projects
-              </h2>
-              <div className="w-full flex flex-col gap-4">
-                {projects
-                  .filter(
-                    (project) => project.title !== "European Study Solution"
-                  )
-                  .map((project, index) => (
-                    <div
-                      key={project.title}
-                      className="w-full transform-gpu hover:scale-[1.01] transition-all duration-300"
-                    >
-                      <Link
-                        href={project.link}
-                        className={`
-                          w-full 
-                          flex flex-row           
-                          gap-4                 
-                          px-4 py-3      
-                          rounded-lg           
-                          transition-all duration-300 ease-out 
-                          ${
-                            project.inProgress
-                              ? "bg-gradient-to-br from-custom-blue/10 via-custom-teal/10 to-custom-blue/10"
-                              : "bg-linear-to-br from-gray-100/95 to-gray-100/90"
-                          }
-                          hover:bg-neutral-100/95
-                          group
-                          items-center         
-                          border border-transparent
-                          ${
-                            project.inProgress
-                              ? "border-custom-blue/20"
-                              : "hover:border-custom-blue/10"
-                          }
-                          backdrop-blur-xs
-                          relative
-                          overflow-hidden
-                        `}
-                      >
-                        {project.inProgress && (
-                          <div className="absolute top-0 right-0 bg-custom-blue text-white px-2 py-1 text-xs rounded-bl-lg">
-                            Coming Soon
-                          </div>
-                        )}
-                        <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#02425C_1.5px,transparent_1.5px)] [background-size:16px_16px] pointer-events-none group-hover:scale-[1.5] transition-transform duration-1000" />
-                        <div className="w-32 h-20 relative overflow-hidden flex justify-center items-center group-hover:scale-[1.01] transition-transform duration-300">
-                          {project.inProgress ? (
-                            <div className="w-full h-full aspect-video relative rounded-md overflow-hidden bg-gradient-to-br from-custom-blue/20 via-custom-teal/20 to-custom-blue/20 flex items-center justify-center shadow-[0_4px_10px_rgba(2,66,92,0.12)] group-hover:shadow-[0_6px_15px_rgba(2,66,92,0.2)] transition-all duration-500">
-                              <div className="text-4xl animate-pulse" aria-hidden="true">🚀</div>
-                              <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_20%,_#ffffff_120%)] opacity-20"></div>
-                            </div>
-                          ) : (
-                            <div className={`w-full h-full relative rounded-md overflow-hidden shadow-xs ${project.backgroundClass}`}>
-                              <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.62),transparent_32%),radial-gradient(circle_at_80%_10%,rgba(255,255,255,0.38),transparent_24%),linear-gradient(135deg,rgba(255,255,255,0.16),transparent_48%)]" />
-                              <div className="relative flex h-full w-full items-end p-3">
-                                <div className="rounded-full border border-white/65 bg-white/35 px-2.5 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-custom-blue/60 backdrop-blur-md">
-                                  {project.category}
-                                </div>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                        <div className="flex flex-col grow gap-1">
-                          <div className="flex items-center justify-between">
-                            <div>
-                              <h3 className="text-lg font-bold text-custom-blue group-hover:text-custom-blue/90 transition-colors duration-300">
-                                {project.title}
-                              </h3>
-                              <p className="text-base text-custom-blue/70 group-hover:text-custom-blue/80 transition-colors duration-300">
-                                {project.subTitle}
-                              </p>
-                            </div>
-                            <div className="flex items-center transition-transform duration-300 ease-out group-hover:translate-x-1">
-                              <FontAwesomeIcon
-                                icon={faChevronRight}
-                                className="w-4 h-4 text-custom-blue/40 group-hover:text-custom-blue/60"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </Link>
-                    </div>
-                  ))}
               </div>
+              <div className="space-y-3">
+                <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/45">Key Skills</p>
+                <div className="flex flex-wrap gap-2">
+                  {projectData.skills.map((skill) => (
+                    <span key={skill} className="rounded-full border border-custom-blue/10 bg-white/50 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.1em] text-custom-blue/60 backdrop-blur-sm">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </header>
+
+          <motion.div 
+            {...fadeInUp(0.2)}
+            className={`relative mb-24 aspect-[16/9] overflow-hidden rounded-[3rem] shadow-[0_40px_120px_rgba(7,20,38,0.16)] ${projectData.backgroundClass}`}
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.4),transparent_50%)]" />
+            <Image
+              src={projectData.image}
+              alt={projectData.title}
+              fill
+              className="object-cover transition-transform duration-1000"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+          </motion.div>
+
+          <div className="space-y-32">
+            {history[0].description.map((section, sIndex) => (
+              <motion.section 
+                key={sIndex}
+                {...fadeInUp(0.1)}
+                className="grid gap-12 lg:grid-cols-[1fr_2fr]"
+              >
+                <div className="lg:sticky lg:top-32 lg:h-fit">
+                  {section.title && (
+                    <>
+                      <SectionLabel index={`0${sIndex + 1}`} label={section.title} />
+                      <h2 className="font-display text-4xl font-medium tracking-tight text-custom-blue">
+                        {section.title}
+                      </h2>
+                    </>
+                  )}
+                </div>
+
+                <div className="space-y-12">
+                  {section.text && section.text.length > 0 && (
+                    <div className="glass-panel space-y-6 rounded-[2.5rem] p-8 sm:p-10">
+                      {section.text.map((p, pIndex) => (
+                        <p key={pIndex} className="text-lg leading-relaxed text-custom-blue/72">
+                          {p}
+                        </p>
+                      ))}
+                    </div>
+                  )}
+
+                  {!hideLegacyImages && section.picture && section.picture.length > 0 && (
+                    <div className="grid gap-6 sm:grid-cols-2">
+                      {section.picture.map((pic, pIdx) => (
+                        <div key={pIdx} className="overflow-hidden rounded-3xl border border-custom-blue/5 bg-white shadow-lg">
+                          <Image
+                            src={pic}
+                            alt={`${section.title} visual ${pIdx + 1}`}
+                            width={1200}
+                            height={800}
+                            className="h-auto w-full"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {!hideLegacyImages && section.subTitle && section.subTitle.map((sub, subIdx) => (
+                    <div key={subIdx} className="space-y-6 pt-8 border-t border-custom-blue/5">
+                      <h3 className="text-xl font-bold text-custom-blue">{sub}</h3>
+                      {section.subText?.[subIdx] && (
+                        <p className="text-lg leading-relaxed text-custom-blue/72">
+                          {section.subText[subIdx]}
+                        </p>
+                      )}
+                      {section.subPicture?.[subIdx] && (
+                        <div className="overflow-hidden rounded-3xl border border-custom-blue/5 bg-white shadow-lg">
+                          <Image
+                            src={section.subPicture[subIdx]}
+                            alt={sub}
+                            width={1200}
+                            height={800}
+                            className="h-auto w-full"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </motion.section>
+            ))}
+          </div>
+
+          <section className="mt-40 rounded-[3.5rem] border border-white/60 bg-[#071726] p-12 text-white shadow-[0_40px_100px_rgba(7,20,38,0.2)] sm:p-20">
+            <div className="relative z-10 flex flex-col items-center text-center">
+              <SectionLabel index="Next" label="Project" tone="light" />
+              <h2 className="mt-8 font-display text-[3.5rem] font-medium leading-none tracking-tight sm:text-[5rem]">
+                CatchScan
+              </h2>
+              <p className="mt-6 max-w-xl text-lg text-white/60">
+                Automated copyright protection for content creators.
+              </p>
+              <Link
+                href="/catchscan"
+                className="group mt-12 inline-flex items-center gap-3 rounded-full bg-[#67d9ff] px-8 py-4 text-sm font-bold text-[#071726] transition-all hover:scale-105 hover:bg-white"
+              >
+                Next Case Study
+                <ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </Link>
             </div>
           </section>
-        </main>
-        <Footer />
-      </div>
+        </div>
+      </main>
+
+      <Footer />
     </div>
   );
-};
-export default ESS;
+}

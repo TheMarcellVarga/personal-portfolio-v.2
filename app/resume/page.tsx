@@ -1,7 +1,25 @@
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
-import { Mail, Globe, Github, Linkedin, MapPin, Phone } from "lucide-react";
-import ResumeActions from "./ResumeActions";
+import { Mail, Globe, Github, Linkedin, MapPin, Phone, ArrowLeft, Download } from "lucide-react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import Header from "../header";
+import Footer from "../footer";
+import { PageBackground } from "../components/PageBackground";
+import { SectionLabel } from "../components/SectionLabel";
 import { resume } from "../data/resume";
+
+const fadeInUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: {
+    duration: 0.8,
+    delay,
+    ease: [0.22, 1, 0.36, 1],
+  },
+});
 
 function InfoRow({
   icon: Icon,
@@ -63,206 +81,169 @@ function SurfaceCard({ children }: { children: React.ReactNode }) {
 }
 
 export default function ResumePage() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(77,141,180,0.14),_transparent_36%),linear-gradient(180deg,_#e7eff5_0%,_#f5f9fc_44%,_#edf4f9_100%)] px-4 py-6 sm:px-6 lg:px-10 print:bg-white print:px-0 print:py-0">
-      <div className="mx-auto flex w-full max-w-5xl justify-end">
-        <ResumeActions />
+    <div className="relative overflow-x-clip print:bg-white">
+      <div className="print:hidden">
+        <PageBackground />
+        <Header 
+          isOpen={isOpen} 
+          setIsOpen={setIsOpen} 
+        />
       </div>
 
-      <article className="resume-sheet mx-auto mt-6 w-full max-w-[210mm] overflow-hidden rounded-[1.6rem] border border-white/75 bg-white shadow-[0_30px_90px_rgba(7,20,38,0.08)] print:mt-0 print:max-w-none print:rounded-none print:border-0 print:shadow-none">
-        <div className="grid min-h-[297mm] grid-cols-1 lg:grid-cols-[62mm_1fr] print:min-h-[297mm] print:grid-cols-[62mm_1fr]">
-          <aside className="relative flex h-full flex-col overflow-hidden bg-[#0b1118] px-5 py-6 text-white before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_top,_rgba(106,211,248,0.16),_transparent_40%)] before:content-[''] print:px-4 print:py-4">
-            <div className="relative z-10">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.34em] text-white/45">
-                2026 Portfolio CV
-              </p>
-            </div>
+      <main className="relative z-10 px-4 pb-24 pt-32 sm:px-6 lg:px-10 print:p-0 print:pt-0">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-12 flex items-center justify-between print:hidden">
+            <motion.div {...fadeInUp(0)}>
+              <Link
+                href="/"
+                className="group inline-flex items-center gap-2 text-sm font-semibold text-custom-blue/60 transition-colors hover:text-custom-blue"
+              >
+                <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                Back to home
+              </Link>
+            </motion.div>
 
-            <div className="relative z-10 mt-4 overflow-hidden rounded-[1.35rem] border border-white/12 bg-white/8 p-0">
-              <div className="relative h-[78mm] overflow-hidden rounded-[1.1rem] p-0">
-                <Image
-                  src={resume.photo}
-                  alt={`Portrait of ${resume.name}`}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 62mm"
-                  className="object-cover object-top"
-                />
-              </div>
-            </div>
-
-            <p className="relative z-10 mt-4 text-sm text-white/72">{resume.title}</p>
-
-            <div className="relative z-10 mt-5 space-y-2.5 text-[11px] leading-5 text-white/78">
-              <InfoRow icon={Globe} href={`https://${resume.website}`} label={resume.website} external />
-              <InfoRow icon={Phone} label={resume.phone} />
-              <InfoRow icon={Mail} href={`mailto:${resume.email}`} label={resume.email} />
-              <InfoRow icon={Linkedin} href={`https://${resume.linkedin}`} label="Marcell Varga" external />
-              <InfoRow icon={Github} href={`https://${resume.github}`} label={resume.githubHandle} external />
-              <InfoRow icon={MapPin} label={resume.location} />
-            </div>
-
-            <section className="relative z-10 mt-6">
-              <h2 className="text-[10px] font-semibold uppercase tracking-[0.34em] text-white/45">
-                Core Strengths
-              </h2>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {resume.strengths.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-white/10 bg-white/6 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.14em] text-white/76"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </section>
-
-            <section className="relative z-10 mt-6">
-              <h2 className="text-[10px] font-semibold uppercase tracking-[0.34em] text-white/45">
-                Stack
-              </h2>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {resume.stack.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-white/10 bg-white/6 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.14em] text-white/76"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </section>
-
-            <section className="relative z-10 mt-6">
-              <h2 className="text-[10px] font-semibold uppercase tracking-[0.34em] text-white/45">
-                Languages
-              </h2>
-              <div className="mt-3 space-y-2">
-                {resume.languages.map((item) => (
-                  <div key={item.name} className="space-y-0.5 text-white/78">
-                    <p className="text-[11px] font-medium text-white">{item.name}</p>
-                    <p className="text-[10px] text-white/65">{item.level}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-          </aside>
-
-          <div className="px-5 py-6 print:px-5 print:py-5">
-            <section>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.34em] text-custom-blue/45">
-                Curriculum Vitae
-              </p>
-              <h1 className="mt-2 font-display text-[2.15rem] leading-[0.92] tracking-[-0.08em] text-custom-blue sm:text-[2.35rem]">
-                {resume.name}
-              </h1>
-              <p className="mt-2 text-[1rem] font-medium text-custom-blue/80">{resume.title}</p>
-
-              <div className="mt-4 space-y-2 text-[12px] leading-6 text-custom-blue/74">
-                {resume.summary.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-              </div>
-            </section>
-
-            <div className="mt-5 grid gap-4 xl:grid-cols-2">
-              <SurfaceCard>
-                <SectionHeading>Keyword Profile</SectionHeading>
-                <div className="flex flex-wrap gap-2">
-                  {resume.keywords.map((item) => (
-                    <Pill key={item}>{item}</Pill>
-                  ))}
-                </div>
-              </SurfaceCard>
-
-              <SurfaceCard>
-                <SectionHeading>Toolbox</SectionHeading>
-                <div className="flex flex-wrap gap-2">
-                  {resume.tooling.map((item) => (
-                    <Pill key={item}>{item}</Pill>
-                  ))}
-                </div>
-              </SurfaceCard>
-            </div>
-
-            <section className="mt-5">
-              <SectionHeading>Experience</SectionHeading>
-              <div className="space-y-4">
-                {resume.experience.map((job) => (
-                  <SurfaceCard key={`${job.company}-${job.period}`}>
-                    <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-                      <div>
-                        <h3 className="font-display text-[1.4rem] leading-[0.96] tracking-[-0.06em] text-custom-blue">
-                          {job.role}
-                        </h3>
-                        <p className="mt-1 text-[13px] font-medium text-custom-blue/68">{job.company}</p>
-                      </div>
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-custom-blue/45">
-                        {job.period}
-                      </p>
-                    </div>
-                    <ul className="mt-3 space-y-1.5 text-[11px] leading-5 text-custom-blue/72">
-                      {job.bullets.map((bullet) => (
-                        <li key={bullet} className="flex gap-3">
-                          <span className="mt-[0.58rem] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-custom-teal" />
-                          <span>{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </SurfaceCard>
-                ))}
-              </div>
-            </section>
-
-            <div className="mt-5 grid gap-5 sm:grid-cols-[1fr_0.95fr]">
-              <section>
-                <SectionHeading>Education</SectionHeading>
-                <div className="space-y-4">
-                  {resume.education.map((item) => (
-                    <SurfaceCard key={item.degree}>
-                      <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-                        <div>
-                          <h3 className="font-display text-[1.3rem] leading-[0.98] tracking-[-0.05em] text-custom-blue">
-                            {item.degree}
-                          </h3>
-                          <p className="mt-1 text-[13px] font-medium text-custom-blue/68">{item.school}</p>
-                        </div>
-                        <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-custom-blue/45">
-                          {item.period}
-                        </p>
-                      </div>
-
-                      <div className="mt-3 space-y-2 text-[11px] leading-5 text-custom-blue/72">
-                        {item.details.map((detail) => (
-                          <p key={detail}>{detail}</p>
-                        ))}
-                      </div>
-                    </SurfaceCard>
-                  ))}
-                </div>
-              </section>
-
-              <section>
-                <SectionHeading>2026 Focus</SectionHeading>
-                <SurfaceCard>
-                  <div className="space-y-3 text-[11px] leading-5 text-custom-blue/72">
-                    {resume.focus.map((item) => (
-                      <p key={item}>{item}</p>
-                    ))}
-                  </div>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {resume.strengths.slice(0, 4).map((item) => (
-                      <Pill key={item}>{item}</Pill>
-                    ))}
-                  </div>
-                </SurfaceCard>
-              </section>
-            </div>
+            <motion.button
+              {...fadeInUp(0.1)}
+              onClick={() => window.print()}
+              className="inline-flex items-center gap-2 rounded-full bg-[#0a2135] px-6 py-3 text-sm font-semibold text-white shadow-xl transition-all hover:scale-105 hover:bg-[#0d2940]"
+            >
+              <Download className="h-4 w-4" />
+              Save as PDF
+            </motion.button>
           </div>
+
+          <motion.article 
+            {...fadeInUp(0.2)}
+            className="resume-sheet mx-auto w-full max-w-[210mm] overflow-hidden rounded-[2.5rem] border border-white/80 bg-white shadow-[0_50px_150px_rgba(7,20,38,0.12)] print:m-0 print:max-w-none print:rounded-none print:border-0 print:shadow-none"
+          >
+            <div className="grid min-h-[297mm] grid-cols-1 lg:grid-cols-[65mm_1fr] print:grid-cols-[65mm_1fr]">
+              <aside className="relative flex h-full flex-col overflow-hidden bg-[#0a1622] px-6 py-8 text-white before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_top,_rgba(103,217,255,0.12),_transparent_40%)] print:py-6">
+                <div className="relative z-10">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/30">
+                    Portfolio CV
+                  </p>
+                </div>
+
+                <div className="relative z-10 mt-6 overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-1">
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-[1.8rem]">
+                    <Image
+                      src={resume.photo}
+                      alt={resume.name}
+                      fill
+                      priority
+                      className="object-cover object-top"
+                    />
+                  </div>
+                </div>
+
+                <div className="relative z-10 mt-8 space-y-4 text-[11px] leading-5">
+                  <InfoRow icon={Globe} href={`https://${resume.website}`} label={resume.website} external />
+                  <InfoRow icon={Phone} label={resume.phone} />
+                  <InfoRow icon={Mail} href={`mailto:${resume.email}`} label={resume.email} />
+                  <InfoRow icon={Linkedin} href={`https://${resume.linkedin}`} label="Marcell Varga" external />
+                  <InfoRow icon={Github} href={`https://${resume.github}`} label={resume.githubHandle} external />
+                  <InfoRow icon={MapPin} label={resume.location} />
+                </div>
+
+                <section className="relative z-10 mt-8">
+                  <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/30">Skills & Tech</h2>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {resume.stack.map((item) => (
+                      <span key={item} className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.1em] text-white/60">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </section>
+
+                <section className="relative z-10 mt-8">
+                  <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/30">Languages</h2>
+                  <div className="mt-4 space-y-3">
+                    {resume.languages.map((item) => (
+                      <div key={item.name} className="flex justify-between items-center text-white/80">
+                        <span className="text-[11px] font-bold uppercase tracking-[0.1em]">{item.name}</span>
+                        <span className="text-[10px] text-white/40">{item.level}</span>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              </aside>
+
+              <div className="px-8 py-10 sm:px-10 print:py-8">
+                <header>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-custom-blue/30">Curriculum Vitae</p>
+                  <h1 className="mt-3 font-display text-5xl font-medium tracking-tight text-custom-blue">
+                    {resume.name}
+                  </h1>
+                  <p className="mt-2 text-lg font-medium text-custom-blue/60">{resume.title}</p>
+                </header>
+
+                <div className="mt-8 space-y-4 text-[13px] leading-relaxed text-custom-blue/70">
+                  {resume.summary.map((paragraph, i) => (
+                    <p key={i}>{paragraph}</p>
+                  ))}
+                </div>
+
+                <div className="mt-10 grid gap-6 sm:grid-cols-2">
+                  <SurfaceCard>
+                    <SectionHeading>Expertise</SectionHeading>
+                    <div className="flex flex-wrap gap-2">
+                      {resume.keywords.map((item) => <Pill key={item}>{item}</Pill>)}
+                    </div>
+                  </SurfaceCard>
+                  <SurfaceCard>
+                    <SectionHeading>Toolbox</SectionHeading>
+                    <div className="flex flex-wrap gap-2">
+                      {resume.tooling.map((item) => <Pill key={item}>{item}</Pill>)}
+                    </div>
+                  </SurfaceCard>
+                </div>
+
+                <section className="mt-10">
+                  <SectionHeading>Experience</SectionHeading>
+                  <div className="space-y-6">
+                    {resume.experience.map((job) => (
+                      <div key={job.company} className="relative pl-6 before:absolute before:left-0 before:top-2 before:h-2 before:w-2 before:rounded-full before:bg-custom-teal">
+                        <div className="flex justify-between items-baseline">
+                          <h3 className="text-xl font-bold text-custom-blue">{job.role}</h3>
+                          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-custom-blue/40">{job.period}</span>
+                        </div>
+                        <p className="font-semibold text-custom-blue/50 uppercase tracking-widest text-[10px] mt-1">{job.company}</p>
+                        <ul className="mt-4 space-y-2">
+                          {job.bullets.map((bullet, i) => (
+                            <li key={i} className="text-[12px] leading-relaxed text-custom-blue/60">• {bullet}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                <section className="mt-10">
+                  <SectionHeading>Education</SectionHeading>
+                  <div className="grid gap-6 sm:grid-cols-2">
+                    {resume.education.map((edu) => (
+                      <div key={edu.degree} className="rounded-2xl border border-custom-blue/5 bg-custom-blue/[0.02] p-6">
+                        <h3 className="font-bold text-custom-blue">{edu.degree}</h3>
+                        <p className="text-xs font-semibold text-custom-blue/50 mt-1">{edu.school}</p>
+                        <p className="text-[10px] font-bold text-custom-blue/30 mt-2 uppercase tracking-widest">{edu.period}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              </div>
+            </div>
+          </motion.article>
         </div>
-      </article>
-    </main>
+      </main>
+
+      <div className="print:hidden">
+        <Footer />
+      </div>
+    </div>
   );
 }
