@@ -798,7 +798,7 @@ export default function Page() {
                     initial={{ opacity: 0, scale: 0.98, x: 15 }}
                     animate={{ opacity: 1, scale: 1, x: 0 }}
                     exit={{ opacity: 0, scale: 0.98, x: -15 }}
-                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
                     className="glass-panel relative flex flex-col justify-start overflow-hidden rounded-[2.8rem] bg-white/72 p-8 shadow-[0_12px_45px_rgba(11,17,26,0.06)] lg:p-10"
                   >
                     <div className="flex flex-wrap items-center gap-4">

@@ -98,7 +98,7 @@ export default function About() {
               key={card.title}
               initial={{ opacity: 0, y: 20 }}
               animate={cardReveal[index] ? { opacity: 1, y: 0 } : { opacity: 0.2, y: 20 }}
-              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] as const }}
               className="flow-card rounded-[1.35rem] p-6"
             >
               <p className="text-[10px] uppercase tracking-[0.2em] text-custom-blue/52">0{index + 1}</p>

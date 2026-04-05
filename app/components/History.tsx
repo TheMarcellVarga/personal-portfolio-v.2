@@ -22,7 +22,7 @@ export default function History() {
             transition={{
               duration: 0.52,
               delay: index * 0.05,
-              ease: [0.16, 1, 0.3, 1],
+              ease: [0.16, 1, 0.3, 1] as const,
             }}
             className="flow-card flow-lift relative ml-7 rounded-xl border border-custom-blue/16 bg-white/84 p-5 backdrop-blur-md sm:ml-10 sm:p-6"
           >

@@ -73,7 +73,7 @@ export default function Skills() {
             transition={{
               duration: 0.48,
               delay: laneIndex * 0.06,
-              ease: [0.16, 1, 0.3, 1],
+              ease: [0.16, 1, 0.3, 1] as const,
             }}
             className="flow-card flow-lift rounded-xl border border-custom-blue/16 bg-white/82 p-5 backdrop-blur-md sm:p-6"
           >

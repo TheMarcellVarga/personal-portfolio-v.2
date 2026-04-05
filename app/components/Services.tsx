@@ -26,7 +26,7 @@ export default function Services() {
             transition={{
               duration: 0.5,
               delay: index * 0.05,
-              ease: [0.16, 1, 0.3, 1],
+              ease: [0.16, 1, 0.3, 1] as const,
             }}
             className="flow-card flow-lift rounded-xl border border-custom-blue/16 bg-white/82 p-5 backdrop-blur-md sm:p-6"
           >

@@ -22,7 +22,7 @@ export default function Highlights() {
             transition={{
               duration: 0.52,
               delay: index * 0.06,
-              ease: [0.16, 1, 0.3, 1],
+              ease: [0.16, 1, 0.3, 1] as const,
             }}
             className="flow-card flow-lift rounded-xl border border-custom-blue/16 bg-white/82 p-5 backdrop-blur-md"
           >
