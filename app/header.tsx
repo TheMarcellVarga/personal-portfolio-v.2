@@ -86,8 +86,10 @@ export default function Header({
 
   return (
     <header
-      className={`sticky-header px-4 py-4 sm:px-6 lg:px-10 transition-transform duration-300 ease-in-out ${
-        isHidden ? "-translate-y-full" : "translate-y-0"
+      className={`sticky-header px-4 py-4 sm:px-6 lg:px-10 transition-transform transition-opacity duration-300 ease-in-out ${
+        isHidden
+          ? "-translate-y-full opacity-0"
+          : "translate-y-0 opacity-100"
       }`}
     >
       <div
