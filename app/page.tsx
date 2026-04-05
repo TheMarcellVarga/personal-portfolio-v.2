@@ -197,6 +197,43 @@ export default function Page() {
     scrollToId("contact", shouldReduceMotion);
   }, [shouldReduceMotion]);
 
+  const [activeSection, setActiveSection] = useState("Intro");
+
+  useEffect(() => {
+    const sectionIds = ["hero", "about", "work", "contact"];
+    const sectionMap: Record<string, string> = {
+      hero: "Intro",
+      about: "Manifesto",
+      work: "Work",
+      contact: "Contact",
+    };
+
+    const observers: IntersectionObserver[] = [];
+
+    sectionIds.forEach((id) => {
+      const element = document.getElementById(id);
+      if (!element) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActiveSection(sectionMap[id]);
+            }
+          });
+        },
+        { threshold: 0.2, rootMargin: "-20% 0px -20% 0px" }
+      );
+
+      observer.observe(element);
+      observers.push(observer);
+    });
+
+    return () => {
+      observers.forEach((o) => o?.disconnect());
+    };
+  }, []);
+
   const featuredProjects = useMemo(() => projects.filter((project) => !project.inProgress), []);
   const activeTrajectoryItem = history[activeTrajectoryIndex];
 
@@ -212,13 +249,14 @@ export default function Page() {
         scrollToAbout={scrollAbout}
         scrollToWork={scrollWork}
         scrollToContact={scrollContact}
+        activeSection={activeSection}
       />
 
       <main className="relative z-10 px-4 pb-8 pt-16 sm:px-6 sm:pb-12 sm:pt-20 lg:px-10">
         <section
           id="hero"
           ref={heroRef}
-          className="mx-auto grid w-full max-w-7xl items-center gap-10 pb-10 pt-4 md:pb-16 lg:min-h-[40rem] lg:grid-cols-[1.15fr_0.85fr] lg:gap-14 xl:min-h-[48rem] 2xl:min-h-[52rem]"
+          className="mx-auto grid w-full max-w-7xl items-center gap-10 pb-10 pt-4 md:pb-16 lg:min-h-screen lg:grid-cols-[1.15fr_0.85fr] lg:gap-14"
         >
           <div className="relative min-w-0">
             {/* <motion.div
@@ -251,7 +289,7 @@ export default function Page() {
                 UX & Frontend Engineer
               </p>
               <h1 className="max-w-[7.2ch] font-display text-[2.8rem] font-medium leading-[0.9] tracking-[-0.08em] text-custom-blue sm:text-[3.8rem] md:text-[4.6rem] lg:text-[5.2rem] xl:text-[6.4rem] 2xl:text-[7.6rem]">
-                Design the logic. Engineer the feeling.
+                Marcell Varga
               </h1>
               <p className="max-w-2xl text-base leading-7 text-custom-blue/72 sm:text-lg sm:leading-8">
                 Born in Denmark, now building from Singapore. I make product interfaces and the code behind them feel sharp.
@@ -373,19 +411,19 @@ export default function Page() {
           </div>
         </section>
 
-        <section className="relative mx-auto mt-20 w-full max-w-7xl sm:mt-32">
+        <section className="relative mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center py-10 sm:py-16">
           <SectionLabel index="02" label="Capabilities" />
-          <div className="py-10">
-            <motion.div {...fadeInUp(0.04)} className="mb-14 max-w-3xl">
-              <h2 className="font-display text-[clamp(2.5rem,4.5vw,4.2rem)] leading-[0.95] tracking-[-0.05em] text-custom-blue">
+          <div className="pt-2">
+            <motion.div {...fadeInUp(0.04)} className="mb-6 max-w-3xl">
+              <h2 className="font-display text-[clamp(1.8rem,3.2vw,2.8rem)] leading-[0.95] tracking-[-0.05em] text-custom-blue">
                 The useful overlap between taste and implementation.
               </h2>
-              <p className="mt-8 max-w-2xl text-[1.1rem] leading-relaxed text-custom-blue/70">
+              <p className="mt-4 max-w-2xl text-[0.95rem] leading-relaxed text-custom-blue/70">
                 Interfaces, motion, systems, and frontend detail all need to line up. These are the pieces I actually care about.
               </p>
             </motion.div>
 
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {capabilityCards.map((card, index) => {
                 const Icon = card.icon;
 
@@ -393,24 +431,24 @@ export default function Page() {
                   <motion.article
                     key={card.title}
                     {...fadeInUp(index * 0.1)}
-                    className={`glass-panel group relative flex min-h-[22rem] flex-col overflow-hidden rounded-[2.8rem] bg-white/65 p-8 shadow-[0_16px_48px_rgba(11,17,26,0.05)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_70px_rgba(11,17,26,0.08)] ${card.colSpan}`}
+                    className={`glass-panel group relative flex min-h-[14rem] flex-col overflow-hidden rounded-[2.2rem] bg-white/65 p-6 shadow-[0_12px_40px_rgba(11,17,26,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(11,17,26,0.06)] ${card.colSpan}`}
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                     <div className="relative z-10 flex h-full flex-col">
-                      <div className="mb-10 inline-flex h-14 w-14 items-center justify-center rounded-[1.2rem] border border-custom-blue/8 bg-white text-custom-blue shadow-sm transition-transform duration-500 group-hover:scale-110">
-                        <Icon className="h-7 w-7" />
+                      <div className="mb-6 inline-flex h-11 w-11 items-center justify-center rounded-[1rem] border border-custom-blue/8 bg-white text-custom-blue shadow-sm transition-transform duration-500 group-hover:scale-105">
+                        <Icon className="h-5 w-5" />
                       </div>
-                      <h2 className="font-display text-[2rem] font-medium leading-[1.05] tracking-[-0.04em] text-custom-blue sm:text-[2.2rem]">
+                      <h2 className="font-display text-[1.4rem] font-medium leading-[1.05] tracking-[-0.04em] text-custom-blue sm:text-[1.6rem]">
                         {card.title}
                       </h2>
-                      <p className="mt-5 max-w-[28rem] text-[0.95rem] leading-relaxed text-custom-blue/72">
+                      <p className="mt-3 max-w-[28rem] text-[0.82rem] leading-relaxed text-custom-blue/72">
                         {card.body}
                       </p>
-                      <div className="mt-auto flex flex-wrap gap-2.5 pt-10">
+                      <div className="mt-auto flex flex-wrap gap-2 pt-6">
                         {capabilityTags.slice(index * 3, index * 3 + 3).map((tag) => (
                           <span
                             key={tag}
-                            className="rounded-full border border-custom-blue/12 bg-white/60 px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-custom-blue/65"
+                            className="rounded-full border border-custom-blue/12 bg-white/60 px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.18em] text-custom-blue/65"
                           >
                             {tag}
                           </span>
@@ -424,18 +462,18 @@ export default function Page() {
           </div>
         </section>
 
-        <section id="work" className="mx-auto mt-20 w-full max-w-7xl sm:mt-32">
+        <section id="work" className="relative mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center py-10 sm:py-16">
           <SectionLabel index="03" label="Selected Work" />
-          <motion.div {...fadeInUp(0.04)} className="mt-10 grid gap-8 lg:grid-cols-2">
+          <motion.div {...fadeInUp(0.04)} className="mt-8 grid gap-6 lg:grid-cols-2">
             {featuredProjects.map((project, index) => (
               <motion.article
                 key={project.title}
                 {...fadeInUp(index * 0.1)}
-                className="glass-panel group relative min-h-[26rem] overflow-hidden rounded-[3rem] border-white/90 shadow-[0_32px_80px_rgba(11,17,26,0.06)] transition duration-700 hover:-translate-y-2 hover:shadow-[0_45px_100px_rgba(11,17,26,0.12)]"
+                className="glass-panel group relative min-h-[18rem] overflow-hidden rounded-[2.5rem] border-white/90 shadow-[0_28px_70px_rgba(11,17,26,0.06)] transition duration-700 hover:-translate-y-1.5 hover:shadow-[0_35px_90px_rgba(11,17,26,0.1)]"
               >
                 <Link
                   href={project.link}
-                  className="relative flex h-full flex-col justify-between p-8 sm:p-12"
+                  className="relative flex h-full flex-col justify-between p-7 sm:p-9"
                   aria-label={`Open ${project.title}`}
                 >
                   <div className="absolute inset-0">
@@ -457,13 +495,13 @@ export default function Page() {
                   </div>
 
                   <div className="relative z-10 mt-auto transform transition-transform duration-700 group-hover:-translate-y-2">
-                    <h3 className="font-display text-[2.5rem] leading-[0.9] tracking-[-0.04em] text-white sm:text-[3.2rem] lg:text-[3.8rem]">
+                    <h3 className="font-display text-[1.8rem] leading-[0.9] tracking-[-0.04em] text-white sm:text-[2.2rem] lg:text-[2.6rem]">
                       {project.title}
                     </h3>
-                    <p className="mt-4 max-w-md text-[1.1rem] leading-relaxed text-white/85">
+                    <p className="mt-3 max-w-md text-[0.95rem] leading-relaxed text-white/85">
                       {project.highlight}
                     </p>
-                    <div className="mt-10 inline-flex w-fit items-center gap-3 rounded-full bg-white px-7 py-3 text-sm font-bold text-custom-blue transition-all duration-300 hover:bg-[#0071e3] hover:text-white">
+                    <div className="mt-8 inline-flex w-fit items-center gap-2.5 rounded-full bg-white px-6 py-2.5 text-xs font-bold text-custom-blue transition-all duration-300 hover:bg-[#0071e3] hover:text-white">
                       Read Case Study
                       <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                     </div>
@@ -508,7 +546,7 @@ export default function Page() {
                           key={`${item.company}-${item.time.start}`}
                           type="button"
                           onClick={() => setActiveTrajectoryIndex(index)}
-                          className={`relative grid w-full grid-cols-[2.5rem_1fr] items-start gap-3 rounded-[1.4rem] py-3 pr-3 text-left transition duration-300 ${
+                          className={`relative grid w-full grid-cols-[2.5rem_1fr] items-center gap-3 rounded-[1.4rem] py-3 pr-3 text-left transition duration-300 ${
                             isActive
                               ? "bg-white shadow-[0_12px_45px_rgba(11,17,26,0.08)]"
                               : "hover:bg-white/45"
@@ -598,7 +636,7 @@ export default function Page() {
 
         <section
           id="contact"
-          className="mx-auto mt-16 w-full max-w-7xl sm:mt-24"
+          className="mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center py-10 sm:py-16"
           onMouseEnter={() => setFooterHover(true)}
           onMouseLeave={() => setFooterHover(false)}
         >

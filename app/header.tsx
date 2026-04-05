@@ -13,6 +13,7 @@ interface HeaderProps {
   scrollToAbout?: () => void;
   scrollToWork?: () => void;
   scrollToContact?: () => void;
+  activeSection?: string;
 }
 
 type NavItem = {
@@ -28,28 +29,16 @@ export default function Header({
   scrollToAbout,
   scrollToWork,
   scrollToContact,
+  activeSection,
 }: HeaderProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    let lastScroll = 0;
-
     const onScroll = () => {
       const current = window.scrollY;
       setIsScrolled(current > 12);
-
-      if (current < 48) {
-        setIsVisible(true);
-      } else if (current > lastScroll) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-
-      lastScroll = current;
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -84,7 +73,7 @@ export default function Header({
   return (
     <header
       className={`sticky-header px-4 py-4 sm:px-6 lg:px-10 ${
-        isVisible || isOpen ? "translate-y-0 opacity-100" : "-translate-y-6 opacity-0"
+        isOpen ? "translate-y-0 opacity-100" : "translate-y-0 opacity-100"
       }`}
     >
       <div
@@ -114,7 +103,11 @@ export default function Header({
             <button
               key={item.label}
               onClick={() => void navigate(item)}
-              className="rounded-full px-4 py-2 text-sm font-semibold text-custom-blue/68 transition duration-300 hover:bg-custom-blue/6 hover:text-custom-blue"
+              className={`rounded-full px-4 py-2 text-sm font-semibold transition duration-300 ${
+                activeSection === item.label
+                  ? "bg-custom-blue/6 text-custom-blue"
+                  : "text-custom-blue/68 hover:bg-custom-blue/6 hover:text-custom-blue"
+              }`}
             >
               {item.label}
             </button>
@@ -148,7 +141,11 @@ export default function Header({
               <button
                 key={item.label}
                 onClick={() => void navigate(item)}
-                className="flex items-center justify-between rounded-[1.4rem] border border-custom-blue/8 bg-custom-blue/3 px-4 py-3 text-left text-sm font-semibold uppercase tracking-[0.16em] text-custom-blue/78"
+                className={`flex items-center justify-between rounded-[1.4rem] border px-4 py-3 text-left text-sm font-semibold uppercase tracking-[0.16em] ${
+                  activeSection === item.label
+                    ? "border-custom-blue/18 bg-custom-blue/8 text-custom-blue"
+                    : "border-custom-blue/8 bg-custom-blue/3 text-custom-blue/78"
+                }`}
               >
                 <span>{item.label}</span>
                 <ArrowUpRight className="h-4 w-4" />
