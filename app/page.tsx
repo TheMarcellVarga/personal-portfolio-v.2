@@ -440,48 +440,102 @@ export default function Page() {
           </div>
         </section>
 
-        <section id="work" className="relative mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center py-10 sm:py-16">
-          <SectionLabel index="03" label="Selected Work" />
-          <motion.div {...fadeInUp(0.04)} className="mt-8 grid gap-6 lg:grid-cols-2">
+        <section id="work" className="relative flex flex-col justify-center py-10 sm:py-16">
+          <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
+            <SectionLabel index="03" label="Selected Work" />
+            <div className="mt-8 flex items-end justify-between">
+              <motion.div {...fadeInUp(0.04)} className="max-w-2xl">
+                <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-[-0.05em] text-custom-blue">
+                  Case studies from the workbench.
+                </h2>
+                <p className="mt-4 text-custom-blue/70">
+                  A selection of projects where product thinking, interaction design, and technical execution come together.
+                </p>
+              </motion.div>
+              
+              <div className="hidden items-center gap-3 md:flex">
+                <button 
+                  onClick={() => {
+                    const scrollContainer = document.getElementById("work-carousel");
+                    if (scrollContainer) scrollContainer.scrollBy({ left: -400, behavior: "smooth" });
+                  }}
+                  className="flex h-12 w-12 items-center justify-center rounded-full border border-custom-blue/10 bg-white/50 text-custom-blue transition-all hover:bg-white hover:shadow-lg active:scale-95"
+                  aria-label="Previous Project"
+                >
+                  <ArrowRight className="h-5 w-5 rotate-180" />
+                </button>
+                <button 
+                  onClick={() => {
+                    const scrollContainer = document.getElementById("work-carousel");
+                    if (scrollContainer) scrollContainer.scrollBy({ left: 400, behavior: "smooth" });
+                  }}
+                  className="flex h-12 w-12 items-center justify-center rounded-full border border-custom-blue/10 bg-white/50 text-custom-blue transition-all hover:bg-white hover:shadow-lg active:scale-95"
+                  aria-label="Next Project"
+                >
+                  <ArrowRight className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <motion.div 
+            id="work-carousel"
+            {...fadeInUp(0.1)}
+            className="no-scrollbar mt-12 flex snap-x snap-mandatory gap-8 overflow-x-auto pb-12 pl-[max(1rem,calc((100%-80rem)/2+2.5rem))] pr-[max(1rem,calc((100%-80rem)/2+2.5rem))]"
+          >
             {featuredProjects.map((project, index) => (
               <motion.article
                 key={project.title}
-                {...fadeInUp(index * 0.1)}
-                className="glass-panel group relative min-h-[18rem] overflow-hidden rounded-[2.5rem] border-white/90 shadow-[0_28px_70px_rgba(11,17,26,0.06)] transition duration-700 hover:-translate-y-1.5 hover:shadow-[0_35px_90px_rgba(11,17,26,0.1)]"
+                className="glass-panel group relative min-w-[min(90vw,38rem)] shrink-0 snap-start overflow-hidden rounded-[3rem] border-white/90 shadow-[0_32px_80px_rgba(11,17,26,0.08)] transition duration-700 hover:-translate-y-1.5 hover:shadow-[0_45px_110px_rgba(11,17,26,0.12)]"
               >
                 <Link
                   href={project.link}
-                  className="relative flex h-full flex-col justify-between p-7 sm:p-9"
+                  className="relative grid h-full grid-rows-[42%_58%] p-0"
                   aria-label={`Open ${project.title}`}
                 >
-                  <div className="absolute inset-0">
+                  <div className="relative overflow-hidden">
                     <Image
                       src={project.image}
                       alt={project.title}
                       fill
                       className="object-cover transition-transform duration-1000 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
-                    <div className={`absolute inset-0 opacity-20 ${project.backgroundClass}`} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#071726]/40 to-transparent" />
                   </div>
 
-                  <div className="relative z-10 flex items-center justify-between gap-4">
-                    <span className="rounded-full border border-white/40 bg-white/10 px-5 py-2 text-[0.72rem] font-bold uppercase tracking-[0.24em] text-white backdrop-blur-xl">
-                      {project.category}
-                    </span>
-                    <span className="text-[0.85rem] font-bold tracking-widest text-white/75">{project.date}</span>
-                  </div>
+                  <div className="relative z-10 flex flex-col justify-between p-8 sm:p-10">
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="flex flex-wrap gap-2">
+                        <span className="rounded-full border border-custom-blue/10 bg-custom-blue/5 px-4 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/60 backdrop-blur-md">
+                          {project.category}
+                        </span>
+                        <span className="rounded-full border border-custom-blue/10 bg-white/80 px-4 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/40 backdrop-blur-md">
+                          {project.date}
+                        </span>
+                      </div>
+                    </div>
 
-                  <div className="relative z-10 mt-auto transform transition-transform duration-700 group-hover:-translate-y-2">
-                    <h3 className="font-display text-[1.8rem] leading-[0.9] tracking-[-0.04em] text-white sm:text-[2.2rem] lg:text-[2.6rem]">
-                      {project.title}
-                    </h3>
-                    <p className="mt-3 max-w-md text-[0.95rem] leading-relaxed text-white/85">
-                      {project.highlight}
-                    </p>
-                    <div className="mt-8 inline-flex w-fit items-center gap-2.5 rounded-full bg-white px-6 py-2.5 text-xs font-bold text-custom-blue transition-all duration-300 hover:bg-[#0071e3] hover:text-white">
-                      Read Case Study
-                      <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    <div className="mt-8">
+                      <h3 className="font-display text-[2.2rem] leading-[0.9] tracking-[-0.05em] text-custom-blue sm:text-[2.8rem]">
+                        {project.title}
+                      </h3>
+                      <p className="mt-4 line-clamp-3 max-w-[42ch] text-[0.95rem] leading-relaxed text-custom-blue/70 sm:text-[1rem]">
+                        {project.highlight}
+                      </p>
+                    </div>
+
+                    <div className="mt-10 flex items-center justify-between pt-8 border-t border-custom-blue/5">
+                      <div className="flex flex-wrap gap-2">
+                        {project.skills.slice(0, 3).map((skill) => (
+                          <span key={skill} className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-custom-blue/40">
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="hidden items-center gap-2 text-sm font-bold text-custom-blue md:flex">
+                        View Study
+                        <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                      </div>
                     </div>
                   </div>
                 </Link>

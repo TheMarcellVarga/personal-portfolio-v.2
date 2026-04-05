@@ -10,6 +10,7 @@ import Footer from "../../footer";
 import { projects } from "../../data/projects";
 import { PageBackground } from "../../components/PageBackground";
 import { SectionLabel } from "../../components/SectionLabel";
+import { OtherWorks } from "../../components/OtherWorks";
 import { useRouter } from "next/navigation";
 
 const hideLegacyImages = false;
@@ -441,24 +442,7 @@ export default function ESSPage() {
             ))}
           </div>
 
-          <section className="mt-40 rounded-[3.5rem] border border-white/60 bg-[#071726] p-12 text-white shadow-[0_40px_100px_rgba(7,20,38,0.2)] sm:p-20">
-            <div className="relative z-10 flex flex-col items-center text-center">
-              <SectionLabel index="Next" label="Project" tone="light" />
-              <h2 className="mt-8 font-display text-[3.5rem] font-medium leading-none tracking-tight sm:text-[5rem]">
-                CatchScan
-              </h2>
-              <p className="mt-6 max-w-xl text-lg text-white/60">
-                Automated copyright protection for content creators.
-              </p>
-              <Link
-                href="/catchscan"
-                className="group mt-12 inline-flex items-center gap-3 rounded-full bg-[#67d9ff] px-8 py-4 text-sm font-bold text-[#071726] transition-all hover:scale-105 hover:bg-white"
-              >
-                Next Case Study
-                <ArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </Link>
-            </div>
-          </section>
+          <OtherWorks currentProjectTitle="European Study Solution" />
         </div>
       </main>
 
