@@ -3,7 +3,7 @@
 import IndexSigAnimatedIcon from "@/public/icons/indexSigAnimated";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 
 interface HeaderProps {
@@ -34,11 +34,25 @@ export default function Header({
   const router = useRouter();
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const onScroll = () => {
       const current = window.scrollY;
+      const delta = current - lastScrollY.current;
+
       setIsScrolled(current > 12);
+
+      if (delta > 8) {
+        // scrolling down — hide
+        setIsHidden(true);
+      } else if (delta < -4) {
+        // scrolling up — reveal
+        setIsHidden(false);
+      }
+
+      lastScrollY.current = current;
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -72,8 +86,8 @@ export default function Header({
 
   return (
     <header
-      className={`sticky-header px-4 py-4 sm:px-6 lg:px-10 ${
-        isOpen ? "translate-y-0 opacity-100" : "translate-y-0 opacity-100"
+      className={`sticky-header px-4 py-4 sm:px-6 lg:px-10 transition-transform duration-300 ease-in-out ${
+        isHidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >
       <div
