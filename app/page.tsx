@@ -113,6 +113,8 @@ export default function Page() {
   const workCarouselTrackRef = useRef<HTMLDivElement>(null);
   const [workCarouselMaxScroll, setWorkCarouselMaxScroll] = useState(0);
   const [activeTrajectoryIndex, setActiveTrajectoryIndex] = useState(0);
+  const trajectoryHeightVh = history.length * 110 + 100;
+  const [trajectoryMinHeightPx, setTrajectoryMinHeightPx] = useState<number | null>(null);
 
   const { scrollYProgress: heroProgress } = useScroll({
     target: heroRef,
@@ -184,6 +186,22 @@ export default function Page() {
   const scrollContact = useCallback(() => {
     scrollToId("contact", shouldReduceMotion);
   }, [shouldReduceMotion]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const updateMinHeight = () => {
+      setTrajectoryMinHeightPx((window.innerHeight * trajectoryHeightVh) / 100);
+    };
+
+    updateMinHeight();
+    window.addEventListener("resize", updateMinHeight);
+    return () => window.removeEventListener("resize", updateMinHeight);
+  }, [trajectoryHeightVh]);
+
+  const trajectorySectionStyle = trajectoryMinHeightPx
+    ? { minHeight: `${trajectoryMinHeightPx}px` }
+    : { minHeight: `${trajectoryHeightVh}vh` };
 
   const [activeSection, setActiveSection] = useState("Intro");
 
@@ -718,7 +736,11 @@ export default function Page() {
           )}
         </section>
 
-        <section ref={trajectoryRef} className="mx-auto mt-20 w-full max-w-7xl sm:mt-32" style={{ minHeight: `${(history.length * 110) + 100}vh` }}>
+        <section
+          ref={trajectoryRef}
+          className="mx-auto mt-20 w-full max-w-7xl sm:mt-32"
+          style={trajectorySectionStyle}
+        >
           <SectionLabel index="04" label="Trajectory" />
           <div className="sticky top-0 flex min-h-screen items-center py-10">
             <div className="w-full space-y-6">
