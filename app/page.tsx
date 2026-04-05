@@ -1,6 +1,6 @@
 "use client";
 
-import { startTransition, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { startTransition, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -108,6 +108,10 @@ export default function Page() {
   const heroRef = useRef<HTMLElement>(null);
   const manifestoRef = useRef<HTMLElement>(null);
   const trajectoryRef = useRef<HTMLElement>(null);
+  const workSectionRef = useRef<HTMLElement>(null);
+  const workCarouselViewportRef = useRef<HTMLDivElement>(null);
+  const workCarouselTrackRef = useRef<HTMLDivElement>(null);
+  const [workCarouselMaxScroll, setWorkCarouselMaxScroll] = useState(0);
   const [activeTrajectoryIndex, setActiveTrajectoryIndex] = useState(0);
 
   const { scrollYProgress: heroProgress } = useScroll({
@@ -131,9 +135,14 @@ export default function Page() {
     target: trajectoryRef,
     offset: ["start start", "end end"],
   });
+  const { scrollYProgress: workScrollProgress } = useScroll({
+    target: workSectionRef,
+    offset: ["start start", "end end"],
+  });
   const manifestoOpacity = useTransform(manifestoProgress, [0, 0.08, 0.82, 1], [0.35, 1, 1, 0.24]);
   const manifestoScale = useTransform(manifestoProgress, [0, 0.25, 1], [0.96, 1, 1.02]);
   const manifestoGlow = useTransform(manifestoProgress, [0, 1], [0.15, 0.5]);
+  const workCarouselX = useTransform(workScrollProgress, (p) => -p * workCarouselMaxScroll);
 
   useMotionValueEvent(trajectoryProgress, "change", (value) => {
     const nextIndex = Math.min(history.length - 1, Math.floor(value * history.length));
@@ -215,6 +224,59 @@ export default function Page() {
 
   const featuredProjects = useMemo(() => projects.filter((project) => !project.inProgress), []);
   const activeTrajectoryItem = history[activeTrajectoryIndex];
+
+  useLayoutEffect(() => {
+    if (shouldReduceMotion) return;
+
+    const viewport = workCarouselViewportRef.current;
+    const track = workCarouselTrackRef.current;
+    if (!viewport || !track) return;
+
+    const measure = () => {
+      const max = track.scrollWidth - viewport.clientWidth;
+      setWorkCarouselMaxScroll((prev) => {
+        const next = Math.max(0, max);
+        return prev === next ? prev : next;
+      });
+    };
+
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(track);
+    ro.observe(viewport);
+    window.addEventListener("resize", measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [shouldReduceMotion, featuredProjects.length]);
+
+  const scrollWorkCarouselStep = useCallback(
+    (direction: -1 | 1) => {
+      if (shouldReduceMotion) {
+        const el = document.getElementById("work-carousel");
+        if (el) el.scrollBy({ left: direction * 400, behavior: "smooth" });
+        return;
+      }
+
+      const section = workSectionRef.current;
+      if (!section || workCarouselMaxScroll <= 0) return;
+
+      const rect = section.getBoundingClientRect();
+      const startY = window.scrollY + rect.top;
+      const endY = startY + section.offsetHeight - window.innerHeight;
+      const scrollRange = Math.max(1, endY - startY);
+      const step = 1 / Math.max(1, featuredProjects.length - 1);
+      const current = workScrollProgress.get();
+      const next = Math.max(0, Math.min(1, current + direction * step));
+
+      window.scrollTo({
+        top: startY + next * scrollRange,
+        behavior: shouldReduceMotion ? "auto" : "smooth",
+      });
+    },
+    [shouldReduceMotion, workCarouselMaxScroll, featuredProjects.length, workScrollProgress]
+  );
 
   return (
     <div className="relative overflow-x-clip">
@@ -440,108 +502,220 @@ export default function Page() {
           </div>
         </section>
 
-        <section id="work" className="relative flex flex-col justify-center py-10 sm:py-16">
-          <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
-            <SectionLabel index="03" label="Selected Work" />
-            <div className="mt-8 flex items-end justify-between">
-              <motion.div {...fadeInUp(0.04)} className="max-w-2xl">
-                <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-[-0.05em] text-custom-blue">
-                  Case studies from the workbench.
-                </h2>
-                <p className="mt-4 text-custom-blue/70">
-                  A selection of projects where product thinking, interaction design, and technical execution come together.
-                </p>
+        <section
+          id="work"
+          ref={workSectionRef}
+          className={shouldReduceMotion ? "relative flex flex-col justify-center py-10 sm:py-16" : "relative w-full"}
+          style={
+            shouldReduceMotion
+              ? undefined
+              : { height: `calc(100vh + ${workCarouselMaxScroll}px)` }
+          }
+        >
+          {shouldReduceMotion ? (
+            <>
+              <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
+                <SectionLabel index="03" label="Selected Work" />
+                <div className="mt-8 flex items-end justify-between">
+                  <motion.div {...fadeInUp(0.04)} className="max-w-2xl">
+                    <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-[-0.05em] text-custom-blue">
+                      Case studies from the workbench.
+                    </h2>
+                    <p className="mt-4 text-custom-blue/70">
+                      A selection of projects where product thinking, interaction design, and technical execution come together.
+                    </p>
+                  </motion.div>
+
+                  <div className="hidden items-center gap-3 md:flex">
+                    <button
+                      type="button"
+                      onClick={() => scrollWorkCarouselStep(-1)}
+                      className="flex h-12 w-12 items-center justify-center rounded-full border border-custom-blue/10 bg-white/50 text-custom-blue transition-all hover:bg-white hover:shadow-lg active:scale-95"
+                      aria-label="Previous Project"
+                    >
+                      <ArrowRight className="h-5 w-5 rotate-180" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => scrollWorkCarouselStep(1)}
+                      className="flex h-12 w-12 items-center justify-center rounded-full border border-custom-blue/10 bg-white/50 text-custom-blue transition-all hover:bg-white hover:shadow-lg active:scale-95"
+                      aria-label="Next Project"
+                    >
+                      <ArrowRight className="h-5 w-5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <motion.div
+                id="work-carousel"
+                {...fadeInUp(0.1)}
+                className="no-scrollbar mt-12 flex snap-x snap-mandatory gap-8 overflow-x-auto pb-12 pl-[max(1rem,calc((100%-80rem)/2+2.5rem))] pr-[max(1rem,calc((100%-80rem)/2+2.5rem))]"
+              >
+                {featuredProjects.map((project) => (
+                  <motion.article
+                    key={project.title}
+                    className="glass-panel group relative min-h-[28rem] min-w-[min(90vw,38rem)] shrink-0 snap-start overflow-hidden rounded-[3rem] border-white/90 shadow-[0_32px_80px_rgba(11,17,26,0.08)] transition duration-700 hover:-translate-y-1.5 hover:shadow-[0_45px_110px_rgba(11,17,26,0.12)]"
+                  >
+                    <Link
+                      href={project.link}
+                      className="relative grid h-full min-h-[28rem] grid-rows-[42%_58%] p-0"
+                      aria-label={`Open ${project.title}`}
+                    >
+                      <div className="relative min-h-0 overflow-hidden">
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#071726]/40 to-transparent" />
+                      </div>
+
+                      <div className="relative z-10 flex flex-col justify-between p-8 sm:p-10">
+                        <div className="flex items-center justify-between gap-4">
+                          <div className="flex flex-wrap gap-2">
+                            <span className="rounded-full border border-custom-blue/10 bg-custom-blue/5 px-4 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/60 backdrop-blur-md">
+                              {project.category}
+                            </span>
+                            <span className="rounded-full border border-custom-blue/10 bg-white/80 px-4 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/40 backdrop-blur-md">
+                              {project.date}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="mt-8">
+                          <h3 className="font-display text-[2.2rem] leading-[0.9] tracking-[-0.05em] text-custom-blue sm:text-[2.8rem]">
+                            {project.title}
+                          </h3>
+                          <p className="mt-4 line-clamp-3 max-w-[42ch] text-[0.95rem] leading-relaxed text-custom-blue/70 sm:text-[1rem]">
+                            {project.highlight}
+                          </p>
+                        </div>
+
+                        <div className="mt-10 flex items-center justify-between border-t border-custom-blue/5 pt-8">
+                          <div className="flex flex-wrap gap-2">
+                            {project.skills.slice(0, 3).map((skill) => (
+                              <span key={skill} className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-custom-blue/40">
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                          <div className="hidden items-center gap-2 text-sm font-bold text-custom-blue md:flex">
+                            View Study
+                            <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </motion.article>
+                ))}
               </motion.div>
-              
-              <div className="hidden items-center gap-3 md:flex">
-                <button 
-                  onClick={() => {
-                    const scrollContainer = document.getElementById("work-carousel");
-                    if (scrollContainer) scrollContainer.scrollBy({ left: -400, behavior: "smooth" });
-                  }}
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-custom-blue/10 bg-white/50 text-custom-blue transition-all hover:bg-white hover:shadow-lg active:scale-95"
-                  aria-label="Previous Project"
+            </>
+          ) : (
+            <div className="sticky top-0 flex min-h-screen flex-col justify-center py-10 sm:py-16">
+              <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
+                <SectionLabel index="03" label="Selected Work" />
+                <div className="mt-8 flex items-end justify-between">
+                  <motion.div {...fadeInUp(0.04)} className="max-w-2xl">
+                    <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-[-0.05em] text-custom-blue">
+                      Case studies from the workbench.
+                    </h2>
+                    <p className="mt-4 text-custom-blue/70">
+                      A selection of projects where product thinking, interaction design, and technical execution come together.
+                    </p>
+                  </motion.div>
+
+                  <div className="hidden items-center gap-3 md:flex">
+                    <button
+                      type="button"
+                      onClick={() => scrollWorkCarouselStep(-1)}
+                      className="flex h-12 w-12 items-center justify-center rounded-full border border-custom-blue/10 bg-white/50 text-custom-blue transition-all hover:bg-white hover:shadow-lg active:scale-95"
+                      aria-label="Previous Project"
+                    >
+                      <ArrowRight className="h-5 w-5 rotate-180" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => scrollWorkCarouselStep(1)}
+                      className="flex h-12 w-12 items-center justify-center rounded-full border border-custom-blue/10 bg-white/50 text-custom-blue transition-all hover:bg-white hover:shadow-lg active:scale-95"
+                      aria-label="Next Project"
+                    >
+                      <ArrowRight className="h-5 w-5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div ref={workCarouselViewportRef} className="mt-12 w-full overflow-hidden pb-12">
+                <motion.div
+                  id="work-carousel"
+                  ref={workCarouselTrackRef}
+                  style={{ x: workCarouselX }}
+                  className="flex w-max gap-8 pl-[max(1rem,calc((100%-80rem)/2+2.5rem))] pr-[max(1rem,calc((100%-80rem)/2+2.5rem))]"
                 >
-                  <ArrowRight className="h-5 w-5 rotate-180" />
-                </button>
-                <button 
-                  onClick={() => {
-                    const scrollContainer = document.getElementById("work-carousel");
-                    if (scrollContainer) scrollContainer.scrollBy({ left: 400, behavior: "smooth" });
-                  }}
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-custom-blue/10 bg-white/50 text-custom-blue transition-all hover:bg-white hover:shadow-lg active:scale-95"
-                  aria-label="Next Project"
-                >
-                  <ArrowRight className="h-5 w-5" />
-                </button>
+                  {featuredProjects.map((project) => (
+                    <motion.article
+                      key={project.title}
+                      className="glass-panel group relative min-h-[28rem] w-[min(90vw,38rem)] shrink-0 overflow-hidden rounded-[3rem] border-white/90 shadow-[0_32px_80px_rgba(11,17,26,0.08)] transition duration-700 hover:-translate-y-1.5 hover:shadow-[0_45px_110px_rgba(11,17,26,0.12)]"
+                    >
+                      <Link
+                        href={project.link}
+                        className="relative grid h-full min-h-[28rem] grid-rows-[42%_58%] p-0"
+                        aria-label={`Open ${project.title}`}
+                      >
+                        <div className="relative min-h-0 overflow-hidden">
+                          <Image
+                            src={project.image}
+                            alt={project.title}
+                            fill
+                            className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#071726]/40 to-transparent" />
+                        </div>
+
+                        <div className="relative z-10 flex flex-col justify-between p-8 sm:p-10">
+                          <div className="flex items-center justify-between gap-4">
+                            <div className="flex flex-wrap gap-2">
+                              <span className="rounded-full border border-custom-blue/10 bg-custom-blue/5 px-4 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/60 backdrop-blur-md">
+                                {project.category}
+                              </span>
+                              <span className="rounded-full border border-custom-blue/10 bg-white/80 px-4 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/40 backdrop-blur-md">
+                                {project.date}
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="mt-8">
+                            <h3 className="font-display text-[2.2rem] leading-[0.9] tracking-[-0.05em] text-custom-blue sm:text-[2.8rem]">
+                              {project.title}
+                            </h3>
+                            <p className="mt-4 line-clamp-3 max-w-[42ch] text-[0.95rem] leading-relaxed text-custom-blue/70 sm:text-[1rem]">
+                              {project.highlight}
+                            </p>
+                          </div>
+
+                          <div className="mt-10 flex items-center justify-between border-t border-custom-blue/5 pt-8">
+                            <div className="flex flex-wrap gap-2">
+                              {project.skills.slice(0, 3).map((skill) => (
+                                <span key={skill} className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-custom-blue/40">
+                                  {skill}
+                                </span>
+                              ))}
+                            </div>
+                            <div className="hidden items-center gap-2 text-sm font-bold text-custom-blue md:flex">
+                              View Study
+                              <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    </motion.article>
+                  ))}
+                </motion.div>
               </div>
             </div>
-          </div>
-
-          <motion.div 
-            id="work-carousel"
-            {...fadeInUp(0.1)}
-            className="no-scrollbar mt-12 flex snap-x snap-mandatory gap-8 overflow-x-auto pb-12 pl-[max(1rem,calc((100%-80rem)/2+2.5rem))] pr-[max(1rem,calc((100%-80rem)/2+2.5rem))]"
-          >
-            {featuredProjects.map((project, index) => (
-              <motion.article
-                key={project.title}
-                className="glass-panel group relative min-w-[min(90vw,38rem)] shrink-0 snap-start overflow-hidden rounded-[3rem] border-white/90 shadow-[0_32px_80px_rgba(11,17,26,0.08)] transition duration-700 hover:-translate-y-1.5 hover:shadow-[0_45px_110px_rgba(11,17,26,0.12)]"
-              >
-                <Link
-                  href={project.link}
-                  className="relative grid h-full grid-rows-[42%_58%] p-0"
-                  aria-label={`Open ${project.title}`}
-                >
-                  <div className="relative overflow-hidden">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#071726]/40 to-transparent" />
-                  </div>
-
-                  <div className="relative z-10 flex flex-col justify-between p-8 sm:p-10">
-                    <div className="flex items-center justify-between gap-4">
-                      <div className="flex flex-wrap gap-2">
-                        <span className="rounded-full border border-custom-blue/10 bg-custom-blue/5 px-4 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/60 backdrop-blur-md">
-                          {project.category}
-                        </span>
-                        <span className="rounded-full border border-custom-blue/10 bg-white/80 px-4 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/40 backdrop-blur-md">
-                          {project.date}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="mt-8">
-                      <h3 className="font-display text-[2.2rem] leading-[0.9] tracking-[-0.05em] text-custom-blue sm:text-[2.8rem]">
-                        {project.title}
-                      </h3>
-                      <p className="mt-4 line-clamp-3 max-w-[42ch] text-[0.95rem] leading-relaxed text-custom-blue/70 sm:text-[1rem]">
-                        {project.highlight}
-                      </p>
-                    </div>
-
-                    <div className="mt-10 flex items-center justify-between pt-8 border-t border-custom-blue/5">
-                      <div className="flex flex-wrap gap-2">
-                        {project.skills.slice(0, 3).map((skill) => (
-                          <span key={skill} className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-custom-blue/40">
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="hidden items-center gap-2 text-sm font-bold text-custom-blue md:flex">
-                        View Study
-                        <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </motion.article>
-            ))}
-          </motion.div>
+          )}
         </section>
 
         <section ref={trajectoryRef} className="mx-auto mt-20 w-full max-w-7xl sm:mt-32" style={{ minHeight: `${(history.length * 110) + 100}vh` }}>
