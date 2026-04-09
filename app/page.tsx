@@ -141,8 +141,14 @@ export default function Page() {
     target: workSectionRef,
     offset: ["start start", "end end"],
   });
-  const manifestoOpacity = useTransform(manifestoProgress, [0, 0.08, 0.82, 1], [0.35, 1, 1, 0.24]);
-  const manifestoScale = useTransform(manifestoProgress, [0, 0.25, 1], [0.96, 1, 1.02]);
+  const manifestoRevealEnd = 0.74;
+  const manifestoOpacity = useTransform(
+    manifestoProgress,
+    [0, 0.12, 0.74, 0.86, 0.95, 1],
+    [0.2, 1, 1, 0.88, 0.32, 0]
+  );
+  const manifestoScale = useTransform(manifestoProgress, [0, 0.18, 0.74, 0.86, 1], [0.95, 1, 1, 0.99, 0.92]);
+  const manifestoY = useTransform(manifestoProgress, [0, 0.2, 0.74, 0.86, 1], [28, 0, 0, -8, -72]);
   const manifestoGlow = useTransform(manifestoProgress, [0, 1], [0.15, 0.5]);
   const workCarouselX = useTransform(workScrollProgress, (p) => -p * workCarouselMaxScroll);
 
@@ -163,7 +169,8 @@ export default function Page() {
   useMotionValueEvent(manifestoProgress, "change", (value) => {
     if (shouldReduceMotion) return;
 
-    const nextLength = Math.round(value * manifesto.length);
+    const revealProgress = Math.min(value / manifestoRevealEnd, 1);
+    const nextLength = Math.round(revealProgress * manifesto.length);
     const nextText = manifesto.slice(0, nextLength);
 
     startTransition(() => {
@@ -314,7 +321,7 @@ export default function Page() {
         <section
           id="hero"
           ref={heroRef}
-          className="mx-auto grid w-full max-w-7xl items-center gap-10 pb-10 pt-4 md:pb-16 lg:min-h-screen lg:grid-cols-[1.15fr_0.85fr] lg:gap-14"
+          className="mx-auto grid min-h-[calc(100svh-5rem)] w-full max-w-7xl items-center gap-10 pb-10 pt-4 md:pb-16 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14"
         >
           <div className="relative min-w-0">
             {/* <motion.div
@@ -425,9 +432,9 @@ export default function Page() {
         <section
           id="about"
           ref={manifestoRef}
-          className="relative mx-auto mt-16 h-[200vh] w-full max-w-7xl sm:mt-24 sm:h-[240vh]"
+          className="relative mx-auto mt-16 h-[240vh] w-full max-w-7xl sm:mt-24 sm:h-[300vh]"
         >
-          <div className="sticky top-0 flex min-h-screen items-center py-12">
+          <div className="sticky top-20 flex min-h-[calc(100svh-5rem)] items-center py-12 sm:top-24">
             <motion.div
               style={
                 shouldReduceMotion
@@ -435,11 +442,12 @@ export default function Page() {
                   : {
                       opacity: manifestoOpacity,
                       scale: manifestoScale,
+                      y: manifestoY,
                     }
               }
-              className="grid w-full gap-8 rounded-[3rem] border border-white/60 bg-[#071726]/92 p-8 text-white shadow-[0_40px_140px_rgba(5,16,32,0.28)] lg:p-12"
+              className="mx-auto flex h-[28rem] w-full max-w-5xl flex-col overflow-hidden rounded-[3rem] border border-white/60 bg-[#071726]/92 p-8 text-white shadow-[0_40px_140px_rgba(5,16,32,0.28)] sm:h-[32rem] lg:h-[36rem] lg:p-12"
             >
-              <div className="flex flex-col justify-between">
+              <div className="flex h-full flex-col justify-between">
                 <div>
                   <SectionLabel index="01" label="Manifesto" tone="light" />
                   <motion.div
@@ -469,7 +477,7 @@ export default function Page() {
           </div>
         </section>
 
-        <section className="relative mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center py-10 sm:py-16">
+        <section className="relative mx-auto flex min-h-[calc(100svh-5rem)] w-full max-w-7xl flex-col justify-center py-10 sm:py-16">
           <SectionLabel index="02" label="Capabilities" />
           <div className="pt-2">
             <motion.div {...fadeInUp(0.04)} className="mb-6 max-w-3xl">
@@ -631,7 +639,7 @@ export default function Page() {
               </motion.div>
             </>
           ) : (
-            <div className="sticky top-0 flex min-h-screen flex-col justify-center py-10 sm:py-16">
+            <div className="sticky top-20 flex min-h-[calc(100svh-5rem)] flex-col justify-center sm:top-24">
               <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
                 <SectionLabel index="03" label="Selected Work" />
                 <div className="mt-8 flex items-end justify-between">
@@ -742,7 +750,7 @@ export default function Page() {
           style={trajectorySectionStyle}
         >
           <SectionLabel index="04" label="Trajectory" />
-          <div className="sticky top-0 flex min-h-screen items-center py-10">
+          <div className="sticky top-20 flex min-h-[calc(100svh-5rem)] items-center sm:top-24">
             <div className="w-full space-y-6">
               <motion.div
                 {...fadeInUp(0.04)}
@@ -864,7 +872,7 @@ export default function Page() {
 
         <section
           id="contact"
-          className="mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center py-10 sm:py-16"
+          className="mx-auto flex min-h-[calc(100svh-5rem)] w-full max-w-7xl flex-col justify-end py-10 sm:py-16"
           onMouseEnter={() => setFooterHover(true)}
           onMouseLeave={() => setFooterHover(false)}
         >

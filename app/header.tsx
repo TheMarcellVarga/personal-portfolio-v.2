@@ -3,7 +3,7 @@
 import IndexSigAnimatedIcon from "@/public/icons/indexSigAnimated";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 
 interface HeaderProps {
@@ -34,25 +34,17 @@ export default function Header({
   const router = useRouter();
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isHidden, setIsHidden] = useState(false);
-  const lastScrollY = useRef(0);
+  const isHomePage = pathname === "/";
+  const isAtTop = isHomePage && !isScrolled;
 
   useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
     const onScroll = () => {
       const current = window.scrollY;
-      const delta = current - lastScrollY.current;
-
-      setIsScrolled(current > 12);
-
-      if (delta > 8) {
-        // scrolling down — hide
-        setIsHidden(true);
-      } else if (delta < -4) {
-        // scrolling up — reveal
-        setIsHidden(false);
-      }
-
-      lastScrollY.current = current;
+      setIsScrolled(current > 20);
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -86,17 +78,13 @@ export default function Header({
 
   return (
     <header
-      className={`sticky-header px-4 py-4 sm:px-6 lg:px-10 transition-transform transition-opacity duration-300 ease-in-out ${
-        isHidden
-          ? "-translate-y-full opacity-0"
-          : "translate-y-0 opacity-100"
-      }`}
+      className="sticky-header translate-y-0 px-4 py-4 opacity-100 transition-[transform,opacity] duration-300 ease-in-out sm:px-6 lg:px-10"
     >
       <div
         className={`mx-auto flex w-full max-w-7xl items-center justify-between rounded-full border px-4 py-3 transition duration-300 sm:px-5 ${
-          isScrolled || isOpen
+          isScrolled || isOpen || !isHomePage
             ? "border-white/60 bg-white/74 shadow-[0_16px_50px_rgba(7,20,38,0.12)] backdrop-blur-2xl"
-            : "border-white/36 bg-white/52 backdrop-blur-xl"
+            : "border-transparent bg-white/10 shadow-none backdrop-blur-sm"
         }`}
       >
         <Link
@@ -122,7 +110,9 @@ export default function Header({
               className={`rounded-full px-4 py-2 text-sm font-semibold transition duration-300 ${
                 activeSection === item.label
                   ? "bg-custom-blue/6 text-custom-blue"
-                  : "text-custom-blue/68 hover:bg-custom-blue/6 hover:text-custom-blue"
+                  : isAtTop
+                    ? "text-custom-blue/58 hover:bg-white/38 hover:text-custom-blue"
+                    : "text-custom-blue/68 hover:bg-custom-blue/6 hover:text-custom-blue"
               }`}
             >
               {item.label}
@@ -142,7 +132,11 @@ export default function Header({
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-custom-blue/10 bg-custom-blue/4 text-custom-blue lg:hidden"
+          className={`inline-flex h-11 w-11 items-center justify-center rounded-full border text-custom-blue lg:hidden ${
+            isAtTop && !isOpen
+              ? "border-white/15 bg-white/20"
+              : "border-custom-blue/10 bg-custom-blue/4"
+          }`}
           aria-label={isOpen ? "Close navigation" : "Open navigation"}
           aria-expanded={isOpen}
         >
