@@ -107,12 +107,15 @@ export default function Projects() {
               >
                 <div className="w-full sm:w-1/4 md:w-[300px] mb-2 sm:mb-0 relative flex items-center justify-center group-hover:scale-[1.02] transition-transform duration-500 px-1 sm:px-0">
                   {project.inProgress ? (
-                    <div className="w-full aspect-3/2 sm:w-full sm:h-full md:aspect-3/2 relative rounded-lg overflow-hidden bg-gradient-to-br from-custom-blue/20 via-custom-teal/20 to-custom-blue/20 flex items-center justify-center shadow-[0_8px_30px_rgba(2,66,92,0.12)] group-hover:shadow-[0_15px_60px_rgba(2,66,92,0.2)] transition-all duration-500">
-                      <div className="absolute top-0 right-0 z-10 bg-custom-blue text-white px-1 py-0.5 text-[8px] sm:text-xs rounded-bl-lg shadow-md">
+                    <div className="w-full aspect-3/2 sm:w-full sm:h-full md:aspect-3/2 relative rounded-lg overflow-hidden glass-panel flex items-center justify-center transition-all duration-500">
+                      <div className="absolute top-3 right-3 z-10 rounded-full border border-custom-blue/15 bg-custom-blue/10 px-3 py-1 text-[0.55rem] font-semibold uppercase tracking-[0.18em] text-custom-blue/60 backdrop-blur-md">
                         Coming Soon
                       </div>
-                      <div className="text-3xl sm:text-6xl animate-pulse" aria-hidden="true">🚀</div>
-                      <div className="absolute inset-0 bg-[radial-gradient(circle,_transparent_20%,_#ffffff_120%)] opacity-20"></div>
+                      <div className="relative z-10 flex flex-col items-center gap-1.5">
+                        <div className="w-10 h-10 rounded-full border-2 border-dashed border-custom-blue/20 flex items-center justify-center">
+                          <span className="text-lg text-custom-blue/30">?</span>
+                        </div>
+                      </div>
                     </div>
                   ) : (
                     <div className={`w-full aspect-3/2 sm:w-full sm:h-full md:aspect-3/2 relative rounded-lg overflow-hidden shadow-[0_8px_30px_rgba(2,66,92,0.12)] group-hover:shadow-[0_15px_60px_rgba(2,66,92,0.2)] transition-all duration-500 ${project.backgroundClass}`}>

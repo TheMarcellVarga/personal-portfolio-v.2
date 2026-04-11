@@ -1,6 +1,14 @@
 "use client";
 
-import { startTransition, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import {
+  startTransition,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -114,7 +122,9 @@ export default function Page() {
   const [workCarouselMaxScroll, setWorkCarouselMaxScroll] = useState(0);
   const [activeTrajectoryIndex, setActiveTrajectoryIndex] = useState(0);
   const trajectoryHeightVh = history.length * 110 + 100;
-  const [trajectoryMinHeightPx, setTrajectoryMinHeightPx] = useState<number | null>(null);
+  const [trajectoryMinHeightPx, setTrajectoryMinHeightPx] = useState<
+    number | null
+  >(null);
 
   const { scrollYProgress: heroProgress } = useScroll({
     target: heroRef,
@@ -128,7 +138,8 @@ export default function Page() {
   const portraitRotate = useTransform(heroProgress, [0, 1], [0, -4]);
   const portraitScale = useTransform(heroProgress, [0, 1], [1, 0.965]);
   const haloScale = useTransform(heroProgress, [0, 1], [1, 1.14]);
-
+  const liquidProgress = useTransform(heroProgress, [0.5, 1], [0, 1]);
+  const liquidRise = useTransform(liquidProgress, [0, 1], [260, -54]);
   const { scrollYProgress: manifestoProgress } = useScroll({
     target: manifestoRef,
     offset: ["start start", "end end"],
@@ -145,18 +156,34 @@ export default function Page() {
   const manifestoOpacity = useTransform(
     manifestoProgress,
     [0, 0.12, 0.74, 0.86, 0.95, 1],
-    [0.2, 1, 1, 0.88, 0.32, 0]
+    [0.2, 1, 1, 0.88, 0.32, 0],
   );
-  const manifestoScale = useTransform(manifestoProgress, [0, 0.18, 0.74, 0.86, 1], [0.95, 1, 1, 0.99, 0.92]);
-  const manifestoY = useTransform(manifestoProgress, [0, 0.2, 0.74, 0.86, 1], [28, 0, 0, -8, -72]);
+  const manifestoScale = useTransform(
+    manifestoProgress,
+    [0, 0.18, 0.74, 0.86, 1],
+    [0.95, 1, 1, 0.99, 0.92],
+  );
+  const manifestoY = useTransform(
+    manifestoProgress,
+    [0, 0.2, 0.74, 0.86, 1],
+    [28, 0, 0, -8, -72],
+  );
   const manifestoGlow = useTransform(manifestoProgress, [0, 1], [0.15, 0.5]);
-  const workCarouselX = useTransform(workScrollProgress, (p) => -p * workCarouselMaxScroll);
+  const workCarouselX = useTransform(
+    workScrollProgress,
+    (p) => -p * workCarouselMaxScroll,
+  );
 
   useMotionValueEvent(trajectoryProgress, "change", (value) => {
-    const nextIndex = Math.min(history.length - 1, Math.floor(value * history.length));
+    const nextIndex = Math.min(
+      history.length - 1,
+      Math.floor(value * history.length),
+    );
 
     startTransition(() => {
-      setActiveTrajectoryIndex((current) => (current === nextIndex ? current : nextIndex));
+      setActiveTrajectoryIndex((current) =>
+        current === nextIndex ? current : nextIndex,
+      );
     });
   });
 
@@ -179,7 +206,10 @@ export default function Page() {
   });
 
   const scrollHome = useCallback(() => {
-    window.scrollTo({ top: 0, behavior: shouldReduceMotion ? "auto" : "smooth" });
+    window.scrollTo({
+      top: 0,
+      behavior: shouldReduceMotion ? "auto" : "smooth",
+    });
   }, [shouldReduceMotion]);
 
   const scrollAbout = useCallback(() => {
@@ -235,7 +265,7 @@ export default function Page() {
             }
           });
         },
-        { threshold: 0.2, rootMargin: "-20% 0px -20% 0px" }
+        { threshold: 0.2, rootMargin: "-20% 0px -20% 0px" },
       );
 
       observer.observe(element);
@@ -247,7 +277,10 @@ export default function Page() {
     };
   }, []);
 
-  const featuredProjects = useMemo(() => projects.filter((project) => !project.inProgress), []);
+  const featuredProjects = useMemo(
+    () => projects.filter((project) => !project.inProgress),
+    [],
+  );
   const activeTrajectoryItem = history[activeTrajectoryIndex];
 
   useLayoutEffect(() => {
@@ -300,7 +333,12 @@ export default function Page() {
         behavior: shouldReduceMotion ? "auto" : "smooth",
       });
     },
-    [shouldReduceMotion, workCarouselMaxScroll, featuredProjects.length, workScrollProgress]
+    [
+      shouldReduceMotion,
+      workCarouselMaxScroll,
+      featuredProjects.length,
+      workScrollProgress,
+    ],
   );
 
   return (
@@ -321,118 +359,140 @@ export default function Page() {
         <section
           id="hero"
           ref={heroRef}
-          className="mx-auto grid min-h-[calc(100svh-5rem)] w-full max-w-7xl items-center gap-10 pb-10 pt-4 md:pb-16 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14"
+          className="relative left-1/2 min-h-[calc(100svh-4rem)] w-screen -translate-x-1/2 overflow-hidden"
         >
-          <div className="relative min-w-0">
-            {/* <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              style={shouldReduceMotion ? undefined : { y: heroPillsY }}
-              className="mb-6 flex flex-wrap gap-3"
-            >
-              {[
-                "Product Design",
-                "Design systems",
-                "Frontend",
-              ].map((pill) => (
-                <span
-                  key={pill}
-                  className="rounded-full border border-white/70 bg-white/65 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-custom-blue/70 shadow-[0_10px_30px_rgba(7,20,38,0.08)] backdrop-blur-xl"
-                >
-                  {pill}
-                </span>
-              ))}
-            </motion.div> */}
-
-            <motion.div
-              {...fadeInUp(0.05)}
-              style={shouldReduceMotion ? undefined : { y: heroCopyY, opacity: heroCopyOpacity }}
-              className="space-y-6"
-            >
-              <p className="font-display text-sm uppercase tracking-[0.4em] text-custom-blue/45">
-                UX & Frontend Engineer
-              </p>
-              <h1 className="max-w-[7.2ch] font-display text-[2.8rem] font-medium leading-[0.9] tracking-[-0.08em] text-custom-blue sm:text-[3.8rem] md:text-[4.6rem] lg:text-[5.2rem] xl:text-[6.4rem] 2xl:text-[7.6rem]">
-                Marcell Varga
-              </h1>
-              <p className="max-w-2xl text-base leading-7 text-custom-blue/72 sm:text-lg sm:leading-8">
-                Born in Denmark, now building from Singapore. I make product interfaces and the code behind them feel sharp.
-              </p>
-            </motion.div>
-
-            <motion.div
-              {...fadeInUp(0.12)}
-              className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap"
-            >
-              <button
-                onClick={scrollWork}
-                className="group inline-flex items-center justify-center gap-3 rounded-full bg-custom-blue px-6 py-3 text-sm font-semibold text-white shadow-[0_18px_50px_rgba(6,23,44,0.22)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#0f3555]"
-              >
-                View selected work
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
-              <Link
-                href="/resume"
-                className="inline-flex items-center justify-center gap-3 rounded-full border border-custom-blue/14 bg-white/70 px-6 py-3 text-sm font-semibold text-custom-blue shadow-[0_10px_30px_rgba(7,20,38,0.08)] backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-custom-blue/28 hover:bg-white"
-              >
-                Open resume
-                <Download className="h-4 w-4" />
-              </Link>
-            </motion.div>
-
-            {/* <motion.div
-              {...fadeInUp(0.18)}
-              style={shouldReduceMotion ? undefined : { y: heroCardsY }}
-              className="mt-8 flex flex-wrap gap-2"
-            >
-              {["Product UX", "Interface systems", "Motion + code"].map((item) => (
-                <span
-                  key={item}
-                  className="rounded-full border border-white/70 bg-white/65 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-custom-blue/65 shadow-[0_10px_30px_rgba(7,20,38,0.08)] backdrop-blur-xl"
-                >
-                  {item}
-                </span>
-              ))}
-            </motion.div> */}
-          </div>
+          <div className="absolute inset-0 bg-[#06111c]" />
+          <div className="absolute inset-0 bg-[linear-gradient(118deg,rgba(5,10,18,0.98)_0%,rgba(8,18,29,0.94)_28%,rgba(16,39,56,0.84)_56%,rgba(88,121,134,0.92)_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(255,255,255,0.1),transparent_18%),radial-gradient(circle_at_72%_24%,rgba(76,207,255,0.18),transparent_18%),radial-gradient(circle_at_84%_66%,rgba(255,224,182,0.18),transparent_24%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,8,14,0.1)_0%,rgba(4,8,14,0.02)_40%,rgba(4,8,14,0.32)_100%)]" />
 
           <motion.div
-            style={shouldReduceMotion ? undefined : { y: portraitY, scale: portraitScale }}
-            className="relative mx-auto w-full max-w-[32rem]"
+            style={
+              shouldReduceMotion
+                ? undefined
+                : { y: portraitY, scale: portraitScale }
+            }
+            className="pointer-events-none absolute inset-y-0 right-[-24vw] flex items-end sm:right-[-12vw] lg:right-[-4vw] xl:right-[2vw]"
           >
             <motion.div
               aria-hidden="true"
               style={shouldReduceMotion ? undefined : { scale: haloScale }}
-              className="absolute inset-x-[12%] top-[4%] -z-10 aspect-square rounded-full bg-[radial-gradient(circle,_rgba(56,188,255,0.42)_0%,_rgba(56,188,255,0.12)_30%,_transparent_72%)] blur-3xl"
+              className="absolute bottom-[12%] right-[18%] h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,_rgba(76,207,255,0.24)_0%,_rgba(76,207,255,0.1)_36%,_transparent_74%)] blur-3xl sm:h-[30rem] sm:w-[30rem] xl:h-[36rem] xl:w-[36rem]"
             />
             <motion.div
-              style={shouldReduceMotion ? undefined : { rotate: portraitRotate }}
-              className="glass-panel relative overflow-hidden rounded-[3rem] p-4 shadow-[0_40px_120px_rgba(7,20,38,0.16)]"
+              style={
+                shouldReduceMotion ? undefined : { rotate: portraitRotate }
+              }
+              className="relative flex h-[72svh] min-h-[32rem] w-[min(104vw,46rem)] items-end justify-center sm:h-[78svh] sm:w-[min(88vw,42rem)] lg:h-[86svh] lg:w-[44rem] xl:h-[90svh] xl:w-[50rem]"
             >
-              <div className="absolute inset-0 bg-[linear-gradient(145deg,rgba(255,255,255,0.66),rgba(255,255,255,0.1))]" />
-              <div className="relative rounded-[2.35rem] bg-[linear-gradient(160deg,#f0d3bc_0%,#8db5c9_46%,#263f55_100%)] p-5 pb-0">
-                <div className="absolute right-5 top-5 rounded-full border border-white/30 bg-white/12 px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-white/80 backdrop-blur-md">
-                  Marcell Varga
-                </div>
-                <Image
-                  src="/images/personalpageprofilealt.png"
-                  alt="Portrait of Marcell Varga"
-                  width={960}
-                  height={1280}
-                  priority
-                  className="mx-auto h-auto w-full max-w-[26rem] object-contain"
-                />
+              <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
+              <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
+              <div className="absolute right-[14%] top-[16%] rounded-full border border-white/12 bg-white/7 px-4 py-2 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-white/66 backdrop-blur-md">
+                Product + Code
               </div>
+              <Image
+                src="/images/personalpageprofilealt.png"
+                alt="Portrait of Marcell Varga"
+                width={1210}
+                height={1777}
+                priority
+                className="relative z-10 h-full w-auto max-w-none object-contain object-bottom drop-shadow-[0_40px_120px_rgba(0,0,0,0.34)]"
+              />
             </motion.div>
+          </motion.div>
 
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,9,15,0.98)_0%,rgba(4,9,15,0.9)_30%,rgba(4,9,15,0.6)_52%,rgba(4,9,15,0.18)_72%,rgba(4,9,15,0.08)_100%)]" />
+
+          <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] w-full max-w-7xl items-end px-6 pb-12 pt-24 sm:px-10 sm:pb-16 lg:px-14 lg:pb-20">
+            <div className="max-w-[42rem]">
+              <motion.div
+                {...fadeInUp(0.05)}
+                style={shouldReduceMotion ? undefined : { y: heroPillsY }}
+                className="mb-6 flex flex-wrap gap-3"
+              >
+                {[
+                  "UX & Frontend Engineer",
+                  "Singapore",
+                  "Design systems + product",
+                ].map((pill) => (
+                  <span
+                    key={pill}
+                    className="rounded-full border border-white/12 bg-white/7 px-4 py-2 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-white/68 shadow-[0_10px_30px_rgba(0,0,0,0.14)] backdrop-blur-xl"
+                  >
+                    {pill}
+                  </span>
+                ))}
+              </motion.div>
+
+              <motion.div
+                {...fadeInUp(0.08)}
+                style={
+                  shouldReduceMotion
+                    ? undefined
+                    : { y: heroCopyY, opacity: heroCopyOpacity }
+                }
+                className="space-y-6"
+              >
+                <h1 className="max-w-[7.2ch] font-display text-[3.35rem] font-medium leading-[0.84] tracking-[-0.09em] text-white sm:text-[4.5rem] md:text-[5.3rem] lg:text-[6rem] xl:text-[7rem] 2xl:text-[7.8rem]">
+                  Marcell Varga
+                </h1>
+                <p className="max-w-[34rem] text-base leading-7 text-white/72 sm:text-lg sm:leading-8">
+                  Born in Denmark, now building from Singapore. I make product
+                  interfaces and the code behind them feel sharp.
+                </p>
+              </motion.div>
+
+              <motion.div
+                {...fadeInUp(0.12)}
+                style={shouldReduceMotion ? undefined : { y: heroCardsY }}
+                className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap"
+              >
+                <button
+                  onClick={scrollWork}
+                  className="group inline-flex items-center justify-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-semibold text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8]"
+                >
+                  View selected work
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </button>
+                <Link
+                  href="/resume"
+                  className="inline-flex items-center justify-center gap-3 rounded-full border border-white/16 bg-white/8 px-6 py-3 text-sm font-semibold text-white/86 shadow-[0_10px_30px_rgba(0,0,0,0.12)] backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-white/28 hover:bg-white/12"
+                >
+                  Open resume
+                  <Download className="h-4 w-4" />
+                </Link>
+              </motion.div>
+
+              <motion.div
+                {...fadeInUp(0.16)}
+                style={shouldReduceMotion ? undefined : { y: heroCardsY }}
+                className="mt-10 flex flex-wrap gap-3 text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-white/42"
+              >
+                <span className="text-white/64">Deliberate interfaces</span>
+                <span>/</span>
+                <span className="text-white/64">Shipped motion</span>
+                <span>/</span>
+                <span className="text-white/64">Frontend craft</span>
+              </motion.div>
+            </div>
+          </div>
+
+          <motion.div
+            aria-hidden="true"
+            style={shouldReduceMotion ? undefined : { y: liquidRise }}
+            className="pointer-events-none absolute inset-x-0 bottom-[-17rem] z-20 h-[34rem] overflow-hidden sm:bottom-[-15rem] sm:h-[38rem]"
+          >
+            <div className="absolute inset-x-[-10%] bottom-0 h-[22rem] overflow-hidden rounded-t-[44%] sm:h-[26rem]">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(76,207,255,0.16),_transparent_28%),radial-gradient(circle_at_20%_70%,_rgba(255,153,102,0.16),_transparent_34%),radial-gradient(circle_at_85%_18%,_rgba(17,27,40,0.12),_transparent_24%),linear-gradient(180deg,_#f8f1e8_0%,_#f6efe5_46%,_#fff8f1_100%)]" />
+              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(17,27,40,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(17,27,40,0.04)_1px,transparent_1px)] bg-[size:92px_92px] [mask-image:radial-gradient(circle_at_center,black_45%,transparent_88%)]" />
+            </div>
           </motion.div>
         </section>
 
         <section
           id="about"
           ref={manifestoRef}
-          className="relative mx-auto mt-16 h-[240vh] w-full max-w-7xl sm:mt-24 sm:h-[300vh]"
+          className="relative mx-auto -mt-8 h-[240vh] w-full max-w-7xl sm:-mt-12 sm:h-[300vh]"
         >
           <div className="sticky top-20 flex min-h-[calc(100svh-5rem)] items-center py-12 sm:top-24">
             <motion.div
@@ -451,7 +511,11 @@ export default function Page() {
                 <div>
                   <SectionLabel index="01" label="Manifesto" tone="light" />
                   <motion.div
-                    style={shouldReduceMotion ? undefined : { opacity: manifestoGlow }}
+                    style={
+                      shouldReduceMotion
+                        ? undefined
+                        : { opacity: manifestoGlow }
+                    }
                     className="mb-8 h-px w-full bg-[linear-gradient(90deg,rgba(76,216,255,0.85),rgba(76,216,255,0.02))]"
                   />
                   <p
@@ -464,7 +528,9 @@ export default function Page() {
                   >
                     {typedText}
                     {!shouldReduceMotion && (
-                      <span className="ml-1 inline-block animate-pulse text-[#67d9ff]">|</span>
+                      <span className="ml-1 inline-block animate-pulse text-[#67d9ff]">
+                        |
+                      </span>
                     )}
                   </p>
                 </div>
@@ -485,7 +551,8 @@ export default function Page() {
                 The useful overlap between taste and implementation.
               </h2>
               <p className="mt-4 max-w-2xl text-[0.95rem] leading-relaxed text-custom-blue/70">
-                Interfaces, motion, systems, and frontend detail all need to line up. These are the pieces I actually care about.
+                Interfaces, motion, systems, and frontend detail all need to
+                line up. These are the pieces I actually care about.
               </p>
             </motion.div>
 
@@ -511,14 +578,16 @@ export default function Page() {
                         {card.body}
                       </p>
                       <div className="mt-auto flex flex-wrap gap-2 pt-6">
-                        {capabilityTags.slice(index * 3, index * 3 + 3).map((tag) => (
-                          <span
-                            key={tag}
-                            className="rounded-full border border-custom-blue/12 bg-white/60 px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.18em] text-custom-blue/65"
-                          >
-                            {tag}
-                          </span>
-                        ))}
+                        {capabilityTags
+                          .slice(index * 3, index * 3 + 3)
+                          .map((tag) => (
+                            <span
+                              key={tag}
+                              className="rounded-full border border-custom-blue/12 bg-white/60 px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.18em] text-custom-blue/65"
+                            >
+                              {tag}
+                            </span>
+                          ))}
                       </div>
                     </div>
                   </motion.article>
@@ -531,7 +600,11 @@ export default function Page() {
         <section
           id="work"
           ref={workSectionRef}
-          className={shouldReduceMotion ? "relative flex flex-col justify-center py-10 sm:py-16" : "relative w-full"}
+          className={
+            shouldReduceMotion
+              ? "relative flex flex-col justify-center py-10 sm:py-16"
+              : "relative w-full"
+          }
           style={
             shouldReduceMotion
               ? undefined
@@ -548,7 +621,8 @@ export default function Page() {
                       Case studies from the workbench.
                     </h2>
                     <p className="mt-4 text-custom-blue/70">
-                      A selection of projects where product thinking, interaction design, and technical execution come together.
+                      A selection of projects where product thinking,
+                      interaction design, and technical execution come together.
                     </p>
                   </motion.div>
 
@@ -622,7 +696,10 @@ export default function Page() {
                         <div className="mt-10 flex items-center justify-between border-t border-custom-blue/5 pt-8">
                           <div className="flex flex-wrap gap-2">
                             {project.skills.slice(0, 3).map((skill) => (
-                              <span key={skill} className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-custom-blue/40">
+                              <span
+                                key={skill}
+                                className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-custom-blue/40"
+                              >
                                 {skill}
                               </span>
                             ))}
@@ -648,7 +725,8 @@ export default function Page() {
                       Case studies from the workbench.
                     </h2>
                     <p className="mt-4 text-custom-blue/70">
-                      A selection of projects where product thinking, interaction design, and technical execution come together.
+                      A selection of projects where product thinking,
+                      interaction design, and technical execution come together.
                     </p>
                   </motion.div>
 
@@ -673,7 +751,10 @@ export default function Page() {
                 </div>
               </div>
 
-              <div ref={workCarouselViewportRef} className="mt-12 w-full overflow-hidden pb-12">
+              <div
+                ref={workCarouselViewportRef}
+                className="mt-12 w-full overflow-hidden pb-12"
+              >
                 <motion.div
                   id="work-carousel"
                   ref={workCarouselTrackRef}
@@ -724,7 +805,10 @@ export default function Page() {
                           <div className="mt-10 flex items-center justify-between border-t border-custom-blue/5 pt-8">
                             <div className="flex flex-wrap gap-2">
                               {project.skills.slice(0, 3).map((skill) => (
-                                <span key={skill} className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-custom-blue/40">
+                                <span
+                                  key={skill}
+                                  className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-custom-blue/40"
+                                >
                                   {skill}
                                 </span>
                               ))}
@@ -764,7 +848,8 @@ export default function Page() {
                     Built in Denmark. Now shipping from Singapore.
                   </p>
                   <p className="max-w-2xl text-sm leading-7 text-custom-blue/68">
-                    Multimedia design first. Product work next. The timeline stays pinned while each step advances one by one.
+                    Multimedia design first. Product work next. The timeline
+                    stays pinned while each step advances one by one.
                   </p>
                 </div>
               </motion.div>
@@ -807,7 +892,10 @@ export default function Page() {
                           </span>
                           <span className="min-w-0 pr-2">
                             <span className="block text-[0.68rem] font-bold uppercase tracking-[0.24em] text-custom-blue/45">
-                              {item.time.start} {item.time.end ? `- ${item.time.end}` : "- Present"}
+                              {item.time.start}{" "}
+                              {item.time.end
+                                ? `- ${item.time.end}`
+                                : "- Present"}
                             </span>
                             <span className="mt-1 block truncate text-[1rem] font-bold text-custom-blue">
                               {item.company}
@@ -828,7 +916,10 @@ export default function Page() {
                     initial={{ opacity: 0, scale: 0.98, x: 15 }}
                     animate={{ opacity: 1, scale: 1, x: 0 }}
                     exit={{ opacity: 0, scale: 0.98, x: -15 }}
-                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
+                    transition={{
+                      duration: 0.4,
+                      ease: [0.22, 1, 0.36, 1] as const,
+                    }}
                     className="glass-panel relative flex flex-col justify-start overflow-hidden rounded-[2.8rem] bg-white/72 p-8 shadow-[0_12px_45px_rgba(11,17,26,0.06)] lg:p-10"
                   >
                     <div className="flex flex-wrap items-center gap-4">
@@ -846,11 +937,16 @@ export default function Page() {
                       {activeTrajectoryItem.jobTitle}
                     </p>
                     <div className="mt-6 space-y-5">
-                      {activeTrajectoryItem.description.map((paragraph, index) => (
-                        <p key={index} className="max-w-[38rem] text-[1rem] leading-relaxed text-custom-blue/75">
-                          {paragraph}
-                        </p>
-                      ))}
+                      {activeTrajectoryItem.description.map(
+                        (paragraph, index) => (
+                          <p
+                            key={index}
+                            className="max-w-[38rem] text-[1rem] leading-relaxed text-custom-blue/75"
+                          >
+                            {paragraph}
+                          </p>
+                        ),
+                      )}
                     </div>
 
                     <div className="mt-12 flex flex-wrap gap-2.5">
@@ -888,7 +984,9 @@ export default function Page() {
                   Ready for the next ambitious build.
                 </h2>
                 <p className="mt-6 max-w-2xl text-lg leading-8 text-white/72">
-                  If you need a UX-minded engineer who can think visually, move fast in code, and care about the end product as much as the process, let’s talk.
+                  If you need a UX-minded engineer who can think visually, move
+                  fast in code, and care about the end product as much as the
+                  process, let’s talk.
                 </p>
               </div>
 

@@ -6,6 +6,7 @@ import PostHogProvider from "./providers/PostHogProvider";
 import { metadata } from "./metadata";
 import ScrollReset from "./components/ScrollReset";
 import DevelopmentBanner from "./components/DevelopmentBanner";
+import LegacyNotice from "./components/LegacyNotice";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({
           <ScrollReset />
           {children}
           <DevelopmentBanner />
+          <LegacyNotice />
           <SpeedInsights />
           <Analytics />
         </PostHogProvider>
