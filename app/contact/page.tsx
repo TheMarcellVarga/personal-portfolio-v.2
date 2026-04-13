@@ -47,7 +47,7 @@ export default function Contact() {
           <header className="mb-20">
             <motion.div {...fadeInUp(0.1)}>
               <SectionLabel index="04" label="Contact" />
-              <h1 className="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-medium leading-[1.1] tracking-[-0.05em] text-custom-blue">
+              <h1 className="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-medium leading-[1.02] tracking-[-0.02em] text-custom-blue">
                 Let's talk about your next product.
               </h1>
             </motion.div>

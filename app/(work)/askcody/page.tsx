@@ -273,7 +273,7 @@ export default function AskCodyPage() {
           <header className="mb-20 grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
             <motion.div {...fadeInUp(0)}>
               <SectionLabel index="Project" label="Case Study" />
-              <h1 className="font-display text-[clamp(2.5rem,6vw,5.5rem)] font-medium leading-[0.9] tracking-[-0.06em] text-custom-blue">
+              <h1 className="font-display text-[clamp(2.5rem,6vw,5.5rem)] font-medium leading-[0.95] tracking-[-0.02em] text-custom-blue">
                 {projectData.title}
               </h1>
               <p className="mt-8 max-w-2xl text-lg leading-relaxed text-custom-blue/72">
@@ -338,7 +338,7 @@ export default function AskCodyPage() {
                   {section.title && (
                     <>
                       <SectionLabel index={`0${sIndex + 1}`} label={section.title} />
-                      <h2 className="font-display text-4xl font-medium tracking-tight text-custom-blue">
+                      <h2 className="font-display text-4xl font-medium tracking-[-0.02em] text-custom-blue">
                         {section.title}
                       </h2>
                     </>

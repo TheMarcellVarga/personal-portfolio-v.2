@@ -176,7 +176,7 @@ export default function ResumePage() {
               <div className="px-8 py-10 sm:px-10 print:py-8">
                 <header>
                   <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-custom-blue/30">Curriculum Vitae</p>
-                  <h1 className="mt-3 font-display text-5xl font-medium tracking-tight text-custom-blue">
+                  <h1 className="mt-3 font-display text-5xl font-medium tracking-[-0.02em] text-custom-blue">
                     {resume.name}
                   </h1>
                   <p className="mt-2 text-lg font-medium text-custom-blue/60">{resume.title}</p>

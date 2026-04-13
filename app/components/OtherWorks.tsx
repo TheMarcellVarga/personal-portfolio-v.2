@@ -62,7 +62,7 @@ export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
               </div>
 
               <div className="relative z-10 mt-auto transform transition-transform duration-700 group-hover:-translate-y-2">
-                <h3 className="font-display text-[2rem] leading-[0.9] tracking-[-0.04em] text-white sm:text-[2.4rem]">
+                <h3 className="font-display text-[2rem] leading-[0.95] tracking-[-0.02em] text-white sm:text-[2.4rem]">
                   {project.title}
                 </h3>
                 <p className="mt-3 max-w-sm text-[0.95rem] leading-relaxed text-white/85">

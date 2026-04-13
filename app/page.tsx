@@ -36,6 +36,7 @@ import Footer from "./footer";
 import { history } from "./data/history";
 import { projects } from "./data/projects";
 import { SectionLabel } from "./components/SectionLabel";
+import { HomeIntro } from "./components/HomeIntro";
 import { PageBackground } from "./components/PageBackground";
 
 const manifesto =
@@ -43,26 +44,26 @@ const manifesto =
 
 const capabilityCards = [
   {
-    title: "I make systems feel alive",
-    body: "I turn rough ideas into interface systems with taste, tension, and enough structure for teams to extend without flattening them.",
+    title: "Systems with character",
+    body: "I turn rough concepts into interface systems with enough structure to scale and enough taste to stay distinct.",
     icon: Blocks,
     colSpan: "lg:col-span-2",
   },
   {
-    title: "I care about shipped feeling",
-    body: "Motion, responsiveness, accessibility, and implementation detail all matter. I care about how the live product feels, not just how the mockup looks.",
+    title: "Shipped feeling matters",
+    body: "Motion, responsiveness, accessibility, and implementation detail matter as much as the mockup itself.",
     icon: Code2,
     colSpan: "lg:col-span-1",
   },
   {
     title: "Research without theater",
-    body: "I use interviews, testing, and iteration when they move the product forward. Useful insight beats a beautiful process doc.",
+    body: "I use interviews, testing, and iteration when they move the product forward. Useful insight beats ceremony.",
     icon: Sparkles,
     colSpan: "lg:col-span-1",
   },
   {
-    title: "Nerdy, but collaborative",
-    body: "I like the details, but I also like momentum. I work comfortably across design, engineering, and product without losing the plot.",
+    title: "Cross-functional by default",
+    body: "I work comfortably across design, engineering, and product without losing momentum or diluting the craft.",
     icon: Rocket,
     colSpan: "lg:col-span-2",
   },
@@ -71,16 +72,13 @@ const capabilityCards = [
 const capabilityTags = [
   "design systems",
   "interaction design",
-  "motion details",
+  "motion systems",
   "frontend architecture",
   "accessibility",
   "prototyping",
-  "research",
-  "TypeScript",
-  "React / Next.js",
-  "SvelteKit",
+  "product thinking",
   "AI product flows",
-  "weird edge cases",
+  "React / Next.js",
 ];
 
 function fadeInUp(delay = 0) {
@@ -110,8 +108,12 @@ export default function Page() {
   const [isOpen, setIsOpen] = useState(false);
   const [footerHover, setFooterHover] = useState(false);
   const [typedText, setTypedText] = useState("");
+  const [introStage, setIntroStage] = useState<"checking" | "playing" | "done">(
+    "checking",
+  );
   const prefersReducedMotion = useReducedMotion();
   const shouldReduceMotion = Boolean(prefersReducedMotion);
+  const headerLogoRef = useRef<HTMLSpanElement>(null);
 
   const heroRef = useRef<HTMLElement>(null);
   const manifestoRef = useRef<HTMLElement>(null);
@@ -138,7 +140,7 @@ export default function Page() {
   const portraitRotate = useTransform(heroProgress, [0, 1], [0, -4]);
   const portraitScale = useTransform(heroProgress, [0, 1], [1, 0.965]);
   const haloScale = useTransform(heroProgress, [0, 1], [1, 1.14]);
-  const liquidProgress = useTransform(heroProgress, [0.5, 1], [0, 1]);
+  const liquidProgress = useTransform(heroProgress, [0.08, 0.55], [0, 1]);
   const liquidRise = useTransform(liquidProgress, [0, 1], [260, -54]);
   const { scrollYProgress: manifestoProgress } = useScroll({
     target: manifestoRef,
@@ -192,6 +194,32 @@ export default function Page() {
       setTypedText(manifesto);
     }
   }, [shouldReduceMotion]);
+
+  useLayoutEffect(() => {
+    if (shouldReduceMotion) {
+      setIntroStage("done");
+      return;
+    }
+
+    const hasPlayedIntro = window.sessionStorage.getItem("mv-home-intro") === "1";
+    setIntroStage(hasPlayedIntro ? "done" : "playing");
+  }, [shouldReduceMotion]);
+
+  const finishIntro = useCallback(() => {
+    window.sessionStorage.setItem("mv-home-intro", "1");
+    setIntroStage("done");
+  }, []);
+
+  useEffect(() => {
+    if (introStage !== "playing") return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [introStage]);
 
   useMotionValueEvent(manifestoProgress, "change", (value) => {
     if (shouldReduceMotion) return;
@@ -282,6 +310,7 @@ export default function Page() {
     [],
   );
   const activeTrajectoryItem = history[activeTrajectoryIndex];
+  const introIsActive = introStage === "playing";
 
   useLayoutEffect(() => {
     if (shouldReduceMotion) return;
@@ -345,22 +374,34 @@ export default function Page() {
     <div className="relative overflow-x-clip">
       <PageBackground />
 
-      <Header
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        scrollToHome={scrollHome}
-        scrollToAbout={scrollAbout}
-        scrollToWork={scrollWork}
-        scrollToContact={scrollContact}
-        activeSection={activeSection}
-      />
+      <motion.div
+        initial={false}
+        animate={
+          introIsActive
+            ? { opacity: 0.22, filter: "blur(14px)" }
+            : { opacity: 1, filter: "blur(0px)" }
+        }
+        transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+        className={`home-intro-stage ${introIsActive ? "pointer-events-none" : ""}`}
+      >
+        <Header
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          scrollToHome={scrollHome}
+          scrollToAbout={scrollAbout}
+          scrollToWork={scrollWork}
+          scrollToContact={scrollContact}
+          activeSection={activeSection}
+          logoRef={headerLogoRef}
+          revealBrand={!introIsActive}
+        />
 
-      <main className="relative z-10 px-4 pb-8 pt-16 sm:px-6 sm:pb-12 sm:pt-20 lg:px-10">
-        <section
-          id="hero"
-          ref={heroRef}
-          className="relative left-1/2 min-h-[calc(100svh-4rem)] w-screen -translate-x-1/2 overflow-hidden"
-        >
+        <main className="relative z-10 px-4 pb-8 pt-0 sm:px-6 sm:pb-12 lg:px-10">
+          <section
+            id="hero"
+            ref={heroRef}
+            className="relative left-1/2 min-h-[100svh] w-screen -translate-x-1/2 overflow-hidden"
+          >
           <div className="absolute inset-0 bg-[#06111c]" />
           <div className="absolute inset-0 bg-[linear-gradient(118deg,rgba(5,10,18,0.98)_0%,rgba(8,18,29,0.94)_28%,rgba(16,39,56,0.84)_56%,rgba(88,121,134,0.92)_100%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(255,255,255,0.1),transparent_18%),radial-gradient(circle_at_72%_24%,rgba(76,207,255,0.18),transparent_18%),radial-gradient(circle_at_84%_66%,rgba(255,224,182,0.18),transparent_24%)]" />
@@ -387,9 +428,6 @@ export default function Page() {
             >
               <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
               <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
-              <div className="absolute right-[14%] top-[16%] rounded-full border border-white/12 bg-white/7 px-4 py-2 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-white/66 backdrop-blur-md">
-                Product + Code
-              </div>
               <Image
                 src="/images/personalpageprofilealt.png"
                 alt="Portrait of Marcell Varga"
@@ -403,25 +441,16 @@ export default function Page() {
 
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,9,15,0.98)_0%,rgba(4,9,15,0.9)_30%,rgba(4,9,15,0.6)_52%,rgba(4,9,15,0.18)_72%,rgba(4,9,15,0.08)_100%)]" />
 
-          <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] w-full max-w-7xl items-end px-6 pb-12 pt-24 sm:px-10 sm:pb-16 lg:px-14 lg:pb-20">
-            <div className="max-w-[42rem]">
+          <div className="relative mx-auto flex min-h-[100svh] w-full max-w-7xl items-center px-6 pb-10 pt-24 sm:px-10 sm:pb-14 lg:px-14 lg:pb-12">
+            <div className="max-w-[36rem]">
               <motion.div
                 {...fadeInUp(0.05)}
                 style={shouldReduceMotion ? undefined : { y: heroPillsY }}
-                className="mb-6 flex flex-wrap gap-3"
+                className="mb-7 flex flex-wrap gap-3"
               >
-                {[
-                  "UX & Frontend Engineer",
-                  "Singapore",
-                  "Design systems + product",
-                ].map((pill) => (
-                  <span
-                    key={pill}
-                    className="rounded-full border border-white/12 bg-white/7 px-4 py-2 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-white/68 shadow-[0_10px_30px_rgba(0,0,0,0.14)] backdrop-blur-xl"
-                  >
-                    {pill}
-                  </span>
-                ))}
+                <span className="font-label rounded-full bg-white/10 px-4 py-2 text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)] backdrop-blur-xl">
+                  Singapore based UX engineer
+                </span>
               </motion.div>
 
               <motion.div
@@ -433,46 +462,34 @@ export default function Page() {
                 }
                 className="space-y-6"
               >
-                <h1 className="max-w-[7.2ch] font-display text-[3.35rem] font-medium leading-[0.84] tracking-[-0.09em] text-white sm:text-[4.5rem] md:text-[5.3rem] lg:text-[6rem] xl:text-[7rem] 2xl:text-[7.8rem]">
+                <h1 className="max-w-[6.6ch] font-display text-[3.35rem] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[4.5rem] md:text-[5.3rem] lg:text-[6rem] xl:text-[6.8rem] 2xl:text-[7.5rem]">
                   Marcell Varga
                 </h1>
-                <p className="max-w-[34rem] text-base leading-7 text-white/72 sm:text-lg sm:leading-8">
-                  Born in Denmark, now building from Singapore. I make product
-                  interfaces and the code behind them feel sharp.
+                <p className="max-w-[30rem] text-[1.02rem] leading-7 text-white/72 sm:text-[1.08rem] sm:leading-8">
+                  I design and build product interfaces that feel calm, sharp,
+                  and ready to ship.
                 </p>
               </motion.div>
 
               <motion.div
                 {...fadeInUp(0.12)}
                 style={shouldReduceMotion ? undefined : { y: heroCardsY }}
-                className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap"
+                className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6"
               >
                 <button
                   onClick={scrollWork}
-                  className="group inline-flex items-center justify-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-semibold text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8]"
+                  className="group inline-flex items-center justify-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8]"
                 >
-                  View selected work
+                  Selected work
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
                 <Link
                   href="/resume"
-                  className="inline-flex items-center justify-center gap-3 rounded-full border border-white/16 bg-white/8 px-6 py-3 text-sm font-semibold text-white/86 shadow-[0_10px_30px_rgba(0,0,0,0.12)] backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-white/28 hover:bg-white/12"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-white/72 transition duration-300 hover:text-white"
                 >
-                  Open resume
+                  Resume
                   <Download className="h-4 w-4" />
                 </Link>
-              </motion.div>
-
-              <motion.div
-                {...fadeInUp(0.16)}
-                style={shouldReduceMotion ? undefined : { y: heroCardsY }}
-                className="mt-10 flex flex-wrap gap-3 text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-white/42"
-              >
-                <span className="text-white/64">Deliberate interfaces</span>
-                <span>/</span>
-                <span className="text-white/64">Shipped motion</span>
-                <span>/</span>
-                <span className="text-white/64">Frontend craft</span>
               </motion.div>
             </div>
           </div>
@@ -483,17 +500,19 @@ export default function Page() {
             className="pointer-events-none absolute inset-x-0 bottom-[-17rem] z-20 h-[34rem] overflow-hidden sm:bottom-[-15rem] sm:h-[38rem]"
           >
             <div className="absolute inset-x-[-10%] bottom-0 h-[22rem] overflow-hidden rounded-t-[44%] sm:h-[26rem]">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(76,207,255,0.16),_transparent_28%),radial-gradient(circle_at_20%_70%,_rgba(255,153,102,0.16),_transparent_34%),radial-gradient(circle_at_85%_18%,_rgba(17,27,40,0.12),_transparent_24%),linear-gradient(180deg,_#f8f1e8_0%,_#f6efe5_46%,_#fff8f1_100%)]" />
-              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(17,27,40,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(17,27,40,0.04)_1px,transparent_1px)] bg-[size:92px_92px] [mask-image:radial-gradient(circle_at_center,black_45%,transparent_88%)]" />
+              {/* Matches PageBackground exactly */}
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,_#f8f1e8_0%,_#f6efe5_46%,_#fff8f1_100%)]" />
+              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(17,27,40,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(17,27,40,0.03)_1px,transparent_1px)] bg-[size:92px_92px] [mask-image:radial-gradient(circle_at_center,black_35%,transparent_80%)]" />
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(76,207,255,0.10),_transparent_28%),radial-gradient(circle_at_20%_70%,_rgba(255,153,102,0.08),_transparent_34%)]" />
             </div>
           </motion.div>
         </section>
 
-        <section
-          id="about"
-          ref={manifestoRef}
-          className="relative mx-auto -mt-8 h-[240vh] w-full max-w-7xl sm:-mt-12 sm:h-[300vh]"
-        >
+          <section
+            id="about"
+            ref={manifestoRef}
+            className="relative mx-auto -mt-8 h-[240vh] w-full max-w-7xl sm:-mt-12 sm:h-[300vh]"
+          >
           <div className="sticky top-20 flex min-h-[calc(100svh-5rem)] items-center py-12 sm:top-24">
             <motion.div
               style={
@@ -505,7 +524,7 @@ export default function Page() {
                       y: manifestoY,
                     }
               }
-              className="mx-auto flex h-[28rem] w-full max-w-5xl flex-col overflow-hidden rounded-[3rem] border border-white/60 bg-[#071726]/92 p-8 text-white shadow-[0_40px_140px_rgba(5,16,32,0.28)] sm:h-[32rem] lg:h-[36rem] lg:p-12"
+              className="mx-auto flex h-[28rem] w-full max-w-5xl flex-col overflow-hidden rounded-[3rem] bg-[#071726]/92 p-8 text-white shadow-[0_40px_140px_rgba(5,16,32,0.28),inset_0_1px_0_rgba(255,255,255,0.16)] sm:h-[32rem] lg:h-[36rem] lg:p-12"
             >
               <div className="flex h-full flex-col justify-between">
                 <div>
@@ -519,7 +538,7 @@ export default function Page() {
                     className="mb-8 h-px w-full bg-[linear-gradient(90deg,rgba(76,216,255,0.85),rgba(76,216,255,0.02))]"
                   />
                   <p
-                    className="max-w-4xl font-display text-[clamp(2rem,4vw,4.6rem)] leading-[1.02] tracking-[-0.06em] !text-[#f8fbff]"
+                    className="max-w-4xl font-display text-[clamp(2rem,4vw,4.6rem)] leading-[1.06] tracking-[-0.02em] !text-[#f8fbff]"
                     style={{
                       color: "#f8fbff",
                       WebkitTextFillColor: "#f8fbff",
@@ -547,7 +566,7 @@ export default function Page() {
           <SectionLabel index="02" label="Capabilities" />
           <div className="pt-2">
             <motion.div {...fadeInUp(0.04)} className="mb-6 max-w-3xl">
-              <h2 className="font-display text-[clamp(1.8rem,3.2vw,2.8rem)] leading-[0.95] tracking-[-0.05em] text-custom-blue">
+              <h2 className="font-display text-[clamp(1.8rem,3.2vw,2.8rem)] leading-[1.02] tracking-[-0.02em] text-custom-blue">
                 The useful overlap between taste and implementation.
               </h2>
               <p className="mt-4 max-w-2xl text-[0.95rem] leading-relaxed text-custom-blue/70">
@@ -568,10 +587,10 @@ export default function Page() {
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                     <div className="relative z-10 flex h-full flex-col">
-                      <div className="mb-6 inline-flex h-11 w-11 items-center justify-center rounded-[1rem] border border-custom-blue/8 bg-white text-custom-blue shadow-sm transition-transform duration-500 group-hover:scale-105">
+                      <div className="mb-6 inline-flex h-11 w-11 items-center justify-center rounded-[1rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_10px_28px_rgba(17,27,40,0.08)] transition-transform duration-500 group-hover:scale-105">
                         <Icon className="h-5 w-5" />
                       </div>
-                      <h2 className="font-display text-[1.4rem] font-medium leading-[1.05] tracking-[-0.04em] text-custom-blue sm:text-[1.6rem]">
+                      <h2 className="font-display text-[1.4rem] font-medium leading-[1.08] tracking-[-0.02em] text-custom-blue sm:text-[1.6rem]">
                         {card.title}
                       </h2>
                       <p className="mt-3 max-w-[28rem] text-[0.82rem] leading-relaxed text-custom-blue/72">
@@ -579,11 +598,11 @@ export default function Page() {
                       </p>
                       <div className="mt-auto flex flex-wrap gap-2 pt-6">
                         {capabilityTags
-                          .slice(index * 3, index * 3 + 3)
+                          .slice(index * 2, index * 2 + 2)
                           .map((tag) => (
                             <span
                               key={tag}
-                              className="rounded-full border border-custom-blue/12 bg-white/60 px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.18em] text-custom-blue/65"
+                              className="font-label rounded-full bg-white/62 px-3 py-1.5 text-[0.58rem] font-medium uppercase tracking-[0.16em] text-custom-blue/62 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]"
                             >
                               {tag}
                             </span>
@@ -617,7 +636,7 @@ export default function Page() {
                 <SectionLabel index="03" label="Selected Work" />
                 <div className="mt-8 flex items-end justify-between">
                   <motion.div {...fadeInUp(0.04)} className="max-w-2xl">
-                    <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-[-0.05em] text-custom-blue">
+                    <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[1.02] tracking-[-0.02em] text-custom-blue">
                       Case studies from the workbench.
                     </h2>
                     <p className="mt-4 text-custom-blue/70">
@@ -630,7 +649,7 @@ export default function Page() {
                     <button
                       type="button"
                       onClick={() => scrollWorkCarouselStep(-1)}
-                      className="flex h-12 w-12 items-center justify-center rounded-full border border-custom-blue/10 bg-white/50 text-custom-blue transition-all hover:bg-white hover:shadow-lg active:scale-95"
+                      className="flex h-12 w-12 items-center justify-center rounded-full bg-white/58 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72)] transition-all hover:bg-white hover:shadow-lg active:scale-95"
                       aria-label="Previous Project"
                     >
                       <ArrowRight className="h-5 w-5 rotate-180" />
@@ -638,7 +657,7 @@ export default function Page() {
                     <button
                       type="button"
                       onClick={() => scrollWorkCarouselStep(1)}
-                      className="flex h-12 w-12 items-center justify-center rounded-full border border-custom-blue/10 bg-white/50 text-custom-blue transition-all hover:bg-white hover:shadow-lg active:scale-95"
+                      className="flex h-12 w-12 items-center justify-center rounded-full bg-white/58 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72)] transition-all hover:bg-white hover:shadow-lg active:scale-95"
                       aria-label="Next Project"
                     >
                       <ArrowRight className="h-5 w-5" />
@@ -675,17 +694,17 @@ export default function Page() {
                       <div className="relative z-10 flex flex-col justify-between p-8 sm:p-10">
                         <div className="flex items-center justify-between gap-4">
                           <div className="flex flex-wrap gap-2">
-                            <span className="rounded-full border border-custom-blue/10 bg-custom-blue/5 px-4 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/60 backdrop-blur-md">
+                            <span className="font-label rounded-full bg-custom-blue/7 px-4 py-1.5 text-[0.62rem] font-medium uppercase tracking-[0.16em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.56)] backdrop-blur-md">
                               {project.category}
                             </span>
-                            <span className="rounded-full border border-custom-blue/10 bg-white/80 px-4 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/40 backdrop-blur-md">
+                            <span className="font-label rounded-full bg-white/84 px-4 py-1.5 text-[0.62rem] font-medium uppercase tracking-[0.16em] text-custom-blue/42 shadow-[inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-md">
                               {project.date}
                             </span>
                           </div>
                         </div>
 
                         <div className="mt-8">
-                          <h3 className="font-display text-[2.2rem] leading-[0.9] tracking-[-0.05em] text-custom-blue sm:text-[2.8rem]">
+                          <h3 className="font-display text-[2.2rem] leading-[0.95] tracking-[-0.02em] text-custom-blue sm:text-[2.8rem]">
                             {project.title}
                           </h3>
                           <p className="mt-4 line-clamp-3 max-w-[42ch] text-[0.95rem] leading-relaxed text-custom-blue/70 sm:text-[1rem]">
@@ -721,7 +740,7 @@ export default function Page() {
                 <SectionLabel index="03" label="Selected Work" />
                 <div className="mt-8 flex items-end justify-between">
                   <motion.div {...fadeInUp(0.04)} className="max-w-2xl">
-                    <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-[-0.05em] text-custom-blue">
+                    <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[1.02] tracking-[-0.02em] text-custom-blue">
                       Case studies from the workbench.
                     </h2>
                     <p className="mt-4 text-custom-blue/70">
@@ -734,7 +753,7 @@ export default function Page() {
                     <button
                       type="button"
                       onClick={() => scrollWorkCarouselStep(-1)}
-                      className="flex h-12 w-12 items-center justify-center rounded-full border border-custom-blue/10 bg-white/50 text-custom-blue transition-all hover:bg-white hover:shadow-lg active:scale-95"
+                      className="flex h-12 w-12 items-center justify-center rounded-full bg-white/58 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72)] transition-all hover:bg-white hover:shadow-lg active:scale-95"
                       aria-label="Previous Project"
                     >
                       <ArrowRight className="h-5 w-5 rotate-180" />
@@ -742,7 +761,7 @@ export default function Page() {
                     <button
                       type="button"
                       onClick={() => scrollWorkCarouselStep(1)}
-                      className="flex h-12 w-12 items-center justify-center rounded-full border border-custom-blue/10 bg-white/50 text-custom-blue transition-all hover:bg-white hover:shadow-lg active:scale-95"
+                      className="flex h-12 w-12 items-center justify-center rounded-full bg-white/58 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72)] transition-all hover:bg-white hover:shadow-lg active:scale-95"
                       aria-label="Next Project"
                     >
                       <ArrowRight className="h-5 w-5" />
@@ -784,17 +803,17 @@ export default function Page() {
                         <div className="relative z-10 flex flex-col justify-between p-8 sm:p-10">
                           <div className="flex items-center justify-between gap-4">
                             <div className="flex flex-wrap gap-2">
-                              <span className="rounded-full border border-custom-blue/10 bg-custom-blue/5 px-4 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/60 backdrop-blur-md">
+                              <span className="font-label rounded-full bg-custom-blue/7 px-4 py-1.5 text-[0.62rem] font-medium uppercase tracking-[0.16em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.56)] backdrop-blur-md">
                                 {project.category}
                               </span>
-                              <span className="rounded-full border border-custom-blue/10 bg-white/80 px-4 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/40 backdrop-blur-md">
+                              <span className="font-label rounded-full bg-white/84 px-4 py-1.5 text-[0.62rem] font-medium uppercase tracking-[0.16em] text-custom-blue/42 shadow-[inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-md">
                                 {project.date}
                               </span>
                             </div>
                           </div>
 
                           <div className="mt-8">
-                            <h3 className="font-display text-[2.2rem] leading-[0.9] tracking-[-0.05em] text-custom-blue sm:text-[2.8rem]">
+                            <h3 className="font-display text-[2.2rem] leading-[0.95] tracking-[-0.02em] text-custom-blue sm:text-[2.8rem]">
                               {project.title}
                             </h3>
                             <p className="mt-4 line-clamp-3 max-w-[42ch] text-[0.95rem] leading-relaxed text-custom-blue/70 sm:text-[1rem]">
@@ -830,7 +849,7 @@ export default function Page() {
 
         <section
           ref={trajectoryRef}
-          className="mx-auto mt-20 w-full max-w-7xl sm:mt-32"
+          className="relative mx-auto mt-20 w-full max-w-7xl sm:mt-32"
           style={trajectorySectionStyle}
         >
           <SectionLabel index="04" label="Trajectory" />
@@ -841,10 +860,10 @@ export default function Page() {
                 className="glass-panel rounded-[2.5rem] bg-white/72 p-6 shadow-[0_18px_65px_rgba(11,17,26,0.07)] backdrop-blur-xl sm:p-8 lg:p-8"
               >
                 <div className="space-y-3">
-                  <div className="inline-flex rounded-full border border-custom-blue/10 bg-white/75 px-4 py-1 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/55">
+                  <div className="font-label inline-flex rounded-full bg-white/76 px-4 py-1.5 text-[0.62rem] font-medium uppercase tracking-[0.18em] text-custom-blue/55 shadow-[inset_0_1px_0_rgba(255,255,255,0.72)]">
                     Engineering Path
                   </div>
-                  <p className="font-display text-[clamp(1.75rem,2.8vw,2.8rem)] leading-[0.94] tracking-[-0.05em] text-custom-blue">
+                  <p className="font-display text-[clamp(1.75rem,2.8vw,2.8rem)] leading-[1.02] tracking-[-0.02em] text-custom-blue">
                     Built in Denmark. Now shipping from Singapore.
                   </p>
                   <p className="max-w-2xl text-sm leading-7 text-custom-blue/68">
@@ -923,17 +942,17 @@ export default function Page() {
                     className="glass-panel relative flex flex-col justify-start overflow-hidden rounded-[2.8rem] bg-white/72 p-8 shadow-[0_12px_45px_rgba(11,17,26,0.06)] lg:p-10"
                   >
                     <div className="flex flex-wrap items-center gap-4">
-                      <span className="rounded-full border border-custom-blue/12 bg-custom-blue/6 px-4 py-2 text-[0.68rem] font-bold uppercase tracking-[0.2em] text-custom-blue/65">
+                      <span className="font-label rounded-full bg-custom-blue/7 px-4 py-2 text-[0.64rem] font-medium uppercase tracking-[0.16em] text-custom-blue/62 shadow-[inset_0_1px_0_rgba(255,255,255,0.58)]">
                         {activeTrajectoryItem.time.start}{" "}
                         {activeTrajectoryItem.time.end
                           ? `- ${activeTrajectoryItem.time.end}`
                           : "- Present"}
                       </span>
-                      <span className="rounded-full border border-custom-blue/10 bg-white px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-custom-blue/55">
+                      <span className="font-label rounded-full bg-white px-3 py-1.5 text-[0.62rem] font-medium uppercase tracking-[0.16em] text-custom-blue/52 shadow-[inset_0_1px_0_rgba(255,255,255,0.72)]">
                         Step {activeTrajectoryIndex + 1} of {history.length}
                       </span>
                     </div>
-                    <p className="mt-8 font-display text-[clamp(1.8rem,2.8vw,2.5rem)] leading-[0.98] tracking-[-0.04em] text-custom-blue">
+                    <p className="mt-8 font-display text-[clamp(1.8rem,2.8vw,2.5rem)] leading-[1.04] tracking-[-0.02em] text-custom-blue">
                       {activeTrajectoryItem.jobTitle}
                     </p>
                     <div className="mt-6 space-y-5">
@@ -953,7 +972,7 @@ export default function Page() {
                       {activeTrajectoryItem.skills.map((skill) => (
                         <span
                           key={skill}
-                          className="rounded-full border border-custom-blue/15 bg-white px-4 py-2 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-custom-blue/60 shadow-sm"
+                          className="font-label rounded-full bg-white px-4 py-2 text-[0.64rem] font-medium uppercase tracking-[0.15em] text-custom-blue/58 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_10px_24px_rgba(17,27,40,0.04)]"
                         >
                           {skill}
                         </span>
@@ -966,21 +985,21 @@ export default function Page() {
           </div>
         </section>
 
-        <section
-          id="contact"
-          className="mx-auto flex min-h-[calc(100svh-5rem)] w-full max-w-7xl flex-col justify-end py-10 sm:py-16"
-          onMouseEnter={() => setFooterHover(true)}
-          onMouseLeave={() => setFooterHover(false)}
-        >
+          <section
+            id="contact"
+            className="mx-auto flex min-h-[calc(100svh-5rem)] w-full max-w-7xl flex-col justify-end py-10 sm:py-16"
+            onMouseEnter={() => setFooterHover(true)}
+            onMouseLeave={() => setFooterHover(false)}
+          >
           <motion.div
             {...fadeInUp(0.06)}
-            className="relative overflow-hidden rounded-[3rem] border border-white/60 bg-[#071726] p-8 text-white shadow-[0_40px_140px_rgba(7,20,38,0.26)] sm:p-12"
+            className="relative overflow-hidden rounded-[3rem] bg-[#071726] p-8 text-white shadow-[0_40px_140px_rgba(7,20,38,0.26),inset_0_1px_0_rgba(255,255,255,0.16)] sm:p-12"
           >
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(72,205,255,0.26),_transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.06),transparent_55%)]" />
             <div className="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
               <div>
                 <SectionLabel index="05" label="Contact" tone="light" />
-                <h2 className="max-w-3xl font-display text-[clamp(2.6rem,5vw,5rem)] leading-[0.96] tracking-[-0.07em] text-white">
+                <h2 className="max-w-3xl font-display text-[clamp(2.6rem,5vw,5rem)] leading-[1] tracking-[-0.03em] text-white">
                   Ready for the next ambitious build.
                 </h2>
                 <p className="mt-6 max-w-2xl text-lg leading-8 text-white/72">
@@ -993,11 +1012,11 @@ export default function Page() {
               <div className="grid gap-4 self-end">
                 <a
                   href="mailto:themarcellvarga@gmail.com"
-                  className="group flex items-center justify-between rounded-[1.8rem] border border-white/12 bg-white/6 px-5 py-4 transition duration-300 hover:border-white/24 hover:bg-white/10"
+                  className="group flex items-center justify-between rounded-[1.8rem] bg-white/7 px-5 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10"
                 >
                   <span className="flex items-center gap-3">
                     <Mail className="h-5 w-5 text-[#67d9ff]" />
-                    <span className="text-sm font-semibold uppercase tracking-[0.18em] text-white/80">
+                    <span className="font-label text-[0.72rem] font-medium uppercase tracking-[0.16em] text-white/80">
                       themarcellvarga@gmail.com
                     </span>
                   </span>
@@ -1007,11 +1026,11 @@ export default function Page() {
                   href="https://www.linkedin.com/in/marcellvarga/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between rounded-[1.8rem] border border-white/12 bg-white/6 px-5 py-4 transition duration-300 hover:border-white/24 hover:bg-white/10"
+                  className="group flex items-center justify-between rounded-[1.8rem] bg-white/7 px-5 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10"
                 >
                   <span className="flex items-center gap-3">
                     <Linkedin className="h-5 w-5 text-[#67d9ff]" />
-                    <span className="text-sm font-semibold uppercase tracking-[0.18em] text-white/80">
+                    <span className="font-label text-[0.72rem] font-medium uppercase tracking-[0.16em] text-white/80">
                       LinkedIn
                     </span>
                   </span>
@@ -1021,11 +1040,11 @@ export default function Page() {
                   href="https://github.com/TheMarcellVarga"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between rounded-[1.8rem] border border-white/12 bg-white/6 px-5 py-4 transition duration-300 hover:border-white/24 hover:bg-white/10"
+                  className="group flex items-center justify-between rounded-[1.8rem] bg-white/7 px-5 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10"
                 >
                   <span className="flex items-center gap-3">
                     <Github className="h-5 w-5 text-[#67d9ff]" />
-                    <span className="text-sm font-semibold uppercase tracking-[0.18em] text-white/80">
+                    <span className="font-label text-[0.72rem] font-medium uppercase tracking-[0.16em] text-white/80">
                       GitHub
                     </span>
                   </span>
@@ -1034,10 +1053,15 @@ export default function Page() {
               </div>
             </div>
           </motion.div>
-        </section>
-      </main>
+          </section>
+        </main>
 
-      <Footer isHover={footerHover} />
+        <Footer isHover={footerHover} />
+      </motion.div>
+
+      {introIsActive && (
+        <HomeIntro targetRef={headerLogoRef} onComplete={finishIntro} />
+      )}
     </div>
   );
 }

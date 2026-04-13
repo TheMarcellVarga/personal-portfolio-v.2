@@ -3,7 +3,9 @@
 import IndexSigAnimatedIcon from "@/public/icons/indexSigAnimated";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useReducedMotion } from "framer-motion";
+import { type RefObject, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 
 interface HeaderProps {
@@ -14,6 +16,8 @@ interface HeaderProps {
   scrollToWork?: () => void;
   scrollToContact?: () => void;
   activeSection?: string;
+  logoRef?: RefObject<HTMLSpanElement | null>;
+  revealBrand?: boolean;
 }
 
 type NavItem = {
@@ -30,28 +34,22 @@ export default function Header({
   scrollToWork,
   scrollToContact,
   activeSection,
+  logoRef,
+  revealBrand = true,
 }: HeaderProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const [isScrolled, setIsScrolled] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+  const [logoAnimationKey, setLogoAnimationKey] = useState(0);
   const isHomePage = pathname === "/";
-  const isAtTop = isHomePage && !isScrolled;
+  const isHeroSection = isHomePage && activeSection === "Intro";
+  const useLightOnDark = isHeroSection && !isOpen;
 
   useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
+    if (prefersReducedMotion) return;
 
-    const onScroll = () => {
-      const current = window.scrollY;
-      setIsScrolled(current > 20);
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    setLogoAnimationKey((current) => current + 1);
+  }, [pathname, prefersReducedMotion, revealBrand]);
 
   const navigate = useCallback(
     async (item: NavItem) => {
@@ -81,10 +79,10 @@ export default function Header({
       className="sticky-header translate-y-0 px-4 py-4 opacity-100 transition-[transform,opacity] duration-300 ease-in-out sm:px-6 lg:px-10"
     >
       <div
-        className={`mx-auto flex w-full max-w-7xl items-center justify-between rounded-full border px-4 py-3 transition duration-300 sm:px-5 ${
-          isScrolled || isOpen || !isHomePage
-            ? "border-white/60 bg-white/74 shadow-[0_16px_50px_rgba(7,20,38,0.12)] backdrop-blur-2xl"
-            : "border-transparent bg-white/10 shadow-none backdrop-blur-sm"
+        className={`mx-auto grid min-h-[4.5rem] w-full max-w-7xl grid-cols-[auto_1fr_auto] items-center rounded-full px-4 py-2 transition duration-300 sm:px-5 lg:grid-cols-[1fr_auto_1fr] ${
+          useLightOnDark
+            ? "bg-[#0a1521]/46 shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_18px_48px_rgba(0,0,0,0.18)] backdrop-blur-2xl"
+            : "bg-white/72 shadow-[0_16px_50px_rgba(7,20,38,0.12),inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-2xl"
         }`}
       >
         <Link
@@ -93,26 +91,44 @@ export default function Header({
             event.preventDefault();
             void navigate(items[0]);
           }}
-          className="flex items-center gap-3"
+          className="flex items-center gap-3 justify-self-start"
           aria-label="Go to homepage"
         >
-          <IndexSigAnimatedIcon isOpen={isOpen} />
-          <span className="hidden text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-custom-blue/48 sm:inline">
+          <span ref={logoRef} className="block w-[5.3125rem] shrink-0">
+            <IndexSigAnimatedIcon
+              key={logoAnimationKey}
+              isOpen={isOpen}
+              tone={useLightOnDark ? "light" : "dark"}
+              animateStroke={!prefersReducedMotion}
+              className={`h-auto w-full transition-opacity duration-500 ${
+                revealBrand ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          </span>
+          <span
+            className={`font-label hidden text-[0.66rem] font-medium uppercase tracking-[0.3em] transition-opacity duration-500 sm:inline ${
+              revealBrand ? "opacity-100" : "opacity-0"
+            } ${
+              useLightOnDark ? "text-white/44" : "text-custom-blue/48"
+            }`}
+          >
             Marcell Varga
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-2 lg:flex">
+        <nav className="hidden items-center gap-2 justify-self-center lg:flex">
           {items.map((item) => (
             <button
               key={item.label}
               onClick={() => void navigate(item)}
-              className={`rounded-full px-4 py-2 text-sm font-semibold transition duration-300 ${
+              className={`font-label rounded-full px-4 py-2 text-[0.68rem] font-medium uppercase tracking-[0.16em] transition duration-300 ${
                 activeSection === item.label
-                  ? "bg-custom-blue/6 text-custom-blue"
-                  : isAtTop
-                    ? "text-custom-blue/58 hover:bg-white/38 hover:text-custom-blue"
-                    : "text-custom-blue/68 hover:bg-custom-blue/6 hover:text-custom-blue"
+                  ? useLightOnDark
+                    ? "bg-white/12 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16)]"
+                    : "bg-custom-blue/10 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.48)]"
+                  : useLightOnDark
+                    ? "text-white/42 hover:bg-white/8 hover:text-white/78"
+                    : "text-custom-blue/68 hover:bg-custom-blue/7 hover:text-custom-blue"
               }`}
             >
               {item.label}
@@ -120,10 +136,14 @@ export default function Header({
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-3 justify-self-end lg:flex">
           <Link
             href="/resume"
-            className="inline-flex items-center gap-2 rounded-full border border-custom-blue/12 bg-custom-blue/4 px-4 py-2 text-sm font-semibold text-custom-blue transition duration-300 hover:border-custom-blue/24 hover:bg-custom-blue/7"
+            className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition duration-300 ${
+              useLightOnDark
+                ? "bg-white/10 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16)] hover:bg-white/14"
+                : "bg-custom-blue/8 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.58),0_8px_24px_rgba(17,27,40,0.06)] hover:bg-custom-blue/12"
+            }`}
           >
             Resume
             <ArrowUpRight className="h-4 w-4" />
@@ -132,10 +152,10 @@ export default function Header({
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`inline-flex h-11 w-11 items-center justify-center rounded-full border text-custom-blue lg:hidden ${
-            isAtTop && !isOpen
-              ? "border-white/15 bg-white/20"
-              : "border-custom-blue/10 bg-custom-blue/4"
+          className={`inline-flex h-11 w-11 items-center justify-center rounded-full justify-self-end lg:hidden ${
+            useLightOnDark
+              ? "bg-white/12 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16)]"
+              : "bg-custom-blue/6 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.58)]"
           }`}
           aria-label={isOpen ? "Close navigation" : "Open navigation"}
           aria-expanded={isOpen}
@@ -145,16 +165,16 @@ export default function Header({
       </div>
 
       {isOpen && (
-        <div className="mx-auto mt-3 w-full max-w-7xl rounded-[2rem] border border-white/60 bg-white/82 p-4 shadow-[0_28px_90px_rgba(7,20,38,0.12)] backdrop-blur-2xl lg:hidden">
+        <div className="mx-auto mt-3 w-full max-w-7xl rounded-[2rem] bg-white/82 p-4 shadow-[0_28px_90px_rgba(7,20,38,0.12),inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-2xl lg:hidden">
           <div className="grid gap-2">
             {items.map((item) => (
               <button
                 key={item.label}
                 onClick={() => void navigate(item)}
-                className={`flex items-center justify-between rounded-[1.4rem] border px-4 py-3 text-left text-sm font-semibold uppercase tracking-[0.16em] ${
+                className={`font-label flex items-center justify-between rounded-[1.4rem] px-4 py-3 text-left text-[0.72rem] font-medium uppercase tracking-[0.16em] shadow-[inset_0_1px_0_rgba(255,255,255,0.44)] ${
                   activeSection === item.label
-                    ? "border-custom-blue/18 bg-custom-blue/8 text-custom-blue"
-                    : "border-custom-blue/8 bg-custom-blue/3 text-custom-blue/78"
+                    ? "bg-custom-blue/8 text-custom-blue"
+                    : "bg-custom-blue/4 text-custom-blue/78"
                 }`}
               >
                 <span>{item.label}</span>
@@ -163,7 +183,7 @@ export default function Header({
             ))}
             <Link
               href="/resume"
-              className="mt-2 flex items-center justify-between rounded-[1.4rem] border border-custom-blue/8 bg-custom-blue px-4 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white"
+              className="font-label mt-2 flex items-center justify-between rounded-[1.4rem] bg-custom-blue px-4 py-3 text-[0.72rem] font-medium uppercase tracking-[0.16em] text-white shadow-[0_18px_40px_rgba(17,27,40,0.18)]"
             >
               <span>Open Resume</span>
               <ArrowUpRight className="h-4 w-4" />
