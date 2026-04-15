@@ -374,15 +374,10 @@ export default function Page() {
     <div className="relative overflow-x-clip">
       <PageBackground />
 
-      <motion.div
-        initial={false}
-        animate={
-          introIsActive
-            ? { opacity: 0.22, filter: "blur(14px)" }
-            : { opacity: 1, filter: "blur(0px)" }
-        }
-        transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-        className={`home-intro-stage ${introIsActive ? "pointer-events-none" : ""}`}
+      <div
+        className={`transition-opacity duration-700 ${
+          introIsActive ? "pointer-events-none opacity-25" : "opacity-100"
+        }`}
       >
         <Header
           isOpen={isOpen}
@@ -395,7 +390,18 @@ export default function Page() {
           logoRef={headerLogoRef}
           revealBrand={!introIsActive}
         />
+      </div>
 
+      <motion.div
+        initial={false}
+        animate={
+          introIsActive
+            ? { opacity: 0.22, filter: "blur(14px)" }
+            : { opacity: 1, filter: "blur(0px)" }
+        }
+        transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+        className={`home-intro-stage ${introIsActive ? "pointer-events-none" : ""}`}
+      >
         <main className="relative z-10 px-4 pb-8 pt-0 sm:px-6 sm:pb-12 lg:px-10">
           <section
             id="hero"

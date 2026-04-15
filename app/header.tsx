@@ -4,8 +4,7 @@ import IndexSigAnimatedIcon from "@/public/icons/indexSigAnimated";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
-import { type RefObject, useCallback } from "react";
-import { useEffect, useState } from "react";
+import { type RefObject, useCallback, useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 
 interface HeaderProps {
@@ -42,16 +41,70 @@ export default function Header({
   const prefersReducedMotion = useReducedMotion();
   const [logoAnimationKey, setLogoAnimationKey] = useState(0);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const isHomePage = pathname === "/";
   const isHeroSection = isHomePage && activeSection === "Intro";
   const useLightOnDark = isHeroSection && !isOpen;
   const highlightedItem = hoveredItem ?? activeSection ?? null;
+  const lastScrollYRef = useRef(0);
+  const isHeaderVisibleRef = useRef(true);
+  const animationFrameRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (prefersReducedMotion) return;
 
     setLogoAnimationKey((current) => current + 1);
   }, [pathname, prefersReducedMotion, revealBrand]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    lastScrollYRef.current = window.scrollY;
+    isHeaderVisibleRef.current = true;
+
+    if (isOpen) return;
+
+    const revealThreshold = 24;
+    const deltaThreshold = 6;
+
+    const updateVisibility = () => {
+      const currentScrollY = window.scrollY;
+      const delta = currentScrollY - lastScrollYRef.current;
+
+      let nextVisible = isHeaderVisibleRef.current;
+
+      if (currentScrollY <= revealThreshold) {
+        nextVisible = true;
+      } else if (delta > deltaThreshold) {
+        nextVisible = false;
+      } else if (delta < -deltaThreshold) {
+        nextVisible = true;
+      }
+
+      lastScrollYRef.current = currentScrollY;
+      animationFrameRef.current = null;
+
+      if (nextVisible !== isHeaderVisibleRef.current) {
+        isHeaderVisibleRef.current = nextVisible;
+        setIsHeaderVisible(nextVisible);
+      }
+    };
+
+    const handleScroll = () => {
+      if (animationFrameRef.current !== null) return;
+      animationFrameRef.current = window.requestAnimationFrame(updateVisibility);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (animationFrameRef.current !== null) {
+        window.cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = null;
+      }
+    };
+  }, [isOpen]);
 
   const navigate = useCallback(
     async (item: NavItem) => {
@@ -78,7 +131,11 @@ export default function Header({
 
   return (
     <header
-      className="sticky-header translate-y-0 px-4 py-4 opacity-100 transition-[transform,opacity] duration-300 ease-in-out sm:px-6 lg:px-10"
+      className={`sticky-header px-4 py-4 transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 lg:px-10 ${
+        isHeaderVisible || isOpen
+          ? "opacity-100"
+          : "opacity-0 pointer-events-none"
+      }`}
     >
       <div
         className={`mx-auto grid min-h-[4.5rem] w-full max-w-7xl grid-cols-[auto_1fr_auto] items-center rounded-full px-4 py-2 transition duration-300 sm:px-5 lg:grid-cols-[1fr_auto_1fr] ${
