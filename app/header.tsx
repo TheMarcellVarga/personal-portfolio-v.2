@@ -3,7 +3,7 @@
 import IndexSigAnimatedIcon from "@/public/icons/indexSigAnimated";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { type RefObject, useCallback } from "react";
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
@@ -41,9 +41,11 @@ export default function Header({
   const pathname = usePathname();
   const prefersReducedMotion = useReducedMotion();
   const [logoAnimationKey, setLogoAnimationKey] = useState(0);
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const isHomePage = pathname === "/";
   const isHeroSection = isHomePage && activeSection === "Intro";
   const useLightOnDark = isHeroSection && !isOpen;
+  const highlightedItem = hoveredItem ?? activeSection ?? null;
 
   useEffect(() => {
     if (prefersReducedMotion) return;
@@ -116,22 +118,48 @@ export default function Header({
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-2 justify-self-center lg:flex">
+        <nav
+          className="hidden items-center gap-2 justify-self-center lg:flex"
+          onMouseLeave={() => setHoveredItem(null)}
+        >
           {items.map((item) => (
             <button
               key={item.label}
               onClick={() => void navigate(item)}
-              className={`font-label rounded-full px-4 py-2 text-[0.68rem] font-medium uppercase tracking-[0.16em] transition duration-300 ${
-                activeSection === item.label
+              onMouseEnter={() => setHoveredItem(item.label)}
+              onFocus={() => setHoveredItem(item.label)}
+              onBlur={() => setHoveredItem(null)}
+              className={`font-label relative rounded-full px-4 py-2 text-[0.68rem] font-medium uppercase tracking-[0.16em] transition duration-300 ${
+                highlightedItem === item.label
                   ? useLightOnDark
-                    ? "bg-white/12 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16)]"
-                    : "bg-custom-blue/10 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.48)]"
+                    ? "text-white"
+                    : "text-custom-blue"
                   : useLightOnDark
-                    ? "text-white/42 hover:bg-white/8 hover:text-white/78"
-                    : "text-custom-blue/68 hover:bg-custom-blue/7 hover:text-custom-blue"
+                    ? "text-white/42 hover:text-white/78"
+                    : "text-custom-blue/68 hover:text-custom-blue"
               }`}
             >
-              {item.label}
+              {highlightedItem === item.label ? (
+                <motion.span
+                  layoutId="header-nav-highlight"
+                  className={`absolute inset-0 rounded-full ${
+                    useLightOnDark
+                      ? "bg-white/12 shadow-[inset_0_1px_0_rgba(255,255,255,0.16)]"
+                      : "bg-custom-blue/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.48)]"
+                  }`}
+                  transition={
+                    prefersReducedMotion
+                      ? { duration: 0 }
+                      : {
+                          type: "spring",
+                          stiffness: 420,
+                          damping: 34,
+                          mass: 0.55,
+                        }
+                  }
+                />
+              ) : null}
+              <span className="relative z-10">{item.label}</span>
             </button>
           ))}
         </nav>
