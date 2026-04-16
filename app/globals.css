@@ -28,6 +28,7 @@
   }
 
   html {
+    position: relative;
     background: var(--page-background);
     color: var(--color-custom-blue);
     font-family: var(--font);

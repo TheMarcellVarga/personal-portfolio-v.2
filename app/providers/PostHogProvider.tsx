@@ -12,6 +12,8 @@ function PostHogInitializer() {
 
   // Initialize PostHog once on client
   useEffect(() => {
+    const enableSessionRecording = process.env.NODE_ENV === 'production';
+
     if (typeof window !== 'undefined' && !posthog.__loaded) {
       const apiKey = process.env.NEXT_PUBLIC_POSTHOG_KEY;
       const apiHost = process.env.NEXT_PUBLIC_POSTHOG_HOST;
@@ -27,18 +29,21 @@ function PostHogInitializer() {
           if (process.env.NODE_ENV === 'development') {
             ph.debug();
           }
-          console.log('PostHog initialized successfully');
           setIsPostHogLoaded(true);
         },
         capture_pageview: false, // We'll handle this manually
         autocapture: true,
         persistence: 'localStorage',
-        disable_session_recording: false, // Enable session recording
-        session_recording: {
-          maskAllInputs: false, // Set to true to mask all input values by default
-          maskTextSelector: '[data-ph-mask]', // Add this attribute to elements that contain sensitive data
-          recordCrossOriginIframes: false,
-        },
+        disable_session_recording: !enableSessionRecording,
+        ...(enableSessionRecording
+          ? {
+              session_recording: {
+                maskAllInputs: false, // Set to true to mask all input values by default
+                maskTextSelector: '[data-ph-mask]', // Add this attribute to elements that contain sensitive data
+                recordCrossOriginIframes: false,
+              },
+            }
+          : {}),
       });
     }
   }, []);
@@ -47,7 +52,6 @@ function PostHogInitializer() {
   useEffect(() => {
     if (posthog.__loaded && pathname) {
       const url = window.origin + pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : '');
-      console.log('Tracking pageview:', url);
       posthog.capture('$pageview', { $current_url: url });
     }
   }, [pathname, searchParams, isPostHogLoaded]);
