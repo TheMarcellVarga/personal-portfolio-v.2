@@ -136,37 +136,66 @@
     width: min(210mm, 100%);
   }
 
-  .hero-particle-field {
+  .hero-signature-field {
     mask-image: linear-gradient(
       135deg,
-      transparent 6%,
-      rgba(0, 0, 0, 0.9) 18%,
-      black 74%,
-      transparent 96%
+      transparent 0%,
+      rgba(0, 0, 0, 0.88) 10%,
+      black 90%,
+      transparent 100%
     );
   }
 
-  .hero-particle {
-    position: absolute;
-    right: -12vw;
-    top: 50%;
-    display: block;
-    border-radius: 999px;
-    will-change: transform, opacity;
-    animation: hero-particle-drift 18s linear infinite;
+  .hero-signature-vignette {
+    opacity: 0.22;
+    background:
+      linear-gradient(
+        118deg,
+        rgba(125, 230, 255, 0) 0%,
+        rgba(125, 230, 255, 0.05) 26%,
+        rgba(255, 255, 255, 0.03) 52%,
+        rgba(125, 230, 255, 0) 74%
+      ),
+      radial-gradient(circle at 78% 34%, rgba(121, 229, 255, 0.06), transparent 28%);
   }
 
-  .hero-particle-core {
+  .hero-signature-echo {
+    position: absolute;
+    transform: rotate(var(--echo-rotate, -11deg));
+    transform-origin: center;
+    mix-blend-mode: screen;
+    opacity: var(--echo-opacity, 0.3);
+    animation: hero-signature-shift var(--echo-duration, 7s) linear infinite;
+    animation-delay: var(--echo-delay, 0s);
+  }
+
+  .hero-signature-mark {
     display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: inherit;
-    background:
-      radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(121, 225, 255, 0.7) 42%, rgba(121, 225, 255, 0) 100%);
-    box-shadow:
-      0 0 12px rgba(121, 225, 255, 0.4),
-      0 0 28px rgba(121, 225, 255, 0.2);
-    animation: hero-particle-wave 4.8s ease-in-out infinite;
+    filter:
+      drop-shadow(0 0 8px rgba(135, 233, 255, 0.26))
+      drop-shadow(0 0 18px rgba(115, 225, 255, 0.1));
+  }
+
+  .hero-signature-stroke {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: hero-signature-trace var(--echo-duration, 7s) cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    animation-delay: var(--echo-delay, 0s);
+  }
+
+  .hero-signature-stroke-main {
+    stroke: rgba(214, 248, 255, 0.98);
+    stroke-width: 1.35;
+  }
+
+  .hero-signature-stroke-lead {
+    stroke: rgba(102, 223, 255, 0.84);
+    stroke-width: 1.15;
+    animation-delay: calc(var(--echo-delay, 0s) + 120ms);
   }
 
   html[data-home-intro="0"] .home-intro-shell {
@@ -241,42 +270,43 @@
   animation: entrance-scale-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@keyframes hero-particle-drift {
+@keyframes hero-signature-shift {
   0% {
-    transform: translate3d(0, 0, 0) scale(var(--particle-scale, 1));
+    transform: rotate(var(--echo-rotate, -11deg)) translate3d(0, 0, 0) scale(1);
+    opacity: calc(var(--echo-opacity, 0.3) * 0.72);
+  }
+
+  50% {
+    opacity: var(--echo-opacity, 0.3);
+  }
+
+  100% {
+    transform: rotate(var(--echo-rotate, -11deg))
+      translate3d(calc(var(--echo-drift-x, 0vw) * -1), var(--echo-drift-y, 0vh), 0)
+      scale(0.95);
+    opacity: calc(var(--echo-opacity, 0.3) * 0.56);
+  }
+}
+
+@keyframes hero-signature-trace {
+  0% {
+    stroke-dashoffset: 1;
     opacity: 0;
   }
 
-  8% {
+  12% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  24% {
+    stroke-dashoffset: 0;
     opacity: 1;
   }
 
   100% {
-    transform: translate3d(-118vw, calc(var(--particle-rise, 18vh) * -1), 0)
-      scale(calc(var(--particle-scale, 1) * 1.08));
+    stroke-dashoffset: 1;
     opacity: 0;
-  }
-}
-
-@keyframes hero-particle-wave {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-
-  25% {
-    transform: translate3d(calc(var(--particle-wave, 12px) * -0.4), calc(var(--particle-wave, 12px) * -0.55), 0)
-      scale(1.08);
-  }
-
-  50% {
-    transform: translate3d(calc(var(--particle-wave, 12px) * 0.2), var(--particle-wave, 12px), 0)
-      scale(0.96);
-  }
-
-  75% {
-    transform: translate3d(calc(var(--particle-wave, 12px) * -0.15), calc(var(--particle-wave, 12px) * -0.35), 0)
-      scale(1.04);
   }
 }
 

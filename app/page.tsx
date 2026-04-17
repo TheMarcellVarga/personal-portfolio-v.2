@@ -82,22 +82,158 @@ const capabilityTags = [
   "React / Next.js",
 ];
 
-const heroParticles = Array.from({ length: 18 }, (_, index) => {
-  const group = index % 3;
+const heroSignatureEchoes = [
+  {
+    id: "sig-0",
+    top: "10%",
+    left: "60%",
+    width: "28rem",
+    style: {
+      ["--echo-duration" as string]: "2.4s",
+      ["--echo-delay" as string]: "-0.4s",
+      ["--echo-opacity" as string]: "0.16",
+      ["--echo-drift-x" as string]: "4.2vw",
+      ["--echo-drift-y" as string]: "2.4vh",
+      ["--echo-rotate" as string]: "-12deg",
+    } as CSSProperties,
+  },
+  {
+    id: "sig-1",
+    top: "24%",
+    left: "30%",
+    width: "11rem",
+    style: {
+      ["--echo-duration" as string]: "2.1s",
+      ["--echo-delay" as string]: "-1.2s",
+      ["--echo-opacity" as string]: "0.06",
+      ["--echo-drift-x" as string]: "2.8vw",
+      ["--echo-drift-y" as string]: "1.4vh",
+      ["--echo-rotate" as string]: "-8deg",
+    } as CSSProperties,
+  },
+  {
+    id: "sig-2",
+    top: "20%",
+    left: "76%",
+    width: "16rem",
+    style: {
+      ["--echo-duration" as string]: "2.2s",
+      ["--echo-delay" as string]: "-0.7s",
+      ["--echo-opacity" as string]: "0.11",
+      ["--echo-drift-x" as string]: "3.4vw",
+      ["--echo-drift-y" as string]: "1.8vh",
+      ["--echo-rotate" as string]: "-15deg",
+    } as CSSProperties,
+  },
+  {
+    id: "sig-3",
+    top: "38%",
+    left: "12%",
+    width: "9rem",
+    style: {
+      ["--echo-duration" as string]: "2s",
+      ["--echo-delay" as string]: "-1.8s",
+      ["--echo-opacity" as string]: "0.04",
+      ["--echo-drift-x" as string]: "2.2vw",
+      ["--echo-drift-y" as string]: "1.1vh",
+      ["--echo-rotate" as string]: "-6deg",
+    } as CSSProperties,
+  },
+  {
+    id: "sig-4",
+    top: "44%",
+    left: "54%",
+    width: "12rem",
+    style: {
+      ["--echo-duration" as string]: "2.15s",
+      ["--echo-delay" as string]: "-0.9s",
+      ["--echo-opacity" as string]: "0.08",
+      ["--echo-drift-x" as string]: "3.1vw",
+      ["--echo-drift-y" as string]: "1.6vh",
+      ["--echo-rotate" as string]: "-13deg",
+    } as CSSProperties,
+  },
+  {
+    id: "sig-5",
+    top: "58%",
+    left: "20%",
+    width: "9rem",
+    style: {
+      ["--echo-duration" as string]: "2.05s",
+      ["--echo-delay" as string]: "-1.6s",
+      ["--echo-opacity" as string]: "0.03",
+      ["--echo-drift-x" as string]: "2.6vw",
+      ["--echo-drift-y" as string]: "1.3vh",
+      ["--echo-rotate" as string]: "-9deg",
+    } as CSSProperties,
+  },
+  {
+    id: "sig-6",
+    top: "66%",
+    left: "68%",
+    width: "10rem",
+    style: {
+      ["--echo-duration" as string]: "2.25s",
+      ["--echo-delay" as string]: "-0.6s",
+      ["--echo-opacity" as string]: "0.07",
+      ["--echo-drift-x" as string]: "3.2vw",
+      ["--echo-drift-y" as string]: "1.9vh",
+      ["--echo-rotate" as string]: "-14deg",
+    } as CSSProperties,
+  },
+  {
+    id: "sig-7",
+    top: "74%",
+    left: "6%",
+    width: "7rem",
+    style: {
+      ["--echo-duration" as string]: "2s",
+      ["--echo-delay" as string]: "-1.9s",
+      ["--echo-opacity" as string]: "0.02",
+      ["--echo-drift-x" as string]: "1.8vw",
+      ["--echo-drift-y" as string]: "1vh",
+      ["--echo-rotate" as string]: "-5deg",
+    } as CSSProperties,
+  },
+  {
+    id: "sig-8",
+    top: "82%",
+    left: "42%",
+    width: "9rem",
+    style: {
+      ["--echo-duration" as string]: "2.18s",
+      ["--echo-delay" as string]: "-1.1s",
+      ["--echo-opacity" as string]: "0.03",
+      ["--echo-drift-x" as string]: "2.4vw",
+      ["--echo-drift-y" as string]: "1.4vh",
+      ["--echo-rotate" as string]: "-10deg",
+    } as CSSProperties,
+  },
+];
 
-  return {
-    id: index,
-    top: 26 + ((index * 7) % 42) + group * 2,
-    size: 4 + (index % 4) * 2 + (group === 2 ? 1 : 0),
-    duration: 14 + (index % 5) * 2.2,
-    delay: index * -1.35,
-    opacity: 0.2 + (index % 5) * 0.08,
-    blur: index % 4 === 0 ? 0.8 : index % 4 === 1 ? 1.4 : 2.1,
-    rise: 14 + (index % 6) * 4,
-    wave: 10 + (index % 4) * 5,
-    scale: 0.82 + (index % 4) * 0.11,
-  };
-});
+function HeroSignatureEchoMark({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      width="85"
+      height="37"
+      viewBox="0 0 85 37"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        pathLength={1}
+        d="M0.396973 36.3291C0.396973 36.3291 1.80464 21.811 13.6633 7.89246"
+        className="hero-signature-stroke hero-signature-stroke-lead"
+      />
+      <path
+        pathLength={1}
+        d="M84.6029 0.378418C83.4907 1.72562 28.5188 31.0478 28.5188 31.0478C34.2765 18.2493 39.5275 5.38881 37.4414 4.87415C37.3274 4.8523 37.2096 4.85749 37.0982 4.88928C31.574 6.017 19.8186 16.4677 17.715 17.2805C17.665 17.3015 17.6107 17.3113 17.5561 17.3093C16.4821 17.2881 15.8514 13.5856 15.4907 9.68776"
+        className="hero-signature-stroke hero-signature-stroke-main"
+      />
+    </svg>
+  );
+}
 
 function fadeInUp(delay = 0) {
   return {
@@ -430,53 +566,13 @@ export default function Page() {
           <div className="absolute inset-0 bg-[linear-gradient(118deg,rgba(5,10,18,0.98)_0%,rgba(8,18,29,0.94)_28%,rgba(16,39,56,0.84)_56%,rgba(88,121,134,0.92)_100%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(255,255,255,0.1),transparent_18%),radial-gradient(circle_at_72%_24%,rgba(76,207,255,0.18),transparent_18%),radial-gradient(circle_at_84%_66%,rgba(255,224,182,0.18),transparent_24%)]" />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,8,14,0.1)_0%,rgba(4,8,14,0.02)_40%,rgba(4,8,14,0.32)_100%)]" />
-          <div
-            aria-hidden="true"
-            className="hero-particle-field pointer-events-none absolute inset-0 overflow-hidden"
-          >
-            <div className="absolute right-[-16vw] top-[30%] h-[26rem] w-[44rem] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_rgba(76,207,255,0.12)_0%,_rgba(76,207,255,0.05)_34%,_transparent_72%)] blur-3xl" />
-            {heroParticles.map((particle) => (
-              <span
-                key={particle.id}
-                className="hero-particle"
-                style={
-                  shouldReduceMotion
-                    ? {
-                        top: `${particle.top}%`,
-                        width: `${particle.size}px`,
-                        height: `${particle.size}px`,
-                        opacity: particle.opacity * 0.7,
-                        filter: `blur(${particle.blur}px)`,
-                        transform: `translate3d(${
-                          -particle.id * 0.35
-                        }rem, ${-particle.rise * 0.08}px, 0) scale(${particle.scale})`,
-                      }
-                    : ({
-                        top: `${particle.top}%`,
-                        width: `${particle.size}px`,
-                        height: `${particle.size}px`,
-                        opacity: particle.opacity,
-                        filter: `blur(${particle.blur}px)`,
-                        animationDuration: `${particle.duration}s`,
-                        animationDelay: `${particle.delay}s`,
-                        ["--particle-rise" as string]: `${particle.rise}vh`,
-                        ["--particle-wave" as string]: `${particle.wave}px`,
-                        ["--particle-scale" as string]: `${particle.scale}`,
-                      } as CSSProperties)
-                }
-              >
-                <span className="hero-particle-core" />
-              </span>
-            ))}
-          </div>
-
           <motion.div
             style={
               shouldReduceMotion
                 ? undefined
                 : { y: portraitY, scale: portraitScale }
             }
-            className="pointer-events-none absolute inset-y-0 right-[-24vw] flex items-end sm:right-[-12vw] lg:right-[-4vw] xl:right-[2vw]"
+            className="pointer-events-none absolute inset-y-0 right-[-24vw] z-20 flex items-end sm:right-[-12vw] lg:right-[-4vw] xl:right-[2vw]"
           >
             <motion.div
               aria-hidden="true"
@@ -502,9 +598,33 @@ export default function Page() {
             </motion.div>
           </motion.div>
 
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,9,15,0.98)_0%,rgba(4,9,15,0.9)_30%,rgba(4,9,15,0.6)_52%,rgba(4,9,15,0.18)_72%,rgba(4,9,15,0.08)_100%)]" />
+          <div className="absolute inset-0 z-10 bg-[linear-gradient(90deg,rgba(4,9,15,0.98)_0%,rgba(4,9,15,0.9)_30%,rgba(4,9,15,0.6)_52%,rgba(4,9,15,0.18)_72%,rgba(4,9,15,0.08)_100%)]" />
 
-          <div className="relative mx-auto flex min-h-[100svh] w-full max-w-7xl items-center px-6 pb-10 pt-24 sm:px-10 sm:pb-14 lg:px-14 lg:pb-12">
+          <div
+            aria-hidden="true"
+            className="hero-signature-field pointer-events-none absolute inset-0 z-0 overflow-hidden"
+          >
+            <div className="hero-signature-vignette absolute inset-0" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_24%,rgba(101,229,255,0.16),transparent_22%),radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.05),transparent_18%),radial-gradient(circle_at_58%_72%,rgba(125,230,255,0.07),transparent_24%)]" />
+            {heroSignatureEchoes.map((echo) => (
+              <div
+                key={echo.id}
+                className="hero-signature-echo"
+                style={
+                  {
+                    ...echo.style,
+                    top: echo.top,
+                    left: echo.left,
+                    width: echo.width,
+                  } as CSSProperties
+                }
+              >
+                <HeroSignatureEchoMark className="hero-signature-mark h-auto w-full" />
+              </div>
+            ))}
+          </div>
+
+          <div className="relative z-30 mx-auto flex min-h-[100svh] w-full max-w-7xl items-center px-6 pb-10 pt-24 sm:px-10 sm:pb-14 lg:px-14 lg:pb-12">
             <div className="max-w-[36rem]">
               <motion.div
                 {...fadeInUp(0.05)}
