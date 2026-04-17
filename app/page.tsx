@@ -19,6 +19,8 @@ import {
   useReducedMotion,
   useScroll,
   useTransform,
+  useMotionValue,
+  useSpring,
 } from "framer-motion";
 import {
   ArrowRight,
@@ -85,128 +87,128 @@ const capabilityTags = [
 const heroSignatureEchoes = [
   {
     id: "sig-0",
-    top: "10%",
-    left: "60%",
-    width: "28rem",
+    top: "15%",
+    left: "55%",
+    width: "32rem",
     style: {
-      ["--echo-duration" as string]: "2.4s",
-      ["--echo-delay" as string]: "-0.4s",
-      ["--echo-opacity" as string]: "0.16",
-      ["--echo-drift-x" as string]: "4.2vw",
-      ["--echo-drift-y" as string]: "2.4vh",
-      ["--echo-rotate" as string]: "-12deg",
-    } as CSSProperties,
-  },
-  {
-    id: "sig-1",
-    top: "24%",
-    left: "30%",
-    width: "11rem",
-    style: {
-      ["--echo-duration" as string]: "2.1s",
-      ["--echo-delay" as string]: "-1.2s",
-      ["--echo-opacity" as string]: "0.06",
-      ["--echo-drift-x" as string]: "2.8vw",
-      ["--echo-drift-y" as string]: "1.4vh",
-      ["--echo-rotate" as string]: "-8deg",
-    } as CSSProperties,
-  },
-  {
-    id: "sig-2",
-    top: "20%",
-    left: "76%",
-    width: "16rem",
-    style: {
-      ["--echo-duration" as string]: "2.2s",
-      ["--echo-delay" as string]: "-0.7s",
-      ["--echo-opacity" as string]: "0.11",
-      ["--echo-drift-x" as string]: "3.4vw",
-      ["--echo-drift-y" as string]: "1.8vh",
-      ["--echo-rotate" as string]: "-15deg",
-    } as CSSProperties,
-  },
-  {
-    id: "sig-3",
-    top: "38%",
-    left: "12%",
-    width: "9rem",
-    style: {
-      ["--echo-duration" as string]: "2s",
-      ["--echo-delay" as string]: "-1.8s",
-      ["--echo-opacity" as string]: "0.04",
-      ["--echo-drift-x" as string]: "2.2vw",
-      ["--echo-drift-y" as string]: "1.1vh",
-      ["--echo-rotate" as string]: "-6deg",
-    } as CSSProperties,
-  },
-  {
-    id: "sig-4",
-    top: "44%",
-    left: "54%",
-    width: "12rem",
-    style: {
-      ["--echo-duration" as string]: "2.15s",
-      ["--echo-delay" as string]: "-0.9s",
-      ["--echo-opacity" as string]: "0.08",
-      ["--echo-drift-x" as string]: "3.1vw",
-      ["--echo-drift-y" as string]: "1.6vh",
-      ["--echo-rotate" as string]: "-13deg",
-    } as CSSProperties,
-  },
-  {
-    id: "sig-5",
-    top: "58%",
-    left: "20%",
-    width: "9rem",
-    style: {
-      ["--echo-duration" as string]: "2.05s",
-      ["--echo-delay" as string]: "-1.6s",
-      ["--echo-opacity" as string]: "0.03",
-      ["--echo-drift-x" as string]: "2.6vw",
-      ["--echo-drift-y" as string]: "1.3vh",
-      ["--echo-rotate" as string]: "-9deg",
-    } as CSSProperties,
-  },
-  {
-    id: "sig-6",
-    top: "66%",
-    left: "68%",
-    width: "10rem",
-    style: {
-      ["--echo-duration" as string]: "2.25s",
-      ["--echo-delay" as string]: "-0.6s",
-      ["--echo-opacity" as string]: "0.07",
-      ["--echo-drift-x" as string]: "3.2vw",
-      ["--echo-drift-y" as string]: "1.9vh",
+      ["--echo-duration" as string]: "4.2s",
+      ["--echo-delay" as string]: "-0.2s",
+      ["--echo-opacity" as string]: "0.22",
+      ["--echo-drift-x" as string]: "8vw",
+      ["--echo-drift-y" as string]: "4vh",
       ["--echo-rotate" as string]: "-14deg",
     } as CSSProperties,
   },
   {
-    id: "sig-7",
-    top: "74%",
-    left: "6%",
-    width: "7rem",
+    id: "sig-1",
+    top: "30%",
+    left: "25%",
+    width: "14rem",
     style: {
-      ["--echo-duration" as string]: "2s",
-      ["--echo-delay" as string]: "-1.9s",
-      ["--echo-opacity" as string]: "0.02",
-      ["--echo-drift-x" as string]: "1.8vw",
-      ["--echo-drift-y" as string]: "1vh",
-      ["--echo-rotate" as string]: "-5deg",
+      ["--echo-duration" as string]: "3.8s",
+      ["--echo-delay" as string]: "-1.5s",
+      ["--echo-opacity" as string]: "0.08",
+      ["--echo-drift-x" as string]: "-6vw",
+      ["--echo-drift-y" as string]: "3vh",
+      ["--echo-rotate" as string]: "10deg",
+    } as CSSProperties,
+  },
+  {
+    id: "sig-2",
+    top: "10%",
+    left: "70%",
+    width: "18rem",
+    style: {
+      ["--echo-duration" as string]: "4.5s",
+      ["--echo-delay" as string]: "-2.8s",
+      ["--echo-opacity" as string]: "0.14",
+      ["--echo-drift-x" as string]: "12vw",
+      ["--echo-drift-y" as string]: "-2vh",
+      ["--echo-rotate" as string]: "-20deg",
+    } as CSSProperties,
+  },
+  {
+    id: "sig-3",
+    top: "45%",
+    left: "8%",
+    width: "10rem",
+    style: {
+      ["--echo-duration" as string]: "3.5s",
+      ["--echo-delay" as string]: "-0.8s",
+      ["--echo-opacity" as string]: "0.05",
+      ["--echo-drift-x" as string]: "-10vw",
+      ["--echo-drift-y" as string]: "5vh",
+      ["--echo-rotate" as string]: "8deg",
+    } as CSSProperties,
+  },
+  {
+    id: "sig-4",
+    top: "50%",
+    left: "60%",
+    width: "15rem",
+    style: {
+      ["--echo-duration" as string]: "4.8s",
+      ["--echo-delay" as string]: "-3.2s",
+      ["--echo-opacity" as string]: "0.10",
+      ["--echo-drift-x" as string]: "5vw",
+      ["--echo-drift-y" as string]: "6vh",
+      ["--echo-rotate" as string]: "-12deg",
+    } as CSSProperties,
+  },
+  {
+    id: "sig-5",
+    top: "65%",
+    left: "15%",
+    width: "12rem",
+    style: {
+      ["--echo-duration" as string]: "4.0s",
+      ["--echo-delay" as string]: "-1.1s",
+      ["--echo-opacity" as string]: "0.04",
+      ["--echo-drift-x" as string]: "-4vw",
+      ["--echo-drift-y" as string]: "8vh",
+      ["--echo-rotate" as string]: "15deg",
+    } as CSSProperties,
+  },
+  {
+    id: "sig-6",
+    top: "20%",
+    left: "15%",
+    width: "13rem",
+    style: {
+      ["--echo-duration" as string]: "5.2s",
+      ["--echo-delay" as string]: "-4.5s",
+      ["--echo-opacity" as string]: "0.12",
+      ["--echo-drift-x" as string]: "-15vw",
+      ["--echo-drift-y" as string]: "2vh",
+      ["--echo-rotate" as string]: "25deg",
+    } as CSSProperties,
+  },
+  {
+    id: "sig-7",
+    top: "75%",
+    left: "45%",
+    width: "22rem",
+    style: {
+      ["--echo-duration" as string]: "5.8s",
+      ["--echo-delay" as string]: "-2.1s",
+      ["--echo-opacity" as string]: "0.15",
+      ["--echo-drift-x" as string]: "4vw",
+      ["--echo-drift-y" as string]: "12vh",
+      ["--echo-rotate" as string]: "-18deg",
     } as CSSProperties,
   },
   {
     id: "sig-8",
-    top: "82%",
-    left: "42%",
-    width: "9rem",
+    top: "40%",
+    left: "80%",
+    width: "11rem",
     style: {
-      ["--echo-duration" as string]: "2.18s",
-      ["--echo-delay" as string]: "-1.1s",
-      ["--echo-opacity" as string]: "0.03",
-      ["--echo-drift-x" as string]: "2.4vw",
-      ["--echo-drift-y" as string]: "1.4vh",
-      ["--echo-rotate" as string]: "-10deg",
+      ["--echo-duration" as string]: "3.9s",
+      ["--echo-delay" as string]: "-1.7s",
+      ["--echo-opacity" as string]: "0.06",
+      ["--echo-drift-x" as string]: "20vw",
+      ["--echo-drift-y" as string]: "4vh",
+      ["--echo-rotate" as string]: "-30deg",
     } as CSSProperties,
   },
 ];
@@ -281,6 +283,23 @@ export default function Page() {
   const [trajectoryMinHeightPx, setTrajectoryMinHeightPx] = useState<
     number | null
   >(null);
+  const [activeProjectImage, setActiveProjectImage] = useState<string | null>(
+    null,
+  );
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springConfig = { damping: 32, stiffness: 180, mass: 0.5 };
+  const mouseXSpring = useSpring(mouseX, springConfig);
+  const mouseYSpring = useSpring(mouseY, springConfig);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
 
   const { scrollYProgress: heroProgress } = useScroll({
     target: heroRef,
@@ -857,6 +876,11 @@ export default function Page() {
                 {featuredProjects.map((project) => (
                   <motion.article
                     key={project.title}
+                    onMouseEnter={() =>
+                      !shouldReduceMotion &&
+                      setActiveProjectImage(project.image)
+                    }
+                    onMouseLeave={() => setActiveProjectImage(null)}
                     className="glass-panel group relative min-h-[28rem] min-w-[min(90vw,38rem)] shrink-0 snap-start overflow-hidden rounded-[3rem] border-white/90 shadow-[0_32px_80px_rgba(11,17,26,0.08)] transition duration-700 hover:-translate-y-1.5 hover:shadow-[0_45px_110px_rgba(11,17,26,0.12)]"
                   >
                     <Link
@@ -966,6 +990,11 @@ export default function Page() {
                   {featuredProjects.map((project) => (
                     <motion.article
                       key={project.title}
+                      onMouseEnter={() =>
+                        !shouldReduceMotion &&
+                        setActiveProjectImage(project.image)
+                      }
+                      onMouseLeave={() => setActiveProjectImage(null)}
                       className="glass-panel group relative min-h-[28rem] w-[min(90vw,38rem)] shrink-0 overflow-hidden rounded-[3rem] border-white/90 shadow-[0_32px_80px_rgba(11,17,26,0.08)] transition duration-700 hover:-translate-y-1.5 hover:shadow-[0_45px_110px_rgba(11,17,26,0.12)]"
                     >
                       <Link
@@ -1245,6 +1274,40 @@ export default function Page() {
       {introIsActive && (
         <HomeIntro targetRef={headerLogoRef} onComplete={finishIntro} />
       )}
+
+      <AnimatePresence>
+        {activeProjectImage && (
+          <motion.div
+            className="pointer-events-none fixed z-[100] h-60 w-[18rem] overflow-hidden rounded-[2rem] border-[3px] border-white/30 bg-white shadow-[0_32px_90px_rgba(0,0,0,0.3)] backdrop-blur-xl sm:h-72 sm:w-[22rem]"
+            style={{
+              left: mouseXSpring,
+              top: mouseYSpring,
+              x: 18,
+              y: 18,
+            }}
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="relative h-full w-full">
+              <Image
+                src={activeProjectImage}
+                alt="Project preview"
+                fill
+                className="scale-105 object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              <div className="absolute inset-x-0 bottom-4 flex justify-center">
+                <span className="font-label rounded-full bg-white/20 px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.18em] text-white shadow-[0_8px_32px_rgba(0,0,0,0.1)] backdrop-blur-md">
+                  View Case Study
+                </span>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
