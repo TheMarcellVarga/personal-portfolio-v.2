@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  type CSSProperties,
   startTransition,
   useCallback,
   useEffect,
@@ -80,6 +81,23 @@ const capabilityTags = [
   "AI product flows",
   "React / Next.js",
 ];
+
+const heroParticles = Array.from({ length: 18 }, (_, index) => {
+  const group = index % 3;
+
+  return {
+    id: index,
+    top: 26 + ((index * 7) % 42) + group * 2,
+    size: 4 + (index % 4) * 2 + (group === 2 ? 1 : 0),
+    duration: 14 + (index % 5) * 2.2,
+    delay: index * -1.35,
+    opacity: 0.2 + (index % 5) * 0.08,
+    blur: index % 4 === 0 ? 0.8 : index % 4 === 1 ? 1.4 : 2.1,
+    rise: 14 + (index % 6) * 4,
+    wave: 10 + (index % 4) * 5,
+    scale: 0.82 + (index % 4) * 0.11,
+  };
+});
 
 function fadeInUp(delay = 0) {
   return {
@@ -412,6 +430,45 @@ export default function Page() {
           <div className="absolute inset-0 bg-[linear-gradient(118deg,rgba(5,10,18,0.98)_0%,rgba(8,18,29,0.94)_28%,rgba(16,39,56,0.84)_56%,rgba(88,121,134,0.92)_100%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(255,255,255,0.1),transparent_18%),radial-gradient(circle_at_72%_24%,rgba(76,207,255,0.18),transparent_18%),radial-gradient(circle_at_84%_66%,rgba(255,224,182,0.18),transparent_24%)]" />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,8,14,0.1)_0%,rgba(4,8,14,0.02)_40%,rgba(4,8,14,0.32)_100%)]" />
+          <div
+            aria-hidden="true"
+            className="hero-particle-field pointer-events-none absolute inset-0 overflow-hidden"
+          >
+            <div className="absolute right-[-16vw] top-[30%] h-[26rem] w-[44rem] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,_rgba(76,207,255,0.12)_0%,_rgba(76,207,255,0.05)_34%,_transparent_72%)] blur-3xl" />
+            {heroParticles.map((particle) => (
+              <span
+                key={particle.id}
+                className="hero-particle"
+                style={
+                  shouldReduceMotion
+                    ? {
+                        top: `${particle.top}%`,
+                        width: `${particle.size}px`,
+                        height: `${particle.size}px`,
+                        opacity: particle.opacity * 0.7,
+                        filter: `blur(${particle.blur}px)`,
+                        transform: `translate3d(${
+                          -particle.id * 0.35
+                        }rem, ${-particle.rise * 0.08}px, 0) scale(${particle.scale})`,
+                      }
+                    : ({
+                        top: `${particle.top}%`,
+                        width: `${particle.size}px`,
+                        height: `${particle.size}px`,
+                        opacity: particle.opacity,
+                        filter: `blur(${particle.blur}px)`,
+                        animationDuration: `${particle.duration}s`,
+                        animationDelay: `${particle.delay}s`,
+                        ["--particle-rise" as string]: `${particle.rise}vh`,
+                        ["--particle-wave" as string]: `${particle.wave}px`,
+                        ["--particle-scale" as string]: `${particle.scale}`,
+                      } as CSSProperties)
+                }
+              >
+                <span className="hero-particle-core" />
+              </span>
+            ))}
+          </div>
 
           <motion.div
             style={
