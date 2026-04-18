@@ -349,6 +349,14 @@ export default function Page() {
     (p) => -p * workCarouselMaxScroll,
   );
 
+  const [isMobileView, setIsMobileView] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobileView(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   useMotionValueEvent(trajectoryProgress, "change", (value) => {
     const nextIndex = Math.min(
       history.length - 1,
@@ -715,7 +723,7 @@ export default function Page() {
             ref={manifestoRef}
             className="relative mx-auto -mt-8 h-[240vh] w-full max-w-7xl sm:-mt-12 sm:h-[300vh]"
           >
-          <div className="sticky top-20 flex min-h-[calc(100svh-5rem)] items-center py-12 sm:top-24">
+          <div className="sticky top-16 flex min-h-[calc(100svh-4rem)] items-center py-10 sm:top-24 sm:min-h-[calc(100svh-6rem)] sm:py-12">
             <motion.div
               style={
                 shouldReduceMotion
@@ -726,7 +734,7 @@ export default function Page() {
                       y: manifestoY,
                     }
               }
-              className="mx-auto flex h-[28rem] w-full max-w-5xl flex-col overflow-hidden rounded-[3rem] bg-[#071726]/92 p-8 text-white shadow-[0_40px_140px_rgba(5,16,32,0.28),inset_0_1px_0_rgba(255,255,255,0.16)] sm:h-[32rem] lg:h-[36rem] lg:p-12"
+              className="mx-auto flex h-[32rem] w-full max-w-5xl flex-col overflow-hidden rounded-[2.5rem] bg-[#071726]/92 p-6 text-white shadow-[0_40px_140px_rgba(5,16,32,0.28),inset_0_1px_0_rgba(255,255,255,0.16)] sm:h-[32rem] sm:rounded-[3rem] sm:p-8 lg:h-[36rem] lg:p-12"
             >
               <div className="flex h-full flex-col justify-between">
                 <div>
@@ -871,7 +879,7 @@ export default function Page() {
               <motion.div
                 id="work-carousel"
                 {...fadeInUp(0.1)}
-                className="no-scrollbar mt-12 flex snap-x snap-mandatory gap-8 overflow-x-auto pb-12 pl-[max(1rem,calc((100%-80rem)/2+2.5rem))] pr-[max(1rem,calc((100%-80rem)/2+2.5rem))]"
+                className="no-scrollbar mt-12 flex snap-x snap-mandatory gap-8 overflow-x-auto pb-12 pl-[calc(50vw-min(45vw,19rem))] pr-[calc(50vw-min(45vw,19rem))] sm:pl-[max(1.5rem,calc((100%-80rem)/2+2.5rem))] sm:pr-[max(1.5rem,calc((100%-80rem)/2+2.5rem))]"
               >
                 {featuredProjects.map((project) => (
                   <motion.article
@@ -942,7 +950,7 @@ export default function Page() {
               </motion.div>
             </>
           ) : (
-            <div className="sticky top-20 flex min-h-[calc(100svh-5rem)] flex-col justify-center sm:top-24">
+            <div className="sticky top-16 flex min-h-[calc(100svh-4rem)] flex-col justify-center sm:top-24 sm:min-h-[calc(100svh-6rem)]">
               <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
                 <SectionLabel index="03" label="Selected Work" />
                 <div className="mt-8 flex items-end justify-between">
@@ -985,7 +993,7 @@ export default function Page() {
                   id="work-carousel"
                   ref={workCarouselTrackRef}
                   style={{ x: workCarouselX }}
-                  className="flex w-max gap-8 pl-[max(1rem,calc((100%-80rem)/2+2.5rem))] pr-[max(1rem,calc((100%-80rem)/2+2.5rem))]"
+                  className="flex w-max gap-8 pl-[calc(50vw-min(45vw,19rem))] pr-[calc(50vw-min(45vw,19rem))] sm:pl-[max(1.5rem,calc((100%-80rem)/2+2.5rem))] sm:pr-[max(1.5rem,calc((100%-80rem)/2+2.5rem))]"
                 >
                   {featuredProjects.map((project) => (
                     <motion.article
@@ -1065,11 +1073,11 @@ export default function Page() {
           style={trajectorySectionStyle}
         >
           <SectionLabel index="04" label="Trajectory" />
-          <div className="sticky top-20 flex min-h-[calc(100svh-5rem)] items-center sm:top-24">
+          <div className="sticky top-16 flex min-h-[calc(100svh-4rem)] items-center sm:top-24">
             <div className="w-full space-y-6">
               <motion.div
                 {...fadeInUp(0.04)}
-                className="glass-panel rounded-[2.5rem] bg-white/72 p-6 shadow-[0_18px_65px_rgba(11,17,26,0.07)] backdrop-blur-xl sm:p-8 lg:p-8"
+                className="glass-panel rounded-[2rem] bg-white/72 p-5 shadow-[0_18px_65px_rgba(11,17,26,0.07)] backdrop-blur-xl sm:rounded-[2.5rem] sm:p-8"
               >
                 <div className="space-y-3">
                   <div className="font-label inline-flex rounded-full bg-white/76 px-4 py-1.5 text-[0.62rem] font-medium uppercase tracking-[0.18em] text-custom-blue/55 shadow-[inset_0_1px_0_rgba(255,255,255,0.72)]">
@@ -1085,8 +1093,8 @@ export default function Page() {
                 </div>
               </motion.div>
 
-              <div className="grid gap-8 lg:grid-cols-[1fr_2fr] lg:items-start">
-                <div className="glass-panel relative h-full rounded-[2.8rem] bg-white/70 p-7 shadow-[0_12px_45px_rgba(11,17,26,0.06)]">
+              <div className="grid gap-6 lg:grid-cols-[1fr_2fr] lg:items-start lg:gap-8">
+                <div className="glass-panel relative flex flex-col rounded-[2.2rem] bg-white/70 p-5 shadow-[0_12px_45px_rgba(11,17,26,0.06)] sm:rounded-[2.8rem] sm:p-7">
                   <div className="pointer-events-none absolute bottom-8 left-[3rem] top-8 w-[2px] -translate-x-1/2 bg-custom-blue/10" />
                   <div className="space-y-4">
                     {history.map((item, index) => {
@@ -1151,7 +1159,7 @@ export default function Page() {
                       duration: 0.4,
                       ease: [0.22, 1, 0.36, 1] as const,
                     }}
-                    className="glass-panel relative flex flex-col justify-start overflow-hidden rounded-[2.8rem] bg-white/72 p-8 shadow-[0_12px_45px_rgba(11,17,26,0.06)] lg:p-10"
+                    className="glass-panel relative flex flex-col justify-start overflow-hidden rounded-[2.2rem] bg-white/72 p-6 shadow-[0_12px_45px_rgba(11,17,26,0.06)] sm:rounded-[2.8rem] sm:p-10"
                   >
                     <div className="flex flex-wrap items-center gap-4">
                       <span className="font-label rounded-full bg-custom-blue/7 px-4 py-2 text-[0.64rem] font-medium uppercase tracking-[0.16em] text-custom-blue/62 shadow-[inset_0_1px_0_rgba(255,255,255,0.58)]">
@@ -1278,17 +1286,17 @@ export default function Page() {
       <AnimatePresence>
         {activeProjectImage && (
           <motion.div
-            className="pointer-events-none fixed z-[100] h-60 w-[18rem] overflow-hidden rounded-[2rem] border-[3px] border-white/30 bg-white shadow-[0_32px_90px_rgba(0,0,0,0.3)] backdrop-blur-xl sm:h-72 sm:w-[22rem]"
+            className="pointer-events-none fixed z-[100] h-[16rem] w-[24rem] overflow-hidden rounded-[1.8rem] border-[1px] border-white/20 bg-white shadow-[0_45px_120px_rgba(0,0,0,0.38)] backdrop-blur-2xl md:h-[22rem] md:w-[36rem]"
             style={{
               left: mouseXSpring,
               top: mouseYSpring,
-              x: 18,
-              y: 18,
+              x: isMobileView ? -180 : 32,
+              y: isMobileView ? -280 : 32,
             }}
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ scale: 0.8, opacity: 0, rotate: -2 }}
+            animate={{ scale: 1, opacity: 1, rotate: 0 }}
+            exit={{ scale: 0.8, opacity: 0, rotate: 2 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="relative h-full w-full">
               <Image
