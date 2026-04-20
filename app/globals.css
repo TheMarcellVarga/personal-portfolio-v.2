@@ -132,6 +132,24 @@
     scrollbar-width: none;
   }
 
+  .no-scrollbar-minimal::-webkit-scrollbar {
+    width: 3px;
+  }
+  .no-scrollbar-minimal::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .no-scrollbar-minimal::-webkit-scrollbar-thumb {
+    background: rgba(17, 27, 40, 0.08);
+    border-radius: 10px;
+  }
+  .no-scrollbar-minimal::-webkit-scrollbar-thumb:hover {
+    background: rgba(17, 27, 40, 0.15);
+  }
+  .no-scrollbar-minimal {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(17, 27, 40, 0.08) transparent;
+  }
+
   .resume-sheet {
     width: min(210mm, 100%);
   }
