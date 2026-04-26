@@ -29,7 +29,7 @@ export default function About() {
       <Header 
         isOpen={isOpen} 
         setIsOpen={setIsOpen} 
-        activeSection="Manifesto"
+        activeSection="Skills"
       />
 
       <main className="relative z-10 px-4 pb-24 pt-32 sm:px-6 lg:px-10">

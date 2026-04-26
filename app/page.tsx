@@ -42,7 +42,7 @@ import { SectionLabel } from "./components/SectionLabel";
 import { HomeIntro } from "./components/HomeIntro";
 import { PageBackground } from "./components/PageBackground";
 
-const manifesto =
+const principlesStatement =
   "I build interfaces that feel deliberate: design systems, motion details, frontend code, and product thinking in one lane.";
 
 const capabilityCards = [
@@ -251,12 +251,31 @@ function fadeInUp(delay = 0) {
 }
 
 function scrollToId(id: string, reducedMotion: boolean) {
-  const element = document.getElementById(id);
+  const section = document.getElementById(id);
+
+  if (id === "about" && section) {
+    const rect = section.getBoundingClientRect();
+    const scrollableDistance = Math.max(section.offsetHeight - window.innerHeight, 0);
+
+    window.scrollTo({
+      top: Math.max(0, window.scrollY + rect.top + scrollableDistance * 0.72),
+      behavior: reducedMotion ? "auto" : "smooth",
+    });
+    return;
+  }
+
+  const element =
+    document.querySelector<HTMLElement>(`[data-scroll-anchor="${id}"]`) ??
+    section;
   if (!element) return;
 
-  element.scrollIntoView({
+  const rect = element.getBoundingClientRect();
+  const targetTop =
+    window.scrollY + rect.top - Math.max((window.innerHeight - rect.height) / 2, 96);
+
+  window.scrollTo({
+    top: Math.max(0, targetTop),
     behavior: reducedMotion ? "auto" : "smooth",
-    block: "start",
   });
 }
 
@@ -272,7 +291,7 @@ export default function Page() {
   const headerLogoRef = useRef<HTMLSpanElement>(null);
 
   const heroRef = useRef<HTMLElement>(null);
-  const manifestoRef = useRef<HTMLElement>(null);
+  const principlesRef = useRef<HTMLElement>(null);
   const trajectoryRef = useRef<HTMLElement>(null);
   const workSectionRef = useRef<HTMLElement>(null);
   const [activeTrajectoryIndex, setActiveTrajectoryIndex] = useState(0);
@@ -312,8 +331,8 @@ export default function Page() {
   const haloScale = useTransform(heroProgress, [0, 1], [1, 1.14]);
   const liquidProgress = useTransform(heroProgress, [0.08, 0.55], [0, 1]);
   const liquidRise = useTransform(liquidProgress, [0, 1], [260, -54]);
-  const { scrollYProgress: manifestoProgress } = useScroll({
-    target: manifestoRef,
+  const { scrollYProgress: principlesProgress } = useScroll({
+    target: principlesRef,
     offset: ["start start", "end end"],
   });
   const { scrollYProgress: trajectoryProgress } = useScroll({
@@ -324,23 +343,23 @@ export default function Page() {
     target: workSectionRef,
     offset: ["start end", "end start"],
   });
-  const manifestoRevealEnd = 0.74;
-  const manifestoOpacity = useTransform(
-    manifestoProgress,
+  const principlesRevealEnd = 0.74;
+  const principlesOpacity = useTransform(
+    principlesProgress,
     [0, 0.12, 0.74, 0.86, 0.95, 1],
     [0.2, 1, 1, 0.88, 0.32, 0],
   );
-  const manifestoScale = useTransform(
-    manifestoProgress,
+  const principlesScale = useTransform(
+    principlesProgress,
     [0, 0.18, 0.74, 0.86, 1],
     [0.95, 1, 1, 0.99, 0.92],
   );
-  const manifestoY = useTransform(
-    manifestoProgress,
+  const principlesY = useTransform(
+    principlesProgress,
     [0, 0.2, 0.74, 0.86, 1],
     [28, 0, 0, -8, -72],
   );
-  const manifestoGlow = useTransform(manifestoProgress, [0, 1], [0.15, 0.5]);
+  const principlesGlow = useTransform(principlesProgress, [0, 1], [0.15, 0.5]);
 
   const [isMobileView, setIsMobileView] = useState(false);
   useEffect(() => {
@@ -365,7 +384,7 @@ export default function Page() {
 
   useEffect(() => {
     if (shouldReduceMotion) {
-      setTypedText(manifesto);
+      setTypedText(principlesStatement);
     }
   }, [shouldReduceMotion]);
 
@@ -395,12 +414,12 @@ export default function Page() {
     };
   }, [introStage]);
 
-  useMotionValueEvent(manifestoProgress, "change", (value) => {
+  useMotionValueEvent(principlesProgress, "change", (value) => {
     if (shouldReduceMotion) return;
 
-    const revealProgress = Math.min(value / manifestoRevealEnd, 1);
-    const nextLength = Math.round(revealProgress * manifesto.length);
-    const nextText = manifesto.slice(0, nextLength);
+    const revealProgress = Math.min(value / principlesRevealEnd, 1);
+    const nextLength = Math.round(revealProgress * principlesStatement.length);
+    const nextText = principlesStatement.slice(0, nextLength);
 
     startTransition(() => {
       setTypedText((current) => (current === nextText ? current : nextText));
@@ -448,7 +467,7 @@ export default function Page() {
     const sectionIds = ["hero", "about", "work", "contact"];
     const sectionMap: Record<string, string> = {
       hero: "Intro",
-      about: "Manifesto",
+      about: "Skills",
       work: "Work",
       contact: "Contact",
     };
@@ -657,30 +676,31 @@ export default function Page() {
 
           <section
             id="about"
-            ref={manifestoRef}
+            ref={principlesRef}
             className="relative mx-auto -mt-8 h-[240vh] w-full max-w-7xl sm:-mt-12 sm:h-[300vh]"
           >
-          <div className="sticky top-16 flex min-h-[calc(100svh-4rem)] items-center py-10 sm:top-24 sm:min-h-[calc(100svh-6rem)] sm:py-12">
+          <div className="sticky top-16 flex h-[32rem] items-center py-10 sm:top-24 sm:h-[40rem] sm:py-12">
             <motion.div
+              data-scroll-anchor="about"
               style={
                 shouldReduceMotion
                   ? undefined
                   : {
-                      opacity: manifestoOpacity,
-                      scale: manifestoScale,
-                      y: manifestoY,
+                      opacity: principlesOpacity,
+                      scale: principlesScale,
+                      y: principlesY,
                     }
               }
-              className="mx-auto flex h-[32rem] w-full max-w-5xl flex-col overflow-hidden rounded-[2.5rem] bg-[#071726]/92 p-6 text-white shadow-[0_40px_140px_rgba(5,16,32,0.28),inset_0_1px_0_rgba(255,255,255,0.16)] sm:h-[32rem] sm:rounded-[3rem] sm:p-8 lg:h-[36rem] lg:p-12"
+              className="mx-auto flex h-[32rem] w-full max-w-5xl flex-col overflow-hidden rounded-[2.5rem] bg-[#071726]/92 p-6 text-white shadow-[0_40px_140px_rgba(5,16,32,0.28),inset_0_1px_0_rgba(255,255,255,0.16)] sm:h-[40rem] sm:rounded-[3rem] sm:p-8 lg:h-[40rem] lg:p-12"
             >
               <div className="flex h-full flex-col justify-between">
                 <div>
-                  <SectionLabel index="01" label="Manifesto" tone="light" />
+                  <SectionLabel index="01" label="Principles" tone="light" />
                   <motion.div
                     style={
                       shouldReduceMotion
                         ? undefined
-                        : { opacity: manifestoGlow }
+                        : { opacity: principlesGlow }
                     }
                     className="mb-8 h-px w-full bg-[linear-gradient(90deg,rgba(76,216,255,0.85),rgba(76,216,255,0.02))]"
                   />
@@ -709,66 +729,70 @@ export default function Page() {
           </div>
         </section>
 
-        <section className="relative mx-auto flex min-h-[calc(100svh-5rem)] w-full max-w-7xl flex-col justify-center py-10 sm:py-16">
-          <SectionLabel index="02" label="Capabilities" />
-          <div className="pt-2">
-            <motion.div {...fadeInUp(0.04)} className="mb-6 max-w-3xl">
-              <h2 className="font-display text-[clamp(1.8rem,3.2vw,2.8rem)] leading-[1.02] tracking-[-0.02em] text-custom-blue">
+        <section className="relative mx-auto w-full max-w-7xl py-20 sm:py-32">
+          <motion.div
+            {...fadeInUp(0.04)}
+            className="mb-6 grid gap-4 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-end"
+          >
+            <div className="max-w-2xl">
+              <SectionLabel index="02" label="Capabilities" />
+              <h2 className="mt-6 max-w-[11ch] font-display text-[clamp(1.55rem,2.35vw,2.35rem)] leading-[0.98] tracking-[-0.025em] text-custom-blue">
                 The useful overlap between taste and implementation.
               </h2>
-              <p className="mt-4 max-w-2xl text-[0.95rem] leading-relaxed text-custom-blue/70">
-                Interfaces, motion, systems, and frontend detail all need to
-                line up. These are the pieces I actually care about.
-              </p>
-            </motion.div>
-
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {capabilityCards.map((card, index) => {
-                const Icon = card.icon;
-
-                return (
-                  <motion.article
-                    key={card.title}
-                    {...fadeInUp(index * 0.1)}
-                    className={`glass-panel group relative flex min-h-[14rem] flex-col overflow-hidden rounded-[2.2rem] bg-white/65 p-6 shadow-[0_12px_40px_rgba(11,17,26,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(11,17,26,0.06)] ${card.colSpan}`}
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                    <div className="relative z-10 flex h-full flex-col">
-                      <div className="mb-6 inline-flex h-11 w-11 items-center justify-center rounded-[1rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_10px_28px_rgba(17,27,40,0.08)] transition-transform duration-500 group-hover:scale-105">
-                        <Icon className="h-5 w-5" />
-                      </div>
-                      <h2 className="font-display text-[1.4rem] font-medium leading-[1.08] tracking-[-0.02em] text-custom-blue sm:text-[1.6rem]">
-                        {card.title}
-                      </h2>
-                      <p className="mt-3 max-w-[28rem] text-[0.82rem] leading-relaxed text-custom-blue/72">
-                        {card.body}
-                      </p>
-                      <div className="mt-auto flex flex-wrap gap-2 pt-6">
-                        {capabilityTags
-                          .slice(index * 2, index * 2 + 2)
-                          .map((tag) => (
-                            <span
-                              key={tag}
-                              className="font-label rounded-full bg-white/62 px-3 py-1.5 text-[0.58rem] font-medium uppercase tracking-[0.16em] text-custom-blue/62 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                      </div>
-                    </div>
-                  </motion.article>
-                );
-              })}
             </div>
+            <p className="max-w-xl text-[0.9rem] leading-7 text-custom-blue/66 lg:justify-self-end">
+              Interfaces, motion, systems, and frontend detail need to line
+              up. This is the part of the work I actually care about.
+            </p>
+          </motion.div>
+
+          <div className="grid auto-rows-fr gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
+            {capabilityCards.map((card, index) => {
+              const Icon = card.icon;
+
+              return (
+                <motion.article
+                  key={card.title}
+                  {...fadeInUp(index * 0.1)}
+                  className={`glass-panel group relative flex min-h-[11.75rem] flex-col overflow-hidden rounded-[1.9rem] bg-white/65 p-5 shadow-[0_12px_40px_rgba(11,17,26,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_48px_rgba(11,17,26,0.05)] sm:rounded-[2.1rem] ${card.colSpan}`}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="relative z-10 flex h-full flex-col">
+                    <div className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-[0.95rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)] transition-transform duration-500 group-hover:scale-105">
+                      <Icon className="h-4.5 w-4.5" />
+                    </div>
+                    <h2 className="max-w-[14ch] font-display text-[1.18rem] font-medium leading-[1.06] tracking-[-0.02em] text-custom-blue sm:text-[1.38rem]">
+                      {card.title}
+                    </h2>
+                    <p className="mt-2.5 max-w-[26rem] text-[0.78rem] leading-6 text-custom-blue/70">
+                      {card.body}
+                    </p>
+                    <div className="mt-auto flex flex-wrap gap-2 pt-5">
+                      {capabilityTags
+                        .slice(index * 2, index * 2 + 2)
+                        .map((tag) => (
+                          <span
+                            key={tag}
+                            className="font-label rounded-full bg-white/62 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                    </div>
+                  </div>
+                </motion.article>
+              );
+            })}
           </div>
         </section>
 
         <section
           id="work"
           ref={workSectionRef}
+          data-scroll-anchor="work"
           className="relative mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 sm:py-32 lg:px-10"
         >
-          <div className="mb-16 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
               <SectionLabel index="03" label="Selected Work" />
               <h2 className="mt-8 font-display text-[clamp(2.4rem,5vw,4.2rem)] leading-[0.95] tracking-[-0.03em] text-custom-blue">
@@ -786,58 +810,56 @@ export default function Page() {
           </div>
 
           <div className="border-t border-custom-blue/10">
-            <div className="no-scrollbar-minimal max-h-[32rem] overflow-y-auto pr-2 sm:max-h-[40rem]">
-              {featuredProjects.map((project, idx) => (
-                <motion.article
-                  key={project.title}
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.05 }}
-                  onMouseEnter={() => !shouldReduceMotion && setActiveProjectImage(project.image)}
-                  onMouseLeave={() => setActiveProjectImage(null)}
-                  className="group relative"
+            {featuredProjects.map((project, idx) => (
+              <motion.article
+                key={project.title}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.05 }}
+                onMouseEnter={() => !shouldReduceMotion && setActiveProjectImage(project.image)}
+                onMouseLeave={() => setActiveProjectImage(null)}
+                className="group relative"
+              >
+                <Link
+                  href={project.link}
+                  className="flex flex-col border-b border-custom-blue/5 py-6 transition-colors duration-500 hover:bg-custom-blue/[0.01] sm:py-8"
                 >
-                  <Link
-                    href={project.link}
-                    className="flex flex-col border-b border-custom-blue/5 py-6 transition-colors duration-500 hover:bg-custom-blue/[0.01] sm:py-8"
-                  >
-                    <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-10">
-                      <div className="flex flex-1 flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
-                        <span className="font-label min-w-[2.5rem] text-[0.62rem] font-bold text-custom-blue/20">
-                          0{idx + 1}
-                        </span>
-                        <h3 className="font-display text-[1.8rem] leading-none tracking-[-0.02em] text-custom-blue transition-transform duration-500 group-hover:translate-x-2 sm:text-[2.2rem] lg:text-[2.8rem]">
-                          {project.title}
-                        </h3>
-                      </div>
+                  <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-10">
+                    <div className="flex flex-1 flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
+                      <span className="font-label min-w-[2.5rem] text-[0.62rem] font-bold text-custom-blue/20">
+                        0{idx + 1}
+                      </span>
+                      <h3 className="font-display text-[1.8rem] leading-none tracking-[-0.02em] text-custom-blue transition-transform duration-500 group-hover:translate-x-2 sm:text-[2.2rem] lg:text-[2.8rem]">
+                        {project.title}
+                      </h3>
+                    </div>
 
-                      <div className="flex items-center justify-between gap-6 sm:justify-end">
-                        <div className="flex flex-col items-end gap-0.5 text-right">
-                          <span className="font-label text-[0.58rem] font-bold uppercase tracking-[0.18em] text-custom-blue/40">
-                            {project.category}
-                          </span>
-                          <span className="font-label text-[0.58rem] font-bold text-custom-blue/20">
-                            {project.date}
-                          </span>
-                        </div>
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-custom-blue/10 transition-all duration-500 group-hover:rotate-45 group-hover:bg-custom-blue group-hover:text-white sm:h-12 sm:w-12">
-                          <ArrowUpRight className="h-4 w-4 sm:h-5 w-5" />
-                        </div>
+                    <div className="flex items-center justify-between gap-6 sm:justify-end">
+                      <div className="flex flex-col items-end gap-0.5 text-right">
+                        <span className="font-label text-[0.58rem] font-bold uppercase tracking-[0.18em] text-custom-blue/40">
+                          {project.category}
+                        </span>
+                        <span className="font-label text-[0.58rem] font-bold text-custom-blue/20">
+                          {project.date}
+                        </span>
+                      </div>
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full border border-custom-blue/10 transition-all duration-500 group-hover:rotate-45 group-hover:bg-custom-blue group-hover:text-white sm:h-12 sm:w-12">
+                        <ArrowUpRight className="h-4 w-4 sm:h-5 w-5" />
                       </div>
                     </div>
-                    
-                    <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1 sm:ml-[10.5rem] sm:mt-1">
-                      {project.skills.slice(0, 4).map((skill) => (
-                        <span key={skill} className="text-[0.58rem] font-bold uppercase tracking-[0.15em] text-custom-blue/30">
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </Link>
-                </motion.article>
-              ))}
-            </div>
+                  </div>
+
+                  <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1 sm:ml-[10.5rem] sm:mt-1">
+                    {project.skills.slice(0, 4).map((skill) => (
+                      <span key={skill} className="text-[0.58rem] font-bold uppercase tracking-[0.15em] text-custom-blue/30">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </Link>
+              </motion.article>
+            ))}
           </div>
         </section>
 
@@ -846,31 +868,36 @@ export default function Page() {
           className="relative mx-auto mt-20 w-full max-w-7xl sm:mt-32"
           style={trajectorySectionStyle}
         >
-          <SectionLabel index="04" label="Trajectory" />
-          <div className="sticky top-16 flex min-h-[calc(100svh-4rem)] items-center sm:top-24">
-            <div className="w-full space-y-6">
+          <div className="sticky top-16 flex min-h-[calc(100svh-4rem)] items-center sm:top-24 sm:min-h-[calc(100svh-6rem)]">
+            <div className="w-full space-y-5">
               <motion.div
                 {...fadeInUp(0.04)}
-                className="glass-panel rounded-[2rem] bg-white/72 p-5 shadow-[0_18px_65px_rgba(11,17,26,0.07)] backdrop-blur-xl sm:rounded-[2.5rem] sm:p-8"
+                className="grid gap-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-end"
               >
-                <div className="space-y-3">
-                  <div className="font-label inline-flex rounded-full bg-white/76 px-4 py-1.5 text-[0.62rem] font-medium uppercase tracking-[0.18em] text-custom-blue/55 shadow-[inset_0_1px_0_rgba(255,255,255,0.72)]">
+                <div className="max-w-2xl">
+                <SectionLabel index="04" label="Trajectory" />
+                <div className="mt-6 space-y-3">
+                  <div className="font-label inline-flex rounded-full bg-white/76 px-3.5 py-1.5 text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/55 shadow-[inset_0_1px_0_rgba(255,255,255,0.72)]">
                     Engineering Path
                   </div>
-                  <p className="font-display text-[clamp(1.75rem,2.8vw,2.8rem)] leading-[1.02] tracking-[-0.02em] text-custom-blue">
+                  <p className="max-w-[11ch] font-display text-[clamp(1.55rem,2.35vw,2.45rem)] leading-[0.98] tracking-[-0.025em] text-custom-blue">
                     Built in Denmark. Now shipping from Singapore.
                   </p>
-                  <p className="max-w-2xl text-sm leading-7 text-custom-blue/68">
-                    Multimedia design first. Product work next. The timeline
-                    stays pinned while each step advances one by one.
+                </div>
+                </div>
+                <div className="max-w-xl lg:justify-self-end">
+                  <p className="text-[0.92rem] leading-7 text-custom-blue/66">
+                    Multimedia design first. Product work next. A compact read
+                    of the path from design school into product engineering and
+                    AI-leaning interface work.
                   </p>
                 </div>
               </motion.div>
 
-              <div className="grid gap-6 lg:grid-cols-[1fr_2fr] lg:items-start lg:gap-8">
-                <div className="glass-panel relative flex flex-col rounded-[2.2rem] bg-white/70 p-5 shadow-[0_12px_45px_rgba(11,17,26,0.06)] sm:rounded-[2.8rem] sm:p-7">
-                  <div className="pointer-events-none absolute bottom-8 left-[3rem] top-8 w-[2px] -translate-x-1/2 bg-custom-blue/10" />
-                  <div className="space-y-4">
+              <div className="grid gap-5 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-5">
+                <div className="glass-panel relative overflow-hidden rounded-[1.9rem] bg-white/70 p-4 shadow-[0_12px_45px_rgba(11,17,26,0.06)] sm:rounded-[2.2rem] sm:p-5">
+                    <div className="pointer-events-none absolute bottom-6 left-[2.4rem] top-6 w-px -translate-x-1/2 bg-custom-blue/10" />
+                    <div className="space-y-2.5">
                     {history.map((item, index) => {
                       const isActive = index === activeTrajectoryIndex;
                       const isPast = index < activeTrajectoryIndex;
@@ -880,18 +907,18 @@ export default function Page() {
                           key={`${item.company}-${item.time.start}`}
                           type="button"
                           onClick={() => setActiveTrajectoryIndex(index)}
-                          className={`relative grid w-full grid-cols-[2.5rem_1fr] items-center gap-3 rounded-[1.4rem] py-3 pr-3 text-left transition duration-300 ${
+                          className={`relative grid w-full grid-cols-[2.1rem_1fr] items-center gap-2.5 rounded-[1.15rem] px-1.5 py-2.5 text-left transition duration-300 ${
                             isActive
-                              ? "bg-white shadow-[0_12px_45px_rgba(11,17,26,0.08)]"
+                              ? "bg-white shadow-[0_10px_30px_rgba(11,17,26,0.07)]"
                               : "hover:bg-white/45"
                           }`}
                           aria-pressed={isActive}
                         >
-                          <span className="relative flex h-7 items-center justify-center">
+                          <span className="relative flex h-6 items-center justify-center">
                             {isActive ? (
                               <motion.span
                                 layoutId="trajectory-dot-v2"
-                                className="relative z-10 h-2.5 w-2.5 rounded-full border-2 border-[#67d9ff] bg-[#67d9ff] shadow-[0_0_0_7px_rgba(103,217,255,0.15)]"
+                                className="relative z-10 h-2.5 w-2.5 rounded-full border-2 border-[#67d9ff] bg-[#67d9ff] shadow-[0_0_0_6px_rgba(103,217,255,0.14)]"
                               />
                             ) : (
                               <span
@@ -903,17 +930,17 @@ export default function Page() {
                               />
                             )}
                           </span>
-                          <span className="min-w-0 pr-2">
-                            <span className="block text-[0.68rem] font-bold uppercase tracking-[0.24em] text-custom-blue/45">
+                          <span className="min-w-0 pr-1">
+                            <span className="block text-[0.62rem] font-bold uppercase tracking-[0.2em] text-custom-blue/45">
                               {item.time.start}{" "}
                               {item.time.end
                                 ? `- ${item.time.end}`
                                 : "- Present"}
                             </span>
-                            <span className="mt-1 block truncate text-[1rem] font-bold text-custom-blue">
+                            <span className="mt-1 block truncate text-[0.94rem] font-bold text-custom-blue">
                               {item.company}
                             </span>
-                            <span className="mt-0.5 block text-[0.72rem] leading-5 text-custom-blue/60">
+                            <span className="mt-0.5 block text-[0.68rem] leading-5 text-custom-blue/58">
                               {item.jobTitle}
                             </span>
                           </span>
@@ -933,61 +960,72 @@ export default function Page() {
                       duration: 0.4,
                       ease: [0.22, 1, 0.36, 1] as const,
                     }}
-                    className="glass-panel relative flex flex-col justify-start overflow-hidden rounded-[2.2rem] bg-white/72 p-6 shadow-[0_12px_45px_rgba(11,17,26,0.06)] sm:rounded-[2.8rem] sm:p-10"
+                    className="glass-panel relative overflow-hidden rounded-[1.9rem] bg-white/72 p-5 shadow-[0_12px_45px_rgba(11,17,26,0.06)] sm:rounded-[2.2rem] sm:p-6"
                   >
-                    <div className="flex flex-wrap items-center gap-4">
-                      <span className="font-label rounded-full bg-custom-blue/7 px-4 py-2 text-[0.64rem] font-medium uppercase tracking-[0.16em] text-custom-blue/62 shadow-[inset_0_1px_0_rgba(255,255,255,0.58)]">
+                    <div className="flex flex-col">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span className="font-label rounded-full bg-custom-blue/7 px-3.5 py-1.5 text-[0.6rem] font-medium uppercase tracking-[0.15em] text-custom-blue/62 shadow-[inset_0_1px_0_rgba(255,255,255,0.58)]">
                         {activeTrajectoryItem.time.start}{" "}
                         {activeTrajectoryItem.time.end
                           ? `- ${activeTrajectoryItem.time.end}`
                           : "- Present"}
                       </span>
-                      <span className="font-label rounded-full bg-white px-3 py-1.5 text-[0.62rem] font-medium uppercase tracking-[0.16em] text-custom-blue/52 shadow-[inset_0_1px_0_rgba(255,255,255,0.72)]">
+                      <span className="font-label rounded-full bg-white px-3 py-1.5 text-[0.58rem] font-medium uppercase tracking-[0.16em] text-custom-blue/52 shadow-[inset_0_1px_0_rgba(255,255,255,0.72)]">
                         Step {activeTrajectoryIndex + 1} of {history.length}
                       </span>
                     </div>
-                    <p className="mt-8 font-display text-[clamp(1.8rem,2.8vw,2.5rem)] leading-[1.04] tracking-[-0.02em] text-custom-blue">
+                    <div className="mt-5 flex flex-col gap-1.5 border-b border-custom-blue/8 pb-4 sm:flex-row sm:items-end sm:justify-between">
+                      <div>
+                        <p className="font-display text-[clamp(1.5rem,2.2vw,2rem)] leading-[1] tracking-[-0.025em] text-custom-blue">
                       {activeTrajectoryItem.jobTitle}
-                    </p>
-                    <div className="mt-6 space-y-5">
-                      {activeTrajectoryItem.description.map(
-                        (paragraph, index) => (
-                          <p
-                            key={index}
-                            className="max-w-[38rem] text-[1rem] leading-relaxed text-custom-blue/75"
-                          >
+                        </p>
+                        <p className="mt-1 text-[0.78rem] uppercase tracking-[0.16em] text-custom-blue/42">
+                          {activeTrajectoryItem.company}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="mt-5 grid gap-3">
+                      {activeTrajectoryItem.description.map((paragraph, index) => (
+                        <div
+                          key={index}
+                          className="grid grid-cols-[0.8rem_1fr] gap-3 rounded-[1.1rem] bg-white/58 px-3 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.68)]"
+                        >
+                          <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#67d9ff]" />
+                          <p className="max-w-[34rem] text-[0.88rem] leading-6 text-custom-blue/72">
                             {paragraph}
                           </p>
-                        ),
-                      )}
+                        </div>
+                      ))}
                     </div>
 
-                    <div className="mt-12 flex flex-wrap gap-2.5">
+                    <div className="mt-6 flex flex-wrap gap-2">
                       {activeTrajectoryItem.skills.map((skill) => (
                         <span
                           key={skill}
-                          className="font-label rounded-full bg-white px-4 py-2 text-[0.64rem] font-medium uppercase tracking-[0.15em] text-custom-blue/58 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_10px_24px_rgba(17,27,40,0.04)]"
+                          className="font-label rounded-full bg-white px-3 py-1.5 text-[0.58rem] font-medium uppercase tracking-[0.14em] text-custom-blue/58 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_20px_rgba(17,27,40,0.03)]"
                         >
                           {skill}
                         </span>
                       ))}
                     </div>
+                    </div>
                   </motion.article>
                 </AnimatePresence>
+                </div>
               </div>
-            </div>
           </div>
         </section>
 
           <section
             id="contact"
-            className="mx-auto flex min-h-[calc(100svh-5rem)] w-full max-w-7xl flex-col justify-end py-10 sm:py-16"
+            className="mx-auto w-full max-w-7xl py-20 sm:py-32"
             onMouseEnter={() => setFooterHover(true)}
             onMouseLeave={() => setFooterHover(false)}
           >
           <motion.div
+            data-scroll-anchor="contact"
             {...fadeInUp(0.06)}
-            className="relative overflow-hidden rounded-[3rem] bg-[#071726] p-8 text-white shadow-[0_40px_140px_rgba(7,20,38,0.26),inset_0_1px_0_rgba(255,255,255,0.16)] sm:p-12"
+            className="relative flex h-[32rem] items-center overflow-hidden rounded-[3rem] bg-[#071726] p-8 text-white shadow-[0_40px_140px_rgba(7,20,38,0.26),inset_0_1px_0_rgba(255,255,255,0.16)] sm:h-[40rem] sm:p-12"
           >
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(72,205,255,0.26),_transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.06),transparent_55%)]" />
             <div className="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">

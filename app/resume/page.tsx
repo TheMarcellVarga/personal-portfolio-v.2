@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Github, Globe, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { Github, Globe, Linkedin, Mail, MapPin, Phone, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import Header from "../header";
 import Footer from "../footer";
@@ -48,6 +48,22 @@ function MainSection({
       </div>
       <div className="mt-4">{children}</div>
     </section>
+  );
+}
+
+function HighlightGrid({ items }: { items: readonly string[] }) {
+  return (
+    <div className="grid gap-3 sm:grid-cols-3">
+      {items.map((item) => (
+        <div
+          key={item}
+          className="rounded-[1rem] border border-custom-blue/8 bg-[#f8fafb] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]"
+        >
+          <Sparkles className="mb-3 h-4 w-4 text-[#1aa6d4]" />
+          <p className="text-[12px] leading-[1.55] text-custom-blue/74">{item}</p>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -122,18 +138,31 @@ export default function ResumePage() {
         <div className="mx-auto max-w-6xl">
           <motion.div
             {...fadeInUp(0)}
-            className="mb-10 flex items-center justify-end print:hidden"
+            className="mb-10 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end print:hidden"
           >
+            <div className="max-w-3xl">
+              <p className="font-label text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-custom-blue/45">
+                Resume 2026
+              </p>
+              <h1 className="mt-3 font-display text-[clamp(2.3rem,5vw,4.5rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-custom-blue">
+                UX, frontend, and AI product flow work from Singapore.
+              </h1>
+              <p className="mt-5 max-w-2xl text-[1rem] leading-7 text-custom-blue/68">
+                A cleaner CV for the current chapter: same AXON role, relocated in
+                March 2026, and positioned around product interfaces, AI-aware
+                workflows, design systems, and production frontend execution.
+              </p>
+            </div>
             <ResumeActions />
           </motion.div>
 
           <motion.article
             {...fadeInUp(0.08)}
-            className="resume-sheet relative mx-auto overflow-hidden rounded-[1.75rem] border border-black/8 bg-white shadow-[0_45px_120px_rgba(17,27,40,0.12)] print:rounded-none print:border-0 print:shadow-none"
+            className="resume-sheet relative mx-auto overflow-hidden rounded-[1.25rem] border border-black/8 bg-white shadow-[0_45px_120px_rgba(17,27,40,0.12)] print:rounded-none print:border-0 print:shadow-none"
           >
             <div className="pointer-events-none absolute right-8 top-12 h-36 w-36 rounded-full bg-[radial-gradient(circle,rgba(76,207,255,0.16),rgba(76,207,255,0.05)_42%,transparent_72%)] blur-2xl" />
             <div className="grid min-h-[297mm] grid-cols-1 lg:grid-cols-[68mm_1fr] print:grid-cols-[68mm_1fr]">
-              <aside className="relative border-b border-black/8 bg-[#f3f5f7] px-6 py-8 lg:border-b-0 lg:border-r print:border-b-0 print:border-r print:py-7">
+              <aside className="relative order-2 border-b border-black/8 bg-[#f3f5f7] px-6 py-8 lg:order-none lg:border-b-0 lg:border-r print:order-none print:border-b-0 print:border-r print:py-7">
                 <div className="pointer-events-none absolute left-0 top-0 h-28 w-full bg-[linear-gradient(180deg,rgba(76,207,255,0.11),transparent)]" />
                 <div className="mx-auto max-w-[220px] lg:max-w-none">
                   <div className="relative mx-auto h-36 w-28 overflow-hidden rounded-[1.35rem] border border-black/8 bg-white shadow-[0_16px_36px_rgba(17,27,40,0.08)]">
@@ -218,18 +247,30 @@ export default function ResumePage() {
                 </div>
               </aside>
 
-              <div className="relative px-6 py-8 sm:px-8 lg:px-9 print:px-8 print:py-7">
-                <header className="relative border-b border-black/8 pb-6">
-                  <div className="pointer-events-none absolute -bottom-px left-0 h-[2px] w-40 bg-[linear-gradient(90deg,rgba(76,207,255,0.78),rgba(76,207,255,0.18),transparent)]" />
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.34em] text-custom-blue/45">
+              <div className="relative order-1 px-6 py-8 sm:px-8 lg:order-none lg:px-9 print:order-none print:px-8 print:py-7">
+                <header className="relative overflow-hidden rounded-[1.25rem] bg-[#0b1826] p-6 text-white shadow-[0_24px_70px_rgba(7,20,38,0.16)] print:rounded-none print:shadow-none">
+                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(76,207,255,0.24),transparent_32%),linear-gradient(135deg,rgba(255,255,255,0.08),transparent_54%)]" />
+                  <div className="relative">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.34em] text-white/45">
                     Resume
                   </p>
-                  <h1 className="mt-3 font-display text-[2.55rem] font-semibold tracking-[-0.04em] text-custom-blue">
+                  <h1 className="mt-3 font-display text-[2.55rem] font-semibold tracking-[-0.04em] text-white">
                     {resume.name}
                   </h1>
-                  <p className="mt-2 text-[1.02rem] font-medium text-custom-blue/60">
+                  <p className="mt-2 max-w-xl text-[1.02rem] font-medium leading-7 text-white/68">
                     {resume.title}
                   </p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {["Singapore", "AI product UX", "Frontend engineering"].map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full bg-white/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/72 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  </div>
                 </header>
 
                 <div className="space-y-8 pt-6">
@@ -244,6 +285,10 @@ export default function ResumePage() {
                         </p>
                       ))}
                     </div>
+                  </MainSection>
+
+                  <MainSection title="Snapshot">
+                    <HighlightGrid items={resume.highlights} />
                   </MainSection>
 
                   <MainSection title="Experience">

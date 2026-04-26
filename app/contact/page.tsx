@@ -115,10 +115,8 @@ export default function Contact() {
                 <ArrowLeft className="h-5 w-5 rotate-180 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
               </a>
 
-              <a
-                href="/MarcellVargaCV.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/resume"
                 className="glass-panel group flex items-center justify-between rounded-full px-8 py-6 transition-all hover:bg-white/60"
               >
                 <div className="flex items-center gap-4">
@@ -128,7 +126,7 @@ export default function Contact() {
                   <span className="font-bold text-custom-blue">Resume</span>
                 </div>
                 <ArrowLeft className="h-5 w-5 rotate-180 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
-              </a>
+              </Link>
             </motion.div>
           </div>
         </div>
