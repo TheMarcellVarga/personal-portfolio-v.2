@@ -36,7 +36,8 @@ function PostHogInitializer() {
         persistence: 'localStorage',
         disable_session_recording: !enableSessionRecording,
         advanced_disable_decide: true,
-        disable_remote_config: true,
+        capture_performance: false,
+        capture_exceptions: false,
         ...(enableSessionRecording
           ? {
               session_recording: {

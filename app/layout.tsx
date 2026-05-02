@@ -26,8 +26,12 @@ export default async function RootLayout({
           {children}
           <DevelopmentBanner />
           <LegacyNotice />
-          <SpeedInsights />
-          <Analytics />
+          {process.env.NODE_ENV === 'production' && (
+            <>
+              <SpeedInsights />
+              <Analytics />
+            </>
+          )}
         </PostHogProvider>
       </body>
     </html>
