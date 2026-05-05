@@ -53,6 +53,7 @@ export default function Header({
   useEffect(() => {
     if (prefersReducedMotion) return;
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLogoAnimationKey((current) => current + 1);
   }, [pathname, prefersReducedMotion, revealBrand]);
 

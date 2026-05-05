@@ -389,12 +389,14 @@ export default function Page() {
 
   useEffect(() => {
     if (shouldReduceMotion) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTypedText(principlesStatement);
     }
   }, [shouldReduceMotion]);
 
   useLayoutEffect(() => {
     if (shouldReduceMotion) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIntroStage("done");
       return;
     }
@@ -911,7 +913,7 @@ export default function Page() {
                     <div className="space-y-2.5">
                       {history.map((item, index) => {
                         const isActive = index === activeTrajectoryIndex;
-                        const isPast = index < activeTrajectoryIndex;
+                        const isPast = index < (activeTrajectoryIndex ?? 0);
 
                         return (
                           <button
@@ -973,55 +975,57 @@ export default function Page() {
                       }}
                       className="glass-panel relative overflow-hidden rounded-[1.9rem] bg-white/72 p-5 shadow-[0_12px_45px_rgba(11,17,26,0.06)] sm:rounded-[2.2rem] sm:p-6"
                     >
-                      <div className="flex flex-col">
-                        <div className="flex flex-wrap items-center gap-3">
-                          <span className="font-label rounded-full bg-custom-blue/7 px-3.5 py-1.5 text-[0.6rem] font-medium uppercase tracking-[0.15em] text-custom-blue/62 shadow-[inset_0_1px_0_rgba(255,255,255,0.58)]">
-                            {activeTrajectoryItem.time.start}{" "}
-                            {activeTrajectoryItem.time.end
-                              ? `- ${activeTrajectoryItem.time.end}`
-                              : "- Present"}
-                          </span>
-                          <span className="font-label rounded-full bg-white px-3 py-1.5 text-[0.58rem] font-medium uppercase tracking-[0.16em] text-custom-blue/52 shadow-[inset_0_1px_0_rgba(255,255,255,0.72)]">
-                            Step {activeTrajectoryIndex + 1} of {history.length}
-                          </span>
-                        </div>
-                        <div className="mt-5 flex flex-col gap-1.5 border-b border-custom-blue/8 pb-4 sm:flex-row sm:items-end sm:justify-between">
-                          <div>
-                            <p className="font-display text-[clamp(1.5rem,2.2vw,2rem)] leading-[1] tracking-[-0.025em] text-custom-blue">
-                              {activeTrajectoryItem.jobTitle}
-                            </p>
-                            <p className="mt-1 text-[0.78rem] uppercase tracking-[0.16em] text-custom-blue/42">
-                              {activeTrajectoryItem.company}
-                            </p>
+                      {activeTrajectoryIndex !== null && (
+                        <div className="flex flex-col">
+                          <div className="flex flex-wrap items-center gap-3">
+                            <span className="font-label rounded-full bg-custom-blue/7 px-3.5 py-1.5 text-[0.6rem] font-medium uppercase tracking-[0.15em] text-custom-blue/62 shadow-[inset_0_1px_0_rgba(255,255,255,0.58)]">
+                              {history[activeTrajectoryIndex].time.start}{" "}
+                              {history[activeTrajectoryIndex].time.end
+                                ? `- ${history[activeTrajectoryIndex].time.end}`
+                                : "- Present"}
+                            </span>
+                            <span className="font-label rounded-full bg-white px-3 py-1.5 text-[0.58rem] font-medium uppercase tracking-[0.16em] text-custom-blue/52 shadow-[inset_0_1px_0_rgba(255,255,255,0.72)]">
+                              Step {activeTrajectoryIndex + 1} of {history.length}
+                            </span>
+                          </div>
+                          <div className="mt-5 flex flex-col gap-1.5 border-b border-custom-blue/8 pb-4 sm:flex-row sm:items-end sm:justify-between">
+                            <div>
+                              <p className="font-display text-[clamp(1.5rem,2.2vw,2rem)] leading-[1] tracking-[-0.025em] text-custom-blue">
+                                {history[activeTrajectoryIndex].jobTitle}
+                              </p>
+                              <p className="mt-1 text-[0.78rem] uppercase tracking-[0.16em] text-custom-blue/42">
+                                {history[activeTrajectoryIndex].company}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="mt-5 grid gap-3">
+                            {history[activeTrajectoryIndex].description.map(
+                              (paragraph, index) => (
+                                <div
+                                  key={index}
+                                  className="grid grid-cols-[0.8rem_1fr] gap-3 rounded-[1.1rem] bg-white/58 px-3 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.68)]"
+                                >
+                                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#67d9ff]" />
+                                  <p className="max-w-[34rem] text-[0.88rem] leading-6 text-custom-blue/72">
+                                    {paragraph}
+                                  </p>
+                                </div>
+                              ),
+                            )}
+                          </div>
+
+                          <div className="mt-6 flex flex-wrap gap-2">
+                            {history[activeTrajectoryIndex].skills.map((skill) => (
+                              <span
+                                key={skill}
+                                className="font-label rounded-full bg-white px-3 py-1.5 text-[0.58rem] font-medium uppercase tracking-[0.14em] text-custom-blue/58 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_20px_rgba(17,27,40,0.03)]"
+                              >
+                                {skill}
+                              </span>
+                            ))}
                           </div>
                         </div>
-                        <div className="mt-5 grid gap-3">
-                          {activeTrajectoryItem.description.map(
-                            (paragraph, index) => (
-                              <div
-                                key={index}
-                                className="grid grid-cols-[0.8rem_1fr] gap-3 rounded-[1.1rem] bg-white/58 px-3 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.68)]"
-                              >
-                                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#67d9ff]" />
-                                <p className="max-w-[34rem] text-[0.88rem] leading-6 text-custom-blue/72">
-                                  {paragraph}
-                                </p>
-                              </div>
-                            ),
-                          )}
-                        </div>
-
-                        <div className="mt-6 flex flex-wrap gap-2">
-                          {activeTrajectoryItem.skills.map((skill) => (
-                            <span
-                              key={skill}
-                              className="font-label rounded-full bg-white px-3 py-1.5 text-[0.58rem] font-medium uppercase tracking-[0.14em] text-custom-blue/58 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_20px_rgba(17,27,40,0.03)]"
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
+                      )}
                     </motion.article>
                   </AnimatePresence>
                 </div>
