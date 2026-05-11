@@ -297,13 +297,7 @@ export default function Page() {
 
   const heroRef = useRef<HTMLElement>(null);
   const principlesRef = useRef<HTMLElement>(null);
-  const trajectoryRef = useRef<HTMLElement>(null);
   const workSectionRef = useRef<HTMLElement>(null);
-  const [activeTrajectoryIndex, setActiveTrajectoryIndex] = useState(0);
-  const trajectoryHeightVh = history.length * 110 + 100;
-  const [trajectoryMinHeightPx, setTrajectoryMinHeightPx] = useState<
-    number | null
-  >(null);
   const [activeProjectImage, setActiveProjectImage] = useState<string | null>(
     null,
   );
@@ -326,22 +320,24 @@ export default function Page() {
     target: heroRef,
     offset: ["start start", "end start"],
   });
-  const heroCopyY = useTransform(heroProgress, [0, 1], [0, -36]);
-  const heroPillsY = useTransform(heroProgress, [0, 1], [0, -18]);
-  const heroCardsY = useTransform(heroProgress, [0, 1], [0, -28]);
-  const heroCopyOpacity = useTransform(heroProgress, [0, 0.85], [1, 0.58]);
-  const portraitY = useTransform(heroProgress, [0, 1], [0, -80]);
-  const portraitRotate = useTransform(heroProgress, [0, 1], [0, -4]);
-  const portraitScale = useTransform(heroProgress, [0, 1], [1, 0.965]);
-  const haloScale = useTransform(heroProgress, [0, 1], [1, 1.14]);
-  const liquidProgress = useTransform(heroProgress, [0.08, 0.55], [0, 1]);
+  const smoothHeroProgress = useSpring(heroProgress, {
+    damping: 34,
+    stiffness: 220,
+    mass: 0.24,
+    restDelta: 0.001,
+  });
+  const heroCopyY = useTransform(smoothHeroProgress, [0, 1], [0, -36]);
+  const heroPillsY = useTransform(smoothHeroProgress, [0, 1], [0, -18]);
+  const heroCardsY = useTransform(smoothHeroProgress, [0, 1], [0, -28]);
+  const heroCopyOpacity = useTransform(smoothHeroProgress, [0, 0.85], [1, 0.58]);
+  const portraitY = useTransform(smoothHeroProgress, [0, 1], [0, -80]);
+  const portraitRotate = useTransform(smoothHeroProgress, [0, 1], [0, -4]);
+  const portraitScale = useTransform(smoothHeroProgress, [0, 1], [1, 0.965]);
+  const haloScale = useTransform(smoothHeroProgress, [0, 1], [1, 1.14]);
+  const liquidProgress = useTransform(smoothHeroProgress, [0.08, 0.55], [0, 1]);
   const liquidRise = useTransform(liquidProgress, [0, 1], [260, -54]);
   const { scrollYProgress: principlesProgress } = useScroll({
     target: principlesRef,
-    offset: ["start start", "end end"],
-  });
-  const { scrollYProgress: trajectoryProgress } = useScroll({
-    target: trajectoryRef,
     offset: ["start start", "end end"],
   });
   const { scrollYProgress: workScrollProgress } = useScroll({
@@ -373,19 +369,6 @@ export default function Page() {
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
-
-  useMotionValueEvent(trajectoryProgress, "change", (value) => {
-    const nextIndex = Math.min(
-      history.length - 1,
-      Math.floor(value * history.length),
-    );
-
-    startTransition(() => {
-      setActiveTrajectoryIndex((current) =>
-        current === nextIndex ? current : nextIndex,
-      );
-    });
-  });
 
   useEffect(() => {
     if (shouldReduceMotion) {
@@ -452,22 +435,6 @@ export default function Page() {
   const scrollContact = useCallback(() => {
     scrollToId("contact", shouldReduceMotion);
   }, [shouldReduceMotion]);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const updateMinHeight = () => {
-      setTrajectoryMinHeightPx((window.innerHeight * trajectoryHeightVh) / 100);
-    };
-
-    updateMinHeight();
-    window.addEventListener("resize", updateMinHeight);
-    return () => window.removeEventListener("resize", updateMinHeight);
-  }, [trajectoryHeightVh]);
-
-  const trajectorySectionStyle = trajectoryMinHeightPx
-    ? { minHeight: `${trajectoryMinHeightPx}px` }
-    : { minHeight: `${trajectoryHeightVh}vh` };
 
   const [activeSection, setActiveSection] = useState("Intro");
 
@@ -546,7 +513,6 @@ export default function Page() {
     () => projects.filter((project) => !project.inProgress),
     [],
   );
-  const activeTrajectoryItem = history[activeTrajectoryIndex];
   const introIsActive = introStage === "playing";
 
   // Removed carousel measurements and scroll functions
@@ -599,18 +565,18 @@ export default function Page() {
                   ? undefined
                   : { y: portraitY, scale: portraitScale }
               }
-              className="pointer-events-none absolute inset-y-0 right-[-24vw] z-20 flex items-end sm:right-[-12vw] lg:right-[-4vw] xl:right-[2vw]"
+              className="hero-scroll-layer pointer-events-none absolute inset-y-0 right-[-24vw] z-20 flex items-end sm:right-[-12vw] lg:right-[-4vw] xl:right-[2vw]"
             >
               <motion.div
                 aria-hidden="true"
                 style={shouldReduceMotion ? undefined : { scale: haloScale }}
-                className="absolute bottom-[12%] right-[18%] h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,_rgba(76,207,255,0.24)_0%,_rgba(76,207,255,0.1)_36%,_transparent_74%)] blur-3xl sm:h-[30rem] sm:w-[30rem] xl:h-[36rem] xl:w-[36rem]"
+                className="hero-scroll-layer absolute bottom-[12%] right-[18%] h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,_rgba(76,207,255,0.24)_0%,_rgba(76,207,255,0.1)_36%,_transparent_74%)] blur-3xl sm:h-[30rem] sm:w-[30rem] xl:h-[36rem] xl:w-[36rem]"
               />
               <motion.div
                 style={
                   shouldReduceMotion ? undefined : { rotate: portraitRotate }
                 }
-                className="relative flex h-[72svh] min-h-[32rem] w-[min(104vw,46rem)] items-end justify-center sm:h-[78svh] sm:w-[min(88vw,42rem)] lg:h-[86svh] lg:w-[44rem] xl:h-[90svh] xl:w-[50rem]"
+                className="hero-scroll-layer relative flex h-[72svh] min-h-[32rem] w-[min(104vw,46rem)] items-end justify-center sm:h-[78svh] sm:w-[min(88vw,42rem)] lg:h-[86svh] lg:w-[44rem] xl:h-[90svh] xl:w-[50rem]"
               >
                 <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
                 <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
@@ -656,7 +622,7 @@ export default function Page() {
                 <motion.div
                   {...fadeInUp(0.05)}
                   style={shouldReduceMotion ? undefined : { y: heroPillsY }}
-                  className="mb-7 flex flex-wrap gap-3"
+                  className="hero-scroll-layer mb-7 flex flex-wrap gap-3"
                 >
                   <span className="font-label rounded-full bg-white/10 px-4 py-2 text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)] backdrop-blur-xl">
                     Frontend & UX Engineer
@@ -670,7 +636,7 @@ export default function Page() {
                       ? undefined
                       : { y: heroCopyY, opacity: heroCopyOpacity }
                   }
-                  className="space-y-6"
+                  className="hero-scroll-layer space-y-6"
                 >
                   <h1 className="max-w-[6.6ch] font-display text-[3.35rem] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[4.5rem] md:text-[5.3rem] lg:text-[6rem] xl:text-[6.8rem] 2xl:text-[7.5rem]">
                     Marcell Varga
@@ -684,7 +650,7 @@ export default function Page() {
                 <motion.div
                   {...fadeInUp(0.12)}
                   style={shouldReduceMotion ? undefined : { y: heroCardsY }}
-                  className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6"
+                  className="hero-scroll-layer mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6"
                 >
                   <button
                     onClick={scrollWork}
@@ -707,7 +673,7 @@ export default function Page() {
             <motion.div
               aria-hidden="true"
               style={shouldReduceMotion ? undefined : { y: liquidRise }}
-              className="pointer-events-none absolute inset-x-0 bottom-[-17rem] z-20 h-[34rem] overflow-hidden sm:bottom-[-15rem] sm:h-[38rem]"
+              className="hero-scroll-layer pointer-events-none absolute inset-x-0 bottom-[-17rem] z-20 h-[34rem] overflow-hidden sm:bottom-[-15rem] sm:h-[38rem]"
             >
               <div className="absolute inset-x-[-10%] bottom-0 h-[22rem] overflow-hidden rounded-t-[44%] sm:h-[26rem]">
                 {/* Matches PageBackground exactly */}
@@ -912,158 +878,114 @@ export default function Page() {
             </div>
           </section>
 
-          <section
-            ref={trajectoryRef}
-            className="relative mx-auto mt-20 w-full max-w-7xl sm:mt-32"
-            style={trajectorySectionStyle}
-          >
-            <div className="sticky top-16 flex min-h-[calc(100svh-4rem)] items-center sm:top-24 sm:min-h-[calc(100svh-6rem)]">
-              <div className="w-full space-y-5">
-                <motion.div
-                  {...fadeInUp(0.04)}
-                  className="grid gap-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-end"
-                >
-                  <div className="max-w-2xl">
-                    <SectionLabel index="04" label="Trajectory" />
-                    <div className="mt-6 space-y-3">
-                      <div className="font-label inline-flex rounded-full bg-white/76 px-3.5 py-1.5 text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/55 shadow-[inset_0_1px_0_rgba(255,255,255,0.72)]">
-                        Engineering Path
-                      </div>
-                      <p className="font-display text-[clamp(1.55rem,2.35vw,2.45rem)] leading-[0.98] tracking-[-0.025em] text-custom-blue">
-                        Built in Denmark. Now shipping from Singapore.
-                      </p>
-                    </div>
+          <section className="relative mx-auto mt-20 w-full max-w-7xl sm:mt-32">
+            <div className="pointer-events-none absolute left-1/2 top-8 h-56 w-[min(34rem,80vw)] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,_rgba(103,217,255,0.18)_0%,_rgba(103,217,255,0.07)_36%,_transparent_72%)] blur-3xl" />
+            <div className="relative grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:gap-12">
+              <div className="lg:pt-4">
+                <SectionLabel index="04" label="Trajectory" />
+                <div className="mt-6 max-w-xl space-y-5">
+                  <div className="font-label inline-flex rounded-full bg-white/76 px-3.5 py-1.5 text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/55 shadow-[inset_0_1px_0_rgba(255,255,255,0.72)]">
+                    Engineering Path
                   </div>
-                  <div className="max-w-xl lg:justify-self-end">
-                    <p className="text-[0.92rem] leading-7 text-custom-blue/66">
-                      Multimedia design first. Product work next. A compact read
-                      of the path from design school into product engineering
-                      and AI-leaning interface work.
+                  <div className="space-y-4">
+                    <p className="font-display text-[clamp(2rem,4.2vw,4.45rem)] leading-[0.9] tracking-[-0.025em] text-custom-blue">
+                      Design foundations. Product systems. Frontend craft.
+                    </p>
+                    <p className="max-w-lg text-[0.96rem] leading-7 text-custom-blue/66">
+                      A compact read of the path from multimedia design in
+                      Denmark into product engineering and AI-leaning interface
+                      work from Singapore.
                     </p>
                   </div>
-                </motion.div>
-
-                <div className="grid gap-5 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-5">
-                  <div className="glass-panel relative overflow-hidden rounded-[1.9rem] bg-white/70 p-4 shadow-[0_12px_45px_rgba(11,17,26,0.06)] sm:rounded-[2.2rem] sm:p-5">
-                    <div className="pointer-events-none absolute bottom-6 left-[2.4rem] top-6 w-px -translate-x-1/2 bg-custom-blue/10" />
-                    <div className="space-y-2.5">
-                      {history.map((item, index) => {
-                        const isActive = index === activeTrajectoryIndex;
-                        const isPast = index < (activeTrajectoryIndex ?? 0);
-
-                        return (
-                          <button
-                            key={`${item.company}-${item.time.start}`}
-                            type="button"
-                            onClick={() => setActiveTrajectoryIndex(index)}
-                            className={`relative grid w-full grid-cols-[2.1rem_1fr] items-center gap-2.5 rounded-[1.15rem] px-1.5 py-2.5 text-left transition duration-300 ${
-                              isActive
-                                ? "bg-white shadow-[0_10px_30px_rgba(11,17,26,0.07)]"
-                                : "hover:bg-white/45"
-                            }`}
-                            aria-pressed={isActive}
-                          >
-                            <span className="relative flex h-6 items-center justify-center">
-                              {isActive ? (
-                                <motion.span
-                                  layoutId="trajectory-dot-v2"
-                                  className="relative z-10 h-2.5 w-2.5 rounded-full border-2 border-[#67d9ff] bg-[#67d9ff] shadow-[0_0_0_6px_rgba(103,217,255,0.14)]"
-                                />
-                              ) : (
-                                <span
-                                  className={`relative z-10 h-2.5 w-2.5 rounded-full border-2 transition duration-300 ${
-                                    isPast
-                                      ? "border-[#67d9ff]/65 bg-white"
-                                      : "border-custom-blue/18 bg-white"
-                                  }`}
-                                />
-                              )}
-                            </span>
-                            <span className="min-w-0 pr-1">
-                              <span className="block text-[0.62rem] font-bold uppercase tracking-[0.2em] text-custom-blue/45">
-                                {item.time.start}{" "}
-                                {item.time.end
-                                  ? `- ${item.time.end}`
-                                  : "- Present"}
-                              </span>
-                              <span className="mt-1 block truncate text-[0.94rem] font-bold text-custom-blue">
-                                {item.company}
-                              </span>
-                              <span className="mt-0.5 block text-[0.68rem] leading-5 text-custom-blue/58">
-                                {item.jobTitle}
-                              </span>
-                            </span>
-                          </button>
-                        );
-                      })}
-                    </div>
+                  <div className="grid max-w-lg grid-cols-3 overflow-hidden rounded-[1.4rem] border border-white/55 bg-white/50 shadow-[0_16px_46px_rgba(11,17,26,0.05)] backdrop-blur-xl">
+                    {["2020", "2022", "Now"].map((label, index) => (
+                      <div
+                        key={label}
+                        className={`px-4 py-3 ${
+                          index > 0 ? "border-l border-custom-blue/8" : ""
+                        }`}
+                      >
+                        <p className="font-label text-[0.58rem] font-bold uppercase tracking-[0.18em] text-custom-blue/42">
+                          {label}
+                        </p>
+                        <p className="mt-1 text-[0.72rem] leading-5 text-custom-blue/62">
+                          {index === 0
+                            ? "Foundations"
+                            : index === 1
+                              ? "Product UX"
+                              : "Shipping"}
+                        </p>
+                      </div>
+                    ))}
                   </div>
+                </div>
+              </div>
 
-                  <AnimatePresence mode="wait">
-                    <motion.article
-                      key={activeTrajectoryIndex}
-                      initial={{ opacity: 0, scale: 0.98, x: 15 }}
-                      animate={{ opacity: 1, scale: 1, x: 0 }}
-                      exit={{ opacity: 0, scale: 0.98, x: -15 }}
-                      transition={{
-                        duration: 0.4,
-                        ease: [0.22, 1, 0.36, 1] as const,
-                      }}
-                      className="glass-panel relative overflow-hidden rounded-[1.9rem] bg-white/72 p-5 shadow-[0_12px_45px_rgba(11,17,26,0.06)] sm:rounded-[2.2rem] sm:p-6"
-                    >
-                      {activeTrajectoryIndex !== null && (
-                        <div className="flex flex-col">
-                          <div className="flex flex-wrap items-center gap-3">
-                            <span className="font-label rounded-full bg-custom-blue/7 px-3.5 py-1.5 text-[0.6rem] font-medium uppercase tracking-[0.15em] text-custom-blue/62 shadow-[inset_0_1px_0_rgba(255,255,255,0.58)]">
-                              {history[activeTrajectoryIndex].time.start}{" "}
-                              {history[activeTrajectoryIndex].time.end
-                                ? `- ${history[activeTrajectoryIndex].time.end}`
-                                : "- Present"}
-                            </span>
-                            <span className="font-label rounded-full bg-white px-3 py-1.5 text-[0.58rem] font-medium uppercase tracking-[0.16em] text-custom-blue/52 shadow-[inset_0_1px_0_rgba(255,255,255,0.72)]">
-                              Step {activeTrajectoryIndex + 1} of {history.length}
-                            </span>
-                          </div>
-                          <div className="mt-5 flex flex-col gap-1.5 border-b border-custom-blue/8 pb-4 sm:flex-row sm:items-end sm:justify-between">
-                            <div>
-                              <p className="font-display text-[clamp(1.5rem,2.2vw,2rem)] leading-[1] tracking-[-0.025em] text-custom-blue">
-                                {history[activeTrajectoryIndex].jobTitle}
-                              </p>
-                              <p className="mt-1 text-[0.78rem] uppercase tracking-[0.16em] text-custom-blue/42">
-                                {history[activeTrajectoryIndex].company}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="mt-5 grid gap-3">
-                            {history[activeTrajectoryIndex].description.map(
-                              (paragraph, index) => (
-                                <div
-                                  key={index}
-                                  className="grid grid-cols-[0.8rem_1fr] gap-3 rounded-[1.1rem] bg-white/58 px-3 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.68)]"
-                                >
-                                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#67d9ff]" />
-                                  <p className="max-w-[34rem] text-[0.88rem] leading-6 text-custom-blue/72">
-                                    {paragraph}
-                                  </p>
-                                </div>
-                              ),
-                            )}
-                          </div>
+              <div className="relative">
+                <div className="pointer-events-none absolute bottom-8 left-[1.1rem] top-8 hidden w-px bg-gradient-to-b from-[#67d9ff]/0 via-[#67d9ff]/45 to-[#67d9ff]/0 sm:block" />
+                <div className="space-y-4">
+                  {history.map((item, index) => {
+                    const isCurrent = index === 0;
 
-                          <div className="mt-6 flex flex-wrap gap-2">
-                            {history[activeTrajectoryIndex].skills.map((skill) => (
-                              <span
-                                key={skill}
-                                className="font-label rounded-full bg-white px-3 py-1.5 text-[0.58rem] font-medium uppercase tracking-[0.14em] text-custom-blue/58 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_20px_rgba(17,27,40,0.03)]"
-                              >
-                                {skill}
+                    return (
+                      <article
+                        key={`${item.company}-${item.time.start}`}
+                        className={`glass-panel group relative overflow-hidden rounded-[1.8rem] bg-white/72 p-5 shadow-[0_12px_45px_rgba(11,17,26,0.06)] transition duration-300 hover:-translate-y-1 hover:bg-white/82 hover:shadow-[0_20px_55px_rgba(11,17,26,0.08)] sm:ml-8 sm:rounded-[2.1rem] sm:p-6 ${
+                          isCurrent ? "ring-1 ring-[#67d9ff]/28" : ""
+                        }`}
+                      >
+                        <div className="pointer-events-none absolute -right-14 -top-14 h-32 w-32 rounded-full bg-[#67d9ff]/12 blur-2xl transition duration-300 group-hover:bg-[#67d9ff]/18" />
+                        <div className="absolute left-5 top-6 hidden h-3 w-3 -translate-x-[2.4rem] rounded-full border-2 border-white bg-[#67d9ff] shadow-[0_0_0_7px_rgba(103,217,255,0.13)] sm:block" />
+
+                        <div className="relative flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                          <div>
+                            <div className="flex flex-wrap items-center gap-2.5">
+                              <span className="font-label rounded-full bg-custom-blue/7 px-3.5 py-1.5 text-[0.58rem] font-medium uppercase tracking-[0.15em] text-custom-blue/62 shadow-[inset_0_1px_0_rgba(255,255,255,0.58)]">
+                                {item.time.start}{" "}
+                                {item.time.end ? `- ${item.time.end}` : "- Present"}
                               </span>
-                            ))}
+                              {isCurrent && (
+                                <span className="font-label rounded-full bg-[#67d9ff]/14 px-3 py-1.5 text-[0.56rem] font-bold uppercase tracking-[0.16em] text-custom-blue/62">
+                                  Current
+                                </span>
+                              )}
+                            </div>
+                            <p className="mt-4 font-display text-[clamp(1.35rem,2vw,1.95rem)] leading-[1] tracking-[-0.02em] text-custom-blue">
+                              {item.jobTitle}
+                            </p>
+                            <p className="mt-1 text-[0.78rem] uppercase tracking-[0.16em] text-custom-blue/42">
+                              {item.company}
+                            </p>
+                          </div>
+                          <div className="font-label text-[0.62rem] font-bold uppercase tracking-[0.18em] text-custom-blue/34">
+                            0{index + 1}
                           </div>
                         </div>
-                      )}
-                    </motion.article>
-                  </AnimatePresence>
+
+                        <div className="relative mt-5 grid gap-3">
+                          {item.description.map((paragraph) => (
+                            <p
+                              key={paragraph}
+                              className="max-w-[42rem] rounded-[1.1rem] bg-white/54 px-3.5 py-3 text-[0.88rem] leading-6 text-custom-blue/72 shadow-[inset_0_1px_0_rgba(255,255,255,0.68)]"
+                            >
+                              {paragraph}
+                            </p>
+                          ))}
+                        </div>
+
+                        <div className="relative mt-5 flex flex-wrap gap-2">
+                          {item.skills.map((skill) => (
+                            <span
+                              key={skill}
+                              className="font-label rounded-full bg-white px-3 py-1.5 text-[0.58rem] font-medium uppercase tracking-[0.14em] text-custom-blue/58 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_20px_rgba(17,27,40,0.03)]"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </article>
+                    );
+                  })}
                 </div>
               </div>
             </div>

@@ -162,6 +162,7 @@
       black 90%,
       transparent 100%
     );
+    contain: layout paint style;
   }
 
   .hero-signature-vignette {
@@ -183,15 +184,15 @@
     transform-origin: center;
     mix-blend-mode: screen;
     opacity: var(--echo-opacity, 0.3);
+    backface-visibility: hidden;
+    will-change: transform, opacity;
     animation: hero-signature-shift var(--echo-duration, 7s) linear infinite;
     animation-delay: var(--echo-delay, 0s);
   }
 
   .hero-signature-mark {
     display: block;
-    filter:
-      drop-shadow(0 0 8px rgba(135, 233, 255, 0.26))
-      drop-shadow(0 0 18px rgba(115, 225, 255, 0.1));
+    transform: translateZ(0);
   }
 
   .hero-signature-stroke {
@@ -199,10 +200,6 @@
     stroke-linecap: round;
     stroke-linejoin: round;
     vector-effect: non-scaling-stroke;
-    stroke-dasharray: 1;
-    stroke-dashoffset: 1;
-    animation: hero-signature-trace var(--echo-duration, 7s) cubic-bezier(0.22, 1, 0.36, 1) infinite;
-    animation-delay: var(--echo-delay, 0s);
   }
 
   .hero-signature-stroke-main {
@@ -213,7 +210,6 @@
   .hero-signature-stroke-lead {
     stroke: rgba(102, 223, 255, 0.84);
     stroke-width: 1.15;
-    animation-delay: calc(var(--echo-delay, 0s) + 120ms);
   }
 
   html[data-home-intro="0"] .home-intro-shell {
@@ -224,6 +220,12 @@
     opacity: 1 !important;
     filter: blur(0px) !important;
     pointer-events: auto !important;
+  }
+
+  .hero-scroll-layer {
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: transform, opacity;
   }
 }
 
@@ -303,28 +305,6 @@
       translate3d(calc(var(--echo-drift-x, 0vw) * -1), var(--echo-drift-y, 0vh), 0)
       scale(0.95);
     opacity: calc(var(--echo-opacity, 0.3) * 0.56);
-  }
-}
-
-@keyframes hero-signature-trace {
-  0% {
-    stroke-dashoffset: 1;
-    opacity: 0;
-  }
-
-  12% {
-    stroke-dashoffset: 0;
-    opacity: 1;
-  }
-
-  24% {
-    stroke-dashoffset: 0;
-    opacity: 1;
-  }
-
-  100% {
-    stroke-dashoffset: 1;
-    opacity: 0;
   }
 }
 
