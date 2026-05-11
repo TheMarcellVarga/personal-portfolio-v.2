@@ -21,6 +21,7 @@ import {
   useTransform,
   useMotionValue,
   useSpring,
+  useInView,
 } from "framer-motion";
 import {
   ArrowRight,
@@ -36,7 +37,7 @@ import {
 } from "lucide-react";
 import Header from "./header";
 import Footer from "./footer";
-import { history } from "./data/history";
+import { history, type HistoryItem } from "./data/history";
 import { projects } from "./data/projects";
 import { SectionLabel } from "./components/SectionLabel";
 import { HomeIntro } from "./components/HomeIntro";
@@ -248,6 +249,112 @@ function fadeInUp(delay = 0) {
       ease: [0.22, 1, 0.36, 1] as const,
     },
   };
+}
+
+function HistoryItemComponent({ 
+  item, 
+  index, 
+  isActive, 
+  onInView 
+}: { 
+  item: HistoryItem; 
+  index: number; 
+  isActive: boolean; 
+  onInView: (index: number) => void;
+}) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { 
+    margin: "-45% 0px -45% 0px",
+    amount: 0.1
+  });
+
+  useEffect(() => {
+    if (isInView) {
+      onInView(index);
+    }
+  }, [isInView, index, onInView]);
+
+  return (
+    <article
+      id={`history-item-${index}`}
+      ref={ref}
+      className={`glass-panel group relative flex min-h-[60vh] flex-col justify-center overflow-hidden rounded-[1.85rem] p-6 transition-all duration-700 snap-center sm:rounded-[2.4rem] sm:p-10 ${
+        isActive 
+          ? "scale-[1.02] bg-white/90 shadow-[0_32px_80px_rgba(17,27,40,0.12)] ring-1 ring-[#67d9ff]/30" 
+          : "scale-100 opacity-60 grayscale-[0.4] blur-none hover:opacity-90 hover:grayscale-0 hover:blur-0 hover:-translate-y-1"
+      }`}
+    >
+      <div className={`pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full blur-3xl transition-all duration-1000 ${
+        isActive ? "bg-[#67d9ff]/22 scale-110" : "bg-[#67d9ff]/5 scale-75"
+      }`} />
+      
+      <div className="relative flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+        <div className="space-y-4">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className={`font-label rounded-full px-4 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.18em] transition-colors duration-500 ${
+              isActive ? "bg-custom-blue/7 text-custom-blue" : "bg-custom-blue/5 text-custom-blue/40"
+            }`}>
+              {item.time.start} {item.time.end ? `- ${item.time.end}` : "- Present"}
+            </span>
+            {index === 0 && (
+              <span className={`font-label rounded-full px-3.5 py-1.5 text-[0.58rem] font-bold uppercase tracking-[0.16em] transition-all duration-500 ${
+                isActive ? "bg-[#67d9ff]/15 text-custom-blue shadow-[0_4px_12px_rgba(103,217,255,0.2)]" : "bg-custom-blue/5 text-custom-blue/30"
+              }`}>
+                Current
+              </span>
+            )}
+          </div>
+          <div className="space-y-1">
+            <h3 className={`font-display text-[clamp(1.6rem,2.4vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.02em] text-custom-blue transition-colors duration-500 ${
+              isActive ? "opacity-100" : "opacity-70"
+            }`}>
+              {item.jobTitle}
+            </h3>
+            <p className={`font-label text-[0.72rem] font-bold uppercase tracking-[0.22em] text-custom-blue/40 transition-colors duration-500 ${
+              isActive ? "text-custom-blue/50" : "text-custom-blue/30"
+            }`}>
+              {item.company}
+            </p>
+          </div>
+        </div>
+        <div className={`font-label text-[0.65rem] font-black tracking-[0.2em] transition-all duration-700 ${
+          isActive ? "text-custom-blue/25 scale-110" : "text-custom-blue/10 scale-100"
+        }`}>
+          0{index + 1}
+        </div>
+      </div>
+
+      <div className="mt-8 grid gap-3.5">
+        {item.description.map((paragraph: string) => (
+          <p
+            key={paragraph}
+            className={`max-w-[42rem] rounded-[1.25rem] px-5 py-4 text-[0.94rem] leading-relaxed transition-all duration-700 ${
+              isActive 
+                ? "bg-white/60 text-custom-blue/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_4px_16px_rgba(17,27,40,0.02)]" 
+                : "text-custom-blue/50"
+            }`}
+          >
+            {paragraph}
+          </p>
+        ))}
+      </div>
+
+      <div className="mt-8 flex flex-wrap gap-2.5">
+        {item.skills.map((skill: string) => (
+          <span
+            key={skill}
+            className={`font-label rounded-full px-4 py-2 text-[0.62rem] font-bold uppercase tracking-[0.14em] transition-all duration-500 ${
+              isActive 
+                ? "bg-white text-custom-blue/70 shadow-[inset_0_1px_0_rgba(255,255,255,1),0_8px_24px_rgba(17,27,40,0.04)]" 
+                : "bg-white/40 text-custom-blue/30"
+            }`}
+          >
+            {skill}
+          </span>
+        ))}
+      </div>
+    </article>
+  );
 }
 
 function scrollToId(id: string, reducedMotion: boolean) {
@@ -515,7 +622,7 @@ export default function Page() {
   );
   const introIsActive = introStage === "playing";
 
-  // Removed carousel measurements and scroll functions
+  const [activeHistoryIndex, setActiveHistoryIndex] = useState(0);
 
   return (
     <div className="relative overflow-x-clip">
@@ -878,115 +985,72 @@ export default function Page() {
             </div>
           </section>
 
-          <section className="relative mx-auto mt-20 w-full max-w-7xl sm:mt-32">
-            <div className="pointer-events-none absolute left-1/2 top-8 h-56 w-[min(34rem,80vw)] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,_rgba(103,217,255,0.18)_0%,_rgba(103,217,255,0.07)_36%,_transparent_72%)] blur-3xl" />
-            <div className="relative grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:gap-12">
-              <div className="lg:pt-4">
+          <section className="relative mx-auto mt-32 w-full max-w-7xl sm:mt-48">
+            <div className="pointer-events-none absolute left-1/2 top-8 h-[40rem] w-[min(48rem,90vw)] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,_rgba(103,217,255,0.14)_0%,_rgba(103,217,255,0.04)_40%,_transparent_75%)] blur-3xl" />
+            
+            <div className="relative grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+              {/* Sticky Left Content */}
+              <div className="lg:sticky lg:top-32 lg:h-fit lg:pt-4">
                 <SectionLabel index="04" label="Trajectory" />
-                <div className="mt-6 max-w-xl space-y-5">
-                  <div className="font-label inline-flex rounded-full bg-white/76 px-3.5 py-1.5 text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/55 shadow-[inset_0_1px_0_rgba(255,255,255,0.72)]">
+                <div className="mt-8 space-y-6">
+                  <div className="font-label inline-flex rounded-full bg-white/76 px-4 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.2em] text-custom-blue/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_12px_32px_rgba(17,27,40,0.04)]">
                     Engineering Path
                   </div>
-                  <div className="space-y-4">
-                    <p className="font-display text-[clamp(2rem,4.2vw,4.45rem)] leading-[0.9] tracking-[-0.025em] text-custom-blue">
-                      Design foundations. Product systems. Frontend craft.
-                    </p>
-                    <p className="max-w-lg text-[0.96rem] leading-7 text-custom-blue/66">
-                      A compact read of the path from multimedia design in
-                      Denmark into product engineering and AI-leaning interface
-                      work from Singapore.
+                  <div className="space-y-5">
+                    <h2 className="font-display text-[clamp(2.4rem,4.5vw,4.8rem)] leading-[0.9] tracking-[-0.03em] text-custom-blue">
+                      Design foundations. <br />
+                      Product systems. <br />
+                      Frontend craft.
+                    </h2>
+                    <p className="max-w-md text-[1.02rem] leading-7 text-custom-blue/60">
+                      A compact read of the path from multimedia design in Denmark into product engineering and AI-leaning interface work from Singapore.
                     </p>
                   </div>
-                  <div className="grid max-w-lg grid-cols-3 overflow-hidden rounded-[1.4rem] border border-white/55 bg-white/50 shadow-[0_16px_46px_rgba(11,17,26,0.05)] backdrop-blur-xl">
-                    {["2020", "2022", "Now"].map((label, index) => (
-                      <div
-                        key={label}
-                        className={`px-4 py-3 ${
-                          index > 0 ? "border-l border-custom-blue/8" : ""
-                        }`}
-                      >
-                        <p className="font-label text-[0.58rem] font-bold uppercase tracking-[0.18em] text-custom-blue/42">
-                          {label}
-                        </p>
-                        <p className="mt-1 text-[0.72rem] leading-5 text-custom-blue/62">
-                          {index === 0
-                            ? "Foundations"
-                            : index === 1
-                              ? "Product UX"
-                              : "Shipping"}
-                        </p>
-                      </div>
-                    ))}
+
+                  <div className="mt-10 flex flex-col gap-6">
+                    <div className="relative flex flex-col gap-3">
+                      <div className="absolute left-[5px] top-2 bottom-2 w-px bg-custom-blue/10" />
+                      {history.map((item, idx) => (
+                        <div 
+                          key={`nav-${idx}`}
+                          className="group relative flex items-center gap-6 py-2 transition-colors duration-300"
+                        >
+                          <div className={`relative z-10 h-2.5 w-2.5 rounded-full border-2 transition-all duration-500 ${
+                            activeHistoryIndex === idx 
+                              ? "scale-125 border-[#67d9ff] bg-[#67d9ff] shadow-[0_0_12px_rgba(103,217,255,0.5)]" 
+                              : "border-custom-blue/15 bg-white group-hover:border-custom-blue/30"
+                          }`} />
+                          <button
+                            onClick={() => {
+                              const el = document.getElementById(`history-item-${idx}`);
+                              el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }}
+                            className={`font-label text-[0.62rem] font-bold uppercase tracking-[0.18em] transition-all duration-500 text-left ${
+                              activeHistoryIndex === idx ? "text-custom-blue translate-x-1" : "text-custom-blue/30 hover:text-custom-blue/50"
+                            }`}
+                          >
+                            {item.company}
+                          </button>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="relative">
-                <div className="pointer-events-none absolute bottom-8 left-[1.1rem] top-8 hidden w-px bg-gradient-to-b from-[#67d9ff]/0 via-[#67d9ff]/45 to-[#67d9ff]/0 sm:block" />
-                <div className="space-y-4">
-                  {history.map((item, index) => {
-                    const isCurrent = index === 0;
-
-                    return (
-                      <article
-                        key={`${item.company}-${item.time.start}`}
-                        className={`glass-panel group relative overflow-hidden rounded-[1.8rem] bg-white/72 p-5 shadow-[0_12px_45px_rgba(11,17,26,0.06)] transition duration-300 hover:-translate-y-1 hover:bg-white/82 hover:shadow-[0_20px_55px_rgba(11,17,26,0.08)] sm:ml-8 sm:rounded-[2.1rem] sm:p-6 ${
-                          isCurrent ? "ring-1 ring-[#67d9ff]/28" : ""
-                        }`}
-                      >
-                        <div className="pointer-events-none absolute -right-14 -top-14 h-32 w-32 rounded-full bg-[#67d9ff]/12 blur-2xl transition duration-300 group-hover:bg-[#67d9ff]/18" />
-                        <div className="absolute left-5 top-6 hidden h-3 w-3 -translate-x-[2.4rem] rounded-full border-2 border-white bg-[#67d9ff] shadow-[0_0_0_7px_rgba(103,217,255,0.13)] sm:block" />
-
-                        <div className="relative flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-                          <div>
-                            <div className="flex flex-wrap items-center gap-2.5">
-                              <span className="font-label rounded-full bg-custom-blue/7 px-3.5 py-1.5 text-[0.58rem] font-medium uppercase tracking-[0.15em] text-custom-blue/62 shadow-[inset_0_1px_0_rgba(255,255,255,0.58)]">
-                                {item.time.start}{" "}
-                                {item.time.end ? `- ${item.time.end}` : "- Present"}
-                              </span>
-                              {isCurrent && (
-                                <span className="font-label rounded-full bg-[#67d9ff]/14 px-3 py-1.5 text-[0.56rem] font-bold uppercase tracking-[0.16em] text-custom-blue/62">
-                                  Current
-                                </span>
-                              )}
-                            </div>
-                            <p className="mt-4 font-display text-[clamp(1.35rem,2vw,1.95rem)] leading-[1] tracking-[-0.02em] text-custom-blue">
-                              {item.jobTitle}
-                            </p>
-                            <p className="mt-1 text-[0.78rem] uppercase tracking-[0.16em] text-custom-blue/42">
-                              {item.company}
-                            </p>
-                          </div>
-                          <div className="font-label text-[0.62rem] font-bold uppercase tracking-[0.18em] text-custom-blue/34">
-                            0{index + 1}
-                          </div>
-                        </div>
-
-                        <div className="relative mt-5 grid gap-3">
-                          {item.description.map((paragraph) => (
-                            <p
-                              key={paragraph}
-                              className="max-w-[42rem] rounded-[1.1rem] bg-white/54 px-3.5 py-3 text-[0.88rem] leading-6 text-custom-blue/72 shadow-[inset_0_1px_0_rgba(255,255,255,0.68)]"
-                            >
-                              {paragraph}
-                            </p>
-                          ))}
-                        </div>
-
-                        <div className="relative mt-5 flex flex-wrap gap-2">
-                          {item.skills.map((skill) => (
-                            <span
-                              key={skill}
-                              className="font-label rounded-full bg-white px-3 py-1.5 text-[0.58rem] font-medium uppercase tracking-[0.14em] text-custom-blue/58 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_20px_rgba(17,27,40,0.03)]"
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-                      </article>
-                    );
-                  })}
-                </div>
+              {/* Scrolling History List */}
+              <div className="relative snap-y snap-proximity space-y-12 py-[20vh] sm:space-y-24">
+                <div className="pointer-events-none absolute bottom-12 left-5 top-12 hidden w-px bg-gradient-to-b from-custom-blue/0 via-custom-blue/10 to-custom-blue/0 sm:block" />
+                
+                {history.map((item, index) => (
+                  <HistoryItemComponent
+                    key={`${item.company}-${item.time.start}`}
+                    item={item}
+                    index={index}
+                    isActive={activeHistoryIndex === index}
+                    onInView={(idx) => setActiveHistoryIndex(idx)}
+                  />
+                ))}
               </div>
             </div>
           </section>
@@ -1106,3 +1170,4 @@ export default function Page() {
     </div>
   );
 }
+
