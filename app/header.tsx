@@ -44,7 +44,9 @@ export default function Header({
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const isHomePage = pathname === "/";
   const isHeroSection = isHomePage && activeSection === "Intro";
-  const useLightOnDark = isHeroSection && !isOpen;
+  const isContactSection = isHomePage && activeSection === "Contact";
+  const useLightOnDark =
+    ((isHeroSection || isContactSection) && !isOpen);
   const highlightedItem = hoveredItem ?? activeSection ?? null;
   const lastScrollYRef = useRef(0);
   const isHeaderVisibleRef = useRef(true);
@@ -74,7 +76,7 @@ export default function Header({
 
       let nextVisible = isHeaderVisibleRef.current;
 
-      if (currentScrollY <= revealThreshold) {
+      if (currentScrollY <= revealThreshold || isContactSection) {
         nextVisible = true;
       } else if (delta > deltaThreshold) {
         nextVisible = false;
@@ -105,7 +107,7 @@ export default function Header({
         animationFrameRef.current = null;
       }
     };
-  }, [isOpen]);
+  }, [isOpen, isContactSection]);
 
   const navigate = useCallback(
     async (item: NavItem) => {

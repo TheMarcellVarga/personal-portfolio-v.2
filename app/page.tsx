@@ -506,6 +506,42 @@ export default function Page() {
     };
   }, []);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const bottomThreshold = 72;
+    let animationFrameId = 0;
+
+    const updateBottomState = () => {
+      const doc = document.documentElement;
+      const nearBottom =
+        window.innerHeight + window.scrollY >= doc.scrollHeight - bottomThreshold;
+
+      if (nearBottom) {
+        setActiveSection("Contact");
+      }
+
+      animationFrameId = 0;
+    };
+
+    const onScroll = () => {
+      if (animationFrameId) return;
+      animationFrameId = window.requestAnimationFrame(updateBottomState);
+    };
+
+    updateBottomState();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", updateBottomState);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", updateBottomState);
+      if (animationFrameId) {
+        window.cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, []);
+
   const featuredProjects = useMemo(
     () => projects.filter((project) => !project.inProgress),
     [],
@@ -1035,33 +1071,33 @@ export default function Page() {
 
           <section
             id="contact"
-            className="mx-auto w-full max-w-7xl py-20 sm:py-32"
+            className="mx-auto mt-20 flex min-h-[calc(100svh-10rem)] w-full max-w-7xl items-center py-6 sm:mt-28 sm:min-h-[calc(100svh-12rem)] sm:py-10 lg:mt-36"
             onMouseEnter={() => setFooterHover(true)}
             onMouseLeave={() => setFooterHover(false)}
           >
             <motion.div
               data-scroll-anchor="contact"
               {...fadeInUp(0.06)}
-              className="relative flex h-[32rem] items-center overflow-hidden rounded-[3rem] bg-[#071726] p-8 text-white shadow-[0_40px_140px_rgba(7,20,38,0.26),inset_0_1px_0_rgba(255,255,255,0.16)] sm:h-[40rem] sm:p-12"
+              className="relative mx-auto flex min-h-[24rem] w-full max-w-5xl items-center overflow-hidden rounded-[2.5rem] bg-[#071726] p-6 text-white shadow-[0_40px_140px_rgba(7,20,38,0.26),inset_0_1px_0_rgba(255,255,255,0.16)] sm:min-h-[28rem] sm:rounded-[2.75rem] sm:p-8"
             >
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(72,205,255,0.26),_transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.06),transparent_55%)]" />
-              <div className="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+              <div className="relative grid w-full gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
                 <div>
                   <SectionLabel index="05" label="Contact" tone="light" />
-                  <h2 className="max-w-3xl font-display text-[clamp(2.6rem,5vw,5rem)] leading-[1] tracking-[-0.03em] text-white">
+                  <h2 className="max-w-3xl font-display text-[clamp(2.3rem,4.5vw,4rem)] leading-[1] tracking-[-0.03em] text-white">
                     Ready for the next ambitious build.
                   </h2>
-                  <p className="mt-6 max-w-2xl text-lg leading-8 text-white/72">
+                  <p className="mt-4 max-w-2xl text-[1rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
                     If you need a UX-minded engineer who can think visually,
                     move fast in code, and care about the end product as much as
                     the process, let’s talk.
                   </p>
                 </div>
 
-                <div className="grid gap-4 self-end">
+                <div className="grid gap-2.5 self-end sm:gap-3">
                   <a
                     href="mailto:themarcellvarga@gmail.com"
-                    className="group flex items-center justify-between rounded-[1.8rem] bg-white/7 px-5 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10"
+                    className="group flex items-center justify-between rounded-[1.35rem] bg-white/7 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 sm:px-5 sm:py-3.5"
                   >
                     <span className="flex items-center gap-3">
                       <Mail className="h-5 w-5 text-[#67d9ff]" />
@@ -1075,7 +1111,7 @@ export default function Page() {
                     href="https://www.linkedin.com/in/marcellvarga/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center justify-between rounded-[1.8rem] bg-white/7 px-5 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10"
+                    className="group flex items-center justify-between rounded-[1.35rem] bg-white/7 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 sm:px-5 sm:py-3.5"
                   >
                     <span className="flex items-center gap-3">
                       <Linkedin className="h-5 w-5 text-[#67d9ff]" />
@@ -1089,7 +1125,7 @@ export default function Page() {
                     href="https://github.com/TheMarcellVarga"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center justify-between rounded-[1.8rem] bg-white/7 px-5 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10"
+                    className="group flex items-center justify-between rounded-[1.35rem] bg-white/7 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 sm:px-5 sm:py-3.5"
                   >
                     <span className="flex items-center gap-3">
                       <Github className="h-5 w-5 text-[#67d9ff]" />
