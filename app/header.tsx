@@ -64,19 +64,27 @@ export default function Header({
 
     lastScrollYRef.current = window.scrollY;
     isHeaderVisibleRef.current = true;
+    setIsHeaderVisible(true);
 
     if (isOpen) return;
 
-    const revealThreshold = 24;
+    const revealThreshold = 80;
     const deltaThreshold = 6;
 
     const updateVisibility = () => {
-      const currentScrollY = window.scrollY;
+      const currentScrollY = Math.max(0, window.scrollY);
       const delta = currentScrollY - lastScrollYRef.current;
+
+      const isInSpecialZone = currentScrollY <= revealThreshold;
+
+      if (Math.abs(delta) < deltaThreshold && !isInSpecialZone) {
+        animationFrameRef.current = null;
+        return;
+      }
 
       let nextVisible = isHeaderVisibleRef.current;
 
-      if (currentScrollY <= revealThreshold || isContactSection) {
+      if (isInSpecialZone) {
         nextVisible = true;
       } else if (delta > deltaThreshold) {
         nextVisible = false;
@@ -107,7 +115,7 @@ export default function Header({
         animationFrameRef.current = null;
       }
     };
-  }, [isOpen, isContactSection]);
+  }, [isOpen]);
 
   const navigate = useCallback(
     async (item: NavItem) => {
