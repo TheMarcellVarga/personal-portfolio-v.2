@@ -128,7 +128,7 @@ export default function ResumePage() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative overflow-x-clip print:bg-white">
+    <div className="relative print:bg-white">
       <div className="print:hidden">
         <PageBackground />
         <Header isOpen={isOpen} setIsOpen={setIsOpen} />

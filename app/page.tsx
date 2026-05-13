@@ -625,7 +625,7 @@ export default function Page() {
   const [activeHistoryIndex, setActiveHistoryIndex] = useState(0);
 
   return (
-    <div className="relative overflow-x-clip">
+    <div className="relative">
       <PageBackground />
 
       <div

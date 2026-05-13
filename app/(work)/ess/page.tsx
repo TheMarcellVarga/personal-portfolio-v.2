@@ -293,7 +293,7 @@ export default function ESSPage() {
   }, [router]);
 
   return (
-    <div className="relative overflow-x-clip">
+    <div className="relative">
       <PageBackground />
       
       <Header 

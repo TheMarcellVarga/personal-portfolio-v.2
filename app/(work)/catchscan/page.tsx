@@ -256,7 +256,7 @@ export default function CatchScanPage() {
   }, [router]);
 
   return (
-    <div className="relative overflow-x-clip">
+    <div className="relative">
       <PageBackground />
       
       <Header 

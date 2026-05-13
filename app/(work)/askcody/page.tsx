@@ -249,7 +249,7 @@ export default function AskCodyPage() {
   }, [router]);
 
   return (
-    <div className="relative overflow-x-clip">
+    <div className="relative">
       <PageBackground />
       
       <Header 
