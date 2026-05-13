@@ -212,9 +212,10 @@ export default function Header({
                   layoutId="header-nav-highlight"
                   className={`absolute inset-0 rounded-full ${
                     useLightOnDark
-                      ? "bg-white/12 shadow-[inset_0_1px_0_rgba(255,255,255,0.16)]"
-                      : "bg-custom-blue/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.48)]"
+                      ? "bg-white/12 shadow-[inset_0_1px_0_rgba(255,255,255,0.16)_opacity-60]"
+                      : "bg-custom-blue/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.48)_opacity-60]"
                   }`}
+             
                   transition={
                     prefersReducedMotion
                       ? { duration: 0 }
@@ -237,7 +238,7 @@ export default function Header({
             href="/resume"
             className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition duration-300 ${
               useLightOnDark
-                ? "bg-white/10 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16)] hover:bg-white/14"
+                ? "bg-white/10 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16)_opacity-60] hover:bg-white/14"
                 : "bg-custom-blue/8 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.58),0_8px_24px_rgba(17,27,40,0.06)] hover:bg-custom-blue/12"
             }`}
           >
@@ -250,7 +251,7 @@ export default function Header({
           onClick={() => setIsOpen(!isOpen)}
           className={`inline-flex h-11 w-11 items-center justify-center rounded-full justify-self-end lg:hidden ${
             useLightOnDark
-              ? "bg-white/12 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16)]"
+              ? "bg-white/12 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16)_opacity-60]"
               : "bg-custom-blue/6 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.58)]"
           }`}
           aria-label={isOpen ? "Close navigation" : "Open navigation"}

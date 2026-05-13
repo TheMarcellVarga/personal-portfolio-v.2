@@ -993,9 +993,6 @@ export default function Page() {
               <div className="lg:sticky lg:top-32 lg:h-fit lg:pt-4">
                 <SectionLabel index="04" label="Trajectory" />
                 <div className="mt-8 space-y-6">
-                  <div className="font-label inline-flex rounded-full bg-white/76 px-4 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.2em] text-custom-blue/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_12px_32px_rgba(17,27,40,0.04)]">
-                    Engineering Path
-                  </div>
                   <div className="space-y-5">
                     <h2 className="font-display text-[clamp(2.4rem,4.5vw,4.8rem)] leading-[0.9] tracking-[-0.03em] text-custom-blue">
                       Design foundations. <br />
