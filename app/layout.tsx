@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 import PostHogProvider from "./providers/PostHogProvider";
 import { metadata } from "./metadata";
 import ScrollReset from "./components/ScrollReset";
-import DevelopmentBanner from "./components/DevelopmentBanner";
+// import DevelopmentBanner from "./components/DevelopmentBanner";
 import LegacyNotice from "./components/LegacyNotice";
 
 export { metadata };
@@ -24,7 +24,7 @@ export default async function RootLayout({
         <PostHogProvider>
           <ScrollReset />
           {children}
-          <DevelopmentBanner />
+          {/* <DevelopmentBanner /> */}
           <LegacyNotice />
           {process.env.NODE_ENV === 'production' && (
             <>
