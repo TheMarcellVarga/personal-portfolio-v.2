@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 
 interface FooterProps {
@@ -39,7 +38,7 @@ export default function Footer({ isHover = false }: FooterProps) {
            🇸🇬 &nbsp;Local Time: {currentTime}
           </span>
 
-          <Link
+          <a
             href="https://www.linkedin.com/in/marcellvarga/"
             target="_blank"
             rel="noopener noreferrer"
@@ -48,8 +47,8 @@ export default function Footer({ isHover = false }: FooterProps) {
             }`}
           >
             LinkedIn
-          </Link>
-          <Link
+          </a>
+          <a
             href="https://github.com/TheMarcellVarga"
             target="_blank"
             rel="noopener noreferrer"
@@ -58,7 +57,7 @@ export default function Footer({ isHover = false }: FooterProps) {
             }`}
           >
             GitHub
-          </Link>
+          </a>
         </div>
       </div>
     </footer>

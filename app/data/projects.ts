@@ -67,7 +67,7 @@ export const projects: Project[] = [
     highlight:
       "The next additions will likely be more technical, more opinionated, and more representative of where I am headed than where I started.",
     skills: ["Coming Soon"],
-    link: "http://github.com/TheMarcellVarga",
+    link: "https://github.com/TheMarcellVarga",
     image: "/images/personalpageprofilealt.png",
     category: "Now building",
     backgroundClass:

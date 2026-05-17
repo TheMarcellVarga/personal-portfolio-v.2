@@ -14,12 +14,15 @@ function PostHogInitializer() {
   useEffect(() => {
     const enableSessionRecording = process.env.NODE_ENV === 'production';
 
+    if (process.env.NODE_ENV !== "production") {
+      return;
+    }
+
     if (typeof window !== 'undefined' && !posthog.__loaded) {
       const apiKey = process.env.NEXT_PUBLIC_POSTHOG_KEY;
       const apiHost = process.env.NEXT_PUBLIC_POSTHOG_HOST;
 
       if (!apiKey) {
-        console.error('PostHog API key is not defined');
         return;
       }
 
