@@ -10,8 +10,8 @@ export const resume = {
   githubHandle: "TheMarcellVarga",
   photo: "/images/personalpageprofilealt.png",
   profile: [
-    "Singapore-based UX and frontend engineer with a design-led foundation and a strong bias for shipping. I bridge product thinking, interaction design, design systems, and frontend implementation to turn complex software into clear, usable product experiences.",
-    "Currently at AXON Networks, where my work has moved deeper into AI-aware product flows, interface foundations, prototyping, and implementation for complex software. I am strongest where visual craft, systems thinking, and production code need to meet.",
+    "Singapore-based UX and frontend engineer with a design-led foundation and a strong bias for shipping. I bridge product thinking, interaction design, design systems, and frontend implementation for complex software.",
+    "Currently at AXON Networks, working on AXON Orchestrator through UX/UI design, interactive prototyping, frontend development, and AI-aware product flows.",
   ],
   highlights: [
     "Relocated to Singapore in March 2026 while continuing in the same AXON Networks role.",
@@ -69,9 +69,9 @@ export const resume = {
       period: "Oct 2022 - Present",
       bullets: [
         "Continue in the same UX and frontend engineering role after relocating to Singapore in March 2026.",
-        "Contribute to AXON Orchestrator across UX, UI, frontend development, and product iteration within cross-functional engineering teams.",
-        "Create interactive prototypes, design-system patterns, and interface foundations that make complex workflows easier to understand and ship.",
-        "Bring AI-aware product thinking into the experience layer, translating emerging technical capabilities into usable workflows.",
+        "Contribute to AXON Orchestrator across UX, UI, frontend development, and product iteration with cross-functional engineering teams.",
+        "Create interactive prototypes, design-system patterns, and interface foundations for complex product workflows.",
+        "Translate AI-aware product thinking and analytics collaboration into usable interface flows.",
         "Develop supporting backend functionality and RESTful APIs with Node.js and Express when the product flow requires it.",
         "Apply accessibility principles, responsive interface thinking, and production frontend discipline across shipped work.",
       ],
@@ -81,8 +81,8 @@ export const resume = {
       role: "UX Designer Intern",
       period: "Jan 2022 - Apr 2022",
       bullets: [
-        "Improved MapsIndoors CMS through research, exploration, and development of interactive animated prototypes.",
-        "Worked through Jira-managed product tasks including documentation and design handoff support.",
+        "Improved MapsIndoors CMS through research, exploration, and interactive animated prototypes.",
+        "Worked through Jira-managed product tasks, documentation, and design handoff support.",
         "Used and contributed to the company design system while learning how SaaS constraints shape interface decisions.",
         "Prioritized scalable layouts through Auto Layout and responsive design thinking.",
         "Designed across desktop and mobile with accessibility and clarity in mind.",
@@ -96,7 +96,7 @@ export const resume = {
       period: "Aug 2020 - Jun 2022",
       details: [
         "Focused on UX/UI design through practical projects centered on usability, product clarity, and visual communication.",
-        "Built frontend applications with an emphasis on the design-to-code process and usable interface implementation.",
+        "Built frontend applications with emphasis on design-to-code delivery and usable interface implementation.",
         "Worked with content production, user research, and usability testing as part of broader product problem solving.",
         "Collaborated with real companies through reflective practice-based learning, applying UX methods to live challenges.",
       ],

@@ -272,9 +272,13 @@ const history = [
 
 function fadeInUp(delay = 0) {
   return {
-    initial: { opacity: 0, y: 20 },
+    initial: { opacity: 1, y: 0 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.2 },
+    viewport: {
+      once: true,
+      amount: 0,
+      margin: "0px",
+    },
     transition: {
       duration: 0.6,
       delay,
@@ -310,14 +314,14 @@ export default function ESSPage() {
             onClick={handleBack}
             className="group mb-12 flex items-center gap-2 text-sm font-semibold text-custom-blue/60 transition-colors hover:text-custom-blue"
           >
-            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            Back to work
+            {/* <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+            Back to work */}
           </motion.button>
 
           <header className="mb-20 grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
             <motion.div {...fadeInUp(0)}>
               <SectionLabel index="Project" label="Case Study" />
-              <h1 className="font-display text-[clamp(2.5rem,6vw,5.5rem)] font-medium leading-[0.95] tracking-[-0.02em] text-custom-blue">
+              <h1 className="font-display text-[clamp(3.2rem,8vw,7rem)] font-medium leading-[0.88] tracking-[-0.04em] text-custom-blue">
                 {projectData.title}
               </h1>
               <p className="mt-8 max-w-2xl text-lg leading-relaxed text-custom-blue/72">
@@ -347,7 +351,7 @@ export default function ESSPage() {
                 <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/45">Key Skills</p>
                 <div className="flex flex-wrap gap-2">
                   {projectData.skills.map((skill) => (
-                    <span key={skill} className="rounded-full border border-custom-blue/10 bg-white/50 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.1em] text-custom-blue/60 backdrop-blur-sm">
+                    <span key={skill} className="font-label rounded-full bg-white/62 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]">
                       {skill}
                     </span>
                   ))}
@@ -358,7 +362,7 @@ export default function ESSPage() {
 
           <motion.div 
             {...fadeInUp(0.2)}
-            className={`relative mb-24 aspect-[16/9] overflow-hidden rounded-[3rem] shadow-[0_40px_120px_rgba(7,20,38,0.16)] ${projectData.backgroundClass}`}
+            className={`glass-panel relative mb-24 aspect-[16/9] overflow-hidden rounded-[1.9rem] bg-white/65 shadow-[0_18px_48px_rgba(11,17,26,0.06)] sm:rounded-[2.1rem] ${projectData.backgroundClass}`}
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.4),transparent_50%)]" />
             <Image
@@ -382,7 +386,7 @@ export default function ESSPage() {
                   {section.title && (
                     <>
                       <SectionLabel index={`0${sIndex + 1}`} label={section.title} />
-                      <h2 className="font-display text-4xl font-medium tracking-[-0.02em] text-custom-blue">
+                      <h2 className="font-display text-[clamp(2.25rem,4vw,3.75rem)] font-medium leading-[0.95] tracking-[-0.035em] text-custom-blue">
                         {section.title}
                       </h2>
                     </>
@@ -390,9 +394,11 @@ export default function ESSPage() {
                 </div>
 
                 <div className="space-y-12">
-                  {section.text && section.text.length > 0 && (
-                    <div className="glass-panel space-y-6 rounded-[2.5rem] p-8 sm:p-10">
-                      {section.text.map((p, pIndex) => (
+                  {(section.text ?? []).filter((paragraph) => paragraph.trim().length > 0).length > 0 && (
+                    <div className="glass-panel space-y-6 rounded-[1.9rem] bg-white/65 p-5 shadow-[0_12px_40px_rgba(11,17,26,0.04)] sm:rounded-[2.1rem] sm:p-7">
+                      {(section.text ?? [])
+                        .filter((paragraph) => paragraph.trim().length > 0)
+                        .map((p, pIndex) => (
                         <p key={pIndex} className="text-lg leading-relaxed text-custom-blue/72">
                           {p}
                         </p>
@@ -403,7 +409,7 @@ export default function ESSPage() {
                   {!hideLegacyImages && section.picture && section.picture.length > 0 && (
                     <div className="grid gap-6 sm:grid-cols-2">
                       {section.picture.map((pic, pIdx) => (
-                        <div key={pIdx} className="overflow-hidden rounded-3xl border border-custom-blue/5 bg-white shadow-lg">
+                        <div key={pIdx} className="glass-panel overflow-hidden rounded-[1.9rem] bg-white/65 shadow-[0_12px_40px_rgba(11,17,26,0.04)] sm:rounded-[2.1rem]">
                           <Image
                             src={pic}
                             alt={`${section.title} visual ${pIdx + 1}`}
@@ -416,27 +422,51 @@ export default function ESSPage() {
                     </div>
                   )}
 
-                  {!hideLegacyImages && section.subTitle && section.subTitle.map((sub, subIdx) => (
-                    <div key={subIdx} className="space-y-6 pt-8 border-t border-custom-blue/5">
-                      <h3 className="text-xl font-bold text-custom-blue">{sub}</h3>
-                      {section.subText?.[subIdx] && (
-                        <p className="text-lg leading-relaxed text-custom-blue/72">
-                          {section.subText[subIdx]}
-                        </p>
-                      )}
-                      {section.subPicture?.[subIdx] && (
-                        <div className="overflow-hidden rounded-3xl border border-custom-blue/5 bg-white shadow-lg">
-                          <Image
-                            src={section.subPicture[subIdx]}
-                            alt={sub}
-                            width={1200}
-                            height={800}
-                            className="h-auto w-full"
-                          />
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                  {!hideLegacyImages && (() => {
+                    const subsections = (section.subTitle ?? [])
+                      .map((sub, subIdx) => ({
+                        title: sub,
+                        text: section.subText?.[subIdx] ?? "",
+                        picture: section.subPicture?.[subIdx] ?? "",
+                      }))
+                      .filter(
+                        ({ title, text, picture }) =>
+                          title.trim().length > 0 ||
+                          text.trim().length > 0 ||
+                          picture.trim().length > 0,
+                      );
+
+                    return subsections.map((subsection, subIdx) => (
+                      <div
+                        key={`${subsection.title || "subsection"}-${subIdx}`}
+                        className={`space-y-6 ${
+                          subIdx > 0 ? "border-t border-custom-blue/5 pt-8" : ""
+                        }`}
+                      >
+                        {subsection.title && (
+                          <h3 className="text-xl font-bold text-custom-blue">
+                            {subsection.title}
+                          </h3>
+                        )}
+                        {subsection.text && (
+                          <p className="text-lg leading-relaxed text-custom-blue/72">
+                            {subsection.text}
+                          </p>
+                        )}
+                        {subsection.picture && (
+                          <div className="glass-panel overflow-hidden rounded-[1.9rem] bg-white/65 shadow-[0_12px_40px_rgba(11,17,26,0.04)] sm:rounded-[2.1rem]">
+                            <Image
+                              src={subsection.picture}
+                              alt={subsection.title || "Case study visual"}
+                              width={1200}
+                              height={800}
+                              className="h-auto w-full"
+                            />
+                          </div>
+                        )}
+                      </div>
+                    ));
+                  })()}
                 </div>
               </motion.section>
             ))}

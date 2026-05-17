@@ -57,7 +57,7 @@ function HighlightGrid({ items }: { items: readonly string[] }) {
       {items.map((item) => (
         <div
           key={item}
-          className="rounded-[1rem] border border-custom-blue/8 bg-[#f8fafb] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]"
+          className="glass-panel rounded-[1.25rem] bg-white/65 p-4 shadow-[0_12px_40px_rgba(11,17,26,0.04)]"
         >
           <Sparkles className="mb-3 h-4 w-4 text-[#1aa6d4]" />
           <p className="text-[12px] leading-[1.55] text-custom-blue/74">{item}</p>
@@ -158,14 +158,14 @@ export default function ResumePage() {
 
           <motion.article
             {...fadeInUp(0.08)}
-            className="resume-sheet relative mx-auto overflow-hidden rounded-[1.25rem] border border-black/8 bg-white shadow-[0_45px_120px_rgba(17,27,40,0.12)] print:rounded-none print:border-0 print:shadow-none"
+            className="resume-sheet glass-panel relative mx-auto overflow-hidden rounded-[1.9rem] bg-white/65 shadow-[0_18px_48px_rgba(11,17,26,0.06)] sm:rounded-[2.1rem] print:rounded-none print:border-0 print:bg-white print:shadow-none"
           >
             <div className="pointer-events-none absolute right-8 top-12 h-36 w-36 rounded-full bg-[radial-gradient(circle,rgba(76,207,255,0.16),rgba(76,207,255,0.05)_42%,transparent_72%)] blur-2xl" />
             <div className="grid min-h-[297mm] grid-cols-1 lg:grid-cols-[68mm_1fr] print:grid-cols-[68mm_1fr]">
-              <aside className="relative order-2 border-b border-black/8 bg-[#f3f5f7] px-6 py-8 lg:order-none lg:border-b-0 lg:border-r print:order-none print:border-b-0 print:border-r print:py-7">
+              <aside className="relative order-2 border-b border-custom-blue/8 bg-white/38 px-6 py-8 lg:order-none lg:border-b-0 lg:border-r print:order-none print:border-b-0 print:border-r print:bg-[#f3f5f7] print:py-7">
                 <div className="pointer-events-none absolute left-0 top-0 h-28 w-full bg-[linear-gradient(180deg,rgba(76,207,255,0.11),transparent)]" />
                 <div className="mx-auto max-w-[220px] lg:max-w-none">
-                  <div className="relative mx-auto h-36 w-28 overflow-hidden rounded-[1.35rem] border border-black/8 bg-white shadow-[0_16px_36px_rgba(17,27,40,0.08)]">
+                  <div className="relative mx-auto h-36 w-28 overflow-hidden rounded-[1.25rem] bg-white/82 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)]">
                     <Image
                       src={resume.photo}
                       alt={resume.name}
@@ -248,7 +248,7 @@ export default function ResumePage() {
               </aside>
 
               <div className="relative order-1 px-6 py-8 sm:px-8 lg:order-none lg:px-9 print:order-none print:px-8 print:py-7">
-                <header className="relative overflow-hidden rounded-[1.25rem] bg-[#0b1826] p-6 text-white shadow-[0_24px_70px_rgba(7,20,38,0.16)] print:rounded-none print:shadow-none">
+                <header className="relative overflow-hidden rounded-[1.9rem] bg-[#0b1826] p-6 text-white shadow-[0_24px_70px_rgba(7,20,38,0.16)] sm:rounded-[2.1rem] print:rounded-none print:shadow-none">
                   <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(76,207,255,0.24),transparent_32%),linear-gradient(135deg,rgba(255,255,255,0.08),transparent_54%)]" />
                   <div className="relative">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.34em] text-white/45">

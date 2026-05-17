@@ -47,7 +47,7 @@ export default function About() {
           <header className="mb-20">
             <motion.div {...fadeInUp(0.1)}>
               <SectionLabel index="01" label="About" />
-              <h1 className="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-medium leading-[1.02] tracking-[-0.02em] text-custom-blue">
+              <h1 className="font-display text-[clamp(3.2rem,8vw,6.6rem)] font-medium leading-[0.88] tracking-[-0.04em] text-custom-blue">
                 Crafting products with clarity, momentum, and purpose.
               </h1>
             </motion.div>
@@ -65,44 +65,53 @@ export default function About() {
           <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-3 mb-24">
             <motion.div 
               {...fadeInUp(0.3)}
-              className="glass-panel group rounded-[2rem] p-8 transition-all hover:bg-white/60"
+              className="glass-panel group relative overflow-hidden rounded-[1.9rem] bg-white/65 p-5 shadow-[0_12px_40px_rgba(11,17,26,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_48px_rgba(11,17,26,0.05)] sm:rounded-[2.1rem]"
             >
-              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-custom-blue/5 text-custom-blue transition-colors group-hover:bg-custom-blue group-hover:text-white">
-                <Globe className="h-6 w-6" />
+              <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="relative z-10">
+              <div className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-[0.95rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)] transition-transform duration-500 group-hover:scale-105">
+                <Globe className="h-4.5 w-4.5" />
               </div>
-              <h2 className="text-lg font-bold text-custom-blue">What I do</h2>
-              <p className="mt-4 text-sm leading-relaxed text-custom-blue/60">
+              <h2 className="font-display text-[1.18rem] font-medium leading-[1.06] tracking-[-0.02em] text-custom-blue sm:text-[1.38rem]">What I do</h2>
+              <p className="mt-2.5 text-[0.78rem] leading-6 text-custom-blue/70">
                 Product discovery, interaction design, prototyping, and frontend
                 engineering with an emphasis on measurable outcomes and smooth delivery.
               </p>
+              </div>
             </motion.div>
 
             <motion.div 
               {...fadeInUp(0.4)}
-              className="glass-panel group rounded-[2rem] p-8 transition-all hover:bg-white/60"
+              className="glass-panel group relative overflow-hidden rounded-[1.9rem] bg-white/65 p-5 shadow-[0_12px_40px_rgba(11,17,26,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_48px_rgba(11,17,26,0.05)] sm:rounded-[2.1rem]"
             >
-              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-custom-blue/5 text-custom-blue transition-colors group-hover:bg-custom-blue group-hover:text-white">
-                <Zap className="h-6 w-6" />
+              <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="relative z-10">
+              <div className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-[0.95rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)] transition-transform duration-500 group-hover:scale-105">
+                <Zap className="h-4.5 w-4.5" />
               </div>
-              <h2 className="text-lg font-bold text-custom-blue">How I work</h2>
-              <p className="mt-4 text-sm leading-relaxed text-custom-blue/60">
+              <h2 className="font-display text-[1.18rem] font-medium leading-[1.06] tracking-[-0.02em] text-custom-blue sm:text-[1.38rem]">How I work</h2>
+              <p className="mt-2.5 text-[0.78rem] leading-6 text-custom-blue/70">
                 I collaborate closely with product, design, and engineering to move from
                 ideas to shipped experiences. I value crisp documentation and rapid iteration.
               </p>
+              </div>
             </motion.div>
 
             <motion.div 
               {...fadeInUp(0.5)}
-              className="glass-panel group rounded-[2rem] p-8 transition-all hover:bg-white/60"
+              className="glass-panel group relative overflow-hidden rounded-[1.9rem] bg-white/65 p-5 shadow-[0_12px_40px_rgba(11,17,26,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_48px_rgba(11,17,26,0.05)] sm:rounded-[2.1rem]"
             >
-              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-custom-blue/5 text-custom-blue transition-colors group-hover:bg-custom-blue group-hover:text-white">
-                <Cpu className="h-6 w-6" />
+              <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="relative z-10">
+              <div className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-[0.95rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)] transition-transform duration-500 group-hover:scale-105">
+                <Cpu className="h-4.5 w-4.5" />
               </div>
-              <h2 className="text-lg font-bold text-custom-blue">Currently</h2>
-              <p className="mt-4 text-sm leading-relaxed text-custom-blue/60">
+              <h2 className="font-display text-[1.18rem] font-medium leading-[1.06] tracking-[-0.02em] text-custom-blue sm:text-[1.38rem]">Currently</h2>
+              <p className="mt-2.5 text-[0.78rem] leading-6 text-custom-blue/70">
                 Exploring AI-augmented UX patterns and modern product storytelling while
                 building reliable, elegant interfaces for global teams.
               </p>
+              </div>
             </motion.div>
           </div>
 
@@ -114,14 +123,14 @@ export default function About() {
               href="https://www.linkedin.com/in/marcellvarga/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 rounded-full border border-custom-blue/10 bg-white/50 px-6 py-3 text-sm font-semibold text-custom-blue backdrop-blur-sm transition-all hover:border-custom-blue/30 hover:bg-white"
+              className="inline-flex items-center gap-3 rounded-full bg-white/62 px-6 py-3 text-sm font-semibold text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.66),0_12px_30px_rgba(17,27,40,0.04)] backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:bg-white"
             >
               <Linkedin className="h-4 w-4" />
               Connect on LinkedIn
             </a>
             <Link
               href="/resume"
-              className="inline-flex items-center gap-3 rounded-full border border-custom-blue/10 bg-custom-blue/5 px-6 py-3 text-sm font-semibold text-custom-blue backdrop-blur-sm transition-all hover:bg-custom-blue hover:text-white"
+              className="inline-flex items-center gap-3 rounded-full bg-white/62 px-6 py-3 text-sm font-semibold text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.66),0_12px_30px_rgba(17,27,40,0.04)] backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:bg-custom-blue hover:text-white"
             >
               <FileText className="h-4 w-4" />
               View full resume

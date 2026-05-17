@@ -35,7 +35,7 @@ export default function Footer({ isHover = false }: FooterProps) {
           craft with motion discipline.
         </p>
         <div className="flex items-center gap-4">
-          <span className="ml-auto mr-0 text-xs text-custom-blue/48 min-w-[135px]">
+          <span className="ml-auto mr-0 text-xs text-custom-blue/48 min-w-[140px]">
            🇸🇬 &nbsp;Local Time: {currentTime}
           </span>
 

@@ -31,16 +31,16 @@ export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
   return (
     <section className="mt-40">
       <SectionLabel index="More" label="Selected Work" />
-      <div className="mt-12 grid gap-8 md:grid-cols-2">
+      <div className="mt-12 grid gap-3.5 md:grid-cols-2">
         {otherProjects.map((project, index) => (
           <motion.article
             key={project.title}
             {...fadeInUp(index * 0.1)}
-            className="glass-panel group relative min-h-[22rem] overflow-hidden rounded-[2.5rem] border-white/90 shadow-[0_28px_70px_rgba(11,17,26,0.06)] transition duration-700 hover:-translate-y-1.5 hover:shadow-[0_35px_90px_rgba(11,17,26,0.1)]"
+            className="glass-panel group relative min-h-[22rem] overflow-hidden rounded-[1.9rem] bg-white/65 shadow-[0_12px_40px_rgba(11,17,26,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_48px_rgba(11,17,26,0.05)] sm:rounded-[2.1rem]"
           >
             <Link
               href={project.link}
-              className="relative flex h-full flex-col justify-between p-8 sm:p-10"
+              className="relative flex h-full flex-col justify-between p-5 sm:p-7"
               aria-label={`Open ${project.title}`}
             >
               <div className="absolute inset-0">
@@ -55,10 +55,10 @@ export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
               </div>
 
               <div className="relative z-10 flex items-center justify-between gap-4">
-                <span className="rounded-full border border-white/40 bg-white/10 px-5 py-2 text-[0.72rem] font-bold uppercase tracking-[0.24em] text-white backdrop-blur-xl">
+                <span className="font-label rounded-full bg-white/16 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.24)] backdrop-blur-xl">
                   {project.category}
                 </span>
-                <span className="text-[0.85rem] font-bold tracking-widest text-white/75">{project.date}</span>
+                <span className="font-label rounded-full bg-white/16 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.24)] backdrop-blur-xl">{project.date}</span>
               </div>
 
               <div className="relative z-10 mt-auto transform transition-transform duration-700 group-hover:-translate-y-2">
@@ -68,7 +68,7 @@ export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
                 <p className="mt-3 max-w-sm text-[0.95rem] leading-relaxed text-white/85">
                   {project.subTitle}
                 </p>
-                <div className="mt-8 inline-flex w-fit items-center gap-2.5 rounded-full bg-white px-6 py-2.5 text-xs font-bold text-custom-blue transition-all duration-300 hover:bg-[#67d9ff] hover:text-white">
+                <div className="mt-8 inline-flex w-fit items-center gap-2.5 rounded-full bg-white/92 px-5 py-2.5 text-xs font-bold text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.66)] transition-all duration-300 hover:bg-[#67d9ff] hover:text-white">
                   Read Case Study
                   <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </div>

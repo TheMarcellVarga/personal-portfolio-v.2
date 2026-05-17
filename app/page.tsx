@@ -278,80 +278,62 @@ function HistoryItemComponent({
     <article
       id={`history-item-${index}`}
       ref={ref}
-      className={`glass-panel group relative flex min-h-[60vh] flex-col justify-center overflow-hidden rounded-[1.85rem] p-6 transition-all duration-700 snap-center sm:rounded-[2.4rem] sm:p-10 ${
-        isActive 
-          ? "scale-[1.02] bg-white/90 shadow-[0_32px_80px_rgba(17,27,40,0.12)] ring-1 ring-[#67d9ff]/30" 
-          : "scale-100 opacity-60 grayscale-[0.4] blur-none hover:opacity-90 hover:grayscale-0 hover:blur-0 hover:-translate-y-1"
-      }`}
+      className="glass-panel group relative flex min-h-[18rem] snap-center flex-col overflow-hidden rounded-[1.9rem] bg-white/65 p-5 shadow-[0_12px_40px_rgba(11,17,26,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_48px_rgba(11,17,26,0.05)] sm:rounded-[2.1rem]"
     >
-      <div className={`pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full blur-3xl transition-all duration-1000 ${
-        isActive ? "bg-[#67d9ff]/22 scale-110" : "bg-[#67d9ff]/5 scale-75"
-      }`} />
-      
-      <div className="relative flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-        <div className="space-y-4">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className={`font-label rounded-full px-4 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.18em] transition-colors duration-500 ${
-              isActive ? "bg-custom-blue/7 text-custom-blue" : "bg-custom-blue/5 text-custom-blue/40"
-            }`}>
-              {item.time.start} {item.time.end ? `- ${item.time.end}` : "- Present"}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div
+        className={`pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full blur-3xl transition-all duration-500 ${
+          isActive ? "bg-[#67d9ff]/10 opacity-100" : "bg-[#67d9ff]/5 opacity-0"
+        }`}
+      />
+
+      <div className="relative z-10 flex h-full flex-col">
+        <div className="mb-5 flex items-start justify-between gap-4">
+          <div className="inline-flex h-10 w-10 items-center justify-center rounded-[0.95rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)] transition-transform duration-500 group-hover:scale-105">
+            <span className="font-label text-[0.56rem] font-bold tracking-[0.16em] text-custom-blue/60">
+              0{index + 1}
             </span>
-            {index === 0 && (
-              <span className={`font-label rounded-full px-3.5 py-1.5 text-[0.58rem] font-bold uppercase tracking-[0.16em] transition-all duration-500 ${
-                isActive ? "bg-[#67d9ff]/15 text-custom-blue shadow-[0_4px_12px_rgba(103,217,255,0.2)]" : "bg-custom-blue/5 text-custom-blue/30"
-              }`}>
-                Current
-              </span>
-            )}
           </div>
-          <div className="space-y-1">
-            <h3 className={`font-display text-[clamp(1.6rem,2.4vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.02em] text-custom-blue transition-colors duration-500 ${
-              isActive ? "opacity-100" : "opacity-70"
-            }`}>
-              {item.jobTitle}
-            </h3>
-            <p className={`font-label text-[0.72rem] font-bold uppercase tracking-[0.22em] text-custom-blue/40 transition-colors duration-500 ${
-              isActive ? "text-custom-blue/50" : "text-custom-blue/30"
-            }`}>
-              {item.company}
-            </p>
-          </div>
+          {index === 0 && (
+            <span className="font-label rounded-full bg-white/62 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]">
+              Current
+            </span>
+          )}
         </div>
-        <div className={`font-label text-[0.65rem] font-black tracking-[0.2em] transition-all duration-700 ${
-          isActive ? "text-custom-blue/25 scale-110" : "text-custom-blue/10 scale-100"
-        }`}>
-          0{index + 1}
-        </div>
-      </div>
 
-      <div className="mt-8 grid gap-3.5">
-        {item.description.map((paragraph: string) => (
-          <p
-            key={paragraph}
-            className={`max-w-[42rem] rounded-[1.25rem] px-5 py-4 text-[0.94rem] leading-relaxed transition-all duration-700 ${
-              isActive 
-                ? "bg-white/60 text-custom-blue/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_4px_16px_rgba(17,27,40,0.02)]" 
-                : "text-custom-blue/50"
-            }`}
-          >
-            {paragraph}
+        <div className="space-y-1">
+          <h3 className="max-w-[16ch] font-display text-[1.18rem] font-medium leading-[1.06] tracking-[-0.02em] text-custom-blue sm:text-[1.38rem]">
+            {item.jobTitle}
+          </h3>
+          <p className="font-label text-[0.58rem] font-bold uppercase tracking-[0.18em] text-custom-blue/35">
+            {item.company}
           </p>
-        ))}
-      </div>
+        </div>
 
-      <div className="mt-8 flex flex-wrap gap-2.5">
-        {item.skills.map((skill: string) => (
-          <span
-            key={skill}
-            className={`font-label rounded-full px-4 py-2 text-[0.62rem] font-bold uppercase tracking-[0.14em] transition-all duration-500 ${
-              isActive 
-                ? "bg-white text-custom-blue/70 shadow-[inset_0_1px_0_rgba(255,255,255,1),0_8px_24px_rgba(17,27,40,0.04)]" 
-                : "bg-white/40 text-custom-blue/30"
-            }`}
-          >
-            {skill}
+        <div className="mt-2.5 grid max-w-[32rem] gap-2.5">
+          {item.description.map((paragraph: string) => (
+            <p
+              key={paragraph}
+              className="text-[0.78rem] leading-6 text-custom-blue/70"
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
+        <div className="mt-auto flex flex-wrap gap-2 pt-5">
+          <span className="font-label rounded-full bg-white/62 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]">
+            {item.time.start} {item.time.end ? `- ${item.time.end}` : "- Present"}
           </span>
-        ))}
+          {item.skills.map((skill: string) => (
+            <span
+              key={skill}
+              className="font-label rounded-full bg-white/62 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
       </div>
     </article>
   );
@@ -731,7 +713,7 @@ export default function Page() {
                   style={shouldReduceMotion ? undefined : { y: heroPillsY }}
                   className="hero-scroll-layer mb-7 flex flex-wrap gap-3"
                 >
-                  <span className="font-label rounded-full bg-white/10 px-4 py-2 text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)] backdrop-blur-xl">
+                  <span className="font-label rounded-full bg-white/10 px-4 py-2 text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl">
                     Frontend & UX Engineer
                   </span>
                 </motion.div>
@@ -837,10 +819,33 @@ export default function Page() {
                       )}
                     </p>
                   </div>
-                  <div className="mt-10 flex items-center gap-4 text-sm text-white/58">
-                    <span className="inline-flex h-2 w-2 rounded-full bg-[#67d9ff]" />
-                    Design, code, motion.
+                  <div className="mt-10 flex items-center gap-2 text-sm text-white/58">
+                    {/* Dot-based progress bar for the intro/principles typing */}
+                    <div className="flex items-center gap-1">
+                      {Array.from({ length: 6 }).map((_, i) => {
+                        // Show more filled dots as typing progresses
+                        // If shouldReduceMotion: just fill all
+                        const progress = shouldReduceMotion
+                          ? 1
+                          : Math.max(
+                              0,
+                              Math.min(1, typedText.length / principlesStatement.length)
+                            );
+                        const activeDots = Math.round(progress * 6);
+                        return (
+                          <span
+                            key={i}
+                            className={`inline-block h-2 w-2 rounded-full transition-all duration-300 ${
+                              i < activeDots
+                                ? "bg-[#67d9ff] scale-70 opacity-60"
+                                : "bg-[#67d9ff]/20 scale-40 opacity-60"
+                            }`}
+                          />
+                        );
+                      })}
+                    </div>
                   </div>
+      
                 </div>
               </motion.div>
             </div>
@@ -853,7 +858,7 @@ export default function Page() {
             >
               <div className="max-w-2xl">
                 <SectionLabel index="02" label="Capabilities" />
-                <h2 className="mt-6 font-display text-[clamp(1.55rem,2.35vw,2.35rem)] leading-[0.98] tracking-[-0.025em] text-custom-blue">
+                <h2 className="mt-6 font-display text-[clamp(2.35rem,4.8vw,4.6rem)] leading-[0.92] tracking-[-0.035em] text-custom-blue">
                   The useful overlap between taste and implementation.
                 </h2>
               </div>
@@ -912,7 +917,7 @@ export default function Page() {
             <div className="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div className="max-w-2xl">
                 <SectionLabel index="03" label="Selected Work" />
-                <h2 className="mt-8 font-display text-[clamp(2.4rem,5vw,4.2rem)] leading-[0.95] tracking-[-0.03em] text-custom-blue">
+                <h2 className="mt-8 font-display text-[clamp(2.8rem,6vw,5.4rem)] leading-[0.9] tracking-[-0.04em] text-custom-blue">
                   Ambition in production.
                 </h2>
                 <p className="mt-6 text-[1.05rem] leading-relaxed text-custom-blue/65">
@@ -994,7 +999,7 @@ export default function Page() {
                 <SectionLabel index="04" label="Trajectory" />
                 <div className="mt-8 space-y-6">
                   <div className="space-y-5">
-                    <h2 className="font-display text-[clamp(2.4rem,4.5vw,4.8rem)] leading-[0.9] tracking-[-0.03em] text-custom-blue">
+                    <h2 className="font-display text-[clamp(2.75rem,5.8vw,5.6rem)] leading-[0.86] tracking-[-0.045em] text-custom-blue">
                       Design foundations. <br />
                       Product systems. <br />
                       Frontend craft.
@@ -1067,7 +1072,7 @@ export default function Page() {
               <div className="relative grid w-full gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
                 <div>
                   <SectionLabel index="05" label="Contact" tone="light" />
-                  <h2 className="max-w-3xl font-display text-[clamp(2.3rem,4.5vw,4rem)] leading-[1] tracking-[-0.03em] text-white">
+                  <h2 className="max-w-3xl font-display text-[clamp(2.65rem,5.4vw,5rem)] leading-[0.92] tracking-[-0.04em] text-white">
                     Ready for the next ambitious build.
                   </h2>
                   <p className="mt-4 max-w-2xl text-[1rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
@@ -1167,4 +1172,3 @@ export default function Page() {
     </div>
   );
 }
-
