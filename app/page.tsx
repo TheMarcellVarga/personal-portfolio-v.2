@@ -46,6 +46,8 @@ import { PageBackground } from "./components/PageBackground";
 const principlesStatement =
   "I build interfaces that feel deliberate: design systems, motion details, frontend code, and product thinking in one lane.";
 
+const PRINCIPLES_REVEAL_END = 0.74;
+
 const capabilityCards = [
   {
     title: "Systems with character",
@@ -350,7 +352,7 @@ function scrollToId(id: string, reducedMotion: boolean) {
     );
 
     window.scrollTo({
-      top: Math.max(0, window.scrollY + rect.top + scrollableDistance * 0.72),
+      top: Math.max(0, window.scrollY + rect.top + scrollableDistance * PRINCIPLES_REVEAL_END),
       behavior: reducedMotion ? "auto" : "smooth",
     });
     return;
@@ -433,7 +435,7 @@ export default function Page() {
     target: workSectionRef,
     offset: ["start end", "end start"],
   });
-  const principlesRevealEnd = 0.74;
+  const principlesRevealEnd = PRINCIPLES_REVEAL_END;
   const principlesOpacity = useTransform(
     principlesProgress,
     [0, 0.12, 0.74, 0.86, 0.95, 1],
