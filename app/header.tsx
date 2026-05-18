@@ -119,11 +119,14 @@ export default function Header({
 
   const navigate = useCallback(
     async (item: NavItem) => {
-      if (pathname !== item.path) {
+      const targetPath = item.path.split("#")[0];
+      if (pathname !== targetPath) {
         await router.push(item.path);
-        window.setTimeout(() => {
-          item.action?.();
-        }, 120);
+        if (item.action) {
+          window.setTimeout(() => {
+            item.action?.();
+          }, 150);
+        }
       } else {
         item.action?.();
       }
@@ -134,10 +137,10 @@ export default function Header({
   );
 
   const items: NavItem[] = [
-    { label: "Intro", path: "/", action: scrollToHome },
-    { label: "Skills", path: "/", action: scrollToAbout },
-    { label: "Work", path: "/", action: scrollToWork },
-    { label: "Contact", path: "/", action: scrollToContact },
+    { label: "Intro", path: "/#hero", action: scrollToHome },
+    { label: "Skills", path: "/#about", action: scrollToAbout },
+    { label: "Work", path: "/#work", action: scrollToWork },
+    { label: "Contact", path: "/#contact", action: scrollToContact },
   ];
 
   return (

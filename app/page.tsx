@@ -600,6 +600,24 @@ export default function Page() {
     };
   }, []);
 
+  useEffect(() => {
+    if (introStage !== "done") return;
+    if (typeof window === "undefined") return;
+
+    const hash = window.location.hash;
+    if (hash) {
+      const id = hash.replace("#", "");
+      const timer = setTimeout(() => {
+        if (id === "hero") {
+          scrollHome();
+        } else {
+          scrollToId(id, shouldReduceMotion);
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [introStage, shouldReduceMotion, scrollHome]);
+
   const featuredProjects = useMemo(
     () => projects.filter((project) => !project.inProgress),
     [],
