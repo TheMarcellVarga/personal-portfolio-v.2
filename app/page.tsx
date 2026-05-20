@@ -845,13 +845,13 @@ export default function Page() {
                 <div className="mt-8 space-y-6">
                   <div className="space-y-5">
                     <h2 className="font-display text-[clamp(2.75rem,5.8vw,5.6rem)] leading-[0.86] tracking-[-0.045em] text-custom-blue">
-                      Design foundations. <br />
-                      Product systems. <br />
-                      Frontend craft.
+                      Design. <br />
+                      Product. <br />
+                      Craft.
                     </h2>
-                    <p className="max-w-md text-[1.02rem] leading-7 text-custom-blue/60">
+                    {/* <p className="max-w-md text-[1.02rem] leading-7 text-custom-blue/60">
                       A compact read of the path from multimedia design in Denmark into product engineering and AI-leaning interface work from Singapore.
-                    </p>
+                    </p> */}
                   </div>
 
                   <div className="mt-10 flex flex-col gap-6">
