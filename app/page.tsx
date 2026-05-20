@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  type CSSProperties,
   startTransition,
   useCallback,
   useEffect,
@@ -87,156 +86,37 @@ const capabilityTags = [
   "React / Next.js",
 ];
 
-const heroSignatureEchoes = [
-  {
-    id: "sig-0",
-    top: "15%",
-    left: "55%",
-    width: "32rem",
-    style: {
-      ["--echo-duration" as string]: "4.2s",
-      ["--echo-delay" as string]: "-0.2s",
-      ["--echo-opacity" as string]: "0.22",
-      ["--echo-drift-x" as string]: "8vw",
-      ["--echo-drift-y" as string]: "4vh",
-      ["--echo-rotate" as string]: "-14deg",
-    } as CSSProperties,
-  },
-  {
-    id: "sig-1",
-    top: "30%",
-    left: "25%",
-    width: "14rem",
-    style: {
-      ["--echo-duration" as string]: "3.8s",
-      ["--echo-delay" as string]: "-1.5s",
-      ["--echo-opacity" as string]: "0.08",
-      ["--echo-drift-x" as string]: "-6vw",
-      ["--echo-drift-y" as string]: "3vh",
-      ["--echo-rotate" as string]: "10deg",
-    } as CSSProperties,
-  },
-  {
-    id: "sig-2",
-    top: "10%",
-    left: "70%",
-    width: "18rem",
-    style: {
-      ["--echo-duration" as string]: "4.5s",
-      ["--echo-delay" as string]: "-2.8s",
-      ["--echo-opacity" as string]: "0.14",
-      ["--echo-drift-x" as string]: "12vw",
-      ["--echo-drift-y" as string]: "-2vh",
-      ["--echo-rotate" as string]: "-20deg",
-    } as CSSProperties,
-  },
-  {
-    id: "sig-3",
-    top: "45%",
-    left: "8%",
-    width: "10rem",
-    style: {
-      ["--echo-duration" as string]: "3.5s",
-      ["--echo-delay" as string]: "-0.8s",
-      ["--echo-opacity" as string]: "0.05",
-      ["--echo-drift-x" as string]: "-10vw",
-      ["--echo-drift-y" as string]: "5vh",
-      ["--echo-rotate" as string]: "8deg",
-    } as CSSProperties,
-  },
-  {
-    id: "sig-4",
-    top: "50%",
-    left: "60%",
-    width: "15rem",
-    style: {
-      ["--echo-duration" as string]: "4.8s",
-      ["--echo-delay" as string]: "-3.2s",
-      ["--echo-opacity" as string]: "0.10",
-      ["--echo-drift-x" as string]: "5vw",
-      ["--echo-drift-y" as string]: "6vh",
-      ["--echo-rotate" as string]: "-12deg",
-    } as CSSProperties,
-  },
-  {
-    id: "sig-5",
-    top: "65%",
-    left: "15%",
-    width: "12rem",
-    style: {
-      ["--echo-duration" as string]: "4.0s",
-      ["--echo-delay" as string]: "-1.1s",
-      ["--echo-opacity" as string]: "0.04",
-      ["--echo-drift-x" as string]: "-4vw",
-      ["--echo-drift-y" as string]: "8vh",
-      ["--echo-rotate" as string]: "15deg",
-    } as CSSProperties,
-  },
-  {
-    id: "sig-6",
-    top: "20%",
-    left: "15%",
-    width: "13rem",
-    style: {
-      ["--echo-duration" as string]: "5.2s",
-      ["--echo-delay" as string]: "-4.5s",
-      ["--echo-opacity" as string]: "0.12",
-      ["--echo-drift-x" as string]: "-15vw",
-      ["--echo-drift-y" as string]: "2vh",
-      ["--echo-rotate" as string]: "25deg",
-    } as CSSProperties,
-  },
-  {
-    id: "sig-7",
-    top: "75%",
-    left: "45%",
-    width: "22rem",
-    style: {
-      ["--echo-duration" as string]: "5.8s",
-      ["--echo-delay" as string]: "-2.1s",
-      ["--echo-opacity" as string]: "0.15",
-      ["--echo-drift-x" as string]: "4vw",
-      ["--echo-drift-y" as string]: "12vh",
-      ["--echo-rotate" as string]: "-18deg",
-    } as CSSProperties,
-  },
-  {
-    id: "sig-8",
-    top: "40%",
-    left: "80%",
-    width: "11rem",
-    style: {
-      ["--echo-duration" as string]: "3.9s",
-      ["--echo-delay" as string]: "-1.7s",
-      ["--echo-opacity" as string]: "0.06",
-      ["--echo-drift-x" as string]: "20vw",
-      ["--echo-drift-y" as string]: "4vh",
-      ["--echo-rotate" as string]: "-30deg",
-    } as CSSProperties,
-  },
-];
-
-function HeroSignatureEchoMark({ className }: { className?: string }) {
+function HeroStudioBackdrop() {
   return (
-    <svg
-      className={className}
-      width="85"
-      height="37"
-      viewBox="0 0 85 37"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+    <div
+      aria-hidden="true"
+      className="hero-studio-field pointer-events-none absolute inset-0 z-0 overflow-hidden"
     >
-      <path
-        pathLength={1}
-        d="M0.396973 36.3291C0.396973 36.3291 1.80464 21.811 13.6633 7.89246"
-        className="hero-signature-stroke hero-signature-stroke-lead"
-      />
-      <path
-        pathLength={1}
-        d="M84.6029 0.378418C83.4907 1.72562 28.5188 31.0478 28.5188 31.0478C34.2765 18.2493 39.5275 5.38881 37.4414 4.87415C37.3274 4.8523 37.2096 4.85749 37.0982 4.88928C31.574 6.017 19.8186 16.4677 17.715 17.2805C17.665 17.3015 17.6107 17.3113 17.5561 17.3093C16.4821 17.2881 15.8514 13.5856 15.4907 9.68776"
-        className="hero-signature-stroke hero-signature-stroke-main"
-      />
-    </svg>
+      <div className="hero-studio-depth absolute inset-0" />
+      <div className="hero-studio-grid absolute inset-0" />
+      <div className="hero-studio-ruler hero-studio-ruler-x" />
+      <div className="hero-studio-ruler hero-studio-ruler-y" />
+      <div className="hero-studio-beam hero-studio-beam-primary" />
+      <div className="hero-studio-beam hero-studio-beam-secondary" />
+
+      <div className="hero-studio-panel hero-studio-panel-primary">
+        <span>Product systems</span>
+        <i />
+        <i />
+        <i />
+      </div>
+      <div className="hero-studio-panel hero-studio-panel-secondary">
+        <span>Prototype</span>
+        <i />
+        <i />
+      </div>
+      <div className="hero-studio-panel hero-studio-panel-tertiary">
+        <span>Frontend</span>
+        <i />
+        <i />
+        <i />
+      </div>
+    </div>
   );
 }
 
@@ -665,9 +545,8 @@ export default function Page() {
             className="relative left-1/2 min-h-[100svh] w-screen -translate-x-1/2 overflow-hidden"
           >
             <div className="absolute inset-0 bg-[#06111c]" />
-            <div className="absolute inset-0 bg-[linear-gradient(118deg,rgba(5,10,18,0.98)_0%,rgba(8,18,29,0.94)_28%,rgba(16,39,56,0.84)_56%,rgba(88,121,134,0.92)_100%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(255,255,255,0.1),transparent_18%),radial-gradient(circle_at_72%_24%,rgba(76,207,255,0.18),transparent_18%),radial-gradient(circle_at_84%_66%,rgba(255,224,182,0.18),transparent_24%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,8,14,0.1)_0%,rgba(4,8,14,0.02)_40%,rgba(4,8,14,0.32)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(118deg,rgba(5,10,18,0.98)_0%,rgba(7,17,28,0.96)_34%,rgba(19,48,61,0.9)_68%,rgba(126,116,96,0.82)_100%)]" />
+            <HeroStudioBackdrop />
             <motion.div
               style={
                 shouldReduceMotion
@@ -701,30 +580,6 @@ export default function Page() {
             </motion.div>
 
             <div className="absolute inset-0 z-10 bg-[linear-gradient(90deg,rgba(4,9,15,0.98)_0%,rgba(4,9,15,0.9)_30%,rgba(4,9,15,0.6)_52%,rgba(4,9,15,0.18)_72%,rgba(4,9,15,0.08)_100%)]" />
-
-            <div
-              aria-hidden="true"
-              className="hero-signature-field pointer-events-none absolute inset-0 z-0 overflow-hidden"
-            >
-              <div className="hero-signature-vignette absolute inset-0" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_24%,rgba(101,229,255,0.16),transparent_22%),radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.05),transparent_18%),radial-gradient(circle_at_58%_72%,rgba(125,230,255,0.07),transparent_24%)]" />
-              {heroSignatureEchoes.map((echo) => (
-                <div
-                  key={echo.id}
-                  className="hero-signature-echo"
-                  style={
-                    {
-                      ...echo.style,
-                      top: echo.top,
-                      left: echo.left,
-                      width: echo.width,
-                    } as CSSProperties
-                  }
-                >
-                  <HeroSignatureEchoMark className="hero-signature-mark h-auto w-full" />
-                </div>
-              ))}
-            </div>
 
             <div className="relative z-30 mx-auto flex min-h-[100svh] w-full max-w-7xl items-center px-6 pb-10 pt-24 sm:px-10 sm:pb-14 lg:px-14 lg:pb-12">
               <div className="max-w-[36rem]">
