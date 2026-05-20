@@ -92,6 +92,10 @@ function HeroDynamicBackdrop() {
       aria-hidden="true"
       className="hero-dynamic-field pointer-events-none absolute inset-0 z-0 overflow-hidden"
     >
+      <div className="absolute inset-0 bg-[#06111c]" />
+      <div className="absolute inset-0 bg-[linear-gradient(118deg,rgba(5,10,18,0.98)_0%,rgba(8,18,29,0.94)_28%,rgba(16,39,56,0.84)_56%,rgba(72,104,122,0.82)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(255,255,255,0.08),transparent_18%),radial-gradient(circle_at_72%_24%,rgba(76,207,255,0.14),transparent_18%),radial-gradient(circle_at_84%_66%,rgba(255,224,182,0.08),transparent_24%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,8,14,0.16)_0%,rgba(4,8,14,0.04)_40%,rgba(4,8,14,0.28)_100%)]" />
       <div className="hero-dynamic-pattern absolute inset-0" />
     </div>
   );
