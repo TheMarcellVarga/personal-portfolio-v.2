@@ -86,36 +86,13 @@ const capabilityTags = [
   "React / Next.js",
 ];
 
-function HeroStudioBackdrop() {
+function HeroDynamicBackdrop() {
   return (
     <div
       aria-hidden="true"
-      className="hero-studio-field pointer-events-none absolute inset-0 z-0 overflow-hidden"
+      className="hero-dynamic-field pointer-events-none absolute inset-0 z-0 overflow-hidden"
     >
-      <div className="hero-studio-depth absolute inset-0" />
-      <div className="hero-studio-grid absolute inset-0" />
-      <div className="hero-studio-ruler hero-studio-ruler-x" />
-      <div className="hero-studio-ruler hero-studio-ruler-y" />
-      <div className="hero-studio-beam hero-studio-beam-primary" />
-      <div className="hero-studio-beam hero-studio-beam-secondary" />
-
-      <div className="hero-studio-panel hero-studio-panel-primary">
-        <span>Product systems</span>
-        <i />
-        <i />
-        <i />
-      </div>
-      <div className="hero-studio-panel hero-studio-panel-secondary">
-        <span>Prototype</span>
-        <i />
-        <i />
-      </div>
-      <div className="hero-studio-panel hero-studio-panel-tertiary">
-        <span>Frontend</span>
-        <i />
-        <i />
-        <i />
-      </div>
+      <div className="hero-dynamic-pattern absolute inset-0" />
     </div>
   );
 }
@@ -304,7 +281,6 @@ export default function Page() {
   const portraitY = useTransform(smoothHeroProgress, [0, 1], [0, -80]);
   const portraitRotate = useTransform(smoothHeroProgress, [0, 1], [0, -4]);
   const portraitScale = useTransform(smoothHeroProgress, [0, 1], [1, 0.965]);
-  const haloScale = useTransform(smoothHeroProgress, [0, 1], [1, 1.14]);
   const liquidProgress = useTransform(smoothHeroProgress, [0.08, 0.55], [0, 1]);
   const liquidRise = useTransform(liquidProgress, [0, 1], [260, -54]);
   const { scrollYProgress: principlesProgress } = useScroll({
@@ -545,8 +521,7 @@ export default function Page() {
             className="relative left-1/2 min-h-[100svh] w-screen -translate-x-1/2 overflow-hidden"
           >
             <div className="absolute inset-0 bg-[#06111c]" />
-            <div className="absolute inset-0 bg-[linear-gradient(118deg,rgba(5,10,18,0.98)_0%,rgba(7,17,28,0.96)_34%,rgba(19,48,61,0.9)_68%,rgba(126,116,96,0.82)_100%)]" />
-            <HeroStudioBackdrop />
+            <HeroDynamicBackdrop />
             <motion.div
               style={
                 shouldReduceMotion
@@ -555,11 +530,6 @@ export default function Page() {
               }
               className="hero-scroll-layer pointer-events-none absolute inset-y-0 right-[-24vw] z-20 flex items-end sm:right-[-12vw] lg:right-[-4vw] xl:right-[2vw]"
             >
-              <motion.div
-                aria-hidden="true"
-                style={shouldReduceMotion ? undefined : { scale: haloScale }}
-                className="hero-scroll-layer absolute bottom-[12%] right-[18%] h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,_rgba(76,207,255,0.24)_0%,_rgba(76,207,255,0.1)_36%,_transparent_74%)] blur-3xl sm:h-[30rem] sm:w-[30rem] xl:h-[36rem] xl:w-[36rem]"
-              />
               <motion.div
                 style={
                   shouldReduceMotion ? undefined : { rotate: portraitRotate }
