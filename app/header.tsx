@@ -145,7 +145,7 @@ export default function Header({
 
   return (
     <header
-      className={`sticky-header px-4 py-4 transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 lg:px-10 ${
+      className={`sticky-header px-3 py-3 transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:py-4 lg:px-10 ${
         isHeaderVisible || isOpen
           ? "opacity-100"
           : "opacity-0 pointer-events-none"
@@ -265,13 +265,13 @@ export default function Header({
       </div>
 
       {isOpen && (
-        <div className="mx-auto mt-3 w-full max-w-7xl rounded-[2rem] bg-white/82 p-4 shadow-[0_28px_90px_rgba(7,20,38,0.12),inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-2xl lg:hidden">
+        <div className="mx-auto mt-3 w-full max-w-7xl rounded-[1.5rem] bg-white/82 p-3 shadow-[0_28px_90px_rgba(7,20,38,0.12),inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-2xl sm:rounded-[2rem] sm:p-4 lg:hidden">
           <div className="grid gap-2">
             {items.map((item) => (
               <button
                 key={item.label}
                 onClick={() => void navigate(item)}
-                className={`font-label flex items-center justify-between rounded-[1.4rem] px-4 py-3 text-left text-[0.72rem] font-medium uppercase tracking-[0.16em] shadow-[inset_0_1px_0_rgba(255,255,255,0.44)] ${
+                className={`font-label flex items-center justify-between rounded-[1.25rem] px-4 py-3 text-left text-[0.72rem] font-medium uppercase tracking-[0.16em] shadow-[inset_0_1px_0_rgba(255,255,255,0.44)] ${
                   activeSection === item.label
                     ? "bg-custom-blue/8 text-custom-blue"
                     : "bg-custom-blue/4 text-custom-blue/78"
@@ -283,7 +283,7 @@ export default function Header({
             ))}
             <Link
               href="/resume"
-              className="font-label mt-2 flex items-center justify-between rounded-[1.4rem] bg-custom-blue px-4 py-3 text-[0.72rem] font-medium uppercase tracking-[0.16em] text-white shadow-[0_18px_40px_rgba(17,27,40,0.18)]"
+              className="font-label mt-2 flex items-center justify-between rounded-[1.25rem] bg-custom-blue px-4 py-3 text-[0.72rem] font-medium uppercase tracking-[0.16em] text-white shadow-[0_18px_40px_rgba(17,27,40,0.18)]"
             >
               <span>Open Resume</span>
               <ArrowUpRight className="h-4 w-4" />

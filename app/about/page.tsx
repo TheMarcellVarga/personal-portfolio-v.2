@@ -47,13 +47,13 @@ export default function About() {
           <header className="mb-20">
             <motion.div {...fadeInUp(0.1)}>
               <SectionLabel index="01" label="About" />
-              <h1 className="font-display text-[clamp(3.2rem,8vw,6.6rem)] font-medium leading-[0.88] tracking-[-0.04em] text-custom-blue">
+              <h1 className="font-display text-[clamp(2.35rem,10vw,6.6rem)] font-medium leading-[0.92] tracking-[-0.04em] text-custom-blue">
                 Crafting products with clarity, momentum, and purpose.
               </h1>
             </motion.div>
             
             <motion.div {...fadeInUp(0.2)} className="mt-12 max-w-2xl">
-              <p className="text-xl leading-relaxed text-custom-blue/72">
+              <p className="text-base leading-relaxed text-custom-blue/72 sm:text-xl">
                 I partner with teams to uncover the right problems, translate them into
                 strong UX strategy, and deliver frontend experiences that feel effortless
                 for users. My focus is building systems that scale while keeping the human

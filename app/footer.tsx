@@ -33,9 +33,9 @@ export default function Footer({ isHover = false }: FooterProps) {
           © {new Date().getFullYear()} Marcell Varga. UX, frontend, and product
           craft with motion discipline.
         </p>
-        <div className="flex items-center gap-4">
-          <span className="ml-auto mr-0 text-xs text-custom-blue/48 min-w-[140px]">
-           🇸🇬 &nbsp;Local Time: {currentTime}
+        <div className="flex flex-wrap items-center gap-4 sm:justify-end">
+          <span className="text-xs text-custom-blue/48 sm:ml-auto">
+            🇸🇬 Local Time: {currentTime}
           </span>
 
           <a

@@ -283,10 +283,10 @@ export default function CatchScanPage() {
                 Back to work */}
               </motion.button>
               <SectionLabel index="Project" label="Case Study" />
-              <h1 className="font-display text-[clamp(3.2rem,8vw,7rem)] font-medium leading-[0.88] tracking-[-0.04em] text-custom-blue">
+              <h1 className="font-display text-[clamp(2.35rem,10vw,7rem)] font-medium leading-[0.92] tracking-[-0.04em] text-custom-blue">
                 {projectData.title}
               </h1>
-              <p className="mt-8 max-w-2xl text-lg leading-relaxed text-custom-blue/72">
+              <p className="mt-8 max-w-2xl text-base leading-relaxed text-custom-blue/72 sm:text-lg">
                 {projectData.description}
               </p>
             </motion.div>
@@ -295,7 +295,7 @@ export default function CatchScanPage() {
               {...fadeInUp(0.1)}
               className="flex flex-col gap-6 lg:pt-16"
             >
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-8">
                 <div className="space-y-1">
                   <p className="flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/45">
                     <Calendar className="h-3 w-3" /> Date

@@ -315,9 +315,9 @@ export default function Page() {
   );
   const principlesGlow = useTransform(principlesProgress, [0, 1], [0.15, 0.5]);
 
-  const [isMobileView, setIsMobileView] = useState(false);
+  const [isCompactViewport, setIsCompactViewport] = useState(false);
   useEffect(() => {
-    const check = () => setIsMobileView(window.innerWidth < 768);
+    const check = () => setIsCompactViewport(window.innerWidth < 1024);
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
@@ -485,6 +485,8 @@ export default function Page() {
     [],
   );
   const introIsActive = introStage === "playing";
+  const principlesDisplayText =
+    isCompactViewport || shouldReduceMotion ? principlesStatement : typedText;
 
   const [activeHistoryIndex, setActiveHistoryIndex] = useState(0);
 
@@ -528,36 +530,89 @@ export default function Page() {
           >
             <div className="absolute inset-0 bg-[#06111c]" />
             <HeroDynamicBackdrop />
-            <motion.div
-              style={
-                shouldReduceMotion
-                  ? undefined
-                  : { y: portraitY, scale: portraitScale }
-              }
-              className="hero-scroll-layer pointer-events-none absolute inset-y-0 right-[-24vw] z-20 flex items-end sm:right-[-12vw] lg:right-[-4vw] xl:right-[2vw]"
-            >
+            <div className="absolute inset-0 z-10 bg-[linear-gradient(180deg,rgba(4,9,15,0.92)_0%,rgba(4,9,15,0.82)_36%,rgba(4,9,15,0.44)_100%)] lg:bg-[linear-gradient(90deg,rgba(4,9,15,0.98)_0%,rgba(4,9,15,0.9)_30%,rgba(4,9,15,0.6)_52%,rgba(4,9,15,0.18)_72%,rgba(4,9,15,0.08)_100%)]" />
+
+            <div className="relative z-30 mx-auto flex min-h-[100svh] w-full max-w-7xl flex-col gap-10 px-6 pb-10 pt-24 sm:px-10 sm:pb-14 lg:hidden">
+              <div className="max-w-[36rem]">
+                <motion.div
+                  {...fadeInUp(0.05)}
+                  style={shouldReduceMotion ? undefined : { y: heroPillsY }}
+                  className="hero-scroll-layer mb-7 flex flex-wrap gap-3"
+                >
+                  <span className="font-label rounded-full bg-white/10 px-4 py-2 text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl">
+                    Frontend & UX Engineer
+                  </span>
+                </motion.div>
+
+                <motion.div
+                  {...fadeInUp(0.08)}
+                  style={
+                    shouldReduceMotion
+                      ? undefined
+                      : { y: heroCopyY, opacity: heroCopyOpacity }
+                  }
+                  className="hero-scroll-layer space-y-6"
+                >
+                  <h1 className="max-w-[8ch] font-display text-[clamp(2.8rem,10vw,4.2rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[clamp(3.4rem,8vw,4.8rem)] md:text-[clamp(3.8rem,7vw,5.4rem)]">
+                    Marcell Varga
+                  </h1>
+                  <p className="max-w-[30rem] text-[0.98rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
+                    I design and build product interfaces that feel calm, sharp,
+                    and ready to ship.
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  {...fadeInUp(0.12)}
+                  style={shouldReduceMotion ? undefined : { y: heroCardsY }}
+                  className="hero-scroll-layer mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6"
+                >
+                  <button
+                    onClick={scrollWork}
+                    className="group inline-flex items-center justify-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8] sm:w-fit"
+                  >
+                    Selected work
+                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </button>
+                  <Link
+                    href="/resume"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-white/72 transition duration-300 hover:text-white"
+                  >
+                    Resume
+                    <Download className="h-4 w-4" />
+                  </Link>
+                </motion.div>
+              </div>
+
               <motion.div
+                {...fadeInUp(0.1)}
                 style={
-                  shouldReduceMotion ? undefined : { rotate: portraitRotate }
+                  shouldReduceMotion
+                    ? undefined
+                    : { y: portraitY, scale: portraitScale }
                 }
-                className="hero-scroll-layer relative flex h-[72svh] min-h-[32rem] w-[min(104vw,46rem)] items-end justify-center sm:h-[78svh] sm:w-[min(88vw,42rem)] lg:h-[86svh] lg:w-[44rem] xl:h-[90svh] xl:w-[50rem]"
+                className="hero-scroll-layer relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/6 p-3 shadow-[0_20px_70px_rgba(0,0,0,0.24)] backdrop-blur-xl"
               >
-                <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
-                <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
-                <Image
-                  src="/images/personalpageprofilealt.png"
-                  alt="Portrait of Marcell Varga"
-                  width={1210}
-                  height={1777}
-                  priority
-                  className="relative z-10 h-full w-auto max-w-none object-contain object-bottom drop-shadow-[0_40px_120px_rgba(0,0,0,0.34)]"
-                />
+                <motion.div
+                  style={shouldReduceMotion ? undefined : { rotate: portraitRotate }}
+                  className="relative overflow-hidden rounded-[1.5rem] bg-[#071726]"
+                >
+                  <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
+                  <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
+                  <div className="relative aspect-[0.72] w-full">
+                    <Image
+                      src="/images/personalpageprofilealt.png"
+                      alt="Portrait of Marcell Varga"
+                      fill
+                      priority
+                      className="object-cover object-top"
+                    />
+                  </div>
+                </motion.div>
               </motion.div>
-            </motion.div>
+            </div>
 
-            <div className="absolute inset-0 z-10 bg-[linear-gradient(90deg,rgba(4,9,15,0.98)_0%,rgba(4,9,15,0.9)_30%,rgba(4,9,15,0.6)_52%,rgba(4,9,15,0.18)_72%,rgba(4,9,15,0.08)_100%)]" />
-
-            <div className="relative z-30 mx-auto flex min-h-[100svh] w-full max-w-7xl items-center px-6 pb-10 pt-24 sm:px-10 sm:pb-14 lg:px-14 lg:pb-12">
+            <div className="relative z-30 mx-auto hidden min-h-[100svh] w-full max-w-7xl items-center px-6 pb-10 pt-24 sm:px-10 sm:pb-14 lg:flex lg:px-14 lg:pb-12">
               <div className="max-w-[36rem]">
                 <motion.div
                   {...fadeInUp(0.05)}
@@ -608,6 +663,33 @@ export default function Page() {
                   </Link>
                 </motion.div>
               </div>
+
+              <motion.div
+                style={
+                  shouldReduceMotion
+                    ? undefined
+                    : { y: portraitY, scale: portraitScale }
+                }
+                className="hero-scroll-layer pointer-events-none absolute inset-y-0 right-[-24vw] z-20 flex items-end sm:right-[-12vw] lg:right-[-4vw] xl:right-[2vw]"
+              >
+                <motion.div
+                  style={
+                    shouldReduceMotion ? undefined : { rotate: portraitRotate }
+                  }
+                  className="hero-scroll-layer relative flex h-[72svh] min-h-[32rem] w-[min(104vw,46rem)] items-end justify-center sm:h-[78svh] sm:w-[min(88vw,42rem)] lg:h-[86svh] lg:w-[44rem] xl:h-[90svh] xl:w-[50rem]"
+                >
+                  <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
+                  <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
+                  <Image
+                    src="/images/personalpageprofilealt.png"
+                    alt="Portrait of Marcell Varga"
+                    width={1210}
+                    height={1777}
+                    priority
+                    className="relative z-10 h-full w-auto max-w-none object-contain object-bottom drop-shadow-[0_40px_120px_rgba(0,0,0,0.34)]"
+                  />
+                </motion.div>
+              </motion.div>
             </div>
 
             <motion.div
@@ -627,9 +709,9 @@ export default function Page() {
           <section
             id="about"
             ref={principlesRef}
-            className="relative mx-auto -mt-8 h-[240vh] w-full max-w-7xl sm:-mt-12 sm:h-[300vh]"
+            className="relative mx-auto mt-12 w-full max-w-7xl lg:-mt-12 lg:h-[240vh]"
           >
-            <div className="sticky top-16 flex h-[32rem] items-center py-10 sm:top-24 sm:h-[40rem] sm:py-12">
+            <div className="lg:sticky lg:top-16 lg:flex lg:h-[32rem] lg:items-center lg:py-10 xl:top-24 xl:h-[40rem] xl:py-12">
               <motion.div
                 data-scroll-anchor="about"
                 style={
@@ -641,9 +723,9 @@ export default function Page() {
                         y: principlesY,
                       }
                 }
-                className="mx-auto flex h-[32rem] w-full max-w-5xl flex-col overflow-hidden rounded-[2.5rem] bg-[#071726]/92 p-6 text-white shadow-[0_40px_140px_rgba(5,16,32,0.28),inset_0_1px_0_rgba(255,255,255,0.16)] sm:h-[40rem] sm:rounded-[3rem] sm:p-8 lg:h-[40rem] lg:p-12"
+                className="mx-auto flex h-auto min-h-[24rem] w-full max-w-5xl flex-col overflow-hidden rounded-[2rem] bg-[#071726]/92 p-6 text-white shadow-[0_40px_140px_rgba(5,16,32,0.28),inset_0_1px_0_rgba(255,255,255,0.16)] sm:min-h-[28rem] sm:rounded-[2.5rem] sm:p-8 lg:h-[40rem] lg:min-h-0 lg:rounded-[3rem] lg:p-12"
               >
-                <div className="flex h-full flex-col justify-between">
+                <div className="flex h-full flex-col justify-between gap-8">
                   <div>
                     <SectionLabel index="01" label="Principles" tone="light" />
                     <motion.div
@@ -655,14 +737,14 @@ export default function Page() {
                       className="mb-8 h-px w-full bg-[linear-gradient(90deg,rgba(76,216,255,0.85),rgba(76,216,255,0.02))]"
                     />
                     <p
-                      className="max-w-4xl font-display text-[clamp(2rem,4vw,4.6rem)] leading-[1.06] tracking-[-0.02em] !text-[#f8fbff]"
+                      className="max-w-4xl font-display text-[clamp(1.95rem,7vw,4.6rem)] leading-[1.08] tracking-[-0.02em] !text-[#f8fbff]"
                       style={{
                         color: "#f8fbff",
                         WebkitTextFillColor: "#f8fbff",
                         textShadow: "0 1px 0 rgba(255,255,255,0.06)",
                       }}
                     >
-                      {typedText}
+                      {principlesDisplayText}
                       {!shouldReduceMotion && (
                         <span className="ml-1 inline-block animate-pulse text-[#67d9ff]">
                           |
@@ -670,7 +752,7 @@ export default function Page() {
                       )}
                     </p>
                   </div>
-                  <div className="mt-10 flex items-center gap-2 text-sm text-white/58">
+                  <div className={`${isCompactViewport ? "hidden lg:flex" : "mt-10 flex"} items-center gap-2 text-sm text-white/58`}>
                     {/* Dot-based progress bar for the intro/principles typing */}
                     <div className="flex items-center gap-1">
                       {Array.from({ length: 6 }).map((_, i) => {
@@ -776,7 +858,7 @@ export default function Page() {
                   drive the engineering choices.
                 </p>
               </div>
-              <div className="flex items-center gap-3 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/40">
+              <div className="hidden items-center gap-3 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/40 md:flex">
                 <span className="h-px w-8 bg-custom-blue/15" />
                 Hover to reveal
               </div>
@@ -791,16 +873,18 @@ export default function Page() {
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.05 }}
                   onMouseEnter={() =>
-                    !shouldReduceMotion && setActiveProjectImage(project.image)
+                    !shouldReduceMotion &&
+                    !isCompactViewport &&
+                    setActiveProjectImage(project.image)
                   }
                   onMouseLeave={() => setActiveProjectImage(null)}
                   className="group relative"
                 >
                   <Link
                     href={project.link}
-                    className="flex flex-col border-b border-custom-blue/5 py-6 transition-colors duration-500 hover:bg-custom-blue/[0.01] sm:py-8"
+                    className="flex flex-col gap-4 rounded-[1.5rem] border-b border-custom-blue/5 px-4 py-5 transition-colors duration-500 hover:bg-custom-blue/[0.01] sm:rounded-none sm:px-0 sm:py-6 md:flex-row md:items-center md:justify-between md:gap-10 md:px-0 md:py-8"
                   >
-                    <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-10">
+                    <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-10">
                       <div className="flex flex-1 flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
                         <span className="font-label min-w-[2.5rem] text-[0.62rem] font-bold text-custom-blue/20">
                           0{idx + 1}
@@ -825,7 +909,7 @@ export default function Page() {
                       </div>
                     </div>
 
-                    <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1 sm:ml-[10.5rem] sm:mt-1">
+                    <div className="mt-1 flex flex-wrap gap-x-5 gap-y-1 sm:mt-1 sm:ml-[10.5rem]">
                       {project.skills.slice(0, 4).map((skill) => (
                         <span
                           key={skill}
@@ -834,6 +918,17 @@ export default function Page() {
                           {skill}
                         </span>
                       ))}
+                    </div>
+
+                    <div className="overflow-hidden rounded-[1.25rem] border border-custom-blue/8 md:hidden">
+                      <div className="relative aspect-[16/10]">
+                        <Image
+                          src={project.image}
+                          alt={`${project.title} preview`}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
                     </div>
                   </Link>
                 </motion.article>
@@ -850,7 +945,7 @@ export default function Page() {
                 <SectionLabel index="04" label="Trajectory" />
                 <div className="mt-8 space-y-6">
                   <div className="space-y-5">
-                    <h2 className="font-display text-[clamp(2.75rem,5.8vw,5.6rem)] leading-[0.86] tracking-[-0.045em] text-custom-blue">
+                    <h2 className="font-display text-[clamp(2.4rem,8vw,5.6rem)] leading-[0.9] tracking-[-0.045em] text-custom-blue">
                       Design. <br />
                       Product. <br />
                       Craft.
@@ -892,7 +987,7 @@ export default function Page() {
               </div>
 
               {/* Scrolling History List */}
-              <div className="relative snap-y snap-proximity space-y-12 py-[20vh] sm:space-y-24">
+              <div className="relative snap-y snap-proximity space-y-12 py-10 sm:space-y-24 lg:py-[20vh]">
                 <div className="pointer-events-none absolute bottom-12 left-5 top-12 hidden w-px bg-gradient-to-b from-custom-blue/0 via-custom-blue/10 to-custom-blue/0 sm:block" />
                 
                 {history.map((item, index) => (
@@ -910,23 +1005,23 @@ export default function Page() {
 
           <section
             id="contact"
-            className="mx-auto mt-20 flex min-h-[calc(100svh-10rem)] w-full max-w-7xl items-center py-6 sm:mt-28 sm:min-h-[calc(100svh-12rem)] sm:py-10 lg:mt-36"
+            className="mx-auto mt-20 flex min-h-[auto] w-full max-w-7xl items-start py-6 sm:mt-28 sm:min-h-[calc(100svh-12rem)] sm:items-center sm:py-10 lg:mt-36 lg:min-h-[calc(100svh-10rem)]"
             onMouseEnter={() => setFooterHover(true)}
             onMouseLeave={() => setFooterHover(false)}
           >
             <motion.div
               data-scroll-anchor="contact"
               {...fadeInUp(0.06)}
-              className="relative mx-auto flex min-h-[24rem] w-full max-w-5xl items-center overflow-hidden rounded-[2.5rem] bg-[#071726] p-6 text-white shadow-[0_40px_140px_rgba(7,20,38,0.26),inset_0_1px_0_rgba(255,255,255,0.16)] sm:min-h-[28rem] sm:rounded-[2.75rem] sm:p-8"
+              className="relative mx-auto flex min-h-[24rem] w-full max-w-5xl items-start overflow-hidden rounded-[2rem] bg-[#071726] p-6 text-white shadow-[0_40px_140px_rgba(7,20,38,0.26),inset_0_1px_0_rgba(255,255,255,0.16)] sm:min-h-[28rem] sm:items-center sm:rounded-[2.75rem] sm:p-8"
             >
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(72,205,255,0.26),_transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.06),transparent_55%)]" />
               <div className="relative grid w-full gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
                 <div>
                   <SectionLabel index="05" label="Contact" tone="light" />
-                  <h2 className="max-w-3xl font-display text-[clamp(2.65rem,5.4vw,5rem)] leading-[0.92] tracking-[-0.04em] text-white">
+                  <h2 className="max-w-3xl font-display text-[clamp(2.15rem,8vw,5rem)] leading-[0.96] tracking-[-0.04em] text-white">
                     Ready for the next ambitious build.
                   </h2>
-                  <p className="mt-4 max-w-2xl text-[1rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
+                  <p className="mt-4 max-w-2xl text-[0.96rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
                     If you need a UX-minded engineer who can think visually,
                     move fast in code, and care about the end product as much as
                     the process, let’s talk.
@@ -936,11 +1031,11 @@ export default function Page() {
                 <div className="grid gap-2.5 self-end sm:gap-3">
                   <a
                     href="mailto:themarcellvarga@gmail.com"
-                    className="group flex items-center justify-between rounded-[1.35rem] bg-white/7 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 sm:px-5 sm:py-3.5"
+                    className="group flex flex-col items-start justify-between gap-3 rounded-[1.35rem] bg-white/7 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 sm:flex-row sm:items-center sm:px-5 sm:py-3.5"
                   >
-                    <span className="flex items-center gap-3">
+                    <span className="flex min-w-0 items-center gap-3">
                       <Mail className="h-5 w-5 text-[#67d9ff]" />
-                      <span className="font-label text-[0.72rem] font-medium uppercase tracking-[0.16em] text-white/80">
+                      <span className="break-all font-label text-[0.68rem] font-medium uppercase tracking-[0.16em] text-white/80 sm:text-[0.72rem]">
                         themarcellvarga@gmail.com
                       </span>
                     </span>
@@ -988,14 +1083,14 @@ export default function Page() {
       )}
 
       <AnimatePresence>
-        {activeProjectImage && (
+        {activeProjectImage && !isCompactViewport && (
           <motion.div
             className="pointer-events-none fixed z-[100] h-[11rem] w-[16rem] overflow-hidden rounded-[1.35rem] border-[1px] border-white/20 bg-white shadow-[0_24px_70px_rgba(0,0,0,0.3)] backdrop-blur-2xl md:h-[14rem] md:w-[22rem]"
             style={{
               left: mouseXSpring,
               top: mouseYSpring,
-              x: isMobileView ? -148 : 18,
-              y: isMobileView ? -220 : 18,
+              x: 18,
+              y: 18,
             }}
             initial={{ scale: 0.8, opacity: 0, rotate: 0 }}
             animate={{ scale: 1, opacity: 1, rotate: 0 }}

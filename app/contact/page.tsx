@@ -47,13 +47,13 @@ export default function Contact() {
           <header className="mb-20">
             <motion.div {...fadeInUp(0.1)}>
               <SectionLabel index="04" label="Contact" />
-              <h1 className="font-display text-[clamp(3.2rem,8vw,6.6rem)] font-medium leading-[0.88] tracking-[-0.04em] text-custom-blue">
+              <h1 className="font-display text-[clamp(2.35rem,10vw,6.6rem)] font-medium leading-[0.92] tracking-[-0.04em] text-custom-blue">
                 Let&apos;s talk about your next product.
               </h1>
             </motion.div>
             
             <motion.div {...fadeInUp(0.2)} className="mt-12 max-w-2xl">
-              <p className="text-xl leading-relaxed text-custom-blue/72">
+              <p className="text-base leading-relaxed text-custom-blue/72 sm:text-xl">
                 Whether you need UX strategy, frontend execution, or a complete product
                 refresh, I&apos;d love to hear about your goals.
               </p>
