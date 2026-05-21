@@ -245,8 +245,10 @@ export default function Page() {
   const [introStage, setIntroStage] = useState<"checking" | "playing" | "done">(
     "checking",
   );
+  const [hasMounted, setHasMounted] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const shouldReduceMotion = Boolean(prefersReducedMotion);
+  const enableScrollMotion = hasMounted && !shouldReduceMotion;
   const headerLogoRef = useRef<HTMLSpanElement>(null);
 
   const heroRef = useRef<HTMLElement>(null);
@@ -269,6 +271,10 @@ export default function Page() {
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX, mouseY]);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   const { scrollYProgress: heroProgress } = useScroll({
     target: heroRef,
@@ -536,7 +542,7 @@ export default function Page() {
               <div className="max-w-[36rem]">
                 <motion.div
                   {...fadeInUp(0.05)}
-                  style={shouldReduceMotion ? undefined : { y: heroPillsY }}
+                  style={enableScrollMotion ? { y: heroPillsY } : undefined}
                   className="hero-scroll-layer mb-7 flex flex-wrap gap-3"
                 >
                   <span className="font-label rounded-full bg-white/10 px-4 py-2 text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl">
@@ -547,9 +553,9 @@ export default function Page() {
                 <motion.div
                   {...fadeInUp(0.08)}
                   style={
-                    shouldReduceMotion
-                      ? undefined
-                      : { y: heroCopyY, opacity: heroCopyOpacity }
+                    enableScrollMotion
+                      ? { y: heroCopyY, opacity: heroCopyOpacity }
+                      : undefined
                   }
                   className="hero-scroll-layer space-y-6"
                 >
@@ -564,7 +570,7 @@ export default function Page() {
 
                 <motion.div
                   {...fadeInUp(0.12)}
-                  style={shouldReduceMotion ? undefined : { y: heroCardsY }}
+                  style={enableScrollMotion ? { y: heroCardsY } : undefined}
                   className="hero-scroll-layer mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6"
                 >
                   <button
@@ -586,15 +592,11 @@ export default function Page() {
 
               <motion.div
                 {...fadeInUp(0.1)}
-                style={
-                  shouldReduceMotion
-                    ? undefined
-                    : { y: portraitY, scale: portraitScale }
-                }
+                style={enableScrollMotion ? { y: portraitY, scale: portraitScale } : undefined}
                 className="hero-scroll-layer relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/6 p-3 shadow-[0_20px_70px_rgba(0,0,0,0.24)] backdrop-blur-xl"
               >
                 <motion.div
-                  style={shouldReduceMotion ? undefined : { rotate: portraitRotate }}
+                  style={enableScrollMotion ? { rotate: portraitRotate } : undefined}
                   className="relative overflow-hidden rounded-[1.5rem] bg-[#071726]"
                 >
                   <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
@@ -616,7 +618,7 @@ export default function Page() {
               <div className="max-w-[36rem]">
                 <motion.div
                   {...fadeInUp(0.05)}
-                  style={shouldReduceMotion ? undefined : { y: heroPillsY }}
+                  style={enableScrollMotion ? { y: heroPillsY } : undefined}
                   className="hero-scroll-layer mb-7 flex flex-wrap gap-3"
                 >
                   <span className="font-label rounded-full bg-white/10 px-4 py-2 text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl">
@@ -627,9 +629,9 @@ export default function Page() {
                 <motion.div
                   {...fadeInUp(0.08)}
                   style={
-                    shouldReduceMotion
-                      ? undefined
-                      : { y: heroCopyY, opacity: heroCopyOpacity }
+                    enableScrollMotion
+                      ? { y: heroCopyY, opacity: heroCopyOpacity }
+                      : undefined
                   }
                   className="hero-scroll-layer space-y-6"
                 >
@@ -644,7 +646,7 @@ export default function Page() {
 
                 <motion.div
                   {...fadeInUp(0.12)}
-                  style={shouldReduceMotion ? undefined : { y: heroCardsY }}
+                  style={enableScrollMotion ? { y: heroCardsY } : undefined}
                   className="hero-scroll-layer mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6"
                 >
                   <button
@@ -665,17 +667,11 @@ export default function Page() {
               </div>
 
               <motion.div
-                style={
-                  shouldReduceMotion
-                    ? undefined
-                    : { y: portraitY, scale: portraitScale }
-                }
+                style={enableScrollMotion ? { y: portraitY, scale: portraitScale } : undefined}
                 className="hero-scroll-layer pointer-events-none absolute inset-y-0 right-[-24vw] z-20 flex items-end sm:right-[-12vw] lg:right-[-4vw] xl:right-[2vw]"
               >
                 <motion.div
-                  style={
-                    shouldReduceMotion ? undefined : { rotate: portraitRotate }
-                  }
+                  style={enableScrollMotion ? { rotate: portraitRotate } : undefined}
                   className="hero-scroll-layer relative flex h-[72svh] min-h-[32rem] w-[min(104vw,46rem)] items-end justify-center sm:h-[78svh] sm:w-[min(88vw,42rem)] lg:h-[86svh] lg:w-[44rem] xl:h-[90svh] xl:w-[50rem]"
                 >
                   <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
@@ -694,7 +690,7 @@ export default function Page() {
 
             <motion.div
               aria-hidden="true"
-              style={shouldReduceMotion ? undefined : { y: liquidRise }}
+              style={enableScrollMotion ? { y: liquidRise } : undefined}
               className="hero-scroll-layer pointer-events-none absolute inset-x-0 bottom-[-17rem] z-20 h-[34rem] overflow-hidden sm:bottom-[-15rem] sm:h-[38rem]"
             >
               <div className="absolute inset-x-[-10%] bottom-0 h-[22rem] overflow-hidden rounded-t-[44%] sm:h-[26rem]">
@@ -715,13 +711,13 @@ export default function Page() {
               <motion.div
                 data-scroll-anchor="about"
                 style={
-                  shouldReduceMotion
-                    ? undefined
-                    : {
+                  enableScrollMotion
+                    ? {
                         opacity: principlesOpacity,
                         scale: principlesScale,
                         y: principlesY,
                       }
+                    : undefined
                 }
                 className="mx-auto flex h-auto min-h-[24rem] w-full max-w-5xl flex-col overflow-hidden rounded-[2rem] bg-[#071726]/92 p-6 text-white shadow-[0_40px_140px_rgba(5,16,32,0.28),inset_0_1px_0_rgba(255,255,255,0.16)] sm:min-h-[28rem] sm:rounded-[2.5rem] sm:p-8 lg:h-[40rem] lg:min-h-0 lg:rounded-[3rem] lg:p-12"
               >
@@ -729,11 +725,7 @@ export default function Page() {
                   <div>
                     <SectionLabel index="01" label="Principles" tone="light" />
                     <motion.div
-                      style={
-                        shouldReduceMotion
-                          ? undefined
-                          : { opacity: principlesGlow }
-                      }
+                      style={enableScrollMotion ? { opacity: principlesGlow } : undefined}
                       className="mb-8 h-px w-full bg-[linear-gradient(90deg,rgba(76,216,255,0.85),rgba(76,216,255,0.02))]"
                     />
                     <p

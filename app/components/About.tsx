@@ -7,7 +7,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const textToType =
   "I design and build thoughtful digital products where clarity, usability, and business goals align. From discovery to delivery, I translate complex problems into elegant, measurable experiences that teams can ship with confidence.";
@@ -30,6 +30,7 @@ const cards = [
 export default function About() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const [typedLength, setTypedLength] = useState(0);
+  const [hasMounted, setHasMounted] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -43,6 +44,11 @@ export default function About() {
 
   const copyOpacity = useTransform(smoothProgress, [0, 0.12, 0.86, 1], [0.15, 1, 1, 0.22]);
   const copyY = useTransform(smoothProgress, [0, 1], [26, -18]);
+  const enableScrollMotion = hasMounted;
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   useMotionValueEvent(smoothProgress, "change", (value) => {
     // Keep an intentional pause at the start and end of the sticky sequence.
@@ -64,7 +70,7 @@ export default function About() {
     >
       <div className="sticky top-20 mx-auto grid w-full max-w-[1200px] gap-6 py-12 lg:grid-cols-[1.08fr_0.92fr]">
         <motion.article
-          style={{ opacity: copyOpacity, y: copyY }}
+          style={enableScrollMotion ? { opacity: copyOpacity, y: copyY } : undefined}
           className="flow-panel relative overflow-hidden px-6 py-7 sm:px-8 sm:py-9"
         >
           <h2 className="text-xs uppercase tracking-[0.2em] text-custom-blue/56">
