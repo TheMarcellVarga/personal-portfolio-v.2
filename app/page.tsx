@@ -325,19 +325,19 @@ export default function Page() {
   const principlesOpacity = useTransform(
     principlesProgress,
     [0, 0.12, 0.74, 0.86, 0.95, 1],
-    [0.2, 1, 1, 0.88, 0.32, 0],
+    [0, 1, 1, 0.88, 0.32, 0],
   );
   const principlesScale = useTransform(
     principlesProgress,
     [0, 0.18, 0.74, 0.86, 1],
-    [0.95, 1, 1, 0.99, 0.92],
+    [0.92, 1, 1, 0.99, 0.92],
   );
   const principlesY = useTransform(
     principlesProgress,
     [0, 0.2, 0.74, 0.86, 1],
-    [28, 0, 0, -8, -72],
+    [36, 0, 0, -8, -72],
   );
-  const principlesGlow = useTransform(principlesProgress, [0, 1], [0.15, 0.5]);
+  const principlesGlow = useTransform(principlesProgress, [0, 1], [0, 0.5]);
 
   const [isCompactViewport, setIsCompactViewport] = useState(false);
   useEffect(() => {
@@ -812,7 +812,7 @@ export default function Page() {
                       }}
                     >
                       {principlesDisplayText}
-                      {!shouldReduceMotion && (
+                      {!shouldReduceMotion && typedText.length > 0 && (
                         <span className="ml-1 inline-block animate-pulse text-[#67d9ff]">
                           |
                         </span>
