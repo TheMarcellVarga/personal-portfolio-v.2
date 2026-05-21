@@ -165,20 +165,7 @@
     contain: layout paint style;
   }
 
-  .hero-dynamic-pattern {
-    opacity: 0.64;
-    background-image:
-      radial-gradient(circle, rgba(255, 255, 255, 0.15) 1px, transparent 1.9px),
-      radial-gradient(circle, rgba(76, 207, 255, 0.1) 1px, transparent 2px);
-    background-position:
-      0 0,
-      15px 17px;
-    background-size:
-      30px 30px,
-      52px 52px;
-    mask-image: linear-gradient(90deg, transparent 0%, black 38%, black 94%, transparent 100%);
-    animation: hero-dot-drift 20s linear infinite alternate;
-  }
+
 
   html[data-home-intro="0"] .home-intro-shell {
     display: none !important;
@@ -258,19 +245,7 @@
   animation: entrance-scale-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@keyframes hero-dot-drift {
-  from {
-    background-position:
-      0 0,
-      15px 17px;
-  }
 
-  to {
-    background-position:
-      18px -12px,
-      -10px 22px;
-  }
-}
 
 @media (prefers-reduced-motion: reduce) {
   html {
