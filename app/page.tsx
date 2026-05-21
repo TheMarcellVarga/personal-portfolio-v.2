@@ -20,7 +20,6 @@ import {
   useTransform,
   useMotionValue,
   useSpring,
-  useInView,
 } from "framer-motion";
 import {
   ArrowRight,
@@ -116,51 +115,70 @@ function fadeInUp(delay = 0) {
   };
 }
 
+function clamp01(value: number) {
+  return Math.min(1, Math.max(0, value));
+}
+
+function smoothstep(value: number) {
+  const t = clamp01(value);
+  return t * t * (3 - 2 * t);
+}
+
 function HistoryItemComponent({ 
   item, 
   index, 
-  isActive, 
-  onInView 
+  focus,
+  reduceMotion,
 }: { 
   item: HistoryItem; 
   index: number; 
-  isActive: boolean; 
-  onInView: (index: number) => void;
+  focus: number;
+  reduceMotion: boolean;
 }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { 
-    margin: "-45% 0px -45% 0px",
-    amount: 0.1
-  });
-
-  useEffect(() => {
-    if (isInView) {
-      onInView(index);
-    }
-  }, [isInView, index, onInView]);
+  const normalizedFocus = reduceMotion ? 1 : focus;
+  const restOffset = 28 + index * 12;
+  const cardMotion = reduceMotion
+    ? undefined
+    : {
+        x: (1 - normalizedFocus) * restOffset,
+        opacity: 0.48 + normalizedFocus * 0.52,
+        scale: 0.965 + normalizedFocus * 0.035,
+        filter: `blur(${(1 - normalizedFocus) * 0.35}px)`,
+      };
 
   return (
-    <article
+    <motion.article
       id={`history-item-${index}`}
-      ref={ref}
-      className="glass-panel group relative flex min-h-[18rem] snap-center flex-col overflow-hidden rounded-[1.9rem] bg-white/65 p-5 shadow-[0_12px_40px_rgba(11,17,26,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_48px_rgba(11,17,26,0.05)] sm:rounded-[2.1rem]"
+      initial={false}
+      animate={cardMotion}
+      transition={{
+        duration: 0.7,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="glass-panel relative flex min-h-[18rem] snap-center flex-col overflow-hidden rounded-[1.9rem] bg-white/65 p-5 shadow-[0_12px_40px_rgba(11,17,26,0.04)] transition-[border-color] duration-300 sm:rounded-[2.1rem]"
+      style={{
+        willChange: reduceMotion ? "auto" : "transform, opacity, filter",
+      }}
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-      <div
-        className={`pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full blur-3xl transition-all duration-500 ${
-          isActive ? "bg-[#67d9ff]/10 opacity-100" : "bg-[#67d9ff]/5 opacity-0"
-        }`}
-      />
-
       <div className="relative z-10 flex h-full flex-col">
         <div className="mb-5 flex items-start justify-between gap-4">
-          <div className="inline-flex h-10 w-10 items-center justify-center rounded-[0.95rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)] transition-transform duration-500 group-hover:scale-105">
+          <div
+            className="inline-flex h-10 w-10 items-center justify-center rounded-[0.95rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)]"
+            style={{
+              transform: `scale(${0.98 + normalizedFocus * 0.08})`,
+            }}
+          >
             <span className="font-label text-[0.56rem] font-bold tracking-[0.16em] text-custom-blue/60">
               0{index + 1}
             </span>
           </div>
           {index === 0 && (
-            <span className="font-label rounded-full bg-white/62 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]">
+            <span
+              className="font-label rounded-full bg-white/62 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]"
+              style={{
+                opacity: 0.58 + normalizedFocus * 0.42,
+              }}
+            >
               Current
             </span>
           )}
@@ -200,7 +218,7 @@ function HistoryItemComponent({
           ))}
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }
 
@@ -494,7 +512,64 @@ export default function Page() {
   const principlesDisplayText =
     isCompactViewport || shouldReduceMotion ? principlesStatement : typedText;
 
-  const [activeHistoryIndex, setActiveHistoryIndex] = useState(0);
+  const [historyFocusValues, setHistoryFocusValues] = useState(() =>
+    history.map(() => 0),
+  );
+  const historyFocusRef = useRef(history.map(() => 0));
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    let animationFrameId = 0;
+
+    const updateHistoryFocus = () => {
+      const viewportCenter = window.innerHeight / 2;
+      const influenceRadius = Math.max(window.innerHeight * 0.42, 420);
+      let didChange = false;
+
+      const nextValues = history.map((_, index) => {
+        const element = document.getElementById(`history-item-${index}`);
+        if (!element) return 0;
+
+        const rect = element.getBoundingClientRect();
+        const cardCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(cardCenter - viewportCenter);
+        const focus = smoothstep(1 - distance / influenceRadius);
+        const nextFocus = shouldReduceMotion ? (focus > 0.5 ? 1 : 0) : focus;
+
+        if (Math.abs(nextFocus - historyFocusRef.current[index]) > 0.01) {
+          didChange = true;
+        }
+
+        return nextFocus;
+      });
+
+      if (didChange) {
+        historyFocusRef.current = nextValues;
+        setHistoryFocusValues(nextValues);
+      }
+    };
+
+    const onScroll = () => {
+      if (animationFrameId) return;
+      animationFrameId = window.requestAnimationFrame(() => {
+        updateHistoryFocus();
+        animationFrameId = 0;
+      });
+    };
+
+    updateHistoryFocus();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", updateHistoryFocus);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", updateHistoryFocus);
+      if (animationFrameId) {
+        window.cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, [shouldReduceMotion]);
 
   return (
     <div className="relative">
@@ -955,19 +1030,26 @@ export default function Page() {
                           key={`nav-${idx}`}
                           className="group relative flex items-center gap-6 py-2 transition-colors duration-300"
                         >
-                          <div className={`relative z-10 h-2.5 w-2.5 rounded-full border-2 transition-all duration-500 ${
-                            activeHistoryIndex === idx 
-                              ? "scale-125 border-[#67d9ff] bg-[#67d9ff] shadow-[0_0_12px_rgba(103,217,255,0.5)]" 
-                              : "border-custom-blue/15 bg-white group-hover:border-custom-blue/30"
-                          }`} />
+                          <div
+                            className="relative z-10 h-2.5 w-2.5 rounded-full border-2 bg-white transition-all duration-500"
+                            style={{
+                              transform: `scale(${0.85 + historyFocusValues[idx] * 0.45})`,
+                              borderColor: `rgba(17, 27, 40, ${0.15 + (1 - historyFocusValues[idx]) * 0.05})`,
+                              backgroundColor: `rgba(103, 217, 255, ${0.15 + historyFocusValues[idx] * 0.85})`,
+                              boxShadow: `0 0 ${historyFocusValues[idx] * 12}px rgba(103,217,255,${historyFocusValues[idx] * 0.5})`,
+                            }}
+                          />
                           <button
                             onClick={() => {
                               const el = document.getElementById(`history-item-${idx}`);
                               el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
                             }}
-                            className={`font-label text-[0.62rem] font-bold uppercase tracking-[0.18em] transition-all duration-500 text-left ${
-                              activeHistoryIndex === idx ? "text-custom-blue translate-x-1" : "text-custom-blue/30 hover:text-custom-blue/50"
-                            }`}
+                            className="font-label text-[0.62rem] font-bold uppercase tracking-[0.18em] text-left transition-all duration-500"
+                            style={{
+                              opacity: 0.28 + historyFocusValues[idx] * 0.72,
+                              transform: `translateX(${historyFocusValues[idx] * 4}px)`,
+                              color: `rgba(17, 27, 40, ${0.3 + historyFocusValues[idx] * 0.7})`,
+                            }}
                           >
                             {item.company}
                           </button>
@@ -987,8 +1069,8 @@ export default function Page() {
                     key={`${item.company}-${item.time.start}`}
                     item={item}
                     index={index}
-                    isActive={activeHistoryIndex === index}
-                    onInView={(idx) => setActiveHistoryIndex(idx)}
+                    focus={historyFocusValues[index] ?? 0}
+                    reduceMotion={shouldReduceMotion}
                   />
                 ))}
               </div>
