@@ -951,8 +951,8 @@ export default function Page() {
                     href={project.link}
                     className="flex flex-col gap-4 rounded-[1.5rem] border-b border-custom-blue/5 px-4 py-5 transition-colors duration-500 hover:bg-custom-blue/[0.01] sm:rounded-none sm:px-0 sm:py-6 md:flex-row md:items-center md:justify-between md:gap-10 md:px-0 md:py-8"
                   >
-                    <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-10">
-                      <div className="flex flex-1 flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
+                    <div className="relative flex flex-col gap-4 md:grid md:flex-1 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)] md:items-center md:gap-8">
+                      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
                         <span className="font-label min-w-[2.5rem] text-[0.62rem] font-bold text-custom-blue/20">
                           0{idx + 1}
                         </span>
@@ -961,7 +961,7 @@ export default function Page() {
                         </h3>
                       </div>
 
-                      <div className="flex items-center justify-between gap-6 sm:justify-end">
+                      <div className="flex items-center justify-between gap-6 md:justify-self-end">
                         <div className="flex flex-col items-end gap-0.5 text-right">
                           <span className="font-label text-[0.58rem] font-bold uppercase tracking-[0.18em] text-custom-blue/40">
                             {project.category}
@@ -974,17 +974,17 @@ export default function Page() {
                           <ArrowUpRight className="h-4 w-4 sm:h-5 w-5" />
                         </div>
                       </div>
-                    </div>
 
-                    <div className="mt-1 flex flex-wrap gap-x-5 gap-y-1 sm:mt-1 sm:ml-[10.5rem]">
-                      {project.skills.slice(0, 4).map((skill) => (
-                        <span
-                          key={skill}
-                          className="text-[0.58rem] font-bold uppercase tracking-[0.15em] text-custom-blue/30"
-                        >
-                          {skill}
-                        </span>
-                      ))}
+                      <div className="flex flex-wrap gap-x-5 gap-y-1 md:justify-self-end md:justify-end">
+                        {project.skills.slice(0, 4).map((skill) => (
+                          <span
+                            key={skill}
+                            className="text-[0.58rem] font-bold uppercase tracking-[0.15em] text-custom-blue/30"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
                     </div>
 
                     <div className="overflow-hidden rounded-[1.25rem] border border-custom-blue/8 md:hidden">
