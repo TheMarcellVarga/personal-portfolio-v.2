@@ -21,7 +21,7 @@ export const projects: Project[] = [
       "A dashboard concept for automated copyright protection, focused on helping creators monitor ownership issues through a clear, system-driven interface.",
     highlight:
       "This project still stands out because it shows how I translate dense product logic into something visually ordered, calm under pressure, and ready for design-system thinking.",
-    skills: ["Design System", "Tailwind CSS", "Dashboard UX", "Atomic Design"],
+    skills: ["Design System", "Tailwind CSS", "Atomic Design"],
     link: "/catchscan",
     image: "/images/catchscan-index.png",
     category: "Product UX + frontend",

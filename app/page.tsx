@@ -607,7 +607,7 @@ export default function Page() {
           <section
             id="hero"
             ref={heroRef}
-            className="relative left-1/2 min-h-[100svh] w-screen -translate-x-1/2 overflow-hidden"
+            className="relative left-1/2 min-h-[100svh] w-screen -translate-x-1/2 overflow-x-clip overflow-y-visible"
           >
             <div className="absolute inset-0 bg-[#06111c]" />
             <HeroDynamicBackdrop />
@@ -743,11 +743,11 @@ export default function Page() {
 
               <motion.div
                 style={enableScrollMotion ? { y: portraitY, scale: portraitScale } : undefined}
-                className="hero-scroll-layer pointer-events-none absolute inset-y-0 right-[-24vw] z-20 flex items-end sm:right-[-12vw] lg:right-[-4vw] xl:right-[2vw]"
+                className="hero-scroll-layer pointer-events-none absolute inset-y-0 right-[-24vw] z-20 flex items-end sm:right-[-12vw] lg:right-[-4vw] xl:right-[-3vw]"
               >
                 <motion.div
                   style={enableScrollMotion ? { rotate: portraitRotate } : undefined}
-                  className="hero-scroll-layer relative flex h-[72svh] min-h-[32rem] w-[min(104vw,46rem)] items-end justify-center sm:h-[78svh] sm:w-[min(88vw,42rem)] lg:h-[86svh] lg:w-[44rem] xl:h-[90svh] xl:w-[50rem]"
+                  className="hero-scroll-layer relative flex h-[72svh] min-h-[32rem] w-[min(104vw,46rem)] items-end justify-end sm:h-[78svh] sm:w-[min(88vw,42rem)] lg:h-[86svh] lg:w-[44rem] xl:h-[90svh] xl:w-[50rem]"
                 >
                   <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
                   <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
@@ -768,11 +768,11 @@ export default function Page() {
               style={enableScrollMotion ? { y: liquidRise } : undefined}
               className="hero-scroll-layer pointer-events-none absolute inset-x-0 bottom-[-17rem] z-20 h-[34rem] overflow-hidden sm:bottom-[-15rem] sm:h-[38rem]"
             >
-              <div className="absolute inset-x-[-10%] bottom-0 h-[22rem] overflow-hidden rounded-t-[44%] sm:h-[26rem]">
-                {/* Matches PageBackground exactly */}
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,_#f8f1e8_0%,_#f6efe5_46%,_#fff8f1_100%)]" />
-                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(17,27,40,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(17,27,40,0.03)_1px,transparent_1px)] bg-[size:92px_92px] [mask-image:radial-gradient(circle_at_center,black_35%,transparent_80%)]" />
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(76,207,255,0.10),_transparent_28%),radial-gradient(circle_at_20%_70%,_rgba(255,153,102,0.08),_transparent_34%)]" />
+              <div className="absolute inset-x-[-10%] bottom-0 h-[22rem] overflow-hidden rounded-t-[44%] [mask-image:linear-gradient(to_bottom,black_0%,black_65%,transparent_100%)] sm:h-[26rem]">
+                {/* Keep the rising mask aligned with the fixed page surface underneath. */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(76,207,255,0.16),_transparent_28%),radial-gradient(circle_at_20%_70%,_rgba(255,153,102,0.16),_transparent_34%),radial-gradient(circle_at_85%_18%,_rgba(17,27,40,0.12),_transparent_24%),linear-gradient(180deg,_#f8f1e8_0%,_#f6efe5_46%,_#fff8f1_100%)] [background-attachment:fixed]" />
+                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(17,27,40,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(17,27,40,0.04)_1px,transparent_1px)] bg-[size:92px_92px] [background-attachment:fixed] [mask-image:radial-gradient(circle_at_center,black_45%,transparent_88%)]" />
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(76,207,255,0.10),_transparent_28%),radial-gradient(circle_at_20%_70%,_rgba(255,153,102,0.08),_transparent_34%)] [background-attachment:fixed]" />
               </div>
             </motion.div>
           </section>
@@ -949,42 +949,41 @@ export default function Page() {
                 >
                   <Link
                     href={project.link}
-                    className="flex flex-col gap-4 rounded-[1.5rem] border-b border-custom-blue/5 px-4 py-5 transition-colors duration-500 hover:bg-custom-blue/[0.01] sm:rounded-none sm:px-0 sm:py-6 md:flex-row md:items-center md:justify-between md:gap-10 md:px-0 md:py-8"
+                    className="grid gap-4 rounded-[1.5rem] border-b border-custom-blue/5 px-4 py-5 transition-colors duration-500 hover:bg-custom-blue/[0.01] sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:px-0 md:py-8"
                   >
-                    <div className="relative flex flex-col gap-4 md:grid md:flex-1 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)] md:items-center md:gap-8">
-                      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
-                        <span className="font-label min-w-[2.5rem] text-[0.62rem] font-bold text-custom-blue/20">
-                          0{idx + 1}
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
+                      <span className="font-label min-w-[2.5rem] text-[0.62rem] font-bold text-custom-blue/20">
+                        0{idx + 1}
+                      </span>
+                      <h3 className="font-display text-[1.8rem] leading-none tracking-[-0.02em] text-custom-blue transition-transform duration-500 group-hover:translate-x-2 sm:text-[2.2rem] lg:text-[2.8rem]">
+                        {project.title}
+                      </h3>
+                    </div>
+
+                    <div className="flex flex-wrap gap-x-5 gap-y-1 md:justify-self-end md:justify-end">
+                      {project.skills.slice(0, 4).map((skill) => (
+                        <span
+                          key={skill}
+                          className="text-[0.58rem] font-bold uppercase tracking-[0.15em] text-custom-blue/30"
+                        >
+                          {skill}
                         </span>
-                        <h3 className="font-display text-[1.8rem] leading-none tracking-[-0.02em] text-custom-blue transition-transform duration-500 group-hover:translate-x-2 sm:text-[2.2rem] lg:text-[2.8rem]">
-                          {project.title}
-                        </h3>
-                      </div>
+                      ))}
+                    </div>
 
-                      <div className="flex items-center justify-between gap-6 md:justify-self-end">
-                        <div className="flex flex-col items-end gap-0.5 text-right">
-                          <span className="font-label text-[0.58rem] font-bold uppercase tracking-[0.18em] text-custom-blue/40">
-                            {project.category}
-                          </span>
-                          <span className="font-label text-[0.58rem] font-bold text-custom-blue/20">
-                            {project.date}
-                          </span>
-                        </div>
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-custom-blue/10 transition-all duration-500 group-hover:rotate-45 group-hover:bg-custom-blue group-hover:text-white sm:h-12 sm:w-12">
-                          <ArrowUpRight className="h-4 w-4 sm:h-5 w-5" />
-                        </div>
+                    <div className="flex items-center justify-between gap-6 md:justify-self-end">
+                      <div className="flex flex-col items-end gap-0.5 text-right">
+                        <span className="font-label text-[0.58rem] font-bold uppercase tracking-[0.18em] text-custom-blue/40">
+                          {project.category}
+                        </span>
+                        <span className="font-label text-[0.58rem] font-bold text-custom-blue/20">
+                          {project.date}
+                        </span>
                       </div>
+                    </div>
 
-                      <div className="flex flex-wrap gap-x-5 gap-y-1 md:justify-self-end md:justify-end">
-                        {project.skills.slice(0, 4).map((skill) => (
-                          <span
-                            key={skill}
-                            className="text-[0.58rem] font-bold uppercase tracking-[0.15em] text-custom-blue/30"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-custom-blue/10 transition-all duration-500 group-hover:rotate-45 group-hover:bg-custom-blue group-hover:text-white sm:h-12 sm:w-12 md:justify-self-end">
+                      <ArrowUpRight className="h-4 w-4 sm:h-5 w-5" />
                     </div>
 
                     <div className="overflow-hidden rounded-[1.25rem] border border-custom-blue/8 md:hidden">
