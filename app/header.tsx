@@ -3,7 +3,7 @@
 import IndexSigAnimatedIcon from "@/public/icons/indexSigAnimated";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { type RefObject, useCallback, useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 
@@ -48,6 +48,51 @@ export default function Header({
   const useLightOnDark =
     ((isHeroSection || isContactSection) && !isOpen);
   const highlightedItem = hoveredItem ?? activeSection ?? null;
+  const mobileMenuVariants = {
+    closed: {
+      opacity: 0,
+      y: -14,
+      scale: 0.98,
+      filter: "blur(6px)",
+      transition: prefersReducedMotion
+        ? { duration: 0 }
+        : {
+            duration: 0.18,
+            ease: [0.22, 1, 0.36, 1],
+            when: "afterChildren",
+          },
+    },
+    open: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      filter: "blur(0px)",
+      transition: prefersReducedMotion
+        ? { duration: 0 }
+        : {
+            duration: 0.26,
+            ease: [0.22, 1, 0.36, 1],
+            when: "beforeChildren",
+            staggerChildren: 0.045,
+          },
+    },
+  };
+  const mobileMenuItemVariants = {
+    closed: {
+      opacity: 0,
+      y: -8,
+    },
+    open: {
+      opacity: 1,
+      y: 0,
+      transition: prefersReducedMotion
+        ? { duration: 0 }
+        : {
+            duration: 0.22,
+            ease: [0.22, 1, 0.36, 1],
+          },
+    },
+  };
   const lastScrollYRef = useRef(0);
   const isHeaderVisibleRef = useRef(true);
   const animationFrameRef = useRef<number | null>(null);
@@ -264,33 +309,54 @@ export default function Header({
         </button>
       </div>
 
-      {isOpen && (
-        <div className="mx-auto mt-3 w-full max-w-7xl rounded-[1.5rem] bg-white/82 p-3 shadow-[0_28px_90px_rgba(7,20,38,0.12),inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-2xl sm:rounded-[2rem] sm:p-4 lg:hidden">
-          <div className="grid gap-2">
-            {items.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => void navigate(item)}
-                className={`font-label flex items-center justify-between rounded-[1.25rem] px-4 py-3 text-left text-[0.72rem] font-medium uppercase tracking-[0.16em] shadow-[inset_0_1px_0_rgba(255,255,255,0.44)] ${
-                  activeSection === item.label
-                    ? "bg-custom-blue/8 text-custom-blue"
-                    : "bg-custom-blue/4 text-custom-blue/78"
-                }`}
-              >
-                <span>{item.label}</span>
-                <ArrowUpRight className="h-4 w-4" />
-              </button>
-            ))}
-            <Link
-              href="/resume"
-              className="font-label mt-2 flex items-center justify-between rounded-[1.25rem] bg-custom-blue px-4 py-3 text-[0.72rem] font-medium uppercase tracking-[0.16em] text-white shadow-[0_18px_40px_rgba(17,27,40,0.18)]"
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            key="mobile-menu"
+            variants={mobileMenuVariants}
+            initial="closed"
+            animate="open"
+            exit="closed"
+            className="mx-auto mt-3 w-full max-w-7xl overflow-hidden rounded-[1.5rem] bg-white/82 p-3 shadow-[0_28px_90px_rgba(7,20,38,0.12),inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-2xl sm:rounded-[2rem] sm:p-4 lg:hidden"
+          >
+            <motion.div
+              className="grid gap-2"
+              variants={{
+                open: {
+                  transition: prefersReducedMotion
+                    ? { duration: 0 }
+                    : { staggerChildren: 0.045 },
+                },
+              }}
             >
-              <span>Open Resume</span>
-              <ArrowUpRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      )}
+              {items.map((item) => (
+                <motion.button
+                  key={item.label}
+                  variants={mobileMenuItemVariants}
+                  onClick={() => void navigate(item)}
+                  className={`font-label flex items-center justify-between rounded-[1.25rem] px-4 py-3 text-left text-[0.72rem] font-medium uppercase tracking-[0.16em] shadow-[inset_0_1px_0_rgba(255,255,255,0.44)] ${
+                    activeSection === item.label
+                      ? "bg-custom-blue/8 text-custom-blue"
+                      : "bg-custom-blue/4 text-custom-blue/78"
+                  }`}
+                >
+                  <span>{item.label}</span>
+                  <ArrowUpRight className="h-4 w-4" />
+                </motion.button>
+              ))}
+              <motion.div variants={mobileMenuItemVariants}>
+                <Link
+                  href="/resume"
+                  className="font-label mt-2 flex items-center justify-between rounded-[1.25rem] bg-custom-blue px-4 py-3 text-[0.72rem] font-medium uppercase tracking-[0.16em] text-white shadow-[0_18px_40px_rgba(17,27,40,0.18)]"
+                >
+                  <span>Open Resume</span>
+                  <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
