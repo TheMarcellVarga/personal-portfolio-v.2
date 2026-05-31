@@ -1023,20 +1023,17 @@ export default function Page() {
 
                   <div className="mt-10 flex flex-col gap-6">
                     <div className="relative flex flex-col gap-3">
-                      <div className="absolute left-[5px] top-2 bottom-2 w-px bg-custom-blue/10" />
                       {history.map((item, idx) => (
                         <div 
                           key={`nav-${idx}`}
                           className="group relative flex items-center gap-6 py-2 transition-colors duration-300"
                         >
                           <div
-                            className="relative z-10 h-2.5 w-2.5 rounded-full border-2 bg-white transition-all duration-500"
-                            style={{
-                              transform: `scale(${0.85 + historyFocusValues[idx] * 0.45})`,
-                              borderColor: `rgba(17, 27, 40, ${0.15 + (1 - historyFocusValues[idx]) * 0.05})`,
-                              backgroundColor: `rgba(103, 217, 255, ${0.15 + historyFocusValues[idx] * 0.85})`,
-                              boxShadow: `0 0 ${historyFocusValues[idx] * 12}px rgba(103,217,255,${historyFocusValues[idx] * 0.5})`,
-                            }}
+                            className={`relative z-10 inline-block h-2.5 w-2.5 rounded-full transition-all duration-300 ${
+                              historyFocusValues[idx] > 0.5
+                                ? "bg-[#67d9ff] opacity-60"
+                                : "bg-[#67d9ff]/20 opacity-60"
+                            }`}
                           />
                           <button
                             onClick={() => {
