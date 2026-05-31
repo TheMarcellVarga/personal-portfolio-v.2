@@ -14,6 +14,36 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: "Aperture Financial Intelligence",
+    subTitle: "AI financial research and portfolio decision support",
+    date: "2026",
+    description:
+      "A financial research and portfolio decision-support workspace with portfolio, watchlist, deterministic research, goal-scenario, risk-review, settings, and billing surfaces.",
+    highlight:
+      "This project shows a calm fintech interface with explicit product boundaries: visible freshness, research-only framing, unavailable states, citations, and scenario planning without trade execution.",
+    skills: ["Next.js", "Go", "Vercel AI SDK", "Supabase"],
+    link: "/ai-finance",
+    image: "/images/ai-finance/aperture-home.jpg",
+    category: "AI fintech product",
+    backgroundClass:
+      "bg-[radial-gradient(circle_at_top_right,_rgba(103,232,249,0.3),_transparent_28%),linear-gradient(155deg,_#071112_0%,_#111820_52%,_#1f1a16_100%)]",
+  },
+  {
+    title: "Wild Route",
+    subTitle: "Prompt-first travel planning for adventure nomads",
+    date: "2026",
+    description:
+      "A full-stack travel planning product that turns an open-ended trip brief into a ranked set of one-way journeys, with clear tradeoffs, save and share flows, and a path to booking.",
+    highlight:
+      "Wild Route brings my current product approach together: an opinionated visual language, a focused planning workflow, and production-minded engineering across the interface, data model, auth, and billing layers.",
+    skills: ["Next.js", "Supabase", "Stripe", "Product UX"],
+    link: "/wild-route",
+    image: "/images/wild-route/home.png",
+    category: "Prompt-first product + full stack",
+    backgroundClass:
+      "bg-[radial-gradient(circle_at_top_right,_rgba(214,255,64,0.32),_transparent_28%),linear-gradient(160deg,_#192018_0%,_#59634f_52%,_#d9ddd0_100%)]",
+  },
+  {
     title: "CatchScan",
     subTitle: "Copyright protection SaaS",
     date: "2021",
