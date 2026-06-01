@@ -217,7 +217,7 @@ export default function ResumePage() {
               </aside>
 
               <div className="relative px-6 py-7 sm:px-8 print:px-7 print:py-6">
-                <header className="border-b border-white/12 pb-5">
+                <header className="border-white/12 pb-5">
                   <div className="flex items-center gap-3">
                     <p className="text-[9px] font-bold uppercase tracking-[0.34em] text-[#67d9ff]">
                       UX/UI Engineer
