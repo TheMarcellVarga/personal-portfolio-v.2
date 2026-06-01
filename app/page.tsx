@@ -835,7 +835,7 @@ export default function Page() {
           <section
             id="about"
             ref={principlesRef}
-            className="relative mx-auto mt-12 w-full max-w-7xl lg:-mt-12 lg:h-[240vh]"
+            className="relative mx-auto mt-12 w-full max-w-7xl lg:-mt-12 lg:h-[260vh]"
           >
             <div className="lg:sticky lg:top-16 lg:flex lg:h-[32rem] lg:items-center lg:py-10 xl:top-24 xl:h-[40rem] xl:py-12">
                 <motion.div
