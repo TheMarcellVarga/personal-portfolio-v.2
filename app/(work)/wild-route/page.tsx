@@ -118,7 +118,7 @@ export default function WildRoutePage() {
                   href="https://github.com/TheMarcellVarga/ai-travel-planner"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-custom-blue px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#263648]"
+                  className="inline-flex items-center gap-2 rounded-full bg-custom-blue px-5 py-3 text-xs font-medium uppercase tracking-[0.14em] text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#263648]"
                 >
                   <Github className="h-4 w-4" />
                   View repository
@@ -130,7 +130,7 @@ export default function WildRoutePage() {
             <motion.div {...fadeInUp(0.1)} className="space-y-6 lg:pb-2">
               <div className="grid grid-cols-2 gap-5">
                 <div className="space-y-1">
-                  <p className="flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/45">
+                  <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">
                     <Calendar className="h-3 w-3" /> Date
                   </p>
                   <p className="text-sm font-semibold text-custom-blue">
@@ -138,7 +138,7 @@ export default function WildRoutePage() {
                   </p>
                 </div>
                 <div className="space-y-1">
-                  <p className="flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/45">
+                  <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">
                     <Tag className="h-3 w-3" /> Category
                   </p>
                   <p className="text-sm font-semibold text-custom-blue">
@@ -147,7 +147,7 @@ export default function WildRoutePage() {
                 </div>
               </div>
               <div className="space-y-3">
-                <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/45">
+                <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">
                   Key skills
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -209,7 +209,7 @@ export default function WildRoutePage() {
                       <strong className="font-display text-4xl tracking-[-0.05em] text-custom-blue">
                         {signal.value}
                       </strong>
-                      <span className="mt-3 block text-[0.64rem] font-bold uppercase tracking-[0.16em] text-custom-blue/54">
+                      <span className="mt-3 block text-[0.64rem] font-medium uppercase tracking-[0.16em] text-custom-blue/54">
                         {signal.label}
                       </span>
                       <p className="mt-3 text-sm leading-6 text-custom-blue/66">
@@ -254,7 +254,7 @@ export default function WildRoutePage() {
                   {...fadeInUp(index * 0.08)}
                   className="glass-panel rounded-[1.9rem] bg-white/65 p-6 shadow-[0_12px_40px_rgba(11,17,26,0.04)] sm:rounded-[2.1rem]"
                 >
-                  <span className="text-[0.64rem] font-bold uppercase tracking-[0.2em] text-custom-blue/42">
+                  <span className="text-[0.64rem] font-medium uppercase tracking-[0.2em] text-custom-blue/42">
                     0{index + 1}
                   </span>
                   <h3 className="mt-6 font-display text-2xl font-medium tracking-[-0.03em] text-custom-blue">
@@ -335,7 +335,7 @@ export default function WildRoutePage() {
                 href="https://github.com/TheMarcellVarga/ai-travel-planner"
                 target="_blank"
                 rel="noreferrer"
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#d7ff40] px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-[#171d16] transition duration-300 hover:-translate-y-0.5 hover:bg-white"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#d7ff40] px-5 py-3 text-xs font-medium uppercase tracking-[0.14em] text-[#171d16] transition duration-300 hover:-translate-y-0.5 hover:bg-white"
               >
                 Explore the code
                 <ArrowUpRight className="h-4 w-4" />

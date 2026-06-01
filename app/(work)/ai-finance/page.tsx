@@ -144,7 +144,7 @@ export default function AiFinancePage() {
             <motion.div {...fadeInUp(0.1)} className="flex flex-col gap-7 lg:pb-2">
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-8">
                 <div className="space-y-1">
-                  <p className="flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/45">
+                  <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">
                     <Calendar className="h-3 w-3" /> Date
                   </p>
                   <p className="text-sm font-semibold text-custom-blue">
@@ -152,7 +152,7 @@ export default function AiFinancePage() {
                   </p>
                 </div>
                 <div className="space-y-1">
-                  <p className="flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/45">
+                  <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">
                     <Tag className="h-3 w-3" /> Category
                   </p>
                   <p className="text-sm font-semibold text-custom-blue">
@@ -161,7 +161,7 @@ export default function AiFinancePage() {
                 </div>
               </div>
               <div className="space-y-3">
-                <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/45">
+                <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">
                   Key Skills
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -179,7 +179,7 @@ export default function AiFinancePage() {
                 href="https://github.com/TheMarcellVarga/ai-finance"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex w-fit items-center gap-2 rounded-full bg-custom-blue px-5 py-3 text-xs font-bold uppercase tracking-[0.13em] text-white shadow-[0_18px_38px_rgba(17,27,40,0.16)] transition hover:-translate-y-0.5 hover:bg-[#22344a]"
+                className="inline-flex w-fit items-center gap-2 rounded-full bg-custom-blue px-5 py-3 text-xs font-medium uppercase tracking-[0.13em] text-white shadow-[0_18px_38px_rgba(17,27,40,0.16)] transition hover:-translate-y-0.5 hover:bg-[#22344a]"
               >
                 View source
                 <ArrowUpRight className="h-4 w-4" />
@@ -310,7 +310,7 @@ export default function AiFinancePage() {
                     <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/8">
                       <ShieldCheck className="h-5 w-5 text-[#67d9ff]" />
                     </div>
-                    <span className="font-label text-[0.62rem] font-bold uppercase tracking-[0.2em] text-white/48">
+                    <span className="font-label text-[0.62rem] font-medium uppercase tracking-[0.2em] text-white/48">
                       Visible guardrails
                     </span>
                   </div>

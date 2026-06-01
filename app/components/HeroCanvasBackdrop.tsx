@@ -135,40 +135,26 @@ export function HeroCanvasBackdrop() {
           const ix = c * spacing;
           const iy = r * spacing;
 
-          // Alternating checkerboard color scheme for clean geometric alignment
-          const isWhite = (c + r) % 2 === 0;
-
-          if (isWhite) {
-            newDots.push({
-              gridX: c,
-              gridY: r,
-              offsetX: 0,
-              offsetY: 0,
-              spacing,
-              r1: 255, g1: 255, b1: 255, a1: 0.22,
-              r2: 255, g2: 255, b2: 255, a2: 0.70,
-              baseRadius: 0.9,
-              layer: 1,
-              x: ix,
-              y: iy,
-              glow: 0,
-            });
-          } else {
-            newDots.push({
-              gridX: c,
-              gridY: r,
-              offsetX: 0,
-              offsetY: 0,
-              spacing,
-              r1: 76, g1: 207, b1: 255, a1: 0.24,
-              r2: 76, g2: 207, b2: 255, a2: 0.85,
-              baseRadius: 1.0,
-              layer: 1,
-              x: ix,
-              y: iy,
-              glow: 0,
-            });
-          }
+          newDots.push({
+            gridX: c,
+            gridY: r,
+            offsetX: 0,
+            offsetY: 0,
+            spacing,
+            r1: 150,
+            g1: 204,
+            b1: 226,
+            a1: 0.18,
+            r2: 255,
+            g2: 255,
+            b2: 255,
+            a2: 0.55,
+            baseRadius: 0.95,
+            layer: 1,
+            x: ix,
+            y: iy,
+            glow: 0,
+          });
         }
       }
 

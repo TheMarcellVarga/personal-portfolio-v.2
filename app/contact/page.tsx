@@ -70,7 +70,7 @@ export default function Contact() {
               <div className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-[0.95rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)] transition-transform duration-500 group-hover:scale-105">
                 <Mail className="h-4.5 w-4.5" />
               </div>
-              <p className="mb-2 text-[0.58rem] font-bold uppercase tracking-[0.18em] text-custom-blue/35">Direct Email</p>
+              <p className="mb-2 text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/35">Direct Email</p>
               <a
                 href="mailto:themarcellvarga@gmail.com"
                 className="break-words font-display text-[1.18rem] font-medium leading-[1.06] tracking-[-0.02em] text-custom-blue transition-colors hover:text-custom-blue/70 sm:text-[1.38rem]"

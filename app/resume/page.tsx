@@ -24,7 +24,7 @@ function SidebarTitle({ children }: { children: React.ReactNode }) {
   return (
     <div className="space-y-2">
       <span className="block h-[2px] w-16 rounded-full bg-[linear-gradient(90deg,rgba(76,207,255,0.7),rgba(76,207,255,0.22),transparent)]" />
-      <h2 className="text-[10px] font-semibold uppercase tracking-[0.32em] text-custom-blue/45">
+      <h2 className="text-[10px] font-medium uppercase tracking-[0.32em] text-custom-blue/45">
         {children}
       </h2>
     </div>
@@ -41,7 +41,7 @@ function MainSection({
   return (
     <section>
       <div className="flex items-center gap-3">
-        <h2 className="text-[11px] font-semibold uppercase tracking-[0.3em] text-custom-blue/55">
+        <h2 className="text-[11px] font-medium uppercase tracking-[0.3em] text-custom-blue/55">
           {title}
         </h2>
         <span className="h-px flex-1 bg-custom-blue/10" />
@@ -141,7 +141,7 @@ export default function ResumePage() {
             className="mb-10 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end print:hidden"
           >
             <div className="max-w-3xl">
-              <p className="font-label text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-custom-blue/45">
+              <p className="font-label text-[0.68rem] font-medium uppercase tracking-[0.28em] text-custom-blue/45">
                 Resume 2026
               </p>
               <h1 className="mt-3 font-display text-[clamp(2.3rem,5vw,4.5rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-custom-blue">
@@ -251,7 +251,7 @@ export default function ResumePage() {
                 <header className="relative overflow-hidden rounded-[1.9rem] bg-[#0b1826] p-6 text-white shadow-[0_24px_70px_rgba(7,20,38,0.16)] sm:rounded-[2.1rem] print:rounded-none print:shadow-none">
                   <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(76,207,255,0.24),transparent_32%),linear-gradient(135deg,rgba(255,255,255,0.08),transparent_54%)]" />
                   <div className="relative">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.34em] text-white/45">
+                  <p className="text-[11px] font-medium uppercase tracking-[0.34em] text-white/45">
                     Resume
                   </p>
                   <h1 className="mt-3 font-display text-[2.55rem] font-semibold tracking-[-0.04em] text-white">
@@ -264,7 +264,7 @@ export default function ResumePage() {
                     {["Singapore", "AI product UX", "Frontend engineering"].map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full bg-white/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/72 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]"
+                        className="rounded-full bg-white/10 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-white/72 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]"
                       >
                         {tag}
                       </span>
@@ -300,11 +300,11 @@ export default function ResumePage() {
                               <h3 className="text-[1.06rem] font-semibold text-custom-blue">
                                 {job.role}
                               </h3>
-                              <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-custom-blue/48">
+                              <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.22em] text-custom-blue/48">
                                 {job.company}
                               </p>
                             </div>
-                            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-custom-blue/42">
+                            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-custom-blue/42">
                               {job.period}
                             </p>
                           </div>
@@ -325,11 +325,11 @@ export default function ResumePage() {
                               <h3 className="text-[1.03rem] font-semibold text-custom-blue">
                                 {education.degree}
                               </h3>
-                              <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-custom-blue/48">
+                              <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.18em] text-custom-blue/48">
                                 {education.school}
                               </p>
                             </div>
-                            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-custom-blue/42">
+                            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-custom-blue/42">
                               {education.period}
                             </p>
                           </div>

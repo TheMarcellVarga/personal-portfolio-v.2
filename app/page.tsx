@@ -209,7 +209,7 @@ function HistoryItemComponent({
           <h3 className="max-w-[16ch] font-display text-[1.18rem] font-medium leading-[1.06] tracking-[-0.02em] text-custom-blue sm:text-[1.38rem]">
             {item.jobTitle}
           </h3>
-          <p className="font-label text-[0.58rem] font-bold uppercase tracking-[0.18em] text-custom-blue/35">
+          <p className="font-label text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/35">
             {item.company}
           </p>
         </div>
@@ -604,7 +604,7 @@ export default function Page() {
 
   return (
     <div className="relative">
-      <PageBackground />
+      <PageBackground showGrid={false} />
 
       <div
         className={`${introPlayedThisVisit ? "transition-opacity duration-700" : ""} ${
@@ -989,7 +989,7 @@ export default function Page() {
                   drive the engineering choices.
                 </p>
               </div>
-              <div className="hidden items-center gap-3 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-custom-blue/40 md:flex">
+              <div className="hidden items-center gap-3 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/40 md:flex">
                 <span className="h-px w-8 bg-custom-blue/15" />
                 Hover to reveal
               </div>
@@ -1028,7 +1028,7 @@ export default function Page() {
                       {project.skills.slice(0, 4).map((skill) => (
                         <span
                           key={skill}
-                          className="text-[0.58rem] font-bold uppercase tracking-[0.15em] text-custom-blue/30"
+                          className="text-[0.58rem] font-medium uppercase tracking-[0.15em] text-custom-blue/30"
                         >
                           {skill}
                         </span>
@@ -1037,7 +1037,7 @@ export default function Page() {
 
                     <div className="flex items-center justify-between gap-6 md:justify-self-end">
                       <div className="flex flex-col items-end gap-0.5 text-right">
-                        <span className="font-label text-[0.58rem] font-bold uppercase tracking-[0.18em] text-custom-blue/40">
+                        <span className="font-label text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/40">
                           {project.category}
                         </span>
                         <span className="font-label text-[0.58rem] font-bold text-custom-blue/20">
@@ -1104,7 +1104,7 @@ export default function Page() {
                               const el = document.getElementById(`history-item-${idx}`);
                               el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
                             }}
-                            className="font-label text-[0.62rem] font-bold uppercase tracking-[0.18em] text-left transition-all duration-500"
+                            className="font-label text-[0.62rem] font-medium uppercase tracking-[0.18em] text-left transition-all duration-500"
                             style={{
                               opacity: 0.28 + historyFocusValues[idx] * 0.72,
                               transform: `translateX(${historyFocusValues[idx] * 4}px)`,
@@ -1241,7 +1241,7 @@ export default function Page() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               <div className="absolute inset-x-0 bottom-3 flex justify-center">
-                <span className="font-label rounded-full bg-white/20 px-2 py-0.75 text-[0.5rem] font-bold uppercase tracking-[0.14em] text-white shadow-[0_8px_32px_rgba(0,0,0,0.1)] backdrop-blur-md">
+                <span className="font-label rounded-full bg-white/20 px-2 py-0.75 text-[0.5rem] font-medium uppercase tracking-[0.14em] text-white shadow-[0_8px_32px_rgba(0,0,0,0.1)] backdrop-blur-md">
                   View Case Study
                 </span>
               </div>
