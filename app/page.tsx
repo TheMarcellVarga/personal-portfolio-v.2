@@ -547,6 +547,8 @@ export default function Page() {
     history.map(() => 0),
   );
   const historyFocusRef = useRef(history.map(() => 0));
+  const [historyActiveIndex, setHistoryActiveIndex] = useState(0);
+  const historyActiveIndexRef = useRef(0);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -575,9 +577,20 @@ export default function Page() {
         return nextFocus;
       });
 
+      const nextActiveIndex = nextValues.reduce(
+        (activeIndex, value, index, values) =>
+          value > values[activeIndex] ? index : activeIndex,
+        0,
+      );
+
       if (didChange) {
         historyFocusRef.current = nextValues;
         setHistoryFocusValues(nextValues);
+      }
+
+      if (nextActiveIndex !== historyActiveIndexRef.current) {
+        historyActiveIndexRef.current = nextActiveIndex;
+        setHistoryActiveIndex(nextActiveIndex);
       }
     };
 
@@ -1094,7 +1107,7 @@ export default function Page() {
                         >
                           <div
                             className={`relative z-10 inline-block h-2.5 w-2.5 rounded-full transition-all duration-300 ${
-                              historyFocusValues[idx] > 0.5
+                              historyActiveIndex === idx
                                 ? "bg-[#67d9ff] opacity-60"
                                 : "bg-[#67d9ff]/20 opacity-60"
                             }`}
@@ -1104,11 +1117,10 @@ export default function Page() {
                               const el = document.getElementById(`history-item-${idx}`);
                               el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
                             }}
-                            className="font-label text-[0.62rem] font-medium uppercase tracking-[0.18em] text-left transition-all duration-500"
+                            className="font-label text-left text-[0.62rem] font-medium uppercase tracking-[0.18em] transition-all duration-300"
                             style={{
-                              opacity: 0.28 + historyFocusValues[idx] * 0.72,
-                              transform: `translateX(${historyFocusValues[idx] * 4}px)`,
-                              color: `rgba(17, 27, 40, ${0.3 + historyFocusValues[idx] * 0.7})`,
+                              opacity: historyActiveIndex === idx ? 1 : 0.28,
+                              color: `rgba(17, 27, 40, ${historyActiveIndex === idx ? 1 : 0.3})`,
                             }}
                           >
                             {item.company}
