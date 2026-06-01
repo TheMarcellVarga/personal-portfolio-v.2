@@ -6,7 +6,6 @@ import PostHogProvider from "./providers/PostHogProvider";
 import { metadata } from "./metadata";
 import ScrollReset from "./components/ScrollReset";
 // import DevelopmentBanner from "./components/DevelopmentBanner";
-import LegacyNotice from "./components/LegacyNotice";
 
 export { metadata };
 
@@ -37,7 +36,6 @@ export default async function RootLayout({
           <ScrollReset />
           {children}
           {/* <DevelopmentBanner /> */}
-          <LegacyNotice />
           {process.env.NODE_ENV === 'production' && (
             <>
               <SpeedInsights />
