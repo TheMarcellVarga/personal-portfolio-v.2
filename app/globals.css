@@ -169,6 +169,12 @@
     display: none !important;
   }
 
+  html[data-home-intro="0"] .home-intro-stage {
+    opacity: 1 !important;
+    filter: blur(0px) !important;
+    pointer-events: auto !important;
+  }
+
   html[data-home-intro="0"] .home-intro-header,
   html[data-home-intro="0"] .home-intro-header-brand,
   html[data-home-intro="0"] .home-intro-fold {

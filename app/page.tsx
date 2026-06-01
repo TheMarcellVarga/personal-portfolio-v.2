@@ -4,7 +4,6 @@ import {
   startTransition,
   useCallback,
   useEffect,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -377,7 +376,7 @@ export default function Page() {
     }
   }, [shouldReduceMotion]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (shouldReduceMotion) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setIntroStage("done");
@@ -622,7 +621,7 @@ export default function Page() {
           activeSection={activeSection}
           logoRef={headerLogoRef}
           revealBrand={introHasCompleted}
-          animateBrand={introPlayedThisVisit && introHasCompleted}
+          animateBrand={introHasCompleted}
         />
       </div>
 
