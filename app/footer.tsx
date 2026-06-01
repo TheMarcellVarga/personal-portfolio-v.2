@@ -30,15 +30,12 @@ export default function Footer({ isHover = false }: FooterProps) {
     <footer className="px-4 pb-8 pt-3 sm:px-6 lg:px-10">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 border-t border-custom-blue/10 pt-6 text-sm text-custom-blue/50 sm:flex-row sm:items-center sm:justify-between">
         <p>
-          © {new Date().getFullYear()} Marcell Varga. UX, frontend, and product
-          craft with motion discipline.
+          © {new Date().getFullYear()} Marcell Varga
         </p>
         <div className="flex flex-wrap items-center gap-4 sm:justify-end">
-          <span className="flex items-center gap-1 text-xs sm:ml-auto">
-            <span className="text-lg leading-none" style={{ color: "initial", opacity: 1 }}>🇸🇬</span>
-            <span className="text-custom-blue/60">Local Time: {currentTime}</span>
+          <span className="text-xs text-custom-blue/48 sm:ml-auto">
+            🇸🇬 Local Time: {currentTime}
           </span>
-     
 
           <a
             href="https://www.linkedin.com/in/marcellvarga/"

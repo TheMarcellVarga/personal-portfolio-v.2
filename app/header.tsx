@@ -3,7 +3,7 @@
 import IndexSigAnimatedIcon from "@/public/icons/indexSigAnimated";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
 import { type RefObject, useCallback, useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 
@@ -17,6 +17,7 @@ interface HeaderProps {
   activeSection?: string;
   logoRef?: RefObject<HTMLSpanElement | null>;
   revealBrand?: boolean;
+  animateBrand?: boolean;
 }
 
 type NavItem = {
@@ -35,6 +36,7 @@ export default function Header({
   activeSection,
   logoRef,
   revealBrand = true,
+  animateBrand = true,
 }: HeaderProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -48,7 +50,8 @@ export default function Header({
   const useLightOnDark =
     ((isHeroSection || isContactSection) && !isOpen);
   const highlightedItem = hoveredItem ?? activeSection ?? null;
-  const mobileMenuVariants = {
+  const menuEase = [0.22, 1, 0.36, 1] as const;
+  const mobileMenuVariants: Variants = {
     closed: {
       opacity: 0,
       y: -14,
@@ -57,8 +60,8 @@ export default function Header({
       transition: prefersReducedMotion
         ? { duration: 0 }
         : {
-            duration: 0.18,
-            ease: [0.22, 1, 0.36, 1],
+          duration: 0.18,
+            ease: menuEase,
             when: "afterChildren",
           },
     },
@@ -71,13 +74,13 @@ export default function Header({
         ? { duration: 0 }
         : {
             duration: 0.26,
-            ease: [0.22, 1, 0.36, 1],
+            ease: menuEase,
             when: "beforeChildren",
             staggerChildren: 0.045,
           },
     },
   };
-  const mobileMenuItemVariants = {
+  const mobileMenuItemVariants: Variants = {
     closed: {
       opacity: 0,
       y: -8,
@@ -89,7 +92,7 @@ export default function Header({
         ? { duration: 0 }
         : {
             duration: 0.22,
-            ease: [0.22, 1, 0.36, 1],
+            ease: menuEase,
           },
     },
   };
@@ -99,10 +102,11 @@ export default function Header({
 
   useEffect(() => {
     if (prefersReducedMotion) return;
+    if (!animateBrand) return;
 
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setLogoAnimationKey((current) => current + 1);
-  }, [pathname, prefersReducedMotion, revealBrand]);
+  }, [pathname, prefersReducedMotion, animateBrand]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -217,8 +221,10 @@ export default function Header({
               key={logoAnimationKey}
               isOpen={isOpen}
               tone={useLightOnDark ? "light" : "dark"}
-              animateStroke={!prefersReducedMotion}
-              className={`h-auto w-full transition-opacity duration-500 ${
+              animateStroke={!prefersReducedMotion && animateBrand}
+              className={`home-intro-header-brand h-auto w-full ${
+                animateBrand ? "transition-opacity duration-500" : ""
+              } ${
                 revealBrand ? "opacity-100" : "opacity-0"
               }`}
             />
@@ -230,7 +236,7 @@ export default function Header({
               useLightOnDark ? "text-white/44" : "text-custom-blue/48"
             }`}
           >
-            Marcell Varga
+            {/* Marcell Varga */}
           </span>
         </Link>
 

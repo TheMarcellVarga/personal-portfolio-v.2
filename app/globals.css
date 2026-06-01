@@ -165,16 +165,16 @@
     contain: layout paint style;
   }
 
-
-
   html[data-home-intro="0"] .home-intro-shell {
     display: none !important;
   }
 
-  html[data-home-intro="0"] .home-intro-stage {
+  html[data-home-intro="0"] .home-intro-header,
+  html[data-home-intro="0"] .home-intro-header-brand,
+  html[data-home-intro="0"] .home-intro-fold {
     opacity: 1 !important;
-    filter: blur(0px) !important;
     pointer-events: auto !important;
+    transform: none !important;
   }
 
   .hero-scroll-layer {

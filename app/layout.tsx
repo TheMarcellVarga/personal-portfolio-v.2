@@ -19,7 +19,19 @@ export default async function RootLayout({
   const introSeen = cookieStore.get("mv-home-intro-seen")?.value === "1";
 
   return (
-    <html lang="en" data-home-intro={introSeen ? "0" : "1"}>
+    <html
+      lang="en"
+      data-home-intro={introSeen ? "0" : "1"}
+      suppressHydrationWarning
+    >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              'try{if(sessionStorage.getItem("mv-home-intro")==="1")document.documentElement.dataset.homeIntro="0"}catch{}',
+          }}
+        />
+      </head>
       <body className="font-body">
         <PostHogProvider>
           <ScrollReset />

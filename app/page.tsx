@@ -115,6 +115,28 @@ function fadeInUp(delay = 0) {
   };
 }
 
+function heroIntroFoldUp(isVisible: boolean, shouldAnimate: boolean, delay = 0) {
+  if (!shouldAnimate) {
+    return {
+      initial: false,
+      animate: { opacity: 1, y: 0, rotateX: 0 },
+      transition: { duration: 0 },
+    };
+  }
+
+  return {
+    initial: false,
+    animate: isVisible
+      ? { opacity: 1, y: 0, rotateX: 0 }
+      : { opacity: 0, y: 32, rotateX: -14 },
+    transition: {
+      duration: 0.78,
+      delay,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
+  };
+}
+
 function clamp01(value: number) {
   return Math.min(1, Math.max(0, value));
 }
@@ -260,9 +282,10 @@ export default function Page() {
   const [isOpen, setIsOpen] = useState(false);
   const [footerHover, setFooterHover] = useState(false);
   const [typedText, setTypedText] = useState("");
-  const [introStage, setIntroStage] = useState<"checking" | "playing" | "done">(
-    "checking",
-  );
+  const [introStage, setIntroStage] = useState<
+    "checking" | "playing" | "exiting" | "done"
+  >("checking");
+  const [introPlayedThisVisit, setIntroPlayedThisVisit] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const shouldReduceMotion = Boolean(prefersReducedMotion);
@@ -363,6 +386,7 @@ export default function Page() {
 
     const hasPlayedIntro =
       window.sessionStorage.getItem("mv-home-intro") === "1";
+    setIntroPlayedThisVisit(!hasPlayedIntro);
     setIntroStage(hasPlayedIntro ? "done" : "playing");
   }, [shouldReduceMotion]);
 
@@ -371,8 +395,12 @@ export default function Page() {
     setIntroStage("done");
   }, []);
 
+  const startIntroExit = useCallback(() => {
+    setIntroStage("exiting");
+  }, []);
+
   useEffect(() => {
-    if (introStage !== "playing") return;
+    if (introStage === "checking" || introStage === "done") return;
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -508,7 +536,11 @@ export default function Page() {
     () => projects.filter((project) => !project.inProgress),
     [],
   );
-  const introIsActive = introStage === "playing";
+  const introIsVisible = introStage !== "done";
+  const introHasCompleted = introStage === "done";
+  const introHeaderMuted = introStage !== "done";
+  const revealHeroIntroText = introStage === "exiting" || introStage === "done";
+  const principlesIntroReady = introStage === "done";
   const principlesDisplayText =
     isCompactViewport || shouldReduceMotion ? principlesStatement : typedText;
 
@@ -576,9 +608,9 @@ export default function Page() {
       <PageBackground />
 
       <div
-        className={`transition-opacity duration-700 ${
-          introIsActive ? "pointer-events-none opacity-25" : "opacity-100"
-        }`}
+        className={`${introPlayedThisVisit ? "transition-opacity duration-700" : ""} ${
+          introHeaderMuted ? "pointer-events-none opacity-25" : "opacity-100"
+        } home-intro-header`}
       >
         <Header
           isOpen={isOpen}
@@ -589,20 +621,12 @@ export default function Page() {
           scrollToContact={scrollContact}
           activeSection={activeSection}
           logoRef={headerLogoRef}
-          revealBrand={!introIsActive}
+          revealBrand={introHasCompleted}
+          animateBrand={introPlayedThisVisit && introHasCompleted}
         />
       </div>
 
-      <motion.div
-        initial={false}
-        animate={
-          introIsActive
-            ? { opacity: 0.22, filter: "blur(14px)" }
-            : { opacity: 1, filter: "blur(0px)" }
-        }
-        transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-        className={`home-intro-stage ${introIsActive ? "pointer-events-none" : ""}`}
-      >
+      <div className={`home-intro-stage ${introIsVisible ? "pointer-events-none" : ""}`}>
         <main className="relative z-10 px-4 pb-8 pt-0 sm:px-6 sm:pb-12 lg:px-10">
           <section
             id="hero"
@@ -616,17 +640,20 @@ export default function Page() {
             <div className="relative z-30 mx-auto flex min-h-[100svh] w-full max-w-7xl flex-col gap-10 px-6 pb-10 pt-24 sm:px-10 sm:pb-14 lg:hidden">
               <div className="max-w-[36rem]">
                 <motion.div
-                  {...fadeInUp(0.05)}
                   style={enableScrollMotion ? { y: heroPillsY } : undefined}
                   className="hero-scroll-layer mb-7 flex flex-wrap gap-3"
                 >
-                  <span className="font-label rounded-full bg-white/10 px-4 py-2 text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl">
-                    Frontend & UX Engineer
-                  </span>
+                  <motion.div
+                    {...heroIntroFoldUp(revealHeroIntroText, introPlayedThisVisit, 0)}
+                    className="home-intro-fold [transform-origin:bottom]"
+                  >
+                    <span className="font-label block rounded-full bg-white/10 px-4 py-2 text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl">
+                      Frontend & UX Engineer
+                    </span>
+                  </motion.div>
                 </motion.div>
 
                 <motion.div
-                  {...fadeInUp(0.08)}
                   style={
                     enableScrollMotion
                       ? { y: heroCopyY, opacity: heroCopyOpacity }
@@ -634,20 +661,28 @@ export default function Page() {
                   }
                   className="hero-scroll-layer space-y-6"
                 >
-                  <h1 className="max-w-[8ch] font-display text-[clamp(2.8rem,10vw,4.2rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[clamp(3.4rem,8vw,4.8rem)] md:text-[clamp(3.8rem,7vw,5.4rem)]">
-                    Marcell Varga
-                  </h1>
-                  <p className="max-w-[30rem] text-[0.98rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
-                    I design and build product interfaces that feel calm, sharp,
-                    and ready to ship.
-                  </p>
+                  <motion.div
+                    {...heroIntroFoldUp(revealHeroIntroText, introPlayedThisVisit, 0.08)}
+                    className="home-intro-fold space-y-6 [transform-origin:bottom]"
+                  >
+                    <h1 className="max-w-[8ch] font-display text-[clamp(2.8rem,10vw,4.2rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[clamp(3.4rem,8vw,4.8rem)] md:text-[clamp(3.8rem,7vw,5.4rem)]">
+                      Marcell Varga
+                    </h1>
+                    <p className="max-w-[30rem] text-[0.98rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
+                      I design and build product interfaces that feel calm, sharp,
+                      and ready to ship.
+                    </p>
+                  </motion.div>
                 </motion.div>
 
                 <motion.div
-                  {...fadeInUp(0.12)}
                   style={enableScrollMotion ? { y: heroCardsY } : undefined}
-                  className="hero-scroll-layer mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6"
+                  className="hero-scroll-layer mt-10"
                 >
+                  <motion.div
+                    {...heroIntroFoldUp(revealHeroIntroText, introPlayedThisVisit, 0.16)}
+                    className="home-intro-fold flex flex-col gap-4 [transform-origin:bottom] sm:flex-row sm:items-center sm:gap-6"
+                  >
                   <button
                     onClick={scrollWork}
                     className="group inline-flex items-center justify-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8] sm:w-fit"
@@ -662,6 +697,7 @@ export default function Page() {
                     Resume
                     <Download className="h-4 w-4" />
                   </Link>
+                  </motion.div>
                 </motion.div>
               </div>
 
@@ -692,17 +728,20 @@ export default function Page() {
             <div className="relative z-30 mx-auto hidden min-h-[100svh] w-full max-w-7xl items-center px-6 pb-10 pt-24 sm:px-10 sm:pb-14 lg:flex lg:px-14 lg:pb-12">
               <div className="max-w-[36rem]">
                 <motion.div
-                  {...fadeInUp(0.05)}
                   style={enableScrollMotion ? { y: heroPillsY } : undefined}
                   className="hero-scroll-layer mb-7 flex flex-wrap gap-3"
                 >
-                  <span className="font-label rounded-full bg-white/10 px-4 py-2 text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl">
-                    Frontend & UX Engineer
-                  </span>
+                  <motion.div
+                    {...heroIntroFoldUp(revealHeroIntroText, introPlayedThisVisit, 0)}
+                    className="home-intro-fold [transform-origin:bottom]"
+                  >
+                    <span className="font-label block rounded-full bg-white/10 px-4 py-2 text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl">
+                      Frontend & UX Engineer
+                    </span>
+                  </motion.div>
                 </motion.div>
 
                 <motion.div
-                  {...fadeInUp(0.08)}
                   style={
                     enableScrollMotion
                       ? { y: heroCopyY, opacity: heroCopyOpacity }
@@ -710,20 +749,28 @@ export default function Page() {
                   }
                   className="hero-scroll-layer space-y-6"
                 >
-                  <h1 className="max-w-[6.6ch] font-display text-[3.35rem] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[4.5rem] md:text-[5.3rem] lg:text-[6rem] xl:text-[6.8rem] 2xl:text-[7.5rem]">
-                    Marcell Varga
-                  </h1>
-                  <p className="max-w-[30rem] text-[1.02rem] leading-7 text-white/72 sm:text-[1.08rem] sm:leading-8">
-                    I design and build product interfaces that feel calm, sharp,
-                    and ready to ship.
-                  </p>
+                  <motion.div
+                    {...heroIntroFoldUp(revealHeroIntroText, introPlayedThisVisit, 0.08)}
+                    className="home-intro-fold space-y-6 [transform-origin:bottom]"
+                  >
+                    <h1 className="max-w-[6.6ch] font-display text-[3.35rem] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[4.5rem] md:text-[5.3rem] lg:text-[6rem] xl:text-[6.8rem] 2xl:text-[7.5rem]">
+                      Marcell Varga
+                    </h1>
+                    <p className="max-w-[30rem] text-[1.02rem] leading-7 text-white/72 sm:text-[1.08rem] sm:leading-8">
+                      I design and build product interfaces that feel calm, sharp,
+                      and ready to ship.
+                    </p>
+                  </motion.div>
                 </motion.div>
 
                 <motion.div
-                  {...fadeInUp(0.12)}
                   style={enableScrollMotion ? { y: heroCardsY } : undefined}
-                  className="hero-scroll-layer mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6"
+                  className="hero-scroll-layer mt-10"
                 >
+                  <motion.div
+                    {...heroIntroFoldUp(revealHeroIntroText, introPlayedThisVisit, 0.16)}
+                    className="home-intro-fold flex flex-col gap-4 [transform-origin:bottom] sm:flex-row sm:items-center sm:gap-6"
+                  >
                   <button
                     onClick={scrollWork}
                     className="group inline-flex items-center justify-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8]"
@@ -738,6 +785,7 @@ export default function Page() {
                     Resume
                     <Download className="h-4 w-4" />
                   </Link>
+                  </motion.div>
                 </motion.div>
               </div>
 
@@ -765,7 +813,14 @@ export default function Page() {
 
             <motion.div
               aria-hidden="true"
-              style={enableScrollMotion ? { y: liquidRise } : undefined}
+              style={
+                enableScrollMotion
+                  ? {
+                      y: liquidRise,
+                      opacity: introStage === "done" ? 1 : 0,
+                    }
+                  : { opacity: introStage === "done" ? 1 : 0 }
+              }
               className="hero-scroll-layer pointer-events-none absolute inset-x-0 bottom-[-17rem] z-20 h-[34rem] overflow-hidden sm:bottom-[-15rem] sm:h-[38rem]"
             >
               <div className="absolute inset-x-[-10%] bottom-0 h-[22rem] overflow-hidden rounded-t-[44%] [mask-image:linear-gradient(to_bottom,black_0%,black_65%,transparent_100%)] sm:h-[26rem]">
@@ -783,24 +838,34 @@ export default function Page() {
             className="relative mx-auto mt-12 w-full max-w-7xl lg:-mt-12 lg:h-[240vh]"
           >
             <div className="lg:sticky lg:top-16 lg:flex lg:h-[32rem] lg:items-center lg:py-10 xl:top-24 xl:h-[40rem] xl:py-12">
-              <motion.div
-                data-scroll-anchor="about"
-                style={
-                  enableScrollMotion
-                    ? {
-                        opacity: principlesOpacity,
-                        scale: principlesScale,
-                        y: principlesY,
-                      }
-                    : undefined
-                }
+                <motion.div
+                  data-scroll-anchor="about"
+                  style={
+                    enableScrollMotion
+                      ? principlesIntroReady
+                        ? {
+                            opacity: principlesOpacity,
+                            scale: principlesScale,
+                            y: principlesY,
+                          }
+                        : { opacity: 0, scale: 0.98, y: 24 }
+                      : principlesIntroReady
+                        ? undefined
+                        : { opacity: 0, scale: 0.98, y: 24 }
+                  }
                 className="mx-auto flex h-auto min-h-[24rem] w-full max-w-5xl flex-col overflow-hidden rounded-[2rem] bg-[#071726]/92 p-6 text-white shadow-[0_40px_140px_rgba(5,16,32,0.28),inset_0_1px_0_rgba(255,255,255,0.16)] sm:min-h-[28rem] sm:rounded-[2.5rem] sm:p-8 lg:h-[40rem] lg:min-h-0 lg:rounded-[3rem] lg:p-12"
               >
                 <div className="flex h-full flex-col justify-between gap-8">
                   <div>
                     <SectionLabel index="01" label="Principles" tone="light" />
                     <motion.div
-                      style={enableScrollMotion ? { opacity: principlesGlow } : undefined}
+                      style={
+                        enableScrollMotion && principlesIntroReady
+                          ? { opacity: principlesGlow }
+                          : principlesIntroReady
+                            ? undefined
+                            : { opacity: 0 }
+                      }
                       className="mb-8 h-px w-full bg-[linear-gradient(90deg,rgba(76,216,255,0.85),rgba(76,216,255,0.02))]"
                     />
                     <p
@@ -1146,10 +1211,10 @@ export default function Page() {
         </main>
 
         <Footer isHover={footerHover} />
-      </motion.div>
+      </div>
 
-      {introIsActive && (
-        <HomeIntro targetRef={headerLogoRef} onComplete={finishIntro} />
+      {introIsVisible && (
+        <HomeIntro onExitStart={startIntroExit} onComplete={finishIntro} />
       )}
 
       <AnimatePresence>
