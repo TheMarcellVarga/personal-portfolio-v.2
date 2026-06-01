@@ -34,9 +34,11 @@ export default function Footer({ isHover = false }: FooterProps) {
           craft with motion discipline.
         </p>
         <div className="flex flex-wrap items-center gap-4 sm:justify-end">
-          <span className="text-xs text-custom-blue/48 sm:ml-auto">
-            🇸🇬 Local Time: {currentTime}
+          <span className="flex items-center gap-1 text-xs sm:ml-auto">
+            <span className="text-lg leading-none" style={{ color: "initial", opacity: 1 }}>🇸🇬</span>
+            <span className="text-custom-blue/60">Local Time: {currentTime}</span>
           </span>
+     
 
           <a
             href="https://www.linkedin.com/in/marcellvarga/"
