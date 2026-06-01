@@ -272,3 +272,27 @@
   size: A4;
   margin: 0;
 }
+
+@media print {
+  html,
+  body {
+    width: 210mm;
+    height: 297mm;
+    background: #081522 !important;
+  }
+
+  .resume-route,
+  .resume-sheet {
+    width: 210mm;
+    height: 297mm;
+    min-height: 297mm;
+    background: #081522 !important;
+    color-adjust: exact;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .resume-sheet {
+    overflow: hidden;
+  }
+}

@@ -2,7 +2,14 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Github, Globe, Linkedin, Mail, MapPin, Phone, Sparkles } from "lucide-react";
+import {
+  Github,
+  Globe,
+  Linkedin,
+  Mail,
+  MapPin,
+  Phone,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import Header from "../header";
 import Footer from "../footer";
@@ -22,9 +29,9 @@ const fadeInUp = (delay = 0) => ({
 
 function SidebarTitle({ children }: { children: React.ReactNode }) {
   return (
-    <div className="space-y-2">
-      <span className="block h-[2px] w-16 rounded-full bg-[linear-gradient(90deg,rgba(76,207,255,0.7),rgba(76,207,255,0.22),transparent)]" />
-      <h2 className="text-[10px] font-medium uppercase tracking-[0.32em] text-custom-blue/45">
+    <div>
+      <span className="mb-2 block h-px w-10 bg-[#67d9ff]" />
+      <h2 className="text-[8px] font-bold uppercase tracking-[0.28em] text-white/48">
         {children}
       </h2>
     </div>
@@ -33,37 +40,26 @@ function SidebarTitle({ children }: { children: React.ReactNode }) {
 
 function MainSection({
   title,
+  index,
   children,
 }: {
   title: string;
+  index: string;
   children: React.ReactNode;
 }) {
   return (
     <section>
       <div className="flex items-center gap-3">
-        <h2 className="text-[11px] font-medium uppercase tracking-[0.3em] text-custom-blue/55">
+        <span className="font-mono text-[8px] font-bold tracking-[0.12em] text-[#67d9ff]">
+          {index}
+        </span>
+        <h2 className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/64">
           {title}
         </h2>
-        <span className="h-px flex-1 bg-custom-blue/10" />
+        <span className="h-px flex-1 bg-white/12" />
       </div>
-      <div className="mt-4">{children}</div>
+      <div className="mt-3">{children}</div>
     </section>
-  );
-}
-
-function HighlightGrid({ items }: { items: readonly string[] }) {
-  return (
-    <div className="grid gap-3 sm:grid-cols-3">
-      {items.map((item) => (
-        <div
-          key={item}
-          className="glass-panel rounded-[1.25rem] bg-white/65 p-4 shadow-[0_12px_40px_rgba(11,17,26,0.04)]"
-        >
-          <Sparkles className="mb-3 h-4 w-4 text-[#1aa6d4]" />
-          <p className="text-[12px] leading-[1.55] text-custom-blue/74">{item}</p>
-        </div>
-      ))}
-    </div>
   );
 }
 
@@ -78,13 +74,13 @@ function ContactItem({
 }) {
   const content = (
     <>
-      <Icon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-custom-blue/45" />
+      <Icon className="mt-[2px] h-3 w-3 shrink-0 text-[#67d9ff]" />
       <span className="break-words">{label}</span>
     </>
   );
 
   if (!href) {
-    return <div className="flex items-start gap-2.5 text-[12px] leading-5 text-custom-blue/72">{content}</div>;
+    return <div className="flex items-start gap-2 text-[9px] leading-4 text-white/66">{content}</div>;
   }
 
   return (
@@ -92,7 +88,7 @@ function ContactItem({
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="flex items-start gap-2.5 text-[12px] leading-5 text-custom-blue/72 transition-colors hover:text-custom-blue"
+      className="flex items-start gap-2 text-[9px] leading-4 text-white/66 transition-colors hover:text-white"
     >
       {content}
     </a>
@@ -103,8 +99,8 @@ function BulletList({ items }: { items: readonly string[] }) {
   return (
     <ul className="space-y-1.5">
       {items.map((item) => (
-        <li key={item} className="flex gap-2 text-[12.5px] leading-[1.55] text-custom-blue/78">
-          <span className="mt-[0.48rem] h-1.5 w-1.5 shrink-0 rounded-full bg-custom-blue/30" />
+        <li key={item} className="flex gap-2 text-[10px] leading-[1.45] text-white/68">
+          <span className="mt-[0.34rem] h-1 w-1 shrink-0 rounded-full bg-[#67d9ff]" />
           <span>{item}</span>
         </li>
       ))}
@@ -114,9 +110,9 @@ function BulletList({ items }: { items: readonly string[] }) {
 
 function CompactList({ items }: { items: readonly string[] }) {
   return (
-    <ul className="space-y-1.5">
+    <ul className="space-y-1">
       {items.map((item) => (
-        <li key={item} className="text-[12px] leading-5 text-custom-blue/78">
+        <li key={item} className="text-[9px] leading-[1.4] text-white/66">
           {item}
         </li>
       ))}
@@ -128,13 +124,13 @@ export default function ResumePage() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative print:bg-white">
+    <div className="resume-route relative min-h-screen print:bg-[#081522]">
       <div className="print:hidden">
         <PageBackground />
         <Header isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
 
-      <main className="relative z-10 px-4 pb-24 pt-32 sm:px-6 lg:px-8 print:p-0 print:pt-0">
+      <main className="relative z-10 px-4 pb-24 pt-32 sm:px-6 lg:px-8 print:p-0">
         <div className="mx-auto max-w-6xl">
           <motion.div
             {...fadeInUp(0)}
@@ -142,15 +138,14 @@ export default function ResumePage() {
           >
             <div className="max-w-3xl">
               <p className="font-label text-[0.68rem] font-medium uppercase tracking-[0.28em] text-custom-blue/45">
-                Resume 2026
+                Resume / 2026
               </p>
               <h1 className="mt-3 font-display text-[clamp(2.3rem,5vw,4.5rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-custom-blue">
-                UX, frontend, and AI product flow work from Singapore.
+                Design-engineering work, formatted for the current chapter.
               </h1>
               <p className="mt-5 max-w-2xl text-[1rem] leading-7 text-custom-blue/68">
-                A cleaner CV for the current chapter: same AXON role, relocated in
-                March 2026, and positioned around product interfaces, AI-aware
-                workflows, design systems, and production frontend execution.
+                A print-ready A4 resume built around UX/UI engineering,
+                frontend delivery, design systems, and AI-aware product work.
               </p>
             </div>
             <ResumeActions />
@@ -158,85 +153,59 @@ export default function ResumePage() {
 
           <motion.article
             {...fadeInUp(0.08)}
-            className="resume-sheet glass-panel relative mx-auto overflow-hidden rounded-[1.9rem] bg-white/65 shadow-[0_18px_48px_rgba(11,17,26,0.06)] sm:rounded-[2.1rem] print:rounded-none print:border-0 print:bg-white print:shadow-none"
+            className="resume-sheet relative mx-auto overflow-hidden rounded-[1.5rem] border border-white/12 bg-[#081522] shadow-[0_30px_110px_rgba(0,0,0,0.34),inset_0_1px_0_rgba(255,255,255,0.08)] sm:rounded-[1.9rem] print:rounded-none print:border-0 print:shadow-none"
           >
-            <div className="pointer-events-none absolute right-8 top-12 h-36 w-36 rounded-full bg-[radial-gradient(circle,rgba(76,207,255,0.16),rgba(76,207,255,0.05)_42%,transparent_72%)] blur-2xl" />
-            <div className="grid min-h-[297mm] grid-cols-1 lg:grid-cols-[68mm_1fr] print:grid-cols-[68mm_1fr]">
-              <aside className="relative order-2 border-b border-custom-blue/8 bg-white/38 px-6 py-8 lg:order-none lg:border-b-0 lg:border-r print:order-none print:border-b-0 print:border-r print:bg-[#f3f5f7] print:py-7">
-                <div className="pointer-events-none absolute left-0 top-0 h-28 w-full bg-[linear-gradient(180deg,rgba(76,207,255,0.11),transparent)]" />
-                <div className="mx-auto max-w-[220px] lg:max-w-none">
-                  <div className="relative mx-auto h-36 w-28 overflow-hidden rounded-[1.25rem] bg-white/82 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)]">
-                    <Image
-                      src={resume.photo}
-                      alt={resume.name}
-                      fill
-                      priority
-                      className="object-cover object-top"
-                    />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_84%_4%,rgba(76,207,255,0.16),transparent_24%),linear-gradient(145deg,rgba(255,255,255,0.025),transparent_44%)]" />
+            <div className="relative grid min-h-[297mm] grid-cols-1 md:grid-cols-[58mm_1fr] print:grid-cols-[58mm_1fr]">
+              <aside className="relative border-b border-white/10 bg-[#0b1b29]/84 px-5 py-6 md:border-b-0 md:border-r print:border-b-0 print:border-r">
+                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(76,207,255,0.1),transparent_19%)]" />
+                <div className="relative mx-auto max-w-[250px] md:max-w-none">
+                  <div className="w-full">
+                    <div className="mx-auto flex w-full max-w-[9.5rem] items-end justify-center overflow-hidden rounded-[1rem] border border-white/12 bg-white/8 px-2 pt-2 shadow-[0_12px_32px_rgba(0,0,0,0.22)] md:max-w-[10.5rem]">
+                      <Image
+                        src={resume.photo}
+                        alt={resume.name}
+                        width={1210}
+                        height={1777}
+                        priority
+                        className="block h-auto w-full self-end object-contain object-center"
+                      />
+                    </div>
                   </div>
 
-                  <div className="mt-6 space-y-3">
-                    <ContactItem
-                      icon={Mail}
-                      label={resume.email}
-                      href={`mailto:${resume.email}`}
-                    />
-                    <ContactItem
-                      icon={Phone}
-                      label={resume.phone}
-                    />
-                    <ContactItem
-                      icon={Globe}
-                      label={resume.website}
-                      href={`https://${resume.website}`}
-                    />
-                    <ContactItem
-                      icon={Linkedin}
-                      label={resume.linkedin}
-                      href={`https://${resume.linkedin}`}
-                    />
-                    <ContactItem
-                      icon={Github}
-                      label={resume.githubHandle}
-                      href={`https://${resume.github}`}
-                    />
+                  <div className="mt-5 space-y-2">
+                    <ContactItem icon={Mail} label={resume.email} href={`mailto:${resume.email}`} />
+                    <ContactItem icon={Phone} label={resume.phone} />
+                    <ContactItem icon={Globe} label={resume.website} href={`https://${resume.website}`} />
+                    <ContactItem icon={Linkedin} label={resume.linkedin} href={`https://${resume.linkedin}`} />
+                    <ContactItem icon={Github} label={resume.githubHandle} href={`https://${resume.github}`} />
                     <ContactItem icon={MapPin} label={resume.location} />
                   </div>
 
-                  <div className="mt-8 space-y-6">
+                  <div className="mt-6 space-y-5">
                     <section>
                       <SidebarTitle>Core Strengths</SidebarTitle>
-                      <div className="mt-3">
+                      <div className="mt-2.5">
                         <CompactList items={resume.coreStrengths} />
                       </div>
                     </section>
 
                     <section>
-                      <SidebarTitle>Practical Skills</SidebarTitle>
-                      <div className="mt-3">
-                        <CompactList items={resume.practicalSkills} />
-                      </div>
-                    </section>
-
-                    <section>
-                      <SidebarTitle>Technical Skills</SidebarTitle>
-                      <div className="mt-3">
+                      <SidebarTitle>Technical Toolkit</SidebarTitle>
+                      <div className="mt-2.5">
                         <CompactList items={resume.technicalSkills} />
                       </div>
                     </section>
 
                     <section>
                       <SidebarTitle>Languages</SidebarTitle>
-                      <div className="mt-3 space-y-2.5">
+                      <div className="mt-2.5 space-y-1.5">
                         {resume.languages.map((language) => (
-                          <div
-                            key={language.name}
-                            className="space-y-0.5 border-b border-black/6 pb-2 last:border-0 last:pb-0"
-                          >
-                            <p className="text-[12px] font-medium text-custom-blue">
+                          <div key={language.name}>
+                            <p className="text-[9px] font-semibold leading-4 text-white/76">
                               {language.name}
                             </p>
-                            <p className="text-[11px] leading-4 text-custom-blue/55">
+                            <p className="text-[8px] leading-3 text-white/42">
                               {language.level}
                             </p>
                           </div>
@@ -247,98 +216,88 @@ export default function ResumePage() {
                 </div>
               </aside>
 
-              <div className="relative order-1 px-6 py-8 sm:px-8 lg:order-none lg:px-9 print:order-none print:px-8 print:py-7">
-                <header className="relative overflow-hidden rounded-[1.9rem] bg-[#0b1826] p-6 text-white shadow-[0_24px_70px_rgba(7,20,38,0.16)] sm:rounded-[2.1rem] print:rounded-none print:shadow-none">
-                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(76,207,255,0.24),transparent_32%),linear-gradient(135deg,rgba(255,255,255,0.08),transparent_54%)]" />
-                  <div className="relative">
-                  <p className="text-[11px] font-medium uppercase tracking-[0.34em] text-white/45">
-                    Resume
-                  </p>
-                  <h1 className="mt-3 font-display text-[2.55rem] font-semibold tracking-[-0.04em] text-white">
+              <div className="relative px-6 py-7 sm:px-8 print:px-7 print:py-6">
+                <header className="border-b border-white/12 pb-5">
+                  <div className="flex items-center gap-3">
+                    <p className="text-[9px] font-bold uppercase tracking-[0.34em] text-[#67d9ff]">
+                      UX/UI Engineer
+                    </p>
+                    <span className="h-px flex-1 bg-[#67d9ff]/24" />
+                    <p className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/32">
+                      Singapore / 2026
+                    </p>
+                  </div>
+                  <h1 className="mt-5 font-display text-[2.8rem] font-semibold leading-[0.9] tracking-[-0.06em] text-white">
                     {resume.name}
                   </h1>
-                  <p className="mt-2 max-w-xl text-[1.02rem] font-medium leading-7 text-white/68">
+                  <p className="mt-3 max-w-xl text-[1rem] font-medium leading-6 text-white/66">
                     {resume.title}
                   </p>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {["Singapore", "AI product UX", "Frontend engineering"].map((tag) => (
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {["Product UX", "Frontend", "Design Systems", "AI Interfaces"].map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full bg-white/10 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-white/72 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]"
+                        className="rounded-full bg-[#67d9ff]/8 px-2.5 py-1 text-[8px] font-bold uppercase tracking-[0.16em] text-[#a4e9ff]"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
-                  </div>
                 </header>
 
-                <div className="space-y-8 pt-6">
-                  <MainSection title="Profile">
-                    <div className="space-y-3">
+                <div className="space-y-5 pt-5">
+                  <MainSection title="Profile" index="01">
+                    <div className="space-y-2">
                       {resume.profile.map((paragraph) => (
-                        <p
-                          key={paragraph}
-                          className="text-[13px] leading-[1.65] text-custom-blue/78"
-                        >
+                        <p key={paragraph} className="text-[10.5px] leading-[1.55] text-white/68">
                           {paragraph}
                         </p>
                       ))}
                     </div>
                   </MainSection>
 
-                  <MainSection title="Snapshot">
-                    <HighlightGrid items={resume.highlights} />
-                  </MainSection>
-
-                  <MainSection title="Experience">
-                    <div className="space-y-7">
+                  <MainSection title="Experience" index="02">
+                    <div className="space-y-5">
                       {resume.experience.map((job) => (
                         <article key={`${job.company}-${job.role}`}>
-                          <div className="flex flex-col gap-2 border-b border-black/6 pb-3 sm:flex-row sm:items-start sm:justify-between">
+                          <div className="mb-2.5 flex items-start justify-between gap-4 border-b border-white/8 pb-2">
                             <div>
-                              <h3 className="text-[1.06rem] font-semibold text-custom-blue">
+                              <h3 className="text-[13px] font-semibold text-white">
                                 {job.role}
                               </h3>
-                              <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.22em] text-custom-blue/48">
+                              <p className="mt-1 text-[8px] font-bold uppercase tracking-[0.2em] text-[#67d9ff]/78">
                                 {job.company}
                               </p>
                             </div>
-                            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-custom-blue/42">
+                            <p className="shrink-0 font-mono text-[8px] uppercase tracking-[0.12em] text-white/42">
                               {job.period}
                             </p>
                           </div>
-                          <div className="pt-3">
-                            <BulletList items={job.bullets} />
-                          </div>
+                          <BulletList items={job.bullets} />
                         </article>
                       ))}
                     </div>
                   </MainSection>
 
-                  <MainSection title="Education">
-                    <div className="space-y-4">
-                      {resume.education.map((education) => (
-                        <article key={`${education.school}-${education.degree}`}>
-                          <div className="flex flex-col gap-2 border-b border-black/6 pb-3 sm:flex-row sm:items-start sm:justify-between">
-                            <div>
-                              <h3 className="text-[1.03rem] font-semibold text-custom-blue">
-                                {education.degree}
-                              </h3>
-                              <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.18em] text-custom-blue/48">
-                                {education.school}
-                              </p>
-                            </div>
-                            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-custom-blue/42">
-                              {education.period}
+                  <MainSection title="Education" index="03">
+                    {resume.education.map((education) => (
+                      <article key={`${education.school}-${education.degree}`}>
+                        <div className="mb-2.5 flex items-start justify-between gap-4 border-b border-white/8 pb-2">
+                          <div>
+                            <h3 className="text-[13px] font-semibold text-white">
+                              {education.degree}
+                            </h3>
+                            <p className="mt-1 text-[8px] font-bold uppercase tracking-[0.18em] text-[#67d9ff]/78">
+                              {education.school}
                             </p>
                           </div>
-                          <div className="pt-3">
-                            <BulletList items={education.details} />
-                          </div>
-                        </article>
-                      ))}
-                    </div>
+                          <p className="shrink-0 font-mono text-[8px] uppercase tracking-[0.12em] text-white/42">
+                            {education.period}
+                          </p>
+                        </div>
+                        <BulletList items={education.details} />
+                      </article>
+                    ))}
                   </MainSection>
                 </div>
               </div>
