@@ -39,7 +39,7 @@ export default function Contact() {
               href="/"
               className="group mb-12 inline-flex items-center gap-2 text-sm font-semibold text-custom-blue/60 transition-colors hover:text-custom-blue"
             >
-              <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+              <ArrowLeft className="h-4 w-4 shrink-0 transition-transform group-hover:-translate-x-1" />
               Back to home
             </Link>
           </motion.div>
@@ -100,7 +100,7 @@ export default function Contact() {
                   </div>
                   <span className="font-display text-[1.18rem] font-medium tracking-[-0.02em] text-custom-blue">LinkedIn</span>
                 </div>
-                <ArrowLeft className="h-5 w-5 rotate-180 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
+                <ArrowLeft className="h-5 w-5 shrink-0 rotate-180 transition-transform group-hover:translate-x-1" />
               </a>
 
               <a
@@ -115,7 +115,7 @@ export default function Contact() {
                   </div>
                   <span className="font-display text-[1.18rem] font-medium tracking-[-0.02em] text-custom-blue">GitHub</span>
                 </div>
-                <ArrowLeft className="h-5 w-5 rotate-180 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
+                <ArrowLeft className="h-5 w-5 shrink-0 rotate-180 transition-transform group-hover:translate-x-1" />
               </a>
 
               <Link
@@ -128,7 +128,7 @@ export default function Contact() {
                   </div>
                   <span className="font-display text-[1.18rem] font-medium tracking-[-0.02em] text-custom-blue">Resume</span>
                 </div>
-                <ArrowLeft className="h-5 w-5 rotate-180 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
+                <ArrowLeft className="h-5 w-5 shrink-0 rotate-180 transition-transform group-hover:translate-x-1" />
               </Link>
             </motion.div>
           </div>

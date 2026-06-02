@@ -1068,7 +1068,7 @@ export default function Page() {
                     </div>
 
                     <div className="flex h-10 w-10 items-center justify-center rounded-full border border-custom-blue/10 transition-all duration-500 group-hover:rotate-45 group-hover:bg-custom-blue group-hover:text-white sm:h-12 sm:w-12 md:justify-self-end">
-                      <ArrowUpRight className="h-4 w-4 sm:h-5 w-5" />
+                      <ArrowUpRight className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
                     </div>
 
                     <div className="overflow-hidden rounded-[1.25rem] border border-custom-blue/8 md:hidden">
@@ -1185,15 +1185,15 @@ export default function Page() {
                 <div className="grid gap-2.5 self-end sm:gap-3">
                   <a
                     href="mailto:themarcellvarga@gmail.com"
-                    className="group flex flex-col items-start justify-between gap-3 rounded-[1.35rem] bg-white/7 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 sm:flex-row sm:items-center sm:px-5 sm:py-3.5"
+                    className="group flex items-center justify-between gap-4 rounded-[1.35rem] bg-white/7 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 sm:px-5 sm:py-3.5"
                   >
-                    <span className="flex min-w-0 items-center gap-3">
+                    <span className="flex min-w-0 flex-1 items-center gap-3">
                       <Mail className="h-5 w-5 text-[#67d9ff]" />
-                      <span className="break-all font-label text-[0.68rem] font-medium uppercase tracking-[0.16em] text-white/80 sm:text-[0.72rem]">
+                      <span className="min-w-0 break-all font-label text-[0.68rem] font-medium uppercase tracking-[0.16em] text-white/80 sm:text-[0.72rem]">
                         themarcellvarga@gmail.com
                       </span>
                     </span>
-                    <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    <ArrowUpRight className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                   </a>
                   <a
                     href="https://www.linkedin.com/in/marcellvarga/"
@@ -1207,7 +1207,7 @@ export default function Page() {
                         LinkedIn
                       </span>
                     </span>
-                    <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    <ArrowUpRight className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                   </a>
                   <a
                     href="https://github.com/TheMarcellVarga"
@@ -1221,7 +1221,7 @@ export default function Page() {
                         GitHub
                       </span>
                     </span>
-                    <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    <ArrowUpRight className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                   </a>
                 </div>
               </div>
