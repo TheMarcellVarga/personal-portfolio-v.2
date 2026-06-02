@@ -128,7 +128,7 @@ export default function WildRoutePage() {
             </motion.div>
 
             <motion.div {...fadeInUp(0.1)} className="space-y-6 lg:pb-2">
-              <div className="grid grid-cols-2 gap-5">
+              <div className="grid grid-cols-2 gap-3 sm:gap-8">
                 <div className="space-y-1">
                   <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">
                     <Calendar className="h-3 w-3" /> Date

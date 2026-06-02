@@ -684,7 +684,7 @@ export default function Page() {
                     {...heroIntroFoldUp(revealHeroIntroText, introPlayedThisVisit, 0.08)}
                     className="home-intro-fold space-y-6 [transform-origin:bottom]"
                   >
-                    <h1 className="max-w-[8ch] font-display text-[clamp(2.8rem,10vw,4.2rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[clamp(3.4rem,8vw,4.8rem)] md:text-[clamp(3.8rem,7vw,5.4rem)]">
+                    <h1 className="max-w-[8ch] font-display text-[clamp(3.4rem,14vw,4.2rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[clamp(3.4rem,8vw,4.8rem)] md:text-[clamp(3.8rem,7vw,5.4rem)]">
                       Marcell Varga
                     </h1>
                     <p className="max-w-[30rem] text-[0.98rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
@@ -704,17 +704,17 @@ export default function Page() {
                   >
                   <button
                     onClick={scrollWork}
-                    className="group inline-flex items-center justify-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8] sm:w-fit"
+                    className="group relative inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8] sm:w-fit sm:gap-3"
                   >
                     Selected work
-                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    <ArrowRight className="absolute right-6 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 sm:static" />
                   </button>
                   <Link
                     href="/resume"
-                    className="inline-flex items-center gap-2 text-sm font-medium text-white/72 transition duration-300 hover:text-white"
+                    className="group relative inline-flex items-center justify-center rounded-full bg-custom-blue px-6 py-3 text-sm font-medium text-white shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#0f1f2f] sm:w-fit sm:gap-3 sm:bg-white sm:text-custom-blue sm:hover:bg-[#eef4f8]"
                   >
                     Resume
-                    <Download className="h-4 w-4" />
+                    <Download className="absolute right-6 h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5 sm:static" />
                   </Link>
                   </motion.div>
                 </motion.div>
@@ -1034,18 +1034,23 @@ export default function Page() {
                 >
                   <Link
                     href={project.link}
-                    className="grid gap-4 rounded-[1.5rem] border-b border-custom-blue/5 px-4 py-5 transition-colors duration-500 hover:bg-custom-blue/[0.01] sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:px-0 md:py-8"
+                    className="grid grid-cols-[minmax(0,1fr)_auto] gap-4 rounded-[1.5rem] border-b border-custom-blue/5 px-4 py-5 transition-colors duration-500 hover:bg-custom-blue/[0.01] sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:px-0 md:py-8"
                   >
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
+                    <div className="col-span-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8 md:col-span-1">
                       <span className="font-label min-w-[2.5rem] text-[0.62rem] font-bold text-custom-blue/20">
                         0{idx + 1}
                       </span>
-                      <h3 className="font-display text-[1.8rem] leading-none tracking-[-0.02em] text-custom-blue transition-transform duration-500 group-hover:translate-x-2 sm:text-[2.2rem] lg:text-[2.8rem]">
-                        {project.title}
-                      </h3>
+                      <div className="flex flex-1 items-center justify-between gap-4">
+                        <h3 className="font-display text-[1.8rem] leading-none tracking-[-0.02em] text-custom-blue transition-transform duration-500 group-hover:translate-x-2 sm:text-[2.2rem] lg:text-[2.8rem]">
+                          {project.title}
+                        </h3>
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-custom-blue/10 transition-all duration-500 group-hover:rotate-45 group-hover:bg-custom-blue group-hover:text-white md:hidden">
+                          <ArrowUpRight className="h-4 w-4 shrink-0" />
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="flex flex-wrap gap-x-5 gap-y-1 md:justify-self-end md:justify-end">
+                    <div className="col-span-2 flex flex-wrap gap-x-5 gap-y-1 md:col-span-1 md:justify-self-end md:justify-end">
                       {project.skills.slice(0, 4).map((skill) => (
                         <span
                           key={skill}
@@ -1057,7 +1062,7 @@ export default function Page() {
                     </div>
 
                     <div className="flex items-center justify-between gap-6 md:justify-self-end">
-                      <div className="flex flex-col items-end gap-0.5 text-right">
+                      <div className="flex items-center gap-3 text-left md:flex-col md:items-end md:gap-0.5 md:text-right">
                         <span className="font-label text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/40">
                           {project.category}
                         </span>
@@ -1067,11 +1072,11 @@ export default function Page() {
                       </div>
                     </div>
 
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-custom-blue/10 transition-all duration-500 group-hover:rotate-45 group-hover:bg-custom-blue group-hover:text-white sm:h-12 sm:w-12 md:justify-self-end">
+                    <div className="hidden h-10 w-10 items-center justify-center rounded-full border border-custom-blue/10 transition-all duration-500 group-hover:rotate-45 group-hover:bg-custom-blue group-hover:text-white sm:h-12 sm:w-12 md:flex md:justify-self-end">
                       <ArrowUpRight className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
                     </div>
 
-                    <div className="overflow-hidden rounded-[1.25rem] border border-custom-blue/8 md:hidden">
+                    <div className="col-span-2 overflow-hidden rounded-[1.25rem] border border-custom-blue/8 md:hidden">
                       <div className="relative aspect-[16/10]">
                         <Image
                           src={project.image}
@@ -1189,7 +1194,7 @@ export default function Page() {
                   >
                     <span className="flex min-w-0 flex-1 items-center gap-3">
                       <Mail className="h-5 w-5 text-[#67d9ff]" />
-                      <span className="min-w-0 break-all font-label text-[0.68rem] font-medium uppercase tracking-[0.16em] text-white/80 sm:text-[0.72rem]">
+                      <span className="min-w-0 break-all font-label text-[0.64rem] font-medium uppercase tracking-[0.16em] text-white/80 sm:text-[0.72rem]">
                         themarcellvarga@gmail.com
                       </span>
                     </span>

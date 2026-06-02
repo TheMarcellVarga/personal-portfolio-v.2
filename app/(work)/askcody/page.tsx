@@ -284,11 +284,11 @@ export default function AskCodyPage() {
               </p>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               {...fadeInUp(0.1)}
               className="flex flex-col gap-6 lg:pt-16"
             >
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-8">
+              <div className="grid grid-cols-2 gap-3 sm:gap-8">
                 <div className="space-y-1">
                   <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">
                     <Calendar className="h-3 w-3" /> Date
