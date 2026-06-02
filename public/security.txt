@@ -1,0 +1,5 @@
+Contact: mailto:themarcellvarga@gmail.com
+Contact: https://marcellvarga.com/contact
+Expires: 2027-06-02T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://marcellvarga.com/.well-known/security.txt
