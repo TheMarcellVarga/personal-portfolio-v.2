@@ -44,7 +44,7 @@
     background: transparent;
     color: var(--color-custom-blue);
     font-family: var(--font);
-    overflow-x: clip;
+    overflow-x: hidden;
   }
 
   a {
@@ -187,6 +187,15 @@
     backface-visibility: hidden;
     transform: translateZ(0);
     will-change: transform, opacity;
+  }
+}
+
+@media (max-width: 639px) {
+  .glass-panel {
+    backdrop-filter: blur(16px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.68),
+      0 16px 48px rgba(17, 27, 40, 0.07);
   }
 }
 

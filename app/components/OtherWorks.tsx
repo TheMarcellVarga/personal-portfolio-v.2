@@ -29,14 +29,14 @@ export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
   );
 
   return (
-    <section className="mt-40">
+    <section className="mt-24 sm:mt-32 lg:mt-40">
       <SectionLabel index="More" label="Selected Work" />
-      <div className="mt-12 grid gap-3.5 md:grid-cols-2">
+      <div className="mt-8 grid gap-3.5 sm:mt-12 md:grid-cols-2">
         {otherProjects.map((project, index) => (
           <motion.article
             key={project.title}
             {...fadeInUp(index * 0.1)}
-            className="glass-panel group relative min-h-[22rem] overflow-hidden rounded-[1.9rem] bg-white/65 shadow-[0_12px_40px_rgba(11,17,26,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_48px_rgba(11,17,26,0.05)] sm:rounded-[2.1rem]"
+            className="glass-panel group relative min-h-[19rem] overflow-hidden rounded-[1.9rem] bg-white/65 shadow-[0_12px_40px_rgba(11,17,26,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_48px_rgba(11,17,26,0.05)] sm:min-h-[22rem] sm:rounded-[2.1rem]"
           >
             <Link
               href={project.link}

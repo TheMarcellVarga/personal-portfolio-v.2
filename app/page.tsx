@@ -150,16 +150,23 @@ function HistoryItemComponent({
   index, 
   focus,
   reduceMotion,
+  compact,
 }: { 
   item: HistoryItem; 
   index: number; 
   focus: number;
   reduceMotion: boolean;
+  compact: boolean;
 }) {
   const normalizedFocus = reduceMotion ? 1 : focus;
   const restOffset = 28 + index * 12;
-  const cardMotion = reduceMotion
-    ? undefined
+  const cardMotion = reduceMotion || compact
+    ? {
+        x: 0,
+        opacity: 1,
+        scale: 1,
+        filter: "blur(0px)",
+      }
     : {
         x: (1 - normalizedFocus) * restOffset,
         opacity: 0.48 + normalizedFocus * 0.52,
@@ -178,7 +185,7 @@ function HistoryItemComponent({
       }}
       className="glass-panel relative flex min-h-[18rem] snap-center flex-col overflow-hidden rounded-[1.9rem] bg-white/65 p-5 shadow-[0_12px_40px_rgba(11,17,26,0.04)] transition-[border-color] duration-300 sm:rounded-[2.1rem]"
       style={{
-        willChange: reduceMotion ? "auto" : "transform, opacity, filter",
+        willChange: reduceMotion || compact ? "auto" : "transform, opacity, filter",
       }}
     >
       <div className="relative z-10 flex h-full flex-col">
@@ -649,7 +656,7 @@ export default function Page() {
             <HeroDynamicBackdrop />
             <div className="absolute inset-0 z-10 bg-[linear-gradient(180deg,rgba(4,9,15,0.92)_0%,rgba(4,9,15,0.82)_36%,rgba(4,9,15,0.44)_100%)] lg:bg-[linear-gradient(90deg,rgba(4,9,15,0.98)_0%,rgba(4,9,15,0.9)_30%,rgba(4,9,15,0.6)_52%,rgba(4,9,15,0.18)_72%,rgba(4,9,15,0.08)_100%)]" />
 
-            <div className="relative z-30 mx-auto flex min-h-[100svh] w-full max-w-7xl flex-col gap-10 px-6 pb-10 pt-24 sm:px-10 sm:pb-14 lg:hidden">
+            <div className="relative z-30 mx-auto flex min-h-[100svh] w-full max-w-7xl flex-col gap-8 px-6 pb-8 pt-24 sm:gap-10 sm:px-10 sm:pb-12 md:grid md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:items-center md:gap-7 lg:hidden">
               <div className="max-w-[36rem]">
                 <motion.div
                   style={enableScrollMotion ? { y: heroPillsY } : undefined}
@@ -716,21 +723,21 @@ export default function Page() {
               <motion.div
                 {...fadeInUp(0.1)}
                 style={enableScrollMotion ? { y: portraitY, scale: portraitScale } : undefined}
-                className="hero-scroll-layer relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/6 p-3 shadow-[0_20px_70px_rgba(0,0,0,0.24)] backdrop-blur-xl"
+                className="hero-scroll-layer relative overflow-hidden rounded-[1.65rem] border border-white/10 bg-white/6 p-2.5 shadow-[0_20px_70px_rgba(0,0,0,0.24)] backdrop-blur-xl sm:rounded-[2rem] sm:p-3"
               >
                 <motion.div
                   style={enableScrollMotion ? { rotate: portraitRotate } : undefined}
-                  className="relative overflow-hidden rounded-[1.5rem] bg-[#071726]"
+                  className="relative overflow-hidden rounded-[1.2rem] bg-[#071726] sm:rounded-[1.5rem]"
                 >
                   <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
                   <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
-                  <div className="relative aspect-[0.72] w-full">
+                  <div className="relative aspect-[0.9] w-full sm:aspect-[1.04] md:aspect-[0.78]">
                     <Image
                       src="/images/personalpageprofilealt.png"
                       alt="Portrait of Marcell Varga"
                       fill
                       priority
-                      className="object-cover object-top"
+                      className="object-cover object-[center_18%]"
                     />
                   </div>
                 </motion.div>
@@ -835,7 +842,7 @@ export default function Page() {
               }
               className="hero-scroll-layer pointer-events-none absolute inset-x-0 bottom-[-17rem] z-20 h-[34rem] overflow-hidden sm:bottom-[-15rem] sm:h-[38rem]"
             >
-              <div className="absolute inset-x-[-10%] bottom-0 h-[22rem] overflow-hidden rounded-t-[44%] [mask-image:linear-gradient(to_bottom,black_0%,black_65%,transparent_100%)] sm:h-[26rem]">
+              <div className="absolute inset-x-0 bottom-0 h-[22rem] overflow-hidden rounded-t-[44%] [mask-image:linear-gradient(to_bottom,black_0%,black_65%,transparent_100%)] sm:h-[26rem] lg:inset-x-[-10%]">
                 {/* Keep the rising mask aligned with the fixed page surface underneath. */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(76,207,255,0.16),_transparent_28%),radial-gradient(circle_at_20%_70%,_rgba(255,153,102,0.16),_transparent_34%),radial-gradient(circle_at_85%_18%,_rgba(17,27,40,0.12),_transparent_24%),linear-gradient(180deg,_#f8f1e8_0%,_#f6efe5_46%,_#fff8f1_100%)] [background-attachment:fixed]" />
                 <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(17,27,40,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(17,27,40,0.04)_1px,transparent_1px)] bg-[size:92px_92px] [background-attachment:fixed] [mask-image:radial-gradient(circle_at_center,black_45%,transparent_88%)]" />
@@ -853,7 +860,7 @@ export default function Page() {
                 <motion.div
                   data-scroll-anchor="about"
                   style={
-                    enableScrollMotion
+                    enableScrollMotion && !isCompactViewport
                       ? principlesIntroReady
                         ? {
                             opacity: principlesOpacity,
@@ -872,7 +879,7 @@ export default function Page() {
                     <SectionLabel index="01" label="Principles" tone="light" />
                     <motion.div
                       style={
-                        enableScrollMotion && principlesIntroReady
+                        enableScrollMotion && !isCompactViewport && principlesIntroReady
                           ? { opacity: principlesGlow }
                           : principlesIntroReady
                             ? undefined
@@ -928,7 +935,7 @@ export default function Page() {
             </div>
           </section>
 
-          <section className="relative mx-auto w-full max-w-7xl py-20 sm:py-32">
+          <section className="relative mx-auto w-full max-w-7xl py-16 sm:py-24 lg:py-32">
             <motion.div
               {...fadeInUp(0.04)}
               className="mb-6 grid gap-4 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-end"
@@ -990,7 +997,7 @@ export default function Page() {
             id="work"
             ref={workSectionRef}
             data-scroll-anchor="work"
-            className="relative mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 sm:py-32 lg:px-10"
+            className="relative mx-auto w-full max-w-7xl py-16 sm:py-24 lg:py-32"
           >
             <div className="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div className="max-w-2xl">
@@ -1080,7 +1087,7 @@ export default function Page() {
             </div>
           </section>
 
-          <section className="relative mx-auto mt-32 w-full max-w-7xl sm:mt-48">
+          <section className="relative mx-auto mt-24 w-full max-w-7xl sm:mt-36 lg:mt-48">
             <div className="pointer-events-none absolute left-1/2 top-8 h-[40rem] w-[min(48rem,90vw)] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,_rgba(103,217,255,0.14)_0%,_rgba(103,217,255,0.04)_40%,_transparent_75%)] blur-3xl" />
             
             <div className="relative grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
@@ -1099,7 +1106,7 @@ export default function Page() {
                     </p> */}
                   </div>
 
-                  <div className="mt-10 flex flex-col gap-6">
+                  <div className="mt-10 hidden flex-col gap-6 lg:flex">
                     <div className="relative flex flex-col gap-3">
                       {history.map((item, idx) => (
                         <div 
@@ -1144,6 +1151,7 @@ export default function Page() {
                     index={index}
                     focus={historyFocusValues[index] ?? 0}
                     reduceMotion={shouldReduceMotion}
+                    compact={isCompactViewport}
                   />
                 ))}
               </div>
