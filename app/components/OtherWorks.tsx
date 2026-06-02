@@ -69,7 +69,7 @@ export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
                   {project.subTitle}
                 </p>
                 <div className="mt-8 inline-flex w-fit items-center gap-2.5 rounded-full bg-white/92 px-5 py-2.5 text-xs font-bold text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.66)] transition-all duration-300 hover:bg-[#67d9ff] hover:text-white">
-                  Read Case Study
+                  Read case study
                   <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </div>
               </div>

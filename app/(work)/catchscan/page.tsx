@@ -27,37 +27,37 @@ const history = [
       {
         title: "Overview",
         text: [
-          "CatchScan is an IT company, whose mission is to help content creators to protect their brand and place them in control of their content. Their product is a software driven platform where content creators can establish an automated protection regarding to their copyright. They offer a web app, where influencers or other artists can insert their intellectual work (for now only images) and make sure that no one else is using it without their permission. As the creator upload their work, the algorithm can search for any misconduct.",
-          "Our client gave us the task to come up with a user-friendly interface and reestablish the architecture of their app while utilizing their already existing in-house algorithm.",
+          "CatchScan helps content creators protect their work through automated copyright monitoring. Creators upload images to a web application, and the platform scans for potential unauthorized use.",
+          "Our task was to redesign the dashboard and improve the product architecture around CatchScan's existing matching algorithm.",
         ],
         picture: [],
       },
       {
         title: "Problem",
         text: [
-          "Our client had created a beta version of their product, where their main focus was on the functionality itself, rather than the user experience. This led to broken user flows of the existing dashboard, resulting in an unpleasing, confusing experience, which doesn't represent the company's values.",
+          "The beta product proved the core functionality, but the dashboard had fragmented user flows and an unclear hierarchy. The experience did not yet reflect the value of the service.",
         ],
         picture: [],
       },
       {
         title: "Objective",
         text: [
-          "The goal of this project is to create a web app for CatchScan, which will be utilizing their copyright matching algorithm. We need to create a visual interface with a well-developed and optimized structure, which will focus on information architecture and user navigation. The dashboard interface will be created from scratch and will help the user to find the functions with ease and fulfill their needs.",
+          "The goal was to create a clear dashboard around the copyright-matching algorithm. We focused on information architecture, navigation, and task flows so creators could upload work, monitor results, and understand their options.",
         ],
         picture: [],
       },
       {
         title: "Design Thinking",
         text: [
-          "At the beginning of the whole process, we need to establish what kind of development method we are going to use. In this project we will be using Design Thinking development. Since it is a human-centered methodology, we bring the users to the spotlight and try to understand their problems, wants, needs, values, feelings. As we will know more about our users, we might re-frame our problem in order to achieve the best solution for them.",
-          "Design thinking consist of 5 parts - empathize, define, ideate, prototype and test. It is non-linear process. That means, while we are moving forward in the overall process, we will be going back to the former steps",
+          "We used a design-thinking process to keep the work grounded in creators' needs and revisit assumptions as we learned more.",
+          "The process moved through empathize, define, ideate, prototype, and test, with iteration between stages when the evidence called for it.",
         ],
         picture: [],
       },
       {
         title: "Empathize",
         text: [
-          "In this phase of the project, the main goal was to connect with our users - know who they are, what are their needs and expectations.",
+          "We started by identifying the creators most likely to use the product and understanding their needs, expectations, and concerns.",
         ],
         picture: [],
         subTitle: [
@@ -73,15 +73,15 @@ const history = [
           "",
         ],
         subText: [
-          "After meeting with our client, our extensive research helped us to understand competition and we had listed the main pros and cons of their solutions, with having the distinctive aspects in mind.",
-          "We had started off by user categorization prior to conducting qualitative interviews to define who is our target audience that will be using our web application.",
-          "First, we had set a subjective criteria where are we considered our user base based on their behaviors and psychographics. After this we also established an objective criteria which consisted of, they are geographic and the demographic status.",
-          "Based on our results, we assume our target audience is English speaker content creators between the age of 18-35.",
-          "To organize and see the outcome of the interviews we created an empathy map, where we have sorted our results into four sections",
-          "This helped us not only to further understand our users but also to prioritize their needs.",
-          "To enhance our research further, we believe we can benefit from creating Personas. As a result, we came up with two personas, which helped us to get a better understanding about what our users' possible needs could be and what aspects should we emphasize on based on our research.",
+          "Benchmarking helped us compare competing solutions and identify the strengths, gaps, and distinctive aspects of the CatchScan concept.",
+          "Before the interviews, we grouped potential users to define the audience for the web application.",
+          "We combined behavioral and psychographic criteria with demographic and geographic factors.",
+          "The research pointed toward English-speaking content creators aged 18 to 35 as the primary audience.",
+          "We organized interview findings in an empathy map.",
+          "This helped us understand the users more clearly and prioritize their needs.",
+          "We created two personas to make those needs tangible and identify which parts of the experience deserved the most attention.",
           "",
-          "We constructed a user journey to take notes of how we can improve the user interaction and the overall satisfaction. This helped us to plan out the process starting from submitting the cases, while taking the user's emotion in mind.",
+          "A user journey mapped the process from submitting a case onward, including opportunities to improve clarity and reduce frustration.",
         ],
         subPicture: [
           "",
@@ -101,31 +101,31 @@ const history = [
         text: [""],
         picture: [],
         subTitle: [
-          "Human-centric problem fomulations",
+          "Human-centered problem statements",
           "",
           "",
           "Content Inventory",
         ],
         subText: [
-          "To make sure we fulfill the users needs and preferences, we have started with formulating problem from the users' point of view.",
-          "To simplify these formulations, we have narrowed them down by paraphrasing them into one sentence forms.",
-          "To support the idea and process we had reformulated the statement once again by creating questions from the one sentence insights",
-          "To fully determine the scope of the project, we have conducted content inventory, to include the all the necessary elements of the project.",
+          "We reframed the challenge from the users' point of view.",
+          "We condensed the findings into clear, one-sentence problem statements.",
+          "We turned those statements into questions that could guide ideation.",
+          "A content inventory helped define the scope and ensure the necessary product elements were covered.",
         ],
         subPicture: ["", "/images/legacy/CS-Images/Figure7.png"],
       },
       {
         title: "Ideate",
         text: [
-          "After getting connected with the users and understand what they want and need, we are kicking off the ideation phase.",
+          "With the user needs defined, we moved into ideation.",
         ],
         picture: [],
         subTitle: ["Brainstorm", "", "", "Information Architecture", ""],
         subText: [
-          "As a result of our inspiring brainstorming session, ended up with ideas based on both the user research results and the human-centered formulations.",
-          "One of the most important result was proceeding with the dashboard styled design as we believed it could incorporate the most tools and usability.",
-          "Moreover, to accomplish this we stumbled upon applying elements of glassmorphism to help emphasize on the objects.",
-          "Our goal was to establish the information architecture in a way to make sure that the users can get their tasks done by spending the least amount of effort as possible, resulting in a satisfying, pleasant experience. This was carried out by provide the user with a clear and assorted information, which is being accompanied by well-defined suitable font type, size and color.",
+          "Brainstorming translated the research findings and problem statements into possible product directions.",
+          "We chose a dashboard structure because it could support the required tools while keeping the main actions visible.",
+          "We used restrained glassmorphism to separate important objects and create hierarchy.",
+          "The information architecture was designed to minimize effort: clear grouping, readable typography, and direct access to the tasks creators needed most.",
         ],
         subPicture: ["", "", "", "", "/images/legacy/CS-Images/Figure11.png"],
       },
@@ -156,25 +156,25 @@ const history = [
           "",
         ],
         subText: [
-          "After concluding our ideations phase, we had started make initial sketches that represents the primary idea of our design solution.",
-          "To become more precise and see the actual details, although not fully acquired yet, we have created low-fidelity wireframes, where we were focusing on the layout and identifying elements.",
-          "Considering the results of the user research we chose to apply a desktop first approach. This is because based on the user's preferences this is a more corporate pensive way of presenting the users with features. Nevertheless, it is an approach more welcome in the professional space and there is more opportunity to increase the number of features.",
-          "Having done with wireframes, guided us towards creating high-fidelity mockups.",
-          "Before we started the actual process of designing, we had decided on using Atomic Design as our choice of team collaboration methodology",
-          "As the atomic design consists of components, our design process started with the smallest ones - Atoms",
-          "By combining atoms together, we formed molecules. In our case as a molecules, we can consider buttons in navigation formed with an icon and text and cards with the buttons, texts, and images",
-          "Organisms are next phase of connection smaller elements. Putting together cards we create \"libraries\", menu buttons - navigation",
-          "Templates are already complex solutions. It is a combination of organisms, and it represents how the pages will look like",
-          "Finally, the complete design with included content - pages",
+          "We started with sketches to capture the initial direction.",
+          "Low-fidelity wireframes made the layout and key interface elements more precise.",
+          "The research supported a desktop-first approach because the product needed to present several professional tools in a single workspace.",
+          "The wireframes then developed into high-fidelity mockups.",
+          "We used Atomic Design to organize the interface and support collaboration.",
+          "The system started with atoms: the smallest reusable interface elements.",
+          "Combining atoms produced molecules such as navigation buttons and content cards.",
+          "Those elements formed larger organisms such as navigation areas and content libraries.",
+          "Templates established the page-level structure.",
+          "The final pages combined those templates with real content.",
           "",
-          "The first that draws the attention of the user are colors. They make the first impression, they affect how the users perceive the interface, see the functionality, they might evoke emotions, they increase the brand recognition as well, and invite the users to take an action. We are preparing solution for CatchScan, start-up company, with an already existing branding, thus we have decided to keep with their image and use their brand colors - blue and orange",
-          "Even though, this was not the requirement, we believe to keep the consistency with their promoting website is a good brand move",
+          "Color shapes the first impression and helps users read the interface. We kept CatchScan's existing blue and orange palette to connect the dashboard with the brand.",
+          "Maintaining consistency with the marketing website made the product feel more coherent.",
           "",
-          "Throughout the design process, we went through several iteration before we found the best solution. It was not easy to find solution that captures our style the most in harmony",
+          "Several iterations helped us simplify the visual direction and find a more balanced solution.",
           "",
           "",
           "",
-          "Our final solution resulted in having a simple one-color background, as we believed this was can the user focus the most on the content, which will facilitate the process of fulfilling any task.",
+          "The final concept uses a simple background so the content and actions stay in focus.",
         ],
         subPicture: [
           "",
@@ -202,30 +202,30 @@ const history = [
       {
         title: "Test",
         text: [
-          "To validate our findings, we had proceeded with conducting hybrid testing, using Five Second and Think Aloud tests. They helped us to verify that call-to-actions and the other important information are highlighted enough to catch the users attention and to make sure the user can interact with the product effortlessly.",
+          "We used five-second and think-aloud tests to check whether the calls to action were visible and whether users could move through the product without confusion.",
         ],
         picture: [],
       },
       {
         title: "Realization",
         text: [
-          "Our project was coded using HTML, CSS and JavaScript. Additionally, we utilized Tailwind as our choice of CSS Framework, which resulted in a swift and efficient workflow.",
-          "As we were creating a web app for service, having the feature of being able to sign up and log in is an essential part. We established this feature therefore the users can access the platform in the easiest way possible",
+          "We implemented the project with HTML, CSS, JavaScript, and Tailwind CSS.",
+          "Because the service depends on personal content and case tracking, sign-up and login were essential parts of the experience.",
         ],
         picture: ["/images/legacy/CS-Images/Figure24.png"],
       },
       {
         title: "",
         text: [
-          "We started off the sign-up sequence by designing with the objective the ask for the most essential data from the user which is inevitable. For the subsequent steps we had to utilize our research and evaluate which lead us to include multiple user input.",
+          "The sign-up sequence asks for essential information first, then introduces additional inputs only when they are needed.",
         ],
         picture: ["/images/legacy/CS-Images/Figure25.png"],
       },
       {
         title: "Summary",
         text: [
-          "To wrap up our process, we have created a dashboard for the SaaS company - CatchScan. We have created a way for their customers to protect their intellectual properties by giving them the possibility to upload their content for the algorithm to process. Furthermore, we provide them with the opportunity to initiate legal action against the found misusers, while supplying them with useful analytics",
-          "The product was accomplished in a human-centered way though conducting broad research, resulting in an easy-to-use, intuitive interface.",
+          "The final dashboard gives creators a structured way to upload work, review matches, understand analytics, and decide what to do next.",
+          "The project combined research, information architecture, interface design, and frontend implementation into a clearer copyright-monitoring experience.",
         ],
         picture: [],
       },
@@ -310,7 +310,7 @@ export default function CatchScanPage() {
                 </div>
               </div>
               <div className="space-y-3">
-                <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">Key Skills</p>
+                <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">Key skills</p>
                 <div className="flex flex-wrap gap-2">
                   {projectData.skills.map((skill) => (
                     <span key={skill} className="font-label rounded-full bg-white/62 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]">

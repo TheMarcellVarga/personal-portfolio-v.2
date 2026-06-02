@@ -18,10 +18,10 @@ export const history: HistoryItem[] = [
       end: "",
     },
     description: [
-      "Designing and building AXON Orchestrator across UX, UI, and frontend implementation.",
-      "Creating prototypes, design-system patterns, and AI-aware product flows with engineering and analytics teams.",
+      "Designing and building product interfaces across UX, UI, and frontend implementation.",
+      "Creating prototypes, component patterns, and AI-aware workflows with engineering and analytics teams.",
     ],
-    skills: ["UX", "React", "TypeScript", "Node.js", "AI-fluent UX"],
+    skills: ["UX", "React", "TypeScript", "Node.js", "AI-aware UX"],
   },
   {
     company: "MapsPeople",
@@ -31,7 +31,7 @@ export const history: HistoryItem[] = [
       end: "Apr 2022",
     },
     description: [
-      "Improved MapsIndoors CMS through research, interaction design, and animated prototypes.",
+      "Improved the MapsIndoors CMS through research, interaction design, and animated prototypes.",
       "Worked with Jira, documentation, accessibility, and the company design system inside a SaaS product team.",
     ],
     skills: ["Figma", "Prototyping", "Accessibility", "SaaS UX"],
@@ -45,7 +45,7 @@ export const history: HistoryItem[] = [
     },
     description: [
       "Built a foundation in UX/UI, frontend development, content production, and product communication.",
-      "Worked on practical, company-connected projects using research, usability testing, and design-to-code delivery.",
+      "Applied research, usability testing, and design-to-code delivery in practical projects with real companies.",
     ],
     skills: ["UX/UI", "Frontend", "Research", "Content Strategy"],
   },

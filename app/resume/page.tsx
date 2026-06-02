@@ -144,7 +144,7 @@ export default function ResumePage() {
                 Design-engineering work, formatted for the current chapter.
               </h1>
               <p className="mt-5 max-w-2xl text-[1rem] leading-7 text-custom-blue/68">
-                A print-ready A4 resume built around UX/UI engineering,
+                A print-ready A4 resume built around UX and frontend engineering,
                 frontend delivery, design systems, and AI-aware product work.
               </p>
             </div>
@@ -220,7 +220,7 @@ export default function ResumePage() {
                 <header className="border-white/12 pb-5">
                   <div className="flex items-center gap-3">
                     <p className="text-[9px] font-bold uppercase tracking-[0.34em] text-[#67d9ff]">
-                      UX/UI Engineer
+                      UX & Frontend Engineer
                     </p>
                     <span className="h-px flex-1 bg-[#67d9ff]/24" />
                     <p className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/32">

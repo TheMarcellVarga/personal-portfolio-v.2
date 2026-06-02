@@ -162,7 +162,7 @@ export default function AiFinancePage() {
               </div>
               <div className="space-y-3">
                 <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">
-                  Key Skills
+                  Key skills
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {projectData.skills.map((skill) => (

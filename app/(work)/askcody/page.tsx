@@ -27,34 +27,34 @@ const history = [
       {
         title: "Overview",
         text: [
-          "AskCody is a company specializing in efficient meeting management through digital solutions. Their philosophy is based on improving the workplace experience, thus increasing employee productivity and satisfaction. Their main product is a cloud-based, flexible and secure solution for creating and managing meetings for office spaces, therefore creating a controlled distribution of the employees. Their platform also makes it possible to edit, track and analyze the meetings. However, our client is addressing major challenge due to the change in corporate office culture.",
+          "AskCody builds digital tools for meeting and workplace management. As office culture shifted toward hybrid work, the product needed to support a broader challenge: helping teams coordinate people, spaces, and shared resources.",
         ],
       },
       {
         title: "Problem",
         text: [
-          "After the COVID-19 pandemic, the concept of workplaces has changed. More and more companies are in the process of transition from static to hybrid office environments. With this transition a new problem arises. Office resource management tools are simply not suitable for the new era of hybrid transformation.",
+          "The shift from static offices to hybrid work changed how companies use desks, rooms, and shared spaces. Existing resource-management tools were not designed for that flexibility.",
         ],
       },
       {
         title: "Objective",
         text: [
-          "To help companies address this issue, we will investigate developing a software solution which will capitalize on utilizing all the company's resources while providing flexible work arrangements for its employees.",
+          "The objective was to explore a software concept that helps companies use office resources efficiently while giving employees more flexibility.",
         ],
       },
       {
         title: "Design Thinking",
         text: [
-          "Our choice of development method for the project was Design Thinking as it can help us systematically extract, teach, learn and apply human centric techniques to solve problems in a creative and innovative way. By using Design Thinking we will ensure that the focus is kept on the users' needs and values, and that it is a human-centered procedure.",
+          "We used a design-thinking process to keep the concept grounded in user needs while exploring a new workplace model.",
         ],
       },
       {
         title: "Empathize",
         subTitle: ["Interviews", "", "Personas", "", ""],
         subText: [
-          "We prepared a thorough interview guide and carefully selected the possible participants, as it would greatly influence the result. We believed that the best source to extract information from would be from personnel of the corporate offices.",
-          "Based on the interviews, we gained insight to many unique needs, which we sorted and evaluated. From this we concluded that companies are looking to optimize their capacity of space resources and to increase the productivity of their employees by automating everyday ad-hoc tasks. In addition, complying with the hybrid model was a key factor.",
-          "Together our findings we settled on having personas for the best representation of our target audience. By doing this we'll be able to know the specific needs of workers in similar positions and use their possible motivation or pain points for our own good. We chose to bring our perception for making it role based.",
+          "We prepared an interview guide and selected participants with experience in corporate office environments.",
+          "The interviews highlighted a need to use space more efficiently, automate everyday coordination tasks, and support hybrid work without creating more friction.",
+          "Role-based personas helped us represent the needs, motivations, and pain points of the main user groups.",
           "",
         ],
         subPicture: [
@@ -68,11 +68,11 @@ const history = [
       {
         title: "Define",
         text: [
-          "After finding the core issues to be solved, we analyze our observations from our users and funnel our thoughts down to make it more tangible. To do this we are synthesizing our findings so we can define the problem.",
+          "We synthesized the research into a more focused definition of the problem.",
         ],
         subTitle: ["Point of View", "", "", "", ""],
         subText: [
-          "Since our project was revolving around exploring what are the crucial issues and how they could act as an obstacle for digital-first work environment, we had to define what the exact problems are, using an actionable problem statements.",
+          "Actionable problem statements helped clarify the barriers people faced in a digital-first workplace.",
           "",
           "",
           "",
@@ -111,25 +111,25 @@ const history = [
           "",
         ],
         subText: [
-          "Having sufficient data made it easy for us to start ideating on the show structure for the product and with it the functionalities which will provide a solution for different user types.",
-          "First, we are stating our goal, which in our case was to discover the potential functionality of the product. To fulfill this, we developed ideas under a short, predetermined amount of time and later validated them among us.",
+          "With the research in place, we explored the product structure and the features needed by different user groups.",
+          "Timed ideation exercises helped us generate and compare possible features quickly.",
           "",
           "",
-          "Our next step was to conduct a card sorting study. We have created cards based on our previous brainstorming sessions, where we were discussing taxonomically low-level features and other aspects of the future system.",
-          "We choose our card sorting method to be hybrid, as our end-product was focusing more on functionality, rather than pure information presentation.",
+          "We then ran a card-sorting study using features identified during brainstorming.",
+          "A hybrid card sort suited a product centered on functionality rather than content alone.",
           "",
-          "The results were captivating, which drove us to generate additional categories, which gave us a further approvement.",
-          "",
-          "",
-          "We started to establish an informational architecture by creating a sitemap. Visual sitemaps gave us a clear representation of the structure for our product. To institute the taxonomy, we had made clear relations between the content, which also lay down the foundation for multiple user flows.",
+          "The results revealed additional categories and improved the structure.",
           "",
           "",
-          "Before finalizing the IA, we created a sitemap for the most valid categories and listed their functions and dependencies beneath them, based on the study results. This was necessary as after working with many pages with many functionalities their relations became quite confusing and therefore, we visualize them.",
+          "A sitemap made the product structure visible and established the relationships between features, content, and user flows.",
           "",
-          "Before going any further we had to make a product discovery using User Stories to revise our progress and verify if all customer goals and product requirements achievable and can be met.",
-          "Our discovery was dictated by two factors, which were our project needs and the technical requirements, including the potential limitations.",
           "",
-          "We have made a list with User Stories to catch all software features from our users' perspective.",
+          "Before finalizing the information architecture, we mapped the strongest categories, their functions, and their dependencies.",
+          "",
+          "User stories helped us check whether the concept addressed the main customer goals and product requirements.",
+          "We considered both the project goals and the technical constraints.",
+          "",
+          "The final user-story list framed the software features from the users' perspective.",
         ],
         subPicture: [
           "",
@@ -159,7 +159,7 @@ const history = [
         text: [""],
         subTitle: ["Sketches", "", ""],
         subText: [
-          "We had started to create initial sketches to capture our vision and get an overview of the page structure. We're also able to visualize the information architecture and project the user behaviors.",
+          "Initial sketches captured the direction, clarified the page structure, and made the information architecture easier to evaluate.",
           "",
           "",
         ],
@@ -172,31 +172,31 @@ const history = [
       {
         title: "Low-Fidelity Wireframes",
         text: [
-          "This time we started to apply more details, including a well-defined information architecture.",
-          "Based on the assessment of the card sorting we had re-evaluated and placed the access to the most important pages into the header, ending up with five subpages.",
+          "Low-fidelity wireframes introduced more detail and a clearer information architecture.",
+          "Based on the card sort, we moved the most important destinations into the header and organized the concept into five main pages.",
         ],
         picture: ["/images/legacy/AC-Images/Figure16.png"],
       },
       {
         title: "Mid-Fidelity Prototype",
         text: [
-          "Our design was determined by the Fluent UI design system while retaining the AskCody corporate visual identity.",
-          "We made a dashboard design, including a snippet of a calendar for a quick overview of the upcoming events, which is one of the most crucial assets of an office worker. In case the visitor in the project manager, we also placed a quick overview widget for the tickets submitted though the support.",
+          "The design used Fluent UI while retaining AskCody's visual identity.",
+          "The dashboard included a calendar overview for upcoming events and a support-ticket widget for project managers.",
         ],
         picture: ["/images/legacy/AC-Images/Figure17.png"],
       },
       {
         title: "",
         text: [
-          "In terms of colors, we had to take both Teams' and AskCody's into consideration. It was important to establish a harmony between them, while not blending them in too much.",
+          "The color system needed to feel compatible with Microsoft Teams while keeping AskCody recognizable.",
         ],
         picture: ["/images/legacy/AC-Images/Figure18.png"],
       },
       {
         title: "High-Fidelity Mockups",
         text: [
-          "Our last iterations included all the functional and interactive elements, using both the design system and the custom assets.",
-          "At this point, we had planned out how the interactions should behave and what they should result in, including changes based on additional feedback.",
+          "The final iterations combined the design system, custom assets, and the main interactive states.",
+          "We defined how the key interactions should behave and incorporated additional feedback.",
         ],
         picture: [
           "/images/legacy/AC-Images/Figure20.png",
@@ -208,7 +208,7 @@ const history = [
       {
         title: "Mobile & Watch",
         text: [
-          "When thinking about convenience and fast ways of booking the resources, the mobile comes as an obvious solution. We also carried out a watch companion implementation.",
+          "To support quick bookings on the move, we explored both mobile and watch companion experiences.",
         ],
         picture: [
           "/images/legacy/AC-Images/Figure34.png",
@@ -218,8 +218,8 @@ const history = [
       {
         title: "Summary",
         text: [
-          "To summarize, we have created an innovative concept for AskCody to solve the issue of resource management and flexible transformation in the office management area.",
-          "We had carried out a centralized solution existing part of AskCody's ecosystem integrated into Microsoft Teams to manage office resources, while providing an overview of the company both for the employees and the managers in the rising trend of hybrid work environments.",
+          "The final concept extends AskCody's ecosystem with a centralized resource-management experience inside Microsoft Teams.",
+          "It gives employees and managers a clearer overview of desks, rooms, events, and support needs in a hybrid workplace.",
         ],
       },
     ],
@@ -303,7 +303,7 @@ export default function AskCodyPage() {
                 </div>
               </div>
               <div className="space-y-3">
-                <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">Key Skills</p>
+                <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">Key skills</p>
                 <div className="flex flex-wrap gap-2">
                   {projectData.skills.map((skill) => (
                     <span key={skill} className="font-label rounded-full bg-white/62 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]">

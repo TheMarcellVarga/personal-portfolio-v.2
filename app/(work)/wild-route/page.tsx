@@ -180,7 +180,7 @@ export default function WildRoutePage() {
           <section className="py-24 sm:py-32">
             <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
               <motion.div {...fadeInUp()} className="lg:sticky lg:top-28">
-                <SectionLabel index="01" label="Product Direction" />
+                <SectionLabel index="01" label="Product direction" />
                 <h2 className="mt-5 max-w-[9ch] font-display text-[clamp(2.6rem,6vw,5rem)] font-medium leading-[0.9] tracking-[-0.05em] text-custom-blue">
                   Travel planning with a point of view.
                 </h2>

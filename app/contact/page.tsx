@@ -48,14 +48,14 @@ export default function Contact() {
             <motion.div {...fadeInUp(0.1)}>
               <SectionLabel index="04" label="Contact" />
               <h1 className="font-display text-[clamp(2.35rem,10vw,6.6rem)] font-medium leading-[0.92] tracking-[-0.04em] text-custom-blue">
-                Let&apos;s talk about your next product.
+                Let&apos;s build something useful.
               </h1>
             </motion.div>
             
             <motion.div {...fadeInUp(0.2)} className="mt-12 max-w-2xl">
               <p className="text-base leading-relaxed text-custom-blue/72 sm:text-xl">
-                Whether you need UX strategy, frontend execution, or a complete product
-                refresh, I&apos;d love to hear about your goals.
+                I&apos;m interested in product challenges where UX decisions, interface
+                systems, and frontend execution need to work together.
               </p>
             </motion.div>
           </header>
@@ -70,7 +70,7 @@ export default function Contact() {
               <div className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-[0.95rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)] transition-transform duration-500 group-hover:scale-105">
                 <Mail className="h-4.5 w-4.5" />
               </div>
-              <p className="mb-2 text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/35">Direct Email</p>
+              <p className="mb-2 text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/35">Direct email</p>
               <a
                 href="mailto:themarcellvarga@gmail.com"
                 className="break-words font-display text-[1.18rem] font-medium leading-[1.06] tracking-[-0.02em] text-custom-blue transition-colors hover:text-custom-blue/70 sm:text-[1.38rem]"
@@ -79,7 +79,7 @@ export default function Contact() {
               </a>
               <div className="mt-5 flex items-center gap-2 text-[0.56rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60">
                 <Send className="h-3 w-3" />
-                Response within 24h
+                Usually replies within 24h
               </div>
               </div>
             </motion.div>

@@ -6,7 +6,7 @@ const shareImage = "/images/personalpageprofilealt.png";
 export const metadata: Metadata = {
   title: "Marcell Varga | UX & Frontend Engineer",
   description:
-    "Singapore-based UX and frontend engineer with Danish design roots, crafting expressive digital products with strong motion, systems thinking, and technical depth.",
+    "Singapore-based UX and frontend engineer turning complex product requirements into clear, scalable interfaces from prototype to production.",
   keywords: [
     "Marcell Varga",
     "UX Engineer",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     title: "Marcell Varga | UX & Frontend Engineer",
     description:
-      "Danish design clarity, Singapore momentum, and frontend craftsmanship shaped into a 2026 portfolio.",
+      "UX, interface systems, and frontend engineering shaped into clear, scalable digital products.",
     siteName: "Marcell Varga Portfolio",
     images: [
       {
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Marcell Varga | UX & Frontend Engineer",
     description:
-      "Singapore-based UX and frontend engineer building expressive digital products with motion and systems thinking.",
+      "Singapore-based UX and frontend engineer building clear, scalable product interfaces from prototype to production.",
     images: [shareImage],
   },
   robots: {

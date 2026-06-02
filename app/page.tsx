@@ -42,32 +42,32 @@ import { PageBackground } from "./components/PageBackground";
 import { HeroCanvasBackdrop } from "./components/HeroCanvasBackdrop";
 
 const principlesStatement =
-  "I build interfaces that feel deliberate: design systems, motion details, frontend code, and product thinking in one lane.";
+  "I turn complex product requirements into clear interfaces, then carry the strongest ideas from prototype to production.";
 
 const PRINCIPLES_REVEAL_END = 0.74;
 
 const capabilityCards = [
   {
-    title: "Systems with character",
-    body: "I turn rough concepts into interface systems with enough structure to scale and enough taste to stay distinct.",
+    title: "Clarity before decoration",
+    body: "I turn complex workflows into interfaces that help people understand what matters and act with confidence.",
     icon: Blocks,
     colSpan: "lg:col-span-2",
   },
   {
-    title: "Shipped feeling matters",
-    body: "Motion, responsiveness, accessibility, and implementation detail matter as much as the mockup itself.",
+    title: "Built beyond the mockup",
+    body: "Responsive behavior, accessibility, and implementation detail are part of the product, not a handoff checklist.",
     icon: Code2,
     colSpan: "lg:col-span-1",
   },
   {
-    title: "Research without theater",
-    body: "I use interviews, testing, and iteration when they move the product forward. Useful insight beats ceremony.",
+    title: "Research that changes the work",
+    body: "I use interviews, testing, and iteration to reduce uncertainty and improve the decisions that reach production.",
     icon: Sparkles,
     colSpan: "lg:col-span-1",
   },
   {
-    title: "Cross-functional by default",
-    body: "I work comfortably across design, engineering, and product without losing momentum or diluting the craft.",
+    title: "Design and engineering together",
+    body: "I work across UX, frontend, and product conversations so useful ideas stay intact as they become real interfaces.",
     icon: Rocket,
     colSpan: "lg:col-span-2",
   },
@@ -660,7 +660,7 @@ export default function Page() {
                     className="home-intro-fold [transform-origin:bottom]"
                   >
                     <span className="font-label block rounded-full bg-white/10 px-4 py-2 text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl">
-                      Frontend & UX Engineer
+                      UX & Frontend Engineer
                     </span>
                   </motion.div>
                 </motion.div>
@@ -682,7 +682,7 @@ export default function Page() {
                     </h1>
                     <p className="max-w-[30rem] text-[0.98rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
                       I design and build product interfaces that feel calm, sharp,
-                      and ready to ship.
+                      and ready for real use.
                     </p>
                   </motion.div>
                 </motion.div>
@@ -748,7 +748,7 @@ export default function Page() {
                     className="home-intro-fold [transform-origin:bottom]"
                   >
                     <span className="font-label block rounded-full bg-white/10 px-4 py-2 text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl">
-                      Frontend & UX Engineer
+                      UX & Frontend Engineer
                     </span>
                   </motion.div>
                 </motion.div>
@@ -770,7 +770,7 @@ export default function Page() {
                     </h1>
                     <p className="max-w-[30rem] text-[1.02rem] leading-7 text-white/72 sm:text-[1.08rem] sm:leading-8">
                       I design and build product interfaces that feel calm, sharp,
-                      and ready to ship.
+                      and ready for real use.
                     </p>
                   </motion.div>
                 </motion.div>
@@ -940,8 +940,9 @@ export default function Page() {
                 </h2>
               </div>
               <p className="max-w-xl text-[0.9rem] leading-7 text-custom-blue/66 lg:justify-self-end">
-                Interfaces, motion, systems, and frontend detail need to line
-                up. This is the part of the work I actually care about.
+                My work sits between product design and frontend engineering:
+                understanding the problem, shaping the interface, and building
+                the details that make it usable.
               </p>
             </motion.div>
 
@@ -995,11 +996,11 @@ export default function Page() {
               <div className="max-w-2xl">
                 <SectionLabel index="03" label="Selected Work" />
                 <h2 className="mt-8 font-display text-[clamp(2.8rem,6vw,5.4rem)] leading-[0.9] tracking-[-0.04em] text-custom-blue">
-                  Ambition in production.
+                  Product thinking, made tangible.
                 </h2>
                 <p className="mt-6 text-[1.05rem] leading-relaxed text-custom-blue/65">
-                  A focused selection of product interfaces where UX details
-                  drive the engineering choices.
+                  A focused selection of interfaces where UX decisions shape
+                  the implementation.
                 </p>
               </div>
               <div className="hidden items-center gap-3 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/40 md:flex">
@@ -1165,12 +1166,11 @@ export default function Page() {
                 <div>
                   <SectionLabel index="05" label="Contact" tone="light" />
                   <h2 className="max-w-3xl font-display text-[clamp(2.15rem,8vw,5rem)] leading-[0.96] tracking-[-0.04em] text-white">
-                    Ready for the next ambitious build.
+                    Looking for the next product challenge.
                   </h2>
                   <p className="mt-4 max-w-2xl text-[0.96rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
-                    If you need a UX-minded engineer who can think visually,
-                    move fast in code, and care about the end product as much as
-                    the process, let’s talk.
+                    If you need an engineer who can move between UX decisions,
+                    interface systems, and production code, let’s talk.
                   </p>
                 </div>
 
@@ -1254,7 +1254,7 @@ export default function Page() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               <div className="absolute inset-x-0 bottom-3 flex justify-center">
                 <span className="font-label rounded-full bg-white/20 px-2 py-0.75 text-[0.5rem] font-medium uppercase tracking-[0.14em] text-white shadow-[0_8px_32px_rgba(0,0,0,0.1)] backdrop-blur-md">
-                  View Case Study
+                  View case study
                 </span>
               </div>
             </div>

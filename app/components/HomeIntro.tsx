@@ -77,7 +77,7 @@ export function HomeIntro({ onExitStart, onComplete }: HomeIntroProps) {
         className="absolute inset-x-0 top-[calc(50%+7rem)] px-6 text-center sm:top-[calc(50%+8rem)]"
       >
         <p className="font-label text-[0.68rem] font-medium uppercase tracking-[0.34em] text-white/54">
-          Frontend & UX Engineer
+          UX & Frontend Engineer
         </p>
       </motion.div>
 

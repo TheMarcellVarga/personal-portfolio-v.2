@@ -1,6 +1,6 @@
 export const resume = {
   name: "Marcell Varga",
-  title: "UX/UI & Frontend Engineer building scalable product interfaces and design systems",
+  title: "UX & Frontend Engineer building clear, scalable product interfaces and design systems",
   location: "Singapore",
   phone: "+45 50 17 17 32",
   email: "themarcellvarga@gmail.com",
@@ -10,12 +10,12 @@ export const resume = {
   githubHandle: "TheMarcellVarga",
   photo: "/images/personalpageprofilealt.png",
   profile: [
-    "Singapore-based UX/UI and frontend engineer working at the intersection of Nordic design principles and software engineering. I turn complex product requirements into clear, scalable interfaces from early research and prototypes through production-ready code.",
-    "Currently contributing to AXON Networks products through UX/UI design, component systems, interactive prototyping, frontend development, and AI-aware product workflows.",
+    "Singapore-based UX and frontend engineer working at the intersection of Nordic design principles and software engineering. I turn complex product requirements into clear, scalable interfaces from early research and prototypes through production-ready code.",
+    "Currently contributing to AXON Networks products through UX/UI design, component systems, interactive prototyping, frontend development, and AI-aware workflows.",
   ],
   highlights: [
     "Relocated to Singapore in March 2026 while continuing in the same AXON Networks role.",
-    "Designs and builds AI-informed workflows, prototypes, and production UI for complex product surfaces.",
+    "Designs and builds AI-aware workflows, prototypes, and production UI for complex product surfaces.",
     "Works across UX, frontend, design systems, accessibility, and enough backend detail to keep ideas shippable.",
   ],
   coreStrengths: [
@@ -70,7 +70,7 @@ export const resume = {
       bullets: [
         "Contribute to AXON Networks product development across UX/UI design, frontend engineering, and product iteration with cross-functional teams.",
         "Create interactive prototypes, scalable component libraries, and design-system patterns for complex product workflows.",
-        "Translate AI-aware product thinking and analytics collaboration into usable, production-ready interface flows.",
+        "Translate AI-aware product thinking and analytics collaboration into usable, production-ready workflows.",
         "Develop supporting RESTful APIs with Node.js and Express and apply WCAG accessibility principles across shipped work.",
       ],
     },
