@@ -1146,9 +1146,7 @@ export default function Page() {
               </div>
 
               {/* Scrolling History List */}
-              <div className="relative snap-y snap-proximity space-y-8 py-10 sm:space-y-16 lg:py-[20vh]">
-                <div className="pointer-events-none absolute bottom-12 left-5 top-12 hidden w-px bg-gradient-to-b from-custom-blue/0 via-custom-blue/10 to-custom-blue/0 sm:block" />
-                
+              <div className="relative snap-y snap-proximity space-y-8 py-10 sm:space-y-16 lg:py-[20vh]">                
                 {history.map((item, index) => (
                   <HistoryItemComponent
                     key={`${item.company}-${item.time.start}`}
