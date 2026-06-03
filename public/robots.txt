@@ -1,0 +1,5 @@
+# https://marcellvarga.com/robots.txt
+# Cloudflare may prepend AI crawler rules when "Instruct AI bot traffic with robots.txt" is enabled.
+
+User-agent: *
+Allow: /

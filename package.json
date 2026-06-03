@@ -6,7 +6,8 @@
     "dev": "next dev -p 3100",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint --ext .ts,.tsx . --ignore-pattern \".history/**\""
+    "lint": "eslint --ext .ts,.tsx . --ignore-pattern \".history/**\"",
+    "cloudflare:security": "node scripts/apply-cloudflare-security.mjs"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
