@@ -306,7 +306,7 @@ export default function ESSPage() {
         activeSection="Work"
       />
 
-      <main className="relative z-10 px-4 pb-20 pt-24 sm:px-6 lg:px-10">
+      <main className="relative z-10 px-5 pb-20 pt-24 sm:px-6 lg:px-10">
         <div className="mx-auto max-w-7xl">
           <motion.button
             initial={{ opacity: 0, x: -10 }}

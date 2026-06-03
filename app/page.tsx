@@ -646,7 +646,7 @@ export default function Page() {
       </div>
 
       <div className={`home-intro-stage ${introIsVisible ? "pointer-events-none" : ""}`}>
-        <main className="relative z-10 px-4 pb-8 pt-0 sm:px-6 sm:pb-12 lg:px-10">
+        <main className="relative z-10 px-5 pb-8 pt-0 sm:px-6 sm:pb-12 lg:px-10">
           <section
             id="hero"
             ref={heroRef}

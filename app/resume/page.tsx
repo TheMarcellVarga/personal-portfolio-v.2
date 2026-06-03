@@ -130,7 +130,7 @@ export default function ResumePage() {
         <Header isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
 
-      <main className="relative z-10 px-4 pb-24 pt-32 sm:px-6 lg:px-8 print:p-0">
+      <main className="relative z-10 px-5 pb-24 pt-32 sm:px-6 lg:px-8 print:p-0">
         <div className="mx-auto max-w-6xl">
           <motion.div
             {...fadeInUp(0)}

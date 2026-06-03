@@ -269,7 +269,7 @@ export default function CatchScanPage() {
         activeSection="Work"
       />
 
-      <main className="relative z-10 px-4 pb-20 pt-24 sm:px-6 lg:px-10">
+      <main className="relative z-10 px-5 pb-20 pt-24 sm:px-6 lg:px-10">
         <div className="mx-auto max-w-7xl">
           <header className="mb-20 grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
             <motion.div {...fadeInUp(0)} className="space-y-6">

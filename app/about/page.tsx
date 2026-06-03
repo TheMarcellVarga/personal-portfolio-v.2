@@ -32,7 +32,7 @@ export default function About() {
         activeSection="Skills"
       />
 
-      <main className="relative z-10 px-4 pb-24 pt-32 sm:px-6 lg:px-10">
+      <main className="relative z-10 px-5 pb-24 pt-32 sm:px-6 lg:px-10">
         <div className="mx-auto max-w-4xl">
           <motion.div {...fadeInUp(0)}>
             <Link
