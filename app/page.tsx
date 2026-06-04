@@ -145,6 +145,20 @@ function smoothstep(value: number) {
   return t * t * (3 - 2 * t);
 }
 
+function readIntroAlreadySeen() {
+  if (typeof window === "undefined") return false;
+
+  if (window.sessionStorage.getItem("mv-home-intro") === "1") {
+    return true;
+  }
+
+  if (document.documentElement.dataset.homeIntro === "0") {
+    return true;
+  }
+
+  return document.cookie.includes("mv-home-intro-seen=1");
+}
+
 function HistoryItemComponent({ 
   item, 
   index, 
@@ -290,8 +304,10 @@ export default function Page() {
   const [typedText, setTypedText] = useState("");
   const [introStage, setIntroStage] = useState<
     "checking" | "playing" | "exiting" | "done"
-  >("checking");
-  const [introPlayedThisVisit, setIntroPlayedThisVisit] = useState(false);
+  >(() => (readIntroAlreadySeen() ? "done" : "checking"));
+  const [introPlayedThisVisit, setIntroPlayedThisVisit] = useState(
+    () => !readIntroAlreadySeen(),
+  );
   const [hasMounted, setHasMounted] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const shouldReduceMotion = Boolean(prefersReducedMotion);
@@ -387,13 +403,16 @@ export default function Page() {
     if (shouldReduceMotion) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setIntroStage("done");
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setIntroPlayedThisVisit(false);
       return;
     }
 
-    const hasPlayedIntro =
-      window.sessionStorage.getItem("mv-home-intro") === "1";
-    setIntroPlayedThisVisit(!hasPlayedIntro);
-    setIntroStage(hasPlayedIntro ? "done" : "playing");
+    const alreadySeen = readIntroAlreadySeen();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIntroPlayedThisVisit(!alreadySeen);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIntroStage(alreadySeen ? "done" : "playing");
   }, [shouldReduceMotion]);
 
   const finishIntro = useCallback(() => {
@@ -641,7 +660,7 @@ export default function Page() {
           activeSection={activeSection}
           logoRef={headerLogoRef}
           revealBrand={introHasCompleted}
-          animateBrand={introHasCompleted}
+          animateBrand={introHasCompleted && introPlayedThisVisit}
         />
       </div>
 
