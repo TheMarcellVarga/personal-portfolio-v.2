@@ -306,6 +306,8 @@ export default function Page() {
     "checking" | "playing" | "exiting" | "done"
   >("checking");
   const [introPlayedThisVisit, setIntroPlayedThisVisit] = useState(true);
+  const [shouldAnimateHeaderBrand, setShouldAnimateHeaderBrand] =
+    useState(false);
   const [hasMounted, setHasMounted] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const shouldReduceMotion = Boolean(prefersReducedMotion);
@@ -415,6 +417,7 @@ export default function Page() {
 
   const finishIntro = useCallback(() => {
     window.sessionStorage.setItem("mv-home-intro", "1");
+    setShouldAnimateHeaderBrand(true);
     setIntroStage("done");
   }, []);
 
@@ -658,7 +661,7 @@ export default function Page() {
           activeSection={activeSection}
           logoRef={headerLogoRef}
           revealBrand={introHasCompleted}
-          animateBrand={introHasCompleted && introPlayedThisVisit}
+          animateBrand={introHasCompleted && shouldAnimateHeaderBrand}
         />
       </div>
 
