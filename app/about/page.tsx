@@ -48,15 +48,16 @@ export default function About() {
             <motion.div {...fadeInUp(0.1)}>
               <SectionLabel index="01" label="About" />
               <h1 className="font-display text-[clamp(2.35rem,10vw,6.6rem)] font-medium leading-[0.92] tracking-[-0.04em] text-custom-blue">
-                Bridging UX decisions and production code.
+                Where UX decisions meet production code.
               </h1>
             </motion.div>
             
             <motion.div {...fadeInUp(0.2)} className="mt-12 max-w-2xl">
               <p className="text-base leading-relaxed text-custom-blue/72 sm:text-xl">
-                I turn complex product requirements into clear, scalable interfaces.
-                My work moves from research and prototypes into component systems and
-                production-ready frontend code.
+                I turn product problems into clear interfaces and the systems
+                needed to ship them. The work usually moves from research and
+                prototypes into component systems, backend APIs, and production
+                code.
               </p>
             </motion.div>
           </header>
@@ -73,8 +74,9 @@ export default function About() {
               </div>
               <h2 className="font-display text-[1.18rem] font-medium leading-[1.06] tracking-[-0.02em] text-custom-blue sm:text-[1.38rem]">What I do</h2>
               <p className="mt-2.5 text-[0.78rem] leading-6 text-custom-blue/70">
-                Product discovery, interaction design, prototyping, design systems,
-                and frontend engineering for complex product workflows.
+                Product discovery, interaction design, prototyping, design
+                systems, frontend engineering, and backend APIs for complex
+                workflows.
               </p>
               </div>
             </motion.div>
@@ -90,8 +92,8 @@ export default function About() {
               </div>
               <h2 className="font-display text-[1.18rem] font-medium leading-[1.06] tracking-[-0.02em] text-custom-blue sm:text-[1.38rem]">How I work</h2>
               <p className="mt-2.5 text-[0.78rem] leading-6 text-custom-blue/70">
-                I work closely with product, design, engineering, and analytics to keep
-                decisions clear and move useful ideas into production.
+                I work closely with product, design, engineering, and analytics
+                to keep decisions grounded and move useful ideas into production.
               </p>
               </div>
             </motion.div>
@@ -108,7 +110,7 @@ export default function About() {
               <h2 className="font-display text-[1.18rem] font-medium leading-[1.06] tracking-[-0.02em] text-custom-blue sm:text-[1.38rem]">Currently</h2>
               <p className="mt-2.5 text-[0.78rem] leading-6 text-custom-blue/70">
                 Building reliable product interfaces while exploring practical,
-                AI-aware workflows and the UX patterns they require.
+                AI-aware workflows and the UX patterns they need.
               </p>
               </div>
             </motion.div>

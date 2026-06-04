@@ -141,11 +141,11 @@ export default function ResumePage() {
                 Resume / 2026
               </p>
               <h1 className="mt-3 font-display text-[clamp(2.3rem,5vw,4.5rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-custom-blue">
-                Design-engineering work, formatted for the current chapter.
+                Design-engineering work, on one page.
               </h1>
               <p className="mt-5 max-w-2xl text-[1rem] leading-7 text-custom-blue/68">
-                A print-ready A4 resume built around UX and frontend engineering,
-                frontend delivery, design systems, and AI-aware product work.
+                A print-ready A4 resume covering UX, frontend and backend
+                delivery, design systems, and AI-aware product work.
               </p>
             </div>
             <ResumeActions />

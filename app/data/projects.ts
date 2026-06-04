@@ -18,9 +18,9 @@ export const projects: Project[] = [
     subTitle: "AI financial research and portfolio decision support",
     date: "2026",
     description:
-      "A financial research workspace for reviewing portfolios, evidence, scenarios, and risk context without blurring the line between insight and advice.",
+      "A financial research workspace for reviewing holdings, evidence, scenarios, and risk without crossing into advice.",
     highlight:
-      "A calm fintech interface with visible freshness, citations, unavailable states, and clear research-only boundaries.",
+      "A calm fintech interface with cited sources, freshness signals, unavailable states, and clear research boundaries.",
     skills: ["Next.js", "Go", "Vercel AI SDK", "Supabase"],
     link: "/ai-finance",
     image: "/images/ai-finance/aperture-home.jpg",
@@ -33,9 +33,9 @@ export const projects: Project[] = [
     subTitle: "Prompt-first travel planning for adventure nomads",
     date: "2026",
     description:
-      "A full-stack travel planner that turns an open-ended trip brief into a ranked set of one-way journeys with clear tradeoffs and a path to booking.",
+      "A prompt-first travel planner that turns an open-ended trip brief into ranked route options with clear tradeoffs and a path to booking.",
     highlight:
-      "Wild Route brings together a distinct visual language, a focused planning workflow, and production-minded engineering across the interface, data model, auth, and billing layers.",
+      "A distinct visual system paired with a focused planning flow and production-minded engineering across interface, data, auth, and billing.",
     skills: ["Next.js", "Supabase", "Stripe", "Product UX"],
     link: "/wild-route",
     image: "/images/wild-route/home.png",
@@ -48,9 +48,9 @@ export const projects: Project[] = [
     subTitle: "Copyright protection SaaS",
     date: "2021",
     description:
-      "A dashboard concept for automated copyright protection, designed to help creators monitor ownership issues through a clear, structured workflow.",
+      "A dashboard concept for automated copyright monitoring that helps creators review ownership signals through a clear workflow.",
     highlight:
-      "An early example of translating dense product logic into a visually ordered interface and reusable design-system patterns.",
+      "An early example of translating dense product logic into a structured interface and reusable design patterns.",
     skills: ["Design System", "Tailwind CSS", "Atomic Design"],
     link: "/catchscan",
     image: "/images/catchscan-index.png",
@@ -63,9 +63,9 @@ export const projects: Project[] = [
     subTitle: "Hybrid office management in Microsoft Teams",
     date: "2022",
     description:
-      "A hybrid workplace concept for desk booking, room availability, and resource management inside the daily workflow of Microsoft Teams.",
+      "A hybrid workplace concept for desk booking, room availability, and resource management inside Microsoft Teams.",
     highlight:
-      "The challenge was to support operational complexity while keeping the experience fast, legible, and intuitive.",
+      "The challenge was keeping a complex system fast, legible, and easy to move through.",
     skills: ["TypeScript", "React", "Fluent UI", "Enterprise UX"],
     link: "/askcody",
     image: "/images/askcody-index.png",
@@ -78,9 +78,9 @@ export const projects: Project[] = [
     subTitle: "Student agency and information platform",
     date: "2021",
     description:
-      "A content-rich website for American students exploring education in Europe, designed to communicate trust and make a complex decision easier to navigate.",
+      "A content-rich website for American students exploring education in Europe, designed to build trust and make a complex decision easier to navigate.",
     highlight:
-      "An early project centered on information architecture, responsive design, and building trust through clear content.",
+      "An early project centered on information architecture, responsive design, and trust through clear content.",
     skills: ["HTML", "CSS", "JavaScript", "SEO"],
     link: "/ess",
     image: "/images/ess-index.png",
@@ -93,9 +93,9 @@ export const projects: Project[] = [
     subTitle: "New chapter, new experiments",
     date: "In Progress",
     description:
-      "New projects are taking shape around a stronger engineering stack, AI-aware product flows, and a sharper design point of view.",
+      "New projects are taking shape around a stronger engineering stack, AI-aware product flows, and a sharper point of view.",
     highlight:
-      "The next additions will reflect the work I want to keep doing: product-focused, technically grounded, and distinct in their execution.",
+      "The next additions will reflect the work I want to keep doing: product-focused, technically grounded, and distinct.",
     skills: ["Coming Soon"],
     link: "https://github.com/TheMarcellVarga",
     image: "/images/personalpageprofilealt.png",

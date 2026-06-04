@@ -55,7 +55,8 @@ export default function Contact() {
             <motion.div {...fadeInUp(0.2)} className="mt-12 max-w-2xl">
               <p className="text-base leading-relaxed text-custom-blue/72 sm:text-xl">
                 If you want to talk about a project, share feedback, or
-                just introduce yourself, just send a note.
+                just introduce yourself, email is the easiest way to reach me.
+                I read everything myself and usually reply within a day.
               </p>
             </motion.div>
           </header>

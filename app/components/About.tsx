@@ -10,20 +10,20 @@ import {
 import { useEffect, useMemo, useRef, useState } from "react";
 
 const textToType =
-  "I design and build thoughtful digital products where clarity, usability, and business goals align. From discovery to delivery, I translate complex problems into elegant, measurable experiences that teams can ship with confidence.";
+  "I turn product problems into clear interfaces and production-ready code, with enough structure that teams can keep building on it.";
 
 const cards = [
   {
     title: "UX Strategy",
-    body: "Turning complexity into clear decisions through information architecture and interaction modeling.",
+    body: "Turning complexity into clear decisions through structure, flow, and priorities.",
   },
   {
     title: "Frontend Craft",
-    body: "Production-grade implementation with performance, maintainability, and accessibility baked in.",
+    body: "Production-grade implementation with performance, maintainability, and accessibility built in.",
   },
   {
     title: "System Thinking",
-    body: "Design systems that align product, design, and engineering into one operating language.",
+    body: "Design systems that keep product, design, and engineering moving together.",
   },
 ];
 

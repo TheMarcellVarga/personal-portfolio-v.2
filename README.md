@@ -1,6 +1,6 @@
 # Personal Portfolio
 
-Welcome to my personal portfolio! This project showcases my skills and projects as a UX & Frontend Engineer. It is built using modern web technologies and demonstrates my ability to create intuitive and engaging digital experiences.
+This is my personal portfolio. It collects selected projects, a short background, and a direct way to get in touch.
 
 ## Table of Contents
 
@@ -17,7 +17,7 @@ Welcome to my personal portfolio! This project showcases my skills and projects 
 
 ## About
 
-This portfolio is a reflection of my journey as a UX & Frontend Engineer. It highlights my skills, projects, and experiences in the field of web development and design. My goal is to craft delightful, business-focused, and user-centered digital experiences.
+This portfolio reflects the way I work across UX, frontend, and backend: clear interfaces, practical details, and enough structure to ship.
 
 ## Features
 
@@ -89,7 +89,7 @@ The portfolio is organized into several main sections:
 
 ## Projects
 
-My portfolio showcases a curated selection of projects that highlight my expertise in UX design and frontend development. From enterprise-level applications to user-centric platforms, each project represents unique challenges solved through thoughtful design and technical implementation.
+My portfolio showcases selected projects across product interfaces, design systems, and frontend delivery.
 
 ### Areas of Focus
 - Enterprise software and Microsoft Teams integrations
@@ -103,7 +103,7 @@ My portfolio showcases a curated selection of projects that highlight my experti
 - Responsive design with Tailwind CSS
 - UI/UX best practices and design systems
 
-For detailed information about specific projects and their implementations, please visit my [live portfolio](https://marcellvarga.com). The portfolio is to be regularly updated with my latest work and achievements.
+For detailed information about specific projects and their implementations, please visit my [live portfolio](https://marcellvarga.com). The portfolio is updated as new work lands.
 
 ## Contact
 
