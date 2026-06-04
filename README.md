@@ -107,7 +107,7 @@ For detailed information about specific projects and their implementations, plea
 
 ## Contact
 
-I'm always open to new opportunities and collaborations. Feel free to reach out:
+If you want to talk about a project, share feedback, or just say hi, reach out:
 
 - **Email:** [themarcellvarga@gmail.com](mailto:themarcellvarga@gmail.com)
 - **LinkedIn:** [Marcell Varga](https://www.linkedin.com/in/marcellvarga/)

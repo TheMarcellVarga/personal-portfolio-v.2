@@ -1177,11 +1177,11 @@ export default function Page() {
                 <div>
                   <SectionLabel index="05" label="Contact" tone="light" />
                   <h2 className="max-w-3xl font-display text-[clamp(2.15rem,8vw,5rem)] leading-[0.96] tracking-[-0.04em] text-white">
-                    Looking for the next product challenge.
+                    Say hi.
                   </h2>
                   <p className="mt-4 max-w-2xl text-[0.96rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
-                    If you need an engineer who can move between UX decisions,
-                    interface systems, and production code, let’s talk.
+                    If you want to talk about a project, share feedback, or
+                    just introduce yourself, just send a note.
                   </p>
                 </div>
 

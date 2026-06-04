@@ -48,14 +48,14 @@ export default function Contact() {
             <motion.div {...fadeInUp(0.1)}>
               <SectionLabel index="04" label="Contact" />
               <h1 className="font-display text-[clamp(2.35rem,10vw,6.6rem)] font-medium leading-[0.92] tracking-[-0.04em] text-custom-blue">
-                Let&apos;s build something useful.
+                Say hi.
               </h1>
             </motion.div>
             
             <motion.div {...fadeInUp(0.2)} className="mt-12 max-w-2xl">
               <p className="text-base leading-relaxed text-custom-blue/72 sm:text-xl">
-                I&apos;m interested in product challenges where UX decisions, interface
-                systems, and frontend execution need to work together.
+                If you want to talk about a project, share feedback, or
+                just introduce yourself, just send a note.
               </p>
             </motion.div>
           </header>
