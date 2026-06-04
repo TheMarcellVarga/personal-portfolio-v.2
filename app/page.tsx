@@ -304,10 +304,8 @@ export default function Page() {
   const [typedText, setTypedText] = useState("");
   const [introStage, setIntroStage] = useState<
     "checking" | "playing" | "exiting" | "done"
-  >(() => (readIntroAlreadySeen() ? "done" : "checking"));
-  const [introPlayedThisVisit, setIntroPlayedThisVisit] = useState(
-    () => !readIntroAlreadySeen(),
-  );
+  >("checking");
+  const [introPlayedThisVisit, setIntroPlayedThisVisit] = useState(true);
   const [hasMounted, setHasMounted] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const shouldReduceMotion = Boolean(prefersReducedMotion);
@@ -664,12 +662,16 @@ export default function Page() {
         />
       </div>
 
-      <div className={`home-intro-stage ${introIsVisible ? "pointer-events-none" : ""}`}>
+      <div
+        className={`home-intro-stage ${
+          introIsVisible ? "pointer-events-none" : ""
+        } ${enableScrollMotion ? "hero-motion-ready" : ""}`}
+      >
         <main className="relative z-10 px-5 pb-8 pt-0 sm:px-6 sm:pb-12 lg:px-10">
           <section
             id="hero"
             ref={heroRef}
-            className="relative left-1/2 min-h-[100svh] w-screen -translate-x-1/2 overflow-x-clip overflow-y-visible"
+            className="isolate relative z-20 left-1/2 min-h-[100svh] w-screen -translate-x-1/2 overflow-x-clip overflow-y-visible"
           >
             <div className="absolute inset-0 bg-[#06111c]" />
             <HeroDynamicBackdrop />
@@ -873,7 +875,7 @@ export default function Page() {
           <section
             id="about"
             ref={principlesRef}
-            className="relative mx-auto mt-12 w-full max-w-7xl lg:-mt-12 lg:h-[260vh]"
+            className="isolate relative z-10 mx-auto mt-12 w-full max-w-7xl lg:-mt-12 lg:h-[260vh]"
           >
             <div className="lg:sticky lg:top-16 lg:flex lg:h-[32rem] lg:items-center lg:py-10 xl:top-24 xl:h-[40rem] xl:py-12">
                 <motion.div

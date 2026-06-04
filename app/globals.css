@@ -185,7 +185,9 @@
 
   .hero-scroll-layer {
     backface-visibility: hidden;
-    transform: translateZ(0);
+  }
+
+  .hero-motion-ready .hero-scroll-layer {
     will-change: transform, opacity;
   }
 }
