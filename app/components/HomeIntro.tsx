@@ -11,7 +11,8 @@ interface HomeIntroProps {
 
 const travelEase = [0.22, 1, 0.36, 1] as const;
 export const HOME_INTRO_COMPLETE_DELAY_MS = 2350;
-const introCookie = "mv-home-intro-seen=1; Path=/; Max-Age=31536000; SameSite=Lax";
+const HOME_INTRO_COOKIE_MAX_AGE_SECONDS = 60 * 5;
+const introCookie = `mv-home-intro-seen=1; Path=/; Max-Age=${HOME_INTRO_COOKIE_MAX_AGE_SECONDS}; SameSite=Lax`;
 
 export function HomeIntro({ onExitStart, onComplete }: HomeIntroProps) {
   const [phase, setPhase] = useState<"hold" | "exit">("hold");
