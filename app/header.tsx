@@ -18,6 +18,7 @@ interface HeaderProps {
   logoRef?: RefObject<HTMLSpanElement | null>;
   revealBrand?: boolean;
   animateBrand?: boolean;
+  brandAnimationSeed?: number;
 }
 
 type NavItem = {
@@ -37,6 +38,7 @@ export default function Header({
   logoRef,
   revealBrand = true,
   animateBrand = true,
+  brandAnimationSeed,
 }: HeaderProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -102,11 +104,17 @@ export default function Header({
 
   useEffect(() => {
     if (prefersReducedMotion) return;
+    if (brandAnimationSeed !== undefined) return;
     if (!animateBrand) return;
 
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setLogoAnimationKey((current) => current + 1);
-  }, [pathname, prefersReducedMotion, animateBrand]);
+  }, [pathname, prefersReducedMotion, animateBrand, brandAnimationSeed]);
+
+  const logoIconKey =
+    brandAnimationSeed !== undefined
+      ? `home-brand-${brandAnimationSeed}`
+      : `nav-brand-${logoAnimationKey}`;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -218,7 +226,7 @@ export default function Header({
         >
           <span ref={logoRef} className="block w-[4.75rem] shrink-0 sm:w-[5.3125rem]">
             <IndexSigAnimatedIcon
-              key={logoAnimationKey}
+              key={logoIconKey}
               isOpen={isOpen}
               tone={useLightOnDark ? "light" : "dark"}
               animateStroke={!prefersReducedMotion && animateBrand}
