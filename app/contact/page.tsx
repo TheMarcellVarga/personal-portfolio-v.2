@@ -8,6 +8,7 @@ import Header from "../header";
 import Footer from "../footer";
 import { PageBackground } from "../components/PageBackground";
 import { SectionLabel } from "../components/SectionLabel";
+import { PhoneReveal } from "../components/PhoneReveal";
 
 const fadeInUp = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -57,6 +58,8 @@ export default function Contact() {
                 If you want to talk about a project, share feedback, or
                 just introduce yourself, email is the easiest way to reach me.
                 I read everything myself and usually reply within a day.
+                Phone details are behind a click-to-reveal control so they stay
+                off scraping lists.
               </p>
             </motion.div>
           </header>
@@ -118,6 +121,8 @@ export default function Contact() {
                 </div>
                 <ArrowLeft className="h-5 w-5 shrink-0 rotate-180 transition-transform group-hover:translate-x-1" />
               </a>
+
+              <PhoneReveal variant="card" />
 
               <Link
                 href="/resume"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import {
   Github,
@@ -8,12 +8,12 @@ import {
   Linkedin,
   Mail,
   MapPin,
-  Phone,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Header from "../header";
 import Footer from "../footer";
 import { PageBackground } from "../components/PageBackground";
+import { PhoneReveal, type PhoneRevealHandle } from "../components/PhoneReveal";
 import ResumeActions from "./ResumeActions";
 import { resume } from "../data/resume";
 
@@ -122,6 +122,24 @@ function CompactList({ items }: { items: readonly string[] }) {
 
 export default function ResumePage() {
   const [isOpen, setIsOpen] = useState(false);
+  const phoneRevealRef = useRef<PhoneRevealHandle>(null);
+
+  useEffect(() => {
+    const handleAfterPrint = () => {
+      phoneRevealRef.current?.hidePrintReveal();
+    };
+
+    window.addEventListener("afterprint", handleAfterPrint);
+    return () => window.removeEventListener("afterprint", handleAfterPrint);
+  }, []);
+
+  async function handleSaveAsPdf() {
+    await phoneRevealRef.current?.revealForPrint();
+    await new Promise<void>((resolve) =>
+      requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+    );
+    window.print();
+  }
 
   return (
     <div className="resume-route relative min-h-screen print:bg-[#081522]">
@@ -135,7 +153,7 @@ export default function ResumePage() {
           <motion.div
             {...fadeInUp(0)}
             className="mb-10 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end print:hidden"
-          >
+            >
             <div className="max-w-3xl">
               <p className="font-label text-[0.68rem] font-medium uppercase tracking-[0.28em] text-custom-blue/45">
                 Resume / 2026
@@ -148,7 +166,7 @@ export default function ResumePage() {
                 delivery, design systems, and AI-aware product work.
               </p>
             </div>
-            <ResumeActions />
+            <ResumeActions onSaveAsPdf={handleSaveAsPdf} />
           </motion.div>
 
           <motion.article
@@ -175,7 +193,7 @@ export default function ResumePage() {
 
                   <div className="mt-5 space-y-2">
                     <ContactItem icon={Mail} label={resume.email} href={`mailto:${resume.email}`} />
-                    <ContactItem icon={Phone} label={resume.phone} />
+                    <PhoneReveal ref={phoneRevealRef} />
                     <ContactItem icon={Globe} label={resume.website} href={`https://${resume.website}`} />
                     <ContactItem icon={Linkedin} label={resume.linkedin} href={`https://${resume.linkedin}`} />
                     <ContactItem icon={Github} label={resume.githubHandle} href={`https://${resume.github}`} />
