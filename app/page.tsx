@@ -37,10 +37,7 @@ import Footer from "./footer";
 import { history, type HistoryItem } from "./data/history";
 import { projects } from "./data/projects";
 import { SectionLabel } from "./components/SectionLabel";
-import {
-  HOME_INTRO_COMPLETE_DELAY_MS,
-  HomeIntro,
-} from "./components/HomeIntro";
+import { HomeIntro } from "./components/HomeIntro";
 import { PageBackground } from "./components/PageBackground";
 import { HeroCanvasBackdrop } from "./components/HeroCanvasBackdrop";
 
@@ -408,6 +405,8 @@ export default function Page() {
       setIntroStage("done");
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setIntroPlayedThisVisit(false);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setShouldAnimateHeaderBrand(true);
       return;
     }
 
@@ -416,23 +415,11 @@ export default function Page() {
     setIntroPlayedThisVisit(!alreadySeen);
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setIntroStage(alreadySeen ? "done" : "playing");
-  }, [shouldReduceMotion]);
-
-  useEffect(() => {
-    if (introPlayedThisVisit) return;
-
-    if (shouldReduceMotion) {
+    if (alreadySeen) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setShouldAnimateHeaderBrand(true);
-      return;
     }
-
-    const timer = window.setTimeout(() => {
-      setShouldAnimateHeaderBrand(true);
-    }, HOME_INTRO_COMPLETE_DELAY_MS);
-
-    return () => window.clearTimeout(timer);
-  }, [introPlayedThisVisit, shouldReduceMotion]);
+  }, [shouldReduceMotion]);
 
   const finishIntro = useCallback(() => {
     window.sessionStorage.setItem("mv-home-intro", "1");
