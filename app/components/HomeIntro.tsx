@@ -10,6 +10,7 @@ interface HomeIntroProps {
 }
 
 const travelEase = [0.22, 1, 0.36, 1] as const;
+export const HOME_INTRO_COMPLETE_DELAY_MS = 2350;
 const introCookie = "mv-home-intro-seen=1; Path=/; Max-Age=31536000; SameSite=Lax";
 
 export function HomeIntro({ onExitStart, onComplete }: HomeIntroProps) {
@@ -25,7 +26,7 @@ export function HomeIntro({ onExitStart, onComplete }: HomeIntroProps) {
       setPhase("exit");
       onExitStart();
     }, 1450);
-    const finish = window.setTimeout(completeIntro, 2350);
+    const finish = window.setTimeout(completeIntro, HOME_INTRO_COMPLETE_DELAY_MS);
 
     return () => {
       window.clearTimeout(startExit);

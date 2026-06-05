@@ -37,7 +37,10 @@ import Footer from "./footer";
 import { history, type HistoryItem } from "./data/history";
 import { projects } from "./data/projects";
 import { SectionLabel } from "./components/SectionLabel";
-import { HomeIntro } from "./components/HomeIntro";
+import {
+  HOME_INTRO_COMPLETE_DELAY_MS,
+  HomeIntro,
+} from "./components/HomeIntro";
 import { PageBackground } from "./components/PageBackground";
 import { HeroCanvasBackdrop } from "./components/HeroCanvasBackdrop";
 
@@ -414,6 +417,22 @@ export default function Page() {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setIntroStage(alreadySeen ? "done" : "playing");
   }, [shouldReduceMotion]);
+
+  useEffect(() => {
+    if (introPlayedThisVisit) return;
+
+    if (shouldReduceMotion) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setShouldAnimateHeaderBrand(true);
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      setShouldAnimateHeaderBrand(true);
+    }, HOME_INTRO_COMPLETE_DELAY_MS);
+
+    return () => window.clearTimeout(timer);
+  }, [introPlayedThisVisit, shouldReduceMotion]);
 
   const finishIntro = useCallback(() => {
     window.sessionStorage.setItem("mv-home-intro", "1");
