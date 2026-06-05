@@ -302,14 +302,12 @@ export default function Page() {
   const [isOpen, setIsOpen] = useState(false);
   const [footerHover, setFooterHover] = useState(false);
   const [typedText, setTypedText] = useState("");
-  const [skipHeaderBrandAnimation] = useState(() => readIntroAlreadySeen());
-  const [headerBrandAnimationSeed, setHeaderBrandAnimationSeed] = useState(0);
   const [introStage, setIntroStage] = useState<
     "checking" | "playing" | "exiting" | "done"
-  >(() => (readIntroAlreadySeen() ? "done" : "checking"));
-  const [introPlayedThisVisit, setIntroPlayedThisVisit] = useState(
-    () => !readIntroAlreadySeen(),
-  );
+  >("checking");
+  const [introPlayedThisVisit, setIntroPlayedThisVisit] = useState(true);
+  const [shouldAnimateHeaderBrand, setShouldAnimateHeaderBrand] =
+    useState(false);
   const [hasMounted, setHasMounted] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const shouldReduceMotion = Boolean(prefersReducedMotion);
@@ -419,7 +417,7 @@ export default function Page() {
 
   const finishIntro = useCallback(() => {
     window.sessionStorage.setItem("mv-home-intro", "1");
-    setHeaderBrandAnimationSeed((seed) => seed + 1);
+    setShouldAnimateHeaderBrand(true);
     setIntroStage("done");
   }, []);
 
@@ -663,8 +661,7 @@ export default function Page() {
           activeSection={activeSection}
           logoRef={headerLogoRef}
           revealBrand={introHasCompleted}
-          animateBrand={introHasCompleted && !skipHeaderBrandAnimation}
-          brandAnimationSeed={headerBrandAnimationSeed}
+          animateBrand={introHasCompleted && shouldAnimateHeaderBrand}
         />
       </div>
 
