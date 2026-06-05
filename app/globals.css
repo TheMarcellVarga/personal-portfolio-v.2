@@ -176,7 +176,6 @@
   }
 
   html[data-home-intro="0"] .home-intro-header,
-  html[data-home-intro="0"] .home-intro-header-brand,
   html[data-home-intro="0"] .home-intro-fold {
     opacity: 1 !important;
     pointer-events: auto !important;
