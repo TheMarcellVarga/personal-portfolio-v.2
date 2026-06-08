@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import {
   Github,
@@ -13,7 +13,7 @@ import { motion } from "framer-motion";
 import Header from "../header";
 import Footer from "../footer";
 import { PageBackground } from "../components/PageBackground";
-import { PhoneReveal, type PhoneRevealHandle } from "../components/PhoneReveal";
+import { PhoneReveal } from "../components/PhoneReveal";
 import ResumeActions from "./ResumeActions";
 import { resume } from "../data/resume";
 
@@ -122,24 +122,6 @@ function CompactList({ items }: { items: readonly string[] }) {
 
 export default function ResumePage() {
   const [isOpen, setIsOpen] = useState(false);
-  const phoneRevealRef = useRef<PhoneRevealHandle>(null);
-
-  useEffect(() => {
-    const handleAfterPrint = () => {
-      phoneRevealRef.current?.hidePrintReveal();
-    };
-
-    window.addEventListener("afterprint", handleAfterPrint);
-    return () => window.removeEventListener("afterprint", handleAfterPrint);
-  }, []);
-
-  async function handleSaveAsPdf() {
-    await phoneRevealRef.current?.revealForPrint();
-    await new Promise<void>((resolve) =>
-      requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
-    );
-    window.print();
-  }
 
   return (
     <div className="resume-route relative min-h-screen print:bg-[#081522]">
@@ -166,7 +148,7 @@ export default function ResumePage() {
                 delivery, design systems, and AI-aware product work.
               </p>
             </div>
-            <ResumeActions onSaveAsPdf={handleSaveAsPdf} />
+            <ResumeActions />
           </motion.div>
 
           <motion.article
@@ -193,7 +175,7 @@ export default function ResumePage() {
 
                   <div className="mt-5 space-y-2">
                     <ContactItem icon={Mail} label={resume.email} href={`mailto:${resume.email}`} />
-                    <PhoneReveal ref={phoneRevealRef} />
+                    <PhoneReveal />
                     <ContactItem icon={Globe} label={resume.website} href={`https://${resume.website}`} />
                     <ContactItem icon={Linkedin} label={resume.linkedin} href={`https://${resume.linkedin}`} />
                     <ContactItem icon={Github} label={resume.githubHandle} href={`https://${resume.github}`} />

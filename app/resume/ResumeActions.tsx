@@ -1,27 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import { ArrowLeft, Download } from "lucide-react";
 
-type ResumeActionsProps = {
-  onSaveAsPdf: () => Promise<void>;
-};
-
-export default function ResumeActions({ onSaveAsPdf }: ResumeActionsProps) {
-  const [isSavingPdf, setIsSavingPdf] = useState(false);
-
-  async function handleSaveAsPdf() {
-    if (isSavingPdf) return;
-
-    setIsSavingPdf(true);
-    try {
-      await onSaveAsPdf();
-    } finally {
-      setIsSavingPdf(false);
-    }
-  }
-
+export default function ResumeActions() {
   return (
     <div className="flex flex-wrap gap-3 print:hidden">
       <Link
@@ -37,15 +19,14 @@ export default function ResumeActions({ onSaveAsPdf }: ResumeActionsProps) {
       >
         ATS version
       </Link>
-      <button
-        type="button"
-        onClick={handleSaveAsPdf}
-        disabled={isSavingPdf}
+      <a
+        href="/MarcellVargaResume2026.pdf"
+        download="Marcell Varga | UX & Frontend Engineer.pdf"
         className="inline-flex items-center gap-2 rounded-full bg-[#0a2135] px-4 py-2 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(7,20,38,0.14),inset_0_1px_0_rgba(255,255,255,0.14)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#0d2940]"
       >
         <Download className="h-4 w-4" />
-        {isSavingPdf ? "Preparing PDF..." : "Save as PDF"}
-      </button>
+        Save as PDF
+      </a>
     </div>
   );
 }
