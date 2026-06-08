@@ -161,7 +161,7 @@ export default function ResumePage() {
                 <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(76,207,255,0.1),transparent_19%)]" />
                 <div className="relative mx-auto max-w-[250px] md:max-w-none">
                   <div className="w-full">
-                    <div className="mx-auto flex w-full max-w-[9.5rem] items-end justify-center overflow-hidden rounded-[1rem] border border-white/12 bg-white/8 px-2 pt-2 shadow-[0_12px_32px_rgba(0,0,0,0.22)] md:max-w-[10.5rem]">
+                    <div className="mx-auto flex w-full max-w-[9.5rem] items-end justify-center overflow-hidden rounded-[1rem] bg-white/8 px-2 pt-2 shadow-[0_12px_32px_rgba(0,0,0,0.22)] md:max-w-[10.5rem]">
                       <Image
                         src={resume.photo}
                         alt={resume.name}
