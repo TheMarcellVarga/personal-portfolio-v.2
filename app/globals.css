@@ -284,10 +284,18 @@
 }
 
 @media print {
+  *,
+  *::before,
+  *::after {
+    color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
   html,
   body {
-    width: 210mm;
-    height: 297mm;
+    width: 210mm !important;
+    height: 297mm !important;
     min-height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -297,14 +305,16 @@
 
   .resume-route,
   .resume-sheet {
-    width: 210mm;
-    height: 297mm;
-    min-height: 297mm;
-    max-height: 297mm;
+    width: 210mm !important;
+    height: 297mm !important;
+    min-height: 0 !important;
+    max-height: 297mm !important;
     background: #081522 !important;
-    color-adjust: exact;
-    print-color-adjust: exact;
-    -webkit-print-color-adjust: exact;
+  }
+
+  .resume-route {
+    position: fixed !important;
+    inset: 0 !important;
   }
 
   .resume-route,
@@ -316,11 +326,35 @@
     overflow: hidden !important;
   }
 
+  .resume-route main,
+  .resume-route main > div {
+    width: 210mm !important;
+    height: 297mm !important;
+  }
+
   .resume-sheet {
+    position: absolute !important;
+    inset: 0 !important;
     margin: 0 !important;
     overflow: hidden;
     page-break-after: avoid;
     break-after: avoid;
+  }
+
+  .resume-sheet::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        ellipse 88mm 58mm at 83% 3%,
+        rgba(76, 207, 255, 0.14) 0%,
+        rgba(76, 207, 255, 0.055) 36%,
+        rgba(8, 21, 34, 0) 74%
+      ),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0) 44%);
   }
 
   .resume-screen-art {
@@ -328,6 +362,8 @@
   }
 
   .resume-print-grid {
+    position: relative;
+    z-index: 1;
     height: 297mm;
     min-height: 0 !important;
     grid-template-columns: 58mm 1fr !important;
