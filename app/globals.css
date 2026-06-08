@@ -288,6 +288,10 @@
   body {
     width: 210mm;
     height: 297mm;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
     background: #081522 !important;
   }
 
@@ -296,13 +300,36 @@
     width: 210mm;
     height: 297mm;
     min-height: 297mm;
+    max-height: 297mm;
     background: #081522 !important;
     color-adjust: exact;
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
   }
 
+  .resume-route,
+  .resume-route main,
+  .resume-route main > div {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+    overflow: hidden !important;
+  }
+
   .resume-sheet {
+    margin: 0 !important;
     overflow: hidden;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .resume-screen-art {
+    display: none !important;
+  }
+
+  .resume-print-grid {
+    height: 297mm;
+    min-height: 0 !important;
+    grid-template-columns: 58mm 1fr !important;
   }
 }

@@ -173,8 +173,8 @@ export default function ResumePage() {
             {...fadeInUp(0.08)}
             className="resume-sheet relative mx-auto overflow-hidden rounded-[1.5rem] border border-white/12 bg-[#081522] shadow-[0_30px_110px_rgba(0,0,0,0.34),inset_0_1px_0_rgba(255,255,255,0.08)] sm:rounded-[1.9rem] print:rounded-none print:border-0 print:shadow-none"
           >
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_84%_4%,rgba(76,207,255,0.16),transparent_24%),linear-gradient(145deg,rgba(255,255,255,0.025),transparent_44%)]" />
-            <div className="relative grid min-h-[297mm] grid-cols-1 md:grid-cols-[58mm_1fr] print:grid-cols-[58mm_1fr]">
+            <div className="resume-screen-art pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_84%_4%,rgba(76,207,255,0.16),transparent_24%),linear-gradient(145deg,rgba(255,255,255,0.025),transparent_44%)]" />
+            <div className="resume-print-grid relative grid min-h-[297mm] grid-cols-1 md:grid-cols-[58mm_1fr] print:grid-cols-[58mm_1fr]">
               <aside className="relative border-b border-white/10 bg-[#0b1b29]/84 px-5 py-6 md:border-b-0 md:border-r print:border-b-0 print:border-r">
                 <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(76,207,255,0.1),transparent_19%)]" />
                 <div className="relative mx-auto max-w-[250px] md:max-w-none">
