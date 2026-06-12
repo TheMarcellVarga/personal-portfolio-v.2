@@ -3,6 +3,7 @@
 import IndexSigAnimatedIcon from "@/public/icons/indexSigAnimated";
 import { motion } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
+import { SplitTextReveal } from "./SplitTextReveal";
 
 interface HomeIntroProps {
   onExitStart: () => void;
@@ -78,9 +79,14 @@ export function HomeIntro({ onExitStart, onComplete }: HomeIntroProps) {
         transition={{ duration: 0.55, ease: travelEase }}
         className="absolute inset-x-0 top-[calc(50%+7rem)] px-6 text-center sm:top-[calc(50%+8rem)]"
       >
-        <p className="font-label text-[0.68rem] font-medium uppercase tracking-[0.34em] text-white/54">
-          UX & Frontend Engineer
-        </p>
+        <SplitTextReveal
+          as="p"
+          text="UX & Frontend Engineer"
+          delay={0.2}
+          duration={0.75}
+          stagger={0.015}
+          className="font-label text-[0.68rem] font-medium uppercase tracking-[0.34em] text-white/54"
+        />
       </motion.div>
 
       {/* <button

@@ -40,6 +40,7 @@ import { SectionLabel } from "./components/SectionLabel";
 import { HomeIntro } from "./components/HomeIntro";
 import { PageBackground } from "./components/PageBackground";
 import { HeroCanvasBackdrop } from "./components/HeroCanvasBackdrop";
+import { SplitTextReveal } from "./components/SplitTextReveal";
 
 const principlesStatement =
   "I turn complex product requirements into clear interfaces and carry the strongest ideas from prototype to production.";
@@ -714,9 +715,14 @@ export default function Page() {
                     {...heroIntroFoldUp(revealHeroIntroText, introPlayedThisVisit, 0.08)}
                     className="home-intro-fold space-y-6 [transform-origin:bottom]"
                   >
-                    <h1 className="max-w-[8ch] font-display text-[clamp(3.4rem,14vw,4.2rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[clamp(3.4rem,8vw,4.8rem)] md:text-[clamp(3.8rem,7vw,5.4rem)]">
-                      Marcell Varga
-                    </h1>
+                    <SplitTextReveal
+                      as="h1"
+                      text="Marcell Varga"
+                      animate={introPlayedThisVisit && revealHeroIntroText && !shouldReduceMotion}
+                      visible={!introPlayedThisVisit || revealHeroIntroText}
+                      delay={0.08}
+                      className="max-w-[8ch] font-display text-[clamp(3.4rem,14vw,4.2rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[clamp(3.4rem,8vw,4.8rem)] md:text-[clamp(3.8rem,7vw,5.4rem)]"
+                    />
                     <p className="max-w-[30rem] text-[0.98rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
                       I design and build product interfaces that stay calm, sharp,
                       and useful in practice.
@@ -802,9 +808,14 @@ export default function Page() {
                     {...heroIntroFoldUp(revealHeroIntroText, introPlayedThisVisit, 0.08)}
                     className="home-intro-fold space-y-6 [transform-origin:bottom]"
                   >
-                    <h1 className="max-w-[6.6ch] font-display text-[3.35rem] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[4.5rem] md:text-[5.3rem] lg:text-[6rem] xl:text-[6.8rem] 2xl:text-[7.5rem]">
-                      Marcell Varga
-                    </h1>
+                    <SplitTextReveal
+                      as="h1"
+                      text="Marcell Varga"
+                      animate={introPlayedThisVisit && revealHeroIntroText && !shouldReduceMotion}
+                      visible={!introPlayedThisVisit || revealHeroIntroText}
+                      delay={0.08}
+                      className="max-w-[6.6ch] font-display text-[3.35rem] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[4.5rem] md:text-[5.3rem] lg:text-[6rem] xl:text-[6.8rem] 2xl:text-[7.5rem]"
+                    />
                     <p className="max-w-[30rem] text-[1.02rem] leading-7 text-white/72 sm:text-[1.08rem] sm:leading-8">
                       I design and build product interfaces that stay calm, sharp,
                       and useful in practice.
@@ -972,9 +983,13 @@ export default function Page() {
             >
               <div className="max-w-2xl">
                 <SectionLabel index="02" label="Capabilities" />
-                <h2 className="mt-6 font-display text-[clamp(2.35rem,4.8vw,4.6rem)] leading-[0.92] tracking-[-0.035em] text-custom-blue">
-                  Where taste meets implementation.
-                </h2>
+                <SplitTextReveal
+                  as="h2"
+                  text="Where taste meets implementation."
+                  animate={!shouldReduceMotion}
+                  triggerOnView
+                  className="mt-6 font-display text-[clamp(2.35rem,4.8vw,4.6rem)] leading-[0.92] tracking-[-0.035em] text-custom-blue"
+                />
               </div>
               <p className="max-w-xl text-[0.9rem] leading-7 text-custom-blue/66 lg:justify-self-end">
                 I sit between product design and frontend engineering:
@@ -1032,9 +1047,13 @@ export default function Page() {
             <div className="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div className="max-w-2xl">
                 <SectionLabel index="03" label="Selected Work" />
-                <h2 className="mt-8 font-display text-[clamp(2.8rem,6vw,5.4rem)] leading-[0.9] tracking-[-0.04em] text-custom-blue">
-                  Work that turns product thinking into interfaces.
-                </h2>
+                <SplitTextReveal
+                  as="h2"
+                  text="Work that turns product thinking into interfaces."
+                  animate={!shouldReduceMotion}
+                  triggerOnView
+                  className="mt-8 font-display text-[clamp(2.8rem,6vw,5.4rem)] leading-[0.9] tracking-[-0.04em] text-custom-blue"
+                />
                 <p className="mt-6 text-[1.05rem] leading-relaxed text-custom-blue/65">
                   A focused set of projects where product decisions show up in
                   the interface.
@@ -1206,9 +1225,13 @@ export default function Page() {
               <div className="relative grid w-full gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
                 <div>
                   <SectionLabel index="05" label="Contact" tone="light" />
-                  <h2 className="max-w-3xl font-display text-[clamp(2.15rem,8vw,5rem)] leading-[0.96] tracking-[-0.04em] text-white">
-                    Say hi.
-                  </h2>
+                  <SplitTextReveal
+                    as="h2"
+                    text="Say hi."
+                    animate={!shouldReduceMotion}
+                    triggerOnView
+                    className="max-w-3xl font-display text-[clamp(2.15rem,8vw,5rem)] leading-[0.96] tracking-[-0.04em] text-white"
+                  />
                   <p className="mt-4 max-w-2xl text-[0.96rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
                     If you want to talk about a project, share feedback, or
                     just introduce yourself, send a note. I read everything

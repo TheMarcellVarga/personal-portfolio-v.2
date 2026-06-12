@@ -189,6 +189,20 @@
   .hero-motion-ready .hero-scroll-layer {
     will-change: transform, opacity;
   }
+
+  .split-text-reveal-word {
+    display: inline-block;
+    overflow: hidden;
+    margin-bottom: -0.18em;
+    padding-bottom: 0.18em;
+    vertical-align: top;
+  }
+
+  .split-text-reveal-char {
+    display: inline-block;
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+  }
 }
 
 @media (max-width: 639px) {
