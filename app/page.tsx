@@ -4,6 +4,7 @@ import {
   startTransition,
   useCallback,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -20,6 +21,7 @@ import {
   useMotionValue,
   useSpring,
 } from "framer-motion";
+import { gsap } from "gsap";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -149,8 +151,12 @@ function smoothstep(value: number) {
 function readIntroAlreadySeen() {
   if (typeof window === "undefined") return false;
 
-  if (window.sessionStorage.getItem("mv-home-intro") === "1") {
-    return true;
+  try {
+    if (window.sessionStorage?.getItem("mv-home-intro") === "1") {
+      return true;
+    }
+  } catch {
+    // Some embedded/private browser contexts can block sessionStorage.
   }
 
   if (document.documentElement.dataset.homeIntro === "0") {
@@ -314,6 +320,7 @@ export default function Page() {
   const shouldReduceMotion = Boolean(prefersReducedMotion);
   const enableScrollMotion = hasMounted && !shouldReduceMotion;
   const headerLogoRef = useRef<HTMLSpanElement>(null);
+  const mainStageRef = useRef<HTMLDivElement>(null);
 
   const heroRef = useRef<HTMLElement>(null);
   const principlesRef = useRef<HTMLElement>(null);
@@ -423,7 +430,11 @@ export default function Page() {
   }, [shouldReduceMotion]);
 
   const finishIntro = useCallback(() => {
-    window.sessionStorage.setItem("mv-home-intro", "1");
+    try {
+      window.sessionStorage?.setItem("mv-home-intro", "1");
+    } catch {
+      // The cookie set by HomeIntro still preserves the short-lived intro state.
+    }
     setShouldAnimateHeaderBrand(true);
     setIntroStage("done");
   }, []);
@@ -565,6 +576,50 @@ export default function Page() {
     }
   }, [introStage, shouldReduceMotion, scrollHome]);
 
+  useLayoutEffect(() => {
+    const stage = mainStageRef.current;
+    if (!stage || shouldReduceMotion) return;
+
+    const revealTargets = Array.from(
+      stage.querySelectorAll<HTMLElement>("main > section, footer"),
+    );
+
+    if (introStage !== "done") {
+      gsap.set(stage, { opacity: 0, y: 16, filter: "blur(12px)" });
+      gsap.set(revealTargets, { opacity: 0, y: 24 });
+      return;
+    }
+
+    gsap.set(stage, { opacity: 0, y: 16, filter: "blur(12px)" });
+    gsap.set(revealTargets, { opacity: 0, y: 24 });
+
+    const tl = gsap.timeline({
+      defaults: {
+        ease: "power4.out",
+      },
+    });
+
+    tl.to(stage, {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      duration: 0.7,
+    }).to(
+      revealTargets,
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.84,
+        stagger: 0.08,
+      },
+      0.08,
+    );
+
+    return () => {
+      tl.kill();
+    };
+  }, [introStage, shouldReduceMotion]);
+
   const featuredProjects = useMemo(
     () => projects.filter((project) => !project.inProgress),
     [],
@@ -573,6 +628,8 @@ export default function Page() {
   const introHasCompleted = introStage === "done";
   const introHeaderMuted = introStage !== "done";
   const revealHeroIntroText = introStage === "exiting" || introStage === "done";
+  const revealHeroTitle = introStage === "done";
+  const revealMainStage = introStage === "done";
   const principlesIntroReady = introStage === "done";
   const principlesDisplayText =
     isCompactViewport || shouldReduceMotion ? principlesStatement : typedText;
@@ -673,9 +730,19 @@ export default function Page() {
       </div>
 
       <div
+        ref={mainStageRef}
         className={`home-intro-stage ${
           introIsVisible ? "pointer-events-none" : ""
         } ${enableScrollMotion ? "hero-motion-ready" : ""}`}
+        style={
+          revealMainStage
+            ? undefined
+            : {
+                opacity: 0,
+                transform: "translate3d(0, 16px, 0)",
+                filter: "blur(12px)",
+              }
+        }
       >
         <main className="relative z-10 px-5 pb-8 pt-0 sm:px-6 sm:pb-12 lg:px-10">
           <section
@@ -718,8 +785,8 @@ export default function Page() {
                     <SplitTextReveal
                       as="h1"
                       text="Marcell Varga"
-                      animate={introPlayedThisVisit && revealHeroIntroText && !shouldReduceMotion}
-                      visible={!introPlayedThisVisit || revealHeroIntroText}
+                      animate={revealHeroTitle && !shouldReduceMotion}
+                      visible={revealHeroTitle}
                       delay={0.08}
                       className="max-w-[8ch] font-display text-[clamp(3.4rem,14vw,4.2rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[clamp(3.4rem,8vw,4.8rem)] md:text-[clamp(3.8rem,7vw,5.4rem)]"
                     />
@@ -811,8 +878,8 @@ export default function Page() {
                     <SplitTextReveal
                       as="h1"
                       text="Marcell Varga"
-                      animate={introPlayedThisVisit && revealHeroIntroText && !shouldReduceMotion}
-                      visible={!introPlayedThisVisit || revealHeroIntroText}
+                      animate={revealHeroTitle && !shouldReduceMotion}
+                      visible={revealHeroTitle}
                       delay={0.08}
                       className="max-w-[6.6ch] font-display text-[3.35rem] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[4.5rem] md:text-[5.3rem] lg:text-[6rem] xl:text-[6.8rem] 2xl:text-[7.5rem]"
                     />

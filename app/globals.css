@@ -172,6 +172,7 @@
   html[data-home-intro="0"] .home-intro-stage {
     opacity: 1 !important;
     filter: blur(0px) !important;
+    transform: none !important;
     pointer-events: auto !important;
   }
 
