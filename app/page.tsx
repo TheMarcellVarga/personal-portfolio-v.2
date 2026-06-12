@@ -1045,15 +1045,17 @@ export default function Page() {
             className="relative mx-auto w-full max-w-7xl py-16 sm:py-24 lg:py-32"
           >
             <div className="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
-              <div className="max-w-2xl">
+              <div className="max-w-4xl">
                 <SectionLabel index="03" label="Selected Work" />
-                <SplitTextReveal
-                  as="h2"
-                  text="Work that turns product thinking into interfaces."
-                  animate={!shouldReduceMotion}
-                  triggerOnView
-                  className="mt-8 font-display text-[clamp(2.8rem,6vw,5.4rem)] leading-[0.9] tracking-[-0.04em] text-custom-blue"
-                />
+                <motion.h2
+                  {...fadeInUp(0.04)}
+                  className="mt-8 max-w-[18ch] font-display text-[clamp(2.95rem,7vw,6.15rem)] font-semibold leading-[0.9] tracking-normal text-custom-blue"
+                >
+                  <span className="block">Selected work,</span>
+                  <span className="block font-editorial-serif font-normal italic text-[#ff6b2c]">
+                    shaped with care.
+                  </span>
+                </motion.h2>
                 <p className="mt-6 text-[1.05rem] leading-relaxed text-custom-blue/65">
                   A focused set of projects where product decisions show up in
                   the interface.
