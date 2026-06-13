@@ -15,7 +15,7 @@ interface HeaderProps {
     label: string;
   };
   scrollToHome?: () => void;
-  scrollToAbout?: () => void;
+  scrollToProcess?: () => void;
   scrollToWork?: () => void;
   scrollToContact?: () => void;
   activeSection?: string;
@@ -35,7 +35,7 @@ export default function Header({
   setIsOpen,
   backLink,
   scrollToHome,
-  scrollToAbout,
+  scrollToProcess,
   scrollToWork,
   scrollToContact,
   activeSection,
@@ -192,7 +192,7 @@ export default function Header({
 
   const items: NavItem[] = [
     { label: "Intro", path: "/#hero", action: scrollToHome },
-    { label: "Skills", path: "/#about", action: scrollToAbout },
+    { label: "Skills", path: "/#process", action: scrollToProcess },
     { label: "Work", path: "/#work", action: scrollToWork },
     { label: "Contact", path: "/#contact", action: scrollToContact },
   ];

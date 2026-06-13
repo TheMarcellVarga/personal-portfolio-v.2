@@ -480,8 +480,8 @@ export default function Page() {
     });
   }, [shouldReduceMotion]);
 
-  const scrollAbout = useCallback(() => {
-    scrollToId("about", shouldReduceMotion);
+  const scrollProcess = useCallback(() => {
+    scrollToId("process", shouldReduceMotion);
   }, [shouldReduceMotion]);
 
   const scrollWork = useCallback(() => {
@@ -495,10 +495,11 @@ export default function Page() {
   const [activeSection, setActiveSection] = useState("Intro");
 
   useEffect(() => {
-    const sectionIds = ["hero", "about", "work", "contact"];
+    const sectionIds = ["hero", "about", "process", "work", "contact"];
     const sectionMap: Record<string, string> = {
       hero: "Intro",
-      about: "Skills",
+      about: "Principles",
+      process: "Skills",
       work: "Work",
       contact: "Contact",
     };
@@ -764,7 +765,7 @@ export default function Page() {
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           scrollToHome={scrollHome}
-          scrollToAbout={scrollAbout}
+          scrollToProcess={scrollProcess}
           scrollToWork={scrollWork}
           scrollToContact={scrollContact}
           activeSection={activeSection}
@@ -1089,7 +1090,9 @@ export default function Page() {
           </section>
 
           <section
+            id="process"
             ref={capabilitiesSectionRef}
+            data-scroll-anchor="process"
             className="relative mx-auto w-full max-w-7xl py-16 sm:py-24 lg:py-32"
           >
             <div className="mb-8 grid gap-4 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-end">

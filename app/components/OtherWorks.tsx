@@ -80,7 +80,7 @@ export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
           >
             <Link
               href={project.link}
-              className="relative flex h-full flex-col justify-between p-5 sm:p-7"
+              className="relative flex h-full flex-col justify-between p-5 transition-colors duration-300 hover:bg-custom-blue/[0.01] sm:p-7"
               aria-label={`Open ${project.title}`}
             >
               <div className="absolute inset-0">
@@ -108,7 +108,7 @@ export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
                 <p className="mt-3 max-w-sm text-[0.95rem] leading-relaxed text-white/85">
                   {project.subTitle}
                 </p>
-                <div className="mt-8 inline-flex w-fit items-center gap-2.5 rounded-full bg-white/92 px-5 py-2.5 text-xs font-bold text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.66)] transition-all duration-300 hover:bg-[#67d9ff] hover:text-white">
+                <div className="mt-8 inline-flex w-fit items-center gap-2.5 rounded-full bg-white/92 px-5 py-2.5 text-sm font-medium text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.66)] transition-all duration-300 group-hover:bg-white group-hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]">
                   View case study
                   <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </div>
