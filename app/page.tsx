@@ -49,43 +49,47 @@ const principlesStatement =
 
 const PRINCIPLES_REVEAL_END = 0.74;
 
-const capabilityCards = [
+const processCards = [
   {
-    title: "Clarity before decoration",
-    body: "I turn complex workflows into interfaces people can understand quickly and use without friction.",
+    number: "01",
+    title: "Discover",
+    body: "I start by mapping user needs, business goals, constraints, and the moments where the current experience breaks down.",
     icon: Blocks,
     colSpan: "lg:col-span-2",
   },
   {
-    title: "Built beyond the mockup",
-    body: "Responsiveness, accessibility, and implementation detail are part of the product from the start.",
-    icon: Code2,
-    colSpan: "lg:col-span-1",
-  },
-  {
-    title: "Research that changes the work",
-    body: "Interviews, testing, and iteration help shape decisions before they reach production.",
+    number: "02",
+    title: "Structure",
+    body: "From there, I define flows, information hierarchy, and the decisions the interface needs to make clear.",
     icon: Sparkles,
     colSpan: "lg:col-span-1",
   },
   {
-    title: "Design and engineering together",
-    body: "I work across UX, frontend, and backend touchpoints so the idea stays intact as it becomes code.",
+    number: "03",
+    title: "Prototype",
+    body: "I test the interaction model early, using focused prototypes to expose weak assumptions before the work gets expensive.",
+    icon: Code2,
+    colSpan: "lg:col-span-1",
+  },
+  {
+    number: "04",
+    title: "Deliver",
+    body: "I carry the strongest solution into implementation, tightening responsiveness, accessibility, motion, and product detail as it becomes real.",
     icon: Rocket,
     colSpan: "lg:col-span-2",
   },
 ];
 
-const capabilityTags = [
-  "design systems",
-  "interaction design",
-  "motion systems",
-  "frontend architecture",
-  "accessibility",
+const processTags = [
+  "research",
+  "constraints",
+  "flows",
+  "content structure",
   "prototyping",
-  "product thinking",
-  "AI product flows",
-  "React / Next.js",
+  "validation",
+  "implementation",
+  "iteration",
+  "handoff",
 ];
 
 function HeroDynamicBackdrop({
@@ -1090,49 +1094,54 @@ export default function Page() {
           >
             <div className="mb-8 grid gap-4 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-end">
               <div className="max-w-2xl">
-                <SectionLabel index="02" label="Capabilities" />
+                <SectionLabel index="02" label="Process" />
                 <SplitTextReveal
                   as="h2"
-                  text="Where taste meets implementation."
+                  text="How It Takes Shape."
                   animate={!shouldReduceMotion}
                   triggerOnView
                   className="mt-8 font-display text-[clamp(2.8rem,6vw,5.4rem)] leading-[0.9] tracking-[-0.04em] text-custom-blue"
                 />
               </div>
               <p className="max-w-xl text-[0.9rem] leading-7 text-custom-blue/66 lg:justify-self-end">
-                I sit between product design and frontend engineering:
-                understanding the problem, shaping the interface, and building
-                the details that make it work.
+                My work moves through a consistent sequence: discover the real
+                problem, structure the experience, prototype the interaction,
+                and deliver the version people can actually use.
               </p>
             </div>
 
-            <div className="grid auto-rows-fr gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
-              {capabilityCards.map((card, index) => {
+            <div className="grid auto-rows-fr gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {processCards.map((card, index) => {
                 const Icon = card.icon;
 
                 return (
                   <article
                     key={card.title}
                     data-capabilities-card
-                    className={`glass-panel relative flex min-h-[11.75rem] flex-col overflow-hidden rounded-[1.9rem] bg-white/65 p-5 shadow-[0_12px_40px_rgba(11,17,26,0.04)] sm:rounded-[2.1rem] ${card.colSpan}`}
+                    className={`glass-panel relative flex min-h-[10rem] flex-col overflow-hidden rounded-[1.8rem] bg-white/65 p-4 shadow-[0_12px_40px_rgba(11,17,26,0.04)] sm:rounded-[2rem] ${card.colSpan}`}
                   >
                     <div className="relative z-10 flex h-full flex-col">
-                      <div className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-[0.95rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)]">
-                        <Icon className="h-4.5 w-4.5" />
+                      <div className="mb-4 flex items-start justify-between gap-3">
+                        <div className="inline-flex h-9 w-9 items-center justify-center rounded-[0.85rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)]">
+                          <Icon className="h-4.5 w-4.5" />
+                        </div>
+                        <span className="font-label rounded-full bg-white/62 px-2.5 py-1 text-[0.52rem] font-medium uppercase tracking-[0.18em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]">
+                          {card.number}
+                        </span>
                       </div>
-                      <h2 className="max-w-[14ch] font-display text-[1.18rem] font-medium leading-[1.06] tracking-[-0.02em] text-custom-blue sm:text-[1.38rem]">
+                      <h2 className="max-w-[14ch] font-display text-[1.08rem] font-medium leading-[1.04] tracking-[-0.02em] text-custom-blue sm:text-[1.24rem]">
                         {card.title}
                       </h2>
-                      <p className="mt-2.5 max-w-[26rem] text-[0.78rem] leading-6 text-custom-blue/70">
+                      <p className="mt-2 max-w-[26rem] text-[0.75rem] leading-[1.55] text-custom-blue/70">
                         {card.body}
                       </p>
-                      <div className="mt-auto flex flex-wrap gap-2 pt-5">
-                        {capabilityTags
+                      <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
+                        {processTags
                           .slice(index * 2, index * 2 + 2)
                           .map((tag) => (
                             <span
                               key={tag}
-                              className="font-label rounded-full bg-white/62 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]"
+                              className="font-label rounded-full bg-white/62 px-2 py-1 text-[0.52rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]"
                             >
                               {tag}
                             </span>
