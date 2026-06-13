@@ -321,6 +321,9 @@ export default function Page() {
   const enableScrollMotion = hasMounted && !shouldReduceMotion;
   const headerLogoRef = useRef<HTMLSpanElement>(null);
   const mainStageRef = useRef<HTMLDivElement>(null);
+  const capabilitiesSectionRef = useRef<HTMLElement>(null);
+  const capabilitiesHasPlayedRef = useRef(false);
+  const [capabilitiesInView, setCapabilitiesInView] = useState(false);
 
   const heroRef = useRef<HTMLElement>(null);
   const principlesRef = useRef<HTMLElement>(null);
@@ -580,18 +583,12 @@ export default function Page() {
     const stage = mainStageRef.current;
     if (!stage || shouldReduceMotion) return;
 
-    const revealTargets = Array.from(
-      stage.querySelectorAll<HTMLElement>("main > section, footer"),
-    );
-
     if (introStage !== "done") {
       gsap.set(stage, { opacity: 0, y: 16, filter: "blur(12px)" });
-      gsap.set(revealTargets, { opacity: 0, y: 24 });
       return;
     }
 
     gsap.set(stage, { opacity: 0, y: 16, filter: "blur(12px)" });
-    gsap.set(revealTargets, { opacity: 0, y: 24 });
 
     const tl = gsap.timeline({
       defaults: {
@@ -604,21 +601,65 @@ export default function Page() {
       y: 0,
       filter: "blur(0px)",
       duration: 0.7,
-    }).to(
-      revealTargets,
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.84,
-        stagger: 0.08,
-      },
-      0.08,
-    );
+    });
 
     return () => {
       tl.kill();
     };
   }, [introStage, shouldReduceMotion]);
+
+  useEffect(() => {
+    const section = capabilitiesSectionRef.current;
+    if (!section || shouldReduceMotion) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || capabilitiesHasPlayedRef.current) return;
+        capabilitiesHasPlayedRef.current = true;
+        setCapabilitiesInView(true);
+        observer.disconnect();
+      },
+      { threshold: 0.28, rootMargin: "0px 0px -16% 0px" },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [shouldReduceMotion]);
+
+  useLayoutEffect(() => {
+    const section = capabilitiesSectionRef.current;
+    if (!section || shouldReduceMotion) return;
+
+    const cards = Array.from(
+      section.querySelectorAll<HTMLElement>("[data-capabilities-card]"),
+    );
+
+    if (!capabilitiesInView) {
+      gsap.set(cards, { opacity: 0, y: 22 });
+      return;
+    }
+
+    gsap.set(cards, { opacity: 0, y: 22 });
+
+    const tl = gsap.timeline({
+      delay: 0.08,
+      defaults: { ease: "power4.out" },
+    });
+
+    tl.to(
+      cards,
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.66,
+        stagger: 0.08,
+      },
+    );
+
+    return () => {
+      tl.kill();
+    };
+  }, [capabilitiesInView, shouldReduceMotion]);
 
   const featuredProjects = useMemo(
     () => projects.filter((project) => !project.inProgress),
@@ -1043,11 +1084,11 @@ export default function Page() {
             </div>
           </section>
 
-          <section className="relative mx-auto w-full max-w-7xl py-16 sm:py-24 lg:py-32">
-            <motion.div
-              {...fadeInUp(0.04)}
-              className="mb-6 grid gap-4 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-end"
-            >
+          <section
+            ref={capabilitiesSectionRef}
+            className="relative mx-auto w-full max-w-7xl py-16 sm:py-24 lg:py-32"
+          >
+            <div className="mb-8 grid gap-4 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-end">
               <div className="max-w-2xl">
                 <SectionLabel index="02" label="Capabilities" />
                 <SplitTextReveal
@@ -1055,7 +1096,7 @@ export default function Page() {
                   text="Where taste meets implementation."
                   animate={!shouldReduceMotion}
                   triggerOnView
-                  className="mt-6 font-display text-[clamp(2.35rem,4.8vw,4.6rem)] leading-[0.92] tracking-[-0.035em] text-custom-blue"
+                  className="mt-8 font-display text-[clamp(2.8rem,6vw,5.4rem)] leading-[0.9] tracking-[-0.04em] text-custom-blue"
                 />
               </div>
               <p className="max-w-xl text-[0.9rem] leading-7 text-custom-blue/66 lg:justify-self-end">
@@ -1063,21 +1104,20 @@ export default function Page() {
                 understanding the problem, shaping the interface, and building
                 the details that make it work.
               </p>
-            </motion.div>
+            </div>
 
             <div className="grid auto-rows-fr gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
               {capabilityCards.map((card, index) => {
                 const Icon = card.icon;
 
                 return (
-                  <motion.article
+                  <article
                     key={card.title}
-                    {...fadeInUp(index * 0.1)}
-                    className={`glass-panel group relative flex min-h-[11.75rem] flex-col overflow-hidden rounded-[1.9rem] bg-white/65 p-5 shadow-[0_12px_40px_rgba(11,17,26,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_48px_rgba(11,17,26,0.05)] sm:rounded-[2.1rem] ${card.colSpan}`}
+                    data-capabilities-card
+                    className={`glass-panel relative flex min-h-[11.75rem] flex-col overflow-hidden rounded-[1.9rem] bg-white/65 p-5 shadow-[0_12px_40px_rgba(11,17,26,0.04)] sm:rounded-[2.1rem] ${card.colSpan}`}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                     <div className="relative z-10 flex h-full flex-col">
-                      <div className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-[0.95rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)] transition-transform duration-500 group-hover:scale-105">
+                      <div className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-[0.95rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)]">
                         <Icon className="h-4.5 w-4.5" />
                       </div>
                       <h2 className="max-w-[14ch] font-display text-[1.18rem] font-medium leading-[1.06] tracking-[-0.02em] text-custom-blue sm:text-[1.38rem]">
@@ -1099,7 +1139,7 @@ export default function Page() {
                           ))}
                       </div>
                     </div>
-                  </motion.article>
+                  </article>
                 );
               })}
             </div>

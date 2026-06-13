@@ -1,10 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { gsap } from "gsap";
 import { projects } from "../data/projects";
 import { SectionLabel } from "./SectionLabel";
 
@@ -12,30 +12,70 @@ type OtherWorksProps = {
   currentProjectTitle: string;
 };
 
-const fadeInUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 20 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.2 },
-  transition: {
-    duration: 0.6,
-    delay,
-    ease: [0.22, 1, 0.36, 1] as const,
-  },
-});
-
 export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
   const otherProjects = projects.filter(
     (p) => p.title !== currentProjectTitle && !p.inProgress
   );
+  const sectionRef = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(false);
+  const hasPlayedRef = useRef(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || hasPlayedRef.current) return;
+        hasPlayedRef.current = true;
+        setInView(true);
+        observer.disconnect();
+      },
+      { threshold: 0.28, rootMargin: "0px 0px -16% 0px" },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const cards = Array.from(section.querySelectorAll<HTMLElement>("[data-other-works-card]"));
+
+    if (!inView) {
+      gsap.set(cards, { opacity: 0, y: 22 });
+      return;
+    }
+
+    gsap.set(cards, { opacity: 0, y: 22 });
+
+    const tl = gsap.timeline({
+      delay: 0.08,
+      defaults: { ease: "power4.out" },
+    });
+
+    tl.to(cards, {
+      opacity: 1,
+      y: 0,
+      duration: 0.66,
+      stagger: 0.08,
+    });
+
+    return () => {
+      tl.kill();
+    };
+  }, [inView]);
 
   return (
-    <section className="mt-24 sm:mt-32 lg:mt-40">
+    <section ref={sectionRef} className="mt-24 sm:mt-32 lg:mt-40">
       <SectionLabel index="More" label="Selected Work" />
       <div className="mt-8 grid gap-3.5 sm:mt-12 md:grid-cols-2">
         {otherProjects.map((project, index) => (
-          <motion.article
+          <article
             key={project.title}
-            {...fadeInUp(index * 0.1)}
+            data-other-works-card
             className="glass-panel group relative min-h-[19rem] overflow-hidden rounded-[1.9rem] bg-white/65 shadow-[0_12px_40px_rgba(11,17,26,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_48px_rgba(11,17,26,0.05)] sm:min-h-[22rem] sm:rounded-[2.1rem]"
           >
             <Link
@@ -74,7 +114,7 @@ export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
                 </div>
               </div>
             </Link>
-          </motion.article>
+          </article>
         ))}
       </div>
     </section>
