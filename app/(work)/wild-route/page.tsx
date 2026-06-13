@@ -115,7 +115,7 @@ export default function WildRoutePage() {
               <h1 className="max-w-[8ch] font-display text-[clamp(3.6rem,12vw,8.5rem)] font-medium leading-[0.86] tracking-[-0.06em] text-custom-blue">
                 Wild Route
               </h1>
-              <p className="max-w-2xl text-base leading-relaxed text-custom-blue/72 sm:text-lg">
+              <p className="max-w-2xl text-[1.05rem] leading-7 text-custom-blue/65">
                 {projectData.description}
               </p>
               <div className="flex flex-wrap gap-3 pt-2">
@@ -123,7 +123,7 @@ export default function WildRoutePage() {
                   href="https://github.com/TheMarcellVarga/ai-travel-planner"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-custom-blue px-5 py-3 text-xs font-medium uppercase tracking-[0.14em] text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#263648]"
+                  className="inline-flex items-center gap-2 rounded-full bg-custom-blue px-6 py-3 text-sm font-medium text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#263648]"
                 >
                   <Github className="h-4 w-4" />
                   View repository
@@ -193,12 +193,12 @@ export default function WildRoutePage() {
 
               <motion.div {...fadeInUp(0.08)} className="space-y-4">
                 <div className="glass-panel space-y-5 rounded-[1.9rem] bg-white/65 p-6 shadow-[0_12px_40px_rgba(11,17,26,0.04)] sm:rounded-[2.1rem] sm:p-8">
-                  <p className="text-lg leading-relaxed text-custom-blue/72">
+                  <p className="text-[1.05rem] leading-7 text-custom-blue/65">
                     Most itinerary tools start with a form or a list of destinations.
                     Wild Route starts with intent: the pace, climate, detours, budget,
                     and activities that make a trip worth taking.
                   </p>
-                  <p className="text-lg leading-relaxed text-custom-blue/72">
+                  <p className="text-[1.05rem] leading-7 text-custom-blue/65">
                     I designed the product around fewer, better-considered choices.
                     The visual language is editorial and cinematic, while the planner
                     stays explicit about route logic, tradeoffs, and what happens next.
@@ -217,7 +217,7 @@ export default function WildRoutePage() {
                       <span className="mt-3 block text-[0.64rem] font-medium uppercase tracking-[0.16em] text-custom-blue/54">
                         {signal.label}
                       </span>
-                      <p className="mt-3 text-sm leading-6 text-custom-blue/66">
+                      <p className="mt-3 text-[0.75rem] leading-[1.55] text-custom-blue/70">
                         {signal.detail}
                       </p>
                     </article>
@@ -233,7 +233,7 @@ export default function WildRoutePage() {
               <h2 className="mt-5 font-display text-[clamp(2.6rem,6vw,5rem)] font-medium leading-[0.9] tracking-[-0.05em] text-custom-blue">
                 A calm interface for a dense decision.
               </h2>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-custom-blue/72">
+              <p className="mt-6 max-w-2xl text-[1.05rem] leading-7 text-custom-blue/65">
                 The current build uses a transparent scoring engine behind the
                 prompt-first experience. That keeps the interaction explainable and
                 leaves a clean path for model-backed enrichment later.
@@ -262,10 +262,10 @@ export default function WildRoutePage() {
                   <span className="text-[0.64rem] font-medium uppercase tracking-[0.2em] text-custom-blue/42">
                     0{index + 1}
                   </span>
-                  <h3 className="mt-6 font-display text-2xl font-medium tracking-[-0.03em] text-custom-blue">
+                  <h3 className="mt-6 font-display text-[1.08rem] font-medium leading-[1.04] tracking-[-0.02em] text-custom-blue sm:text-[1.24rem]">
                     {step.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-6 text-custom-blue/68">
+                  <p className="mt-3 text-[0.75rem] leading-[1.55] text-custom-blue/70">
                     {step.text}
                   </p>
                 </motion.article>
@@ -279,7 +279,7 @@ export default function WildRoutePage() {
               <h2 className="mt-5 font-display text-[clamp(2.6rem,6vw,5rem)] font-medium leading-[0.9] tracking-[-0.05em] text-custom-blue">
                 Designed past the mockup.
               </h2>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-custom-blue/72">
+              <p className="mt-6 max-w-2xl text-[1.05rem] leading-7 text-custom-blue/65">
                 The product is wired as a production-style Next.js application:
                 identity, private data, public sharing, billing, and operational
                 endpoints are part of the system rather than presentation-only
@@ -300,10 +300,10 @@ export default function WildRoutePage() {
                     <div className="inline-flex h-11 w-11 items-center justify-center rounded-[1rem] bg-custom-blue text-[#d7ff40] shadow-[0_12px_24px_rgba(17,27,40,0.12)] transition-transform duration-500 group-hover:scale-105">
                       <Icon className="h-5 w-5" />
                     </div>
-                    <h3 className="mt-7 font-display text-2xl font-medium tracking-[-0.03em] text-custom-blue">
+                    <h3 className="mt-7 font-display text-[1.08rem] font-medium leading-[1.04] tracking-[-0.02em] text-custom-blue sm:text-[1.24rem]">
                       {layer.title}
                     </h3>
-                    <p className="mt-3 max-w-xl text-sm leading-6 text-custom-blue/68">
+                    <p className="mt-3 max-w-xl text-[0.75rem] leading-[1.55] text-custom-blue/70">
                       {layer.text}
                     </p>
                   </motion.article>
@@ -330,7 +330,7 @@ export default function WildRoutePage() {
               <h2 className="mt-8 max-w-[12ch] font-display text-[clamp(2.6rem,6vw,5.25rem)] font-medium leading-[0.9] tracking-[-0.05em]">
                 One product, end to end.
               </h2>
-              <p className="mt-6 max-w-2xl text-base leading-7 text-white/72 sm:text-lg sm:leading-8">
+              <p className="mt-6 max-w-2xl text-[1.05rem] leading-7 text-white/68">
                 Wild Route is a current portfolio piece because it reflects the work
                 I want to keep doing: shaping a distinct product idea, building the
                 interface carefully, and carrying the system far enough that the
@@ -340,7 +340,7 @@ export default function WildRoutePage() {
                 href="https://github.com/TheMarcellVarga/ai-travel-planner"
                 target="_blank"
                 rel="noreferrer"
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#d7ff40] px-5 py-3 text-xs font-medium uppercase tracking-[0.14em] text-[#171d16] transition duration-300 hover:-translate-y-0.5 hover:bg-white"
+                className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#d7ff40] px-6 py-3 text-sm font-medium text-[#171d16] transition duration-300 hover:-translate-y-0.5 hover:bg-white"
               >
                 Explore the code
                 <ArrowUpRight className="h-4 w-4" />

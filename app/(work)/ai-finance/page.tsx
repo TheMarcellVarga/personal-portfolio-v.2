@@ -123,7 +123,7 @@ export default function AiFinancePage() {
               <h1 className="font-display text-[clamp(3rem,9vw,7rem)] font-medium leading-[0.9] tracking-[-0.05em] text-custom-blue">
                 Aperture Financial Intelligence
               </h1>
-              <p className="max-w-3xl text-base leading-relaxed text-custom-blue/72 sm:text-lg">
+              <p className="max-w-3xl text-[1.05rem] leading-7 text-custom-blue/65">
                 A financial research and portfolio decision-support workspace
                 for reviewing holdings, evidence, scenarios, and risk context
                 without trade execution or personalized advice.
@@ -168,7 +168,7 @@ export default function AiFinancePage() {
                 href="https://github.com/TheMarcellVarga/ai-finance"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex w-fit items-center gap-2 rounded-full bg-custom-blue px-5 py-3 text-xs font-medium uppercase tracking-[0.13em] text-white shadow-[0_18px_38px_rgba(17,27,40,0.16)] transition hover:-translate-y-0.5 hover:bg-[#22344a]"
+                className="inline-flex w-fit items-center gap-2 rounded-full bg-custom-blue px-6 py-3 text-sm font-medium text-white shadow-[0_18px_38px_rgba(17,27,40,0.16)] transition hover:-translate-y-0.5 hover:bg-[#22344a]"
               >
                 View source
                 <ArrowUpRight className="h-4 w-4" />
@@ -203,12 +203,12 @@ export default function AiFinancePage() {
               </div>
               <div className="space-y-5">
                 <div className="glass-panel space-y-6 rounded-[1.9rem] bg-white/65 p-6 shadow-[0_12px_40px_rgba(11,17,26,0.04)] sm:rounded-[2.1rem] sm:p-8">
-                  <p className="text-lg leading-relaxed text-custom-blue/72">
+                  <p className="text-[1.05rem] leading-7 text-custom-blue/65">
                     Aperture is designed around a small research loop: load a
                     portfolio, inspect the evidence, review scenarios, and keep
                     the final judgment with the person using the workspace.
                   </p>
-                  <p className="text-lg leading-relaxed text-custom-blue/72">
+                  <p className="text-[1.05rem] leading-7 text-custom-blue/65">
                     The current product includes a cinematic public site and an
                     authenticated workspace with portfolio, watchlist,
                     research, goals, risk, settings, and billing routes.
@@ -221,10 +221,10 @@ export default function AiFinancePage() {
                       className="glass-panel rounded-[1.4rem] bg-white/62 p-5 shadow-[0_12px_40px_rgba(11,17,26,0.04)]"
                     >
                       <Icon className="h-5 w-5 text-custom-blue/52" />
-                      <h3 className="mt-5 text-base font-bold text-custom-blue">
+                      <h3 className="mt-5 font-display text-[1.08rem] font-medium leading-[1.04] tracking-[-0.02em] text-custom-blue sm:text-[1.24rem]">
                         {title}
                       </h3>
-                      <p className="mt-2 text-sm leading-6 text-custom-blue/62">
+                      <p className="mt-2 text-[0.75rem] leading-[1.55] text-custom-blue/70">
                         {text}
                       </p>
                     </div>
@@ -241,7 +241,7 @@ export default function AiFinancePage() {
                     The live product language stays explicit.
                   </h2>
                 </div>
-                <p className="max-w-2xl text-lg leading-relaxed text-custom-blue/68">
+                <p className="max-w-2xl text-[1.05rem] leading-7 text-custom-blue/65">
                   The public product page presents the core workspace surfaces
                   and keeps the guardrails visible: freshness labels, saved
                   citations, SEC-style source context, and no return promises.
@@ -264,7 +264,7 @@ export default function AiFinancePage() {
                 <h2 className="font-display max-w-3xl text-[clamp(2.6rem,5vw,4.6rem)] font-medium leading-[0.92] tracking-[-0.045em] text-custom-blue">
                   What is implemented in the workspace.
                 </h2>
-                <p className="max-w-2xl text-lg leading-relaxed text-custom-blue/68">
+                <p className="max-w-2xl text-[1.05rem] leading-7 text-custom-blue/65">
                   These are the routes and interactions currently present in
                   the product. The research, goal, and risk views are explicitly
                   local-demo experiences with deterministic content.
@@ -278,10 +278,10 @@ export default function AiFinancePage() {
                     className="glass-panel rounded-[1.6rem] bg-white/62 p-6 shadow-[0_12px_40px_rgba(11,17,26,0.04)]"
                   >
                     <Icon className="h-5 w-5 text-custom-blue/55" />
-                    <h3 className="mt-6 text-xl font-bold tracking-[-0.02em] text-custom-blue">
+                    <h3 className="mt-6 font-display text-[1.08rem] font-medium leading-[1.04] tracking-[-0.02em] text-custom-blue sm:text-[1.24rem]">
                       {title}
                     </h3>
-                    <p className="mt-3 text-sm leading-6 text-custom-blue/65">
+                    <p className="mt-3 text-[0.75rem] leading-[1.55] text-custom-blue/70">
                       {text}
                     </p>
                   </article>
@@ -306,7 +306,7 @@ export default function AiFinancePage() {
                   <h2 className="font-display mt-8 max-w-xl text-[clamp(2.6rem,5vw,4.5rem)] font-medium leading-[0.92] tracking-[-0.045em] text-white">
                     The boundaries appear in the interface.
                   </h2>
-                  <p className="mt-6 max-w-xl text-base leading-7 text-white/62">
+                  <p className="mt-6 max-w-xl text-[1.05rem] leading-7 text-white/68">
                     The product does not hide its constraints in fine print.
                     Research-only framing, freshness labels, and unavailable
                     states are part of the visible experience.
@@ -319,7 +319,7 @@ export default function AiFinancePage() {
                       className="flex items-start gap-3 rounded-[1.2rem] bg-white/[0.055] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
                     >
                       <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#67d9ff]/80" />
-                      <p className="text-sm leading-6 text-white/72">{rule}</p>
+                      <p className="text-[0.75rem] leading-[1.55] text-white/72">{rule}</p>
                     </div>
                   ))}
                 </div>
@@ -337,14 +337,14 @@ export default function AiFinancePage() {
                 </h2>
               </div>
               <div className="glass-panel space-y-6 rounded-[1.9rem] bg-white/65 p-6 shadow-[0_12px_40px_rgba(11,17,26,0.04)] sm:rounded-[2.1rem] sm:p-8">
-                <p className="text-lg leading-relaxed text-custom-blue/72">
+                <p className="text-[1.05rem] leading-7 text-custom-blue/65">
                   The public marketing routes and authenticated workspace routes
                   are built. Portfolio and watchlist views expose provider
                   freshness and failure states. Research, goal, and risk
                   surfaces use deterministic local-demo content so the product
                   can be reviewed without external model spend.
                 </p>
-                <p className="text-lg leading-relaxed text-custom-blue/72">
+                <p className="text-[1.05rem] leading-7 text-custom-blue/65">
                   That distinction matters for the case study: the visible
                   product is the evidence. Planned production hardening is not
                   presented here as a shipped feature.

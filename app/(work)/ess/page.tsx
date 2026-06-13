@@ -309,7 +309,7 @@ export default function ESSPage() {
               <h1 className="font-display text-[clamp(2.35rem,10vw,7rem)] font-medium leading-[0.92] tracking-[-0.04em] text-custom-blue">
                 {projectData.title}
               </h1>
-              <p className="mt-8 max-w-2xl text-base leading-relaxed text-custom-blue/72 sm:text-lg">
+              <p className="mt-8 max-w-2xl text-[1.05rem] leading-7 text-custom-blue/65">
                 {projectData.description}
               </p>
             </motion.div>
@@ -384,7 +384,7 @@ export default function ESSPage() {
                       {(section.text ?? [])
                         .filter((paragraph) => paragraph.trim().length > 0)
                         .map((p, pIndex) => (
-                        <p key={pIndex} className="text-lg leading-relaxed text-custom-blue/72">
+                        <p key={pIndex} className="text-[1.05rem] leading-7 text-custom-blue/65">
                           {p}
                         </p>
                       ))}
@@ -429,12 +429,12 @@ export default function ESSPage() {
                         }`}
                       >
                         {subsection.title && (
-                          <h3 className="text-xl font-bold text-custom-blue">
+                          <h3 className="font-display text-[1.08rem] font-medium leading-[1.04] tracking-[-0.02em] text-custom-blue sm:text-[1.24rem]">
                             {subsection.title}
                           </h3>
                         )}
                         {subsection.text && (
-                          <p className="text-lg leading-relaxed text-custom-blue/72">
+                          <p className="text-[1.05rem] leading-7 text-custom-blue/65">
                             {subsection.text}
                           </p>
                         )}
