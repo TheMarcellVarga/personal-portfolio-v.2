@@ -241,7 +241,7 @@ function HistoryItemComponent({
           <h3 className="max-w-[16ch] font-display text-[1.18rem] font-medium leading-[1.06] tracking-[-0.02em] text-custom-blue sm:text-[1.38rem]">
             {item.jobTitle}
           </h3>
-          <p className="font-label text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/35">
+          <p className="font-label text-[0.72rem] font-medium uppercase tracking-[0.16em] text-custom-blue/42">
             {item.company}
           </p>
         </div>
@@ -258,13 +258,13 @@ function HistoryItemComponent({
         </div>
 
         <div className="mt-auto flex flex-wrap gap-2 pt-5">
-          <span className="font-label rounded-full bg-white/62 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]">
+          <span className="font-label rounded-full bg-white/62 px-3 py-1.5 text-[0.66rem] font-medium uppercase tracking-[0.14em] text-custom-blue/68 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]">
             {item.time.start} {item.time.end ? `- ${item.time.end}` : "- Present"}
           </span>
           {item.skills.map((skill: string) => (
             <span
               key={skill}
-              className="font-label rounded-full bg-white/62 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]"
+              className="font-label rounded-full bg-white/62 px-3 py-1.5 text-[0.66rem] font-medium uppercase tracking-[0.14em] text-custom-blue/68 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]"
             >
               {skill}
             </span>
