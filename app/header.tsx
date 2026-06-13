@@ -10,6 +10,10 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 interface HeaderProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  backLink?: {
+    href: string;
+    label: string;
+  };
   scrollToHome?: () => void;
   scrollToAbout?: () => void;
   scrollToWork?: () => void;
@@ -29,6 +33,7 @@ type NavItem = {
 export default function Header({
   isOpen,
   setIsOpen,
+  backLink,
   scrollToHome,
   scrollToAbout,
   scrollToWork,
@@ -207,38 +212,56 @@ export default function Header({
             : "bg-white/72 shadow-[0_16px_50px_rgba(7,20,38,0.12),inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-2xl"
         }`}
       >
-        <Link
-          href="/"
-          onClick={(event) => {
-            event.preventDefault();
-            void navigate(items[0]);
-          }}
-          className="flex items-center gap-3 justify-self-start"
-          aria-label="Go to homepage"
-        >
-          <span ref={logoRef} className="block w-[4.75rem] shrink-0 sm:w-[5.3125rem]">
-            <IndexSigAnimatedIcon
-              key={logoAnimationKey}
-              isOpen={isOpen}
-              tone={useLightOnDark ? "light" : "dark"}
-              animateStroke={!prefersReducedMotion && animateBrand}
-              className={`home-intro-header-brand h-auto w-full ${
-                animateBrand ? "transition-opacity duration-500" : ""
-              } ${
-                revealBrand ? "opacity-100" : "opacity-0"
-              }`}
-            />
-          </span>
-          <span
-            className={`font-label hidden text-[0.66rem] font-medium uppercase tracking-[0.3em] transition-opacity duration-500 sm:inline ${
-              revealBrand ? "opacity-100" : "opacity-0"
-            } ${
-              useLightOnDark ? "text-white/44" : "text-custom-blue/48"
-            }`}
+        <div className="flex items-center gap-3 justify-self-start">
+          <Link
+            href="/"
+            onClick={(event) => {
+              event.preventDefault();
+              void navigate(items[0]);
+            }}
+            className="flex items-center gap-3"
+            aria-label="Go to homepage"
           >
-            {/* Marcell Varga */}
-          </span>
-        </Link>
+            <span ref={logoRef} className="block w-[4.75rem] shrink-0 sm:w-[5.3125rem]">
+              <IndexSigAnimatedIcon
+                key={logoAnimationKey}
+                isOpen={isOpen}
+                tone={useLightOnDark ? "light" : "dark"}
+                animateStroke={!prefersReducedMotion && animateBrand}
+                className={`home-intro-header-brand h-auto w-full ${
+                  animateBrand ? "transition-opacity duration-500" : ""
+                } ${
+                  revealBrand ? "opacity-100" : "opacity-0"
+                }`}
+              />
+            </span>
+            <span
+              className={`font-label hidden text-[0.66rem] font-medium uppercase tracking-[0.3em] transition-opacity duration-500 sm:inline ${
+                revealBrand ? "opacity-100" : "opacity-0"
+              } ${
+                useLightOnDark ? "text-white/44" : "text-custom-blue/48"
+              }`}
+            >
+              {/* Marcell Varga */}
+            </span>
+          </Link>
+
+          {backLink ? (
+            <Link
+              href={backLink.href}
+              className={`inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-[0.72rem] font-medium uppercase tracking-[0.16em] transition duration-300 sm:px-4 ${
+                useLightOnDark
+                  ? "bg-white/10 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16)_opacity-60] hover:bg-white/14"
+                  : "bg-custom-blue/8 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.58),0_8px_24px_rgba(17,27,40,0.06)] hover:bg-custom-blue/12"
+              }`}
+              aria-label={backLink.label}
+            >
+              <ArrowUpRight className="h-4 w-4 rotate-[-135deg]" />
+              <span className="hidden sm:inline">{backLink.label}</span>
+              <span className="sm:hidden">Back</span>
+            </Link>
+          ) : null}
+        </div>
 
         <nav
           className="hidden items-center gap-2 justify-self-center lg:flex"

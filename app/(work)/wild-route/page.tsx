@@ -100,11 +100,16 @@ export default function WildRoutePage() {
     <div className="relative">
       <PageBackground />
 
-      <Header isOpen={isOpen} setIsOpen={setIsOpen} activeSection="Work" />
+      <Header
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        activeSection="Work"
+        backLink={{ href: "/#work", label: "Back to work" }}
+      />
 
-      <main className="relative z-10 px-5 pb-20 pt-28 sm:px-6 lg:px-10">
+      <main className="relative z-10 px-5 pb-20 pt-32 sm:px-6 lg:px-10 lg:pt-36">
         <div className="mx-auto max-w-7xl">
-          <header className="mb-16 grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+          <header className="mb-16 grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
             <motion.div {...fadeInUp()} className="space-y-6">
               <SectionLabel index="Project" label="Case Study" />
               <h1 className="max-w-[8ch] font-display text-[clamp(3.6rem,12vw,8.5rem)] font-medium leading-[0.86] tracking-[-0.06em] text-custom-blue">

@@ -1,16 +1,15 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowUpRight, Calendar, Tag } from "lucide-react";
+import { ArrowUpRight, Calendar, Tag } from "lucide-react";
 import Header from "../../header";
 import Footer from "../../footer";
 import { projects } from "../../data/projects";
 import { PageBackground } from "../../components/PageBackground";
 import { SectionLabel } from "../../components/SectionLabel";
 import { OtherWorks } from "../../components/OtherWorks";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const hideLegacyImages = false;
@@ -252,12 +251,7 @@ function fadeInUp(delay = 0) {
 
 export default function CatchScanPage() {
   const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
   const projectData = projects.find((p) => p.title === "CatchScan")!;
-
-  const handleBack = useCallback(() => {
-    router.push("/#work");
-  }, [router]);
 
   return (
     <div className="relative">
@@ -267,21 +261,13 @@ export default function CatchScanPage() {
         isOpen={isOpen} 
         setIsOpen={setIsOpen} 
         activeSection="Work"
+        backLink={{ href: "/#work", label: "Back to work" }}
       />
 
-      <main className="relative z-10 px-5 pb-20 pt-24 sm:px-6 lg:px-10">
+      <main className="relative z-10 px-5 pb-20 pt-32 sm:px-6 lg:px-10 lg:pt-36">
         <div className="mx-auto max-w-7xl">
-          <header className="mb-20 grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
+          <header className="mb-16 grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
             <motion.div {...fadeInUp(0)} className="space-y-6">
-              <motion.button
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                onClick={handleBack}
-                className="group inline-flex w-fit items-center gap-2 text-sm font-semibold text-custom-blue/60 transition-colors hover:text-custom-blue"
-              >
-                {/* <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-                Back to work */}
-              </motion.button>
               <SectionLabel index="Project" label="Case Study" />
               <h1 className="font-display text-[clamp(2.35rem,10vw,7rem)] font-medium leading-[0.92] tracking-[-0.04em] text-custom-blue">
                 {projectData.title}
@@ -293,7 +279,7 @@ export default function CatchScanPage() {
 
             <motion.div
               {...fadeInUp(0.1)}
-              className="flex flex-col gap-6 lg:pt-16"
+              className="flex flex-col gap-6 lg:pb-2"
             >
               <div className="grid grid-cols-2 gap-3 sm:gap-8">
                 <div className="space-y-1">

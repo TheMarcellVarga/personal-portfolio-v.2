@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  ArrowLeft,
   ArrowUpRight,
   BarChart3,
   BookOpenCheck,
@@ -19,7 +18,6 @@ import {
   Tag,
   WalletCards,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
 import Footer from "../../footer";
 import Header from "../../header";
 import { OtherWorks } from "../../components/OtherWorks";
@@ -102,34 +100,25 @@ function fadeInUp(delay = 0) {
 
 export default function AiFinancePage() {
   const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
   const projectData = projects.find(
     (project) => project.title === "Aperture Financial Intelligence",
   )!;
-
-  const handleBack = useCallback(() => {
-    router.push("/#work");
-  }, [router]);
 
   return (
     <div className="relative">
       <PageBackground />
 
-      <Header isOpen={isOpen} setIsOpen={setIsOpen} activeSection="Work" />
+      <Header
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        activeSection="Work"
+        backLink={{ href: "/#work", label: "Back to work" }}
+      />
 
-      <main className="relative z-10 px-5 pb-20 pt-24 sm:px-6 lg:px-10">
+      <main className="relative z-10 px-5 pb-20 pt-32 sm:px-6 lg:px-10 lg:pt-36">
         <div className="mx-auto max-w-7xl">
           <header className="mb-16 grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
             <motion.div {...fadeInUp(0)} className="space-y-6">
-              <motion.button
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                onClick={handleBack}
-                className="group inline-flex w-fit items-center gap-2 text-sm font-semibold text-custom-blue/60 transition-colors hover:text-custom-blue"
-              >
-                <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-                Back to work
-              </motion.button>
               <SectionLabel index="Project" label="Case Study" />
               <h1 className="font-display text-[clamp(3rem,9vw,7rem)] font-medium leading-[0.9] tracking-[-0.05em] text-custom-blue">
                 Aperture Financial Intelligence
