@@ -37,3 +37,7 @@ next-env.d.ts
 
 # history
 .history
+
+# agents
+.agents
+skills-lock.json
