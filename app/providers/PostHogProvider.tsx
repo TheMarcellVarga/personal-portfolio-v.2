@@ -32,21 +32,45 @@ function PostHogInitializer() {
           if (process.env.NODE_ENV === 'development') {
             ph.debug();
           }
+          if (enableSessionRecording) {
+            ph.startSessionRecording(true);
+          }
           setIsPostHogLoaded(true);
         },
-        capture_pageview: false, // We'll handle this manually
+        capture_pageview: false,
+        capture_pageleave: true,
         autocapture: true,
         persistence: 'localStorage',
+        request_batching: false,
+        person_profiles: 'always',
         disable_session_recording: !enableSessionRecording,
-        advanced_disable_decide: true,
-        capture_performance: false,
-        capture_exceptions: false,
+        enable_recording_console_log: true,
+        capture_performance: true,
+        capture_exceptions: true,
         ...(enableSessionRecording
           ? {
               session_recording: {
-                maskAllInputs: false, // Set to true to mask all input values by default
-                maskTextSelector: '[data-ph-mask]', // Add this attribute to elements that contain sensitive data
-                recordCrossOriginIframes: false,
+                maskAllInputs: false,
+                maskInputOptions: {
+                  color: false,
+                  date: false,
+                  'datetime-local': false,
+                  email: false,
+                  month: false,
+                  number: false,
+                  range: false,
+                  search: false,
+                  tel: false,
+                  text: false,
+                  time: false,
+                  url: false,
+                  week: false,
+                  textarea: false,
+                  select: false,
+                  password: false,
+                },
+                recordCrossOriginIframes: true,
+                collectFonts: true,
               },
             }
           : {}),
@@ -58,7 +82,7 @@ function PostHogInitializer() {
   useEffect(() => {
     if (posthog.__loaded && pathname) {
       const url = window.origin + pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : '');
-      posthog.capture('$pageview', { $current_url: url });
+      posthog.capture('$pageview', { $current_url: url }, { send_instantly: true });
     }
   }, [pathname, searchParams, isPostHogLoaded]);
 
