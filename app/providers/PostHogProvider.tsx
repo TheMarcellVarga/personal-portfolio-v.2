@@ -12,12 +12,6 @@ function PostHogInitializer() {
 
   // Initialize PostHog once on client
   useEffect(() => {
-    const enableSessionRecording = process.env.NODE_ENV === 'production';
-
-    if (process.env.NODE_ENV !== "production") {
-      return;
-    }
-
     if (typeof window !== 'undefined' && !posthog.__loaded) {
       const apiKey = process.env.NEXT_PUBLIC_POSTHOG_KEY;
       const apiHost = process.env.NEXT_PUBLIC_POSTHOG_HOST;
@@ -32,9 +26,7 @@ function PostHogInitializer() {
           if (process.env.NODE_ENV === 'development') {
             ph.debug();
           }
-          if (enableSessionRecording) {
-            ph.startSessionRecording(true);
-          }
+          ph.startSessionRecording(true);
           setIsPostHogLoaded(true);
         },
         capture_pageview: false,
@@ -43,37 +35,33 @@ function PostHogInitializer() {
         persistence: 'localStorage',
         request_batching: false,
         person_profiles: 'always',
-        disable_session_recording: !enableSessionRecording,
+        disable_session_recording: false,
         enable_recording_console_log: true,
         capture_performance: true,
         capture_exceptions: true,
-        ...(enableSessionRecording
-          ? {
-              session_recording: {
-                maskAllInputs: false,
-                maskInputOptions: {
-                  color: false,
-                  date: false,
-                  'datetime-local': false,
-                  email: false,
-                  month: false,
-                  number: false,
-                  range: false,
-                  search: false,
-                  tel: false,
-                  text: false,
-                  time: false,
-                  url: false,
-                  week: false,
-                  textarea: false,
-                  select: false,
-                  password: false,
-                },
-                recordCrossOriginIframes: true,
-                collectFonts: true,
-              },
-            }
-          : {}),
+        session_recording: {
+          maskAllInputs: false,
+          maskInputOptions: {
+            color: false,
+            date: false,
+            'datetime-local': false,
+            email: false,
+            month: false,
+            number: false,
+            range: false,
+            search: false,
+            tel: false,
+            text: false,
+            time: false,
+            url: false,
+            week: false,
+            textarea: false,
+            select: false,
+            password: false,
+          },
+          recordCrossOriginIframes: true,
+          collectFonts: true,
+        },
       });
     }
   }, []);
