@@ -121,28 +121,6 @@ function fadeInUp(delay = 0) {
   };
 }
 
-function heroIntroFoldUp(isVisible: boolean, shouldAnimate: boolean, delay = 0) {
-  if (!shouldAnimate) {
-    return {
-      initial: false,
-      animate: { opacity: 1, y: 0, rotateX: 0 },
-      transition: { duration: 0 },
-    };
-  }
-
-  return {
-    initial: false,
-    animate: isVisible
-      ? { opacity: 1, y: 0, rotateX: 0 }
-      : { opacity: 0, y: 32, rotateX: -14 },
-    transition: {
-      duration: 0.78,
-      delay,
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
-  };
-}
-
 function clamp01(value: number) {
   return Math.min(1, Math.max(0, value));
 }
@@ -587,13 +565,28 @@ export default function Page() {
   useLayoutEffect(() => {
     const stage = mainStageRef.current;
     if (!stage || shouldReduceMotion) return;
+    const leftTargets = Array.from(
+      stage.querySelectorAll<HTMLElement>("[data-hero-left]"),
+    );
+    const assetTargets = Array.from(
+      stage.querySelectorAll<HTMLElement>("[data-hero-asset]"),
+    );
+    const allTargets = [...leftTargets, ...assetTargets];
 
     if (introStage !== "done") {
-      gsap.set(stage, { opacity: 0, y: 16, filter: "blur(12px)" });
+      gsap.set(stage, { opacity: 0, y: 16 });
+      gsap.set(allTargets, {
+        opacity: 0,
+        y: 18,
+      });
       return;
     }
 
-    gsap.set(stage, { opacity: 0, y: 16, filter: "blur(12px)" });
+    gsap.set(stage, { opacity: 0, y: 16 });
+    gsap.set(allTargets, {
+      opacity: 0,
+      y: 18,
+    });
 
     const tl = gsap.timeline({
       defaults: {
@@ -604,9 +597,32 @@ export default function Page() {
     tl.to(stage, {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
       duration: 0.7,
     });
+    if (leftTargets.length) {
+      tl.to(
+        leftTargets,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.58,
+          stagger: 0.08,
+        },
+        0.12,
+      );
+    }
+    if (assetTargets.length) {
+      tl.to(
+        assetTargets,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.05,
+        },
+        0.22,
+      );
+    }
 
     return () => {
       tl.kill();
@@ -673,7 +689,6 @@ export default function Page() {
   const introIsVisible = introStage !== "done";
   const introHasCompleted = introStage === "done";
   const introHeaderMuted = introStage !== "done";
-  const revealHeroIntroText = introStage === "exiting" || introStage === "done";
   const revealHeroTitle = introStage === "done";
   const revealMainStage = introStage === "done";
   const principlesIntroReady = introStage === "done";
@@ -786,7 +801,6 @@ export default function Page() {
             : {
                 opacity: 0,
                 transform: "translate3d(0, 16px, 0)",
-                filter: "blur(12px)",
               }
         }
       >
@@ -806,14 +820,11 @@ export default function Page() {
                   style={enableScrollMotion ? { y: heroPillsY } : undefined}
                   className="hero-scroll-layer mb-7 flex flex-wrap gap-3"
                 >
-                  <motion.div
-                    {...heroIntroFoldUp(revealHeroIntroText, introPlayedThisVisit, 0)}
-                    className="home-intro-fold [transform-origin:bottom]"
-                  >
+                  <div data-hero-left className="home-intro-fold [transform-origin:bottom]">
                     <span className="font-label block rounded-full bg-white/10 px-4 py-2 text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl">
                       UX & Frontend Engineer
                     </span>
-                  </motion.div>
+                  </div>
                 </motion.div>
 
                 <motion.div
@@ -824,10 +835,7 @@ export default function Page() {
                   }
                   className="hero-scroll-layer space-y-6"
                 >
-                  <motion.div
-                    {...heroIntroFoldUp(revealHeroIntroText, introPlayedThisVisit, 0.08)}
-                    className="home-intro-fold space-y-6 [transform-origin:bottom]"
-                  >
+                  <div className="home-intro-fold space-y-6 [transform-origin:bottom]">
                     <SplitTextReveal
                       as="h1"
                       text="Marcell Varga"
@@ -836,41 +844,42 @@ export default function Page() {
                       delay={0.08}
                       className="max-w-[8ch] font-display text-[clamp(3.4rem,14vw,4.2rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[clamp(3.4rem,8vw,4.8rem)] md:text-[clamp(3.8rem,7vw,5.4rem)]"
                     />
-                    <p className="max-w-[30rem] text-[0.98rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
+                    <p
+                      data-hero-left
+                      className="max-w-[30rem] text-[0.98rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8"
+                    >
                       I design and build product interfaces that stay calm, sharp,
                       and useful in practice.
                     </p>
-                  </motion.div>
+                  </div>
                 </motion.div>
 
                 <motion.div
                   style={enableScrollMotion ? { y: heroCardsY } : undefined}
                   className="hero-scroll-layer mt-10"
                 >
-                  <motion.div
-                    {...heroIntroFoldUp(revealHeroIntroText, introPlayedThisVisit, 0.16)}
-                    className="home-intro-fold flex flex-col gap-4 [transform-origin:bottom] sm:flex-row sm:items-center sm:gap-6"
-                  >
-                  <button
-                    onClick={scrollWork}
-                    className="group relative inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8] sm:w-fit sm:gap-3"
-                  >
-                    Selected work
-                    <ArrowRight className="absolute right-6 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 sm:static" />
-                  </button>
-                  <Link
-                    href="/resume"
-                    className="group relative inline-flex items-center justify-center rounded-full bg-custom-blue px-6 py-3 text-sm font-medium text-white shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#0f1f2f] sm:w-fit sm:gap-3 sm:bg-white sm:text-custom-blue sm:hover:bg-[#eef4f8]"
-                  >
-                    Resume
-                    <Download className="absolute right-6 h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5 sm:static" />
-                  </Link>
-                  </motion.div>
+                  <div className="home-intro-fold flex flex-col gap-4 [transform-origin:bottom] sm:flex-row sm:items-center sm:gap-6">
+                    <button
+                      data-hero-left
+                      onClick={scrollWork}
+                      className="group relative inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8] sm:w-fit sm:gap-3"
+                    >
+                      Selected work
+                      <ArrowRight className="absolute right-6 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 sm:static" />
+                    </button>
+                    <Link
+                      data-hero-left
+                      href="/resume"
+                      className="group relative inline-flex items-center justify-center rounded-full bg-custom-blue px-6 py-3 text-sm font-medium text-white shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#0f1f2f] sm:w-fit sm:gap-3 sm:bg-white sm:text-custom-blue sm:hover:bg-[#eef4f8]"
+                    >
+                      Resume
+                      <Download className="absolute right-6 h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5 sm:static" />
+                    </Link>
+                  </div>
                 </motion.div>
               </div>
 
               <motion.div
-                {...fadeInUp(0.1)}
                 style={enableScrollMotion ? { y: portraitY, scale: portraitScale } : undefined}
                 className="hero-scroll-layer relative overflow-hidden rounded-[1.65rem] border border-white/10 bg-white/6 p-2.5 shadow-[0_20px_70px_rgba(0,0,0,0.24)] backdrop-blur-xl sm:rounded-[2rem] sm:p-3"
               >
@@ -878,16 +887,18 @@ export default function Page() {
                   style={enableScrollMotion ? { rotate: portraitRotate } : undefined}
                   className="relative overflow-hidden rounded-[1.2rem] bg-[#071726] sm:rounded-[1.5rem]"
                 >
-                  <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
-                  <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
-                  <div className="relative aspect-[0.9] w-full sm:aspect-[1.04] md:aspect-[0.78]">
-                    <Image
-                      src="/images/personalpageprofilealt.png"
-                      alt="Portrait of Marcell Varga"
-                      fill
-                      priority
-                      className="object-cover object-[center_18%]"
-                    />
+                  <div data-hero-asset className="relative h-full w-full">
+                    <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
+                    <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
+                    <div className="relative aspect-[0.9] w-full sm:aspect-[1.04] md:aspect-[0.78]">
+                      <Image
+                        src="/images/personalpageprofilealt.png"
+                        alt="Portrait of Marcell Varga"
+                        fill
+                        priority
+                        className="object-cover object-[center_18%]"
+                      />
+                    </div>
                   </div>
                 </motion.div>
               </motion.div>
@@ -899,14 +910,11 @@ export default function Page() {
                   style={enableScrollMotion ? { y: heroPillsY } : undefined}
                   className="hero-scroll-layer mb-7 flex flex-wrap gap-3"
                 >
-                  <motion.div
-                    {...heroIntroFoldUp(revealHeroIntroText, introPlayedThisVisit, 0)}
-                    className="home-intro-fold [transform-origin:bottom]"
-                  >
+                  <div data-hero-left className="home-intro-fold [transform-origin:bottom]">
                     <span className="font-label block rounded-full bg-white/10 px-4 py-2 text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl">
                       UX & Frontend Engineer
                     </span>
-                  </motion.div>
+                  </div>
                 </motion.div>
 
                 <motion.div
@@ -917,10 +925,7 @@ export default function Page() {
                   }
                   className="hero-scroll-layer space-y-6"
                 >
-                  <motion.div
-                    {...heroIntroFoldUp(revealHeroIntroText, introPlayedThisVisit, 0.08)}
-                    className="home-intro-fold space-y-6 [transform-origin:bottom]"
-                  >
+                  <div className="home-intro-fold space-y-6 [transform-origin:bottom]">
                     <SplitTextReveal
                       as="h1"
                       text="Marcell Varga"
@@ -929,36 +934,38 @@ export default function Page() {
                       delay={0.08}
                       className="max-w-[6.6ch] font-display text-[3.35rem] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[4.5rem] md:text-[5.3rem] lg:text-[6rem] xl:text-[6.8rem] 2xl:text-[7.5rem]"
                     />
-                    <p className="max-w-[30rem] text-[1.02rem] leading-7 text-white/72 sm:text-[1.08rem] sm:leading-8">
+                    <p
+                      data-hero-left
+                      className="max-w-[30rem] text-[1.02rem] leading-7 text-white/72 sm:text-[1.08rem] sm:leading-8"
+                    >
                       I design and build product interfaces that stay calm, sharp,
                       and useful in practice.
                     </p>
-                  </motion.div>
+                  </div>
                 </motion.div>
 
                 <motion.div
                   style={enableScrollMotion ? { y: heroCardsY } : undefined}
                   className="hero-scroll-layer mt-10"
                 >
-                  <motion.div
-                    {...heroIntroFoldUp(revealHeroIntroText, introPlayedThisVisit, 0.16)}
-                    className="home-intro-fold flex flex-col gap-4 [transform-origin:bottom] sm:flex-row sm:items-center sm:gap-6"
-                  >
-                  <button
-                    onClick={scrollWork}
-                    className="group inline-flex items-center justify-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8]"
-                  >
-                    Selected work
-                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                  </button>
-                  <Link
-                    href="/resume"
-                    className="inline-flex items-center gap-2 text-sm font-medium text-white/72 transition duration-300 hover:text-white"
-                  >
-                    Resume
-                    <Download className="h-4 w-4" />
-                  </Link>
-                  </motion.div>
+                  <div className="home-intro-fold flex flex-col gap-4 [transform-origin:bottom] sm:flex-row sm:items-center sm:gap-6">
+                    <button
+                      data-hero-left
+                      onClick={scrollWork}
+                      className="group inline-flex items-center justify-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8]"
+                    >
+                      Selected work
+                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    </button>
+                    <Link
+                      data-hero-left
+                      href="/resume"
+                      className="inline-flex items-center gap-2 text-sm font-medium text-white/72 transition duration-300 hover:text-white"
+                    >
+                      Resume
+                      <Download className="h-4 w-4" />
+                    </Link>
+                  </div>
                 </motion.div>
               </div>
 
@@ -970,16 +977,18 @@ export default function Page() {
                   style={enableScrollMotion ? { rotate: portraitRotate } : undefined}
                   className="hero-scroll-layer relative flex h-[72svh] min-h-[32rem] w-[min(104vw,46rem)] items-end justify-end sm:h-[78svh] sm:w-[min(88vw,42rem)] lg:h-[86svh] lg:w-[44rem] xl:h-[90svh] xl:w-[50rem]"
                 >
-                  <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
-                  <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
-                  <Image
-                    src="/images/personalpageprofilealt.png"
-                    alt="Portrait of Marcell Varga"
-                    width={1210}
-                    height={1777}
-                    priority
-                    className="relative z-10 h-full w-auto max-w-none object-contain object-bottom drop-shadow-[0_40px_120px_rgba(0,0,0,0.34)]"
-                  />
+                  <div data-hero-asset className="relative flex h-full w-full items-end justify-end">
+                    <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
+                    <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
+                    <Image
+                      src="/images/personalpageprofilealt.png"
+                      alt="Portrait of Marcell Varga"
+                      width={1210}
+                      height={1777}
+                      priority
+                      className="relative z-10 h-full w-auto max-w-none object-contain object-bottom drop-shadow-[0_40px_120px_rgba(0,0,0,0.34)]"
+                    />
+                  </div>
                 </motion.div>
               </motion.div>
             </div>
