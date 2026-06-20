@@ -1080,7 +1080,7 @@ export default function Page() {
                     }
                   : { opacity: introStage === "done" ? 1 : 0 }
               }
-              className="hero-scroll-layer pointer-events-none absolute inset-x-0 bottom-[-17rem] z-20 h-[34rem] overflow-hidden sm:bottom-[-15rem] sm:h-[38rem]"
+              className="hero-scroll-layer pointer-events-none absolute inset-x-0 bottom-[-17rem] z-20 hidden h-[34rem] overflow-hidden sm:bottom-[-15rem] sm:h-[38rem] md:block"
             >
               <div className="absolute inset-x-0 bottom-0 h-[22rem] overflow-hidden rounded-t-[44%] [mask-image:linear-gradient(to_bottom,black_0%,black_65%,transparent_100%)] sm:h-[26rem] lg:inset-x-[-10%]">
                 {/* Keep the rising mask aligned with the fixed page surface underneath. */}
