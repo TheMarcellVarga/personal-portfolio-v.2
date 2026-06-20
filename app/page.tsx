@@ -858,9 +858,11 @@ export default function Page() {
                   style={enableScrollMotion ? { y: heroCardsY } : undefined}
                   className="hero-scroll-layer mt-10"
                 >
-                  <div className="home-intro-fold flex flex-col gap-4 [transform-origin:bottom] sm:flex-row sm:items-center sm:gap-6">
+                  <div
+                    data-hero-left
+                    className="home-intro-fold flex flex-col gap-4 [transform-origin:bottom] sm:flex-row sm:items-center sm:gap-6"
+                  >
                     <button
-                      data-hero-left
                       onClick={scrollWork}
                       className="group relative inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8] sm:w-fit sm:gap-3"
                     >
@@ -868,7 +870,6 @@ export default function Page() {
                       <ArrowRight className="absolute right-6 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 sm:static" />
                     </button>
                     <Link
-                      data-hero-left
                       href="/resume"
                       className="group relative inline-flex items-center justify-center rounded-full bg-custom-blue px-6 py-3 text-sm font-medium text-white shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#0f1f2f] sm:w-fit sm:gap-3 sm:bg-white sm:text-custom-blue sm:hover:bg-[#eef4f8]"
                     >
@@ -948,9 +949,11 @@ export default function Page() {
                   style={enableScrollMotion ? { y: heroCardsY } : undefined}
                   className="hero-scroll-layer mt-10"
                 >
-                  <div className="home-intro-fold flex flex-col gap-4 [transform-origin:bottom] sm:flex-row sm:items-center sm:gap-6">
+                  <div
+                    data-hero-left
+                    className="home-intro-fold flex flex-col gap-4 [transform-origin:bottom] sm:flex-row sm:items-center sm:gap-6"
+                  >
                     <button
-                      data-hero-left
                       onClick={scrollWork}
                       className="group inline-flex items-center justify-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8]"
                     >
@@ -958,7 +961,6 @@ export default function Page() {
                       <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                     </button>
                     <Link
-                      data-hero-left
                       href="/resume"
                       className="inline-flex items-center gap-2 text-sm font-medium text-white/72 transition duration-300 hover:text-white"
                     >
