@@ -787,6 +787,7 @@ export default function Page() {
       const viewportCenter = window.innerHeight / 2;
       const influenceRadius = Math.max(window.innerHeight * 0.42, 420);
       let didChange = false;
+      let nextActiveIndex = 0;
 
       const nextValues = history.map((_, index) => {
         const element = document.getElementById(`history-item-${index}`);
@@ -798,18 +799,16 @@ export default function Page() {
         const focus = smoothstep(1 - distance / influenceRadius);
         const nextFocus = shouldReduceMotion ? (focus > 0.5 ? 1 : 0) : focus;
 
+        if (cardCenter <= viewportCenter) {
+          nextActiveIndex = index;
+        }
+
         if (Math.abs(nextFocus - historyFocusRef.current[index]) > 0.01) {
           didChange = true;
         }
 
         return nextFocus;
       });
-
-      const nextActiveIndex = nextValues.reduce(
-        (activeIndex, value, index, values) =>
-          value > values[activeIndex] ? index : activeIndex,
-        0,
-      );
 
       if (didChange) {
         historyFocusRef.current = nextValues;
@@ -1384,7 +1383,7 @@ export default function Page() {
                               const el = document.getElementById(`history-item-${idx}`);
                               el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
                             }}
-                            className="font-label text-left text-[0.62rem] font-medium uppercase tracking-[0.18em] transition-all duration-300"
+                            className="font-label text-left text-[0.7rem] font-medium uppercase tracking-[0.16em] transition-all duration-300"
                             style={{
                               opacity: historyActiveIndex === idx ? 1 : 0.28,
                               color: `rgba(17, 27, 40, ${historyActiveIndex === idx ? 1 : 0.3})`,
