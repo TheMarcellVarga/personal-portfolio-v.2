@@ -565,67 +565,143 @@ export default function Page() {
   useLayoutEffect(() => {
     const stage = mainStageRef.current;
     if (!stage || shouldReduceMotion) return;
-    const leftTargets = Array.from(
-      stage.querySelectorAll<HTMLElement>("[data-hero-left]"),
+    const badgeTargets = Array.from(
+      stage.querySelectorAll<HTMLElement>("[data-hero-badge]"),
     );
-    const assetTargets = Array.from(
-      stage.querySelectorAll<HTMLElement>("[data-hero-asset]"),
+    const badgeLabelTargets = Array.from(
+      stage.querySelectorAll<HTMLElement>("[data-hero-badge-label]"),
     );
-    const allTargets = [...leftTargets, ...assetTargets];
+    const copyTargets = Array.from(
+      stage.querySelectorAll<HTMLElement>("[data-hero-copy]"),
+    );
+    const ctaGroups = Array.from(
+      stage.querySelectorAll<HTMLElement>("[data-hero-cta-group]"),
+    );
+    const allTargets = [
+      ...copyTargets,
+      ...ctaGroups,
+    ];
 
     if (introStage !== "done") {
       gsap.set(stage, { opacity: 0, y: 16 });
+      gsap.set(badgeTargets, {
+        autoAlpha: 0,
+        clipPath: "inset(0 100% 0 0 round 999px)",
+        y: 6,
+      });
+      gsap.set(badgeLabelTargets, {
+        autoAlpha: 0,
+        x: -10,
+      });
       gsap.set(allTargets, {
-        opacity: 0,
+        autoAlpha: 0,
         y: 18,
       });
       return;
     }
 
     gsap.set(stage, { opacity: 0, y: 16 });
+    gsap.set(badgeTargets, {
+      autoAlpha: 0,
+      clipPath: "inset(0 100% 0 0 round 999px)",
+      y: 6,
+    });
+    gsap.set(badgeLabelTargets, {
+      autoAlpha: 0,
+      x: -10,
+    });
     gsap.set(allTargets, {
-      opacity: 0,
+      autoAlpha: 0,
       y: 18,
     });
 
-    const tl = gsap.timeline({
-      defaults: {
-        ease: "power4.out",
-      },
-    });
+    let timeline: gsap.core.Timeline | null = null;
+    const startDelay = window.setTimeout(() => {
+      timeline = gsap.timeline({
+        defaults: {
+          ease: "power4.out",
+        },
+      });
 
-    tl.to(stage, {
-      opacity: 1,
-      y: 0,
-      duration: 0.7,
-    });
-    if (leftTargets.length) {
-      tl.to(
-        leftTargets,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.58,
-          stagger: 0.08,
-        },
-        0.12,
-      );
-    }
-    if (assetTargets.length) {
-      tl.to(
-        assetTargets,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          stagger: 0.05,
-        },
-        0.22,
-      );
-    }
+      timeline.to(stage, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+      });
+      if (badgeTargets.length) {
+        timeline.fromTo(
+          badgeTargets,
+          {
+            autoAlpha: 1,
+            clipPath: "inset(0 100% 0 0 round 999px)",
+            y: 6,
+          },
+          {
+            autoAlpha: 1,
+            clipPath: "inset(0 0% 0 0 round 999px)",
+            y: 0,
+            duration: 0.7,
+            stagger: 0.08,
+            clearProps: "opacity,visibility,clipPath,transform",
+          },
+          0.12,
+        );
+      }
+      if (badgeLabelTargets.length) {
+        timeline.fromTo(
+          badgeLabelTargets,
+          {
+            autoAlpha: 0,
+            x: -10,
+          },
+          {
+            autoAlpha: 1,
+            x: 0,
+            duration: 0.42,
+            stagger: 0.08,
+            clearProps: "opacity,visibility,transform",
+          },
+          0.28,
+        );
+      }
+      if (copyTargets.length) {
+        timeline.fromTo(
+          copyTargets,
+          {
+            autoAlpha: 0,
+            y: 16,
+          },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.58,
+            stagger: 0.08,
+            clearProps: "opacity,visibility,transform",
+          },
+          0.18,
+        );
+      }
+      if (ctaGroups.length) {
+        timeline.fromTo(
+          ctaGroups,
+          {
+            autoAlpha: 0,
+            y: 16,
+          },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.56,
+            clearProps: "opacity,visibility,transform",
+          },
+          0.24,
+        );
+      }
+    }, 80);
 
     return () => {
-      tl.kill();
+      window.clearTimeout(startDelay);
+      timeline?.kill();
     };
   }, [introStage, shouldReduceMotion]);
 
@@ -820,8 +896,8 @@ export default function Page() {
                   style={enableScrollMotion ? { y: heroPillsY } : undefined}
                   className="hero-scroll-layer mb-7 flex flex-wrap gap-3"
                 >
-                  <div data-hero-left className="home-intro-fold [transform-origin:bottom]">
-                    <span className="font-label block rounded-full bg-white/10 px-4 py-2 text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl">
+                  <div data-hero-badge className="home-intro-fold inline-flex overflow-hidden rounded-full bg-white/10 px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl [transform-origin:left_center]">
+                    <span data-hero-badge-label className="font-label block text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74">
                       UX & Frontend Engineer
                     </span>
                   </div>
@@ -844,13 +920,12 @@ export default function Page() {
                       delay={0.08}
                       className="max-w-[8ch] font-display text-[clamp(3.4rem,14vw,4.2rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[clamp(3.4rem,8vw,4.8rem)] md:text-[clamp(3.8rem,7vw,5.4rem)]"
                     />
-                    <p
-                      data-hero-left
-                      className="max-w-[30rem] text-[0.98rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8"
-                    >
-                      I design and build product interfaces that stay calm, sharp,
-                      and useful in practice.
-                    </p>
+                    <div data-hero-copy>
+                      <p className="max-w-[30rem] text-[0.98rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
+                        I design and build product interfaces that stay calm, sharp,
+                        and useful in practice.
+                      </p>
+                    </div>
                   </div>
                 </motion.div>
 
@@ -858,24 +933,25 @@ export default function Page() {
                   style={enableScrollMotion ? { y: heroCardsY } : undefined}
                   className="hero-scroll-layer mt-10"
                 >
-                  <div
-                    data-hero-left
-                    className="home-intro-fold flex flex-col gap-4 [transform-origin:bottom] sm:flex-row sm:items-center sm:gap-6"
-                  >
+                  <div className="home-intro-fold flex flex-col gap-4 [transform-origin:bottom] sm:flex-row sm:items-center sm:gap-6">
+                  <div data-hero-cta-group className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
                     <button
                       onClick={scrollWork}
-                      className="group relative inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8] sm:w-fit sm:gap-3"
+                      className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.9)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8] hover:shadow-[0_24px_70px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.9)] active:translate-y-0 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c] sm:w-fit sm:gap-3"
                     >
-                      Selected work
-                      <ArrowRight className="absolute right-6 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 sm:static" />
+                      <span className="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_0%,rgba(103,217,255,0.18)_45%,transparent_70%)] transition-transform duration-700 group-hover:translate-x-full" />
+                      <span className="relative z-10">Selected work</span>
+                      <ArrowRight className="absolute right-6 z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 sm:static" />
                     </button>
                     <Link
                       href="/resume"
-                      className="group relative inline-flex items-center justify-center rounded-full bg-custom-blue px-6 py-3 text-sm font-medium text-white shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#0f1f2f] sm:w-fit sm:gap-3 sm:bg-white sm:text-custom-blue sm:hover:bg-[#eef4f8]"
+                      className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-custom-blue px-6 py-3 text-sm font-medium text-white shadow-[0_20px_60px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.14)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-[#0f1f2f] active:translate-y-0 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c] sm:w-fit sm:gap-3 sm:bg-white sm:text-custom-blue sm:hover:bg-[#eef4f8] sm:hover:shadow-[0_24px_70px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.9)]"
                     >
-                      Resume
-                      <Download className="absolute right-6 h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5 sm:static" />
+                      <span className="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_0%,rgba(103,217,255,0.16)_45%,transparent_70%)] transition-transform duration-700 group-hover:translate-x-full" />
+                      <span className="relative z-10">Resume</span>
+                      <Download className="absolute right-6 z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5 sm:static" />
                     </Link>
+                    </div>
                   </div>
                 </motion.div>
               </div>
@@ -888,7 +964,7 @@ export default function Page() {
                   style={enableScrollMotion ? { rotate: portraitRotate } : undefined}
                   className="relative overflow-hidden rounded-[1.2rem] bg-[#071726] sm:rounded-[1.5rem]"
                 >
-                  <div data-hero-asset className="relative h-full w-full">
+                  <div className="relative h-full w-full">
                     <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
                     <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
                     <div className="relative aspect-[0.9] w-full sm:aspect-[1.04] md:aspect-[0.78]">
@@ -911,8 +987,8 @@ export default function Page() {
                   style={enableScrollMotion ? { y: heroPillsY } : undefined}
                   className="hero-scroll-layer mb-7 flex flex-wrap gap-3"
                 >
-                  <div data-hero-left className="home-intro-fold [transform-origin:bottom]">
-                    <span className="font-label block rounded-full bg-white/10 px-4 py-2 text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl">
+                  <div data-hero-badge className="home-intro-fold inline-flex overflow-hidden rounded-full bg-white/10 px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl [transform-origin:left_center]">
+                    <span data-hero-badge-label className="font-label block text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74">
                       UX & Frontend Engineer
                     </span>
                   </div>
@@ -935,13 +1011,12 @@ export default function Page() {
                       delay={0.08}
                       className="max-w-[6.6ch] font-display text-[3.35rem] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[4.5rem] md:text-[5.3rem] lg:text-[6rem] xl:text-[6.8rem] 2xl:text-[7.5rem]"
                     />
-                    <p
-                      data-hero-left
-                      className="max-w-[30rem] text-[1.02rem] leading-7 text-white/72 sm:text-[1.08rem] sm:leading-8"
-                    >
-                      I design and build product interfaces that stay calm, sharp,
-                      and useful in practice.
-                    </p>
+                    <div data-hero-copy>
+                      <p className="max-w-[30rem] text-[1.02rem] leading-7 text-white/72 sm:text-[1.08rem] sm:leading-8">
+                        I design and build product interfaces that stay calm, sharp,
+                        and useful in practice.
+                      </p>
+                    </div>
                   </div>
                 </motion.div>
 
@@ -949,24 +1024,25 @@ export default function Page() {
                   style={enableScrollMotion ? { y: heroCardsY } : undefined}
                   className="hero-scroll-layer mt-10"
                 >
-                  <div
-                    data-hero-left
-                    className="home-intro-fold flex flex-col gap-4 [transform-origin:bottom] sm:flex-row sm:items-center sm:gap-6"
-                  >
+                  <div className="home-intro-fold flex flex-col gap-4 [transform-origin:bottom] sm:flex-row sm:items-center sm:gap-6">
+                  <div data-hero-cta-group className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
                     <button
                       onClick={scrollWork}
-                      className="group inline-flex items-center justify-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8]"
+                      className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.9)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8] hover:shadow-[0_24px_70px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.9)] active:translate-y-0 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c]"
                     >
-                      Selected work
-                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                      <span className="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_0%,rgba(103,217,255,0.18)_45%,transparent_70%)] transition-transform duration-700 group-hover:translate-x-full" />
+                      <span className="relative z-10">Selected work</span>
+                      <ArrowRight className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                     </button>
                     <Link
                       href="/resume"
-                      className="inline-flex items-center gap-2 text-sm font-medium text-white/72 transition duration-300 hover:text-white"
+                      className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-3 py-2 text-sm font-medium text-white/72 outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-white/8 hover:text-white active:translate-y-0 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-white/55 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c]"
                     >
-                      Resume
-                      <Download className="h-4 w-4" />
+                      <span className="pointer-events-none absolute inset-x-3 bottom-1 h-px origin-left scale-x-0 bg-white/45 transition-transform duration-300 group-hover:scale-x-100" />
+                      <span className="relative z-10">Resume</span>
+                      <Download className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
                     </Link>
+                    </div>
                   </div>
                 </motion.div>
               </div>
@@ -979,7 +1055,7 @@ export default function Page() {
                   style={enableScrollMotion ? { rotate: portraitRotate } : undefined}
                   className="hero-scroll-layer relative flex h-[72svh] min-h-[32rem] w-[min(104vw,46rem)] items-end justify-end sm:h-[78svh] sm:w-[min(88vw,42rem)] lg:h-[86svh] lg:w-[44rem] xl:h-[90svh] xl:w-[50rem]"
                 >
-                  <div data-hero-asset className="relative flex h-full w-full items-end justify-end">
+                  <div className="relative flex h-full w-full items-end justify-end">
                     <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
                     <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
                     <Image
