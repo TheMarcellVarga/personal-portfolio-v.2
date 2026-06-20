@@ -347,7 +347,6 @@ export default function Page() {
   const heroCardsY = useTransform(smoothHeroProgress, [0, 1], [0, -28]);
   const heroCopyOpacity = useTransform(smoothHeroProgress, [0, 0.85], [1, 0.58]);
   const portraitY = useTransform(smoothHeroProgress, [0, 1], [0, -80]);
-  const portraitRotate = useTransform(smoothHeroProgress, [0, 1], [0, -4]);
   const portraitScale = useTransform(smoothHeroProgress, [0, 1], [1, 0.965]);
   const liquidProgress = useTransform(smoothHeroProgress, [0.08, 0.55], [0, 1]);
   const liquidRise = useTransform(liquidProgress, [0, 1], [260, -54]);
@@ -959,10 +958,7 @@ export default function Page() {
                 style={enableScrollMotion ? { y: portraitY, scale: portraitScale } : undefined}
                 className="hero-scroll-layer relative overflow-hidden rounded-[1.65rem] border border-white/10 bg-white/6 p-2.5 shadow-[0_20px_70px_rgba(0,0,0,0.24)] backdrop-blur-xl sm:rounded-[2rem] sm:p-3"
               >
-                <motion.div
-                  style={enableScrollMotion ? { rotate: portraitRotate } : undefined}
-                  className="relative overflow-hidden rounded-[1.2rem] bg-[#071726] sm:rounded-[1.5rem]"
-                >
+                <motion.div className="relative overflow-hidden rounded-[1.2rem] bg-[#071726] sm:rounded-[1.5rem]">
                   <div className="relative h-full w-full">
                     <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
                     <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
@@ -1050,10 +1046,7 @@ export default function Page() {
                 style={enableScrollMotion ? { y: portraitY, scale: portraitScale } : undefined}
                 className="hero-scroll-layer pointer-events-none absolute inset-y-0 right-[-24vw] z-20 flex items-end sm:right-[-12vw] lg:right-[-4vw] xl:right-[-3vw]"
               >
-                <motion.div
-                  style={enableScrollMotion ? { rotate: portraitRotate } : undefined}
-                  className="hero-scroll-layer relative flex h-[72svh] min-h-[32rem] w-[min(104vw,46rem)] items-end justify-end sm:h-[78svh] sm:w-[min(88vw,42rem)] lg:h-[86svh] lg:w-[44rem] xl:h-[90svh] xl:w-[50rem]"
-                >
+                <motion.div className="hero-scroll-layer relative flex h-[72svh] min-h-[32rem] w-[min(104vw,46rem)] items-end justify-end sm:h-[78svh] sm:w-[min(88vw,42rem)] lg:h-[86svh] lg:w-[44rem] xl:h-[90svh] xl:w-[50rem]">
                   <div className="relative flex h-full w-full items-end justify-end">
                     <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
                     <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
