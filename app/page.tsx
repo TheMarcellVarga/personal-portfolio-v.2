@@ -769,7 +769,7 @@ export default function Page() {
 
   return (
     <div className="relative">
-      <PageBackground showGrid={false} />
+      <PageBackground />
 
       <div
         className={`${introPlayedThisVisit ? "transition-opacity duration-700" : ""} ${
@@ -1010,7 +1010,6 @@ export default function Page() {
               <div className="absolute inset-x-0 bottom-0 h-[22rem] overflow-hidden rounded-t-[44%] [mask-image:linear-gradient(to_bottom,black_0%,black_65%,transparent_100%)] sm:h-[26rem] lg:inset-x-[-10%]">
                 {/* Keep the rising mask aligned with the fixed page surface underneath. */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(76,207,255,0.16),_transparent_28%),radial-gradient(circle_at_20%_70%,_rgba(255,153,102,0.16),_transparent_34%),radial-gradient(circle_at_85%_18%,_rgba(17,27,40,0.12),_transparent_24%),linear-gradient(180deg,_#f8f1e8_0%,_#f6efe5_46%,_#fff8f1_100%)] [background-attachment:fixed]" />
-                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(17,27,40,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(17,27,40,0.04)_1px,transparent_1px)] bg-[size:92px_92px] [background-attachment:fixed] [mask-image:radial-gradient(circle_at_center,black_45%,transparent_88%)]" />
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(76,207,255,0.10),_transparent_28%),radial-gradient(circle_at_20%_70%,_rgba(255,153,102,0.08),_transparent_34%)] [background-attachment:fixed]" />
               </div>
             </motion.div>
