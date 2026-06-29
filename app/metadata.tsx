@@ -1,53 +1,64 @@
 import type { Metadata } from "next";
-
-const siteUrl = "https://marcellvarga.com";
-const shareImage = "/images/personalpageprofilealt.png";
+import {
+  personName,
+  roleTitle,
+  shareImage,
+  siteDescription,
+  siteName,
+  siteUrl,
+} from "./seo";
 
 export const metadata: Metadata = {
-  title: "Marcell Varga | UX & Frontend Engineer",
-  description:
-    "Singapore-based UX and frontend engineer turning complex product requirements into clear, scalable interfaces from prototype to production.",
+  title: {
+    default: `${personName} | ${roleTitle} in Singapore`,
+    template: `%s | ${personName}`,
+  },
+  description: siteDescription,
+  applicationName: siteName,
   keywords: [
     "Marcell Varga",
+    "marcellvarga.com",
+    "TheMarcellVarga",
     "UX Engineer",
     "Frontend Engineer",
     "Product Design Engineer",
-    "Singapore designer",
-    "Next.js portfolio",
+    "Singapore UX Engineer",
+    "Singapore Frontend Engineer",
+    "AI Product UX",
+    "Official portfolio",
     "React",
+    "Next.js",
     "TypeScript",
     "Design Systems",
-    "Motion Design",
   ],
   authors: [{ name: "Marcell Varga", url: "https://www.linkedin.com/in/marcellvarga/" }],
-  creator: "Marcell Varga",
-  publisher: "Marcell Varga",
+  creator: personName,
+  publisher: personName,
+  category: "Portfolio",
   metadataBase: new URL(siteUrl),
   alternates: {
-    canonical: siteUrl,
+    canonical: "/",
   },
   openGraph: {
-    type: "website",
+    type: "profile",
     locale: "en_US",
-    url: siteUrl,
-    title: "Marcell Varga | UX & Frontend Engineer",
-    description:
-      "UX, interface systems, and frontend engineering shaped into clear, scalable digital products.",
-    siteName: "Marcell Varga Portfolio",
+    url: "/",
+    title: `${personName} | ${roleTitle} in Singapore`,
+    description: siteDescription,
+    siteName,
     images: [
       {
         url: shareImage,
         width: 1200,
-        height: 1200,
-        alt: "Portrait of Marcell Varga",
+        height: 900,
+        alt: "Marcell Varga, Singapore-based UX and frontend engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Marcell Varga | UX & Frontend Engineer",
-    description:
-      "Singapore-based UX and frontend engineer building clear, scalable product interfaces from prototype to production.",
+    title: `${personName} | ${roleTitle} in Singapore`,
+    description: siteDescription,
     images: [shareImage],
   },
   robots: {

@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { cookies } from "next/headers";
 import PostHogProvider from "./providers/PostHogProvider";
 import { metadata } from "./metadata";
+import { structuredData } from "./seo";
 import ScrollReset from "./components/ScrollReset";
 import SmoothScroll from "./components/SmoothScroll";
 // import DevelopmentBanner from "./components/DevelopmentBanner";
@@ -24,6 +25,14 @@ export default async function RootLayout({
       data-home-intro={introSeen ? "0" : "1"}
       suppressHydrationWarning
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+          }}
+        />
+      </head>
       <body className="font-body">
         <PostHogProvider>
           <SmoothScroll>
