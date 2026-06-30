@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import {
+  alternatePersonNames,
   personName,
   roleTitle,
   shareImage,
@@ -17,6 +18,8 @@ export const metadata: Metadata = {
   applicationName: siteName,
   keywords: [
     "Marcell Varga",
+    ...alternatePersonNames,
+    "Varga Marcell",
     "marcellvarga.com",
     "TheMarcellVarga",
     "UX Engineer",

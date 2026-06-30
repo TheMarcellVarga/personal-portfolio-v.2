@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { cookies } from "next/headers";
 import PostHogProvider from "./providers/PostHogProvider";
 import { metadata } from "./metadata";
-import { structuredData } from "./seo";
+import { personSameAs, structuredData } from "./seo";
 import ScrollReset from "./components/ScrollReset";
 import SmoothScroll from "./components/SmoothScroll";
 // import DevelopmentBanner from "./components/DevelopmentBanner";
@@ -26,6 +26,10 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        {personSameAs.map((href) => (
+          <link key={href} rel="me" href={href} />
+        ))}
+        <link rel="author" href="https://marcellvarga.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

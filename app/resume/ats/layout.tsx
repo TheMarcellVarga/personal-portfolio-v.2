@@ -5,7 +5,11 @@ export const metadata: Metadata = {
   description:
     "ATS-readable resume for Marcell Varga, UX and frontend engineer in Singapore.",
   alternates: {
-    canonical: "/resume/ats",
+    canonical: "/resume",
+  },
+  robots: {
+    index: false,
+    follow: true,
   },
 };
 
