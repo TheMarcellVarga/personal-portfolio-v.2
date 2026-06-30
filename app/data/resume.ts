@@ -14,7 +14,7 @@ export const resume = {
     "Currently contributing to AXON Networks products through UX/UI design, component systems, interactive prototyping, frontend development, and AI-aware workflows.",
   ],
   highlights: [
-    "Relocated to Singapore in March 2026 while continuing in the same AXON Networks role.",
+    "Bridges the gap between UX design and production code, maintaining scalable design systems.",
     "Designs and builds AI-aware workflows, prototypes, and production UI for complex product surfaces.",
     "Works across UX, frontend, design systems, accessibility, and enough backend detail to keep ideas shippable.",
   ],
