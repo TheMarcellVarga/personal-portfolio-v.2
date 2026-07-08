@@ -53,7 +53,7 @@ const compositionSteps = [
   },
   {
     title: "Compare route shapes",
-    text: "The interface keeps four recommendations in view, then opens the selected path with confidence, stop order, save, share, and handoff actions.",
+    text: "The interface keeps four recommendations in view, then opens the selected path with ranking reasons, estimate boundaries, and handoff actions.",
   },
 ];
 
@@ -248,7 +248,7 @@ export default function WildRoutePage() {
             >
               <Image
                 src="/images/wild-route/planner.png"
-                alt="Wild Route planner route composition workspace"
+                alt="Wild Route selected-route planner with ranking reasons and estimate boundary"
                 fill
                 className="object-cover"
               />
