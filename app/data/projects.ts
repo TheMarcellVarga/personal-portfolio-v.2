@@ -15,31 +15,31 @@ export type Project = {
 export const projects: Project[] = [
   {
     title: "Aperture Financial Intelligence",
-    subTitle: "AI financial research and portfolio decision support",
+    subTitle: "Portfolio-aware research, risk, and goal intelligence",
     date: "2026",
     description:
-      "A financial research workspace for reviewing holdings, evidence, scenarios, and risk without crossing into advice.",
+      "A recruiter-grade fintech workspace for portfolio review, cited AI briefs, goal scenarios, risk explanation, billing, and security-aware research flows.",
     highlight:
-      "A calm fintech interface with cited sources, freshness signals, unavailable states, and clear research boundaries.",
-    skills: ["Next.js", "Go", "Vercel AI SDK", "Supabase"],
+      "A premium dark fintech product with Clerk auth, Go-backed finance APIs, Supabase persistence, deterministic AI fixture mode, and explicit advice boundaries.",
+    skills: ["Next.js", "Go", "Clerk", "Supabase"],
     link: "/ai-finance",
     image: "/images/ai-finance/aperture-home.jpg",
-    category: "AI fintech product",
+    category: "Fintech product + AI safety",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(103,232,249,0.3),_transparent_28%),linear-gradient(155deg,_#071112_0%,_#111820_52%,_#1f1a16_100%)]",
   },
   {
     title: "Wild Route",
-    subTitle: "Prompt-first travel planning for adventure nomads",
+    subTitle: "Prompt-first route planning for adventure travelers",
     date: "2026",
     description:
-      "A prompt-first travel planner that turns an open-ended trip brief into ranked route options with clear tradeoffs and a path to booking.",
+      "A prompt-first adventure travel planner that turns a rough trip idea into ranked, shareable multi-stop routes with reasoning and external booking handoffs.",
     highlight:
-      "A distinct visual system paired with a focused planning flow and production-minded engineering across interface, data, auth, and billing.",
-    skills: ["Next.js", "Supabase", "Stripe", "Product UX"],
+      "A production-style Next.js app with deterministic route generation, Supabase-backed saves, public share pages, account controls, and Stripe billing routes.",
+    skills: ["Next.js", "Supabase", "Stripe", "Vitest"],
     link: "/wild-route",
     image: "/images/wild-route/home.png",
-    category: "Prompt-first product + full stack",
+    category: "Travel product + full stack",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(214,255,64,0.32),_transparent_28%),linear-gradient(160deg,_#192018_0%,_#59634f_52%,_#d9ddd0_100%)]",
   },

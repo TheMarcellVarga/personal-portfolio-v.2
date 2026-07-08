@@ -9,7 +9,7 @@ export const shareImage = "/images/cinematic-profile-pic-sg.png";
 export const siteDescription =
   "Official portfolio of Marcell Varga, a Singapore-based UX and frontend engineer building AI-aware product interfaces, design systems, React and Next.js products.";
 
-export const lastUpdated = "2026-06-30";
+export const lastUpdated = "2026-07-08";
 export const alternatePersonNames = [
   "Varga Marcell",
   "TheMarcellVarga",
@@ -27,14 +27,14 @@ export const featuredWorks = [
     name: "Aperture Financial Intelligence",
     url: `${siteUrl}/ai-finance`,
     description:
-      "AI financial research workspace with cited evidence, portfolio review flows, freshness states, and clear product guardrails.",
+      "Fintech research workspace with portfolio review, cited AI briefs, goal scenarios, risk explanation, billing, and explicit advice boundaries.",
     image: `${siteUrl}/images/ai-finance/aperture-home.jpg`,
   },
   {
     name: "Wild Route",
     url: `${siteUrl}/wild-route`,
     description:
-      "Prompt-first travel planner that turns open-ended trip briefs into ranked route options and booking-ready flows.",
+      "Prompt-first adventure travel planner with ranked route options, deterministic reasoning, save/share flows, and external booking handoffs.",
     image: `${siteUrl}/images/wild-route/home.png`,
   },
   {

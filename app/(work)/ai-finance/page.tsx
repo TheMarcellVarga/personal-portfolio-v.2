@@ -124,9 +124,9 @@ export default function AiFinancePage() {
                 Aperture Financial Intelligence
               </h1>
               <p className="max-w-3xl text-[1.05rem] leading-7 text-custom-blue/65">
-                A financial research and portfolio decision-support workspace
-                for reviewing holdings, evidence, scenarios, and risk context
-                without trade execution or personalized advice.
+                A portfolio-aware fintech workspace for holdings review, cited
+                AI briefs, goal scenarios, risk explanation, and billing-aware
+                research flows without trade execution or personalized advice.
               </p>
             </motion.div>
 
@@ -209,9 +209,10 @@ export default function AiFinancePage() {
                     the final judgment with the person using the workspace.
                   </p>
                   <p className="text-[1.05rem] leading-7 text-custom-blue/65">
-                    The current product includes a cinematic public site and an
-                    authenticated workspace with portfolio, watchlist,
-                    research, goals, risk, settings, and billing routes.
+                    The current product includes public marketing routes,
+                    Clerk-authenticated workspace routes, a Go-backed finance
+                    API layer, Supabase persistence, AI safety fixtures, and
+                    verified billing and security paths.
                   </p>
                 </div>
                 <div className="grid gap-3 sm:grid-cols-3">
@@ -244,7 +245,7 @@ export default function AiFinancePage() {
                 <p className="max-w-2xl text-[1.05rem] leading-7 text-custom-blue/65">
                   The public product page presents the core workspace surfaces
                   and keeps the guardrails visible: freshness labels, saved
-                  citations, SEC-style source context, and no return promises.
+                  citations, source context, and no return promises.
                 </p>
               </div>
               <div className="glass-panel overflow-hidden rounded-[1.9rem] bg-[#08100f] shadow-[0_18px_52px_rgba(11,17,26,0.12)] sm:rounded-[2.1rem]">
@@ -266,8 +267,9 @@ export default function AiFinancePage() {
                 </h2>
                 <p className="max-w-2xl text-[1.05rem] leading-7 text-custom-blue/65">
                   These are the routes and interactions currently present in
-                  the product. The research, goal, and risk views are explicitly
-                  local-demo experiences with deterministic content.
+                  the product. Research, goal, and risk views use deterministic
+                  fixture mode by default so safety behavior and citations can
+                  be reviewed without external model spend.
                 </p>
               </div>
 
@@ -333,21 +335,21 @@ export default function AiFinancePage() {
               <div className="lg:sticky lg:top-32 lg:h-fit">
                 <SectionLabel index="04" label="Current state" />
                 <h2 className="font-display text-[clamp(2.6rem,5vw,4.4rem)] font-medium leading-[0.92] tracking-[-0.045em] text-custom-blue">
-                  Honest about the local-demo boundary.
+                  Built enough to audit.
                 </h2>
               </div>
               <div className="glass-panel space-y-6 rounded-[1.9rem] bg-white/65 p-6 shadow-[0_12px_40px_rgba(11,17,26,0.04)] sm:rounded-[2.1rem] sm:p-8">
                 <p className="text-[1.05rem] leading-7 text-custom-blue/65">
-                  The public marketing routes and authenticated workspace routes
-                  are built. Portfolio and watchlist views expose provider
-                  freshness and failure states. Research, goal, and risk
-                  surfaces use deterministic local-demo content so the product
-                  can be reviewed without external model spend.
+                  The public marketing routes, authenticated workspace routes,
+                  Go API tests, deterministic AI evals, and billing and security
+                  verification paths are in place. Portfolio and watchlist views
+                  expose provider freshness and failure states.
                 </p>
                 <p className="text-[1.05rem] leading-7 text-custom-blue/65">
-                  That distinction matters for the case study: the visible
-                  product is the evidence. Planned production hardening is not
-                  presented here as a shipped feature.
+                  The case study stays clear about what is real today:
+                  deterministic AI behavior is the default review mode, direct
+                  model calls require explicit environment opt-in, and the
+                  product does not present research support as financial advice.
                 </p>
               </div>
             </motion.section>

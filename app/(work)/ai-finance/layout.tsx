@@ -3,7 +3,7 @@ import { siteName } from "../../seo";
 
 const title = "Aperture Financial Intelligence Case Study";
 const description =
-  "A Marcell Varga case study for an AI financial research workspace with cited evidence, portfolio review flows, freshness states, and clear product guardrails.";
+  "A Marcell Varga case study for a fintech research workspace with portfolio review, cited AI briefs, goal scenarios, risk explanation, billing, and explicit advice boundaries.";
 
 export const metadata: Metadata = {
   title,
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/images/ai-finance/aperture-home.jpg",
-        width: 1200,
-        height: 900,
+        width: 1440,
+        height: 1024,
         alt: "Aperture Financial Intelligence product interface",
       },
     ],

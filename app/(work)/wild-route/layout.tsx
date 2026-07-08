@@ -3,7 +3,7 @@ import { siteName } from "../../seo";
 
 const title = "Wild Route Case Study";
 const description =
-  "A Marcell Varga case study for a prompt-first travel planner that turns open-ended trip briefs into ranked route options and booking-ready flows.";
+  "A Marcell Varga case study for a prompt-first adventure travel planner with ranked route options, deterministic reasoning, save/share flows, and external booking handoffs.";
 
 export const metadata: Metadata = {
   title,
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/images/wild-route/home.png",
-        width: 1200,
-        height: 900,
+        width: 1440,
+        height: 810,
         alt: "Wild Route travel planning interface",
       },
     ],

@@ -31,14 +31,14 @@ const productSignals = [
     detail: "Each brief resolves into a considered set instead of an endless result list.",
   },
   {
-    value: "01",
-    label: "clear promoted stop",
-    detail: "The business model is visible in the product without overwhelming the planning flow.",
+    value: "25",
+    label: "free generations",
+    detail: "Plan limits are defined server-side and stay visible in the product model.",
   },
   {
-    value: "12d",
-    label: "travel window",
-    detail: "Pace, budget, stops, and route wishes stay attached to the recommendation.",
+    value: "12",
+    label: "saved routes",
+    detail: "The free tier supports durable route saves before deeper provider integrations.",
   },
 ];
 
@@ -53,7 +53,7 @@ const compositionSteps = [
   },
   {
     title: "Compare route shapes",
-    text: "The interface keeps four recommendations in view, then opens the selected path with its confidence, stop order, and booking actions.",
+    text: "The interface keeps four recommendations in view, then opens the selected path with confidence, stop order, save, share, and handoff actions.",
   },
 ];
 
@@ -61,7 +61,7 @@ const platformLayers = [
   {
     icon: Route,
     title: "Planning surface",
-    text: "Prompt-first route composition, a globe-based comparison view, destination reasoning, and provider handoffs.",
+    text: "Prompt-first route composition, globe or 2D fallback comparison, destination reasoning, and provider handoffs.",
   },
   {
     icon: Database,
@@ -201,7 +201,8 @@ export default function WildRoutePage() {
                   <p className="text-[1.05rem] leading-7 text-custom-blue/65">
                     I designed the product around fewer, better-considered choices.
                     The visual language is editorial and cinematic, while the planner
-                    stays explicit about route logic, tradeoffs, and what happens next.
+                    stays explicit about route logic, estimates, persistence, and
+                    external booking handoffs.
                   </p>
                 </div>
 
@@ -236,7 +237,8 @@ export default function WildRoutePage() {
               <p className="mt-6 max-w-2xl text-[1.05rem] leading-7 text-custom-blue/65">
                 The current build uses a transparent scoring engine behind the
                 prompt-first experience. That keeps the interaction explainable and
-                leaves a clean path for model-backed enrichment later.
+                gives the product a reliable spine before live provider or model-backed
+                enrichment.
               </p>
             </motion.div>
 
@@ -246,7 +248,7 @@ export default function WildRoutePage() {
             >
               <Image
                 src="/images/wild-route/planner.png"
-                alt="Wild Route planner with a selected route and globe visualization"
+                alt="Wild Route planner route composition workspace"
                 fill
                 className="object-cover"
               />
@@ -282,8 +284,8 @@ export default function WildRoutePage() {
               <p className="mt-6 max-w-2xl text-[1.05rem] leading-7 text-custom-blue/65">
                 The product is wired as a production-style Next.js application:
                 identity, private data, public sharing, billing, and operational
-                endpoints are part of the system rather than presentation-only
-                placeholders.
+                endpoints are part of the system. Deterministic route generation,
+                tests, and explicit fallback behavior keep the demo reviewable.
               </p>
             </motion.div>
 
@@ -333,8 +335,8 @@ export default function WildRoutePage() {
               <p className="mt-6 max-w-2xl text-[1.05rem] leading-7 text-white/68">
                 Wild Route is a current portfolio piece because it reflects the work
                 I want to keep doing: shaping a distinct product idea, building the
-                interface carefully, and carrying the system far enough that the
-                underlying product decisions become real.
+                interface carefully, and carrying the system through save, share,
+                handoff, account, and billing flows.
               </p>
               <Link
                 href="https://github.com/TheMarcellVarga/ai-travel-planner"
