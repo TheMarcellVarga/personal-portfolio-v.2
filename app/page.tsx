@@ -329,7 +329,11 @@ export default function Page() {
   }, [mouseX, mouseY]);
 
   useEffect(() => {
-    setHasMounted(true);
+    const frame = window.requestAnimationFrame(() => {
+      setHasMounted(true);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   const { scrollYProgress: heroProgress } = useScroll({
@@ -385,32 +389,35 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    if (shouldReduceMotion) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (!shouldReduceMotion) return;
+
+    const frame = window.requestAnimationFrame(() => {
       setTypedText(principlesStatement);
-    }
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, [shouldReduceMotion]);
 
   useEffect(() => {
-    if (shouldReduceMotion) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setIntroStage("done");
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setIntroPlayedThisVisit(false);
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setShouldAnimateHeaderBrand(true);
-      return;
-    }
+    if (typeof window === "undefined") return;
 
-    const alreadySeen = readIntroAlreadySeen();
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIntroPlayedThisVisit(!alreadySeen);
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIntroStage(alreadySeen ? "done" : "playing");
-    if (alreadySeen) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setShouldAnimateHeaderBrand(true);
-    }
+    const frame = window.requestAnimationFrame(() => {
+      if (shouldReduceMotion) {
+        setIntroStage("done");
+        setIntroPlayedThisVisit(false);
+        setShouldAnimateHeaderBrand(true);
+        return;
+      }
+
+      const alreadySeen = readIntroAlreadySeen();
+      setIntroPlayedThisVisit(!alreadySeen);
+      setIntroStage(alreadySeen ? "done" : "playing");
+      if (alreadySeen) {
+        setShouldAnimateHeaderBrand(true);
+      }
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, [shouldReduceMotion]);
 
   const finishIntro = useCallback(() => {
@@ -842,7 +849,7 @@ export default function Page() {
   }, [shouldReduceMotion]);
 
   return (
-    <div className="relative">
+    <div className="relative overflow-x-clip">
       <PageBackground />
 
       <div
@@ -878,17 +885,17 @@ export default function Page() {
               }
         }
       >
-        <main className="relative z-10 px-5 pb-8 pt-0 sm:px-6 sm:pb-12 lg:px-10">
+        <main className="relative z-10 px-4 pb-8 pt-0 sm:px-6 sm:pb-12 lg:px-10">
           <section
             id="hero"
             ref={heroRef}
-            className="isolate relative z-20 left-1/2 min-h-[100svh] w-screen -translate-x-1/2 overflow-x-clip overflow-y-visible"
+            className="isolate relative left-1/2 z-20 min-h-[100dvh] w-screen -translate-x-1/2 overflow-x-clip overflow-y-visible"
           >
             <div className="absolute inset-0 bg-[#06111c]" />
             <HeroDynamicBackdrop />
             <div className="absolute inset-0 z-10 bg-[linear-gradient(180deg,rgba(4,9,15,0.92)_0%,rgba(4,9,15,0.82)_36%,rgba(4,9,15,0.44)_100%)] lg:bg-[linear-gradient(90deg,rgba(4,9,15,0.98)_0%,rgba(4,9,15,0.9)_30%,rgba(4,9,15,0.6)_52%,rgba(4,9,15,0.18)_72%,rgba(4,9,15,0.08)_100%)]" />
 
-            <div className="relative z-30 mx-auto flex min-h-[100svh] w-full max-w-7xl flex-col gap-8 px-6 pb-8 pt-24 sm:gap-10 sm:px-10 sm:pb-12 md:grid md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:items-center md:gap-7 lg:hidden">
+            <div className="relative z-30 mx-auto flex min-h-[100dvh] w-full max-w-7xl flex-col gap-7 px-4 pb-10 pt-22 sm:gap-10 sm:px-10 sm:pb-12 sm:pt-24 md:grid md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:items-center md:gap-7 lg:hidden">
               <div className="max-w-[36rem]">
                 <motion.div
                   style={enableScrollMotion ? { y: heroPillsY } : undefined}
@@ -916,10 +923,10 @@ export default function Page() {
                       animate={revealHeroTitle && !shouldReduceMotion}
                       visible={revealHeroTitle}
                       delay={0.08}
-                      className="max-w-[8ch] font-display text-[clamp(3.4rem,14vw,4.2rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[clamp(3.4rem,8vw,4.8rem)] md:text-[clamp(3.8rem,7vw,5.4rem)]"
+                      className="max-w-[8ch] font-display text-[clamp(2.85rem,13vw,4.2rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[clamp(3.4rem,8vw,4.8rem)] md:text-[clamp(3.8rem,7vw,5.4rem)]"
                     />
                     <div data-hero-copy>
-                      <p className="max-w-[30rem] text-[0.98rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
+                      <p className="max-w-[30rem] text-[0.95rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
                         I design and build product interfaces that stay calm, sharp,
                         and useful in practice.
                       </p>
@@ -935,19 +942,19 @@ export default function Page() {
                   <div data-hero-cta-group className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
                     <button
                       onClick={scrollWork}
-                      className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.9)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8] hover:shadow-[0_24px_70px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.9)] active:translate-y-0 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c] sm:w-fit sm:gap-3"
+                      className="group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.9)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8] hover:shadow-[0_24px_70px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.9)] active:translate-y-0 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c] sm:w-fit"
                     >
                       <span className="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_0%,rgba(103,217,255,0.18)_45%,transparent_70%)] transition-transform duration-700 group-hover:translate-x-full" />
                       <span className="relative z-10">Selected work</span>
-                      <ArrowRight className="absolute right-6 z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 sm:static" />
+                      <ArrowRight className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                     </button>
                     <Link
                       href="/resume"
-                      className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-custom-blue px-6 py-3 text-sm font-medium text-white shadow-[0_20px_60px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.14)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-[#0f1f2f] active:translate-y-0 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c] sm:w-fit sm:gap-3 sm:bg-white sm:text-custom-blue sm:hover:bg-[#eef4f8] sm:hover:shadow-[0_24px_70px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.9)]"
+                      className="group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-custom-blue px-6 py-3 text-sm font-medium text-white shadow-[0_20px_60px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.14)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-[#0f1f2f] active:translate-y-0 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c] sm:w-fit sm:bg-white sm:text-custom-blue sm:hover:bg-[#eef4f8] sm:hover:shadow-[0_24px_70px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.9)]"
                     >
                       <span className="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_0%,rgba(103,217,255,0.16)_45%,transparent_70%)] transition-transform duration-700 group-hover:translate-x-full" />
                       <span className="relative z-10">Resume</span>
-                      <Download className="absolute right-6 z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5 sm:static" />
+                      <Download className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
                     </Link>
                     </div>
                   </div>
@@ -956,13 +963,13 @@ export default function Page() {
 
               <motion.div
                 style={enableScrollMotion ? { y: portraitY, scale: portraitScale } : undefined}
-                className="hero-scroll-layer relative overflow-hidden rounded-[1.65rem] border border-white/10 bg-white/6 p-2.5 shadow-[0_20px_70px_rgba(0,0,0,0.24)] backdrop-blur-xl sm:rounded-[2rem] sm:p-3"
+                className="hero-scroll-layer relative w-full max-w-[24rem] self-center overflow-hidden rounded-[1.65rem] border border-white/10 bg-white/6 p-2.5 shadow-[0_20px_70px_rgba(0,0,0,0.24)] backdrop-blur-xl sm:max-w-[30rem] sm:rounded-[2rem] sm:p-3 md:max-w-none"
               >
                 <motion.div className="relative overflow-hidden rounded-[1.2rem] bg-[#071726] sm:rounded-[1.5rem]">
                   <div className="relative h-full w-full">
                     <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
                     <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
-                    <div className="relative aspect-[0.9] w-full sm:aspect-[1.04] md:aspect-[0.78]">
+                    <div className="relative aspect-[1.18] w-full sm:aspect-[1.04] md:aspect-[0.78]">
                       <Image
                         src="/images/personalpageprofilealt.png"
                         alt="Portrait of Marcell Varga"
@@ -976,7 +983,7 @@ export default function Page() {
               </motion.div>
             </div>
 
-            <div className="relative z-30 mx-auto hidden min-h-[100svh] w-full max-w-7xl items-center px-6 pb-10 pt-24 sm:px-10 sm:pb-14 lg:flex lg:px-14 lg:pb-12">
+            <div className="relative z-30 mx-auto hidden min-h-[100dvh] w-full max-w-7xl items-center px-6 pb-10 pt-24 sm:px-10 sm:pb-14 lg:flex lg:px-14 lg:pb-12">
               <div className="max-w-[36rem]">
                 <motion.div
                   style={enableScrollMotion ? { y: heroPillsY } : undefined}
@@ -1086,7 +1093,7 @@ export default function Page() {
           <section
             id="about"
             ref={principlesRef}
-            className="isolate relative z-10 mx-auto mt-12 w-full max-w-7xl lg:-mt-12 lg:h-[260vh]"
+            className="isolate relative z-10 mx-auto mt-8 w-full max-w-7xl sm:mt-12 lg:-mt-12 lg:h-[260vh]"
           >
             <div className="lg:sticky lg:top-16 lg:flex lg:h-[32rem] lg:items-center lg:py-10 xl:top-24 xl:h-[40rem] xl:py-12">
                 <motion.div
@@ -1104,7 +1111,7 @@ export default function Page() {
                         ? undefined
                         : { opacity: 0, scale: 0.98, y: 24 }
                   }
-                className="mx-auto flex h-auto min-h-[24rem] w-full max-w-5xl flex-col overflow-hidden rounded-[2rem] bg-[#071726]/92 p-6 text-white shadow-[0_40px_140px_rgba(5,16,32,0.28),inset_0_1px_0_rgba(255,255,255,0.16)] sm:min-h-[28rem] sm:rounded-[2.5rem] sm:p-8 lg:h-[40rem] lg:min-h-0 lg:rounded-[3rem] lg:p-12"
+                className="mx-auto flex h-auto min-h-[20rem] w-full max-w-5xl flex-col overflow-hidden rounded-[1.65rem] bg-[#071726]/92 p-5 text-white shadow-[0_40px_140px_rgba(5,16,32,0.28),inset_0_1px_0_rgba(255,255,255,0.16)] sm:min-h-[28rem] sm:rounded-[2.5rem] sm:p-8 lg:h-[40rem] lg:min-h-0 lg:rounded-[3rem] lg:p-12"
               >
                 <div className="flex h-full flex-col justify-between gap-8">
                   <div>
@@ -1120,7 +1127,7 @@ export default function Page() {
                       className="mb-8 h-px w-full bg-[linear-gradient(90deg,rgba(76,216,255,0.85),rgba(76,216,255,0.02))]"
                     />
                     <p
-                      className="max-w-4xl font-display text-[clamp(1.95rem,7vw,4.6rem)] leading-[1.08] tracking-[-0.02em] !text-[#f8fbff]"
+                      className="max-w-4xl font-display text-[clamp(1.55rem,7vw,4.6rem)] leading-[1.12] tracking-[-0.02em] !text-[#f8fbff] sm:leading-[1.08]"
                       style={{
                         color: "#f8fbff",
                         WebkitTextFillColor: "#f8fbff",
@@ -1181,7 +1188,7 @@ export default function Page() {
                   text="How It Takes Shape."
                   animate={!shouldReduceMotion}
                   triggerOnView
-                  className="mt-8 font-display text-[clamp(2.8rem,6vw,5.4rem)] leading-[0.9] tracking-[-0.04em] text-custom-blue"
+                  className="mt-6 font-display text-[clamp(2.2rem,12vw,5.4rem)] leading-[0.95] tracking-[-0.04em] text-custom-blue sm:mt-8 sm:leading-[0.9]"
                 />
               </div>
               <p className="max-w-xl text-[0.9rem] leading-7 text-custom-blue/66 lg:justify-self-end">
@@ -1249,9 +1256,9 @@ export default function Page() {
                   text="Work that turns product thinking into interfaces."
                   animate={!shouldReduceMotion}
                   triggerOnView
-                  className="mt-8 font-display text-[clamp(2.8rem,6vw,5.4rem)] leading-[0.9] tracking-[-0.04em] text-custom-blue"
+                  className="mt-6 font-display text-[clamp(2.15rem,11vw,5.4rem)] leading-[0.96] tracking-[-0.04em] text-custom-blue sm:mt-8 sm:leading-[0.9]"
                 />
-                <p className="mt-6 text-[1.05rem] leading-relaxed text-custom-blue/65">
+                <p className="mt-5 text-[0.98rem] leading-relaxed text-custom-blue/65 sm:mt-6 sm:text-[1.05rem]">
                   A focused set of projects where product decisions show up in
                   the interface.
                 </p>
@@ -1280,14 +1287,14 @@ export default function Page() {
                 >
                   <Link
                     href={project.link}
-                    className="grid grid-cols-[minmax(0,1fr)_auto] gap-4 rounded-[1.5rem] border-b border-custom-blue/5 px-4 py-5 transition-colors duration-500 hover:bg-custom-blue/[0.01] sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:px-0 md:py-8"
+                    className="grid grid-cols-[minmax(0,1fr)] gap-4 rounded-[1.5rem] border-b border-custom-blue/5 px-3 py-5 transition-colors duration-500 hover:bg-custom-blue/[0.01] sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:px-0 md:py-8"
                   >
-                    <div className="col-span-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8 md:col-span-1">
+                    <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:gap-8 md:col-span-1">
                       <span className="font-label min-w-[2.5rem] text-[0.62rem] font-bold text-custom-blue/20">
                         0{idx + 1}
                       </span>
                       <div className="flex flex-1 items-center justify-between gap-4">
-                        <h3 className="font-display text-[1.8rem] leading-none tracking-[-0.02em] text-custom-blue transition-transform duration-500 group-hover:translate-x-2 sm:text-[2.2rem] lg:text-[2.8rem]">
+                        <h3 className="min-w-0 text-pretty font-display text-[clamp(1.55rem,8vw,1.95rem)] leading-[1.02] tracking-[-0.02em] text-custom-blue transition-transform duration-500 group-hover:translate-x-0 sm:text-[2.2rem] md:group-hover:translate-x-2 lg:text-[2.8rem]">
                           {project.title}
                         </h3>
                         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-custom-blue/10 transition-all duration-500 group-hover:rotate-45 group-hover:bg-custom-blue group-hover:text-white md:hidden">
@@ -1296,7 +1303,7 @@ export default function Page() {
                       </div>
                     </div>
 
-                    <div className="col-span-2 flex flex-wrap gap-x-5 gap-y-1 md:col-span-1 md:justify-self-end md:justify-end">
+                    <div className="flex flex-wrap gap-x-4 gap-y-1 md:col-span-1 md:justify-self-end md:justify-end">
                       {project.skills.slice(0, 4).map((skill) => (
                         <span
                           key={skill}
@@ -1322,7 +1329,7 @@ export default function Page() {
                       <ArrowUpRight className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
                     </div>
 
-                    <div className="col-span-2 overflow-hidden rounded-[1.25rem] border border-custom-blue/8 md:hidden">
+                    <div className="overflow-hidden rounded-[1.25rem] border border-custom-blue/8 md:hidden">
                       <div className="relative aspect-[16/10]">
                         <Image
                           src={project.image}
@@ -1347,7 +1354,7 @@ export default function Page() {
                 <SectionLabel index="04" label="Trajectory" />
                 <div className="mt-8 space-y-6">
                   <div className="space-y-5">
-                    <h2 className="font-display text-[clamp(2.4rem,8vw,5.6rem)] leading-[0.9] tracking-[-0.045em] text-custom-blue">
+                    <h2 className="font-display text-[clamp(2.4rem,14vw,5.6rem)] leading-[0.9] tracking-[-0.045em] text-custom-blue">
                       Design. <br />
                       Product. <br />
                       Craft.
@@ -1392,7 +1399,7 @@ export default function Page() {
               </div>
 
               {/* Scrolling History List */}
-              <div className="relative snap-y snap-proximity space-y-8 py-10 sm:space-y-16 lg:py-[20vh]">                
+              <div className="relative snap-y snap-proximity space-y-5 py-6 sm:space-y-16 sm:py-10 lg:py-[20vh]">                
                 {history.map((item, index) => (
                   <HistoryItemComponent
                     key={`${item.company}-${item.time.start}`}
@@ -1409,14 +1416,14 @@ export default function Page() {
 
           <section
             id="contact"
-            className="mx-auto mt-20 flex min-h-[auto] w-full max-w-7xl items-start py-6 sm:mt-28 sm:min-h-[calc(100svh-12rem)] sm:items-center sm:py-10 lg:mt-36 lg:min-h-[calc(100svh-10rem)]"
+            className="mx-auto mt-16 flex min-h-[auto] w-full max-w-7xl items-start py-6 sm:mt-28 sm:min-h-[calc(100dvh-12rem)] sm:items-center sm:py-10 lg:mt-36 lg:min-h-[calc(100dvh-10rem)]"
             onMouseEnter={() => setFooterHover(true)}
             onMouseLeave={() => setFooterHover(false)}
           >
             <motion.div
               data-scroll-anchor="contact"
               {...fadeInUp(0.06)}
-              className="relative mx-auto flex min-h-[24rem] w-full max-w-5xl items-start overflow-hidden rounded-[2rem] bg-[#071726] p-6 text-white shadow-[0_40px_140px_rgba(7,20,38,0.26),inset_0_1px_0_rgba(255,255,255,0.16)] sm:min-h-[28rem] sm:items-center sm:rounded-[2.75rem] sm:p-8"
+              className="relative mx-auto flex min-h-[24rem] w-full max-w-5xl items-start overflow-hidden rounded-[1.65rem] bg-[#071726] p-5 text-white shadow-[0_40px_140px_rgba(7,20,38,0.26),inset_0_1px_0_rgba(255,255,255,0.16)] sm:min-h-[28rem] sm:items-center sm:rounded-[2.75rem] sm:p-8"
             >
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(72,205,255,0.26),_transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.06),transparent_55%)]" />
               <div className="relative grid w-full gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
@@ -1427,7 +1434,7 @@ export default function Page() {
                     text="Say hi."
                     animate={!shouldReduceMotion}
                     triggerOnView
-                    className="max-w-3xl font-display text-[clamp(2.15rem,8vw,5rem)] leading-[0.96] tracking-[-0.04em] text-white"
+                    className="max-w-3xl font-display text-[clamp(2.15rem,12vw,5rem)] leading-[0.96] tracking-[-0.04em] text-white"
                   />
                   <p className="mt-4 max-w-2xl text-[0.96rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
                     If you want to talk about a project, share feedback, or
@@ -1439,11 +1446,11 @@ export default function Page() {
                 <div className="grid gap-2.5 self-end sm:gap-3">
                   <a
                     href="mailto:themarcellvarga@gmail.com"
-                    className="group flex items-center justify-between gap-4 rounded-[1.35rem] bg-white/7 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 sm:px-5 sm:py-3.5"
+                    className="group flex items-center justify-between gap-3 rounded-[1.25rem] bg-white/7 px-3.5 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 sm:gap-4 sm:rounded-[1.35rem] sm:px-5 sm:py-3.5"
                   >
                     <span className="flex min-w-0 flex-1 items-center gap-3">
-                      <Mail className="h-5 w-5 text-[#67d9ff]" />
-                      <span className="min-w-0 break-all font-label text-[0.64rem] font-medium uppercase tracking-[0.16em] text-white/80 sm:text-[0.72rem]">
+                      <Mail className="h-5 w-5 shrink-0 text-[#67d9ff]" />
+                      <span className="min-w-0 break-all font-label text-[0.58rem] font-medium uppercase tracking-[0.1em] text-white/80 sm:text-[0.72rem] sm:tracking-[0.16em]">
                         themarcellvarga@gmail.com
                       </span>
                     </span>

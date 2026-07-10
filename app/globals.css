@@ -32,6 +32,7 @@
     background: var(--page-background);
     color: var(--color-custom-blue);
     font-family: var(--font);
+    overflow-x: clip;
     scroll-behavior: auto;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;

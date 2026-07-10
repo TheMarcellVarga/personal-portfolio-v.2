@@ -27,14 +27,14 @@ export default function Footer({ isHover = false }: FooterProps) {
   }, []);
 
   return (
-    <footer className="px-5 pb-8 pt-3 sm:px-6 lg:px-10">
+    <footer className="px-4 pb-8 pt-3 sm:px-6 lg:px-10">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 border-t border-custom-blue/10 pt-5 text-sm text-custom-blue/50 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:pt-6">
-        <div className="flex items-center justify-between gap-3 sm:contents">
+        <div className="flex flex-col gap-1.5 sm:contents">
           <p className="text-xs sm:text-sm">
             © {new Date().getFullYear()} Marcell Varga
           </p>
           <span className="text-[0.68rem] text-custom-blue/48 sm:order-2 sm:ml-auto sm:text-xs">
-            🇸🇬 Local Time: {currentTime}
+            Singapore: {currentTime}
           </span>
         </div>
         <div className="sm:order-3">

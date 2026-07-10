@@ -118,9 +118,13 @@ export default function Header({
 
     lastScrollYRef.current = window.scrollY;
     isHeaderVisibleRef.current = true;
-    setIsHeaderVisible(true);
+    const resetVisibilityFrame = window.requestAnimationFrame(() => {
+      setIsHeaderVisible(true);
+    });
 
-    if (isOpen) return;
+    if (isOpen) {
+      return () => window.cancelAnimationFrame(resetVisibilityFrame);
+    }
 
     const revealThreshold = 80;
     const deltaThreshold = 6;
@@ -168,6 +172,7 @@ export default function Header({
         window.cancelAnimationFrame(animationFrameRef.current);
         animationFrameRef.current = null;
       }
+      window.cancelAnimationFrame(resetVisibilityFrame);
     };
   }, [isOpen]);
 
@@ -199,14 +204,14 @@ export default function Header({
 
   return (
     <header
-      className={`sticky-header px-4 py-2.5 transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:py-4 lg:px-10 ${
+      className={`sticky-header px-3 py-2.5 transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:py-4 lg:px-10 ${
         isHeaderVisible || isOpen
           ? "opacity-100"
           : "opacity-0 pointer-events-none"
       }`}
     >
       <div
-        className={`mx-auto grid min-h-[4rem] w-full max-w-7xl grid-cols-[auto_1fr_auto] items-center rounded-full px-5 py-1.5 transition duration-300 sm:min-h-[4.5rem] sm:px-5 sm:py-2 lg:grid-cols-[1fr_auto_1fr] ${
+        className={`mx-auto grid min-h-[3.5rem] w-full max-w-7xl grid-cols-[auto_1fr_auto] items-center rounded-full px-3.5 py-1.5 transition duration-300 sm:min-h-[4.5rem] sm:px-5 sm:py-2 lg:grid-cols-[1fr_auto_1fr] ${
           useLightOnDark
             ? "bg-[#0a1521]/46 shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_18px_48px_rgba(0,0,0,0.18)] backdrop-blur-2xl"
             : "bg-white/72 shadow-[0_16px_50px_rgba(7,20,38,0.12),inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-2xl"
@@ -222,7 +227,7 @@ export default function Header({
             className="flex items-center gap-3"
             aria-label="Go to homepage"
           >
-            <span ref={logoRef} className="block w-[4.75rem] shrink-0 sm:w-[5.3125rem]">
+            <span ref={logoRef} className="block w-[4.15rem] shrink-0 sm:w-[5.3125rem]">
               <IndexSigAnimatedIcon
                 key={logoAnimationKey}
                 isOpen={isOpen}
