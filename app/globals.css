@@ -45,7 +45,6 @@
     background: transparent;
     color: var(--color-custom-blue);
     font-family: var(--font);
-    overflow-x: hidden;
   }
 
   a {

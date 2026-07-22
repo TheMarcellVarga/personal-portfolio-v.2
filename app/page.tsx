@@ -633,6 +633,7 @@ export default function Page() {
         opacity: 1,
         y: 0,
         duration: 0.7,
+        clearProps: "transform",
       });
       if (badgeTargets.length) {
         timeline.fromTo(
