@@ -488,44 +488,58 @@ export default function Page() {
       contact: "Contact",
     };
 
-    const observers: IntersectionObserver[] = [];
+    const updateActiveSection = () => {
+      const readingLine = window.innerHeight * 0.45;
+      const activeId = [...sectionIds]
+        .reverse()
+        .find((id) => {
+          const element = document.getElementById(id);
+          if (!element) return false;
+
+          const { top, bottom } = element.getBoundingClientRect();
+          return top <= readingLine && bottom > readingLine;
+        });
+
+      if (activeId) {
+        setActiveSection(sectionMap[activeId]);
+      }
+    };
+
+    // A single observer avoids callback-order races when adjacent sections overlap.
+    const observer = new IntersectionObserver(updateActiveSection, {
+      threshold: 0,
+      rootMargin: "-45% 0px -54% 0px",
+    });
 
     sectionIds.forEach((id) => {
       const element = document.getElementById(id);
-      if (!element) return;
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setActiveSection(sectionMap[id]);
-            }
-          });
-        },
-        { threshold: 0.2, rootMargin: "-20% 0px -20% 0px" },
-      );
-
-      observer.observe(element);
-      observers.push(observer);
+      if (element) observer.observe(element);
     });
 
+    updateActiveSection();
+    window.addEventListener("resize", updateActiveSection);
+
     return () => {
-      observers.forEach((o) => o?.disconnect());
+      observer.disconnect();
+      window.removeEventListener("resize", updateActiveSection);
     };
   }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const bottomThreshold = 72;
+    const edgeThreshold = 72;
     let animationFrameId = 0;
 
     const updateBottomState = () => {
       const doc = document.documentElement;
+      const nearTop = window.scrollY <= edgeThreshold;
       const nearBottom =
-        window.innerHeight + window.scrollY >= doc.scrollHeight - bottomThreshold;
+        window.innerHeight + window.scrollY >= doc.scrollHeight - edgeThreshold;
 
-      if (nearBottom) {
+      if (nearTop) {
+        setActiveSection("Intro");
+      } else if (nearBottom) {
         setActiveSection("Contact");
       }
 
