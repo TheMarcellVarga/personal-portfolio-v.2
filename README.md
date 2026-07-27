@@ -58,7 +58,7 @@ The portfolio uses semantic structure, reduced-motion support, and explicit imag
 
 ## Privacy and analytics
 
-The site exposes contact and social links, with an optional click-to-reveal phone interaction. It is not scrape-proof; private environment values and credentials must never be committed. PostHog is optional and should be configured only with the appropriate consent and privacy policy.
+The site exposes email and professional social links. Private environment values, credentials, and personal phone numbers must never be committed or served from public routes. PostHog is optional and should be configured only with the appropriate consent and privacy policy.
 
 ## Deployment
 

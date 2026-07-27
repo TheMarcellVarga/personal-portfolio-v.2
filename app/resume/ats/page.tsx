@@ -94,7 +94,6 @@ export default function AtsResumePage() {
                 {resume.email}
               </a>
             </p>
-            <p>Phone: {resume.phone}</p>
             <p>
               Website:{" "}
               <a

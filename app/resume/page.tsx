@@ -13,7 +13,6 @@ import { motion } from "framer-motion";
 import Header from "../header";
 import Footer from "../footer";
 import { PageBackground } from "../components/PageBackground";
-import { PhoneReveal } from "../components/PhoneReveal";
 import ResumeActions from "./ResumeActions";
 import { resume } from "../data/resume";
 
@@ -175,7 +174,6 @@ export default function ResumePage() {
 
                   <div className="mt-5 space-y-2">
                     <ContactItem icon={Mail} label={resume.email} href={`mailto:${resume.email}`} />
-                    <PhoneReveal />
                     <ContactItem icon={Globe} label={resume.website} href={`https://${resume.website}`} />
                     <ContactItem icon={Linkedin} label={resume.linkedin} href={`https://${resume.linkedin}`} />
                     <ContactItem icon={Github} label={resume.githubHandle} href={`https://${resume.github}`} />

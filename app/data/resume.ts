@@ -2,7 +2,6 @@ export const resume = {
   name: "Marcell Varga",
   title: "UX & Frontend Engineer building clear, scalable product interfaces and design systems",
   location: "Singapore",
-  phone: "Available on request",
   email: "themarcellvarga@gmail.com",
   website: "marcellvarga.com",
   linkedin: "linkedin.com/in/marcellvarga",

@@ -40,6 +40,16 @@ test("public routes send baseline browser security headers", async ({ page }) =>
   expect(response.headers()["permissions-policy"]).toContain("camera=()");
 });
 
+test("public routes do not serve personal phone data", async ({ page }) => {
+  const phoneResponse = await page.request.get("/api/contact/phone");
+  const contactResponse = await page.request.get("/contact");
+  const resumeResponse = await page.request.get("/resume");
+
+  expect(phoneResponse.status()).toBe(404);
+  await expect(contactResponse.text()).resolves.not.toContain("Reveal phone number");
+  await expect(resumeResponse.text()).resolves.not.toContain("Available on request");
+});
+
 test("homepage has no serious or critical non-color automated accessibility violations", async ({ page }) => {
   await prepareHomepage(page);
   await page.goto("/");
