@@ -15,12 +15,12 @@ import {
   AnimatePresence,
   motion,
   useMotionValueEvent,
-  useReducedMotion,
   useScroll,
   useTransform,
   useMotionValue,
   useSpring,
 } from "framer-motion";
+import { useClientReducedMotion } from "./hooks/useClientReducedMotion";
 import { gsap } from "gsap";
 import {
   ArrowRight,
@@ -297,8 +297,7 @@ export default function Page() {
   const [shouldAnimateHeaderBrand, setShouldAnimateHeaderBrand] =
     useState(false);
   const [hasMounted, setHasMounted] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
-  const shouldReduceMotion = Boolean(prefersReducedMotion);
+  const shouldReduceMotion = useClientReducedMotion();
   const enableScrollMotion = hasMounted && !shouldReduceMotion;
   const headerLogoRef = useRef<HTMLSpanElement>(null);
   const mainStageRef = useRef<HTMLDivElement>(null);

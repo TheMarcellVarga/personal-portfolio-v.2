@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "framer-motion";
+import { useClientReducedMotion } from "../hooks/useClientReducedMotion";
 
 interface Dot {
   gridX: number;
@@ -37,8 +37,7 @@ export function HeroCanvasBackdrop() {
   const mouseRef = useRef({ clientX: -1000, clientY: -1000, active: false });
   const [isVisible, setIsVisible] = useState(true);
   
-  const prefersReducedMotion = useReducedMotion();
-  const shouldReduceMotion = Boolean(prefersReducedMotion);
+  const shouldReduceMotion = useClientReducedMotion();
 
   // Monitor visibility of the hero background to freeze loop when scrolled away
   useEffect(() => {

@@ -1,8 +1,8 @@
 "use client";
 
-import { useReducedMotion } from "framer-motion";
 import { ReactLenis } from "lenis/react";
 import type { PropsWithChildren } from "react";
+import { useClientReducedMotion } from "../hooks/useClientReducedMotion";
 
 const lenisOptions = {
   autoRaf: true,
@@ -33,7 +33,7 @@ const lenisOptions = {
 } as const;
 
 export default function SmoothScroll({ children }: PropsWithChildren) {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useClientReducedMotion();
 
   if (shouldReduceMotion) {
     return <>{children}</>;

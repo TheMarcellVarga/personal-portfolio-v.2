@@ -113,7 +113,7 @@ verification, and limitations consistently.
 
 ## Phase 3: Visual and Interaction Rework
 
-Status: Not started
+Status: Complete (implemented and verified 2026-07-28)
 
 ### Work
 
@@ -133,6 +133,11 @@ Status: Not started
 - motion has reduced alternatives;
 - mobile case studies remain readable;
 - CTA text and contrast pass accessibility checks.
+
+Implementation note: the existing visual identity and project-specific media
+are retained. Browser coverage confirms the featured case studies remain
+readable at a 390px viewport with no horizontal overflow, and motion preference
+handling hydrates without markup mismatches.
 
 ## Phase 4: Accessibility, Performance, and SEO
 

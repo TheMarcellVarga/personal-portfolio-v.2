@@ -45,6 +45,37 @@ test("featured work uses the shared evidence record", async ({ page }) => {
   }
 });
 
+test.describe("mobile and motion fallbacks", () => {
+  test.use({ viewport: { width: 390, height: 844 }, isMobile: true });
+
+  test("featured case studies stay readable without horizontal overflow", async ({ page }) => {
+    for (const [route, evidenceId] of [
+      ["/ai-finance", "aperture"],
+      ["/wild-route", "wild-route"],
+      ["/about", "professional-product-work"],
+    ]) {
+      await page.goto(route);
+      await expect(page.locator(`[data-case-study-evidence="${evidenceId}"]`)).toBeVisible();
+
+      const horizontalOverflow = await page.evaluate(
+        () => document.documentElement.scrollWidth - window.innerWidth,
+      );
+      expect(horizontalOverflow).toBeLessThanOrEqual(1);
+    }
+  });
+
+  test("reduced-motion preference shortens interface transitions", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/about");
+
+    const transitionDuration = await page
+      .getByRole("link", { name: "View full resume" })
+      .evaluate((element) => Number.parseFloat(getComputedStyle(element).transitionDuration));
+
+    expect(transitionDuration).toBeLessThanOrEqual(0.001);
+  });
+});
+
 test("public routes send baseline browser security headers", async ({ page }) => {
   const response = await page.request.get("/");
 

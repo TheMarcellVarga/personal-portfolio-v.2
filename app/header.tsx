@@ -3,9 +3,10 @@
 import IndexSigAnimatedIcon from "@/public/icons/indexSigAnimated";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { type RefObject, useCallback, useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
+import { useClientReducedMotion } from "./hooks/useClientReducedMotion";
 
 interface HeaderProps {
   isOpen: boolean;
@@ -45,7 +46,7 @@ export default function Header({
 }: HeaderProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useClientReducedMotion();
   const [logoAnimationKey, setLogoAnimationKey] = useState(0);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
