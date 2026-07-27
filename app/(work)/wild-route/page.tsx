@@ -17,7 +17,9 @@ import Footer from "../../footer";
 import { PageBackground } from "../../components/PageBackground";
 import { SectionLabel } from "../../components/SectionLabel";
 import { OtherWorks } from "../../components/OtherWorks";
+import { CaseStudyEvidence } from "../../components/CaseStudyEvidence";
 import { projects } from "../../data/projects";
+import { caseStudies } from "../../data/case-studies";
 
 const projectData = projects.find((project) => project.title === "Wild Route")!;
 
@@ -334,6 +336,7 @@ export default function WildRoutePage() {
             </div>
           </motion.section>
 
+          <CaseStudyEvidence caseStudy={caseStudies["wild-route"]} />
           <OtherWorks currentProjectTitle="Wild Route" />
         </div>
       </main>

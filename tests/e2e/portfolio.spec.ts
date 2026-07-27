@@ -34,6 +34,17 @@ test("contact and resume routes are reachable", async ({ page }) => {
   expect(legacyPhoneEndpoint.status()).toBe(404);
 });
 
+test("featured work uses the shared evidence record", async ({ page }) => {
+  for (const [route, evidenceId] of [
+    ["/ai-finance", "aperture"],
+    ["/wild-route", "wild-route"],
+    ["/about", "professional-product-work"],
+  ]) {
+    await page.goto(route);
+    await expect(page.locator(`[data-case-study-evidence="${evidenceId}"]`)).toBeVisible();
+  }
+});
+
 test("public routes send baseline browser security headers", async ({ page }) => {
   const response = await page.request.get("/");
 

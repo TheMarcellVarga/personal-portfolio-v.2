@@ -87,7 +87,7 @@ Status: Complete (implemented and verified 2026-07-28)
 
 ## Phase 2: Case Study System
 
-Status: Not started
+Status: Complete (implemented and verified 2026-07-28)
 
 ### Work
 
@@ -105,6 +105,11 @@ Status: Not started
 - layouts preserve project-specific identity;
 - media has alt text and reserved dimensions;
 - limitations are visible.
+
+Implementation note: the shared evidence record is rendered within each
+project's existing route so Aperture, Wild Route, and confidential product work
+retain their own visual context while exposing role, user, decisions,
+verification, and limitations consistently.
 
 ## Phase 3: Visual and Interaction Rework
 

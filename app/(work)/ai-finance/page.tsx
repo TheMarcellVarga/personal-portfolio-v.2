@@ -21,6 +21,8 @@ import Header from "../../header";
 import { OtherWorks } from "../../components/OtherWorks";
 import { PageBackground } from "../../components/PageBackground";
 import { SectionLabel } from "../../components/SectionLabel";
+import { CaseStudyEvidence } from "../../components/CaseStudyEvidence";
+import { caseStudies } from "../../data/case-studies";
 import { projects } from "../../data/projects";
 
 const workspaceSurfaces = [
@@ -352,6 +354,7 @@ export default function AiFinancePage() {
             </motion.section>
           </div>
 
+          <CaseStudyEvidence caseStudy={caseStudies.aperture} />
           <OtherWorks currentProjectTitle="Aperture Financial Intelligence" />
         </div>
       </main>

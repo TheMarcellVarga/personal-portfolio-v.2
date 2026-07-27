@@ -8,6 +8,8 @@ import Header from "../header";
 import Footer from "../footer";
 import { PageBackground } from "../components/PageBackground";
 import { SectionLabel } from "../components/SectionLabel";
+import { CaseStudyEvidence } from "../components/CaseStudyEvidence";
+import { caseStudies } from "../data/case-studies";
 
 const fadeInUp = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -115,6 +117,8 @@ export default function About() {
               </div>
             </motion.div>
           </div>
+
+          <CaseStudyEvidence caseStudy={caseStudies["professional-product-work"]} />
 
           <motion.div 
             {...fadeInUp(0.6)}
