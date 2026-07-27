@@ -32,22 +32,20 @@ Within 60 seconds, a hiring manager should understand:
 ### Featured
 
 1. Aperture Financial Intelligence
-2. First Revenue Game
-3. Focusin
+2. Wild Route
+3. Professional product work (confidential)
 
 ### Supporting
 
-- ThreadScribe Studio
-- one of Shader Lab or Robot Remote Control
+- Earlier work is retained only as clearly labelled archive evidence.
 
 ### GitHub only
 
-- Endless Activity
-- selected learning or utility repositories
+- Endless Activity and selected learning or utility repositories
 
 ## Phase 0: Content and Analytics Baseline
 
-Status: Not started
+Status: Complete (audit recorded 2026-07-27)
 
 ### Work
 
@@ -67,14 +65,14 @@ Status: Not started
 
 ## Phase 1: Positioning and Information Architecture
 
-Status: Not started
+Status: Complete (implemented and verified 2026-07-28)
 
 ### Work
 
 - rewrite homepage around product-focused frontend engineering;
 - make Singapore context useful, not decorative;
 - summarize design background as an engineering advantage;
-- feature three case studies with distinct roles;
+- feature three current proof points with distinct roles;
 - move full project depth to dedicated routes;
 - provide a concise experience and capabilities section;
 - keep resume and contact easy to reach;
@@ -84,7 +82,7 @@ Status: Not started
 
 - role positioning is clear above the fold;
 - each featured project has a different proof purpose;
-- no archive project appears;
+- no archive project appears in the homepage selection;
 - navigation fits on one desktop line and works on mobile.
 
 ## Phase 2: Case Study System
@@ -211,4 +209,3 @@ Do not add more project cards to make the portfolio look larger.
 - deployed links and contact work;
 - external reviewers understand the target role;
 - ongoing maintenance is simple.
-

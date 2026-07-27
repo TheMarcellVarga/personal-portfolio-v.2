@@ -16,6 +16,10 @@ test("homepage presents the product-engineering story and current work", async (
   await expect(page.locator("[data-hero-badge-label]").last()).toBeVisible();
   await expect(page.locator('a[href="/ai-finance"]').first()).toBeVisible();
   await expect(page.locator('a[href="/wild-route"]').first()).toBeVisible();
+  await expect(page.locator("#work a")).toHaveCount(3);
+  await expect(page.locator('#work a[href="/askcody"]')).toHaveCount(0);
+  await expect(page.locator('#work a[href="/catchscan"]')).toHaveCount(0);
+  await expect(page.locator('#work a[href="/ess"]')).toHaveCount(0);
 });
 
 test("contact and resume routes are reachable", async ({ page }) => {
