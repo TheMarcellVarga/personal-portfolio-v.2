@@ -171,7 +171,7 @@ deployed release candidate and real-user or production-lab data.
 
 ## Phase 5: Deployment and Evidence
 
-Status: Not started
+Status: Prepared; external release validation and feedback pending
 
 ### Work
 
@@ -189,6 +189,11 @@ Status: Not started
 - contact route is verified;
 - feedback confirms the intended role positioning is understood;
 - no unpublished or private repository is linked.
+
+Implementation note: the release-evidence checklist records the exact pending
+deployment, device, contact, analytics, privacy, performance, and reviewer
+inputs. This stage cannot be completed from a local checkout because it
+requires a deployed candidate and independent external evidence.
 
 ## Phase 6: Ongoing Maintenance
 
