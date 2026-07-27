@@ -25,6 +25,19 @@ test("contact and resume routes are reachable", async ({ page }) => {
 
   await page.goto("/resume");
   await expect(page.getByRole("heading", { name: "Design-engineering work, on one page." })).toBeVisible();
+
+  const legacyPhoneEndpoint = await page.request.get("/api/contact/phone");
+  expect(legacyPhoneEndpoint.status()).toBe(404);
+});
+
+test("public routes send baseline browser security headers", async ({ page }) => {
+  const response = await page.request.get("/");
+
+  expect(response.status()).toBe(200);
+  expect(response.headers()["x-content-type-options"]).toBe("nosniff");
+  expect(response.headers()["x-frame-options"]).toBe("DENY");
+  expect(response.headers()["referrer-policy"]).toBe("strict-origin-when-cross-origin");
+  expect(response.headers()["permissions-policy"]).toContain("camera=()");
 });
 
 test("homepage has no serious or critical non-color automated accessibility violations", async ({ page }) => {
