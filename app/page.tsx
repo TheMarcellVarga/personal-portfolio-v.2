@@ -1277,7 +1277,7 @@ export default function Page() {
                   the interface.
                 </p>
               </div>
-              <div className="hidden items-center gap-3 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/40 md:flex">
+              <div className="hidden items-center gap-3 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/70 md:flex">
                 <span className="h-px w-8 bg-custom-blue/15" />
                 Hover to reveal
               </div>
@@ -1304,7 +1304,7 @@ export default function Page() {
                     className="grid grid-cols-[minmax(0,1fr)] gap-4 rounded-[1.5rem] border-b border-custom-blue/5 px-3 py-5 transition-colors duration-500 hover:bg-custom-blue/[0.01] sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:px-0 md:py-8"
                   >
                     <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:gap-8 md:col-span-1">
-                      <span className="font-label min-w-[2.5rem] text-[0.62rem] font-bold text-custom-blue/20">
+                      <span className="font-label min-w-[2.5rem] text-[0.62rem] font-bold text-custom-blue/70">
                         0{idx + 1}
                       </span>
                       <div className="flex flex-1 items-center justify-between gap-4">
@@ -1321,7 +1321,7 @@ export default function Page() {
                       {project.skills.slice(0, 4).map((skill) => (
                         <span
                           key={skill}
-                          className="text-[0.58rem] font-medium uppercase tracking-[0.15em] text-custom-blue/30"
+                          className="text-[0.58rem] font-medium uppercase tracking-[0.15em] text-custom-blue/70"
                         >
                           {skill}
                         </span>
@@ -1330,10 +1330,10 @@ export default function Page() {
 
                     <div className="flex items-center justify-between gap-6 md:justify-self-end">
                       <div className="flex items-center gap-3 text-left md:flex-col md:items-end md:gap-0.5 md:text-right">
-                        <span className="font-label text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/40">
+                        <span className="font-label text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/70">
                           {project.category}
                         </span>
-                        <span className="font-label text-[0.58rem] font-bold text-custom-blue/20">
+                        <span className="font-label text-[0.58rem] font-bold text-custom-blue/70">
                           {project.status}
                         </span>
                       </div>

@@ -50,7 +50,7 @@ test("public routes do not serve personal phone data", async ({ page }) => {
   await expect(resumeResponse.text()).resolves.not.toContain("Available on request");
 });
 
-test("homepage has no serious or critical non-color automated accessibility violations", async ({ page }) => {
+test("homepage has no serious or critical automated accessibility violations", async ({ page }) => {
   await prepareHomepage(page);
   await page.goto("/");
   await expect(page.locator(".home-intro-shell")).toHaveCount(0);
@@ -58,9 +58,6 @@ test("homepage has no serious or critical non-color automated accessibility viol
 
   const results = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa"])
-    // Muted-label contrast requires a dedicated visual pass; keep every other
-    // serious and critical WCAG rule enforced until that work is complete.
-    .disableRules(["color-contrast"])
     .analyze();
   const blockingViolations = results.violations.filter((violation) =>
     ["serious", "critical"].includes(violation.impact ?? ""),

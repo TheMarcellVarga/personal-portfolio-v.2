@@ -17,7 +17,7 @@ export function SectionLabel({
   return (
     <div
       className={`font-label mb-6 flex items-center gap-4 text-[0.68rem] font-medium uppercase tracking-[0.28em] ${
-        isLight ? "text-white/62" : "text-custom-blue/55"
+        isLight ? "text-white/80" : "text-custom-blue/70"
       }`}
     >
       <span>{index}</span>
