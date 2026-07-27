@@ -1,7 +1,10 @@
 import type { CaseStudyRecord } from "../data/case-studies";
+import { projectStatusByCaseStudyId } from "../data/projects";
 import { SectionLabel } from "./SectionLabel";
 
 export function CaseStudyEvidence({ caseStudy }: { caseStudy: CaseStudyRecord }) {
+  const status = projectStatusByCaseStudyId[caseStudy.id];
+
   return (
     <section
       data-case-study-evidence={caseStudy.id}
@@ -10,8 +13,11 @@ export function CaseStudyEvidence({ caseStudy }: { caseStudy: CaseStudyRecord })
       <SectionLabel index="Evidence" label="Case-study record" />
       <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr]">
         <div>
-          <p className="font-label text-[0.68rem] font-medium uppercase tracking-[0.18em] text-custom-blue/70">
-            {caseStudy.status}
+          <p
+            data-case-study-status={caseStudy.id}
+            className="font-label text-[0.68rem] font-medium uppercase tracking-[0.18em] text-custom-blue/70"
+          >
+            {status}
           </p>
           <h2 className="mt-4 font-display text-[clamp(2.1rem,5vw,3.7rem)] font-medium leading-[0.94] tracking-[-0.04em] text-custom-blue">
             What the work proves.

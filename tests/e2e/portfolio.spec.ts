@@ -35,13 +35,14 @@ test("contact and resume routes are reachable", async ({ page }) => {
 });
 
 test("featured work uses the shared evidence record", async ({ page }) => {
-  for (const [route, evidenceId] of [
-    ["/ai-finance", "aperture"],
-    ["/wild-route", "wild-route"],
-    ["/about", "professional-product-work"],
+  for (const [route, evidenceId, status] of [
+    ["/ai-finance", "aperture", "Fixture-backed"],
+    ["/wild-route", "wild-route", "Partial"],
+    ["/about", "professional-product-work", "Working"],
   ]) {
     await page.goto(route);
     await expect(page.locator(`[data-case-study-evidence="${evidenceId}"]`)).toBeVisible();
+    await expect(page.locator(`[data-case-study-status="${evidenceId}"]`)).toHaveText(status);
   }
 });
 

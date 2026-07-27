@@ -1,6 +1,7 @@
+import type { CaseStudyId } from "./projects";
+
 export type CaseStudyRecord = {
-  id: "aperture" | "wild-route" | "professional-product-work";
-  status: "Working" | "Fixture-backed" | "Partial";
+  id: CaseStudyId;
   role: string;
   problem: string;
   user: string;
@@ -12,7 +13,6 @@ export type CaseStudyRecord = {
 export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
   aperture: {
     id: "aperture",
-    status: "Fixture-backed",
     role: "Product concept, interaction design, and frontend representation",
     problem:
       "Make portfolio research, risk context, and goal scenarios easier to review without implying trade execution or personal advice.",
@@ -33,7 +33,6 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
   },
   "wild-route": {
     id: "wild-route",
-    status: "Partial",
     role: "Product direction, interaction design, and frontend implementation",
     problem:
       "Turn an open-ended travel brief into a smaller, explainable set of route options rather than an endless destination list.",
@@ -54,7 +53,6 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
   },
   "professional-product-work": {
     id: "professional-product-work",
-    status: "Working",
     role: "Product-focused frontend engineering in a confidential environment",
     problem:
       "Translate complex product requirements into clear, resilient interfaces while keeping implementation details confidential.",

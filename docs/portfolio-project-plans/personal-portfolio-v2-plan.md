@@ -197,7 +197,7 @@ requires a deployed candidate and independent external evidence.
 
 ## Phase 6: Ongoing Maintenance
 
-Status: Not started
+Status: Complete (maintenance process defined and status source unified 2026-07-28)
 
 ### Work
 
@@ -213,6 +213,11 @@ Status: Not started
 - content owner and review cadence are defined;
 - project status can be updated without code duplication;
 - stale claims have an explicit removal process.
+
+Implementation note: ownership, cadence, source-of-truth rules, and stale-link
+removal steps are documented in `portfolio-maintenance.md`. Case-study status
+is derived from the project model through `caseStudyId` rather than copied into
+each evidence record.
 
 ## Stop Conditions
 

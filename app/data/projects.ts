@@ -1,3 +1,8 @@
+export type CaseStudyId =
+  | "aperture"
+  | "wild-route"
+  | "professional-product-work";
+
 export type Project = {
   title: string;
   subTitle: string;
@@ -11,6 +16,7 @@ export type Project = {
   backgroundClass: string;
   status: "Working" | "Fixture-backed" | "Partial" | "Archived";
   portfolioPlacement: "featured" | "professional" | "archive";
+  caseStudyId?: CaseStudyId;
 };
 
 export const projects: Project[] = [
@@ -30,6 +36,7 @@ export const projects: Project[] = [
       "bg-[radial-gradient(circle_at_top_right,_rgba(103,232,249,0.3),_transparent_28%),linear-gradient(155deg,_#071112_0%,_#111820_52%,_#1f1a16_100%)]",
     status: "Fixture-backed",
     portfolioPlacement: "featured",
+    caseStudyId: "aperture",
   },
   {
     title: "Wild Route",
@@ -47,6 +54,7 @@ export const projects: Project[] = [
       "bg-[radial-gradient(circle_at_top_right,_rgba(214,255,64,0.32),_transparent_28%),linear-gradient(160deg,_#192018_0%,_#59634f_52%,_#d9ddd0_100%)]",
     status: "Partial",
     portfolioPlacement: "featured",
+    caseStudyId: "wild-route",
   },
   {
     title: "Professional product work",
@@ -64,6 +72,7 @@ export const projects: Project[] = [
       "bg-[radial-gradient(circle_at_top_right,_rgba(103,232,249,0.28),_transparent_28%),linear-gradient(155deg,_#071112_0%,_#111820_52%,_#1f1a16_100%)]",
     status: "Working",
     portfolioPlacement: "professional",
+    caseStudyId: "professional-product-work",
   },
   {
     title: "CatchScan",
@@ -117,3 +126,13 @@ export const projects: Project[] = [
     portfolioPlacement: "archive",
   },
 ];
+
+export const projectStatusByCaseStudyId = projects.reduce(
+  (statusByCaseStudyId, project) => {
+    if (project.caseStudyId) {
+      statusByCaseStudyId[project.caseStudyId] = project.status;
+    }
+    return statusByCaseStudyId;
+  },
+  {} as Record<CaseStudyId, Project["status"]>,
+);
