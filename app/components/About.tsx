@@ -7,7 +7,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 const textToType =
   "I turn product problems into clear interfaces and production-ready code, with enough structure that teams can keep building on it.";
@@ -30,7 +30,6 @@ const cards = [
 export default function About() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const [typedLength, setTypedLength] = useState(0);
-  const [hasMounted, setHasMounted] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -44,11 +43,7 @@ export default function About() {
 
   const copyOpacity = useTransform(smoothProgress, [0, 0.12, 0.86, 1], [0.15, 1, 1, 0.22]);
   const copyY = useTransform(smoothProgress, [0, 1], [26, -18]);
-  const enableScrollMotion = hasMounted;
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
+  const enableScrollMotion = true;
 
   useMotionValueEvent(smoothProgress, "change", (value) => {
     // Keep an intentional pause at the start and end of the sticky sequence.

@@ -14,7 +14,7 @@ type OtherWorksProps = {
 
 export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
   const otherProjects = projects.filter(
-    (p) => p.title !== currentProjectTitle && !p.inProgress
+    (p) => p.title !== currentProjectTitle && p.portfolioPlacement === "archive"
   );
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
@@ -70,7 +70,10 @@ export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
 
   return (
     <section ref={sectionRef} className="mt-24 sm:mt-32 lg:mt-40">
-      <SectionLabel index="More" label="Selected Work" />
+      <SectionLabel index="More" label="Earlier / Archived case studies" />
+      <p className="mt-4 max-w-2xl text-sm leading-6 text-custom-blue/65">
+        Earlier work remains available for context and does not represent my current technical scope.
+      </p>
       <div className="mt-8 grid gap-3.5 sm:mt-12 md:grid-cols-2">
         {otherProjects.map((project, index) => (
           <article
@@ -98,7 +101,7 @@ export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
                 <span className="font-label rounded-full bg-white/16 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.24)] backdrop-blur-xl">
                   {project.category}
                 </span>
-                <span className="font-label rounded-full bg-white/16 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.24)] backdrop-blur-xl">{project.date}</span>
+                <span className="font-label rounded-full bg-white/16 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.24)] backdrop-blur-xl">{project.status}</span>
               </div>
 
               <div className="relative z-10 mt-auto transform transition-transform duration-700 group-hover:-translate-y-2">

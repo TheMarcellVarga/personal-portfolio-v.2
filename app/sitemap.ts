@@ -12,7 +12,7 @@ const staticRoutes = [
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date(lastUpdated);
   const projectRoutes = projects
-    .filter((project) => project.link.startsWith("/") && !project.inProgress)
+    .filter((project) => project.link.startsWith("/") && project.portfolioPlacement === "featured")
     .map((project) => project.link);
 
   return [...staticRoutes, ...projectRoutes].map((route) => ({

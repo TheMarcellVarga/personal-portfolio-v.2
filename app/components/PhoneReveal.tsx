@@ -2,6 +2,7 @@
 
 import {
   forwardRef,
+  useCallback,
   useImperativeHandle,
   useState,
 } from "react";
@@ -34,7 +35,7 @@ export const PhoneReveal = forwardRef<PhoneRevealHandle, PhoneRevealProps>(funct
 
   const isVisible = manualVisible || printVisible;
 
-  async function loadPhone() {
+  const loadPhone = useCallback(async () => {
     if (phone) return phone;
 
     const response = await fetch("/api/contact/phone", {
@@ -54,7 +55,7 @@ export const PhoneReveal = forwardRef<PhoneRevealHandle, PhoneRevealProps>(funct
 
     setPhone(data.phone);
     return data.phone;
-  }
+  }, [phone]);
 
   async function revealPhone() {
     if (isVisible || isLoading) return;
@@ -72,7 +73,7 @@ export const PhoneReveal = forwardRef<PhoneRevealHandle, PhoneRevealProps>(funct
     }
   }
 
-  async function revealForPrint() {
+  const revealForPrint = useCallback(async () => {
     if (printVisible) {
       await waitForPaint();
       return;
@@ -90,11 +91,11 @@ export const PhoneReveal = forwardRef<PhoneRevealHandle, PhoneRevealProps>(funct
     } finally {
       setIsLoading(false);
     }
-  }
+  }, [loadPhone, printVisible]);
 
-  function hidePrintReveal() {
+  const hidePrintReveal = useCallback(() => {
     setPrintVisible(false);
-  }
+  }, []);
 
   useImperativeHandle(
     ref,
@@ -102,7 +103,7 @@ export const PhoneReveal = forwardRef<PhoneRevealHandle, PhoneRevealProps>(funct
       revealForPrint,
       hidePrintReveal,
     }),
-    [printVisible, phone],
+    [revealForPrint, hidePrintReveal],
   );
 
   if (variant === "card") {

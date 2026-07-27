@@ -2,10 +2,8 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  ArrowUpRight,
   BarChart3,
   BookOpenCheck,
   Calendar,
@@ -124,20 +122,28 @@ export default function AiFinancePage() {
                 Aperture Financial Intelligence
               </h1>
               <p className="max-w-3xl text-[1.05rem] leading-7 text-custom-blue/65">
-                A portfolio-aware fintech workspace for holdings review, cited
-                AI briefs, goal scenarios, risk explanation, and billing-aware
-                research flows without trade execution or personalized advice.
+                A fixture-backed finance-product prototype for holdings review,
+                research briefs, goal scenarios, and risk explanation without trade
+                execution or personalized advice.
               </p>
             </motion.div>
 
             <motion.div {...fadeInUp(0.1)} className="flex flex-col gap-6 lg:pb-2">
-              <div className="grid grid-cols-2 gap-3 sm:gap-8">
+              <div className="grid grid-cols-3 gap-3 sm:gap-8">
                 <div className="space-y-1">
                   <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">
                     <Calendar className="h-3 w-3" /> Date
                   </p>
                   <p className="text-sm font-semibold text-custom-blue">
                     {projectData.date}
+                  </p>
+                </div>
+                <div className="space-y-1">
+                  <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">
+                    <Tag className="h-3 w-3" /> Implementation status
+                  </p>
+                  <p className="text-sm font-semibold text-custom-blue">
+                    {projectData.status}
                   </p>
                 </div>
                 <div className="space-y-1">
@@ -164,15 +170,6 @@ export default function AiFinancePage() {
                   ))}
                 </div>
               </div>
-              <Link
-                href="https://github.com/TheMarcellVarga/ai-finance"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex w-fit items-center gap-2 rounded-full bg-custom-blue px-6 py-3 text-sm font-medium text-white shadow-[0_18px_38px_rgba(17,27,40,0.16)] transition hover:-translate-y-0.5 hover:bg-[#22344a]"
-              >
-                View source
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
             </motion.div>
           </header>
 

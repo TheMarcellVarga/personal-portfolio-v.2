@@ -2,14 +2,11 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  ArrowUpRight,
   Calendar,
   CreditCard,
   Database,
-  Github,
   Route,
   Share2,
   Sparkles,
@@ -118,28 +115,24 @@ export default function WildRoutePage() {
               <p className="max-w-2xl text-[1.05rem] leading-7 text-custom-blue/65">
                 {projectData.description}
               </p>
-              <div className="flex flex-wrap gap-3 pt-2">
-                <Link
-                  href="https://github.com/TheMarcellVarga/ai-travel-planner"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-custom-blue px-6 py-3 text-sm font-medium text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#263648]"
-                >
-                  <Github className="h-4 w-4" />
-                  View repository
-                  <ArrowUpRight className="h-4 w-4" />
-                </Link>
-              </div>
             </motion.div>
 
             <motion.div {...fadeInUp(0.1)} className="space-y-6 lg:pb-2">
-              <div className="grid grid-cols-2 gap-3 sm:gap-8">
+              <div className="grid grid-cols-3 gap-3 sm:gap-8">
                 <div className="space-y-1">
                   <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">
                     <Calendar className="h-3 w-3" /> Date
                   </p>
                   <p className="text-sm font-semibold text-custom-blue">
                     {projectData.date}
+                  </p>
+                </div>
+                <div className="space-y-1">
+                  <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">
+                    <Tag className="h-3 w-3" /> Implementation status
+                  </p>
+                  <p className="text-sm font-semibold text-custom-blue">
+                    {projectData.status}
                   </p>
                 </div>
                 <div className="space-y-1">
@@ -338,15 +331,6 @@ export default function WildRoutePage() {
                 interface carefully, and carrying the system through save, share,
                 handoff, account, and billing flows.
               </p>
-              <Link
-                href="https://github.com/TheMarcellVarga/ai-travel-planner"
-                target="_blank"
-                rel="noreferrer"
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#d7ff40] px-6 py-3 text-sm font-medium text-[#171d16] transition duration-300 hover:-translate-y-0.5 hover:bg-white"
-              >
-                Explore the code
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
             </div>
           </motion.section>
 

@@ -1,154 +1,71 @@
-# Personal Portfolio
+# Marcell Varga Portfolio
 
-This is my personal portfolio. It collects selected projects, a short background, and a direct way to get in touch.
+Professional portfolio for Marcell Varga, a Singapore-based product-focused frontend engineer working across React, TypeScript, UX, design systems, and AI-aware product workflows.
 
-## Table of Contents
+## Purpose
 
-- [About](#about)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Projects](#projects)
-- [Contact](#contact)
-- [Development](#development)
-- [Deployment](#deployment)
-- [License](#license)
+The site presents a focused, evidence-led view of product work rather than a complete repository history. It separates current work, confidential professional experience, fixture-backed prototypes, and archived case studies.
 
-## About
+## Information architecture
 
-This portfolio reflects the way I work across UX, frontend, and backend: clear interfaces, practical details, and enough structure to ship.
+- `/` — portfolio overview and selected work.
+- `/ai-finance` — Aperture, a fixture-backed finance prototype.
+- `/wild-route` — Wild Route, a partial travel-planning project.
+- `/about` — professional experience and working approach.
+- `/askcody`, `/catchscan`, and `/ess` — archived case studies.
+- `/resume` and `/resume/ats` — human-readable and ATS-oriented resumes.
+- `/contact` — contact details.
 
-## Features
+## Project-status rules
 
-- Responsive design for seamless viewing on any device
-- Interactive animations and transitions using Locomotive Scroll
-- Dynamic project showcase
-- Contact section for easy communication
-- Smooth scrolling and navigation
-- Dark/Light mode compatibility
-- Performance optimized
-- SEO friendly
+Projects are intentionally labelled to avoid overstating the available evidence:
 
-## Technologies Used
+- **Working** — current professional or active work.
+- **Fixture-backed** — a prototype powered by deterministic local fixture data.
+- **Partial** — an incomplete project whose scope is shown accurately.
+- **Archived** — earlier work retained for historical context.
 
-### Core
-- **Frontend Framework:** React, Next.js 13 (App Router)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
+## Stack
 
-### Libraries & Tools
-- **Animation:** Locomotive Scroll
-- **Icons:** FontAwesome, Heroicons, React Icons
-- **State Management:** React Hooks
-- **Version Control:** Git
-- **Deployment:** Vercel
+- Next.js 16 and React 19
+- TypeScript and Tailwind CSS 4
+- Framer Motion, GSAP, and Lenis
+- Vercel deployment and optional PostHog analytics
 
-## Installation
+## Local development
 
-To run this project locally, follow these steps:
+Requires Node.js 20 or later.
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/TheMarcellVarga/personal-portfolio-v.2.git
-   ```
+```bash
+npm install
+npm run dev
+```
 
-2. Navigate to the project directory:
-   ```bash
-   cd personal-portfolio-v.2
-   ```
+The development server runs on port `3100`.
 
-3. Install the dependencies:
-   ```bash
-   npm install
-   # or
-   yarn install
-   # or
-   pnpm install
-   ```
+## Verification
 
-4. Start the development server:
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   # or
-   pnpm dev
-   ```
+```bash
+npm run lint
+npm run build
+```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser to view the portfolio.
+Browser, accessibility, and CI coverage are planned work. Performance claims should only be added after measurement.
 
-## Usage
+## Accessibility and performance approach
 
-The portfolio is organized into several main sections:
+The portfolio uses semantic structure, reduced-motion support, and explicit image dimensions. Performance is treated as a measurable outcome, not a marketing claim.
 
-- **Home:** Introduction and greeting with dynamic time-based welcome message
-- **About:** Detailed information about my skills and experience
-- **Projects:** Showcase of my work with detailed descriptions
-- **Contact:** Multiple ways to get in touch
+## Privacy and analytics
 
-## Projects
-
-My portfolio showcases selected projects across product interfaces, design systems, and frontend delivery.
-
-### Areas of Focus
-- Enterprise software and Microsoft Teams integrations
-- SaaS platforms with complex user interfaces
-- Business-focused web applications
-- SEO-optimized informative websites
-
-### Technical Highlights
-- Modern frontend frameworks (React, Next.js)
-- TypeScript and JavaScript
-- Responsive design with Tailwind CSS
-- UI/UX best practices and design systems
-
-For detailed information about specific projects and their implementations, please visit my [live portfolio](https://marcellvarga.com). The portfolio is updated as new work lands.
-
-## Contact
-
-If you want to talk about a project, share feedback, or just say hi, reach out:
-
-- **Email:** [themarcellvarga@gmail.com](mailto:themarcellvarga@gmail.com)
-- **LinkedIn:** [Marcell Varga](https://www.linkedin.com/in/marcellvarga/)
-- **Resume:** [View resume](https://marcellvarga.com/resume)
-
-## Development
-
-This project uses several Next.js features and optimizations:
-
-- **App Router:** Utilizing the latest Next.js 13 routing system
-- **Font Optimization:** Using `next/font` for optimal loading of custom fonts
-- **Image Optimization:** Leveraging `next/image` for responsive images
-- **Client-side Navigation:** Smooth transitions between pages
-- **TypeScript:** Full type safety throughout the application
-
-### Learn More
-
-To learn more about the technologies used in this project:
-
-- [Next.js Documentation](https://nextjs.org/docs)
-- [React Documentation](https://reactjs.org/)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
+The site exposes contact and social links, with an optional click-to-reveal phone interaction. It is not scrape-proof; private environment values and credentials must never be committed. PostHog is optional and should be configured only with the appropriate consent and privacy policy.
 
 ## Deployment
 
-This portfolio is deployed on Vercel. The production version can be viewed at [my live portfolio](https://marcellvarga.com).
+The canonical production domain is `marcellvarga.com`. Keep the deployment configuration and canonical metadata aligned when making domain changes.
 
-To deploy your own version:
+## Current limitations
 
-1. Fork this repository
-2. Create a new project on [Vercel](https://vercel.com)
-3. Connect your forked repository
-4. Deploy!
-
-For more details, check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment).
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
-
-Created with ❤️ by [Marcell Varga](https://github.com/TheMarcellVarga)
+- Source-code links are withheld until their public repositories are verified.
+- Professional AXON work is represented without confidential screenshots or implementation details.
+- Archived case studies do not represent the current technical scope.

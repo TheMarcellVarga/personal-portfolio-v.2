@@ -1,13 +1,13 @@
 export const siteUrl = "https://marcellvarga.com";
 export const siteName = "Marcell Varga Portfolio";
 export const personName = "Marcell Varga";
-export const roleTitle = "UX & Frontend Engineer";
+export const roleTitle = "Product-Focused Frontend Engineer";
 export const location = "Singapore";
 export const profileImage = "/images/cinematic-profile-pic-sg.png";
 export const shareImage = "/images/cinematic-profile-pic-sg.png";
 
 export const siteDescription =
-  "Official portfolio of Marcell Varga, a Singapore-based UX and frontend engineer building AI-aware product interfaces, design systems, React and Next.js products.";
+  "Official portfolio of Marcell Varga, a Singapore-based product-focused frontend engineer building clear React and TypeScript product interfaces.";
 
 export const lastUpdated = "2026-07-08";
 export const alternatePersonNames = [
@@ -27,36 +27,22 @@ export const featuredWorks = [
     name: "Aperture Financial Intelligence",
     url: `${siteUrl}/ai-finance`,
     description:
-      "Fintech research workspace with portfolio review, cited AI briefs, goal scenarios, risk explanation, billing, and explicit advice boundaries.",
+      "Fixture-backed finance product prototype for portfolio review, research briefs, goal scenarios, and clear advice boundaries.",
     image: `${siteUrl}/images/ai-finance/aperture-home.jpg`,
   },
   {
     name: "Wild Route",
     url: `${siteUrl}/wild-route`,
     description:
-      "Prompt-first adventure travel planner with ranked route options, deterministic reasoning, save/share flows, and external booking handoffs.",
+      "Partial prompt-first adventure travel planner with ranked route options and deterministic reasoning.",
     image: `${siteUrl}/images/wild-route/home.png`,
   },
   {
-    name: "CatchScan",
-    url: `${siteUrl}/catchscan`,
+    name: "Professional product work",
+    url: `${siteUrl}/about`,
     description:
-      "Copyright protection SaaS dashboard concept focused on product UX, workflow clarity, and reusable interface patterns.",
-    image: `${siteUrl}/images/catchscan-index.png`,
-  },
-  {
-    name: "AskCody",
-    url: `${siteUrl}/askcody`,
-    description:
-      "Hybrid office management experience in Microsoft Teams covering desk booking, room availability, and enterprise UX.",
-    image: `${siteUrl}/images/askcody-index.png`,
-  },
-  {
-    name: "European Study Solution",
-    url: `${siteUrl}/ess`,
-    description:
-      "Content-rich student agency website focused on information architecture, responsive design, trust, and SEO.",
-    image: `${siteUrl}/images/ess-index.png`,
+      "Confidential professional frontend work for complex network products, described without implementation details.",
+    image: `${siteUrl}${profileImage}`,
   },
 ] as const;
 
@@ -92,7 +78,7 @@ export const structuredData = {
       knowsAbout: [
         "UX design",
         "Frontend engineering",
-        "Product design",
+        "Product engineering",
         "Design systems",
         "React",
         "Next.js",
@@ -102,7 +88,7 @@ export const structuredData = {
       sameAs: personSameAs,
       mainEntityOfPage: `${siteUrl}/`,
       disambiguatingDescription:
-        "Marcell Varga, also searchable as Varga Marcell in Hungarian name order, at marcellvarga.com is a Singapore-based UX and frontend engineer focused on product interfaces, design systems, React, Next.js, and AI-aware workflows.",
+        "Marcell Varga, also searchable as Varga Marcell in Hungarian name order, is a Singapore-based product-focused frontend engineer working on clear product interfaces with React and TypeScript.",
     },
     {
       "@type": "WebSite",
@@ -124,7 +110,7 @@ export const structuredData = {
       "@type": "ProfilePage",
       "@id": `${siteUrl}/#profile-page`,
       url: siteUrl,
-      name: "Marcell Varga - UX & Frontend Engineer in Singapore",
+      name: "Marcell Varga - Product-Focused Frontend Engineer in Singapore",
       description: siteDescription,
       dateModified: lastUpdated,
       mainEntity: {
@@ -139,7 +125,7 @@ export const structuredData = {
       "@type": "WebPage",
       "@id": `${siteUrl}/#homepage`,
       url: siteUrl,
-      name: "Marcell Varga | UX & Frontend Engineer in Singapore",
+      name: "Marcell Varga | Product-Focused Frontend Engineer in Singapore",
       description: siteDescription,
       dateModified: lastUpdated,
       isPartOf: {

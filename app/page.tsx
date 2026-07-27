@@ -52,44 +52,43 @@ const PRINCIPLES_REVEAL_END = 0.74;
 const processCards = [
   {
     number: "01",
-    title: "Discover",
-    body: "I start by mapping user needs, business goals, constraints, and the moments where the current experience breaks down.",
+    title: "Product delivery",
+    body: "Translate complex product requirements into usable interfaces, from the first decision through production detail.",
     icon: Blocks,
     colSpan: "lg:col-span-2",
   },
   {
     number: "02",
-    title: "Structure",
-    body: "From there, I define flows, information hierarchy, and the decisions the interface needs to make clear.",
+    title: "International context",
+    body: "Build with product teams across markets, balancing user needs, engineering constraints, and a clear shared direction.",
     icon: Sparkles,
     colSpan: "lg:col-span-1",
   },
   {
     number: "03",
-    title: "Prototype",
-    body: "I test the interaction model early, using focused prototypes to expose weak assumptions before the work gets expensive.",
+    title: "Core stack",
+    body: "React, TypeScript, design systems, and pragmatic frontend engineering for durable product interfaces.",
     icon: Code2,
     colSpan: "lg:col-span-1",
   },
   {
     number: "04",
-    title: "Deliver",
-    body: "I carry the strongest solution into implementation, tightening responsiveness, accessibility, motion, and product detail as it becomes real.",
+    title: "Ownership",
+    body: "Carry the work through implementation, refining responsiveness, accessibility, motion, and product detail as it becomes real.",
     icon: Rocket,
     colSpan: "lg:col-span-2",
   },
 ];
 
 const processTags = [
-  "research",
-  "constraints",
-  "flows",
-  "content structure",
-  "prototyping",
-  "validation",
-  "implementation",
-  "iteration",
-  "handoff",
+  "AXON Networks",
+  "product delivery",
+  "React",
+  "TypeScript",
+  "design systems",
+  "UX engineering",
+  "accessibility",
+  "responsive UI",
 ];
 
 function HeroDynamicBackdrop({
@@ -780,7 +779,7 @@ export default function Page() {
   }, [capabilitiesInView, shouldReduceMotion]);
 
   const featuredProjects = useMemo(
-    () => projects.filter((project) => !project.inProgress),
+    () => projects.filter((project) => project.portfolioPlacement !== "archive"),
     [],
   );
   const introIsVisible = introStage !== "done";
@@ -918,7 +917,7 @@ export default function Page() {
                 >
                   <div data-hero-badge className="home-intro-fold inline-flex overflow-hidden rounded-full bg-white/10 px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl [transform-origin:left_center]">
                     <span data-hero-badge-label className="font-label block text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74">
-                      UX & Frontend Engineer
+                      Product-focused frontend engineer
                     </span>
                   </div>
                 </motion.div>
@@ -942,8 +941,8 @@ export default function Page() {
                     />
                     <div data-hero-copy>
                       <p className="max-w-[30rem] text-[0.95rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
-                        I design and build product interfaces that stay calm, sharp,
-                        and useful in practice.
+                        Singapore-based frontend engineer using React and TypeScript
+                        to turn complex product requirements into clear, resilient interfaces.
                       </p>
                     </div>
                   </div>
@@ -1006,7 +1005,7 @@ export default function Page() {
                 >
                   <div data-hero-badge className="home-intro-fold inline-flex overflow-hidden rounded-full bg-white/10 px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl [transform-origin:left_center]">
                     <span data-hero-badge-label className="font-label block text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74">
-                      UX & Frontend Engineer
+                      Product-focused frontend engineer
                     </span>
                   </div>
                 </motion.div>
@@ -1030,8 +1029,8 @@ export default function Page() {
                     />
                     <div data-hero-copy>
                       <p className="max-w-[30rem] text-[1.02rem] leading-7 text-white/72 sm:text-[1.08rem] sm:leading-8">
-                        I design and build product interfaces that stay calm, sharp,
-                        and useful in practice.
+                        Singapore-based frontend engineer using React and TypeScript
+                        to turn complex product requirements into clear, resilient interfaces.
                       </p>
                     </div>
                   </div>
@@ -1197,19 +1196,19 @@ export default function Page() {
           >
             <div className="mb-8 grid gap-4 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-end">
               <div className="max-w-2xl">
-                <SectionLabel index="02" label="Process" />
+                <SectionLabel index="02" label="Proof" />
                 <SplitTextReveal
                   as="h2"
-                  text="How It Takes Shape."
+                  text="Product thinking, backed by delivery."
                   animate={!shouldReduceMotion}
                   triggerOnView
                   className="mt-6 font-display text-[clamp(2.2rem,12vw,5.4rem)] leading-[0.95] tracking-[-0.04em] text-custom-blue sm:mt-8 sm:leading-[0.9]"
                 />
               </div>
               <p className="max-w-xl text-[0.9rem] leading-7 text-custom-blue/66 lg:justify-self-end">
-                My work moves through a consistent sequence: discover the real
-                problem, structure the experience, prototype the interaction,
-                and deliver the version people can actually use.
+                Current work is grounded in product delivery: clarifying complex
+                requirements, building resilient React interfaces, and carrying the
+                details through implementation.
               </p>
             </div>
 
@@ -1335,7 +1334,7 @@ export default function Page() {
                           {project.category}
                         </span>
                         <span className="font-label text-[0.58rem] font-bold text-custom-blue/20">
-                          {project.date}
+                          {project.status}
                         </span>
                       </div>
                     </div>
