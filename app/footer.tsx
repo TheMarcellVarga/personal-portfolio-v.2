@@ -34,7 +34,7 @@ export default function Footer({ isHover = false }: FooterProps) {
             © {new Date().getFullYear()} Marcell Varga
           </p>
           <span className="text-[0.68rem] text-custom-blue/48 sm:order-2 sm:ml-auto sm:text-xs">
-            Singapore: {currentTime}
+            🇸🇬 Local Time: {currentTime}
           </span>
         </div>
         <div className="sm:order-3">
