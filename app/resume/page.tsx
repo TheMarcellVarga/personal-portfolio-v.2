@@ -136,7 +136,7 @@ export default function ResumePage() {
             className="mb-10 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end print:hidden"
             >
             <div className="max-w-3xl">
-              <p className="font-label text-[0.68rem] font-medium uppercase tracking-[0.28em] text-custom-blue/45">
+              <p className="font-label text-[0.68rem] font-medium uppercase tracking-[0.28em] text-custom-blue/70">
                 Resume / 2026
               </p>
               <h1 className="mt-3 font-display text-[clamp(2.3rem,5vw,4.5rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-custom-blue">

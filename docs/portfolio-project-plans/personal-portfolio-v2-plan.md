@@ -141,7 +141,7 @@ handling hydrates without markup mismatches.
 
 ## Phase 4: Accessibility, Performance, and SEO
 
-Status: Not started
+Status: Local implementation complete; deployed Web Vitals pending release candidate
 
 ### Work
 
@@ -162,6 +162,12 @@ Status: Not started
 - Core Web Vitals meet documented targets on the deployed site;
 - metadata and social previews are current;
 - no broken internal or project links remain.
+
+Implementation note: canonical metadata, social metadata, JSON-LD, sitemap,
+responsive `next/image` media, print-friendly resume behavior, browser security
+headers, keyboard navigation, internal-link checks, and Axe checks are covered
+locally. LCP, INP, CLS, bundle and route-payload measurement still require a
+deployed release candidate and real-user or production-lab data.
 
 ## Phase 5: Deployment and Evidence
 

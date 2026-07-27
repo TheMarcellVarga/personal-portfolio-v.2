@@ -133,7 +133,7 @@ export default function AiFinancePage() {
             <motion.div {...fadeInUp(0.1)} className="flex flex-col gap-6 lg:pb-2">
               <div className="grid grid-cols-3 gap-3 sm:gap-8">
                 <div className="space-y-1">
-                  <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">
+                  <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/70">
                     <Calendar className="h-3 w-3" /> Date
                   </p>
                   <p className="text-sm font-semibold text-custom-blue">
@@ -141,7 +141,7 @@ export default function AiFinancePage() {
                   </p>
                 </div>
                 <div className="space-y-1">
-                  <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">
+                  <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/70">
                     <Tag className="h-3 w-3" /> Implementation status
                   </p>
                   <p className="text-sm font-semibold text-custom-blue">
@@ -149,7 +149,7 @@ export default function AiFinancePage() {
                   </p>
                 </div>
                 <div className="space-y-1">
-                  <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">
+                  <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/70">
                     <Tag className="h-3 w-3" /> Category
                   </p>
                   <p className="text-sm font-semibold text-custom-blue">
@@ -158,7 +158,7 @@ export default function AiFinancePage() {
                 </div>
               </div>
               <div className="space-y-3">
-                <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">
+                <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/70">
                   Key skills
                 </p>
                 <div className="flex flex-wrap gap-2">

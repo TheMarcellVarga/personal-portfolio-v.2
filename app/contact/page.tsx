@@ -37,7 +37,7 @@ export default function Contact() {
           <motion.div {...fadeInUp(0)}>
             <Link
               href="/"
-              className="group mb-12 inline-flex items-center gap-2 text-sm font-semibold text-custom-blue/60 transition-colors hover:text-custom-blue"
+              className="group mb-12 inline-flex items-center gap-2 text-sm font-semibold text-custom-blue/85 transition-colors hover:text-custom-blue"
             >
               <ArrowLeft className="h-4 w-4 shrink-0 transition-transform group-hover:-translate-x-1" />
               Back to home
@@ -71,14 +71,14 @@ export default function Contact() {
               <div className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-[0.95rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)] transition-transform duration-500 group-hover:scale-105">
                 <Mail className="h-4.5 w-4.5" />
               </div>
-              <p className="mb-2 text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/35">Direct email</p>
+              <p className="mb-2 text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/70">Direct email</p>
               <a
                 href="mailto:themarcellvarga@gmail.com"
                 className="break-words font-display text-[1.18rem] font-medium leading-[1.06] tracking-[-0.02em] text-custom-blue transition-colors hover:text-custom-blue/70 sm:text-[1.38rem]"
               >
                 themarcellvarga@gmail.com
               </a>
-              <div className="mt-5 flex items-center gap-2 text-[0.56rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60">
+              <div className="mt-5 flex items-center gap-2 text-[0.56rem] font-medium uppercase tracking-[0.15em] text-custom-blue/70">
                 <Send className="h-3 w-3" />
                 Usually replies within 24h
               </div>

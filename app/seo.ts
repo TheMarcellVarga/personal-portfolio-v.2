@@ -9,7 +9,7 @@ export const shareImage = "/images/cinematic-profile-pic-sg.png";
 export const siteDescription =
   "Official portfolio of Marcell Varga, a Singapore-based product-focused frontend engineer building clear React and TypeScript product interfaces.";
 
-export const lastUpdated = "2026-07-08";
+export const lastUpdated = "2026-07-28";
 export const alternatePersonNames = [
   "Varga Marcell",
   "TheMarcellVarga",

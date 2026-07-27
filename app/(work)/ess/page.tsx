@@ -320,20 +320,20 @@ export default function ESSPage() {
             >
               <div className="grid grid-cols-2 gap-3 sm:gap-8">
                 <div className="space-y-1">
-                  <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">
+                  <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/70">
                     <Calendar className="h-3 w-3" /> Date
                   </p>
                   <p className="text-sm font-semibold text-custom-blue">{projectData.date}</p>
                 </div>
                 <div className="space-y-1">
-                  <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">
+                  <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/70">
                     <Tag className="h-3 w-3" /> Category
                   </p>
                   <p className="text-sm font-semibold text-custom-blue">{projectData.category}</p>
                 </div>
               </div>
               <div className="space-y-3">
-                <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/45">Key skills</p>
+                <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/70">Key skills</p>
                 <div className="flex flex-wrap gap-2">
                   {projectData.skills.map((skill) => (
                     <span key={skill} className="font-label rounded-full bg-white/62 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]">

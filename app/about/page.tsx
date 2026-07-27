@@ -39,7 +39,7 @@ export default function About() {
           <motion.div {...fadeInUp(0)}>
             <Link
               href="/"
-              className="group mb-12 inline-flex items-center gap-2 text-sm font-semibold text-custom-blue/60 transition-colors hover:text-custom-blue"
+              className="group mb-12 inline-flex items-center gap-2 text-sm font-semibold text-custom-blue/85 transition-colors hover:text-custom-blue"
             >
               <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
               Back to home

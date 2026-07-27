@@ -74,6 +74,21 @@ test.describe("mobile and motion fallbacks", () => {
 
     expect(transitionDuration).toBeLessThanOrEqual(0.001);
   });
+
+  test("mobile navigation remains usable with a keyboard", async ({ page }) => {
+    await page.goto("/about");
+
+    const menuButton = page.getByRole("button", { name: "Open navigation" });
+    await menuButton.focus();
+    await expect(menuButton).toBeFocused();
+    await page.keyboard.press("Enter");
+
+    const resumeLink = page.getByRole("link", { name: "Open Resume" });
+    await expect(resumeLink).toBeVisible();
+    await resumeLink.focus();
+    await page.keyboard.press("Enter");
+    await expect(page).toHaveURL(/\/resume$/);
+  });
 });
 
 test("public routes send baseline browser security headers", async ({ page }) => {
@@ -96,6 +111,44 @@ test("public routes do not serve personal phone data", async ({ page }) => {
   await expect(resumeResponse.text()).resolves.not.toContain("Available on request");
 });
 
+test("selected work exposes canonical metadata and is listed in the sitemap", async ({ page }) => {
+  const selectedRoutes = [
+    ["/ai-finance", /Aperture Financial Intelligence Case Study/i],
+    ["/wild-route", /Wild Route Case Study/i],
+    ["/about", /About Marcell Varga/i],
+  ] as const;
+
+  for (const [route, title] of selectedRoutes) {
+    await page.goto(route);
+    await expect(page).toHaveTitle(title);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      "href",
+      `https://marcellvarga.com${route}`,
+    );
+  }
+
+  const sitemap = await page.request.get("/sitemap.xml");
+  expect(sitemap.status()).toBe(200);
+  const sitemapText = await sitemap.text();
+  for (const [route] of selectedRoutes) {
+    expect(sitemapText).toContain(`https://marcellvarga.com${route}`);
+  }
+});
+
+test("internal portfolio links resolve", async ({ page }) => {
+  await prepareHomepage(page);
+  await page.goto("/");
+
+  const routes = await page.locator('a[href^="/"]').evaluateAll((links) =>
+    [...new Set(links.map((link) => new URL(link.href).pathname))],
+  );
+
+  for (const route of routes) {
+    const response = await page.request.get(route);
+    expect(response.status(), `${route} should resolve`).toBeLessThan(400);
+  }
+});
+
 test("homepage has no serious or critical automated accessibility violations", async ({ page }) => {
   await prepareHomepage(page);
   await page.goto("/");
@@ -110,4 +163,33 @@ test("homepage has no serious or critical automated accessibility violations", a
   );
 
   expect(blockingViolations).toEqual([]);
+});
+
+test("public routes have no serious or critical automated accessibility violations", async ({ page }) => {
+  for (const route of [
+    "/",
+    "/ai-finance",
+    "/wild-route",
+    "/about",
+    "/contact",
+    "/resume",
+    "/askcody",
+    "/catchscan",
+    "/ess",
+  ]) {
+    if (route === "/") {
+      await prepareHomepage(page);
+    }
+    await page.goto(route);
+    await page.waitForTimeout(1_000);
+
+    const results = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa"])
+      .analyze();
+    const blockingViolations = results.violations.filter((violation) =>
+      ["serious", "critical"].includes(violation.impact ?? ""),
+    );
+
+    expect(blockingViolations, `${route} accessibility violations`).toEqual([]);
+  }
 });
