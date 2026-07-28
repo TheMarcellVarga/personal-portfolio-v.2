@@ -89,7 +89,7 @@ export const projects: Project[] = [
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_left,_rgba(99,174,255,0.35),_transparent_30%),linear-gradient(160deg,_#d9e8ff_0%,_#cfe0ef_50%,_#bad4e4_100%)]",
     status: "Archived",
-    portfolioPlacement: "archive",
+    portfolioPlacement: "featured",
   },
   {
     title: "AskCody",
@@ -106,7 +106,7 @@ export const projects: Project[] = [
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(76,214,255,0.28),_transparent_26%),linear-gradient(160deg,_#d8f5ff_0%,_#dce8ff_52%,_#c8dde8_100%)]",
     status: "Archived",
-    portfolioPlacement: "archive",
+    portfolioPlacement: "featured",
   },
   {
     title: "European Study Solution",
@@ -123,7 +123,7 @@ export const projects: Project[] = [
     backgroundClass:
       "bg-[radial-gradient(circle_at_20%_20%,_rgba(120,197,255,0.26),_transparent_28%),linear-gradient(160deg,_#ebf4ff_0%,_#dbe7f2_50%,_#cedee8_100%)]",
     status: "Archived",
-    portfolioPlacement: "archive",
+    portfolioPlacement: "featured",
   },
 ];
 

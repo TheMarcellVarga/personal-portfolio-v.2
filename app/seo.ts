@@ -38,11 +38,25 @@ export const featuredWorks = [
     image: `${siteUrl}/images/wild-route/home.png`,
   },
   {
-    name: "Professional product work",
-    url: `${siteUrl}/about`,
+    name: "CatchScan",
+    url: `${siteUrl}/catchscan`,
     description:
-      "Confidential professional frontend work for complex network products, described without implementation details.",
-    image: `${siteUrl}${profileImage}`,
+      "Copyright protection SaaS dashboard concept focused on clear ownership-monitoring workflows for creators.",
+    image: `${siteUrl}/images/catchscan-index.png`,
+  },
+  {
+    name: "AskCody",
+    url: `${siteUrl}/askcody`,
+    description:
+      "Hybrid workplace management concept for desk booking, room availability, and resource coordination inside Microsoft Teams.",
+    image: `${siteUrl}/images/askcody-index.png`,
+  },
+  {
+    name: "European Study Solution",
+    url: `${siteUrl}/ess`,
+    description:
+      "Information platform for American students exploring education in Europe, designed around trust and clear guidance.",
+    image: `${siteUrl}/images/ess-index.png`,
   },
 ] as const;
 

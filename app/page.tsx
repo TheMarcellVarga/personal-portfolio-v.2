@@ -778,7 +778,7 @@ export default function Page() {
   }, [capabilitiesInView, shouldReduceMotion]);
 
   const featuredProjects = useMemo(
-    () => projects.filter((project) => project.portfolioPlacement !== "archive"),
+    () => projects.filter((project) => project.portfolioPlacement === "featured"),
     [],
   );
   const introIsVisible = introStage !== "done";

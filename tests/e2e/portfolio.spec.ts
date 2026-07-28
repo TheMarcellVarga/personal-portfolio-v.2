@@ -7,19 +7,20 @@ async function prepareHomepage(page: Page) {
   });
 }
 
-test("homepage presents the product-engineering story and current work", async ({ page }) => {
+test("homepage presents the product-engineering story and selected work", async ({ page }) => {
   await prepareHomepage(page);
   await page.goto("/");
   await expect(page.locator(".home-intro-shell")).toHaveCount(0);
 
   await expect(page).toHaveTitle(/Marcell Varga/i);
   await expect(page.locator("[data-hero-badge-label]").last()).toBeVisible();
-  await expect(page.locator('a[href="/ai-finance"]').first()).toBeVisible();
-  await expect(page.locator('a[href="/wild-route"]').first()).toBeVisible();
-  await expect(page.locator("#work a")).toHaveCount(3);
-  await expect(page.locator('#work a[href="/askcody"]')).toHaveCount(0);
-  await expect(page.locator('#work a[href="/catchscan"]')).toHaveCount(0);
-  await expect(page.locator('#work a[href="/ess"]')).toHaveCount(0);
+  await expect(page.locator('#work a[href="/ai-finance"]')).toBeVisible();
+  await expect(page.locator('#work a[href="/wild-route"]')).toBeVisible();
+  await expect(page.locator('#work a[href="/catchscan"]')).toBeVisible();
+  await expect(page.locator('#work a[href="/askcody"]')).toBeVisible();
+  await expect(page.locator('#work a[href="/ess"]')).toBeVisible();
+  await expect(page.locator("#work a")).toHaveCount(5);
+  await expect(page.locator('#work a[href="/about"]')).toHaveCount(0);
 });
 
 test("contact and resume routes are reachable", async ({ page }) => {
@@ -116,7 +117,9 @@ test("selected work exposes canonical metadata and is listed in the sitemap", as
   const selectedRoutes = [
     ["/ai-finance", /Aperture Financial Intelligence Case Study/i],
     ["/wild-route", /Wild Route Case Study/i],
-    ["/about", /About Marcell Varga/i],
+    ["/catchscan", /CatchScan Case Study/i],
+    ["/askcody", /AskCody Case Study/i],
+    ["/ess", /European Study Solution Case Study/i],
   ] as const;
 
   for (const [route, title] of selectedRoutes) {
