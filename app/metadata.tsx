@@ -28,6 +28,8 @@ export const metadata: Metadata = {
     "Singapore UX Engineer",
     "Singapore Frontend Engineer",
     "AI Product UX",
+    "Trustworthy AI",
+    "AI Evaluation",
     "Official portfolio",
     "React",
     "Next.js",

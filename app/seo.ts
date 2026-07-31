@@ -7,9 +7,9 @@ export const profileImage = "/images/cinematic-profile-pic-sg.png";
 export const shareImage = "/images/cinematic-profile-pic-sg.png";
 
 export const siteDescription =
-  "Official portfolio of Marcell Varga, a Singapore-based product-focused frontend engineer building clear React and TypeScript product interfaces.";
+  "Official portfolio of Marcell Varga, a Singapore-based product-focused frontend engineer building clear React and TypeScript interfaces, design systems, and trustworthy AI workflows.";
 
-export const lastUpdated = "2026-07-28";
+export const lastUpdated = "2026-07-31";
 export const alternatePersonNames = [
   "Varga Marcell",
   "TheMarcellVarga",
@@ -27,7 +27,7 @@ export const featuredWorks = [
     name: "Aperture Financial Intelligence",
     url: `${siteUrl}/ai-finance`,
     description:
-      "Fixture-backed finance product prototype for portfolio review, research briefs, goal scenarios, and clear advice boundaries.",
+      "Locally release-ready financial research workspace with owner-scoped retrieval, cited structured analysis, human approval, and deterministic AI evaluation.",
     image: `${siteUrl}/images/ai-finance/aperture-home.jpg`,
   },
   {
