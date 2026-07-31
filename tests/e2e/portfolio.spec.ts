@@ -47,6 +47,17 @@ test("featured work uses the shared evidence record", async ({ page }) => {
   }
 });
 
+test("Aperture case study presents measurable systems evidence", async ({ page }) => {
+  await page.goto("/ai-finance");
+
+  await expect(page.getByRole("heading", { name: "Aperture Financial Intelligence" })).toBeVisible();
+  await expect(page.getByText("40/40")).toBeVisible();
+  await expect(page.getByText("From private document to reviewed evidence.")).toBeVisible();
+  await expect(page.getByRole("list", { name: "Aperture system architecture" })).toBeVisible();
+  await expect(page.getByText("Local rigor before live-model theatre.")).toBeVisible();
+  await expect(page.getByText(/not a public financial service/i)).toBeVisible();
+});
+
 test.describe("mobile and motion fallbacks", () => {
   test.use({ viewport: { width: 390, height: 844 }, isMobile: true });
 

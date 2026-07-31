@@ -1,89 +1,132 @@
 "use client";
 
-import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
-  BarChart3,
+  ArrowDown,
+  BadgeCheck,
   BookOpenCheck,
   Calendar,
-  CircleGauge,
-  FileText,
-  Goal,
-  Radar,
-  Settings,
+  Database,
+  Download,
+  FileSearch,
+  FlaskConical,
+  GitBranch,
+  LockKeyhole,
+  ServerCog,
   ShieldCheck,
   Tag,
-  WalletCards,
+  Upload,
+  UserCheck,
 } from "lucide-react";
-import Footer from "../../footer";
-import Header from "../../header";
+import { useState } from "react";
+
+import { CaseStudyEvidence } from "../../components/CaseStudyEvidence";
 import { OtherWorks } from "../../components/OtherWorks";
 import { PageBackground } from "../../components/PageBackground";
 import { SectionLabel } from "../../components/SectionLabel";
-import { CaseStudyEvidence } from "../../components/CaseStudyEvidence";
 import { caseStudies } from "../../data/case-studies";
 import { projects } from "../../data/projects";
+import Footer from "../../footer";
+import Header from "../../header";
 
-const workspaceSurfaces = [
+const proofMetrics = [
+  { value: "40/40", label: "Evidence evals passing" },
+  { value: "5", label: "Source documents in baseline" },
+  { value: "100%", label: "Citation checks passing" },
+  { value: "$0", label: "External AI spend in CI" },
+] as const;
+
+const researchJourney = [
   {
-    title: "Portfolio intelligence",
-    text: "A portfolio workspace for holdings, allocation, concentration, intraday movement, provider freshness, and visible unavailable states.",
-    icon: WalletCards,
+    title: "Upload private evidence",
+    text: "Page-aware parsing preserves document, page, and source boundaries.",
+    icon: Upload,
   },
   {
-    title: "Market movement review",
-    text: "A watchlist surface for provider-backed equities and ETFs, daily movement, research notes, and an add-ticker flow.",
-    icon: Radar,
+    title: "Retrieve scoped passages",
+    text: "Hybrid search stays inside the active owner and workspace boundary.",
+    icon: FileSearch,
   },
   {
-    title: "Research room",
-    text: "A deterministic local-demo filing summary with cited source chunks, filing highlights, material risks, and saved research controls.",
+    title: "Generate structured analysis",
+    text: "Every section validates against a schema and degrades explicitly on failure.",
     icon: BookOpenCheck,
   },
   {
-    title: "Goal intelligence",
-    text: "A deterministic local-demo scenario planner with milestones, contribution scenarios, and research-discipline prompts.",
-    icon: Goal,
+    title: "Inspect material claims",
+    text: "Citations reveal the stored excerpt, page, and active retrieval context.",
+    icon: BadgeCheck,
   },
   {
-    title: "Risk explainer",
-    text: "A deterministic local-demo risk review for concentration signals, allocation context, limitations, and review actions.",
-    icon: CircleGauge,
+    title: "Review before acceptance",
+    text: "Human edits and decisions remain separate from immutable raw output.",
+    icon: UserCheck,
   },
   {
-    title: "Settings and billing",
-    text: "Workspace controls for privacy, providers, plan entitlements, saved research limits, and billing-period usage.",
-    icon: Settings,
+    title: "Export reviewed work",
+    text: "The report preserves approval state, evidence, limitations, and disclaimer.",
+    icon: Download,
   },
-];
+] as const;
 
-const visibleGuardrails = [
-  "Research and portfolio decision support only.",
-  "No brokerage or trade execution.",
-  "No personalized investment advice.",
-  "No promised returns or suitability claims.",
-  "Visible provider timestamps and freshness labels.",
-  "No estimated values when market data is unavailable.",
-];
+const architectureFlow = [
+  {
+    eyebrow: "Interface",
+    title: "Next.js",
+    text: "Authenticated product UI, BFF routes, streamed analysis, and review controls.",
+    icon: GitBranch,
+  },
+  {
+    eyebrow: "Authority",
+    title: "Go API",
+    text: "Ownership enforcement, finance behavior, document jobs, and retrieval contracts.",
+    icon: ServerCog,
+  },
+  {
+    eyebrow: "System of record",
+    title: "Supabase",
+    text: "Postgres, pgvector, private storage, immutable output, and append-only review history.",
+    icon: Database,
+  },
+  {
+    eyebrow: "Intelligence",
+    title: "Provider boundary",
+    text: "Validated AI interfaces with deterministic CI and a disabled-by-default live path.",
+    icon: FlaskConical,
+  },
+] as const;
 
-const productRhythm = [
+const engineeringDecisions = [
   {
-    title: "Load the portfolio",
-    text: "Start from holdings, allocation, and freshness metadata.",
-    icon: BarChart3,
+    title: "Application-owned tools",
+    text: "AI workflows call narrow product APIs rather than receiving database credentials or unrestricted portfolio access.",
   },
   {
-    title: "Inspect the evidence",
-    text: "Review source chunks, assumptions, and risk context.",
-    icon: FileText,
+    title: "Evidence before prose",
+    text: "Retrieval creates an allow-list first. Material claims must cite that active evidence or disclose that support is missing.",
   },
   {
-    title: "Keep the boundary visible",
-    text: "Use scenario review and research prompts without trade instructions.",
-    icon: ShieldCheck,
+    title: "Approval is a human event",
+    text: "The model cannot approve itself. A later edit or regeneration invalidates stale acceptance instead of inheriting trust.",
   },
-];
+] as const;
+
+const releaseEvidence = [
+  "A disposable-database E2E test passes from upload through reviewed Markdown export.",
+  "Cross-owner reads return not found, including review history and retrieval targets.",
+  "Document prompt injection is screened before generation and fails closed without safe evidence.",
+  "Schema repair is attempted once; unrecoverable output becomes visibly partial or failed.",
+  "Accessibility contracts cover skip navigation, live regions, reduced motion, tables, and keyboard controls.",
+  "Separate non-root API and worker images build with deployment and rollback guidance.",
+] as const;
+
+const visibleBoundaries = [
+  "Research and decision support—not brokerage or trade execution.",
+  "No personalized advice, suitability claims, or promised returns.",
+  "External model calls remain disabled until cost and credentials are approved.",
+  "The release evidence is local; this page does not claim production scale.",
+] as const;
 
 function fadeInUp(delay = 0) {
   return {
@@ -117,55 +160,34 @@ export default function AiFinancePage() {
 
       <main className="relative z-10 px-5 pb-20 pt-32 sm:px-6 lg:px-10 lg:pt-36">
         <div className="mx-auto max-w-7xl">
-          <header className="mb-16 grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
-            <motion.div {...fadeInUp(0)} className="space-y-6">
-              <SectionLabel index="Project" label="Case Study" />
-              <h1 className="font-display text-[clamp(3rem,9vw,7rem)] font-medium leading-[0.9] tracking-[-0.05em] text-custom-blue">
+          <header className="mb-14 grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+            <motion.div {...fadeInUp()} className="space-y-6">
+              <SectionLabel index="Flagship" label="Systems case study" />
+              <h1 className="text-balance font-display text-[clamp(3rem,9vw,7rem)] font-medium leading-[0.9] tracking-[-0.05em] text-custom-blue">
                 Aperture Financial Intelligence
               </h1>
-              <p className="max-w-3xl text-[1.05rem] leading-7 text-custom-blue/65">
-                A fixture-backed finance-product prototype for holdings review,
-                research briefs, goal scenarios, and risk explanation without trade
-                execution or personalized advice.
+              <p className="max-w-[62ch] text-[1.05rem] leading-7 text-custom-blue/70">
+                A full-stack financial research workspace built to make AI output
+                inspectable, reviewable, and accountable before it becomes a
+                decision artifact.
               </p>
             </motion.div>
 
             <motion.div {...fadeInUp(0.1)} className="flex flex-col gap-6 lg:pb-2">
-              <div className="grid grid-cols-3 gap-3 sm:gap-8">
-                <div className="space-y-1">
-                  <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/70">
-                    <Calendar className="h-3 w-3" /> Date
-                  </p>
-                  <p className="text-sm font-semibold text-custom-blue">
-                    {projectData.date}
-                  </p>
-                </div>
-                <div className="space-y-1">
-                  <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/70">
-                    <Tag className="h-3 w-3" /> Implementation status
-                  </p>
-                  <p className="text-sm font-semibold text-custom-blue">
-                    {projectData.status}
-                  </p>
-                </div>
-                <div className="space-y-1">
-                  <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/70">
-                    <Tag className="h-3 w-3" /> Category
-                  </p>
-                  <p className="text-sm font-semibold text-custom-blue">
-                    {projectData.category}
-                  </p>
-                </div>
+              <div className="grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
+                <ProjectFact icon={Calendar} label="Date" value={projectData.date} />
+                <ProjectFact icon={Tag} label="Status" value={projectData.status} />
+                <ProjectFact icon={Tag} label="Field" value={projectData.category} />
               </div>
               <div className="space-y-3">
                 <p className="text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/70">
-                  Key skills
+                  Core stack
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {projectData.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="font-label rounded-full bg-white/62 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]"
+                      className="font-label rounded-full bg-white/62 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-custom-blue/65 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]"
                     >
                       {skill}
                     </span>
@@ -175,180 +197,224 @@ export default function AiFinancePage() {
             </motion.div>
           </header>
 
-          <motion.div
+          <motion.dl
+            {...fadeInUp(0.12)}
+            aria-label="Aperture release evidence summary"
+            className="mb-8 grid overflow-hidden rounded-[1.5rem] border border-custom-blue/10 bg-white/52 sm:grid-cols-2 lg:grid-cols-4"
+          >
+            {proofMetrics.map((metric) => (
+              <div
+                key={metric.label}
+                className="border-b border-custom-blue/8 px-5 py-5 last:border-b-0 sm:[&:nth-child(odd)]:border-r lg:border-b-0 lg:border-r lg:last:border-r-0"
+              >
+                <dd className="font-display text-3xl font-medium tracking-[-0.035em] text-custom-blue">
+                  {metric.value}
+                </dd>
+                <dt className="mt-1 text-xs leading-5 text-custom-blue/65">{metric.label}</dt>
+              </div>
+            ))}
+          </motion.dl>
+
+          <motion.figure
             {...fadeInUp(0.15)}
-            className="glass-panel relative mb-32 overflow-hidden rounded-[1.9rem] bg-[#071112] shadow-[0_24px_70px_rgba(11,17,26,0.14)] sm:rounded-[2.1rem]"
+            className="glass-panel relative mb-28 overflow-hidden rounded-[1.9rem] bg-[#071112] shadow-[0_24px_70px_rgba(11,17,26,0.14)] sm:rounded-[2.1rem]"
           >
             <Image
               src="/images/ai-finance/aperture-home.jpg"
-              alt="Aperture Financial Intelligence homepage"
+              alt="Aperture public homepage introducing the financial intelligence workspace"
               width={1440}
               height={1024}
               priority
               className="h-auto w-full"
             />
-          </motion.div>
+            <figcaption className="border-t border-white/10 bg-[#071112] px-5 py-4 text-xs leading-5 text-white/62">
+              The public identity sets the tone; the product proof lives in the
+              owner-scoped evidence workflow behind it.
+            </figcaption>
+          </motion.figure>
 
-          <div className="space-y-32">
-            <motion.section
-              {...fadeInUp()}
-              className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr]"
-            >
+          <div className="space-y-28 sm:space-y-36">
+            <motion.section {...fadeInUp()} className="grid gap-12 lg:grid-cols-[0.78fr_1.22fr]">
               <div className="lg:sticky lg:top-32 lg:h-fit">
-                <SectionLabel index="01" label="Product" />
-                <h2 className="font-display text-[clamp(2.6rem,5vw,4.4rem)] font-medium leading-[0.92] tracking-[-0.045em] text-custom-blue">
-                  Complexity, made quiet.
+                <SectionLabel index="01" label="Problem and role" />
+                <h2 className="text-balance font-display text-[clamp(2.6rem,5vw,4.4rem)] font-medium leading-[0.92] tracking-[-0.045em] text-custom-blue">
+                  Trust had to become interface behavior.
                 </h2>
               </div>
-              <div className="space-y-5">
-                <div className="glass-panel space-y-6 rounded-[1.9rem] bg-white/65 p-6 shadow-[0_12px_40px_rgba(11,17,26,0.04)] sm:rounded-[2.1rem] sm:p-8">
-                  <p className="text-[1.05rem] leading-7 text-custom-blue/65">
-                    Aperture is designed around a small research loop: load a
-                    portfolio, inspect the evidence, review scenarios, and keep
-                    the final judgment with the person using the workspace.
+              <div className="space-y-4">
+                <div className="glass-panel space-y-5 rounded-[1.9rem] bg-white/65 p-6 sm:rounded-[2.1rem] sm:p-8">
+                  <p className="text-[1.05rem] leading-7 text-custom-blue/72">
+                    Financial research tools often collapse source material,
+                    generated prose, and user judgment into one confident answer.
+                    Aperture separates those layers so a person can see what was
+                    retrieved, what the system inferred, and what a human actually approved.
                   </p>
-                  <p className="text-[1.05rem] leading-7 text-custom-blue/65">
-                    The current product includes public marketing routes,
-                    Clerk-authenticated workspace routes, a Go-backed finance
-                    API layer, Supabase persistence, AI safety fixtures, and
-                    verified billing and security paths.
+                  <p className="text-[1.05rem] leading-7 text-custom-blue/72">
+                    I shaped the product direction, interaction model, frontend,
+                    API integration, evaluation strategy, and release boundaries as
+                    one independent portfolio system—not a collection of disconnected screens.
                   </p>
                 </div>
-                <div className="grid gap-3 sm:grid-cols-3">
-                  {productRhythm.map(({ title, text, icon: Icon }) => (
-                    <div
-                      key={title}
-                      className="glass-panel rounded-[1.4rem] bg-white/62 p-5 shadow-[0_12px_40px_rgba(11,17,26,0.04)]"
-                    >
-                      <Icon className="h-5 w-5 text-custom-blue/52" />
-                      <h3 className="mt-5 font-display text-[1.08rem] font-medium leading-[1.04] tracking-[-0.02em] text-custom-blue sm:text-[1.24rem]">
-                        {title}
-                      </h3>
-                      <p className="mt-2 text-[0.75rem] leading-[1.55] text-custom-blue/70">
-                        {text}
-                      </p>
-                    </div>
-                  ))}
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <BriefCard label="Primary user" text="A research-minded investor or analyst who needs source visibility and explicit uncertainty—not automated trading." />
+                  <BriefCard label="Design constraint" text="Keep the workflow calm and legible while exposing enough technical provenance to support scrutiny." />
                 </div>
-              </div>
-            </motion.section>
-
-            <motion.section {...fadeInUp()} className="space-y-8">
-              <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
-                <div>
-                  <SectionLabel index="02" label="Product page" />
-                  <h2 className="mt-8 font-display text-[clamp(2.6rem,5vw,4.4rem)] font-medium leading-[0.92] tracking-[-0.045em] text-custom-blue">
-                    The live product language stays explicit.
-                  </h2>
-                </div>
-                <p className="max-w-2xl text-[1.05rem] leading-7 text-custom-blue/65">
-                  The public product page presents the core workspace surfaces
-                  and keeps the guardrails visible: freshness labels, saved
-                  citations, source context, and no return promises.
-                </p>
-              </div>
-              <div className="glass-panel overflow-hidden rounded-[1.9rem] bg-[#08100f] shadow-[0_18px_52px_rgba(11,17,26,0.12)] sm:rounded-[2.1rem]">
-                <Image
-                  src="/images/ai-finance/aperture-product.jpg"
-                  alt="Aperture Financial Intelligence product page"
-                  width={1440}
-                  height={1024}
-                  className="h-auto w-full"
-                />
               </div>
             </motion.section>
 
             <motion.section {...fadeInUp()}>
-              <SectionLabel index="03" label="Workspace surfaces" />
-              <div className="mt-8 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
-                <h2 className="font-display max-w-3xl text-[clamp(2.6rem,5vw,4.6rem)] font-medium leading-[0.92] tracking-[-0.045em] text-custom-blue">
-                  What is implemented in the workspace.
+              <SectionLabel index="02" label="Golden path" />
+              <div className="mt-8 grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
+                <h2 className="text-balance font-display text-[clamp(2.6rem,5vw,4.6rem)] font-medium leading-[0.92] tracking-[-0.045em] text-custom-blue">
+                  From private document to reviewed evidence.
                 </h2>
-                <p className="max-w-2xl text-[1.05rem] leading-7 text-custom-blue/65">
-                  These are the routes and interactions currently present in
-                  the product. Research, goal, and risk views use deterministic
-                  fixture mode by default so safety behavior and citations can
-                  be reviewed without external model spend.
+                <p className="max-w-[62ch] text-[1.05rem] leading-7 text-custom-blue/68">
+                  The case study centers on one flow that can be tested end to end,
+                  explained in an interview, and evaluated without relying on a polished chat demo.
                 </p>
               </div>
-
-              <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-                {workspaceSurfaces.map(({ title, text, icon: Icon }) => (
-                  <article
-                    key={title}
-                    className="glass-panel rounded-[1.6rem] bg-white/62 p-6 shadow-[0_12px_40px_rgba(11,17,26,0.04)]"
-                  >
-                    <Icon className="h-5 w-5 text-custom-blue/55" />
-                    <h3 className="mt-6 font-display text-[1.08rem] font-medium leading-[1.04] tracking-[-0.02em] text-custom-blue sm:text-[1.24rem]">
+              <ol className="mt-10 grid gap-px overflow-hidden rounded-[1.8rem] border border-custom-blue/10 bg-custom-blue/10 md:grid-cols-2 lg:grid-cols-3">
+                {researchJourney.map(({ title, text, icon: Icon }, index) => (
+                  <li key={title} className="bg-[#eef2f2] p-6 sm:p-7">
+                    <div className="flex items-center justify-between">
+                      <Icon className="h-5 w-5 text-custom-blue/65" />
+                      <span className="font-label text-[0.62rem] font-semibold tracking-[0.18em] text-custom-blue/70">
+                        0{index + 1}
+                      </span>
+                    </div>
+                    <h3 className="mt-8 font-display text-xl font-medium tracking-[-0.02em] text-custom-blue">
                       {title}
                     </h3>
-                    <p className="mt-3 text-[0.75rem] leading-[1.55] text-custom-blue/70">
-                      {text}
-                    </p>
+                    <p className="mt-3 text-sm leading-6 text-custom-blue/68">{text}</p>
+                  </li>
+                ))}
+              </ol>
+            </motion.section>
+
+            <motion.figure {...fadeInUp()} className="overflow-hidden rounded-[1.9rem] bg-[#08100f] shadow-[0_18px_52px_rgba(11,17,26,0.12)] sm:rounded-[2.1rem]">
+              <Image
+                src="/images/ai-finance/aperture-product.jpg"
+                alt="Aperture product page explaining evidence, ownership, and safe AI boundaries"
+                width={1440}
+                height={1024}
+                className="h-auto w-full"
+              />
+              <figcaption className="border-t border-white/10 px-5 py-4 text-xs leading-5 text-white/62">
+                Product language makes evidence, ownership, freshness, and advice
+                boundaries part of the value proposition.
+              </figcaption>
+            </motion.figure>
+
+            <motion.section {...fadeInUp()}>
+              <SectionLabel index="03" label="System design" />
+              <div className="mt-8 grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
+                <h2 className="text-balance font-display text-[clamp(2.6rem,5vw,4.5rem)] font-medium leading-[0.92] tracking-[-0.045em] text-custom-blue">
+                  Clear ownership between layers.
+                </h2>
+                <p className="max-w-[62ch] text-[1.05rem] leading-7 text-custom-blue/68">
+                  The browser does not become a shortcut around security. Next.js
+                  owns the product experience, Go owns authoritative finance and
+                  document behavior, and Supabase holds relational evidence.
+                </p>
+              </div>
+              <ol aria-label="Aperture system architecture" className="mt-10 grid gap-3 lg:grid-cols-4">
+                {architectureFlow.map(({ eyebrow, title, text, icon: Icon }, index) => (
+                  <li key={title} className="relative">
+                    <article className="glass-panel h-full rounded-[1.55rem] bg-white/65 p-6">
+                      <Icon className="h-5 w-5 text-custom-blue/60" />
+                      <p className="mt-8 font-label text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-custom-blue/50">
+                        {eyebrow}
+                      </p>
+                      <h3 className="mt-2 font-display text-2xl font-medium tracking-[-0.03em] text-custom-blue">
+                        {title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-6 text-custom-blue/68">{text}</p>
+                    </article>
+                    {index < architectureFlow.length - 1 ? (
+                      <ArrowDown className="mx-auto my-2 h-4 w-4 text-custom-blue/35 lg:absolute lg:-right-2.5 lg:top-1/2 lg:z-10 lg:m-0 lg:-rotate-90" aria-hidden="true" />
+                    ) : null}
+                  </li>
+                ))}
+              </ol>
+              <div className="mt-5 grid gap-3 lg:grid-cols-3">
+                {engineeringDecisions.map((decision) => (
+                  <article key={decision.title} className="border-l border-custom-blue/15 py-2 pl-5">
+                    <h3 className="font-display text-xl font-medium tracking-[-0.02em] text-custom-blue">
+                      {decision.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-6 text-custom-blue/68">{decision.text}</p>
                   </article>
                 ))}
               </div>
             </motion.section>
 
-            <motion.section
-              {...fadeInUp()}
-              className="overflow-hidden rounded-[1.9rem] bg-[#10191d] p-6 text-white shadow-[0_24px_70px_rgba(11,17,26,0.16)] sm:rounded-[2.1rem] sm:p-9 lg:p-12"
-            >
-              <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+            <motion.section {...fadeInUp()} className="overflow-hidden rounded-[1.9rem] bg-[#10191d] p-6 text-white shadow-[0_24px_70px_rgba(11,17,26,0.16)] sm:rounded-[2.1rem] sm:p-9 lg:p-12">
+              <div className="grid gap-12 lg:grid-cols-[0.78fr_1.22fr]">
                 <div>
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/8">
-                      <ShieldCheck className="h-5 w-5 text-[#67d9ff]" />
-                    </div>
-                    <span className="font-label text-[0.62rem] font-medium uppercase tracking-[0.2em] text-white/48">
-                      Visible guardrails
-                    </span>
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/8">
+                    <LockKeyhole className="h-5 w-5 text-[#67d9ff]" />
                   </div>
-                  <h2 className="font-display mt-8 max-w-xl text-[clamp(2.6rem,5vw,4.5rem)] font-medium leading-[0.92] tracking-[-0.045em] text-white">
-                    The boundaries appear in the interface.
-                  </h2>
-                  <p className="mt-6 max-w-xl text-[1.05rem] leading-7 text-white/68">
-                    The product does not hide its constraints in fine print.
-                    Research-only framing, freshness labels, and unavailable
-                    states are part of the visible experience.
+                  <p className="mt-8 font-label text-[0.62rem] font-medium uppercase tracking-[0.2em] text-white/48">
+                    Trust model
                   </p>
+                  <h2 className="text-balance font-display mt-3 max-w-xl text-[clamp(2.6rem,5vw,4.5rem)] font-medium leading-[0.92] tracking-[-0.045em] text-white">
+                    Evidence can be challenged. Approval cannot be inferred.
+                  </h2>
                 </div>
                 <div className="grid gap-3 sm:grid-cols-2">
-                  {visibleGuardrails.map((rule) => (
-                    <div
-                      key={rule}
-                      className="flex items-start gap-3 rounded-[1.2rem] bg-white/[0.055] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
-                    >
+                  {visibleBoundaries.map((rule) => (
+                    <div key={rule} className="flex items-start gap-3 rounded-[1.2rem] bg-white/[0.055] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
                       <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#67d9ff]/80" />
-                      <p className="text-[0.75rem] leading-[1.55] text-white/72">{rule}</p>
+                      <p className="text-sm leading-6 text-white/72">{rule}</p>
                     </div>
                   ))}
                 </div>
               </div>
             </motion.section>
 
-            <motion.section
-              {...fadeInUp()}
-              className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr]"
-            >
+            <motion.section {...fadeInUp()} className="grid gap-12 lg:grid-cols-[0.78fr_1.22fr]">
               <div className="lg:sticky lg:top-32 lg:h-fit">
-                <SectionLabel index="04" label="Current state" />
-                <h2 className="font-display text-[clamp(2.6rem,5vw,4.4rem)] font-medium leading-[0.92] tracking-[-0.045em] text-custom-blue">
-                  Built enough to audit.
+                <SectionLabel index="04" label="Release evidence" />
+                <h2 className="text-balance font-display text-[clamp(2.6rem,5vw,4.4rem)] font-medium leading-[0.92] tracking-[-0.045em] text-custom-blue">
+                  Proof beyond the happy path.
+                </h2>
+                <p className="mt-6 max-w-md text-[1rem] leading-7 text-custom-blue/68">
+                  The strongest outcome is not a claim about model intelligence. It
+                  is a repeatable system for testing what happens when evidence,
+                  ownership, generation, or approval goes wrong.
+                </p>
+              </div>
+              <ul className="overflow-hidden rounded-[1.8rem] border border-custom-blue/10 bg-white/54">
+                {releaseEvidence.map((item, index) => (
+                  <li key={item} className="grid gap-4 border-b border-custom-blue/8 p-5 last:border-b-0 sm:grid-cols-[3rem_1fr] sm:p-6">
+                    <span className="font-label text-[0.62rem] font-semibold tracking-[0.18em] text-custom-blue/70">
+                      0{index + 1}
+                    </span>
+                    <span className="text-sm leading-6 text-custom-blue/72">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.section>
+
+            <motion.section {...fadeInUp()} className="grid gap-8 border-y border-custom-blue/10 py-12 sm:py-16 lg:grid-cols-[0.78fr_1.22fr]">
+              <div>
+                <SectionLabel index="05" label="Trade-off" />
+                <h2 className="mt-6 text-balance font-display text-[clamp(2.4rem,5vw,4rem)] font-medium leading-[0.94] tracking-[-0.04em] text-custom-blue">
+                  Local rigor before live-model theatre.
                 </h2>
               </div>
-              <div className="glass-panel space-y-6 rounded-[1.9rem] bg-white/65 p-6 shadow-[0_12px_40px_rgba(11,17,26,0.04)] sm:rounded-[2.1rem] sm:p-8">
-                <p className="text-[1.05rem] leading-7 text-custom-blue/65">
-                  The public marketing routes, authenticated workspace routes,
-                  Go API tests, deterministic AI evals, and billing and security
-                  verification paths are in place. Portfolio and watchlist views
-                  expose provider freshness and failure states.
+              <div className="space-y-5 text-[1.02rem] leading-7 text-custom-blue/70">
+                <p>
+                  I kept external AI calls disabled while the product boundaries,
+                  retrieval, citations, review history, failure states, and evaluation
+                  system were still being built. That made CI deterministic and avoided
+                  presenting paid-provider output as proof of product quality.
                 </p>
-                <p className="text-[1.05rem] leading-7 text-custom-blue/65">
-                  The case study stays clear about what is real today:
-                  deterministic AI behavior is the default review mode, direct
-                  model calls require explicit environment opt-in, and the
-                  product does not present research support as financial advice.
+                <p>
+                  The trade-off is explicit: Aperture is locally release-ready, not a
+                  public financial service. Production credentials, hosted migrations,
+                  live-model evaluation, and deployed performance evidence remain separate
+                  environment-activation work.
                 </p>
               </div>
             </motion.section>
@@ -361,5 +427,35 @@ export default function AiFinancePage() {
 
       <Footer />
     </div>
+  );
+}
+
+function ProjectFact({
+  icon: Icon,
+  label,
+  value,
+}: {
+  icon: typeof Calendar;
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="space-y-1">
+      <p className="flex items-center gap-2 text-[0.62rem] font-medium uppercase tracking-[0.18em] text-custom-blue/70">
+        <Icon className="h-3 w-3" aria-hidden="true" /> {label}
+      </p>
+      <p className="text-sm font-semibold text-custom-blue">{value}</p>
+    </div>
+  );
+}
+
+function BriefCard({ label, text }: { label: string; text: string }) {
+  return (
+    <article className="glass-panel rounded-[1.45rem] bg-white/60 p-5">
+      <h3 className="font-label text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-custom-blue/55">
+        {label}
+      </h3>
+      <p className="mt-3 text-sm leading-6 text-custom-blue/70">{text}</p>
+    </article>
   );
 }

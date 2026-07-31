@@ -13,22 +13,24 @@ export type CaseStudyRecord = {
 export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
   aperture: {
     id: "aperture",
-    role: "Product concept, interaction design, and frontend representation",
+    role: "Independent product direction, UX/UI, Next.js frontend, Go API integration, AI evaluation, and release engineering",
     problem:
-      "Make portfolio research, risk context, and goal scenarios easier to review without implying trade execution or personal advice.",
-    user: "People reviewing investment information who need visible sources, freshness, and decision boundaries.",
+      "Turn private financial source material into structured research that remains traceable, challengeable, and human-approved without implying trade execution or personal advice.",
+    user: "Research-minded investors and analysts who need evidence, freshness, uncertainty, and decision boundaries visible in one workflow.",
     decisions: [
-      "Keep research support separate from trade execution and advice.",
-      "Show provider freshness and unavailable states instead of estimates.",
-      "Use deterministic fixtures for repeatable portfolio demonstrations.",
+      "Separated Next.js product rendering from the authoritative Go finance and document API.",
+      "Bound material claims to the active retrieval evidence or a visible unsupported state.",
+      "Stored immutable raw output and append-only human edits, decisions, and citation feedback.",
+      "Kept external providers disabled by default while deterministic evaluation and failure handling matured.",
     ],
     verification: [
-      "Current portfolio routes build and render with reserved screenshot media.",
-      "Research-only guardrails are visible in the case-study interface.",
+      "40 of 40 evidence regression cases pass across five source documents.",
+      "The disposable-database E2E flow passes from upload through reviewed export.",
+      "Cross-owner isolation, prompt injection, schema repair, accessibility, and deployment contracts are automated release gates.",
     ],
     limitations: [
-      "The public source repository was unavailable during the portfolio audit.",
-      "The portfolio representation uses deterministic fixture data.",
+      "The complete product path is verified locally, not claimed as a public production service.",
+      "External model calls and paid-provider comparisons remain disabled pending explicit cost and credential approval.",
     ],
   },
   "wild-route": {

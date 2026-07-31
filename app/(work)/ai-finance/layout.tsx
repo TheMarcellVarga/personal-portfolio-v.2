@@ -3,7 +3,7 @@ import { siteName } from "../../seo";
 
 const title = "Aperture Financial Intelligence Case Study";
 const description =
-  "A Marcell Varga case study for a fintech research workspace with portfolio review, cited AI briefs, goal scenarios, risk explanation, billing, and explicit advice boundaries.";
+  "A Marcell Varga systems case study for an evidence-led financial research workspace with owner-scoped retrieval, cited structured analysis, human approval, AI evaluation, and explicit advice boundaries.";
 
 export const metadata: Metadata = {
   title,
