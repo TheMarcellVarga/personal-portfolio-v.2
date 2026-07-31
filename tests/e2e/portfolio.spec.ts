@@ -37,7 +37,7 @@ test("contact and resume routes are reachable", async ({ page }) => {
 
 test("featured work uses the shared evidence record", async ({ page }) => {
   for (const [route, evidenceId, status] of [
-    ["/ai-finance", "aperture", "Fixture-backed"],
+    ["/ai-finance", "aperture", "Local release-ready"],
     ["/wild-route", "wild-route", "Partial"],
     ["/about", "professional-product-work", "Working"],
   ]) {

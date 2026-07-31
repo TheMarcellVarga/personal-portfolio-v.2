@@ -4,12 +4,12 @@ Professional portfolio for Marcell Varga, a Singapore-based product-focused fron
 
 ## Purpose
 
-The site presents a focused, evidence-led view of product work rather than a complete repository history. It separates current work, confidential professional experience, fixture-backed prototypes, and archived case studies.
+The site presents a focused, evidence-led view of product work rather than a complete repository history. It separates locally verified products, confidential professional experience, partial prototypes, and archived case studies.
 
 ## Information architecture
 
 - `/` — portfolio overview and selected work.
-- `/ai-finance` — Aperture, a fixture-backed finance prototype.
+- `/ai-finance` — Aperture, a locally release-ready financial research workspace.
 - `/wild-route` — Wild Route, a partial travel-planning project.
 - `/about` — professional experience and working approach.
 - `/askcody`, `/catchscan`, and `/ess` — archived case studies.
@@ -21,6 +21,7 @@ The site presents a focused, evidence-led view of product work rather than a com
 Projects are intentionally labelled to avoid overstating the available evidence:
 
 - **Working** — current professional or active work.
+- **Local release-ready** — the complete local product path and release gates pass, while public infrastructure or paid providers remain intentionally inactive.
 - **Fixture-backed** — a prototype powered by deterministic local fixture data.
 - **Partial** — an incomplete project whose scope is shown accurately.
 - **Archived** — earlier work retained for historical context.
@@ -50,7 +51,7 @@ npm run lint
 npm run build
 ```
 
-Browser, accessibility, and CI coverage are planned work. Performance claims should only be added after measurement.
+Playwright covers core routes, responsive layouts, links, browser security headers, and serious or critical automated accessibility violations. Performance claims should only be added after deployed measurement.
 
 ## Accessibility and performance approach
 

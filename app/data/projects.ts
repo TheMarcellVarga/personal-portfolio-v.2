@@ -14,7 +14,12 @@ export type Project = {
   image: string;
   category: string;
   backgroundClass: string;
-  status: "Working" | "Fixture-backed" | "Partial" | "Archived";
+  status:
+    | "Working"
+    | "Local release-ready"
+    | "Fixture-backed"
+    | "Partial"
+    | "Archived";
   portfolioPlacement: "featured" | "professional" | "archive";
   caseStudyId?: CaseStudyId;
 };
@@ -22,19 +27,19 @@ export type Project = {
 export const projects: Project[] = [
   {
     title: "Aperture Financial Intelligence",
-    subTitle: "Portfolio-aware research, risk, and goal intelligence",
+    subTitle: "Evidence-led financial research with human approval",
     date: "2026",
     description:
-      "A finance-product prototype for portfolio review, cited research briefs, goal scenarios, and risk explanation with clear decision-support boundaries.",
+      "A full-stack financial research workspace that turns private source documents into cited, reviewable analysis without crossing into trade execution or personal advice.",
     highlight:
-      "A polished product concept shown with deterministic fixture data and explicit advice boundaries.",
-    skills: ["Next.js", "Go", "Clerk", "Supabase"],
+      "The complete local workflow covers upload, retrieval, structured analysis, citation inspection, human approval, and reviewed export.",
+    skills: ["Next.js", "Go", "Supabase", "AI evaluation"],
     link: "/ai-finance",
     image: "/images/ai-finance/aperture-home.jpg",
-    category: "Fintech product + AI safety",
+    category: "Fintech systems + trustworthy AI",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(103,232,249,0.3),_transparent_28%),linear-gradient(155deg,_#071112_0%,_#111820_52%,_#1f1a16_100%)]",
-    status: "Fixture-backed",
+    status: "Local release-ready",
     portfolioPlacement: "featured",
     caseStudyId: "aperture",
   },
