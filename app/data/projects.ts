@@ -17,6 +17,7 @@ export type Project = {
     | "Local release-ready"
     | "Deployed demo"
     | "Fixture-backed"
+    | "In progress"
     | "Partial"
     | "Archived";
   portfolioPlacement: "featured" | "professional" | "archive";
@@ -95,6 +96,23 @@ export const projects: Project[] = [
     status: "Working",
     portfolioPlacement: "professional",
     caseStudyId: "professional-product-work",
+  },
+  {
+    title: "Focusin",
+    subTitle: "A native macOS companion for better breaks",
+    date: "2026",
+    description:
+      "A local-first SwiftUI menu bar app that recommends short, state-aware micro-breaks and helps users return to focus with one click.",
+    highlight:
+      "The product scope covers native macOS interaction, curated recommendations, break timers, reminders, quiet hours, and local persistence.",
+    skills: ["SwiftUI", "Swift", "macOS", "Local-first"],
+    link: "https://github.com/TheMarcellVarga/focusin",
+    image: "/images/focusin/light-focusing.png",
+    category: "Native macOS product",
+    backgroundClass:
+      "bg-[radial-gradient(circle_at_top_right,_rgba(48,132,255,0.32),_transparent_28%),linear-gradient(160deg,_#102347_0%,_#245da8_52%,_#dce8f8_100%)]",
+    status: "In progress",
+    portfolioPlacement: "featured",
   },
   {
     title: "CatchScan",

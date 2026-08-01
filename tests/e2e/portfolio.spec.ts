@@ -17,10 +17,14 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page.locator('#work a[href="/ai-finance"]')).toBeVisible();
   await expect(page.locator('#work a[href="/wild-route"]')).toBeVisible();
   await expect(page.locator('#work a[href="/threadscribe"]')).toBeVisible();
+  const focusinLink = page.locator('#work a[href="https://github.com/TheMarcellVarga/focusin"]');
+  await expect(focusinLink).toBeVisible();
+  await expect(focusinLink).toHaveAttribute("target", "_blank");
+  await expect(focusinLink).toHaveAttribute("rel", "noreferrer");
   await expect(page.locator('#work a[href="/catchscan"]')).toBeVisible();
   await expect(page.locator('#work a[href="/askcody"]')).toBeVisible();
   await expect(page.locator('#work a[href="/ess"]')).toBeVisible();
-  await expect(page.locator("#work a")).toHaveCount(6);
+  await expect(page.locator("#work a")).toHaveCount(7);
   await expect(page.locator('#work a[href="/about"]')).toHaveCount(0);
 });
 

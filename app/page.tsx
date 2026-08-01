@@ -124,6 +124,10 @@ function clamp01(value: number) {
   return Math.min(1, Math.max(0, value));
 }
 
+function isExternalProjectLink(link: string) {
+  return link.startsWith("http");
+}
+
 function smoothstep(value: number) {
   const t = clamp01(value);
   return t * t * (3 - 2 * t);
@@ -1302,6 +1306,8 @@ export default function Page() {
                 >
                   <Link
                     href={project.link}
+                    target={isExternalProjectLink(project.link) ? "_blank" : undefined}
+                    rel={isExternalProjectLink(project.link) ? "noreferrer" : undefined}
                     className="grid grid-cols-[minmax(0,1fr)] gap-4 rounded-[1.5rem] border-b border-custom-blue/5 px-3 py-5 transition-colors duration-500 hover:bg-custom-blue/[0.01] sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:px-0 md:py-8"
                   >
                     <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:gap-8 md:col-span-1">
@@ -1538,7 +1544,7 @@ export default function Page() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               <div className="absolute inset-x-0 bottom-3 flex justify-center">
                 <span className="font-label rounded-full bg-white/20 px-2 py-0.75 text-[0.5rem] font-medium uppercase tracking-[0.14em] text-white shadow-[0_8px_32px_rgba(0,0,0,0.1)] backdrop-blur-md">
-                  View case study
+                  View project
                 </span>
               </div>
             </div>
