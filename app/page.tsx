@@ -45,7 +45,7 @@ import { HeroCanvasBackdrop } from "./components/HeroCanvasBackdrop";
 import { SplitTextReveal } from "./components/SplitTextReveal";
 
 const principlesStatement =
-  "I turn complex product requirements into clear interfaces and carry the strongest ideas from prototype to production.";
+  "I turn complex product and AI workflows into clear interfaces, then carry the strongest ideas through architecture, testing, and release.";
 
 const PRINCIPLES_REVEAL_END = 0.74;
 
@@ -940,8 +940,9 @@ export default function Page() {
                     />
                     <div data-hero-copy>
                       <p className="max-w-[30rem] text-[0.95rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
-                        Singapore-based frontend engineer using React and TypeScript
-                        to turn complex product requirements into clear, resilient interfaces.
+                        Singapore-based product-focused frontend engineer using React
+                        and TypeScript to turn complex products and AI workflows into
+                        clear, resilient interfaces.
                       </p>
                     </div>
                   </div>
@@ -1028,8 +1029,9 @@ export default function Page() {
                     />
                     <div data-hero-copy>
                       <p className="max-w-[30rem] text-[1.02rem] leading-7 text-white/72 sm:text-[1.08rem] sm:leading-8">
-                        Singapore-based frontend engineer using React and TypeScript
-                        to turn complex product requirements into clear, resilient interfaces.
+                        Singapore-based product-focused frontend engineer using React
+                        and TypeScript to turn complex products and AI workflows into
+                        clear, resilient interfaces.
                       </p>
                     </div>
                   </div>
@@ -1272,8 +1274,8 @@ export default function Page() {
                   className="mt-6 font-display text-[clamp(2.15rem,11vw,5.4rem)] leading-[0.96] tracking-[-0.04em] text-custom-blue sm:mt-8 sm:leading-[0.9]"
                 />
                 <p className="mt-5 text-[0.98rem] leading-relaxed text-custom-blue/65 sm:mt-6 sm:text-[1.05rem]">
-                  A focused set of projects where product decisions show up in
-                  the interface.
+                  A focused set of products where interface quality is backed by
+                  architecture, testing, and honest system boundaries.
                 </p>
               </div>
               <div className="hidden items-center gap-3 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/70 md:flex">

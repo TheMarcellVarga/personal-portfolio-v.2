@@ -10,7 +10,8 @@ The site presents a focused, evidence-led view of product work rather than a com
 
 - `/` — portfolio overview and selected work.
 - `/ai-finance` — Aperture, a locally release-ready financial research workspace.
-- `/wild-route` — Wild Route, a partial travel-planning project.
+- `/wild-route` — Wild Route, a deployed adventure travel-planning demo.
+- `/threadscribe` — ThreadScribe Studio, a local-first trustworthy AI case study.
 - `/about` — professional experience and working approach.
 - `/askcody`, `/catchscan`, and `/ess` — archived case studies.
 - `/resume` and `/resume/ats` — human-readable and ATS-oriented resumes.
@@ -49,6 +50,7 @@ The development server runs on port `3100`.
 ```bash
 npm run lint
 npm run build
+npm run test:e2e
 ```
 
 Playwright covers core routes, responsive layouts, links, browser security headers, and serious or critical automated accessibility violations. Performance claims should only be added after deployed measurement.

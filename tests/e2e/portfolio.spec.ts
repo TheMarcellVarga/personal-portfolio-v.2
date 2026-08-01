@@ -16,9 +16,10 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page.locator("[data-hero-badge-label]").last()).toBeVisible();
   await expect(page.locator('#work a[href="/ai-finance"]')).toBeVisible();
   await expect(page.locator('#work a[href="/wild-route"]')).toBeVisible();
+  await expect(page.locator('#work a[href="/threadscribe"]')).toBeVisible();
   await expect(page.locator('#work a[href="/catchscan"]')).toBeVisible();
   await expect(page.locator('#work a[href="/askcody"]')).toBeVisible();
-  await expect(page.locator('#work a[href="/ess"]')).toBeVisible();
+  await expect(page.locator('#work a[href="/ess"]')).toHaveCount(0);
   await expect(page.locator("#work a")).toHaveCount(5);
   await expect(page.locator('#work a[href="/about"]')).toHaveCount(0);
 });
@@ -39,6 +40,7 @@ test("featured work uses the shared evidence record", async ({ page }) => {
   for (const [route, evidenceId, status] of [
     ["/ai-finance", "aperture", "Local release-ready"],
     ["/wild-route", "wild-route", "Deployed demo"],
+    ["/threadscribe", "threadscribe", "Local release-ready"],
     ["/about", "professional-product-work", "Working"],
   ]) {
     await page.goto(route);
@@ -76,6 +78,24 @@ test("Wild Route case study proves product engineering beyond the interface", as
   );
 });
 
+test("ThreadScribe case study shows trustworthy AI interaction evidence", async ({ page }) => {
+  await page.goto("/threadscribe");
+
+  await expect(page.getByRole("heading", { name: "ThreadScribe Studio" })).toBeVisible();
+  await expect(page.getByText("45/45")).toBeVisible();
+  await expect(
+    page.getByRole("list", { name: "ThreadScribe system architecture" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Failure stays truthful and useful." }),
+  ).toBeVisible();
+  await expect(page.getByText(/public walkthrough uses deterministic fixture/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /inspect source/i })).toHaveAttribute(
+    "href",
+    "https://github.com/TheMarcellVarga/ai-transcriber",
+  );
+});
+
 test.describe("mobile and motion fallbacks", () => {
   test.use({ viewport: { width: 390, height: 844 }, isMobile: true });
 
@@ -83,6 +103,7 @@ test.describe("mobile and motion fallbacks", () => {
     for (const [route, evidenceId] of [
       ["/ai-finance", "aperture"],
       ["/wild-route", "wild-route"],
+      ["/threadscribe", "threadscribe"],
       ["/about", "professional-product-work"],
     ]) {
       await page.goto(route);
@@ -146,9 +167,9 @@ test("selected work exposes canonical metadata and is listed in the sitemap", as
   const selectedRoutes = [
     ["/ai-finance", /Aperture Financial Intelligence Case Study/i],
     ["/wild-route", /Wild Route Case Study/i],
+    ["/threadscribe", /ThreadScribe Studio Case Study/i],
     ["/catchscan", /CatchScan Case Study/i],
     ["/askcody", /AskCody Case Study/i],
-    ["/ess", /European Study Solution Case Study/i],
   ] as const;
 
   for (const [route, title] of selectedRoutes) {
@@ -203,6 +224,7 @@ test("public routes have no serious or critical automated accessibility violatio
     "/",
     "/ai-finance",
     "/wild-route",
+    "/threadscribe",
     "/about",
     "/contact",
     "/resume",
