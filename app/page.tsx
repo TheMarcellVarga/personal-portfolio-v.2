@@ -576,10 +576,9 @@ export default function Page() {
   const [activeSection, setActiveSection] = useState("Intro");
 
   useEffect(() => {
-    const sectionIds = ["hero", "about", "process", "work", "contact"];
+    const sectionIds = ["hero", "process", "work", "contact"];
     const sectionMap: Record<string, string> = {
       hero: "Intro",
-      about: "Principles",
       process: "Proof",
       work: "Work",
       contact: "Contact",
