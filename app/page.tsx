@@ -1066,9 +1066,9 @@ export default function Page() {
                     </button>
                     <Link
                       href="/resume"
-                      className="group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-custom-blue px-6 py-3 text-sm font-medium text-white shadow-[0_20px_60px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.14)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-[#0f1f2f] active:translate-y-0 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c] sm:w-fit sm:bg-white sm:text-custom-blue sm:hover:bg-[#eef4f8] sm:hover:shadow-[0_24px_70px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.9)]"
+                      className="hero-resume-cta group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full px-6 py-3 text-sm font-medium outline-none sm:w-fit"
                     >
-                      <span className="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_0%,rgba(103,217,255,0.16)_45%,transparent_70%)] transition-transform duration-700 group-hover:translate-x-full" />
+                      <span className="hero-resume-sheen pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_0%,rgba(103,217,255,0.18)_45%,transparent_70%)] transition-transform duration-700 group-hover:translate-x-full" />
                       <span className="relative z-10">Resume</span>
                       <Download className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
                     </Link>
@@ -1155,9 +1155,9 @@ export default function Page() {
                     </button>
                     <Link
                       href="/resume"
-                      className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-3 py-2 text-sm font-medium text-white/72 outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-white/8 hover:text-white active:translate-y-0 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-white/55 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c]"
+                      className="hero-resume-cta group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-6 py-3 text-sm font-medium outline-none"
                     >
-                      <span className="pointer-events-none absolute inset-x-3 bottom-1 h-px origin-left scale-x-0 bg-white/45 transition-transform duration-300 group-hover:scale-x-100" />
+                      <span className="hero-resume-sheen pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_0%,rgba(103,217,255,0.18)_45%,transparent_70%)] transition-transform duration-700 group-hover:translate-x-full" />
                       <span className="relative z-10">Resume</span>
                       <Download className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
                     </Link>
