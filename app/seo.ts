@@ -58,6 +58,13 @@ export const featuredWorks = [
       "Hybrid workplace management concept for desk booking, room availability, and resource coordination inside Microsoft Teams.",
     image: `${siteUrl}/images/askcody-index.png`,
   },
+  {
+    name: "European Study Solution",
+    url: `${siteUrl}/ess`,
+    description:
+      "Information platform for American students exploring education in Europe, designed around trust and clear guidance.",
+    image: `${siteUrl}/images/ess-index.png`,
+  },
 ] as const;
 
 export const structuredData = {

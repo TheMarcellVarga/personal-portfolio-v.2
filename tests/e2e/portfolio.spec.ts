@@ -19,8 +19,8 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page.locator('#work a[href="/threadscribe"]')).toBeVisible();
   await expect(page.locator('#work a[href="/catchscan"]')).toBeVisible();
   await expect(page.locator('#work a[href="/askcody"]')).toBeVisible();
-  await expect(page.locator('#work a[href="/ess"]')).toHaveCount(0);
-  await expect(page.locator("#work a")).toHaveCount(5);
+  await expect(page.locator('#work a[href="/ess"]')).toBeVisible();
+  await expect(page.locator("#work a")).toHaveCount(6);
   await expect(page.locator('#work a[href="/about"]')).toHaveCount(0);
 });
 
@@ -170,6 +170,7 @@ test("selected work exposes canonical metadata and is listed in the sitemap", as
     ["/threadscribe", /ThreadScribe Studio Case Study/i],
     ["/catchscan", /CatchScan Case Study/i],
     ["/askcody", /AskCody Case Study/i],
+    ["/ess", /European Study Solution Case Study/i],
   ] as const;
 
   for (const [route, title] of selectedRoutes) {

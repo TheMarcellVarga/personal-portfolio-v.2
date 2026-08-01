@@ -145,7 +145,7 @@ export const projects: Project[] = [
     backgroundClass:
       "bg-[radial-gradient(circle_at_20%_20%,_rgba(120,197,255,0.26),_transparent_28%),linear-gradient(160deg,_#ebf4ff_0%,_#dbe7f2_50%,_#cedee8_100%)]",
     status: "Archived",
-    portfolioPlacement: "archive",
+    portfolioPlacement: "featured",
   },
 ];
 
