@@ -1522,14 +1522,14 @@ export default function Page() {
                       A compact read of the path from multimedia design in Denmark into product engineering and AI-leaning interface work from Singapore.
                     </p> */}
                   </div>
-
+{/* 
                   <Link
                     href="/about"
                     className="group inline-flex items-center gap-2 font-label text-[0.72rem] font-medium uppercase tracking-[0.16em] text-custom-blue/72 outline-none transition-colors duration-300 hover:text-custom-blue focus-visible:text-custom-blue focus-visible:underline focus-visible:underline-offset-4"
                   >
                     About me
                     <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </Link>
+                  </Link> */}
 
                   <div className="mt-10 hidden flex-col gap-6 lg:flex">
                     <div className="relative flex flex-col gap-3">
