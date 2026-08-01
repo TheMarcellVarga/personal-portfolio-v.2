@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { siteName } from "../seo";
+import { roleTitle, siteName } from "../seo";
 
-const title = "About Marcell Varga";
+const title = `About Marcell Varga | ${roleTitle}`;
 const description =
-  "Learn how Marcell Varga works across UX design, frontend engineering, product prototypes, design systems, and production software.";
+  "Meet Marcell Varga, a Singapore-based product-focused frontend engineer with a UX foundation. He builds clear interfaces, design systems, and trustworthy AI-aware workflows.";
 
 export const metadata: Metadata = {
   title,

@@ -200,6 +200,7 @@ export default function Header({
     { label: "Intro", path: "/#hero", action: scrollToHome },
     { label: "Proof", path: "/#process", action: scrollToProcess },
     { label: "Work", path: "/#work", action: scrollToWork },
+    { label: "About", path: "/about" },
     { label: "Contact", path: "/#contact", action: scrollToContact },
   ];
 
