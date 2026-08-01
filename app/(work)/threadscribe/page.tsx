@@ -349,7 +349,7 @@ export default function ThreadScribePage() {
 function Meta({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="font-label text-[0.62rem] font-medium uppercase tracking-[0.18em] text-custom-blue/55">
+      <p className="font-label text-[0.62rem] font-medium uppercase tracking-[0.18em] text-custom-blue/70">
         {label}
       </p>
       <p className="mt-1.5 text-sm font-semibold text-custom-blue">{value}</p>
