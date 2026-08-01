@@ -580,7 +580,7 @@ export default function Page() {
     const sectionMap: Record<string, string> = {
       hero: "Intro",
       about: "Principles",
-      process: "Skills",
+      process: "Proof",
       work: "Work",
       contact: "Contact",
     };
