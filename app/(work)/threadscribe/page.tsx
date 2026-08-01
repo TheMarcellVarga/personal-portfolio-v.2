@@ -9,8 +9,6 @@ import {
   AudioLines,
   CheckCircle2,
   Database,
-  Eye,
-  FileJson2,
   Gauge,
   ShieldCheck,
   TriangleAlert,
@@ -55,29 +53,6 @@ const architecture = [
     icon: Database,
     title: "Local SQLite library",
     text: "Sessions, segments, edits, outputs, tags, and safe export records stay searchable on the local machine.",
-  },
-] as const;
-
-const trustDecisions = [
-  {
-    icon: Eye,
-    title: "Preserve the source",
-    text: "Timestamped raw speech stays beside every transformed draft. Cleanup never becomes silent replacement.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Disclose the provider",
-    text: "Fixture, local, and cloud states remain visible. External calls are disabled by default.",
-  },
-  {
-    icon: TriangleAlert,
-    title: "Make failure useful",
-    text: "Cancellation and worker errors keep the preview and prior work available for inspection or retry.",
-  },
-  {
-    icon: FileJson2,
-    title: "Export visible content",
-    text: "JSON, text, and Markdown exports omit hidden prompts, prompt hashes, keys, and server-only metadata.",
   },
 ] as const;
 
@@ -360,84 +335,6 @@ export default function ThreadScribePage() {
               </motion.div>
             </div>
           </section>
-
-          <section className="pb-24 sm:pb-32">
-            <div className="grid gap-10 lg:grid-cols-[1fr_0.82fr] lg:items-center">
-              <motion.div {...reveal()}>
-                <h2 className="mt-5 max-w-[11ch] font-display text-[clamp(2.6rem,6vw,5rem)] font-medium leading-[0.92] tracking-[-0.05em] text-custom-blue">
-                  The artifact survives the AI moment.
-                </h2>
-                <p className="mt-6 max-w-xl text-[1.05rem] leading-7 text-custom-blue/68">
-                  Sessions can be saved, searched, reopened, edited, and
-                  exported from SQLite. Confirmed deletion removes segments, AI
-                  outputs, tags, export records, and full-text search content.
-                </p>
-                <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                  {trustDecisions.map((decision, index) => {
-                    const Icon = decision.icon;
-
-                    return (
-                      <motion.article
-                        key={decision.title}
-                        {...reveal(index * 0.04)}
-                        className="rounded-[1.4rem] border border-custom-blue/10 bg-white/48 p-5"
-                      >
-                        <Icon
-                          className="h-5 w-5 text-custom-blue"
-                          aria-hidden="true"
-                        />
-                        <h3 className="mt-4 font-display text-lg font-medium text-custom-blue">
-                          {decision.title}
-                        </h3>
-                        <p className="mt-2 text-sm leading-6 text-custom-blue/66">
-                          {decision.text}
-                        </p>
-                      </motion.article>
-                    );
-                  })}
-                </div>
-              </motion.div>
-
-              <motion.figure
-                {...reveal(0.08)}
-                className="glass-panel mx-auto w-full max-w-[28rem] overflow-hidden rounded-[1.9rem] bg-white/62 p-3 shadow-[0_18px_55px_rgba(11,17,26,0.06)] sm:rounded-[2.1rem]"
-              >
-                <Image
-                  src="/images/threadscribe/local-library-export.png"
-                  alt="ThreadScribe local session with editable raw and cleaned transcript plus JSON export"
-                  width={390}
-                  height={844}
-                  className="h-auto w-full rounded-[1.45rem]"
-                />
-                <figcaption className="px-2 pb-2 pt-4 text-sm leading-6 text-custom-blue/64">
-                  The saved record keeps raw and cleaned text editable while
-                  export stays limited to visible user artifacts.
-                </figcaption>
-              </motion.figure>
-            </div>
-          </section>
-
-          <motion.section
-            {...reveal()}
-            className="rounded-[2rem] border border-custom-blue/10 bg-white/55 p-7 shadow-[0_18px_55px_rgba(11,17,26,0.05)] sm:rounded-[2.5rem] sm:p-10 lg:p-12"
-          >
-            <SectionLabel index="Boundary" label="Exact limitations" />
-            <div className="mt-7 grid gap-8 lg:grid-cols-[0.78fr_1.22fr]">
-              <h2 className="max-w-[10ch] font-display text-[clamp(2.5rem,6vw,4.8rem)] font-medium leading-[0.92] tracking-[-0.05em] text-custom-blue">
-                Credibility includes what this does not prove.
-              </h2>
-              <div className="grid gap-4 sm:grid-cols-2">
-                {caseStudies.threadscribe.limitations.map((limitation) => (
-                  <p
-                    key={limitation}
-                    className="rounded-[1.35rem] bg-white/62 p-5 text-sm leading-6 text-custom-blue/68"
-                  >
-                    {limitation}
-                  </p>
-                ))}
-              </div>
-            </div>
-          </motion.section>
 
           <CaseStudyEvidence caseStudy={caseStudies.threadscribe} />
           <OtherWorks currentProjectTitle="ThreadScribe Studio" />
