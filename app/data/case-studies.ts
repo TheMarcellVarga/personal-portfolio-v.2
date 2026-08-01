@@ -56,6 +56,29 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
       "Demo saves use browser-local storage and previews use schema-validated stateless recipes, not cross-device account persistence.",
     ],
   },
+  threadscribe: {
+    id: "threadscribe",
+    role: "Independent product direction, UX/UI, Next.js implementation, local persistence, AI evaluation, privacy review, accessibility, and release evidence",
+    problem:
+      "Turn private speech into useful written artifacts without hiding where processing happens, replacing source material silently, or presenting fixture output as live-model intelligence.",
+    user: "Solo builders who record implementation notes, bug reports, planning thoughts, and short voice memos that need to become durable, searchable work.",
+    decisions: [
+      "Kept timestamped raw segments beside transformed drafts so the source remains inspectable.",
+      "Made fixture, local, and cloud provider modes explicit, with external calls disabled by default.",
+      "Stored sessions, edits, outputs, tags, and exports in a local SQLite library with verified deletion behavior.",
+      "Preserved audio previews and prior work across cancellation, worker failure, malformed output, and retry.",
+    ],
+    verification: [
+      "Five labeled fixture cases pass 45 of 45 deterministic checks across cleanup, notes, actions, empty input, and instruction-like transcript text.",
+      "Thirty-seven application tests pass alongside privacy fixtures, keyboard workflow checks, production build, and automated accessibility scans.",
+      "One permitted 8.63-second clip completed with local faster-whisper in 2.068 seconds warm on the recorded demo machine.",
+    ],
+    limitations: [
+      "The public walkthrough uses deterministic fixture transforms. It is not evidence of general model quality.",
+      "The local Whisper result covers one short English clip on one machine and does not establish production-scale accuracy or latency.",
+      "Speaker labels and segment confidence remain exploratory; hosted sync, sharing, and compliance certification are outside the project scope.",
+    ],
+  },
   "professional-product-work": {
     id: "professional-product-work",
     role: "Product-focused frontend engineering in a confidential environment",

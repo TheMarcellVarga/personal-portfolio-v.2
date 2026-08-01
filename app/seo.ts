@@ -9,7 +9,7 @@ export const shareImage = "/images/cinematic-profile-pic-sg.png";
 export const siteDescription =
   "Official portfolio of Marcell Varga, a Singapore-based product-focused frontend engineer building clear React and TypeScript interfaces, design systems, and trustworthy AI workflows.";
 
-export const lastUpdated = "2026-07-31";
+export const lastUpdated = "2026-08-01";
 export const alternatePersonNames = [
   "Varga Marcell",
   "TheMarcellVarga",
@@ -38,6 +38,13 @@ export const featuredWorks = [
     image: `${siteUrl}/images/wild-route/home.png`,
   },
   {
+    name: "ThreadScribe Studio",
+    url: `${siteUrl}/threadscribe`,
+    description:
+      "Local-first transcript workspace with raw and transformed review, provider disclosure, structured AI output, recoverable jobs, and deterministic evaluation.",
+    image: `${siteUrl}/images/threadscribe/transformed-output.png`,
+  },
+  {
     name: "CatchScan",
     url: `${siteUrl}/catchscan`,
     description:
@@ -50,13 +57,6 @@ export const featuredWorks = [
     description:
       "Hybrid workplace management concept for desk booking, room availability, and resource coordination inside Microsoft Teams.",
     image: `${siteUrl}/images/askcody-index.png`,
-  },
-  {
-    name: "European Study Solution",
-    url: `${siteUrl}/ess`,
-    description:
-      "Information platform for American students exploring education in Europe, designed around trust and clear guidance.",
-    image: `${siteUrl}/images/ess-index.png`,
   },
 ] as const;
 

@@ -1,7 +1,5 @@
 export type CaseStudyId =
-  | "aperture"
-  | "wild-route"
-  | "professional-product-work";
+  "aperture" | "wild-route" | "threadscribe" | "professional-product-work";
 
 export type Project = {
   title: string;
@@ -61,6 +59,24 @@ export const projects: Project[] = [
     status: "Deployed demo",
     portfolioPlacement: "featured",
     caseStudyId: "wild-route",
+  },
+  {
+    title: "ThreadScribe Studio",
+    subTitle: "Trustworthy AI transcript interaction, built local-first",
+    date: "2026",
+    description:
+      "A local-first transcript workspace that keeps raw speech, AI drafts, provider state, retention, and failure recovery visible throughout the workflow.",
+    highlight:
+      "The verified lifecycle covers audio capture, timestamped transcription, structured transforms, local persistence, safe export, and recoverable worker failure.",
+    skills: ["Next.js", "TypeScript", "SQLite", "AI evaluation"],
+    link: "/threadscribe",
+    image: "/images/threadscribe/transformed-output.png",
+    category: "Trustworthy AI + frontend systems",
+    backgroundClass:
+      "bg-[radial-gradient(circle_at_top_right,_rgba(99,206,194,0.28),_transparent_28%),linear-gradient(155deg,_#071312_0%,_#10201f_52%,_#233332_100%)]",
+    status: "Local release-ready",
+    portfolioPlacement: "featured",
+    caseStudyId: "threadscribe",
   },
   {
     title: "Professional product work",
@@ -129,7 +145,7 @@ export const projects: Project[] = [
     backgroundClass:
       "bg-[radial-gradient(circle_at_20%_20%,_rgba(120,197,255,0.26),_transparent_28%),linear-gradient(160deg,_#ebf4ff_0%,_#dbe7f2_50%,_#cedee8_100%)]",
     status: "Archived",
-    portfolioPlacement: "featured",
+    portfolioPlacement: "archive",
   },
 ];
 
