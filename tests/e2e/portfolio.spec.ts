@@ -21,6 +21,11 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(focusinLink).toBeVisible();
   await expect(focusinLink).toHaveAttribute("target", "_blank");
   await expect(focusinLink).toHaveAttribute("rel", "noreferrer");
+  await expect(page.locator('#work a[href="/catchscan"]')).toHaveCount(0);
+  await expect(page.getByRole("button", { name: /legacy projects/i })).toBeVisible();
+  await expect(page.locator("#work a")).toHaveCount(4);
+
+  await page.getByRole("button", { name: /legacy projects/i }).click();
   await expect(page.locator('#work a[href="/catchscan"]')).toBeVisible();
   await expect(page.locator('#work a[href="/askcody"]')).toBeVisible();
   await expect(page.locator('#work a[href="/ess"]')).toBeVisible();

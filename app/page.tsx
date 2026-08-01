@@ -26,6 +26,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   Blocks,
+  ChevronDown,
   Code2,
   Download,
   Github,
@@ -37,7 +38,7 @@ import {
 import Header from "./header";
 import Footer from "./footer";
 import { history, type HistoryItem } from "./data/history";
-import { projects } from "./data/projects";
+import { projects, type Project } from "./data/projects";
 import { SectionLabel } from "./components/SectionLabel";
 import { HomeIntro } from "./components/HomeIntro";
 import { PageBackground } from "./components/PageBackground";
@@ -290,8 +291,102 @@ function scrollToId(id: string, reducedMotion: boolean) {
   });
 }
 
+function ProjectListItem({
+  project,
+  numberLabel,
+  index,
+  shouldReduceMotion,
+  isCompactViewport,
+  setActiveProjectImage,
+  className = "",
+}: {
+  project: Project;
+  numberLabel: string;
+  index: number;
+  shouldReduceMotion: boolean;
+  isCompactViewport: boolean;
+  setActiveProjectImage: (image: string | null) => void;
+  className?: string;
+}) {
+  return (
+    <motion.article
+      key={project.title}
+      initial={{ opacity: 0, y: 15 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.05 }}
+      onMouseEnter={() =>
+        !shouldReduceMotion &&
+        !isCompactViewport &&
+        setActiveProjectImage(project.image)
+      }
+      onMouseLeave={() => setActiveProjectImage(null)}
+      className={`group relative ${className}`}
+    >
+      <Link
+        href={project.link}
+        target={isExternalProjectLink(project.link) ? "_blank" : undefined}
+        rel={isExternalProjectLink(project.link) ? "noreferrer" : undefined}
+        className="grid grid-cols-[minmax(0,1fr)] gap-4 rounded-[1.5rem] border-b border-custom-blue/5 px-3 py-5 transition-colors duration-500 hover:bg-custom-blue/[0.01] sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:px-0 md:py-8"
+      >
+        <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:gap-8 md:col-span-1">
+          <span className="font-label min-w-[2.5rem] text-[0.62rem] font-bold text-custom-blue/70">
+            {numberLabel}
+          </span>
+          <div className="flex flex-1 items-center justify-between gap-4">
+            <h3 className="min-w-0 text-pretty font-display text-[clamp(1.55rem,8vw,1.95rem)] leading-[1.02] tracking-[-0.02em] text-custom-blue transition-transform duration-500 group-hover:translate-x-0 sm:text-[2.2rem] md:group-hover:translate-x-2 lg:text-[2.8rem]">
+              {project.title}
+            </h3>
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-custom-blue/10 transition-all duration-500 group-hover:rotate-45 group-hover:bg-custom-blue group-hover:text-white md:hidden">
+              <ArrowUpRight className="h-4 w-4 shrink-0" />
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-x-4 gap-y-1 md:col-span-1 md:justify-self-end md:justify-end">
+          {project.skills.slice(0, 4).map((skill) => (
+            <span
+              key={skill}
+              className="text-[0.58rem] font-medium uppercase tracking-[0.15em] text-custom-blue/70"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex items-center justify-between gap-6 md:justify-self-end">
+          <div className="flex items-center gap-3 text-left md:flex-col md:items-end md:gap-0.5 md:text-right">
+            <span className="font-label text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/70">
+              {project.category}
+            </span>
+            <span className="font-label text-[0.58rem] font-bold text-custom-blue/70">
+              {project.status}
+            </span>
+          </div>
+        </div>
+
+        <div className="hidden h-10 w-10 items-center justify-center rounded-full border border-custom-blue/10 transition-all duration-500 group-hover:rotate-45 group-hover:bg-custom-blue group-hover:text-white sm:h-12 sm:w-12 md:flex md:justify-self-end">
+          <ArrowUpRight className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
+        </div>
+
+        <div className="overflow-hidden rounded-[1.25rem] border border-custom-blue/8 md:hidden">
+          <div className="relative aspect-[16/10]">
+            <Image
+              src={project.image}
+              alt={`${project.title} preview`}
+              fill
+              className="object-cover"
+            />
+          </div>
+        </div>
+      </Link>
+    </motion.article>
+  );
+}
+
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false);
+  const [legacyProjectsOpen, setLegacyProjectsOpen] = useState(false);
   const [footerHover, setFooterHover] = useState(false);
   const [typedText, setTypedText] = useState("");
   const [introStage, setIntroStage] = useState<
@@ -783,6 +878,10 @@ export default function Page() {
 
   const featuredProjects = useMemo(
     () => projects.filter((project) => project.portfolioPlacement === "featured"),
+    [],
+  );
+  const legacyProjects = useMemo(
+    () => projects.filter((project) => project.portfolioPlacement === "archive"),
     [],
   );
   const introIsVisible = introStage !== "done";
@@ -1290,79 +1389,113 @@ export default function Page() {
 
             <div className="border-t border-custom-blue/10">
               {featuredProjects.map((project, idx) => (
-                <motion.article
+                <ProjectListItem
                   key={project.title}
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.05 }}
-                  onMouseEnter={() =>
-                    !shouldReduceMotion &&
-                    !isCompactViewport &&
-                    setActiveProjectImage(project.image)
-                  }
-                  onMouseLeave={() => setActiveProjectImage(null)}
-                  className="group relative"
-                >
-                  <Link
-                    href={project.link}
-                    target={isExternalProjectLink(project.link) ? "_blank" : undefined}
-                    rel={isExternalProjectLink(project.link) ? "noreferrer" : undefined}
-                    className="grid grid-cols-[minmax(0,1fr)] gap-4 rounded-[1.5rem] border-b border-custom-blue/5 px-3 py-5 transition-colors duration-500 hover:bg-custom-blue/[0.01] sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:px-0 md:py-8"
-                  >
-                    <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:gap-8 md:col-span-1">
-                      <span className="font-label min-w-[2.5rem] text-[0.62rem] font-bold text-custom-blue/70">
-                        0{idx + 1}
-                      </span>
-                      <div className="flex flex-1 items-center justify-between gap-4">
-                        <h3 className="min-w-0 text-pretty font-display text-[clamp(1.55rem,8vw,1.95rem)] leading-[1.02] tracking-[-0.02em] text-custom-blue transition-transform duration-500 group-hover:translate-x-0 sm:text-[2.2rem] md:group-hover:translate-x-2 lg:text-[2.8rem]">
-                          {project.title}
-                        </h3>
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-custom-blue/10 transition-all duration-500 group-hover:rotate-45 group-hover:bg-custom-blue group-hover:text-white md:hidden">
-                          <ArrowUpRight className="h-4 w-4 shrink-0" />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-x-4 gap-y-1 md:col-span-1 md:justify-self-end md:justify-end">
-                      {project.skills.slice(0, 4).map((skill) => (
-                        <span
-                          key={skill}
-                          className="text-[0.58rem] font-medium uppercase tracking-[0.15em] text-custom-blue/70"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="flex items-center justify-between gap-6 md:justify-self-end">
-                      <div className="flex items-center gap-3 text-left md:flex-col md:items-end md:gap-0.5 md:text-right">
-                        <span className="font-label text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/70">
-                          {project.category}
-                        </span>
-                        <span className="font-label text-[0.58rem] font-bold text-custom-blue/70">
-                          {project.status}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="hidden h-10 w-10 items-center justify-center rounded-full border border-custom-blue/10 transition-all duration-500 group-hover:rotate-45 group-hover:bg-custom-blue group-hover:text-white sm:h-12 sm:w-12 md:flex md:justify-self-end">
-                      <ArrowUpRight className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
-                    </div>
-
-                    <div className="overflow-hidden rounded-[1.25rem] border border-custom-blue/8 md:hidden">
-                      <div className="relative aspect-[16/10]">
-                        <Image
-                          src={project.image}
-                          alt={`${project.title} preview`}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                    </div>
-                  </Link>
-                </motion.article>
+                  project={project}
+                  numberLabel={`0${idx + 1}`}
+                  index={idx}
+                  shouldReduceMotion={shouldReduceMotion}
+                  isCompactViewport={isCompactViewport}
+                  setActiveProjectImage={setActiveProjectImage}
+                />
               ))}
+
+              <div className="group relative border-b border-custom-blue/5">
+                <button
+                  type="button"
+                  aria-controls="legacy-project-list"
+                  aria-expanded={legacyProjectsOpen}
+                  data-testid="legacy-projects-toggle"
+                  onClick={() => setLegacyProjectsOpen((isOpen) => !isOpen)}
+                  className="grid w-full grid-cols-[minmax(0,1fr)] gap-4 rounded-[1.5rem] px-3 py-5 text-left transition-colors duration-500 hover:bg-custom-blue/[0.01] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-custom-blue/30 focus-visible:ring-inset sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:py-8"
+                >
+                  <span className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:gap-8 md:col-span-1">
+                    <span className="font-label min-w-[2.5rem] text-[0.62rem] font-bold text-custom-blue/70">
+                      {String(featuredProjects.length + 1).padStart(2, "0")}
+                    </span>
+                    <span className="flex flex-1 items-center justify-between gap-4">
+                      <span className="min-w-0 font-display text-[clamp(1.55rem,8vw,1.95rem)] leading-[1.02] tracking-[-0.02em] text-custom-blue transition-transform duration-500 group-hover:translate-x-0 sm:text-[2.2rem] md:group-hover:translate-x-2 lg:text-[2.8rem]">
+                        Legacy projects
+                      </span>
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-custom-blue/10 transition-all duration-500 group-hover:bg-custom-blue group-hover:text-white md:hidden">
+                        <ChevronDown
+                          className={`h-4 w-4 transition-transform duration-500 ${legacyProjectsOpen ? "rotate-180" : ""}`}
+                        />
+                      </span>
+                    </span>
+                  </span>
+
+                  <span className="flex flex-wrap gap-x-4 gap-y-1 md:col-span-1 md:justify-self-end md:justify-end">
+                    {legacyProjects.map((project) => (
+                      <span
+                        key={project.title}
+                        className="text-[0.58rem] font-medium uppercase tracking-[0.15em] text-custom-blue/70"
+                      >
+                        {project.title === "European Study Solution"
+                          ? "ESS"
+                          : project.title}
+                      </span>
+                    ))}
+                  </span>
+
+                  <span className="flex items-center justify-between gap-6 md:justify-self-end">
+                    <span className="flex items-center gap-3 text-left md:flex-col md:items-end md:gap-0.5 md:text-right">
+                      <span className="font-label text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/70">
+                        Earlier work
+                      </span>
+                      <span className="font-label text-[0.58rem] font-bold text-custom-blue/70">
+                        3 case studies
+                      </span>
+                    </span>
+                  </span>
+
+                  <span className="hidden h-10 w-10 items-center justify-center rounded-full border border-custom-blue/10 transition-all duration-500 group-hover:bg-custom-blue group-hover:text-white sm:h-12 sm:w-12 md:flex md:justify-self-end">
+                    <ChevronDown
+                      className={`h-4 w-4 transition-transform duration-500 sm:h-5 sm:w-5 ${legacyProjectsOpen ? "rotate-180" : ""}`}
+                    />
+                  </span>
+
+                  <span className="overflow-hidden rounded-[1.25rem] border border-custom-blue/8 md:hidden">
+                    <span className="relative block aspect-[16/10]">
+                      <Image
+                        src={legacyProjects[0]?.image ?? "/images/catchscan-index.png"}
+                        alt="Preview of legacy portfolio projects"
+                        fill
+                        className="object-cover"
+                      />
+                      <span className="absolute inset-0 bg-gradient-to-r from-custom-blue/35 to-transparent" />
+                    </span>
+                  </span>
+                </button>
+
+                <div id="legacy-project-list">
+                  <AnimatePresence initial={false}>
+                    {legacyProjectsOpen && (
+                      <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: shouldReduceMotion ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}
+                      className="overflow-hidden pl-3 sm:pl-8"
+                      >
+                        <div className="border-l border-custom-blue/10 pl-3 sm:pl-6">
+                          {legacyProjects.map((project, idx) => (
+                            <ProjectListItem
+                              key={project.title}
+                              project={project}
+                              numberLabel={`L${idx + 1}`}
+                              index={idx}
+                              shouldReduceMotion={shouldReduceMotion}
+                              isCompactViewport={isCompactViewport}
+                              setActiveProjectImage={setActiveProjectImage}
+                            />
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
             </div>
           </section>
 
