@@ -79,24 +79,4 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
       "Speaker labels and segment confidence remain exploratory; hosted sync, sharing, and compliance certification are outside the project scope.",
     ],
   },
-  "professional-product-work": {
-    id: "professional-product-work",
-    role: "Product-focused frontend engineering in a confidential environment",
-    problem:
-      "Translate complex product requirements into clear, resilient interfaces while keeping implementation details confidential.",
-    user: "Product teams and customers working through complex network-product workflows.",
-    decisions: [
-      "Use component systems to keep product decisions consistent in implementation.",
-      "Work across UX, frontend delivery, and AI-aware workflow exploration.",
-      "Describe outcomes at a high level without exposing proprietary material.",
-    ],
-    verification: [
-      "Current role and responsibilities are represented without confidential screenshots.",
-      "The portfolio separates this work from independently verifiable prototypes.",
-    ],
-    limitations: [
-      "Screenshots, code, customer data, and detailed metrics are intentionally omitted.",
-      "This page is an evidence summary, not a public project repository.",
-    ],
-  },
 };

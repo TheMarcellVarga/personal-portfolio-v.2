@@ -41,6 +41,9 @@ test("contact and resume routes are reachable", async ({ page }) => {
   await page.goto("/resume");
   await expect(page.getByRole("heading", { name: "Design-engineering work, on one page." })).toBeVisible();
 
+  const aboutResponse = await page.request.get("/about");
+  expect(aboutResponse.status()).toBe(404);
+
   const legacyPhoneEndpoint = await page.request.get("/api/contact/phone");
   expect(legacyPhoneEndpoint.status()).toBe(404);
 });
@@ -50,7 +53,6 @@ test("featured work uses the shared evidence record", async ({ page }) => {
     ["/ai-finance", "aperture", "Local release-ready"],
     ["/wild-route", "wild-route", "Deployed demo"],
     ["/threadscribe", "threadscribe", "Local release-ready"],
-    ["/about", "professional-product-work", "Working"],
   ]) {
     await page.goto(route);
     await expect(page.locator(`[data-case-study-evidence="${evidenceId}"]`)).toBeVisible();
@@ -113,7 +115,6 @@ test.describe("mobile and motion fallbacks", () => {
       ["/ai-finance", "aperture"],
       ["/wild-route", "wild-route"],
       ["/threadscribe", "threadscribe"],
-      ["/about", "professional-product-work"],
     ]) {
       await page.goto(route);
       await expect(page.locator(`[data-case-study-evidence="${evidenceId}"]`)).toBeVisible();
@@ -127,17 +128,17 @@ test.describe("mobile and motion fallbacks", () => {
 
   test("reduced-motion preference shortens interface transitions", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.goto("/about");
+    await page.goto("/contact");
 
     const transitionDuration = await page
-      .getByRole("link", { name: "View full resume" })
+      .getByRole("link", { name: "Resume" })
       .evaluate((element) => Number.parseFloat(getComputedStyle(element).transitionDuration));
 
     expect(transitionDuration).toBeLessThanOrEqual(0.001);
   });
 
   test("mobile navigation remains usable with a keyboard", async ({ page }) => {
-    await page.goto("/about");
+    await page.goto("/contact");
 
     const menuButton = page.getByRole("button", { name: "Open navigation" });
     await menuButton.focus();
@@ -194,6 +195,7 @@ test("selected work exposes canonical metadata and is listed in the sitemap", as
   const sitemap = await page.request.get("/sitemap.xml");
   expect(sitemap.status()).toBe(200);
   const sitemapText = await sitemap.text();
+  expect(sitemapText).not.toContain("https://marcellvarga.com/about");
   for (const [route] of selectedRoutes) {
     expect(sitemapText).toContain(`https://marcellvarga.com${route}`);
   }
@@ -235,7 +237,6 @@ test("public routes have no serious or critical automated accessibility violatio
     "/ai-finance",
     "/wild-route",
     "/threadscribe",
-    "/about",
     "/contact",
     "/resume",
     "/askcody",

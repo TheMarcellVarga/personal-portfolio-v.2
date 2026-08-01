@@ -1,5 +1,5 @@
 export type CaseStudyId =
-  "aperture" | "wild-route" | "threadscribe" | "professional-product-work";
+  "aperture" | "wild-route" | "threadscribe";
 
 export type Project = {
   title: string;
@@ -20,7 +20,7 @@ export type Project = {
     | "In progress"
     | "Partial"
     | "Archived";
-  portfolioPlacement: "featured" | "professional" | "archive";
+  portfolioPlacement: "featured" | "archive";
   caseStudyId?: CaseStudyId;
 };
 
@@ -78,24 +78,6 @@ export const projects: Project[] = [
     status: "Local release-ready",
     portfolioPlacement: "featured",
     caseStudyId: "threadscribe",
-  },
-  {
-    title: "Professional product work",
-    subTitle: "Frontend engineering for complex network products",
-    date: "Current",
-    description:
-      "Confidential product work focused on translating complex requirements into clear, resilient interfaces for AXON Networks.",
-    highlight:
-      "Professional work is described at a high level to respect confidentiality while showing current product and engineering scope.",
-    skills: ["React", "TypeScript", "Product delivery", "Design systems"],
-    link: "/about",
-    image: "/images/cinematic-profile-pic-sg.png",
-    category: "Professional product work",
-    backgroundClass:
-      "bg-[radial-gradient(circle_at_top_right,_rgba(103,232,249,0.28),_transparent_28%),linear-gradient(155deg,_#071112_0%,_#111820_52%,_#1f1a16_100%)]",
-    status: "Working",
-    portfolioPlacement: "professional",
-    caseStudyId: "professional-product-work",
   },
   {
     title: "Focusin",
