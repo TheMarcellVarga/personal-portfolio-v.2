@@ -22,7 +22,7 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(focusinLink).toHaveAttribute("target", "_blank");
   await expect(focusinLink).toHaveAttribute("rel", "noreferrer");
   await expect(page.locator('#work a[href="/catchscan"]')).toHaveCount(0);
-  await expect(page.locator('#about a[href="/about"]')).toBeVisible();
+  await expect(page.locator('#trajectory a[href="/about"]')).toBeVisible();
   await expect(page.getByRole("button", { name: /legacy projects/i })).toBeVisible();
   await expect(page.locator("#work a")).toHaveCount(4);
 
@@ -34,13 +34,16 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page.locator('#work a[href="/about"]')).toHaveCount(0);
 });
 
-test("principles statement settles at its complete text", async ({ page }) => {
+test("principles statement types forward and reverses on scroll back", async ({ page }) => {
   await prepareHomepage(page);
   await page.goto("/");
   await expect(page.locator(".home-intro-shell")).toHaveCount(0);
 
   const principles = page.locator("#about");
   const statement = principles.locator('[data-scroll-anchor="about"] p');
+  const fullStatement =
+    "I turn complex product and AI workflows into clear interfaces, then carry the strongest ideas through architecture, testing, and release.";
+
   await page.evaluate(() => {
     const section = document.querySelector<HTMLElement>('#about');
     if (!section) return;
@@ -51,9 +54,13 @@ test("principles statement settles at its complete text", async ({ page }) => {
   });
   await page.waitForTimeout(1200);
 
-  await expect(statement).toHaveText(
-    "I turn complex product and AI workflows into clear interfaces, then carry the strongest ideas through architecture, testing, and release.",
-  );
+  await expect(statement).toHaveText(fullStatement);
+
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "auto" }));
+  await page.waitForTimeout(900);
+
+  await expect(statement).not.toHaveText(fullStatement);
+  await expect(statement).toHaveText("");
 });
 
 test("about, contact, and resume routes are reachable", async ({ page }) => {

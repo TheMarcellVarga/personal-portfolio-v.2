@@ -389,7 +389,6 @@ export default function Page() {
   const [legacyProjectsOpen, setLegacyProjectsOpen] = useState(false);
   const [footerHover, setFooterHover] = useState(false);
   const [typedText, setTypedText] = useState("");
-  const principlesTypingCompleteRef = useRef(false);
   const [introStage, setIntroStage] = useState<
     "checking" | "playing" | "exiting" | "done"
   >("checking");
@@ -545,19 +544,10 @@ export default function Page() {
 
   useMotionValueEvent(principlesProgress, "change", (value) => {
     if (shouldReduceMotion) return;
-    if (principlesTypingCompleteRef.current) return;
 
     const revealProgress = Math.min(value / principlesRevealEnd, 1);
     const nextLength = Math.round(revealProgress * principlesStatement.length);
     const nextText = principlesStatement.slice(0, nextLength);
-
-    if (revealProgress >= 1 || nextLength >= principlesStatement.length) {
-      principlesTypingCompleteRef.current = true;
-      startTransition(() => {
-        setTypedText(principlesStatement);
-      });
-      return;
-    }
 
     startTransition(() => {
       setTypedText((current) => (current === nextText ? current : nextText));
@@ -1298,13 +1288,6 @@ export default function Page() {
                         })}
                       </div>
                     </div>
-                    <Link
-                      href="/about"
-                      className="group ml-auto inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-white/10 px-4 py-2.5 text-sm font-medium text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.14)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-white/16 active:translate-y-0 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-[#67d9ff] focus-visible:ring-offset-2 focus-visible:ring-offset-[#071726]"
-                    >
-                      About me
-                      <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </Link>
                   </div>
                 </div>
               </motion.div>
@@ -1518,7 +1501,10 @@ export default function Page() {
             </div>
           </section>
 
-          <section className="relative mx-auto mt-24 w-full max-w-7xl sm:mt-36 lg:mt-48">
+          <section
+            id="trajectory"
+            className="relative mx-auto mt-24 w-full max-w-7xl sm:mt-36 lg:mt-48"
+          >
             <div className="pointer-events-none absolute left-1/2 top-8 h-[40rem] w-[min(48rem,90vw)] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,_rgba(103,217,255,0.14)_0%,_rgba(103,217,255,0.04)_40%,_transparent_75%)] blur-3xl" />
             
             <div className="relative grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
@@ -1536,6 +1522,14 @@ export default function Page() {
                       A compact read of the path from multimedia design in Denmark into product engineering and AI-leaning interface work from Singapore.
                     </p> */}
                   </div>
+
+                  <Link
+                    href="/about"
+                    className="group inline-flex items-center gap-2 font-label text-[0.72rem] font-medium uppercase tracking-[0.16em] text-custom-blue/72 outline-none transition-colors duration-300 hover:text-custom-blue focus-visible:text-custom-blue focus-visible:underline focus-visible:underline-offset-4"
+                  >
+                    About me
+                    <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </Link>
 
                   <div className="mt-10 hidden flex-col gap-6 lg:flex">
                     <div className="relative flex flex-col gap-3">
