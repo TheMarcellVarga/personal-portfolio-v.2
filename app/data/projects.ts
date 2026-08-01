@@ -17,6 +17,7 @@ export type Project = {
   status:
     | "Working"
     | "Local release-ready"
+    | "Deployed demo"
     | "Fixture-backed"
     | "Partial"
     | "Archived";
@@ -48,16 +49,16 @@ export const projects: Project[] = [
     subTitle: "Prompt-first route planning for adventure travelers",
     date: "2026",
     description:
-      "A prompt-first adventure travel-planning concept that turns a rough trip idea into ranked multi-stop routes with visible reasoning.",
+      "A deployed prompt-first travel planner that turns a rough adventure brief into ranked multi-stop routes with visible reasoning, estimates, and booking boundaries.",
     highlight:
-      "A partial product build centered on deterministic route generation and an editorial interface for comparing route options.",
-    skills: ["Next.js", "Supabase", "Stripe", "Vitest"],
+      "An end-to-end product-engineering case study spanning interaction design, deterministic route logic, secure data boundaries, accessibility, testing, and a serverless production repair.",
+    skills: ["Next.js", "TypeScript", "Supabase RLS", "Stripe", "Playwright"],
     link: "/wild-route",
     image: "/images/wild-route/home.png",
-    category: "Travel product + full stack",
+    category: "Product engineering + applied AI UX",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(214,255,64,0.32),_transparent_28%),linear-gradient(160deg,_#192018_0%,_#59634f_52%,_#d9ddd0_100%)]",
-    status: "Partial",
+    status: "Deployed demo",
     portfolioPlacement: "featured",
     caseStudyId: "wild-route",
   },

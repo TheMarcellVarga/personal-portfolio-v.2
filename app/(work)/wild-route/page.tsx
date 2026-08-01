@@ -4,13 +4,16 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
+  AlertTriangle,
+  ArrowUpRight,
+  Braces,
   Calendar,
   CreditCard,
-  Database,
   Route,
-  Share2,
+  ShieldCheck,
   Sparkles,
   Tag,
+  TestTube2,
 } from "lucide-react";
 import Header from "../../header";
 import Footer from "../../footer";
@@ -25,19 +28,19 @@ const projectData = projects.find((project) => project.title === "Wild Route")!;
 
 const productSignals = [
   {
-    value: "04",
-    label: "ranked route studies",
-    detail: "Each brief resolves into a considered set instead of an endless result list.",
+    value: "74",
+    label: "deterministic tests",
+    detail: "Route logic, entitlements, validation, security, sharing, and handoffs are regression tested.",
   },
   {
-    value: "25",
-    label: "free generations",
-    detail: "Plan limits are defined server-side and stay visible in the product model.",
+    value: "15",
+    label: "browser checks",
+    detail: "Chromium covers the hosted journey, keyboard use, accessibility, motion, and media fallbacks.",
   },
   {
-    value: "12",
-    label: "saved routes",
-    detail: "The free tier supports durable route saves before deeper provider integrations.",
+    value: "05",
+    label: "verified migrations",
+    detail: "Ownership, public sharing, entitlements, profiles, and route records are modeled with RLS.",
   },
 ];
 
@@ -59,23 +62,38 @@ const compositionSteps = [
 const platformLayers = [
   {
     icon: Route,
-    title: "Planning surface",
-    text: "Prompt-first route composition, globe or 2D fallback comparison, destination reasoning, and provider handoffs.",
+    title: "Decision surface",
+    text: "Prompt-first composition, globe or 2D fallback, ranked alternatives, visible assumptions, and explicit provider handoffs.",
   },
   {
-    icon: Database,
-    title: "Account data",
-    text: "Supabase Auth, Postgres, and row-level security for profiles, generations, saved routes, public shares, and handoff history.",
+    icon: ShieldCheck,
+    title: "Trust boundary",
+    text: "Browser requests stop at same-origin handlers. Secrets stay server-side, inputs are schema validated, and public snapshots use an explicit allowlist.",
   },
   {
     icon: CreditCard,
-    title: "Managed billing",
-    text: "Stripe Checkout, billing portal access, and webhook-driven entitlement syncing for free and pro limits.",
+    title: "Ownership and billing",
+    text: "Supabase RLS and server ownership checks protect user data; Stripe webhooks require signatures and use an idempotency ledger.",
   },
   {
-    icon: Share2,
-    title: "Durable route lifecycle",
-    text: "Private saves, public share links, account export, deletion controls, and notification-ready delivery paths.",
+    icon: TestTube2,
+    title: "Release confidence",
+    text: "Deterministic tests, hosted golden-path checks, privacy-safe operational events, bounded rate limits, and failure-state coverage make the build inspectable.",
+  },
+];
+
+const tradeoffs = [
+  {
+    title: "Deterministic before generative",
+    text: "The route engine is inspectable and testable today. A live model can later enrich intent interpretation without becoming the authority for price, availability, or safety.",
+  },
+  {
+    title: "Immersion with a fallback",
+    text: "The globe creates spatial context, while a fully usable 2D route view protects the core comparison task when motion, media, or WebGL is unavailable.",
+  },
+  {
+    title: "Honest demo over fake production",
+    text: "The interface labels fixture-backed data and planning estimates. Unconfigured providers degrade visibly instead of silently pretending to be live.",
   },
 ];
 
@@ -161,6 +179,24 @@ export default function WildRoutePage() {
                   ))}
                 </div>
               </div>
+              <div className="flex flex-wrap gap-3 pt-1">
+                <a
+                  href="https://ai-travel-planner-psi-five.vercel.app"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-custom-blue px-5 py-3 text-xs font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-custom-blue focus-visible:ring-offset-2"
+                >
+                  Open live demo <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+                <a
+                  href="https://github.com/TheMarcellVarga/ai-travel-planner"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-custom-blue/15 bg-white/55 px-5 py-3 text-xs font-semibold text-custom-blue transition-colors duration-300 hover:bg-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-custom-blue focus-visible:ring-offset-2"
+                >
+                  Inspect source <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+              </div>
             </motion.div>
           </header>
 
@@ -196,8 +232,8 @@ export default function WildRoutePage() {
                   <p className="text-[1.05rem] leading-7 text-custom-blue/65">
                     I designed the product around fewer, better-considered choices.
                     The visual language is editorial and cinematic, while the planner
-                    stays explicit about route logic, estimates, persistence, and
-                    external booking handoffs.
+                    stays explicit about route logic, confidence, freshness, estimates,
+                    persistence, and external booking handoffs.
                   </p>
                 </div>
 
@@ -277,10 +313,11 @@ export default function WildRoutePage() {
                 Designed past the mockup.
               </h2>
               <p className="mt-6 max-w-2xl text-[1.05rem] leading-7 text-custom-blue/65">
-                The product is wired as a production-style Next.js application:
-                identity, private data, public sharing, billing, and operational
-                endpoints are part of the system. Deterministic route generation,
-                tests, and explicit fallback behavior keep the demo reviewable.
+                The interface is only the visible edge. Behind it, Next.js owns the
+                browser-facing boundary, Supabase models identity and ownership, and
+                Stripe-compatible flows model entitlement changes. Paid integrations
+                remain disabled in the demo, but their contracts and failure states are
+                part of the system.
               </p>
             </motion.div>
 
@@ -309,6 +346,126 @@ export default function WildRoutePage() {
             </div>
           </section>
 
+          <section className="pb-24 sm:pb-32">
+            <motion.div
+              {...fadeInUp()}
+              className="overflow-hidden rounded-[2rem] bg-[#171d16] text-white shadow-[0_24px_70px_rgba(17,27,40,0.14)] sm:rounded-[2.5rem]"
+            >
+              <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
+                <div className="border-b border-white/10 p-6 sm:p-10 lg:border-b-0 lg:border-r lg:p-12">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-[1.1rem] bg-[#d7ff40] text-[#171d16]">
+                    <AlertTriangle className="h-5 w-5" />
+                  </div>
+                  <p className="mt-8 text-[0.64rem] font-medium uppercase tracking-[0.2em] text-white/55">
+                    Production learning
+                  </p>
+                  <h2 className="mt-4 max-w-[10ch] font-display text-[clamp(2.5rem,6vw,4.8rem)] font-medium leading-[0.9] tracking-[-0.05em]">
+                    What broke in production.
+                  </h2>
+                </div>
+
+                <div className="space-y-8 p-6 sm:p-10 lg:p-12">
+                  <div>
+                    <span className="text-[0.64rem] font-medium uppercase tracking-[0.18em] text-[#d7ff40]">
+                      The failure
+                    </span>
+                    <p className="mt-3 text-[1.05rem] leading-7 text-white/70">
+                      The first Vercel deployment generated routes correctly, but Save
+                      returned “Route not found.” The implementation had assumed that
+                      process memory would be shared across serverless function instances.
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-[0.64rem] font-medium uppercase tracking-[0.18em] text-[#d7ff40]">
+                      The repair
+                    </span>
+                    <p className="mt-3 text-[1.05rem] leading-7 text-white/70">
+                      I moved demo saves into a browser-local route vault and rebuilt
+                      previews from schema-validated stateless recipes. Those recipes omit
+                      the original prompt, while booking links are reconstructed server-side.
+                    </p>
+                  </div>
+                  <div className="rounded-[1.4rem] border border-white/10 bg-white/[0.055] p-5">
+                    <p className="text-sm leading-6 text-white/62">
+                      The result is honest about demo persistence and survives serverless
+                      execution. A managed Supabase deployment remains the explicit path to
+                      cross-device, account-owned saves.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </section>
+
+          <section className="space-y-10 pb-24 sm:pb-32">
+            <motion.div {...fadeInUp()} className="max-w-3xl">
+              <SectionLabel index="04" label="Responsive product" />
+              <h2 className="mt-5 max-w-[11ch] font-display text-[clamp(2.6rem,6vw,5rem)] font-medium leading-[0.9] tracking-[-0.05em] text-custom-blue">
+                The route stays legible in your hand.
+              </h2>
+              <p className="mt-6 max-w-2xl text-[1.05rem] leading-7 text-custom-blue/65">
+                Mobile is not a compressed desktop canvas. The planner preserves prompt
+                context, decision reasons, route order, estimate boundaries, and sharing
+                actions in a deliberate reading sequence.
+              </p>
+            </motion.div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              <motion.figure
+                {...fadeInUp(0.06)}
+                className="glass-panel overflow-hidden rounded-[1.9rem] bg-[#171d16] p-3 shadow-[0_24px_70px_rgba(17,27,40,0.12)] sm:rounded-[2.1rem] sm:p-4"
+              >
+                <Image
+                  src="/images/wild-route/planner-mobile.png"
+                  alt="Wild Route mobile planner showing a ranked multi-stop route"
+                  width={390}
+                  height={844}
+                  className="mx-auto h-auto w-full max-w-[390px] rounded-[1.35rem]"
+                />
+              </motion.figure>
+              <motion.figure
+                {...fadeInUp(0.12)}
+                className="glass-panel overflow-hidden rounded-[1.9rem] bg-[#171d16] p-3 shadow-[0_24px_70px_rgba(17,27,40,0.12)] sm:rounded-[2.1rem] sm:p-4"
+              >
+                <Image
+                  src="/images/wild-route/share-mobile.png"
+                  alt="Wild Route mobile public share view with estimate and booking boundaries"
+                  width={390}
+                  height={844}
+                  className="mx-auto h-auto w-full max-w-[390px] rounded-[1.35rem]"
+                />
+              </motion.figure>
+            </div>
+          </section>
+
+          <section className="pb-24 sm:pb-32">
+            <motion.div {...fadeInUp()} className="max-w-3xl">
+              <SectionLabel index="05" label="Product tradeoffs" />
+              <h2 className="mt-5 font-display text-[clamp(2.6rem,6vw,5rem)] font-medium leading-[0.9] tracking-[-0.05em] text-custom-blue">
+                Trust is part of the interface.
+              </h2>
+            </motion.div>
+            <div className="mt-10 grid gap-3 lg:grid-cols-3">
+              {tradeoffs.map((tradeoff, index) => (
+                <motion.article
+                  key={tradeoff.title}
+                  {...fadeInUp(index * 0.08)}
+                  className="glass-panel rounded-[1.9rem] bg-white/65 p-6 shadow-[0_12px_40px_rgba(11,17,26,0.04)] sm:rounded-[2.1rem]"
+                >
+                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-[0.9rem] bg-custom-blue text-[#d7ff40]">
+                    {index === 0 ? <Braces className="h-4 w-4" /> : index === 1 ? <Route className="h-4 w-4" /> : <ShieldCheck className="h-4 w-4" />}
+                  </div>
+                  <h3 className="mt-6 font-display text-[1.08rem] font-medium leading-[1.04] tracking-[-0.02em] text-custom-blue sm:text-[1.24rem]">
+                    {tradeoff.title}
+                  </h3>
+                  <p className="mt-3 text-[0.75rem] leading-[1.55] text-custom-blue/70">
+                    {tradeoff.text}
+                  </p>
+                </motion.article>
+              ))}
+            </div>
+          </section>
+
           <motion.section
             {...fadeInUp()}
             className="relative overflow-hidden rounded-[2rem] bg-[#171d16] p-6 text-white shadow-[0_24px_70px_rgba(17,27,40,0.14)] sm:rounded-[2.5rem] sm:p-10 lg:p-14"
@@ -325,13 +482,13 @@ export default function WildRoutePage() {
                 <Sparkles className="h-5 w-5" />
               </div>
               <h2 className="mt-8 max-w-[12ch] font-display text-[clamp(2.6rem,6vw,5.25rem)] font-medium leading-[0.9] tracking-[-0.05em]">
-                One product, end to end.
+                Product thinking, shipped end to end.
               </h2>
               <p className="mt-6 max-w-2xl text-[1.05rem] leading-7 text-white/68">
-                Wild Route is a current portfolio piece because it reflects the work
-                I want to keep doing: shaping a distinct product idea, building the
-                interface carefully, and carrying the system through save, share,
-                handoff, account, and billing flows.
+                Wild Route reflects the work I want to keep doing: turning an ambiguous
+                product opportunity into a distinct interaction, then carrying it through
+                frontend architecture, APIs, security boundaries, testing, deployment,
+                and the unglamorous failures that make the next release better.
               </p>
             </div>
           </motion.section>

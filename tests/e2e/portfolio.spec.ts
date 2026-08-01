@@ -38,7 +38,7 @@ test("contact and resume routes are reachable", async ({ page }) => {
 test("featured work uses the shared evidence record", async ({ page }) => {
   for (const [route, evidenceId, status] of [
     ["/ai-finance", "aperture", "Local release-ready"],
-    ["/wild-route", "wild-route", "Partial"],
+    ["/wild-route", "wild-route", "Deployed demo"],
     ["/about", "professional-product-work", "Working"],
   ]) {
     await page.goto(route);
@@ -56,6 +56,24 @@ test("Aperture case study presents measurable systems evidence", async ({ page }
   await expect(page.getByRole("list", { name: "Aperture system architecture" })).toBeVisible();
   await expect(page.getByText("Local rigor before live-model theatre.")).toBeVisible();
   await expect(page.getByText(/not a public financial service/i)).toBeVisible();
+});
+
+test("Wild Route case study proves product engineering beyond the interface", async ({ page }) => {
+  await page.goto("/wild-route");
+
+  await expect(page.getByRole("heading", { name: "Wild Route" })).toBeVisible();
+  await expect(page.getByText("74", { exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "What broke in production." })).toBeVisible();
+  await expect(page.getByText(/process memory would be shared/i)).toBeVisible();
+  await expect(page.getByText(/fixture-backed data and planning estimates/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /open live demo/i })).toHaveAttribute(
+    "href",
+    "https://ai-travel-planner-psi-five.vercel.app",
+  );
+  await expect(page.getByRole("link", { name: /inspect source/i })).toHaveAttribute(
+    "href",
+    "https://github.com/TheMarcellVarga/ai-travel-planner",
+  );
 });
 
 test.describe("mobile and motion fallbacks", () => {

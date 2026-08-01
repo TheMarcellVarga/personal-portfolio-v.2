@@ -3,7 +3,7 @@ import { siteName } from "../../seo";
 
 const title = "Wild Route Case Study";
 const description =
-  "A Marcell Varga case study for a prompt-first adventure travel planner with ranked route options, deterministic reasoning, save/share flows, and external booking handoffs.";
+  "A deployed product-engineering case study by Marcell Varga: prompt-first route planning, deterministic reasoning, secure save/share boundaries, accessibility, testing, and a serverless production repair.";
 
 export const metadata: Metadata = {
   title,

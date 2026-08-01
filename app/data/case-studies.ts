@@ -35,22 +35,25 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
   },
   "wild-route": {
     id: "wild-route",
-    role: "Product direction, interaction design, and frontend implementation",
+    role: "Independent product direction, UX/UI, Next.js frontend, route/API architecture, security boundaries, testing, and deployment",
     problem:
-      "Turn an open-ended travel brief into a smaller, explainable set of route options rather than an endless destination list.",
-    user: "Adventure travelers comparing pace, climate, budget, and detours before booking elsewhere.",
+      "Turn an open-ended adventure brief into a small, explainable set of route options without presenting planning estimates, fixture data, or external booking handoffs as confirmed travel inventory.",
+    user: "Independent adventure travelers comparing pace, climate, budget, and detours before validating details and booking with external providers.",
     decisions: [
-      "Start from intent rather than a destination-first search form.",
-      "Keep route ranking reasons and estimate boundaries visible.",
-      "Use a deterministic scoring spine before live provider enrichment.",
+      "Started from travel intent and kept route reasoning, confidence, freshness, and estimate boundaries visible at the point of decision.",
+      "Built a deterministic, schema-validated route engine before adding live model or provider dependencies.",
+      "Kept browser traffic behind same-origin Next.js handlers, with ownership checks, Supabase RLS, and server-only booking-link construction.",
+      "Reworked save and preview flows for stateless serverless hosting after the first deployed implementation exposed a process-memory assumption.",
     ],
     verification: [
-      "Current portfolio routes build and render with real project media.",
-      "The selected-route flow is represented with responsive screenshots.",
+      "74 deterministic Vitest cases pass across route generation, entitlements, validation, security, share, and handoff behavior.",
+      "15 Chromium checks cover the hosted golden path, keyboard flow, axe accessibility, reduced motion, and media fallbacks.",
+      "Five Supabase migrations pass static verification; the local and Vercel production builds pass with zero production dependency vulnerabilities.",
     ],
     limitations: [
-      "This is a partial project, not a claimed production service.",
-      "The linked public source repository was unavailable during the audit.",
+      "The public deployment is a portfolio demo: route metadata is fixture-backed, prices are planning estimates, and generation is deterministic rather than a live LLM.",
+      "Live managed Supabase, Stripe, email, and travel-provider integrations remain intentionally unconfigured; booking completes on external provider sites.",
+      "Demo saves use browser-local storage and previews use schema-validated stateless recipes, not cross-device account persistence.",
     ],
   },
   "professional-product-work": {
