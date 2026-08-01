@@ -13,6 +13,7 @@ The site presents a focused, evidence-led view of product work rather than a com
 - `/wild-route` — Wild Route, a deployed adventure travel-planning demo.
 - `/threadscribe` — ThreadScribe Studio, a local-first trustworthy AI case study.
 - `/askcody`, `/catchscan`, and `/ess` — archived case studies.
+- `/about` — professional background, working approach, and current direction.
 - `/resume` and `/resume/ats` — human-readable and ATS-oriented resumes.
 - `/contact` — contact details.
 

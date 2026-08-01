@@ -389,6 +389,7 @@ export default function Page() {
   const [legacyProjectsOpen, setLegacyProjectsOpen] = useState(false);
   const [footerHover, setFooterHover] = useState(false);
   const [typedText, setTypedText] = useState("");
+  const principlesTypingCompleteRef = useRef(false);
   const [introStage, setIntroStage] = useState<
     "checking" | "playing" | "exiting" | "done"
   >("checking");
@@ -544,10 +545,19 @@ export default function Page() {
 
   useMotionValueEvent(principlesProgress, "change", (value) => {
     if (shouldReduceMotion) return;
+    if (principlesTypingCompleteRef.current) return;
 
     const revealProgress = Math.min(value / principlesRevealEnd, 1);
     const nextLength = Math.round(revealProgress * principlesStatement.length);
     const nextText = principlesStatement.slice(0, nextLength);
+
+    if (revealProgress >= 1 || nextLength >= principlesStatement.length) {
+      principlesTypingCompleteRef.current = true;
+      startTransition(() => {
+        setTypedText(principlesStatement);
+      });
+      return;
+    }
 
     startTransition(() => {
       setTypedText((current) => (current === nextText ? current : nextText));
@@ -1252,40 +1262,50 @@ export default function Page() {
                       }}
                     >
                       {principlesDisplayText}
-                      {!shouldReduceMotion && typedText.length > 0 && (
+                      {!shouldReduceMotion &&
+                        typedText.length > 0 &&
+                        typedText.length < principlesStatement.length && (
                         <span className="ml-1 inline-block animate-pulse text-[#67d9ff]">
                           |
                         </span>
                       )}
                     </p>
                   </div>
-                  <div className={`${isCompactViewport ? "hidden lg:flex" : "mt-10 flex"} items-center gap-2 text-sm text-white/58`}>
-                    {/* Dot-based progress bar for the intro/principles typing */}
-                    <div className="flex items-center gap-1">
-                      {Array.from({ length: 6 }).map((_, i) => {
-                        // Show more filled dots as typing progresses
-                        // If shouldReduceMotion: just fill all
-                        const progress = shouldReduceMotion
-                          ? 1
-                          : Math.max(
-                              0,
-                              Math.min(1, typedText.length / principlesStatement.length)
-                            );
-                        const activeDots = Math.round(progress * 6);
-                        return (
-                          <span
-                            key={i}
-                            className={`inline-block h-2 w-2 rounded-full transition-all duration-300 ${
-                              i < activeDots
-                                ? "bg-[#67d9ff] scale-70 opacity-60"
-                                : "bg-[#67d9ff]/20 scale-40 opacity-60"
-                            }`}
-                          />
-                        );
-                      })}
+                  <div className="mt-10 flex items-center justify-between gap-4">
+                    <div
+                      className={`${isCompactViewport ? "hidden lg:flex" : "flex"} items-center gap-2 text-sm text-white/58`}
+                      aria-hidden="true"
+                    >
+                      <div className="flex items-center gap-1">
+                        {Array.from({ length: 6 }).map((_, i) => {
+                          const progress = shouldReduceMotion
+                            ? 1
+                            : Math.max(
+                                0,
+                                Math.min(1, typedText.length / principlesStatement.length)
+                              );
+                          const activeDots = Math.round(progress * 6);
+                          return (
+                            <span
+                              key={i}
+                              className={`inline-block h-2 w-2 rounded-full transition-all duration-300 ${
+                                i < activeDots
+                                  ? "bg-[#67d9ff] scale-70 opacity-60"
+                                  : "bg-[#67d9ff]/20 scale-40 opacity-60"
+                              }`}
+                            />
+                          );
+                        })}
+                      </div>
                     </div>
+                    <Link
+                      href="/about"
+                      className="group ml-auto inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-white/10 px-4 py-2.5 text-sm font-medium text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.14)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-white/16 active:translate-y-0 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-[#67d9ff] focus-visible:ring-offset-2 focus-visible:ring-offset-[#071726]"
+                    >
+                      About me
+                      <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </Link>
                   </div>
-      
                 </div>
               </motion.div>
             </div>

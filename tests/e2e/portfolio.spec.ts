@@ -22,6 +22,7 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(focusinLink).toHaveAttribute("target", "_blank");
   await expect(focusinLink).toHaveAttribute("rel", "noreferrer");
   await expect(page.locator('#work a[href="/catchscan"]')).toHaveCount(0);
+  await expect(page.locator('#about a[href="/about"]')).toBeVisible();
   await expect(page.getByRole("button", { name: /legacy projects/i })).toBeVisible();
   await expect(page.locator("#work a")).toHaveCount(4);
 
@@ -33,16 +34,41 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page.locator('#work a[href="/about"]')).toHaveCount(0);
 });
 
-test("contact and resume routes are reachable", async ({ page }) => {
+test("principles statement settles at its complete text", async ({ page }) => {
+  await prepareHomepage(page);
+  await page.goto("/");
+  await expect(page.locator(".home-intro-shell")).toHaveCount(0);
+
+  const principles = page.locator("#about");
+  const statement = principles.locator('[data-scroll-anchor="about"] p');
+  await page.evaluate(() => {
+    const section = document.querySelector<HTMLElement>('#about');
+    if (!section) return;
+    window.scrollTo({
+      top: section.offsetTop + section.offsetHeight * 0.82,
+      behavior: "auto",
+    });
+  });
+  await page.waitForTimeout(1200);
+
+  await expect(statement).toHaveText(
+    "I turn complex product and AI workflows into clear interfaces, then carry the strongest ideas through architecture, testing, and release.",
+  );
+});
+
+test("about, contact, and resume routes are reachable", async ({ page }) => {
+  await page.goto("/about");
+  await expect(
+    page.getByRole("heading", { name: "Product thinking, built into code." }),
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: /selected work/i })).toBeVisible();
+
   await page.goto("/contact");
   await expect(page.getByRole("heading", { name: "Say hi." })).toBeVisible();
   await expect(page.getByRole("link", { name: /themarcellvarga@gmail.com/i })).toBeVisible();
 
   await page.goto("/resume");
   await expect(page.getByRole("heading", { name: "Design-engineering work, on one page." })).toBeVisible();
-
-  const aboutResponse = await page.request.get("/about");
-  expect(aboutResponse.status()).toBe(404);
 
   const legacyPhoneEndpoint = await page.request.get("/api/contact/phone");
   expect(legacyPhoneEndpoint.status()).toBe(404);
@@ -195,7 +221,7 @@ test("selected work exposes canonical metadata and is listed in the sitemap", as
   const sitemap = await page.request.get("/sitemap.xml");
   expect(sitemap.status()).toBe(200);
   const sitemapText = await sitemap.text();
-  expect(sitemapText).not.toContain("https://marcellvarga.com/about");
+  expect(sitemapText).toContain("https://marcellvarga.com/about");
   for (const [route] of selectedRoutes) {
     expect(sitemapText).toContain(`https://marcellvarga.com${route}`);
   }
@@ -237,6 +263,7 @@ test("public routes have no serious or critical automated accessibility violatio
     "/ai-finance",
     "/wild-route",
     "/threadscribe",
+    "/about",
     "/contact",
     "/resume",
     "/askcody",
