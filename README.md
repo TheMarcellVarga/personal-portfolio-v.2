@@ -12,6 +12,7 @@ The site presents a focused, evidence-led view of product work rather than a com
 - `/ai-finance` — Aperture, a locally release-ready financial research workspace.
 - `/wild-route` — Wild Route, a deployed adventure travel-planning demo.
 - `/threadscribe` — ThreadScribe Studio, a local-first trustworthy AI case study.
+- `/focusin` — Focusin, a locally verified native macOS product case study.
 - `/askcody`, `/catchscan`, and `/ess` — archived case studies.
 - `/about` — professional background, working approach, and current direction.
 - `/resume` and `/resume/ats` — human-readable and ATS-oriented resumes.

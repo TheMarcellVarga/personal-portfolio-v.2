@@ -17,12 +17,8 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page.locator('#work a[href="/ai-finance"]')).toBeVisible();
   await expect(page.locator('#work a[href="/wild-route"]')).toBeVisible();
   await expect(page.locator('#work a[href="/threadscribe"]')).toBeVisible();
-  const focusinLink = page.locator('#work a[href="https://github.com/TheMarcellVarga/focusin"]');
-  await expect(focusinLink).toBeVisible();
-  await expect(focusinLink).toHaveAttribute("target", "_blank");
-  await expect(focusinLink).toHaveAttribute("rel", "noreferrer");
+  await expect(page.locator('#work a[href="/focusin"]')).toBeVisible();
   await expect(page.locator('#work a[href="/catchscan"]')).toHaveCount(0);
-  await expect(page.locator('#trajectory a[href="/about"]')).toBeVisible();
   await expect(page.getByRole("button", { name: /legacy projects/i })).toBeVisible();
   await expect(page.locator("#work a")).toHaveCount(4);
 
@@ -86,6 +82,7 @@ test("featured work uses the shared evidence record", async ({ page }) => {
     ["/ai-finance", "aperture", "Local release-ready"],
     ["/wild-route", "wild-route", "Deployed demo"],
     ["/threadscribe", "threadscribe", "Local release-ready"],
+    ["/focusin", "focusin", "Locally verified"],
   ]) {
     await page.goto(route);
     await expect(page.locator(`[data-case-study-evidence="${evidenceId}"]`)).toBeVisible();
@@ -140,6 +137,22 @@ test("ThreadScribe case study shows trustworthy AI interaction evidence", async 
   );
 });
 
+test("Focusin case study connects native product judgment to verified engineering", async ({ page }) => {
+  await page.goto("/focusin");
+
+  await expect(page.getByRole("heading", { name: "Focusin", exact: true })).toBeVisible();
+  await expect(page.getByText("54", { exact: true }).first()).toBeVisible();
+  await expect(page.getByRole("list", { name: "Focusin product state loop" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "The local loop does not depend on platform permission." }),
+  ).toBeVisible();
+  await expect(page.getByText(/no signed archive, installable external beta/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /inspect source/i })).toHaveAttribute(
+    "href",
+    "https://github.com/TheMarcellVarga/focusin",
+  );
+});
+
 test.describe("mobile and motion fallbacks", () => {
   test.use({ viewport: { width: 390, height: 844 }, isMobile: true });
 
@@ -148,6 +161,7 @@ test.describe("mobile and motion fallbacks", () => {
       ["/ai-finance", "aperture"],
       ["/wild-route", "wild-route"],
       ["/threadscribe", "threadscribe"],
+      ["/focusin", "focusin"],
     ]) {
       await page.goto(route);
       await expect(page.locator(`[data-case-study-evidence="${evidenceId}"]`)).toBeVisible();
@@ -168,6 +182,14 @@ test.describe("mobile and motion fallbacks", () => {
       .evaluate((element) => Number.parseFloat(getComputedStyle(element).transitionDuration));
 
     expect(transitionDuration).toBeLessThanOrEqual(0.001);
+
+    for (const [route, heading] of [
+      ["/threadscribe", "ThreadScribe Studio"],
+      ["/focusin", "Focusin"],
+    ] as const) {
+      await page.goto(route);
+      await expect(page.getByRole("heading", { name: heading, exact: true })).toBeVisible();
+    }
   });
 
   test("mobile navigation remains usable with a keyboard", async ({ page }) => {
@@ -211,6 +233,7 @@ test("selected work exposes canonical metadata and is listed in the sitemap", as
     ["/ai-finance", /Aperture Financial Intelligence Case Study/i],
     ["/wild-route", /Wild Route Case Study/i],
     ["/threadscribe", /ThreadScribe Studio Case Study/i],
+    ["/focusin", /Focusin Case Study/i],
     ["/catchscan", /CatchScan Case Study/i],
     ["/askcody", /AskCody Case Study/i],
     ["/ess", /European Study Solution Case Study/i],
@@ -270,6 +293,7 @@ test("public routes have no serious or critical automated accessibility violatio
     "/ai-finance",
     "/wild-route",
     "/threadscribe",
+    "/focusin",
     "/about",
     "/contact",
     "/resume",

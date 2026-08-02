@@ -250,6 +250,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  [data-motion-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
   .hero-resume-cta,
   .hero-resume-cta .hero-resume-sheen,
   .hero-resume-cta svg {

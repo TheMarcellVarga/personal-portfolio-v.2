@@ -79,4 +79,27 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
       "Speaker labels and segment confidence remain exploratory; hosted sync, sharing, and compliance certification are outside the project scope.",
     ],
   },
+  focusin: {
+    id: "focusin",
+    role: "Independent product direction, native macOS UX, SwiftUI implementation, state and persistence architecture, accessibility, testing, and release preparation",
+    problem:
+      "Help desk workers move from a focus interval into a useful micro-break without adding a dashboard, an account, or another decision at the moment their attention is already depleted.",
+    user: "Mac-based desk workers who notice stiffness, fatigue, scattered attention, or anxiety and want a small, optional reset that stays close to their current task.",
+    decisions: [
+      "Persisted wall-clock deadlines instead of countdown ticks so focus and break state reconcile after sleep, relaunch, clock changes, and delayed timers.",
+      "Separated non-negotiable safety preferences from softer state, duration, and same-day novelty matching through a documented fallback order.",
+      "Bundled a versioned, human-reviewed activity catalog instead of introducing remote generation, accounts, or runtime networking.",
+      "Kept notification and login-item services outside the local state core so platform denial never blocks the focus-and-break loop.",
+    ],
+    verification: [
+      "Fifty-four deterministic tests cover lifecycle, persistence, quiet hours, recommendation passes, catalog validation, permission reconciliation, and beta templates.",
+      "Twenty-one bundled activities pass state, duration, safety, and default-filter coverage validation, with named human content approval for version 0.1.0 (1).",
+      "Forty-one current appearance and accessibility captures cover light and dark modes, large text, increased contrast, reduced transparency, recovery states, and Settings.",
+    ],
+    limitations: [
+      "The implementation and unsigned Release integrity are locally verified; no signed archive, installable external beta, TestFlight build, or App Store listing exists yet.",
+      "Exact-candidate VoiceOver, notification, login-item, lifecycle, upgrade, and final-media checks remain open until a signed candidate exists.",
+      "The five-to-eight-person beta has not run, so the case study makes no usability, satisfaction, or real-world recommendation-quality claim.",
+    ],
+  },
 };

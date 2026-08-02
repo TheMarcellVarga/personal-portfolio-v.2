@@ -59,14 +59,15 @@ const architecture = [
 function revealMotion(delay: number, reduceMotion: boolean) {
   if (reduceMotion) {
     return {
+      "data-motion-reveal": "",
       initial: false as const,
-      whileInView: { opacity: 1, y: 0 },
-      viewport: { once: true },
+      animate: { opacity: 1, y: 0 },
       transition: { duration: 0 },
     };
   }
 
   return {
+    "data-motion-reveal": "",
     initial: { opacity: 0, y: 22 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, amount: 0.14 },

@@ -1,5 +1,5 @@
 export type CaseStudyId =
-  "aperture" | "wild-route" | "threadscribe";
+  "aperture" | "wild-route" | "threadscribe" | "focusin";
 
 export type Project = {
   title: string;
@@ -17,6 +17,7 @@ export type Project = {
     | "Local release-ready"
     | "Deployed demo"
     | "Fixture-backed"
+    | "Locally verified"
     | "In progress"
     | "Partial"
     | "Archived";
@@ -81,20 +82,21 @@ export const projects: Project[] = [
   },
   {
     title: "Focusin",
-    subTitle: "A native macOS companion for better breaks",
+    subTitle: "A native macOS focus-and-reset loop",
     date: "2026",
     description:
-      "A local-first SwiftUI menu bar app that recommends short, state-aware micro-breaks and helps users return to focus with one click.",
+      "A local-first SwiftUI menu bar app that turns a focus deadline into one state-aware micro-break, then gets out of the way.",
     highlight:
-      "The product scope covers native macOS interaction, curated recommendations, break timers, reminders, quiet hours, and local persistence.",
-    skills: ["SwiftUI", "Swift", "macOS", "Local-first"],
-    link: "https://github.com/TheMarcellVarga/focusin",
+      "The verified product work spans a date-derived state machine, curated recommendation policy, resilient platform integrations, accessibility behavior, and local persistence.",
+    skills: ["SwiftUI", "Swift", "macOS", "Accessibility"],
+    link: "/focusin",
     image: "/images/focusin/light-focusing.png",
     category: "Native macOS product",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(48,132,255,0.32),_transparent_28%),linear-gradient(160deg,_#102347_0%,_#245da8_52%,_#dce8f8_100%)]",
-    status: "In progress",
+    status: "Locally verified",
     portfolioPlacement: "featured",
+    caseStudyId: "focusin",
   },
   {
     title: "CatchScan",
