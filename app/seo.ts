@@ -9,7 +9,7 @@ export const shareImage = "/images/cinematic-profile-pic-sg.png";
 export const siteDescription =
   "Official portfolio of Marcell Varga, a Singapore-based product-focused frontend engineer building clear React and TypeScript interfaces, design systems, and trustworthy AI workflows.";
 
-export const lastUpdated = "2026-08-01";
+export const lastUpdated = "2026-08-04";
 export const alternatePersonNames = [
   "Varga Marcell",
   "TheMarcellVarga",
@@ -22,7 +22,7 @@ export const personSameAs = [
   "https://marcellvarga.com",
 ] as const;
 
-export const featuredWorks = [
+export const selectedWorks = [
   {
     name: "Aperture Financial Intelligence",
     url: `${siteUrl}/ai-finance`,
@@ -45,25 +45,18 @@ export const featuredWorks = [
     image: `${siteUrl}/images/threadscribe/transformed-output.png`,
   },
   {
-    name: "CatchScan",
-    url: `${siteUrl}/catchscan`,
+    name: "Focusin",
+    url: `${siteUrl}/focusin`,
     description:
-      "Copyright protection SaaS dashboard concept focused on clear ownership-monitoring workflows for creators.",
-    image: `${siteUrl}/images/catchscan-index.png`,
+      "Locally verified native macOS focus-and-reset utility with deterministic state, curated recommendations, accessibility, and release evidence.",
+    image: `${siteUrl}/images/focusin/light-focusing.png`,
   },
   {
-    name: "AskCody",
-    url: `${siteUrl}/askcody`,
+    name: "Endless Activity",
+    url: `${siteUrl}/endless-activity`,
     description:
-      "Hybrid workplace management concept for desk booking, room availability, and resource coordination inside Microsoft Teams.",
-    image: `${siteUrl}/images/askcody-index.png`,
-  },
-  {
-    name: "European Study Solution",
-    url: `${siteUrl}/ess`,
-    description:
-      "Information platform for American students exploring education in Europe, designed around trust and clear guidance.",
-    image: `${siteUrl}/images/ess-index.png`,
+      "Locally verified native iOS activity deck with deterministic ranking, local persistence, accessible gestures, and a disciplined offline MVP boundary.",
+    image: `${siteUrl}/images/endless-activity/discover.png`,
   },
 ] as const;
 
@@ -179,7 +172,7 @@ export const structuredData = {
       name: "Selected work by Marcell Varga",
       description:
         "Portfolio case studies by Marcell Varga across AI product UX, frontend engineering, design systems, and complex product interfaces.",
-      itemListElement: featuredWorks.map((work, index) => ({
+      itemListElement: selectedWorks.map((work, index) => ({
         "@type": "ListItem",
         position: index + 1,
         item: {

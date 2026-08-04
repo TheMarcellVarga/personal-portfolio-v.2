@@ -33,15 +33,18 @@ Within 60 seconds, a hiring manager should understand:
 
 1. Aperture Financial Intelligence
 2. Wild Route
-3. Professional product work (confidential)
+3. Focusin
 
 ### Supporting
 
+- ThreadScribe Studio: trustworthy AI interaction and local-first workflow evidence.
+- Endless Activity: a concise native iOS product-craft case study with deterministic
+  ranking, accessibility, persistence, and disciplined MVP scope.
 - Earlier work is retained only as clearly labelled archive evidence.
 
 ### GitHub only
 
-- Endless Activity and selected learning or utility repositories
+- Selected learning or utility repositories that do not add a distinct proof point.
 
 ## Phase 0: Content and Analytics Baseline
 
@@ -101,15 +104,17 @@ Status: Complete (implemented and verified 2026-07-28)
 
 ### Acceptance Gate
 
-- all three featured case studies use the model;
+- all featured and supporting case studies use the model;
 - layouts preserve project-specific identity;
 - media has alt text and reserved dimensions;
 - limitations are visible.
 
 Implementation note: the shared evidence record is rendered within each
-project's existing route so Aperture, Wild Route, and confidential product work
-retain their own visual context while exposing role, user, decisions,
-verification, and limitations consistently.
+project's existing route so featured and supporting work retains its own visual
+context while exposing role, user, decisions, verification, and limitations
+consistently. Aperture, Wild Route, and Focusin carry the featured narrative;
+ThreadScribe Studio and Endless Activity add narrower supporting proof without
+expanding the flagship count.
 
 ## Phase 3: Visual and Interaction Rework
 

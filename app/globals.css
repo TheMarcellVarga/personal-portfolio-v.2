@@ -1,5 +1,29 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("/fonts/cabinet-grotesk/cabinet-grotesk-400.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("/fonts/cabinet-grotesk/cabinet-grotesk-500.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("/fonts/cabinet-grotesk/cabinet-grotesk-700.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+}
+
 @theme {
   --color-custom-blue: #111b28;
   --color-custom-teal: #4ccfff;
@@ -88,6 +112,14 @@
 
   .font-mono {
     font-family: var(--mono-font);
+  }
+
+  .font-case-study {
+    font-family: "Cabinet Grotesk", var(--font);
+  }
+
+  .case-study-marquee-track {
+    animation: case-study-marquee 26s linear infinite;
   }
 
   .sticky-header {
@@ -243,6 +275,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .case-study-marquee-track {
+    animation: none;
+  }
+
   [data-motion-reveal] {
     opacity: 1 !important;
     transform: none !important;
@@ -261,6 +297,16 @@
 
   .hero-resume-cta .hero-resume-sheen {
     transform: none;
+  }
+}
+
+@keyframes case-study-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
   }
 }
 

@@ -102,4 +102,27 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
       "The five-to-eight-person beta has not run, so the case study makes no usability, satisfaction, or real-world recommendation-quality claim.",
     ],
   },
+  "endless-activity": {
+    id: "endless-activity",
+    role: "Independent product direction, native iOS UX, SwiftUI implementation, catalog and ranking architecture, accessibility, testing, and portfolio release preparation",
+    problem:
+      "Help someone move from an unfocused moment of boredom to one realistic activity without requiring a search query, onboarding, account, location permission, or network connection.",
+    user: "People between plans or low on ideas who want a fast, private suggestion they can save, skip, filter, and return to later.",
+    decisions: [
+      "Opened directly into a tactile card deck and made save and skip available as both gestures and visible controls.",
+      "Separated the immutable bundled catalog, pure ranking rules, persisted signals, and presentation deck so interaction state never corrupts source data.",
+      "Used practical constraints and saved-category signals instead of opaque personalization or generated content.",
+      "Kept the complete version-one loop local and deterministic, with explicit recovery for exhausted decks and destructive history reset.",
+    ],
+    verification: [
+      "Fifty bundled activities pass unique ID, unique title, schema, tagging, step-count, and content-quality validation.",
+      "Twelve unit tests and seven UI tests passed on the iPhone 17e simulator, covering ranking, persistence, swipes, details, filters, Saved, and relaunch state.",
+      "The large-device build passed on iPhone 17 Pro Max, with recorded checks for accessibility-size text, VoiceOver actions, Reduce Motion, and current presentation captures.",
+    ],
+    limitations: [
+      "The latest full simulator verification is dated 28 June 2026; the current audit environment has no full Xcode installation for a fresh rerun.",
+      "The project is a polished local MVP and portfolio proof point, not an App Store release or evidence of real-world retention or recommendation quality.",
+      "Accounts, cloud sync, live events, required location, booking, payments, social planning, and AI-generated activities are intentionally outside version one.",
+    ],
+  },
 };

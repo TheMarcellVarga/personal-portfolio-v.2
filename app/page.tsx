@@ -879,6 +879,10 @@ export default function Page() {
     () => projects.filter((project) => project.portfolioPlacement === "featured"),
     [],
   );
+  const supportingProjects = useMemo(
+    () => projects.filter((project) => project.portfolioPlacement === "supporting"),
+    [],
+  );
   const legacyProjects = useMemo(
     () => projects.filter((project) => project.portfolioPlacement === "archive"),
     [],
@@ -1402,6 +1406,28 @@ export default function Page() {
                 />
               ))}
 
+              <div className="border-t border-custom-blue/10 pb-3 pt-10 sm:pt-12">
+                <p className="font-label text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-custom-blue/72">
+                  Supporting work
+                </p>
+                <p className="mt-2 max-w-2xl text-sm leading-6 text-custom-blue/62">
+                  Focused proof points that deepen the main story without competing
+                  with the three featured projects.
+                </p>
+              </div>
+
+              {supportingProjects.map((project, idx) => (
+                <ProjectListItem
+                  key={project.title}
+                  project={project}
+                  numberLabel={`S${idx + 1}`}
+                  index={featuredProjects.length + idx}
+                  shouldReduceMotion={shouldReduceMotion}
+                  isCompactViewport={isCompactViewport}
+                  setActiveProjectImage={setActiveProjectImage}
+                />
+              ))}
+
               <div className="group relative border-b border-custom-blue/5">
                 <button
                   type="button"
@@ -1413,7 +1439,7 @@ export default function Page() {
                 >
                   <span className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:gap-8 md:col-span-1">
                     <span className="font-label min-w-[2.5rem] text-[0.62rem] font-bold text-custom-blue/70">
-                      {String(featuredProjects.length + 1).padStart(2, "0")}
+                      {String(featuredProjects.length + supportingProjects.length + 1).padStart(2, "0")}
                     </span>
                     <span className="flex flex-1 items-center justify-between gap-4">
                       <span className="min-w-0 font-display text-[clamp(1.55rem,8vw,1.95rem)] leading-[1.02] tracking-[-0.02em] text-custom-blue transition-transform duration-500 group-hover:translate-x-0 sm:text-[2.2rem] md:group-hover:translate-x-2 lg:text-[2.8rem]">

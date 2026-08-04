@@ -6,6 +6,10 @@ Professional portfolio for Marcell Varga, a Singapore-based product-focused fron
 
 The site presents a focused, evidence-led view of product work rather than a complete repository history. It separates locally verified products, confidential professional experience, partial prototypes, and archived case studies.
 
+The selected-work hierarchy intentionally uses three featured projects and two
+supporting case studies. Supporting work adds a distinct proof point without
+competing with the main portfolio narrative.
+
 ## Information architecture
 
 - `/` — portfolio overview and selected work.
@@ -13,6 +17,7 @@ The site presents a focused, evidence-led view of product work rather than a com
 - `/wild-route` — Wild Route, a deployed adventure travel-planning demo.
 - `/threadscribe` — ThreadScribe Studio, a local-first trustworthy AI case study.
 - `/focusin` — Focusin, a locally verified native macOS product case study.
+- `/endless-activity` — Endless Activity, a locally verified supporting native iOS product-craft case study.
 - `/askcody`, `/catchscan`, and `/ess` — archived case studies.
 - `/about` — professional background, working approach, and current direction.
 - `/resume` and `/resume/ats` — human-readable and ATS-oriented resumes.

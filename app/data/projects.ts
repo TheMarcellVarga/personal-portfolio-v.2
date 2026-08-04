@@ -1,5 +1,5 @@
 export type CaseStudyId =
-  "aperture" | "wild-route" | "threadscribe" | "focusin";
+  "aperture" | "wild-route" | "threadscribe" | "focusin" | "endless-activity";
 
 export type Project = {
   title: string;
@@ -21,7 +21,7 @@ export type Project = {
     | "In progress"
     | "Partial"
     | "Archived";
-  portfolioPlacement: "featured" | "archive";
+  portfolioPlacement: "featured" | "supporting" | "archive";
   caseStudyId?: CaseStudyId;
 };
 
@@ -77,7 +77,7 @@ export const projects: Project[] = [
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(99,206,194,0.28),_transparent_28%),linear-gradient(155deg,_#071312_0%,_#10201f_52%,_#233332_100%)]",
     status: "Local release-ready",
-    portfolioPlacement: "featured",
+    portfolioPlacement: "supporting",
     caseStudyId: "threadscribe",
   },
   {
@@ -97,6 +97,24 @@ export const projects: Project[] = [
     status: "Locally verified",
     portfolioPlacement: "featured",
     caseStudyId: "focusin",
+  },
+  {
+    title: "Endless Activity",
+    subTitle: "A native iOS activity deck for the moment between plans",
+    date: "2026",
+    description:
+      "A local-first SwiftUI product that turns boredom into a quick, realistic choice through a curated swipe deck and practical filters.",
+    highlight:
+      "The supporting case study connects interaction craft to deterministic ranking, local persistence, accessibility alternatives, testing, and deliberate product restraint.",
+    skills: ["SwiftUI", "Swift", "iOS", "Accessibility"],
+    link: "/endless-activity",
+    image: "/images/endless-activity/discover.png",
+    category: "Native iOS product craft",
+    backgroundClass:
+      "bg-[radial-gradient(circle_at_top_right,_rgba(255,91,82,0.34),_transparent_30%),linear-gradient(160deg,_#111820_0%,_#202a35_48%,_#f4eee8_100%)]",
+    status: "Locally verified",
+    portfolioPlacement: "supporting",
+    caseStudyId: "endless-activity",
   },
   {
     title: "CatchScan",

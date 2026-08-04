@@ -18,15 +18,16 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page.locator('#work a[href="/wild-route"]')).toBeVisible();
   await expect(page.locator('#work a[href="/threadscribe"]')).toBeVisible();
   await expect(page.locator('#work a[href="/focusin"]')).toBeVisible();
+  await expect(page.locator('#work a[href="/endless-activity"]')).toBeVisible();
   await expect(page.locator('#work a[href="/catchscan"]')).toHaveCount(0);
   await expect(page.getByRole("button", { name: /legacy projects/i })).toBeVisible();
-  await expect(page.locator("#work a")).toHaveCount(4);
+  await expect(page.locator("#work a")).toHaveCount(5);
 
   await page.getByRole("button", { name: /legacy projects/i }).click();
   await expect(page.locator('#work a[href="/catchscan"]')).toBeVisible();
   await expect(page.locator('#work a[href="/askcody"]')).toBeVisible();
   await expect(page.locator('#work a[href="/ess"]')).toBeVisible();
-  await expect(page.locator("#work a")).toHaveCount(7);
+  await expect(page.locator("#work a")).toHaveCount(8);
   await expect(page.locator('#work a[href="/about"]')).toHaveCount(0);
 });
 
@@ -83,6 +84,7 @@ test("featured work uses the shared evidence record", async ({ page }) => {
     ["/wild-route", "wild-route", "Deployed demo"],
     ["/threadscribe", "threadscribe", "Local release-ready"],
     ["/focusin", "focusin", "Locally verified"],
+    ["/endless-activity", "endless-activity", "Locally verified"],
   ]) {
     await page.goto(route);
     await expect(page.locator(`[data-case-study-evidence="${evidenceId}"]`)).toBeVisible();
@@ -153,6 +155,22 @@ test("Focusin case study connects native product judgment to verified engineerin
   );
 });
 
+test("Endless Activity case study presents native product craft with honest scope", async ({ page }) => {
+  await page.goto("/endless-activity");
+
+  await expect(page.getByRole("heading", { name: "Endless Activity", exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Core logic and golden paths" }).click();
+  await expect(page.getByText("12 + 7", { exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "The deck owns presentation, not truth." }),
+  ).toBeVisible();
+  await expect(page.getByText(/latest full simulator verification is dated/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /inspect source/i }).first()).toHaveAttribute(
+    "href",
+    "https://github.com/TheMarcellVarga/endless-activity",
+  );
+});
+
 test.describe("mobile and motion fallbacks", () => {
   test.use({ viewport: { width: 390, height: 844 }, isMobile: true });
 
@@ -162,6 +180,7 @@ test.describe("mobile and motion fallbacks", () => {
       ["/wild-route", "wild-route"],
       ["/threadscribe", "threadscribe"],
       ["/focusin", "focusin"],
+      ["/endless-activity", "endless-activity"],
     ]) {
       await page.goto(route);
       await expect(page.locator(`[data-case-study-evidence="${evidenceId}"]`)).toBeVisible();
@@ -186,6 +205,7 @@ test.describe("mobile and motion fallbacks", () => {
     for (const [route, heading] of [
       ["/threadscribe", "ThreadScribe Studio"],
       ["/focusin", "Focusin"],
+      ["/endless-activity", "Endless Activity"],
     ] as const) {
       await page.goto(route);
       await expect(page.getByRole("heading", { name: heading, exact: true })).toBeVisible();
@@ -234,6 +254,7 @@ test("selected work exposes canonical metadata and is listed in the sitemap", as
     ["/wild-route", /Wild Route Case Study/i],
     ["/threadscribe", /ThreadScribe Studio Case Study/i],
     ["/focusin", /Focusin Case Study/i],
+    ["/endless-activity", /Endless Activity Case Study/i],
     ["/catchscan", /CatchScan Case Study/i],
     ["/askcody", /AskCody Case Study/i],
     ["/ess", /European Study Solution Case Study/i],
@@ -262,7 +283,11 @@ test("internal portfolio links resolve", async ({ page }) => {
   await page.goto("/");
 
   const routes = await page.locator('a[href^="/"]').evaluateAll((links) =>
-    [...new Set(links.map((link) => new URL(link.href).pathname))],
+    [
+      ...new Set(
+        links.map((link) => new URL((link as HTMLAnchorElement).href).pathname),
+      ),
+    ],
   );
 
   for (const route of routes) {
@@ -294,6 +319,7 @@ test("public routes have no serious or critical automated accessibility violatio
     "/wild-route",
     "/threadscribe",
     "/focusin",
+    "/endless-activity",
     "/about",
     "/contact",
     "/resume",

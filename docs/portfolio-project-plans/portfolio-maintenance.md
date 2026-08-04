@@ -12,7 +12,7 @@
 
 - Project placement, date, status, links, and card content live in
   `app/data/projects.ts`.
-- The featured case-study evidence lives in `app/data/case-studies.ts`.
+- Featured and supporting case-study evidence lives in `app/data/case-studies.ts`.
 - `caseStudyId` joins the two records, so the evidence component reads status
   from the project record instead of duplicating it.
 - Route metadata lives beside each route layout; global identity and structured
