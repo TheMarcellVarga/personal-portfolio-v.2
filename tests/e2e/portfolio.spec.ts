@@ -92,6 +92,29 @@ test("featured work uses the shared evidence record", async ({ page }) => {
   }
 });
 
+test("case study recommendations use current work and vary by the page", async ({ page }) => {
+  for (const [route, currentTitle, expectedCount] of [
+    ["/ai-finance", "Aperture Financial Intelligence", 4],
+    ["/wild-route", "Wild Route", 4],
+    ["/threadscribe", "ThreadScribe Studio", 4],
+    ["/focusin", "Focusin", 4],
+    ["/endless-activity", "Endless Activity", 4],
+    ["/catchscan", "CatchScan", 5],
+    ["/askcody", "AskCody", 5],
+    ["/ess", "European Study Solution", 5],
+  ] as const) {
+    await page.goto(route);
+
+    const currentWork = page.locator("[data-other-works]");
+    await expect(currentWork).toContainText("Current case studies");
+    await expect(currentWork.locator("[data-other-works-card]")).toHaveCount(expectedCount);
+    await expect(currentWork.getByRole("heading", { name: currentTitle })).toHaveCount(0);
+    await expect(currentWork).not.toContainText("CatchScan");
+    await expect(currentWork).not.toContainText("AskCody");
+    await expect(currentWork).not.toContainText("European Study Solution");
+  }
+});
+
 test("Aperture case study presents measurable systems evidence", async ({ page }) => {
   await page.goto("/ai-finance");
 

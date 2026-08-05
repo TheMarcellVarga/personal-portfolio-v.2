@@ -14,7 +14,7 @@ type OtherWorksProps = {
 
 export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
   const otherProjects = projects.filter(
-    (p) => p.title !== currentProjectTitle && p.portfolioPlacement === "archive"
+    (p) => p.title !== currentProjectTitle && p.portfolioPlacement !== "archive"
   );
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
@@ -69,10 +69,15 @@ export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
   }, [inView]);
 
   return (
-    <section ref={sectionRef} className="mt-24 sm:mt-32 lg:mt-40">
-      <SectionLabel index="More" label="Earlier / Archived case studies" />
+    <section
+      ref={sectionRef}
+      data-other-works
+      className="mt-24 sm:mt-32 lg:mt-40"
+    >
+      <SectionLabel index="More" label="Current case studies" />
       <p className="mt-4 max-w-2xl text-sm leading-6 text-custom-blue/65">
-        Earlier work remains available for context and does not represent my current technical scope.
+        Explore the other current projects where product thinking is carried through
+        interface, architecture, testing, and release.
       </p>
       <div className="mt-8 grid gap-3.5 sm:mt-12 md:grid-cols-2">
         {otherProjects.map((project, index) => (
