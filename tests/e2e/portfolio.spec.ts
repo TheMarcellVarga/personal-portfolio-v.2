@@ -15,19 +15,20 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page).toHaveTitle(/Marcell Varga/i);
   await expect(page.locator("[data-hero-badge-label]").last()).toBeVisible();
   await expect(page.locator('#work a[href="/ai-finance"]')).toBeVisible();
+  await expect(page.locator('#work a[href="/first-revenue-game"]')).toBeVisible();
   await expect(page.locator('#work a[href="/wild-route"]')).toBeVisible();
   await expect(page.locator('#work a[href="/threadscribe"]')).toBeVisible();
   await expect(page.locator('#work a[href="/focusin"]')).toBeVisible();
   await expect(page.locator('#work a[href="/endless-activity"]')).toBeVisible();
   await expect(page.locator('#work a[href="/catchscan"]')).toHaveCount(0);
   await expect(page.getByRole("button", { name: /legacy projects/i })).toBeVisible();
-  await expect(page.locator("#work a")).toHaveCount(5);
+  await expect(page.locator("#work a")).toHaveCount(6);
 
   await page.getByRole("button", { name: /legacy projects/i }).click();
   await expect(page.locator('#work a[href="/catchscan"]')).toBeVisible();
   await expect(page.locator('#work a[href="/askcody"]')).toBeVisible();
   await expect(page.locator('#work a[href="/ess"]')).toBeVisible();
-  await expect(page.locator("#work a")).toHaveCount(8);
+  await expect(page.locator("#work a")).toHaveCount(9);
   await expect(page.locator('#work a[href="/about"]')).toHaveCount(0);
 });
 
@@ -39,7 +40,7 @@ test("principles statement types forward and reverses on scroll back", async ({ 
   const principles = page.locator("#about");
   const statement = principles.locator('[data-scroll-anchor="about"] p');
   const fullStatement =
-    "I turn complex product and AI workflows into clear interfaces, then carry the strongest ideas through architecture, testing, and release.";
+    "I turn complex product workflows into clear interfaces, then carry them through backend architecture, reliability, testing, and release.";
 
   await page.evaluate(() => {
     const section = document.querySelector<HTMLElement>('#about');
@@ -81,6 +82,7 @@ test("about, contact, and resume routes are reachable", async ({ page }) => {
 test("featured work uses the shared evidence record", async ({ page }) => {
   for (const [route, evidenceId, status] of [
     ["/ai-finance", "aperture", "Local release-ready"],
+    ["/first-revenue-game", "first-revenue-game", "Configured runtime verified"],
     ["/wild-route", "wild-route", "Deployed demo"],
     ["/threadscribe", "threadscribe", "Local release-ready"],
     ["/focusin", "focusin", "Locally verified"],
@@ -93,15 +95,18 @@ test("featured work uses the shared evidence record", async ({ page }) => {
 });
 
 test("case study recommendations use current work and vary by the page", async ({ page }) => {
+  test.setTimeout(45_000);
+
   for (const [route, currentTitle, expectedCount] of [
-    ["/ai-finance", "Aperture Financial Intelligence", 4],
-    ["/wild-route", "Wild Route", 4],
-    ["/threadscribe", "ThreadScribe Studio", 4],
-    ["/focusin", "Focusin", 4],
-    ["/endless-activity", "Endless Activity", 4],
-    ["/catchscan", "CatchScan", 5],
-    ["/askcody", "AskCody", 5],
-    ["/ess", "European Study Solution", 5],
+    ["/ai-finance", "Aperture Financial Intelligence", 5],
+    ["/first-revenue-game", "First Revenue Game", 5],
+    ["/wild-route", "Wild Route", 5],
+    ["/threadscribe", "ThreadScribe Studio", 5],
+    ["/focusin", "Focusin", 5],
+    ["/endless-activity", "Endless Activity", 5],
+    ["/catchscan", "CatchScan", 6],
+    ["/askcody", "AskCody", 6],
+    ["/ess", "European Study Solution", 6],
   ] as const) {
     await page.goto(route);
 
@@ -124,6 +129,29 @@ test("Aperture case study presents measurable systems evidence", async ({ page }
   await expect(page.getByRole("list", { name: "Aperture system architecture" })).toBeVisible();
   await expect(page.getByText("Local rigor before live-model theatre.")).toBeVisible();
   await expect(page.getByText(/not a public financial service/i)).toBeVisible();
+});
+
+test("First Revenue Game connects product judgment to reliable backend evidence", async ({ page }) => {
+  await page.goto("/first-revenue-game");
+
+  await expect(page.getByRole("heading", { name: "First Revenue Game", exact: true })).toBeVisible();
+  await expect(page.getByText("41", { exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("list", { name: "First Revenue Game product workflow" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("list", { name: "First Revenue Game system architecture" }),
+  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "The backend earns its complexity." })).toBeVisible();
+  await expect(page.getByText(/no hosted production environment/i).first()).toBeVisible();
+  await expect(page.locator("video")).toHaveAttribute(
+    "poster",
+    "/images/first-revenue-game/member-dashboard.jpg",
+  );
+  await expect(page.getByRole("link", { name: /inspect source/i })).toHaveAttribute(
+    "href",
+    "https://github.com/TheMarcellVarga/gamified-business-development",
+  );
 });
 
 test("Wild Route case study proves product engineering beyond the interface", async ({ page }) => {
@@ -200,6 +228,7 @@ test.describe("mobile and motion fallbacks", () => {
   test("featured case studies stay readable without horizontal overflow", async ({ page }) => {
     for (const [route, evidenceId] of [
       ["/ai-finance", "aperture"],
+      ["/first-revenue-game", "first-revenue-game"],
       ["/wild-route", "wild-route"],
       ["/threadscribe", "threadscribe"],
       ["/focusin", "focusin"],
@@ -227,6 +256,7 @@ test.describe("mobile and motion fallbacks", () => {
 
     for (const [route, heading] of [
       ["/threadscribe", "ThreadScribe Studio"],
+      ["/first-revenue-game", "First Revenue Game"],
       ["/focusin", "Focusin"],
       ["/endless-activity", "Endless Activity"],
     ] as const) {
@@ -274,6 +304,7 @@ test("public routes do not serve personal phone data", async ({ page }) => {
 test("selected work exposes canonical metadata and is listed in the sitemap", async ({ page }) => {
   const selectedRoutes = [
     ["/ai-finance", /Aperture Financial Intelligence Case Study/i],
+    ["/first-revenue-game", /First Revenue Game Case Study/i],
     ["/wild-route", /Wild Route Case Study/i],
     ["/threadscribe", /ThreadScribe Studio Case Study/i],
     ["/focusin", /Focusin Case Study/i],
@@ -336,9 +367,12 @@ test("homepage has no serious or critical automated accessibility violations", a
 });
 
 test("public routes have no serious or critical automated accessibility violations", async ({ page }) => {
+  test.setTimeout(60_000);
+
   for (const route of [
     "/",
     "/ai-finance",
+    "/first-revenue-game",
     "/wild-route",
     "/threadscribe",
     "/focusin",
