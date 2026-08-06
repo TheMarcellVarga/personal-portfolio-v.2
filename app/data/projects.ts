@@ -1,5 +1,10 @@
 export type CaseStudyId =
-  "aperture" | "wild-route" | "threadscribe" | "focusin" | "endless-activity";
+  | "aperture"
+  | "first-revenue-game"
+  | "wild-route"
+  | "threadscribe"
+  | "focusin"
+  | "endless-activity";
 
 export type Project = {
   title: string;
@@ -18,6 +23,7 @@ export type Project = {
     | "Deployed demo"
     | "Fixture-backed"
     | "Locally verified"
+    | "Configured runtime verified"
     | "In progress"
     | "Partial"
     | "Archived";
@@ -43,6 +49,24 @@ export const projects: Project[] = [
     status: "Local release-ready",
     portfolioPlacement: "featured",
     caseStudyId: "aperture",
+  },
+  {
+    title: "First Revenue Game",
+    subTitle: "Commercial proof, operator review, and reliable progression",
+    date: "2026",
+    description:
+      "A social execution product that helps solo builders turn one monetizable skill into first-revenue evidence through focused missions, accountable proof, and operator review.",
+    highlight:
+      "A configured vertical slice connects the Next.js product shell to an authoritative Java/Spring workflow, transactional outbox, replay-safe events, scoped artifacts, and operational evidence.",
+    skills: ["Next.js", "Java / Spring", "PostgreSQL", "Kafka", "OpenTelemetry"],
+    link: "/first-revenue-game",
+    image: "/images/first-revenue-game/member-dashboard.jpg",
+    category: "Enterprise product + event-driven systems",
+    backgroundClass:
+      "bg-[radial-gradient(circle_at_top_right,_rgba(239,178,86,0.34),_transparent_28%),linear-gradient(155deg,_#0c1820_0%,_#18343b_52%,_#725232_100%)]",
+    status: "Configured runtime verified",
+    portfolioPlacement: "featured",
+    caseStudyId: "first-revenue-game",
   },
   {
     title: "Wild Route",

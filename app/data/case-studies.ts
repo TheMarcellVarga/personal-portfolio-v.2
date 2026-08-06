@@ -33,6 +33,30 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
       "External model calls and paid-provider comparisons remain disabled pending explicit cost and credential approval.",
     ],
   },
+  "first-revenue-game": {
+    id: "first-revenue-game",
+    role: "Independent product direction, UX/UI, Next.js shell and BFF, Java/Spring domain workflow, event reliability, observability, testing, and release evidence",
+    problem:
+      "Help solo builders move one monetizable skill toward first revenue without rewarding planning theater, while ensuring that progression changes only when submitted proof supports it.",
+    user: "Solo builders pursuing a first paid outcome, and operators responsible for reviewing commercial evidence and unlocking supported progression.",
+    decisions: [
+      "Centered the member experience on one commercially specific mission, external evidence, and an explicit reject-revise-approve recovery loop.",
+      "Migrated the authoritative workflow one vertical slice at a time, preserving the Next.js product contract while Spring Boot took ownership in configured mode.",
+      "Signed short-lived viewer context across the BFF boundary and enforced role plus resource ownership inside the backend.",
+      "Committed workflow state and event intent atomically through a transactional outbox, then made projections idempotent by event ID.",
+      "Resolved proof ownership before issuing short-lived MinIO access and kept operational telemetry free of secrets and applicant data.",
+    ],
+    verification: [
+      "Forty-one Vitest tests and 35 passing Playwright checks cover the product shell, API contracts, responsive behavior, and member/operator workflow.",
+      "Thirty-four JUnit and Testcontainers tests exercise the backend against real PostgreSQL and Redpanda services.",
+      "The configured verifier proves application-to-approval state, BFF reads, outbox drain and recovery, custom metrics, Grafana provisioning, and log privacy.",
+    ],
+    limitations: [
+      "The configured runtime is verified locally; no hosted production environment or production end-user identity deployment is claimed.",
+      "The demonstrated golden path uses link proof. MinIO file handling is verified separately through permission and storage coverage.",
+      "Redis is readiness-checked but owns no product workload, and production SLOs, alert routing, retention, scaling, and incident ownership remain open.",
+    ],
+  },
   "wild-route": {
     id: "wild-route",
     role: "Independent product direction, UX/UI, Next.js frontend, route/API architecture, security boundaries, testing, and deployment",

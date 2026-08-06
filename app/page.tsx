@@ -46,7 +46,7 @@ import { HeroCanvasBackdrop } from "./components/HeroCanvasBackdrop";
 import { SplitTextReveal } from "./components/SplitTextReveal";
 
 const principlesStatement =
-  "I turn complex product and AI workflows into clear interfaces, then carry the strongest ideas through architecture, testing, and release.";
+  "I turn complex product workflows into clear interfaces, then carry them through backend architecture, reliability, testing, and release.";
 
 const PRINCIPLES_REVEAL_END = 0.74;
 
@@ -68,7 +68,7 @@ const processCards = [
   {
     number: "03",
     title: "Core stack",
-    body: "React, TypeScript, design systems, and pragmatic frontend engineering for durable product interfaces.",
+    body: "React, TypeScript, Java/Spring, and event-driven systems for durable product workflows.",
     icon: Code2,
     colSpan: "lg:col-span-1",
   },
@@ -86,8 +86,8 @@ const processTags = [
   "product delivery",
   "React",
   "TypeScript",
-  "design systems",
-  "UX engineering",
+  "Java / Spring",
+  "event systems",
   "accessibility",
   "responsive UI",
 ];
@@ -1317,8 +1317,8 @@ export default function Page() {
               </div>
               <p className="max-w-xl text-[0.9rem] leading-7 text-custom-blue/66 lg:justify-self-end">
                 Current work is grounded in product delivery: clarifying complex
-                requirements, building resilient React interfaces, and carrying the
-                details through implementation.
+                requirements, building resilient interfaces and backend workflows,
+                and carrying the details through verification and release.
               </p>
             </div>
 

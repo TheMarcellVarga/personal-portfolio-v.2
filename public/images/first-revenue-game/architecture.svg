@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980" role="img" aria-labelledby="title description">
+  <title id="title">First Revenue Game current configured architecture</title>
+  <description id="description">The browser uses the Next.js product shell and BFF. Next.js signs viewer and trace context for the Spring Boot workflow API. Spring Boot owns durable workflow state in PostgreSQL, publishes through a transactional outbox to Redpanda, and updates idempotent projections. Proof files use an ownership-scoped MinIO path. OpenTelemetry, Prometheus, and Grafana provide runtime evidence.</description>
+  <defs>
+    <style>
+      .background { fill: #f4f1ea; }
+      .ink { fill: #151515; }
+      .muted { fill: #655f56; }
+      .panel { fill: #fffdf8; stroke: #151515; stroke-width: 2; }
+      .dark-panel { fill: #191919; stroke: #191919; stroke-width: 2; }
+      .accent-panel { fill: #efe5d5; stroke: #9b5c1a; stroke-width: 2; }
+      .ops-panel { fill: #e8ece8; stroke: #4e6255; stroke-width: 2; }
+      .arrow { fill: none; stroke: #151515; stroke-width: 3; marker-end: url(#arrow); }
+      .accent-arrow { fill: none; stroke: #9b5c1a; stroke-width: 3; marker-end: url(#accent-arrow); }
+      .dashed-arrow { fill: none; stroke: #655f56; stroke-width: 3; stroke-dasharray: 10 8; marker-end: url(#muted-arrow); }
+      .eyebrow { font: 600 18px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 2px; text-transform: uppercase; }
+      .heading { font: 700 30px Inter, ui-sans-serif, system-ui, sans-serif; }
+      .body { font: 400 20px Inter, ui-sans-serif, system-ui, sans-serif; }
+      .small { font: 400 17px Inter, ui-sans-serif, system-ui, sans-serif; }
+      .white { fill: #fffdf8; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#151515"/></marker>
+    <marker id="accent-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#9b5c1a"/></marker>
+    <marker id="muted-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#655f56"/></marker>
+  </defs>
+
+  <rect class="background" width="1600" height="980" rx="34"/>
+  <text class="eyebrow muted" x="70" y="65">CURRENT CONFIGURED STATE · 2026-08-01</text>
+  <text class="heading ink" x="70" y="112">Product shell, authoritative workflow, durable events</text>
+  <text class="body muted" x="70" y="148">Only demonstrated components are shown. Redis is readiness-verified but has no active product workload.</text>
+
+  <rect class="panel" x="70" y="225" width="225" height="150" rx="22"/>
+  <text class="eyebrow muted" x="95" y="260">CLIENT</text>
+  <text class="heading ink" x="95" y="305">Browser</text>
+  <text class="small muted" x="95" y="338">Member + operator UI</text>
+
+  <rect class="accent-panel" x="370" y="200" width="360" height="200" rx="22"/>
+  <text class="eyebrow muted" x="400" y="240">PRODUCT SHELL</text>
+  <text class="heading ink" x="400" y="286">Next.js App Router</text>
+  <text class="small muted" x="400" y="322">Pages · BFF routes · sessions</text>
+  <text class="small muted" x="400" y="350">Turnstile · email · analytics</text>
+  <text class="small muted" x="400" y="378">Signed viewer + trace context</text>
+
+  <rect class="dark-panel" x="820" y="185" width="400" height="230" rx="22"/>
+  <text class="eyebrow white" x="850" y="225">AUTHORITATIVE WORKFLOW</text>
+  <text class="heading white" x="850" y="272">Spring Boot 3</text>
+  <text class="small white" x="850" y="310">Applications · onboarding · missions</text>
+  <text class="small white" x="850" y="338">Proof · pods · operator review</text>
+  <text class="small white" x="850" y="366">Role + ownership enforcement</text>
+  <text class="small white" x="850" y="394">Transactional command boundary</text>
+
+  <path class="arrow" d="M295 300 H370"/>
+  <path class="accent-arrow" d="M730 300 H820"/>
+  <text class="small muted" x="742" y="278">BFF</text>
+
+  <rect class="panel" x="1235" y="210" width="295" height="180" rx="22"/>
+  <text class="eyebrow muted" x="1265" y="250">SYSTEM OF RECORD</text>
+  <text class="heading ink" x="1265" y="296">PostgreSQL</text>
+  <text class="small muted" x="1265" y="330">Flyway schema ownership</text>
+  <text class="small muted" x="1265" y="358">Domain state + outbox</text>
+  <path class="arrow" d="M1220 300 H1235"/>
+
+  <rect class="accent-panel" x="820" y="500" width="300" height="150" rx="22"/>
+  <text class="eyebrow muted" x="850" y="540">RELIABILITY</text>
+  <text class="heading ink" x="850" y="582">Outbox dispatcher</text>
+  <text class="small muted" x="850" y="615">Claim · retry · dead letter</text>
+
+  <rect class="panel" x="1210" y="500" width="320" height="150" rx="22"/>
+  <text class="eyebrow muted" x="1240" y="540">EVENT TRANSPORT</text>
+  <text class="heading ink" x="1240" y="582">Redpanda / Kafka</text>
+  <text class="small muted" x="1240" y="615">Versioned workflow facts</text>
+
+  <rect class="panel" x="1210" y="725" width="320" height="150" rx="22"/>
+  <text class="eyebrow muted" x="1240" y="765">CONSUMERS</text>
+  <text class="heading ink" x="1240" y="807">Idempotent projections</text>
+  <text class="small muted" x="1240" y="840">Unique event ID · replay safe</text>
+
+  <path class="accent-arrow" d="M1380 390 V455 H970 V500"/>
+  <text class="small muted" x="1090" y="446">committed outbox row</text>
+  <path class="arrow" d="M1120 575 H1210"/>
+  <path class="arrow" d="M1370 650 V725"/>
+  <path class="arrow" d="M1210 815 H1160 V690 H1420 V390"/>
+  <text class="small muted" x="900" y="690">projection state returns to PostgreSQL</text>
+
+  <rect class="panel" x="370" y="505" width="355" height="145" rx="22"/>
+  <text class="eyebrow muted" x="400" y="545">PROOF ARTIFACT PATH</text>
+  <text class="heading ink" x="400" y="585">MinIO / S3-compatible</text>
+  <text class="small muted" x="400" y="618">Scoped metadata + signed download</text>
+  <path class="dashed-arrow" d="M820 360 H770 V575 H725"/>
+
+  <rect class="ops-panel" x="70" y="730" width="980" height="150" rx="22"/>
+  <text class="eyebrow muted" x="100" y="770">OPERATIONAL EVIDENCE</text>
+  <text class="heading ink" x="100" y="812">OpenTelemetry Collector</text>
+  <text class="heading ink" x="520" y="812">Prometheus</text>
+  <text class="heading ink" x="800" y="812">Grafana</text>
+  <text class="small muted" x="100" y="850">Privacy-safe traces</text>
+  <text class="small muted" x="520" y="850">HTTP + event metrics</text>
+  <text class="small muted" x="800" y="850">Latency · errors · outbox · events</text>
+  <path class="dashed-arrow" d="M980 415 V690 H280 V730"/>
+  <path class="dashed-arrow" d="M1040 415 V690 H520 V730"/>
+
+  <text class="small muted" x="70" y="940">Solid arrows: verified configured golden path · Dashed arrows: configured artifact/telemetry paths backed by ownership and runtime checks</text>
+</svg>
