@@ -438,7 +438,7 @@ function ProjectFact({
 }) {
   return (
     <div>
-      <div className="flex items-center gap-2 text-custom-blue/45">
+      <div className="flex items-center gap-2 text-custom-blue/70">
         <Icon className="h-3.5 w-3.5" aria-hidden="true" />
         <span className="text-[0.58rem] font-medium uppercase tracking-[0.17em]">{label}</span>
       </div>
