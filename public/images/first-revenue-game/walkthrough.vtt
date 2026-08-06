@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00.000 --> 00:12.000
+First Revenue Game helps a solo builder turn one monetizable skill into first-revenue evidence—not generic task activity.
+
+00:12.000 --> 00:24.000
+The workspace keeps one active commercial mission, its proof standard, due date, fallback, and revenue goal together.
+
+00:24.000 --> 00:36.000
+Submitted proof enters a server-confirmed review state and locks editing so the decision remains tied to the exact evidence.
+
+00:36.000 --> 00:48.000
+The operator can reject with an actionable note or approve only the milestones the submitted proof supports.
+
+00:48.000 --> 01:00.000
+The same mission-first hierarchy remains usable on mobile, with access to pod accountability, progress, and settings.
+
+01:00.000 --> 01:15.000
+Next.js is the shell; Spring Boot owns the configured workflow, with PostgreSQL, a transactional outbox, Redpanda, and observable event evidence.
