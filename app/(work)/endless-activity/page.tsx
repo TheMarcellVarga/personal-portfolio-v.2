@@ -171,8 +171,8 @@ export default function EndlessActivityPage() {
 
       <main className="relative z-10 w-full max-w-full overflow-x-hidden px-5 pb-20 pt-32 sm:px-6 lg:px-10 lg:pt-36">
         <div className="mx-auto max-w-7xl">
-          <header className="relative min-h-[45rem] pb-28 sm:min-h-[52rem] sm:pb-40 lg:min-h-[48rem]">
-            <div className="relative z-10 max-w-6xl pt-5 lg:pt-16">
+          <header className="relative pb-20 sm:pb-28 lg:grid lg:min-h-[44rem] lg:grid-cols-[minmax(0,1fr)_minmax(19rem,25rem)] lg:items-center lg:gap-12 lg:pb-24">
+            <div className="relative z-10 max-w-3xl pt-5 lg:pt-0">
               <p className="text-sm font-medium text-custom-blue/72">
                 Supporting native iOS product case study
               </p>
@@ -190,7 +190,7 @@ export default function EndlessActivityPage() {
                   Source available privately on request
                 </p>
                 <a
-                  href="/images/endless-activity/endless-activity-demo.mp4"
+                  href="#walkthrough"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-white/74 px-6 py-3.5 text-sm font-semibold text-custom-blue shadow-[inset_0_0_0_1px_rgba(17,27,40,0.1),0_14px_38px_rgba(17,27,40,0.08)] transition duration-300 hover:-translate-y-1 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-custom-blue focus-visible:ring-offset-3"
                 >
                   Watch 24-second walkthrough
@@ -199,7 +199,7 @@ export default function EndlessActivityPage() {
               </div>
             </div>
 
-            <div className="pointer-events-none absolute -bottom-4 right-[-7.5rem] z-0 w-[19rem] rotate-[5deg] sm:right-[-3rem] sm:w-[25rem] lg:-bottom-28 lg:right-[-4rem] lg:w-[25rem] xl:right-0 xl:w-[27rem]">
+            <div className="relative z-10 mx-auto mt-12 w-[min(78vw,19rem)] rotate-[5deg] sm:w-[min(64vw,25rem)] lg:mt-0 lg:w-full lg:max-w-[23rem] lg:justify-self-end xl:max-w-[25rem]">
               <div className="absolute -left-20 top-16 h-72 w-72 rounded-full bg-[#ff5b52]/20 blur-3xl" />
               <Image
                 src="/images/endless-activity/discover.png"
@@ -207,12 +207,59 @@ export default function EndlessActivityPage() {
                 width={1170}
                 height={2532}
                 priority
-                loading="eager"
                 className="relative h-auto w-full rounded-[2.6rem] shadow-[0_45px_110px_rgba(17,27,40,0.28)]"
               />
             </div>
 
           </header>
+
+          <figure
+            id="walkthrough"
+            className="scroll-mt-28 overflow-hidden rounded-[2.2rem] bg-[#111b28] p-5 text-white shadow-[0_28px_80px_rgba(17,27,40,0.16)] sm:p-7 lg:grid lg:grid-cols-[minmax(0,19rem)_minmax(0,1fr)] lg:items-center lg:gap-10 lg:p-10"
+          >
+            <video
+              controls
+              playsInline
+              preload="metadata"
+              poster="/images/endless-activity/discover.png"
+              aria-label="Twenty-four second Endless Activity visual walkthrough"
+              aria-describedby="endless-activity-transcript"
+              className="mx-auto w-full max-w-[19rem] rounded-[1.6rem] bg-[#f4f5f5]"
+            >
+              <source src="/images/endless-activity/endless-activity-demo.mp4" type="video/mp4" />
+              <track
+                kind="descriptions"
+                src="/images/endless-activity/endless-activity-demo.vtt"
+                srcLang="en"
+                label="Visual descriptions"
+                default
+              />
+              Your browser does not support the Endless Activity walkthrough.
+            </video>
+            <div className="mt-6 lg:mt-0">
+              <p className="text-[0.64rem] font-semibold uppercase tracking-[0.2em] text-[#ff8e87]">
+                Accessible walkthrough
+              </p>
+              <h2 className="mt-4 max-w-[11ch] text-[clamp(2.4rem,5vw,4.8rem)] font-medium leading-[0.9] tracking-[-0.05em]">
+                One flow, described clearly.
+              </h2>
+              <p className="mt-5 max-w-xl text-[1rem] leading-7 text-white/72">
+                The visual demo shows the same concrete path as the case study:
+                discover one activity, inspect its steps, save it, and adjust preferences.
+              </p>
+              <details id="endless-activity-transcript" className="mt-7 rounded-[1.2rem] border border-white/10 bg-white/[0.06] p-5">
+                <summary className="cursor-pointer text-sm font-semibold text-white">
+                  Read the walkthrough transcript
+                </summary>
+                <ol className="mt-4 space-y-3 text-sm leading-6 text-white/72">
+                  <li><span className="mr-2 font-mono text-xs text-[#ff8e87]">00:00</span>Discover presents one five-sense reset with duration, cost, energy, Save, and Skip controls.</li>
+                  <li><span className="mr-2 font-mono text-xs text-[#ff8e87]">00:06</span>The activity detail view expands into three practical steps and a Save for later action.</li>
+                  <li><span className="mr-2 font-mono text-xs text-[#ff8e87]">00:12</span>The Saved screen keeps the activity available for another moment.</li>
+                  <li><span className="mr-2 font-mono text-xs text-[#ff8e87]">00:18</span>Preferences expose duration, cost, energy, and setting filters without requiring an account.</li>
+                </ol>
+              </details>
+            </div>
+          </figure>
 
           <div className="overflow-hidden border-y border-custom-blue/10 py-4" aria-label="Project proof points">
             <div className="case-study-marquee-track flex w-max items-center">

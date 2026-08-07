@@ -79,6 +79,21 @@ test("about, contact, and resume routes are reachable", async ({ page }) => {
   expect(legacyPhoneEndpoint.status()).toBe(404);
 });
 
+test("branded recovery route guides visitors back to the portfolio", async ({ page }) => {
+  const response = await page.goto("/this-route-does-not-exist");
+
+  expect(response?.status()).toBe(404);
+  await expect(page.getByRole("heading", { name: "This path led nowhere." })).toBeVisible();
+  await expect(page.getByRole("link", { name: /return to portfolio/i })).toHaveAttribute(
+    "href",
+    "/",
+  );
+  await expect(page.getByRole("link", { name: /open resume/i })).toHaveAttribute(
+    "href",
+    "/resume",
+  );
+});
+
 test("featured work uses the shared evidence record", async ({ page }) => {
   for (const [route, evidenceId, status] of [
     ["/ai-finance", "aperture", "Local release-ready"],
@@ -179,6 +194,10 @@ test("ThreadScribe case study shows trustworthy AI interaction evidence", async 
   ).toBeVisible();
   await expect(page.getByText(/public walkthrough uses deterministic fixture/i)).toBeVisible();
   await expect(page.getByText("Source available privately on request")).toBeVisible();
+  await expect(page.locator("video track[kind='captions']")).toHaveAttribute(
+    "src",
+    "/images/threadscribe/threadscribe-demo.vtt",
+  );
 });
 
 test("Focusin case study connects native product judgment to verified engineering", async ({ page }) => {
@@ -205,6 +224,13 @@ test("Endless Activity case study presents native product craft with honest scop
   ).toBeVisible();
   await expect(page.getByText(/latest full simulator verification is dated/i)).toBeVisible();
   await expect(page.getByText("Source available privately on request").first()).toBeVisible();
+  await expect(page.locator("#walkthrough video track[kind='descriptions']")).toHaveAttribute(
+    "src",
+    "/images/endless-activity/endless-activity-demo.vtt",
+  );
+  await expect(page.locator("#endless-activity-transcript")).toContainText(
+    "Preferences expose duration",
+  );
 });
 
 test.describe("mobile and motion fallbacks", () => {
@@ -227,6 +253,17 @@ test.describe("mobile and motion fallbacks", () => {
       );
       expect(horizontalOverflow).toBeLessThanOrEqual(1);
     }
+  });
+
+  test("Endless Activity stacks the device artwork below the mobile copy", async ({ page }) => {
+    await page.goto("/endless-activity");
+
+    const copy = await page.locator("main header > div").nth(0).boundingBox();
+    const device = await page.locator("main header img").boundingBox();
+
+    expect(copy).not.toBeNull();
+    expect(device).not.toBeNull();
+    expect(device!.y).toBeGreaterThan(copy!.y + copy!.height - 1);
   });
 
   test("reduced-motion preference shortens interface transitions", async ({ page }) => {

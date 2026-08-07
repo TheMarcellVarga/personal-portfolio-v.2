@@ -1,0 +1,17 @@
+WEBVTT
+
+00:00.000 --> 00:13.500
+UPLOAD PERMITTED AUDIO → TIMESTAMPED RAW SEGMENTS
+Fixture mode, speech diagnostics, and temp-file deletion stay visible.
+
+00:13.500 --> 00:27.000
+RUN CLEAN → COMPARE TRANSFORMED OUTPUT
+Schema-valid fixture output discloses confidence, safety, model, and off-device state.
+
+00:27.000 --> 00:40.500
+SAVE → SEARCH → REOPEN → EXPORT
+The SQLite library stays local; JSON exports omit hidden prompts and server-only metadata.
+
+00:40.500 --> 00:54.000
+OPT INTO LOCAL WHISPER → WORKER UNAVAILABLE
+No transcript is fabricated; the audio preview remains available for Retry.

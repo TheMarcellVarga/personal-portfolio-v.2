@@ -139,6 +139,13 @@ export default function ThreadScribePage() {
                 src="/images/threadscribe/threadscribe-demo.mp4"
                 type="video/mp4"
               />
+              <track
+                kind="captions"
+                src="/images/threadscribe/threadscribe-demo.vtt"
+                srcLang="en"
+                label="English"
+                default
+              />
               Your browser does not support the demo video.
             </video>
             <figcaption className="px-3 pb-2 pt-3 text-sm leading-6 text-white/68 sm:px-4">
