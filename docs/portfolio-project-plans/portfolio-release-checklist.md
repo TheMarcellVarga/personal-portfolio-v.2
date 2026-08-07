@@ -7,12 +7,12 @@ history. Do not mark an item complete until its evidence is recorded below.
 
 | Field | Value |
 | --- | --- |
-| Candidate commit | `8db06e4` or its descendant |
+| Candidate commit | Current `main` release candidate |
 | Intended canonical URL | `https://marcellvarga.com` |
 | Local gate | `npm run check && npm run test:e2e` |
-| Local result | Passed on 2026-07-28 |
-| Deployment URL | Pending |
-| Release date | Pending |
+| Local result | Passed 2026-08-07: `npm run check` and `PLAYWRIGHT_PORT=3110 npm run test:e2e` |
+| Deployment URL | `https://marcellvarga.com` (Vercel production deployment `dpl_6XxAPMXKmVyRzfXUzukaFnLHpXhi`) |
+| Release date | 2026-08-07 |
 
 ## Production quality targets
 
@@ -46,9 +46,9 @@ horizontal overflow. Record the browser/version and date for every row.
 | --- | --- | --- | --- |
 | Contact route | The mailto link opens a message addressed to `themarcellvarga@gmail.com` | Pending | Pending |
 | Contact handling | A test message is received and can be replied to | Pending | Pending |
-| Analytics configuration | PostHog is enabled only in production when a public project key is supplied; document consent/legal basis before enabling | Pending | Pending |
+| Analytics configuration | PostHog initializes only after explicit opt-in; autocapture and session recording are disabled | Local code review 2026-08-07 | Pass |
 | Privacy sweep | No phone endpoint, private data, or unapproved identifier is publicly exposed | Pending | Pending |
-| Public links | No unpublished or private repository is linked from public routes | Pending | Pending |
+| Public links | No unpublished or private repository is linked from public routes | Local link sweep 2026-08-07 | Pass |
 
 ## Reviewer task
 

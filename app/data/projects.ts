@@ -65,7 +65,7 @@ export const projects: Project[] = [
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(239,178,86,0.34),_transparent_28%),linear-gradient(155deg,_#0c1820_0%,_#18343b_52%,_#725232_100%)]",
     status: "Configured runtime verified",
-    portfolioPlacement: "featured",
+    portfolioPlacement: "supporting",
     caseStudyId: "first-revenue-game",
   },
   {

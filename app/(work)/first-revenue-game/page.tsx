@@ -4,7 +4,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Activity,
-  ArrowUpRight,
   BadgeCheck,
   Calendar,
   Database,
@@ -153,8 +152,8 @@ export default function FirstRevenueGamePage() {
                 First Revenue Game
               </h1>
               <p className="max-w-[60ch] text-[1.05rem] leading-7 text-custom-blue/70">
-                A social execution product where commercial evidence—not activity
-                inside the app—controls progression, backed by an authoritative
+                A social execution product where commercial evidence, not activity
+                inside the app, controls progression, backed by an authoritative
                 Java/Spring workflow and recoverable event delivery.
               </p>
             </motion.div>
@@ -253,7 +252,7 @@ export default function FirstRevenueGamePage() {
                     Recovery is a product feature
                   </p>
                   <h2 className="mt-4 max-w-[11ch] font-display text-[clamp(2.6rem,5vw,4.5rem)] leading-[0.9] tracking-[-0.05em]">
-                    Reject, revise, approve—without stale state.
+                    Reject, revise, approve, without stale state.
                   </h2>
                   <p className="mt-6 max-w-lg text-sm leading-6 text-white/68">
                     The operator reviews the same evidence the member submitted.
@@ -376,15 +375,9 @@ export default function FirstRevenueGamePage() {
                     Product loop to runtime proof in 87 seconds.
                   </h2>
                 </div>
-                <a
-                  href="https://github.com/TheMarcellVarga/gamified-business-development"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex w-fit items-center gap-2 rounded-full bg-custom-blue px-5 py-3 text-sm font-medium text-white transition-transform hover:-translate-y-0.5"
-                >
-                  Inspect source
-                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                </a>
+                <p className="inline-flex w-fit items-center rounded-full bg-custom-blue/10 px-5 py-3 text-sm font-medium text-custom-blue">
+                  Source available privately on request
+                </p>
               </div>
               <div className="overflow-hidden rounded-[1.9rem] bg-[#09151b] shadow-[0_24px_70px_rgba(11,17,26,0.15)]">
                 <video

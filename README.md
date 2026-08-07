@@ -6,7 +6,7 @@ Professional portfolio for Marcell Varga, a Singapore-based product-focused fron
 
 The site presents a focused, evidence-led view of product work rather than a complete repository history. It separates locally verified products, confidential professional experience, partial prototypes, and archived case studies.
 
-The selected-work hierarchy intentionally uses three featured projects and two
+The selected-work hierarchy intentionally uses three featured projects and three
 supporting case studies. Supporting work adds a distinct proof point without
 competing with the main portfolio narrative.
 
@@ -14,6 +14,7 @@ competing with the main portfolio narrative.
 
 - `/` — portfolio overview and selected work.
 - `/ai-finance` — Aperture, a locally release-ready financial research workspace.
+- `/first-revenue-game` — First Revenue Game, a configured runtime-verified social execution product.
 - `/wild-route` — Wild Route, a deployed adventure travel-planning demo.
 - `/threadscribe` — ThreadScribe Studio, a local-first trustworthy AI case study.
 - `/focusin` — Focusin, a locally verified native macOS product case study.
@@ -29,7 +30,9 @@ Projects are intentionally labelled to avoid overstating the available evidence:
 
 - **Working** — current professional or active work.
 - **Local release-ready** — the complete local product path and release gates pass, while public infrastructure or paid providers remain intentionally inactive.
+- **Configured runtime verified** — the product shell and backend workflow have been verified against a configured local runtime, without claiming hosted production.
 - **Fixture-backed** — a prototype powered by deterministic local fixture data.
+- **Locally verified** — current local device or simulator evidence exists, while external distribution is not claimed.
 - **Partial** — an incomplete project whose scope is shown accurately.
 - **Archived** — earlier work retained for historical context.
 
@@ -67,7 +70,7 @@ The portfolio uses semantic structure, reduced-motion support, and explicit imag
 
 ## Privacy and analytics
 
-The site exposes email and professional social links. Private environment values, credentials, and personal phone numbers must never be committed or served from public routes. PostHog is optional and should be configured only with the appropriate consent and privacy policy.
+The site exposes email and professional social links. Private environment values, credentials, and personal phone numbers must never be committed or served from public routes. PostHog is opt-in only: it records anonymous page-performance and error measurements after a visitor selects “Allow analytics”; session recording, autocapture, and input capture are disabled.
 
 ## Deployment
 
@@ -75,6 +78,6 @@ The canonical production domain is `marcellvarga.com`. Keep the deployment confi
 
 ## Current limitations
 
-- Source-code links are withheld until their public repositories are verified.
+- Source-code links are withheld until their public repositories are verified. Current case studies state that private source is available on request.
 - Professional AXON work is represented without confidential screenshots or implementation details.
 - Archived case studies do not represent the current technical scope.

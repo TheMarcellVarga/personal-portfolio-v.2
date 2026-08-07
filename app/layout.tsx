@@ -1,28 +1,24 @@
 import "./globals.css";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/react";
-import { cookies } from "next/headers";
 import PostHogProvider from "./providers/PostHogProvider";
 import { metadata } from "./metadata";
 import { personSameAs, structuredData } from "./seo";
+import AnalyticsConsent from "./components/AnalyticsConsent";
+import AnalyticsGate from "./components/AnalyticsGate";
 import ScrollReset from "./components/ScrollReset";
 import SmoothScroll from "./components/SmoothScroll";
 // import DevelopmentBanner from "./components/DevelopmentBanner";
 
 export { metadata };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = await cookies();
-  const introSeen = cookieStore.get("mv-home-intro-seen")?.value === "1";
-
   return (
     <html
       lang="en"
-      data-home-intro={introSeen ? "0" : "1"}
+      data-home-intro="1"
       suppressHydrationWarning
     >
       <head>
@@ -44,12 +40,8 @@ export default async function RootLayout({
             {children}
           </SmoothScroll>
           {/* <DevelopmentBanner /> */}
-          {process.env.NODE_ENV === 'production' && (
-            <>
-              <SpeedInsights />
-              <Analytics />
-            </>
-          )}
+          <AnalyticsGate />
+          <AnalyticsConsent />
         </PostHogProvider>
       </body>
     </html>

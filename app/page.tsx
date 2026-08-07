@@ -1091,7 +1091,7 @@ export default function Page() {
                     <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
                     <div className="relative aspect-[1.18] w-full sm:aspect-[1.04] md:aspect-[0.78]">
                       <Image
-                        src="/images/personalpageprofilealt.png"
+                        src="/images/personalpageprofilealt.webp"
                         alt="Portrait of Marcell Varga"
                         fill
                         priority
@@ -1179,7 +1179,7 @@ export default function Page() {
                     <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
                     <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
                     <Image
-                      src="/images/personalpageprofilealt.png"
+                      src="/images/personalpageprofilealt.webp"
                       alt="Portrait of Marcell Varga"
                       width={1210}
                       height={1777}

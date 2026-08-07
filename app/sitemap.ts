@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .filter(
       (project) =>
         project.link.startsWith("/") &&
-        ["featured", "supporting", "archive"].includes(project.portfolioPlacement),
+        project.portfolioPlacement !== "archive",
     )
     .map((project) => project.link);
 

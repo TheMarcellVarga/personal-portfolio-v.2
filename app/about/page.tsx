@@ -86,7 +86,7 @@ export default function AboutPage() {
           >
             <div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] md:aspect-[0.92] lg:aspect-[1.05]">
               <Image
-                src="/images/marcell-great-wall.png"
+                src="/images/marcell-great-wall.webp"
                 alt="Marcell Varga at the Great Wall of China"
                 fill
                 priority
@@ -140,7 +140,7 @@ export default function AboutPage() {
           >
             <div className="relative aspect-[1.55] overflow-hidden rounded-[1.5rem] sm:aspect-[2.2] sm:rounded-[2rem]">
               <Image
-                src="/images/cinematic-profile-pic-sg.png"
+                src="/images/cinematic-profile-pic-sg.webp"
                 alt="Marcell Varga exploring a nature trail in Singapore"
                 fill
                 sizes="(max-width: 767px) 100vw, 1280px"

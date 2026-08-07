@@ -5,7 +5,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   ArrowDown,
-  ArrowUpRight,
   AudioLines,
   CheckCircle2,
   Database,
@@ -118,14 +117,9 @@ export default function ThreadScribePage() {
                 <Meta label="Stack" value="Next.js, TypeScript, SQLite" />
                 <Meta label="Year" value={projectData.date} />
               </div>
-              <a
-                href="https://github.com/TheMarcellVarga/ai-transcriber"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-custom-blue px-5 py-3 text-xs font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.985] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-custom-blue focus-visible:ring-offset-2"
-              >
-                Inspect source <ArrowUpRight className="h-3.5 w-3.5" />
-              </a>
+              <p className="inline-flex w-fit items-center rounded-full bg-custom-blue/10 px-5 py-3 text-xs font-semibold text-custom-blue">
+                Source available privately on request
+              </p>
             </motion.div>
           </header>
 

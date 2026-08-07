@@ -32,6 +32,6 @@
 ## Change discipline
 
 Add an article only when it materially deepens one of the three featured proof
-points. Keep confidential work at the current level of abstraction and remove
+points. Keep supporting work distinct from the flagship narrative, and remove
 anything that might disclose proprietary implementation, customer, or metric
 data.

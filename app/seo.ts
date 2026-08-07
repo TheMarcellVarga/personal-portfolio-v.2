@@ -1,15 +1,17 @@
+import { projects } from "./data/projects";
+
 export const siteUrl = "https://marcellvarga.com";
 export const siteName = "Marcell Varga Portfolio";
 export const personName = "Marcell Varga";
 export const roleTitle = "Product-Focused Frontend Engineer";
 export const location = "Singapore";
-export const profileImage = "/images/cinematic-profile-pic-sg.png";
-export const shareImage = "/images/cinematic-profile-pic-sg.png";
+export const profileImage = "/images/cinematic-profile-pic-sg.webp";
+export const shareImage = "/images/cinematic-profile-pic-sg.webp";
 
 export const siteDescription =
   "Official portfolio of Marcell Varga, a Singapore-based product-focused frontend engineer building clear React and TypeScript interfaces, design systems, and trustworthy AI workflows.";
 
-export const lastUpdated = "2026-08-04";
+export const lastUpdated = "2026-08-07";
 export const alternatePersonNames = [
   "Varga Marcell",
   "TheMarcellVarga",
@@ -22,43 +24,18 @@ export const personSameAs = [
   "https://marcellvarga.com",
 ] as const;
 
-export const selectedWorks = [
-  {
-    name: "Aperture Financial Intelligence",
-    url: `${siteUrl}/ai-finance`,
-    description:
-      "Locally release-ready financial research workspace with owner-scoped retrieval, cited structured analysis, human approval, and deterministic AI evaluation.",
-    image: `${siteUrl}/images/ai-finance/aperture-home.jpg`,
-  },
-  {
-    name: "Wild Route",
-    url: `${siteUrl}/wild-route`,
-    description:
-      "Partial prompt-first adventure travel planner with ranked route options and deterministic reasoning.",
-    image: `${siteUrl}/images/wild-route/home.png`,
-  },
-  {
-    name: "ThreadScribe Studio",
-    url: `${siteUrl}/threadscribe`,
-    description:
-      "Local-first transcript workspace with raw and transformed review, provider disclosure, structured AI output, recoverable jobs, and deterministic evaluation.",
-    image: `${siteUrl}/images/threadscribe/transformed-output.png`,
-  },
-  {
-    name: "Focusin",
-    url: `${siteUrl}/focusin`,
-    description:
-      "Locally verified native macOS focus-and-reset utility with deterministic state, curated recommendations, accessibility, and release evidence.",
-    image: `${siteUrl}/images/focusin/light-focusing.png`,
-  },
-  {
-    name: "Endless Activity",
-    url: `${siteUrl}/endless-activity`,
-    description:
-      "Locally verified native iOS activity deck with deterministic ranking, local persistence, accessible gestures, and a disciplined offline MVP boundary.",
-    image: `${siteUrl}/images/endless-activity/discover.png`,
-  },
-] as const;
+export const selectedWorks = projects
+  .filter(
+    (project) =>
+      project.portfolioPlacement !== "archive" &&
+      project.link.startsWith("/"),
+  )
+  .map((project) => ({
+    name: project.title,
+    url: `${siteUrl}${project.link}`,
+    description: project.description,
+    image: `${siteUrl}${project.image}`,
+  }));
 
 export const structuredData = {
   "@context": "https://schema.org",

@@ -10,7 +10,6 @@ import {
   Accessibility,
   ArrowLeft,
   ArrowRight,
-  ArrowUpRight,
   Bookmark,
   Database,
   Layers3,
@@ -177,7 +176,7 @@ export default function EndlessActivityPage() {
               <p className="text-sm font-medium text-custom-blue/72">
                 Supporting native iOS product case study
               </p>
-              <h1 className="mt-6 max-w-6xl text-[clamp(4rem,13vw,10rem)] font-medium leading-[0.8] tracking-[-0.065em] text-custom-blue">
+              <h1 className="mt-6 max-w-6xl text-[clamp(4rem,13vw,10rem)] font-medium leading-[0.8] tracking-[-0.065em] text-custom-blue lg:max-w-[9ch]">
                 Endless Activity
               </h1>
               <p className="mt-8 max-w-2xl text-[1.06rem] leading-7 text-custom-blue/72 sm:text-[1.16rem] sm:leading-8">
@@ -187,15 +186,9 @@ export default function EndlessActivityPage() {
               </p>
 
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href="https://github.com/TheMarcellVarga/endless-activity"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-custom-blue px-6 py-3.5 text-sm font-semibold text-white shadow-[0_18px_44px_rgba(17,27,40,0.18)] transition duration-300 hover:-translate-y-1 hover:bg-[#1c2b3d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-custom-blue focus-visible:ring-offset-3"
-                >
-                  Inspect source
-                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </a>
+                <p className="inline-flex items-center justify-center rounded-full bg-custom-blue/10 px-6 py-3.5 text-sm font-semibold text-custom-blue">
+                  Source available privately on request
+                </p>
                 <a
                   href="/images/endless-activity/endless-activity-demo.mp4"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-white/74 px-6 py-3.5 text-sm font-semibold text-custom-blue shadow-[inset_0_0_0_1px_rgba(17,27,40,0.1),0_14px_38px_rgba(17,27,40,0.08)] transition duration-300 hover:-translate-y-1 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-custom-blue focus-visible:ring-offset-3"
@@ -206,7 +199,7 @@ export default function EndlessActivityPage() {
               </div>
             </div>
 
-            <div className="pointer-events-none absolute -bottom-4 right-[-7.5rem] z-0 w-[19rem] rotate-[5deg] sm:right-[-3rem] sm:w-[25rem] lg:-bottom-28 lg:right-0 lg:w-[29rem] xl:right-6">
+            <div className="pointer-events-none absolute -bottom-4 right-[-7.5rem] z-0 w-[19rem] rotate-[5deg] sm:right-[-3rem] sm:w-[25rem] lg:-bottom-28 lg:right-[-4rem] lg:w-[25rem] xl:right-0 xl:w-[27rem]">
               <div className="absolute -left-20 top-16 h-72 w-72 rounded-full bg-[#ff5b52]/20 blur-3xl" />
               <Image
                 src="/images/endless-activity/discover.png"
@@ -489,14 +482,9 @@ export default function EndlessActivityPage() {
                   and knowing where a version one should stop.
                 </p>
                 <div className="flex flex-col gap-3 sm:flex-row">
-                  <a
-                    href="https://github.com/TheMarcellVarga/endless-activity"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[#111b28] px-6 py-3.5 text-sm font-semibold text-white transition duration-300 hover:-translate-y-1 hover:bg-[#1c2b3d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111b28] focus-visible:ring-offset-3 focus-visible:ring-offset-[#ff5b52]"
-                  >
-                    Inspect the repository <ArrowUpRight className="h-4 w-4" />
-                  </a>
+                  <p className="inline-flex items-center justify-center rounded-full bg-[#111b28]/10 px-6 py-3.5 text-sm font-semibold text-[#111b28]">
+                    Source available privately on request
+                  </p>
                   <Link
                     href="/contact"
                     className="inline-flex items-center justify-center gap-2 rounded-full bg-white/64 px-6 py-3.5 text-sm font-semibold text-[#111b28] transition duration-300 hover:-translate-y-1 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111b28] focus-visible:ring-offset-3 focus-visible:ring-offset-[#ff5b52]"

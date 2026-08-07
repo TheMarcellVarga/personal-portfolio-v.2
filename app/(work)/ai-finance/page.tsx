@@ -122,7 +122,7 @@ const releaseEvidence = [
 ] as const;
 
 const visibleBoundaries = [
-  "Research and decision support—not brokerage or trade execution.",
+  "Research and decision support, not brokerage or trade execution.",
   "No personalized advice, suitability claims, or promised returns.",
   "External model calls remain disabled until cost and credentials are approved.",
   "The release evidence is local; this page does not claim production scale.",
@@ -252,11 +252,11 @@ export default function AiFinancePage() {
                   <p className="text-[1.05rem] leading-7 text-custom-blue/72">
                     I shaped the product direction, interaction model, frontend,
                     API integration, evaluation strategy, and release boundaries as
-                    one independent portfolio system—not a collection of disconnected screens.
+                    one independent portfolio system, not a collection of disconnected screens.
                   </p>
                 </div>
                 <div className="grid gap-3 sm:grid-cols-2">
-                  <BriefCard label="Primary user" text="A research-minded investor or analyst who needs source visibility and explicit uncertainty—not automated trading." />
+                  <BriefCard label="Primary user" text="A research-minded investor or analyst who needs source visibility and explicit uncertainty, not automated trading." />
                   <BriefCard label="Design constraint" text="Keep the workflow calm and legible while exposing enough technical provenance to support scrutiny." />
                 </div>
               </div>

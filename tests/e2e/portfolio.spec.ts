@@ -148,10 +148,7 @@ test("First Revenue Game connects product judgment to reliable backend evidence"
     "poster",
     "/images/first-revenue-game/member-dashboard.jpg",
   );
-  await expect(page.getByRole("link", { name: /inspect source/i })).toHaveAttribute(
-    "href",
-    "https://github.com/TheMarcellVarga/gamified-business-development",
-  );
+  await expect(page.getByText("Source available privately on request")).toBeVisible();
 });
 
 test("Wild Route case study proves product engineering beyond the interface", async ({ page }) => {
@@ -166,10 +163,7 @@ test("Wild Route case study proves product engineering beyond the interface", as
     "href",
     "https://ai-travel-planner-psi-five.vercel.app",
   );
-  await expect(page.getByRole("link", { name: /inspect source/i })).toHaveAttribute(
-    "href",
-    "https://github.com/TheMarcellVarga/ai-travel-planner",
-  );
+  await expect(page.getByText("Source available privately on request")).toBeVisible();
 });
 
 test("ThreadScribe case study shows trustworthy AI interaction evidence", async ({ page }) => {
@@ -184,10 +178,7 @@ test("ThreadScribe case study shows trustworthy AI interaction evidence", async 
     page.getByRole("heading", { name: "Failure stays truthful and useful." }),
   ).toBeVisible();
   await expect(page.getByText(/public walkthrough uses deterministic fixture/i)).toBeVisible();
-  await expect(page.getByRole("link", { name: /inspect source/i })).toHaveAttribute(
-    "href",
-    "https://github.com/TheMarcellVarga/ai-transcriber",
-  );
+  await expect(page.getByText("Source available privately on request")).toBeVisible();
 });
 
 test("Focusin case study connects native product judgment to verified engineering", async ({ page }) => {
@@ -200,10 +191,7 @@ test("Focusin case study connects native product judgment to verified engineerin
     page.getByRole("heading", { name: "The local loop does not depend on platform permission." }),
   ).toBeVisible();
   await expect(page.getByText(/no signed archive, installable external beta/i)).toBeVisible();
-  await expect(page.getByRole("link", { name: /inspect source/i })).toHaveAttribute(
-    "href",
-    "https://github.com/TheMarcellVarga/focusin",
-  );
+  await expect(page.getByText("Source available privately on request")).toBeVisible();
 });
 
 test("Endless Activity case study presents native product craft with honest scope", async ({ page }) => {
@@ -216,10 +204,7 @@ test("Endless Activity case study presents native product craft with honest scop
     page.getByRole("heading", { name: "The deck owns presentation, not truth." }),
   ).toBeVisible();
   await expect(page.getByText(/latest full simulator verification is dated/i)).toBeVisible();
-  await expect(page.getByRole("link", { name: /inspect source/i }).first()).toHaveAttribute(
-    "href",
-    "https://github.com/TheMarcellVarga/endless-activity",
-  );
+  await expect(page.getByText("Source available privately on request").first()).toBeVisible();
 });
 
 test.describe("mobile and motion fallbacks", () => {
@@ -289,6 +274,45 @@ test("public routes send baseline browser security headers", async ({ page }) =>
   expect(response.headers()["x-frame-options"]).toBe("DENY");
   expect(response.headers()["referrer-policy"]).toBe("strict-origin-when-cross-origin");
   expect(response.headers()["permissions-policy"]).toContain("camera=()");
+  expect(response.headers()["content-security-policy"]).toContain("frame-ancestors 'none'");
+});
+
+test("analytics stays off until a visitor opts in", async ({ page }) => {
+  await page.goto("/contact");
+
+  const consent = page.getByRole("complementary", { name: "Optional analytics" });
+  await expect(consent).toBeVisible();
+  await consent.getByRole("button", { name: "Not now" }).click();
+  await expect(consent).toHaveCount(0);
+
+  const cookies = await page.context().cookies();
+  expect(cookies.find((cookie) => cookie.name === "mv-analytics-consent")?.value).toBe(
+    "declined",
+  );
+});
+
+test("public pages do not expose stale private repository URLs", async ({ page }) => {
+  const staleUrls = [
+    "https://github.com/TheMarcellVarga/gamified-business-development",
+    "https://github.com/TheMarcellVarga/ai-travel-planner",
+    "https://github.com/TheMarcellVarga/ai-transcriber",
+    "https://github.com/TheMarcellVarga/focusin",
+    "https://github.com/TheMarcellVarga/endless-activity",
+  ];
+
+  for (const route of [
+    "/first-revenue-game",
+    "/wild-route",
+    "/threadscribe",
+    "/focusin",
+    "/endless-activity",
+  ]) {
+    const response = await page.request.get(route);
+    const html = await response.text();
+    for (const staleUrl of staleUrls) {
+      expect(html, `${route} should not expose ${staleUrl}`).not.toContain(staleUrl);
+    }
+  }
 });
 
 test("public routes do not serve personal phone data", async ({ page }) => {
@@ -327,8 +351,11 @@ test("selected work exposes canonical metadata and is listed in the sitemap", as
   expect(sitemap.status()).toBe(200);
   const sitemapText = await sitemap.text();
   expect(sitemapText).toContain("https://marcellvarga.com/about");
-  for (const [route] of selectedRoutes) {
+  for (const [route] of selectedRoutes.slice(0, 6)) {
     expect(sitemapText).toContain(`https://marcellvarga.com${route}`);
+  }
+  for (const route of ["/catchscan", "/askcody", "/ess"]) {
+    expect(sitemapText).not.toContain(`https://marcellvarga.com${route}`);
   }
 });
 

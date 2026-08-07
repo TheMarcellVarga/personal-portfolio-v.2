@@ -24,7 +24,7 @@ Within 60 seconds, a hiring manager should understand:
 - Marcell is a product-focused frontend engineer;
 - UX judgment is an engineering advantage;
 - the work includes complex interfaces, APIs, data, reliability, and AI trust;
-- three projects provide credible evidence;
+- three featured projects provide credible evidence, with three supporting studies adding depth;
 - current role, location, and contact path are clear.
 
 ## Content Hierarchy
@@ -37,6 +37,7 @@ Within 60 seconds, a hiring manager should understand:
 
 ### Supporting
 
+- First Revenue Game: reliable progression, operator review, and configured backend evidence.
 - ThreadScribe Studio: trustworthy AI interaction and local-first workflow evidence.
 - Endless Activity: a concise native iOS product-craft case study with deterministic
   ranking, accessibility, persistence, and disciplined MVP scope.
@@ -146,7 +147,7 @@ handling hydrates without markup mismatches.
 
 ## Phase 4: Accessibility, Performance, and SEO
 
-Status: Local implementation complete; deployed Web Vitals pending release candidate
+Status: Local implementation complete; production verification pending the current release candidate (2026-08-07)
 
 ### Work
 
@@ -176,7 +177,7 @@ deployed release candidate and real-user or production-lab data.
 
 ## Phase 5: Deployment and Evidence
 
-Status: Prepared; external release validation and feedback pending
+Status: Release candidate prepared; production deployment and external validation pending (2026-08-07)
 
 ### Work
 
@@ -233,7 +234,7 @@ Do not add more project cards to make the portfolio look larger.
 
 ## Definition of Done
 
-- three featured and two supporting projects are presented;
+- three featured and three supporting projects are presented;
 - archive projects are absent;
 - accessibility and performance evidence is recorded;
 - case studies use real current media;

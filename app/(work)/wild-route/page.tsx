@@ -188,14 +188,9 @@ export default function WildRoutePage() {
                 >
                   Open live demo <ArrowUpRight className="h-3.5 w-3.5" />
                 </a>
-                <a
-                  href="https://github.com/TheMarcellVarga/ai-travel-planner"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-custom-blue/15 bg-white/55 px-5 py-3 text-xs font-semibold text-custom-blue transition-colors duration-300 hover:bg-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-custom-blue focus-visible:ring-offset-2"
-                >
-                  Inspect source <ArrowUpRight className="h-3.5 w-3.5" />
-                </a>
+                <span className="inline-flex items-center rounded-full border border-custom-blue/15 bg-white/55 px-5 py-3 text-xs font-semibold text-custom-blue/72">
+                  Source available privately on request
+                </span>
               </div>
             </motion.div>
           </header>

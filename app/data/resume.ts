@@ -7,7 +7,7 @@ export const resume = {
   linkedin: "linkedin.com/in/marcellvarga",
   github: "github.com/TheMarcellVarga",
   githubHandle: "TheMarcellVarga",
-  photo: "/images/personalpageprofilealt.png",
+  photo: "/images/personalpageprofilealt.webp",
   profile: [
     "Singapore-based UX and frontend engineer working at the intersection of Nordic design principles and software engineering. I turn complex product requirements into clear, scalable interfaces from early research and prototypes through production-ready code.",
     "Currently contributing to AXON Networks products through UX/UI design, component systems, interactive prototyping, frontend development, and AI-aware workflows.",

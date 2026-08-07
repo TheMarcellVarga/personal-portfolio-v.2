@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     type: "profile",
     images: [
       {
-        url: "/images/marcell-great-wall.png",
+        url: "/images/marcell-great-wall.webp",
         width: 1086,
         height: 1448,
         alt: "Marcell Varga at the Great Wall of China",
