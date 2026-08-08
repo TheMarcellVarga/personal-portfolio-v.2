@@ -5,10 +5,6 @@ import RecoveryPage from "./components/RecoveryPage";
 export const metadata: Metadata = {
   title: "Page not found | Marcell Varga",
   description: "The requested portfolio page does not exist.",
-  robots: {
-    index: false,
-    follow: true,
-  },
 };
 
 export default function GlobalNotFound() {
