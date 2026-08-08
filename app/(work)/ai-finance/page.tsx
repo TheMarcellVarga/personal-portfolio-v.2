@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   ArrowDown,
+  ArrowUpRight,
   BadgeCheck,
   BookOpenCheck,
   Calendar,
@@ -193,6 +194,19 @@ export default function AiFinancePage() {
                     </span>
                   ))}
                 </div>
+              </div>
+              <div className="flex flex-wrap gap-3 pt-1">
+                <a
+                  href="https://ai-finance-two-bice.vercel.app/demo"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-custom-blue px-5 py-3 text-xs font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-custom-blue focus-visible:ring-offset-2"
+                >
+                  Open guided demo <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+                <span className="inline-flex items-center rounded-full border border-custom-blue/15 bg-white/55 px-5 py-3 text-xs font-semibold text-custom-blue/72">
+                  Private workspace requires sign-in
+                </span>
               </div>
             </motion.div>
           </header>

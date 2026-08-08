@@ -19,6 +19,7 @@ export type Project = {
   backgroundClass: string;
   status:
     | "Guided product walkthrough"
+    | "Live guided demo"
     | "End-to-end product slice"
     | "Live public demo"
     | "Native macOS build"
@@ -43,7 +44,7 @@ export const projects: Project[] = [
     category: "Fintech systems + trustworthy AI",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(103,232,249,0.3),_transparent_28%),linear-gradient(155deg,_#071112_0%,_#111820_52%,_#1f1a16_100%)]",
-    status: "Guided product walkthrough",
+    status: "Live guided demo",
     portfolioPlacement: "featured",
     caseStudyId: "aperture",
   },
@@ -61,7 +62,7 @@ export const projects: Project[] = [
     category: "Enterprise product + event-driven systems",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(239,178,86,0.34),_transparent_28%),linear-gradient(155deg,_#0c1820_0%,_#18343b_52%,_#725232_100%)]",
-    status: "End-to-end product slice",
+    status: "Live public demo",
     portfolioPlacement: "supporting",
     caseStudyId: "first-revenue-game",
   },

@@ -13,8 +13,8 @@ competing with the main portfolio narrative.
 ## Information architecture
 
 - `/` — portfolio overview and selected work.
-- `/ai-finance` — Aperture, a guided product walkthrough for an evidence-led financial research workspace.
-- `/first-revenue-game` — First Revenue Game, an end-to-end product slice for a social execution product.
+- `/ai-finance` — Aperture, a live read-only guided demo plus private evidence-led financial research workspace.
+- `/first-revenue-game` — First Revenue Game, a live public demo of a social execution product.
 - `/wild-route` — Wild Route, a live public adventure travel-planning demo.
 - `/threadscribe` — ThreadScribe Studio, a guided walkthrough of a local-first trustworthy AI workspace.
 - `/focusin` — Focusin, a native macOS product build and case study.
@@ -29,6 +29,7 @@ competing with the main portfolio narrative.
 Project labels lead with what a visitor can experience while keeping the evidence boundary clear:
 
 - **Guided product walkthrough** — the key product flow is shown through the case study, screens, and recorded or deterministic walkthrough evidence.
+- **Live guided demo** — a public read-only route demonstrates the product loop while protected or provider-backed areas remain private.
 - **End-to-end product slice** — an implemented vertical slice demonstrates the product shell, workflow boundaries, and supporting verification.
 - **Live public demo** — the product is deployed and available to try at its public route.
 - **Native macOS build / Native iOS build** — a current platform build and case-study evidence are available; external distribution is not implied.

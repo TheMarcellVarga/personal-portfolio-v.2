@@ -97,8 +97,8 @@ test("branded recovery route guides visitors back to the portfolio", async ({ pa
 
 test("featured work uses the shared evidence record", async ({ page }) => {
   for (const [route, evidenceId, status] of [
-    ["/ai-finance", "aperture", "Guided product walkthrough"],
-    ["/first-revenue-game", "first-revenue-game", "End-to-end product slice"],
+    ["/ai-finance", "aperture", "Live guided demo"],
+    ["/first-revenue-game", "first-revenue-game", "Live public demo"],
     ["/wild-route", "wild-route", "Live public demo"],
     ["/threadscribe", "threadscribe", "Guided product walkthrough"],
     ["/focusin", "focusin", "Native macOS build"],
