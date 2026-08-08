@@ -18,15 +18,12 @@ export type Project = {
   category: string;
   backgroundClass: string;
   status:
-    | "Working"
-    | "Local release-ready"
-    | "Deployed demo"
-    | "Fixture-backed"
-    | "Locally verified"
-    | "Configured runtime verified"
-    | "In progress"
-    | "Partial"
-    | "Archived";
+    | "Guided product walkthrough"
+    | "End-to-end product slice"
+    | "Live public demo"
+    | "Native macOS build"
+    | "Native iOS build"
+    | "Archived case study";
   portfolioPlacement: "featured" | "supporting" | "archive";
   caseStudyId?: CaseStudyId;
 };
@@ -46,7 +43,7 @@ export const projects: Project[] = [
     category: "Fintech systems + trustworthy AI",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(103,232,249,0.3),_transparent_28%),linear-gradient(155deg,_#071112_0%,_#111820_52%,_#1f1a16_100%)]",
-    status: "Local release-ready",
+    status: "Guided product walkthrough",
     portfolioPlacement: "featured",
     caseStudyId: "aperture",
   },
@@ -57,14 +54,14 @@ export const projects: Project[] = [
     description:
       "A social execution product that helps solo builders turn one monetizable skill into first-revenue evidence through focused missions, accountable proof, and operator review.",
     highlight:
-      "A configured vertical slice connects the Next.js product shell to an authoritative Java/Spring workflow, transactional outbox, replay-safe events, scoped artifacts, and operational evidence.",
+      "An end-to-end vertical slice connects the Next.js product shell to an authoritative Java/Spring workflow, transactional outbox, replay-safe events, scoped artifacts, and operational evidence.",
     skills: ["Next.js", "Java / Spring", "PostgreSQL", "Kafka", "OpenTelemetry"],
     link: "/first-revenue-game",
     image: "/images/first-revenue-game/member-dashboard.jpg",
     category: "Enterprise product + event-driven systems",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(239,178,86,0.34),_transparent_28%),linear-gradient(155deg,_#0c1820_0%,_#18343b_52%,_#725232_100%)]",
-    status: "Configured runtime verified",
+    status: "End-to-end product slice",
     portfolioPlacement: "supporting",
     caseStudyId: "first-revenue-game",
   },
@@ -82,7 +79,7 @@ export const projects: Project[] = [
     category: "Product engineering + applied AI UX",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(214,255,64,0.32),_transparent_28%),linear-gradient(160deg,_#192018_0%,_#59634f_52%,_#d9ddd0_100%)]",
-    status: "Deployed demo",
+    status: "Live public demo",
     portfolioPlacement: "featured",
     caseStudyId: "wild-route",
   },
@@ -100,7 +97,7 @@ export const projects: Project[] = [
     category: "Trustworthy AI + frontend systems",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(99,206,194,0.28),_transparent_28%),linear-gradient(155deg,_#071312_0%,_#10201f_52%,_#233332_100%)]",
-    status: "Local release-ready",
+    status: "Guided product walkthrough",
     portfolioPlacement: "supporting",
     caseStudyId: "threadscribe",
   },
@@ -118,7 +115,7 @@ export const projects: Project[] = [
     category: "Native macOS product",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(48,132,255,0.32),_transparent_28%),linear-gradient(160deg,_#102347_0%,_#245da8_52%,_#dce8f8_100%)]",
-    status: "Locally verified",
+    status: "Native macOS build",
     portfolioPlacement: "featured",
     caseStudyId: "focusin",
   },
@@ -136,7 +133,7 @@ export const projects: Project[] = [
     category: "Native iOS product craft",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(255,91,82,0.34),_transparent_30%),linear-gradient(160deg,_#111820_0%,_#202a35_48%,_#f4eee8_100%)]",
-    status: "Locally verified",
+    status: "Native iOS build",
     portfolioPlacement: "supporting",
     caseStudyId: "endless-activity",
   },
@@ -154,7 +151,7 @@ export const projects: Project[] = [
     category: "Product UX + frontend",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_left,_rgba(99,174,255,0.35),_transparent_30%),linear-gradient(160deg,_#d9e8ff_0%,_#cfe0ef_50%,_#bad4e4_100%)]",
-    status: "Archived",
+    status: "Archived case study",
     portfolioPlacement: "archive",
   },
   {
@@ -171,7 +168,7 @@ export const projects: Project[] = [
     category: "Enterprise product",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(76,214,255,0.28),_transparent_26%),linear-gradient(160deg,_#d8f5ff_0%,_#dce8ff_52%,_#c8dde8_100%)]",
-    status: "Archived",
+    status: "Archived case study",
     portfolioPlacement: "archive",
   },
   {
@@ -188,7 +185,7 @@ export const projects: Project[] = [
     category: "Editorial web experience",
     backgroundClass:
       "bg-[radial-gradient(circle_at_20%_20%,_rgba(120,197,255,0.26),_transparent_28%),linear-gradient(160deg,_#ebf4ff_0%,_#dbe7f2_50%,_#cedee8_100%)]",
-    status: "Archived",
+    status: "Archived case study",
     portfolioPlacement: "archive",
   },
 ];

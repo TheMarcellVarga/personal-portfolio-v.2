@@ -4,7 +4,7 @@ Professional portfolio for Marcell Varga, a Singapore-based product-focused fron
 
 ## Purpose
 
-The site presents a focused, evidence-led view of product work rather than a complete repository history. It separates locally verified products, confidential professional experience, partial prototypes, and archived case studies.
+The site presents a focused, evidence-led view of product work rather than a complete repository history. It separates public demos, guided product walkthroughs, native builds, confidential professional experience, and archived case studies.
 
 The selected-work hierarchy intentionally uses three featured projects and three
 supporting case studies. Supporting work adds a distinct proof point without
@@ -13,28 +13,26 @@ competing with the main portfolio narrative.
 ## Information architecture
 
 - `/` — portfolio overview and selected work.
-- `/ai-finance` — Aperture, a locally release-ready financial research workspace.
-- `/first-revenue-game` — First Revenue Game, a configured runtime-verified social execution product.
-- `/wild-route` — Wild Route, a deployed adventure travel-planning demo.
-- `/threadscribe` — ThreadScribe Studio, a local-first trustworthy AI case study.
-- `/focusin` — Focusin, a locally verified native macOS product case study.
-- `/endless-activity` — Endless Activity, a locally verified supporting native iOS product-craft case study.
+- `/ai-finance` — Aperture, a guided product walkthrough for an evidence-led financial research workspace.
+- `/first-revenue-game` — First Revenue Game, an end-to-end product slice for a social execution product.
+- `/wild-route` — Wild Route, a live public adventure travel-planning demo.
+- `/threadscribe` — ThreadScribe Studio, a guided walkthrough of a local-first trustworthy AI workspace.
+- `/focusin` — Focusin, a native macOS product build and case study.
+- `/endless-activity` — Endless Activity, a native iOS product-craft case study.
 - `/askcody`, `/catchscan`, and `/ess` — archived case studies.
 - `/about` — professional background, working approach, and current direction.
 - `/resume` and `/resume/ats` — human-readable and ATS-oriented resumes.
 - `/contact` — contact details.
 
-## Project-status rules
+## Experience labels
 
-Projects are intentionally labelled to avoid overstating the available evidence:
+Project labels lead with what a visitor can experience while keeping the evidence boundary clear:
 
-- **Working** — current professional or active work.
-- **Local release-ready** — the complete local product path and release gates pass, while public infrastructure or paid providers remain intentionally inactive.
-- **Configured runtime verified** — the product shell and backend workflow have been verified against a configured local runtime, without claiming hosted production.
-- **Fixture-backed** — a prototype powered by deterministic local fixture data.
-- **Locally verified** — current local device or simulator evidence exists, while external distribution is not claimed.
-- **Partial** — an incomplete project whose scope is shown accurately.
-- **Archived** — earlier work retained for historical context.
+- **Guided product walkthrough** — the key product flow is shown through the case study, screens, and recorded or deterministic walkthrough evidence.
+- **End-to-end product slice** — an implemented vertical slice demonstrates the product shell, workflow boundaries, and supporting verification.
+- **Live public demo** — the product is deployed and available to try at its public route.
+- **Native macOS build / Native iOS build** — a current platform build and case-study evidence are available; external distribution is not implied.
+- **Archived case study** — earlier work retained for historical context.
 
 ## Stack
 
@@ -45,7 +43,7 @@ Projects are intentionally labelled to avoid overstating the available evidence:
 
 ## Local development
 
-Requires Node.js 20 or later.
+Requires Node.js 22.13 or later.
 
 ```bash
 npm install

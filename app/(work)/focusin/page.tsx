@@ -128,7 +128,7 @@ export default function FocusinPage() {
 
             <motion.div {...reveal(0.08)} className="space-y-7 lg:pb-2">
               <div className="grid gap-5 sm:grid-cols-2">
-                <Meta label="Implementation" value={projectData.status} />
+                <Meta label="Experience" value={projectData.status} />
                 <Meta label="Role" value="Product, UX, SwiftUI, release" />
                 <Meta label="Runtime" value="Native macOS 14+" />
                 <Meta label="Year" value={projectData.date} />
@@ -172,7 +172,7 @@ export default function FocusinPage() {
                   className="mx-auto h-full max-h-[38rem] w-auto rounded-[2rem] object-contain drop-shadow-[0_26px_45px_rgba(0,0,0,0.28)]"
                 />
                 <figcaption className="mx-auto mt-5 max-w-xl text-center text-xs leading-5 text-white/52">
-                  Current deterministic debug-fixture capture used as
+                  Current deterministic review capture used as
                   engineering evidence; signed-candidate media remains open.
                 </figcaption>
               </figure>
@@ -264,7 +264,7 @@ export default function FocusinPage() {
                   <ResilienceFact text="Denied notifications never stop a deadline from becoming break due." />
                   <ResilienceFact text="Quiet hours suppress reminders, not local timer progression." />
                   <ResilienceFact text="Activation, wake, clock, timezone, and day changes share one reconciliation path." />
-                  <ResilienceFact text="Legacy preference payloads remain backward-compatible and fixture-tested." />
+                  <ResilienceFact text="Legacy preference payloads remain backward-compatible and regression-tested." />
                 </div>
               </motion.div>
             </div>
@@ -355,7 +355,7 @@ export default function FocusinPage() {
                   system integration stay native, inspectable, and reversible.
                 </p>
                 <p className="mt-6 max-w-xl border-l-2 border-[#087aff] pl-5 text-sm leading-6 text-custom-blue/62">
-                  These are current deterministic fixture captures. Final public
+                  These are current deterministic review captures. Final public
                   media must still come from the exact signed candidate.
                 </p>
               </motion.div>

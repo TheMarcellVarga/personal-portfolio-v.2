@@ -30,7 +30,7 @@ const proofMetrics = [
   { value: "41", label: "Vitest checks" },
   { value: "35", label: "Playwright passes" },
   { value: "34", label: "JUnit + Testcontainers" },
-  { value: "1", label: "Configured golden path" },
+  { value: "1", label: "Verified golden path" },
 ] as const;
 
 const productLoop = [
@@ -66,7 +66,7 @@ const architecture = [
   {
     label: "Workflow authority",
     title: "Spring Boot",
-    text: "Application, member, proof, pod, operator, billing-read, and artifact APIs own configured-mode rules.",
+    text: "Application, member, proof, pod, operator, billing-read, and artifact APIs own the workflow rules.",
     icon: ServerCog,
   },
   {
@@ -102,7 +102,7 @@ const trustDecisions = [
 ] as const;
 
 const operationalEvidence = [
-  "Runs a real application-to-approval workflow against the configured services.",
+  "Runs a complete application-to-approval workflow against the supporting services.",
   "Waits for the transactional outbox to drain and confirms the BFF reads Spring-owned state.",
   "Checks request, error, backlog, and projection metrics plus the provisioned Grafana dashboard.",
   "Fails if secrets, signed assertions, generated applicant email, or private payload data appear in logs.",
@@ -161,7 +161,7 @@ export default function FirstRevenueGamePage() {
             <motion.div {...fadeInUp(0.08)} className="flex flex-col gap-6 lg:pb-2">
               <div className="grid grid-cols-2 gap-x-6 gap-y-5">
                 <ProjectFact icon={Calendar} label="Date" value={projectData.date} />
-                <ProjectFact icon={Tag} label="Status" value={projectData.status} />
+                <ProjectFact icon={Tag} label="Experience" value={projectData.status} />
                 <ProjectFact icon={Users} label="Audience" value="Builders + operators" />
                 <ProjectFact icon={BadgeCheck} label="Scope" value="Independent build" />
               </div>
@@ -286,13 +286,13 @@ export default function FirstRevenueGamePage() {
                   <p className="mt-5 text-sm leading-6 text-custom-blue/68">
                     Configuring the backend changes the repository implementation,
                     not the product-facing UI contract. Demo mode remains useful;
-                    configured mode proves authoritative backend ownership.
+                    the end-to-end mode proves authoritative backend ownership.
                   </p>
                 </div>
                 <figure className="glass-panel overflow-hidden rounded-[1.6rem] bg-white/72 p-4 sm:p-6">
                   <Image
                     src="/images/first-revenue-game/architecture.svg"
-                    alt="Current configured architecture from Next.js through Spring Boot, PostgreSQL, Redpanda, MinIO, and observability services"
+                    alt="Current verified architecture from Next.js through Spring Boot, PostgreSQL, Redpanda, MinIO, and observability services"
                     width={1600}
                     height={900}
                     className="h-auto w-full"
@@ -350,7 +350,7 @@ export default function FirstRevenueGamePage() {
             </motion.section>
 
             <motion.section {...fadeInUp()} className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-              <ScreenshotFrame src="/images/first-revenue-game/operations.jpg" width={983} height={1000} alt="Grafana First Revenue Operations dashboard" caption="The configured path closes on measured latency, errors, outbox state, and projected workflow events." />
+              <ScreenshotFrame src="/images/first-revenue-game/operations.jpg" width={983} height={1000} alt="Grafana First Revenue Operations dashboard" caption="The verified path closes on measured latency, errors, outbox state, and projected workflow events." />
               <div className="lg:py-5">
                 <SectionLabel index="05" label="Operational evidence" />
                 <h2 className="mt-5 text-balance font-display text-[clamp(2.7rem,5vw,4.5rem)] font-medium leading-[0.9] tracking-[-0.05em] text-custom-blue">

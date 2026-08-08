@@ -93,7 +93,7 @@ const tradeoffs = [
   },
   {
     title: "Honest demo over fake production",
-    text: "The interface labels fixture-backed data and planning estimates. Unconfigured providers degrade visibly instead of silently pretending to be live.",
+    text: "The interface labels its deterministic planning dataset and estimates. Unconnected providers degrade visibly instead of silently pretending to be live.",
   },
 ];
 
@@ -149,7 +149,7 @@ export default function WildRoutePage() {
                 </div>
                 <div className="space-y-1">
                   <p className="flex items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/70">
-                    <Tag className="h-3 w-3" /> Implementation status
+                    <Tag className="h-3 w-3" /> Experience
                   </p>
                   <p className="text-sm font-semibold text-custom-blue">
                     {projectData.status}

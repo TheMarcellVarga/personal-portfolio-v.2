@@ -29,7 +29,7 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
       "Cross-owner isolation, prompt injection, schema repair, accessibility, and deployment contracts are automated release gates.",
     ],
     limitations: [
-      "The complete product path is verified locally, not claimed as a public production service.",
+      "The complete product path is available as a guided build; this case study does not claim a public production service.",
       "External model calls and paid-provider comparisons remain disabled pending explicit cost and credential approval.",
     ],
   },
@@ -41,7 +41,7 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
     user: "Solo builders pursuing a first paid outcome, and operators responsible for reviewing commercial evidence and unlocking supported progression.",
     decisions: [
       "Centered the member experience on one commercially specific mission, external evidence, and an explicit reject-revise-approve recovery loop.",
-      "Migrated the authoritative workflow one vertical slice at a time, preserving the Next.js product contract while Spring Boot took ownership in configured mode.",
+      "Migrated the authoritative workflow one vertical slice at a time, preserving the Next.js product contract while Spring Boot took ownership in the verified mode.",
       "Signed short-lived viewer context across the BFF boundary and enforced role plus resource ownership inside the backend.",
       "Committed workflow state and event intent atomically through a transactional outbox, then made projections idempotent by event ID.",
       "Resolved proof ownership before issuing short-lived MinIO access and kept operational telemetry free of secrets and applicant data.",
@@ -49,10 +49,10 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
     verification: [
       "Forty-one Vitest tests and 35 passing Playwright checks cover the product shell, API contracts, responsive behavior, and member/operator workflow.",
       "Thirty-four JUnit and Testcontainers tests exercise the backend against real PostgreSQL and Redpanda services.",
-      "The configured verifier proves application-to-approval state, BFF reads, outbox drain and recovery, custom metrics, Grafana provisioning, and log privacy.",
+      "The verification harness proves application-to-approval state, BFF reads, outbox drain and recovery, custom metrics, Grafana provisioning, and log privacy.",
     ],
     limitations: [
-      "The configured runtime is verified locally; no hosted production environment or production end-user identity deployment is claimed.",
+      "The end-to-end product slice is verified against its supporting services; no hosted production environment or production end-user identity deployment is claimed.",
       "The demonstrated golden path uses link proof. MinIO file handling is verified separately through permission and storage coverage.",
       "Redis is readiness-checked but owns no product workload, and production SLOs, alert routing, retention, scaling, and incident ownership remain open.",
     ],
@@ -61,7 +61,7 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
     id: "wild-route",
     role: "Independent product direction, UX/UI, Next.js frontend, route/API architecture, security boundaries, testing, and deployment",
     problem:
-      "Turn an open-ended adventure brief into a small, explainable set of route options without presenting planning estimates, fixture data, or external booking handoffs as confirmed travel inventory.",
+      "Turn an open-ended adventure brief into a small, explainable set of route options without presenting planning estimates or external booking handoffs as confirmed travel inventory.",
     user: "Independent adventure travelers comparing pace, climate, budget, and detours before validating details and booking with external providers.",
     decisions: [
       "Started from travel intent and kept route reasoning, confidence, freshness, and estimate boundaries visible at the point of decision.",
@@ -75,8 +75,8 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
       "Five Supabase migrations pass static verification; the local and Vercel production builds pass with zero production dependency vulnerabilities.",
     ],
     limitations: [
-      "The public deployment is a portfolio demo: route metadata is fixture-backed, prices are planning estimates, and generation is deterministic rather than a live LLM.",
-      "Live managed Supabase, Stripe, email, and travel-provider integrations remain intentionally unconfigured; booking completes on external provider sites.",
+      "The public demo uses a deterministic planning dataset, planning estimates, and inspectable route generation rather than live inventory or an LLM.",
+      "Live managed Supabase, Stripe, email, and travel-provider integrations remain intentionally off; booking completes on external provider sites.",
       "Demo saves use browser-local storage and previews use schema-validated stateless recipes, not cross-device account persistence.",
     ],
   },
@@ -84,21 +84,21 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
     id: "threadscribe",
     role: "Independent product direction, UX/UI, Next.js implementation, local persistence, AI evaluation, privacy review, accessibility, and release evidence",
     problem:
-      "Turn private speech into useful written artifacts without hiding where processing happens, replacing source material silently, or presenting fixture output as live-model intelligence.",
+      "Turn private speech into useful written artifacts without hiding where processing happens, replacing source material silently, or presenting sample output as live-model intelligence.",
     user: "Solo builders who record implementation notes, bug reports, planning thoughts, and short voice memos that need to become durable, searchable work.",
     decisions: [
       "Kept timestamped raw segments beside transformed drafts so the source remains inspectable.",
-      "Made fixture, local, and cloud provider modes explicit, with external calls disabled by default.",
+      "Made sample, local, and cloud provider modes explicit, with external calls disabled by default.",
       "Stored sessions, edits, outputs, tags, and exports in a local SQLite library with verified deletion behavior.",
       "Preserved audio previews and prior work across cancellation, worker failure, malformed output, and retry.",
     ],
     verification: [
-      "Five labeled fixture cases pass 45 of 45 deterministic checks across cleanup, notes, actions, empty input, and instruction-like transcript text.",
-      "Thirty-seven application tests pass alongside privacy fixtures, keyboard workflow checks, production build, and automated accessibility scans.",
+      "Five labeled sample cases pass 45 of 45 deterministic checks across cleanup, notes, actions, empty input, and instruction-like transcript text.",
+      "Thirty-seven application tests pass alongside privacy samples, keyboard workflow checks, production build, and automated accessibility scans.",
       "One permitted 8.63-second clip completed with local faster-whisper in 2.068 seconds warm on the recorded demo machine.",
     ],
     limitations: [
-      "The public walkthrough uses deterministic fixture transforms. It is not evidence of general model quality.",
+      "The public walkthrough uses deterministic sample transforms. It is not evidence of general model quality.",
       "The local Whisper result covers one short English clip on one machine and does not establish production-scale accuracy or latency.",
       "Speaker labels and segment confidence remain exploratory; hosted sync, sharing, and compliance certification are outside the project scope.",
     ],
@@ -121,7 +121,7 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
       "Forty-one current appearance and accessibility captures cover light and dark modes, large text, increased contrast, reduced transparency, recovery states, and Settings.",
     ],
     limitations: [
-      "The implementation and unsigned Release integrity are locally verified; no signed archive, installable external beta, TestFlight build, or App Store listing exists yet.",
+      "The current build and unsigned Release integrity are verified; no signed archive, installable external beta, TestFlight build, or App Store listing exists yet.",
       "Exact-candidate VoiceOver, notification, login-item, lifecycle, upgrade, and final-media checks remain open until a signed candidate exists.",
       "The five-to-eight-person beta has not run, so the case study makes no usability, satisfaction, or real-world recommendation-quality claim.",
     ],

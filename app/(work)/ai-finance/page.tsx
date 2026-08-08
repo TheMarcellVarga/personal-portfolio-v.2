@@ -176,7 +176,7 @@ export default function AiFinancePage() {
             <motion.div {...fadeInUp(0.1)} className="flex flex-col gap-6 lg:pb-2">
               <div className="grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
                 <ProjectFact icon={Calendar} label="Date" value={projectData.date} />
-                <ProjectFact icon={Tag} label="Status" value={projectData.status} />
+                <ProjectFact icon={Tag} label="Experience" value={projectData.status} />
                 <ProjectFact icon={Tag} label="Field" value={projectData.category} />
               </div>
               <div className="space-y-3">
@@ -411,8 +411,8 @@ export default function AiFinancePage() {
                   presenting paid-provider output as proof of product quality.
                 </p>
                 <p>
-                  The trade-off is explicit: Aperture is locally release-ready, not a
-                  public financial service. Production credentials, hosted migrations,
+                  The trade-off is explicit: Aperture is presented as a guided product
+                  walkthrough, not a public financial service. Production credentials, hosted migrations,
                   live-model evaluation, and deployed performance evidence remain separate
                   environment-activation work.
                 </p>

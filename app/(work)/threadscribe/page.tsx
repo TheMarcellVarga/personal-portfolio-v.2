@@ -41,7 +41,7 @@ const architecture = [
   {
     icon: Gauge,
     title: "Transcription worker",
-    text: "Deterministic fixtures or explicit local Whisper return timestamped segments through one observable job contract.",
+    text: "Deterministic samples or explicit local Whisper return timestamped segments through one observable job contract.",
   },
   {
     icon: ShieldCheck,
@@ -112,7 +112,7 @@ export default function ThreadScribePage() {
 
             <motion.div {...reveal(0.08)} className="space-y-7 lg:pb-2">
               <div className="grid gap-5 sm:grid-cols-2">
-                <Meta label="Implementation" value={projectData.status} />
+                <Meta label="Experience" value={projectData.status} />
                 <Meta label="Focus" value="Trustworthy AI interaction" />
                 <Meta label="Stack" value="Next.js, TypeScript, SQLite" />
                 <Meta label="Year" value={projectData.date} />
@@ -174,7 +174,7 @@ export default function ThreadScribePage() {
               >
                 <Image
                   src="/images/threadscribe/raw-transcript.png"
-                  alt="ThreadScribe timestamped raw transcript with fixture disclosure and deleted temporary audio"
+                  alt="ThreadScribe timestamped raw transcript with sample-mode disclosure and deleted temporary audio"
                   width={983}
                   height={1000}
                   className="h-auto w-full rounded-[1.45rem]"
@@ -220,7 +220,7 @@ export default function ThreadScribePage() {
                 <p className="mt-5 max-w-xl text-[1rem] leading-7 text-white/66">
                   Five labeled synthetic transcripts test cleanup, notes,
                   actions, empty input, and instruction-like transcript text.
-                  The score is a fixture contract result, not a model-quality
+                  The score is a sample contract result, not a model-quality
                   benchmark.
                 </p>
               </motion.div>

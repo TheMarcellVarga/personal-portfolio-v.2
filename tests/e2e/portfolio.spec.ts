@@ -97,12 +97,12 @@ test("branded recovery route guides visitors back to the portfolio", async ({ pa
 
 test("featured work uses the shared evidence record", async ({ page }) => {
   for (const [route, evidenceId, status] of [
-    ["/ai-finance", "aperture", "Local release-ready"],
-    ["/first-revenue-game", "first-revenue-game", "Configured runtime verified"],
-    ["/wild-route", "wild-route", "Deployed demo"],
-    ["/threadscribe", "threadscribe", "Local release-ready"],
-    ["/focusin", "focusin", "Locally verified"],
-    ["/endless-activity", "endless-activity", "Locally verified"],
+    ["/ai-finance", "aperture", "Guided product walkthrough"],
+    ["/first-revenue-game", "first-revenue-game", "End-to-end product slice"],
+    ["/wild-route", "wild-route", "Live public demo"],
+    ["/threadscribe", "threadscribe", "Guided product walkthrough"],
+    ["/focusin", "focusin", "Native macOS build"],
+    ["/endless-activity", "endless-activity", "Native iOS build"],
   ]) {
     await page.goto(route);
     await expect(page.locator(`[data-case-study-evidence="${evidenceId}"]`)).toBeVisible();
@@ -174,7 +174,7 @@ test("Wild Route case study proves product engineering beyond the interface", as
   await expect(page.getByText("74", { exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "What broke in production." })).toBeVisible();
   await expect(page.getByText(/process memory would be shared/i)).toBeVisible();
-  await expect(page.getByText(/fixture-backed data and planning estimates/i)).toBeVisible();
+  await expect(page.getByText(/deterministic planning dataset and estimates/i)).toBeVisible();
   await expect(page.getByRole("link", { name: /open live demo/i })).toHaveAttribute(
     "href",
     "https://ai-travel-planner-psi-five.vercel.app",
@@ -193,7 +193,7 @@ test("ThreadScribe case study shows trustworthy AI interaction evidence", async 
   await expect(
     page.getByRole("heading", { name: "Failure stays truthful and useful." }),
   ).toBeVisible();
-  await expect(page.getByText(/public walkthrough uses deterministic fixture/i)).toBeVisible();
+  await expect(page.getByText(/public walkthrough uses deterministic sample/i)).toBeVisible();
   await expect(page.getByText("Source available privately on request")).toBeVisible();
   await expect(page.locator("video track[kind='captions']")).toHaveAttribute(
     "src",
