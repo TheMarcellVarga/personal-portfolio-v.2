@@ -6,7 +6,6 @@ import AnalyticsConsent from "./components/AnalyticsConsent";
 import AnalyticsGate from "./components/AnalyticsGate";
 import ScrollReset from "./components/ScrollReset";
 import SmoothScroll from "./components/SmoothScroll";
-// import DevelopmentBanner from "./components/DevelopmentBanner";
 
 export { metadata };
 
@@ -39,7 +38,6 @@ export default function RootLayout({
             <ScrollReset />
             {children}
           </SmoothScroll>
-          {/* <DevelopmentBanner /> */}
           <AnalyticsGate />
           <AnalyticsConsent />
         </PostHogProvider>

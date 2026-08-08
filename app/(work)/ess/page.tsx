@@ -354,6 +354,7 @@ export default function ESSPage() {
               src={projectData.image}
               alt={projectData.title}
               fill
+              sizes="(max-width: 1023px) 100vw, 50vw"
               className="object-cover transition-transform duration-1000"
               priority
             />

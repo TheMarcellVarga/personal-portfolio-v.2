@@ -245,7 +245,7 @@ export default function Header({
               className={`font-label hidden text-[0.66rem] font-medium uppercase tracking-[0.3em] transition-opacity duration-500 sm:inline ${
                 revealBrand ? "opacity-100" : "opacity-0"
               } ${
-                useLightOnDark ? "text-white/44" : "text-custom-blue/48"
+                useLightOnDark ? "text-white/75" : "text-custom-blue/80"
               }`}
             >
               {/* Marcell Varga */}
@@ -286,8 +286,8 @@ export default function Header({
                     ? "text-white"
                     : "text-custom-blue"
                   : useLightOnDark
-                    ? "text-white/80 hover:text-white"
-                    : "text-custom-blue/68 hover:text-custom-blue"
+                    ? "text-white hover:text-white"
+                    : "text-custom-blue/90 hover:text-custom-blue"
               }`}
             >
               {highlightedItem === item.label ? (

@@ -207,6 +207,7 @@ export default function EndlessActivityPage() {
                 width={1170}
                 height={2532}
                 priority
+                loading="eager"
                 className="relative h-auto w-full rounded-[2.6rem] shadow-[0_45px_110px_rgba(17,27,40,0.28)]"
               />
             </div>

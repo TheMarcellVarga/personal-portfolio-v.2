@@ -11,7 +11,7 @@ interface HomeIntroProps {
 }
 
 const travelEase = [0.22, 1, 0.36, 1] as const;
-export const HOME_INTRO_COMPLETE_DELAY_MS = 2350;
+export const HOME_INTRO_COMPLETE_DELAY_MS = 1650;
 const HOME_INTRO_COOKIE_MAX_AGE_SECONDS = 60 * 5;
 const introCookie = `mv-home-intro-seen=1; Path=/; Max-Age=${HOME_INTRO_COOKIE_MAX_AGE_SECONDS}; SameSite=Lax`;
 
@@ -27,7 +27,7 @@ export function HomeIntro({ onExitStart, onComplete }: HomeIntroProps) {
     const startExit = window.setTimeout(() => {
       setPhase("exit");
       onExitStart();
-    }, 1450);
+    }, 1000);
     const finish = window.setTimeout(completeIntro, HOME_INTRO_COMPLETE_DELAY_MS);
 
     return () => {
@@ -85,7 +85,7 @@ export function HomeIntro({ onExitStart, onComplete }: HomeIntroProps) {
           delay={0.2}
           duration={0.75}
           stagger={0.015}
-          className="font-label text-[0.68rem] font-medium uppercase tracking-[0.34em] text-white/54"
+          className="font-label text-[0.68rem] font-medium uppercase tracking-[0.34em] text-white/84"
         />
       </motion.div>
 

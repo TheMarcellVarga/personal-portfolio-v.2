@@ -96,6 +96,7 @@ export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
                   src={project.image}
                   alt={project.title}
                   fill
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
                   className="object-cover transition-transform duration-1000 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />

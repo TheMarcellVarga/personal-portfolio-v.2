@@ -76,7 +76,9 @@ export function SplitTextReveal({
       type: "words,chars",
       wordsClass: "split-text-reveal-word",
       charsClass: "split-text-reveal-char",
-      aria: "auto",
+      // Keep the semantic host intact. `aria="auto"` adds aria-label to the
+      // host element, which is invalid on paragraph elements.
+      aria: "none",
     });
 
     gsap.set(split.chars, {

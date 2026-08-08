@@ -38,7 +38,7 @@ export default function RecoveryPage({
         <div className="mx-auto max-w-7xl">
           <section className="grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-end">
             <div>
-              <p className="font-label text-[0.66rem] font-semibold uppercase tracking-[0.2em] text-custom-blue/58">
+              <p className="font-label text-[0.66rem] font-semibold uppercase tracking-[0.2em] text-custom-blue/82">
                 {eyebrow}
               </p>
               <h1 className="mt-6 max-w-[10ch] font-display text-[clamp(4rem,12vw,9rem)] font-medium leading-[0.84] tracking-[-0.07em] text-custom-blue">
@@ -74,7 +74,7 @@ export default function RecoveryPage({
                   404
                 </p>
                 <div className="mt-4 border-t border-custom-blue/10 pt-5">
-                  <p className="font-label text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-custom-blue/52">
+                    <p className="font-label text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-custom-blue/78">
                     A useful next move
                   </p>
                   <p className="mt-3 max-w-sm text-sm leading-6 text-custom-blue/68">

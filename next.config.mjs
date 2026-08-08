@@ -1,5 +1,25 @@
 /** @type {import('next').NextConfig} */
+const isDevelopment = process.env.NODE_ENV !== "production";
+const developmentScriptPolicy = isDevelopment ? " 'unsafe-eval'" : "";
+const contentSecurityPolicy = [
+  "default-src 'self'",
+  "base-uri 'self'",
+  "frame-ancestors 'none'",
+  "object-src 'none'",
+  "form-action 'self'",
+  "img-src 'self' data: blob: https:",
+  "media-src 'self' blob:",
+  "font-src 'self' data:",
+  "style-src 'self' 'unsafe-inline'",
+  `script-src 'self' 'unsafe-inline'${developmentScriptPolicy} https://*.vercel-insights.com`,
+  "connect-src 'self' https://*.vercel-insights.com https://eu.i.posthog.com https://us.i.posthog.com",
+  "worker-src 'self' blob:",
+].join("; ");
+
 const nextConfig = {
+  experimental: {
+    globalNotFound: true,
+  },
   async headers() {
     return [
       {
@@ -17,8 +37,7 @@ const nextConfig = {
           },
           {
             key: "Content-Security-Policy",
-            value:
-              "default-src 'self'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'; form-action 'self'; img-src 'self' data: blob: https:; media-src 'self' blob:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel-insights.com https://*.posthog.com; connect-src 'self' https://*.vercel-insights.com https://*.posthog.com; worker-src 'self' blob:;",
+            value: contentSecurityPolicy,
           },
           {
             key: "Strict-Transport-Security",

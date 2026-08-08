@@ -203,6 +203,7 @@ export default function WildRoutePage() {
               src="/images/wild-route/home.png"
               alt="Wild Route editorial landing page"
               fill
+              sizes="(max-width: 639px) 100vw, 50vw"
               priority
               className="object-cover"
             />
@@ -276,6 +277,7 @@ export default function WildRoutePage() {
                 src="/images/wild-route/planner.png"
                 alt="Wild Route selected-route planner with ranking reasons and estimate boundary"
                 fill
+                sizes="(max-width: 1023px) 100vw, 55vw"
                 className="object-cover"
               />
             </motion.div>
@@ -469,6 +471,7 @@ export default function WildRoutePage() {
               src="/images/wild-route/ribbon.png"
               alt=""
               fill
+              sizes="100vw"
               className="object-cover opacity-25"
             />
             <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(18,24,17,0.98),rgba(18,24,17,0.88)_55%,rgba(18,24,17,0.42))]" />

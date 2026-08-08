@@ -375,6 +375,7 @@ function ProjectListItem({
               src={project.image}
               alt={`${project.title} preview`}
               fill
+              sizes="(max-width: 767px) 100vw, 0px"
               className="object-cover"
             />
           </div>
@@ -716,7 +717,9 @@ export default function Page() {
       return;
     }
 
-    gsap.set(stage, { opacity: 0, y: 16 });
+    // Reveal the semantic stage immediately; animate its contents instead so
+    // assistive technology never sees a partially transparent page.
+    gsap.set(stage, { opacity: 1, y: 0 });
     gsap.set(badgeTargets, {
       autoAlpha: 0,
       clipPath: "inset(0 100% 0 0 round 999px)",
@@ -739,12 +742,6 @@ export default function Page() {
         },
       });
 
-      timeline.to(stage, {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        clearProps: "transform",
-      });
       if (badgeTargets.length) {
         timeline.fromTo(
           badgeTargets,
@@ -972,9 +969,9 @@ export default function Page() {
       <PageBackground />
 
       <div
-        className={`${introPlayedThisVisit ? "transition-opacity duration-700" : ""} ${
-          introHeaderMuted ? "pointer-events-none opacity-25" : "opacity-100"
-        } home-intro-header`}
+        className={`${introHeaderMuted ? "pointer-events-none opacity-25" : "opacity-100"} home-intro-header`}
+        aria-hidden={introHeaderMuted}
+        inert={introHeaderMuted ? true : undefined}
       >
         <Header
           isOpen={isOpen}
@@ -995,6 +992,8 @@ export default function Page() {
         className={`home-intro-stage ${
           introIsVisible ? "pointer-events-none" : ""
         } ${enableScrollMotion ? "hero-motion-ready" : ""}`}
+        aria-hidden={introIsVisible}
+        inert={introIsVisible ? true : undefined}
         style={
           revealMainStage
             ? undefined
@@ -1021,7 +1020,7 @@ export default function Page() {
                   className="hero-scroll-layer mb-7 flex flex-wrap gap-3"
                 >
                   <div data-hero-badge className="home-intro-fold inline-flex overflow-hidden rounded-full bg-white/10 px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl [transform-origin:left_center]">
-                    <span data-hero-badge-label className="font-label block text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74">
+                    <span data-hero-badge-label className="font-label block text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/90">
                       Product-focused frontend engineer
                     </span>
                   </div>
@@ -1045,7 +1044,7 @@ export default function Page() {
                       className="max-w-[8ch] font-display text-[clamp(2.85rem,13vw,4.2rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[clamp(3.4rem,8vw,4.8rem)] md:text-[clamp(3.8rem,7vw,5.4rem)]"
                     />
                     <div data-hero-copy>
-                      <p className="max-w-[30rem] text-[0.95rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
+                      <p className="max-w-[30rem] text-[0.95rem] leading-7 text-white/90 sm:text-[1.05rem] sm:leading-8">
                         Singapore-based product-focused frontend engineer using React
                         and TypeScript to turn complex products and AI workflows into
                         clear, resilient interfaces.
@@ -1094,6 +1093,7 @@ export default function Page() {
                         src="/images/personalpageprofilealt.webp"
                         alt="Portrait of Marcell Varga"
                         fill
+                        sizes="(max-width: 639px) 24rem, (max-width: 1023px) 30rem, 0px"
                         priority
                         className="object-cover object-[center_18%]"
                       />
@@ -1110,7 +1110,7 @@ export default function Page() {
                   className="hero-scroll-layer mb-7 flex flex-wrap gap-3"
                 >
                   <div data-hero-badge className="home-intro-fold inline-flex overflow-hidden rounded-full bg-white/10 px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl [transform-origin:left_center]">
-                    <span data-hero-badge-label className="font-label block text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/74">
+                    <span data-hero-badge-label className="font-label block text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/90">
                       Product-focused frontend engineer
                     </span>
                   </div>
@@ -1134,7 +1134,7 @@ export default function Page() {
                       className="max-w-[6.6ch] font-display text-[3.35rem] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[4.5rem] md:text-[5.3rem] lg:text-[6rem] xl:text-[6.8rem] 2xl:text-[7.5rem]"
                     />
                     <div data-hero-copy>
-                      <p className="max-w-[30rem] text-[1.02rem] leading-7 text-white/72 sm:text-[1.08rem] sm:leading-8">
+                      <p className="max-w-[30rem] text-[1.02rem] leading-7 text-white/90 sm:text-[1.08rem] sm:leading-8">
                         Singapore-based product-focused frontend engineer using React
                         and TypeScript to turn complex products and AI workflows into
                         clear, resilient interfaces.
@@ -1489,6 +1489,7 @@ export default function Page() {
                         src={legacyProjects[0]?.image ?? "/images/catchscan-index.png"}
                         alt="Preview of legacy portfolio projects"
                         fill
+                        sizes="(max-width: 767px) 100vw, 0px"
                         className="object-cover"
                       />
                       <span className="absolute inset-0 bg-gradient-to-r from-custom-blue/35 to-transparent" />
@@ -1710,6 +1711,7 @@ export default function Page() {
                 src={activeProjectImage}
                 alt="Project preview"
                 fill
+                sizes="(max-width: 767px) 16rem, 22rem"
                 className="object-cover"
                 priority
               />

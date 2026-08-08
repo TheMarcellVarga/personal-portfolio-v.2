@@ -32,8 +32,10 @@
 }
 
 :root {
-  --font: -apple-system, BlinkMacSystemFont, "Apple Color Emoji", Inter, Roboto,
-    "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Apple Color Emoji", Inter,
+    Roboto, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-display: "Cabinet Grotesk", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
   --mono-font:
     "SF Mono", menlo, monaco, consolas, "Courier New", Courier, monospace;
   --page-background: #f3ede5;
@@ -55,7 +57,7 @@
     position: relative;
     background: var(--page-background);
     color: var(--color-custom-blue);
-    font-family: var(--font);
+    font-family: var(--font-body);
     overflow-x: clip;
     scroll-behavior: auto;
     text-rendering: optimizeLegibility;
@@ -68,7 +70,7 @@
     margin: 0;
     background: transparent;
     color: var(--color-custom-blue);
-    font-family: var(--font);
+    font-family: var(--font-body);
   }
 
   a {
@@ -99,15 +101,15 @@
 
 @layer utilities {
   .font-display {
-    font-family: var(--font);
+    font-family: var(--font-display);
   }
 
   .font-body {
-    font-family: var(--font);
+    font-family: var(--font-body);
   }
 
   .font-label {
-    font-family: var(--font);
+    font-family: var(--font-display);
   }
 
   .font-mono {
@@ -115,7 +117,7 @@
   }
 
   .font-case-study {
-    font-family: "Cabinet Grotesk", var(--font);
+    font-family: var(--font-display);
   }
 
   .case-study-marquee-track {

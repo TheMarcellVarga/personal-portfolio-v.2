@@ -83,6 +83,7 @@ test("branded recovery route guides visitors back to the portfolio", async ({ pa
   const response = await page.goto("/this-route-does-not-exist");
 
   expect(response?.status()).toBe(404);
+  await expect(page).toHaveTitle("Page not found | Marcell Varga");
   await expect(page.getByRole("heading", { name: "This path led nowhere." })).toBeVisible();
   await expect(page.getByRole("link", { name: /return to portfolio/i })).toHaveAttribute(
     "href",
@@ -312,6 +313,7 @@ test("public routes send baseline browser security headers", async ({ page }) =>
   expect(response.headers()["referrer-policy"]).toBe("strict-origin-when-cross-origin");
   expect(response.headers()["permissions-policy"]).toContain("camera=()");
   expect(response.headers()["content-security-policy"]).toContain("frame-ancestors 'none'");
+  expect(response.headers()["content-security-policy"]).not.toContain("https://*.posthog.com");
 });
 
 test("analytics stays off until a visitor opts in", async ({ page }) => {
