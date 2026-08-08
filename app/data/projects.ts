@@ -63,7 +63,7 @@ export const projects: Project[] = [
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(239,178,86,0.34),_transparent_28%),linear-gradient(155deg,_#0c1820_0%,_#18343b_52%,_#725232_100%)]",
     status: "Live public demo",
-    portfolioPlacement: "supporting",
+    portfolioPlacement: "featured",
     caseStudyId: "first-revenue-game",
   },
   {
@@ -117,7 +117,7 @@ export const projects: Project[] = [
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(48,132,255,0.32),_transparent_28%),linear-gradient(160deg,_#102347_0%,_#245da8_52%,_#dce8f8_100%)]",
     status: "Native macOS build",
-    portfolioPlacement: "featured",
+    portfolioPlacement: "supporting",
     caseStudyId: "focusin",
   },
   {

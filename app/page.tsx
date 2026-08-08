@@ -50,6 +50,18 @@ const principlesStatement =
 
 const PRINCIPLES_REVEAL_END = 0.74;
 
+const featuredProjectOrder = [
+  "Wild Route",
+  "First Revenue Game",
+  "Aperture Financial Intelligence",
+];
+
+const supportingProjectOrder = [
+  "ThreadScribe Studio",
+  "Focusin",
+  "Endless Activity",
+];
+
 const processCards = [
   {
     number: "01",
@@ -873,11 +885,25 @@ export default function Page() {
   }, [capabilitiesInView, shouldReduceMotion]);
 
   const featuredProjects = useMemo(
-    () => projects.filter((project) => project.portfolioPlacement === "featured"),
+    () =>
+      projects
+        .filter((project) => project.portfolioPlacement === "featured")
+        .sort(
+          (left, right) =>
+            featuredProjectOrder.indexOf(left.title) -
+            featuredProjectOrder.indexOf(right.title),
+        ),
     [],
   );
   const supportingProjects = useMemo(
-    () => projects.filter((project) => project.portfolioPlacement === "supporting"),
+    () =>
+      projects
+        .filter((project) => project.portfolioPlacement === "supporting")
+        .sort(
+          (left, right) =>
+            supportingProjectOrder.indexOf(left.title) -
+            supportingProjectOrder.indexOf(right.title),
+        ),
     [],
   );
   const legacyProjects = useMemo(
