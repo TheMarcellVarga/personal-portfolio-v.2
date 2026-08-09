@@ -64,10 +64,10 @@ test("principles statement types forward and reverses on scroll back", async ({ 
 test("about, contact, and resume routes are reachable", async ({ page }) => {
   await page.goto("/about");
   await expect(
-    page.getByRole("heading", { name: "Design judgment. Engineering depth." }),
+    page.getByRole("heading", { name: "Hi, I’m Marcell." }),
   ).toBeVisible();
-  await expect(page.getByRole("link", { name: /explore selected work/i })).toBeVisible();
-  await expect(page.locator("main")).toContainText("The throughline is clarity.");
+  await expect(page.getByRole("link", { name: /see what i build/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "My route here was not a straight line." })).toBeVisible();
 
   await page.goto("/contact");
   await expect(page.getByRole("heading", { name: "Say hi." })).toBeVisible();
@@ -260,7 +260,7 @@ test.describe("mobile and motion fallbacks", () => {
   test("about page preserves its editorial layout without horizontal overflow", async ({ page }) => {
     await page.goto("/about");
     await expect(
-      page.getByRole("heading", { name: "Design judgment. Engineering depth." }),
+      page.getByRole("heading", { name: "Hi, I’m Marcell." }),
     ).toBeVisible();
 
     const horizontalOverflow = await page.evaluate(
