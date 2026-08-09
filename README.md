@@ -40,7 +40,7 @@ Project labels lead with what a visitor can experience while keeping the evidenc
 - Next.js 16 and React 19
 - TypeScript and Tailwind CSS 4
 - Framer Motion, GSAP, and Lenis
-- Vercel deployment and optional PostHog analytics
+- Vercel deployment with no analytics or tracking SDKs
 
 ## Local development
 
@@ -69,7 +69,7 @@ The portfolio uses semantic structure, reduced-motion support, and explicit imag
 
 ## Privacy and analytics
 
-The site exposes email and professional social links. Private environment values, credentials, and personal phone numbers must never be committed or served from public routes. PostHog is opt-in only: it records anonymous page-performance and error measurements after a visitor selects “Allow analytics”; session recording, autocapture, and input capture are disabled.
+The site exposes email and professional social links. Private environment values, credentials, and personal phone numbers must never be committed or served from public routes. Analytics and tracking are not installed or initialized: there is no consent banner, analytics cookie, PostHog integration, Vercel Analytics, Speed Insights, session recording, or hidden telemetry. The short-lived homepage intro cookie only remembers whether the visual intro has completed and is not used for measurement.
 
 ## Deployment
 

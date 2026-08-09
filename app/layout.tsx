@@ -1,9 +1,6 @@
 import "./globals.css";
-import PostHogProvider from "./providers/PostHogProvider";
 import { metadata } from "./metadata";
 import { personSameAs, structuredData } from "./seo";
-import AnalyticsConsent from "./components/AnalyticsConsent";
-import AnalyticsGate from "./components/AnalyticsGate";
 import ScrollReset from "./components/ScrollReset";
 import SmoothScroll from "./components/SmoothScroll";
 
@@ -33,14 +30,10 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body">
-        <PostHogProvider>
-          <SmoothScroll>
-            <ScrollReset />
-            {children}
-          </SmoothScroll>
-          <AnalyticsGate />
-          <AnalyticsConsent />
-        </PostHogProvider>
+        <SmoothScroll>
+          <ScrollReset />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );
