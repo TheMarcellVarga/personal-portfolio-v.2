@@ -1654,7 +1654,7 @@ export default function Page() {
                     text="Say hi."
                     animate={!shouldReduceMotion}
                     triggerOnView
-                    className="max-w-3xl font-display text-[clamp(2.15rem,12vw,5rem)] leading-[0.96] tracking-[-0.04em] text-white"
+                    className="max-w-3xl font-display text-[clamp(2.15rem,12vw,5rem)] leading-[1.02] tracking-[-0.04em] text-white"
                   />
                   <p className="mt-4 max-w-2xl text-[0.96rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
                     If you want to talk about a project, share feedback, or

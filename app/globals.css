@@ -253,8 +253,8 @@
   .split-text-reveal-word {
     display: inline-block;
     overflow: hidden;
-    margin-bottom: -0.18em;
-    padding-bottom: 0.18em;
+    margin-block: -0.08em -0.18em;
+    padding-block: 0.08em 0.18em;
     vertical-align: top;
   }
 
