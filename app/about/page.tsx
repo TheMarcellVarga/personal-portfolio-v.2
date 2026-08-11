@@ -114,12 +114,33 @@ export default function AboutPage() {
               <figcaption className="glass-panel absolute bottom-0 left-0 max-w-[16rem] -rotate-3 rounded-[1.35rem] px-5 py-4 text-sm leading-6 text-custom-blue/72 sm:max-w-[18rem]">
                 Proof that I occasionally close the laptop.
                 <span className="mt-2 block font-mono text-[0.6rem] uppercase tracking-[0.14em] text-custom-blue/42">
-                  Great Wall · 2025
+                  Great Wall · July 2026
                 </span>
               </figcaption>
               <div className="absolute -right-2 top-[18%] rotate-6 rounded-full bg-[#071726] px-4 py-2 font-label text-[0.58rem] uppercase tracking-[0.18em] text-white/78 shadow-[0_14px_36px_rgba(7,23,38,0.2)] sm:right-0">
-                based in Singapore
+                Latest detour · July 2026
               </div>
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 140 110"
+                fill="none"
+                className="pointer-events-none absolute -right-10 top-[18%] hidden h-28 w-36 text-custom-blue/46 sm:block"
+              >
+                <path
+                  d="M132 7C127 37 113 53 88 62C65 70 49 81 42 101"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeDasharray="2 6"
+                />
+                <path
+                  d="M42 101L44 85M42 101L57 95"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </motion.figure>
           </div>
         </section>
