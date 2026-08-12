@@ -99,6 +99,11 @@ export function SplitTextReveal({
       stagger,
       ease: "power4.out",
       clearProps: "opacity,transform",
+      onComplete: () => {
+        // Keep the reveal clipped while it runs, then release the mask so
+        // descenders such as "y" remain fully visible in the resting state.
+        gsap.set(split.words, { overflow: "visible" });
+      },
     });
 
     return () => {
