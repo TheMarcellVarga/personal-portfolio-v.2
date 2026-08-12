@@ -414,7 +414,7 @@ export default function AiFinancePage() {
               <div>
                 <SectionLabel index="05" label="Trade-off" />
                 <h2 className="mt-6 text-balance font-display text-[clamp(2.4rem,5vw,4rem)] font-medium leading-[0.94] tracking-[-0.04em] text-custom-blue">
-                  Local rigor before live-model theatre.
+                  Public proof before provider expansion.
                 </h2>
               </div>
               <div className="space-y-5 text-[1.02rem] leading-7 text-custom-blue/70">
@@ -425,10 +425,10 @@ export default function AiFinancePage() {
                   presenting paid-provider output as proof of product quality.
                 </p>
                 <p>
-                  The trade-off is explicit: Aperture is presented as a guided product
-                  walkthrough, not a public financial service. Production credentials, hosted migrations,
-                  live-model evaluation, and deployed performance evidence remain separate
-                  environment-activation work.
+                  The public result is a deployed, read-only guided demo using fictional
+                  evidence—not a financial service. Authenticated document ingestion,
+                  production credentials, hosted migrations, and live-model evaluation stay
+                  behind a private evaluation boundary until their operating controls are ready.
                 </p>
               </div>
             </motion.section>

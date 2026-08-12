@@ -147,8 +147,8 @@ test("Aperture case study presents measurable systems evidence", async ({ page }
   await expect(page.getByText("40/40")).toBeVisible();
   await expect(page.getByText("From private document to reviewed evidence.")).toBeVisible();
   await expect(page.getByRole("list", { name: "Aperture system architecture" })).toBeVisible();
-  await expect(page.getByText("Local rigor before live-model theatre.")).toBeVisible();
-  await expect(page.getByText(/not a public financial service/i)).toBeVisible();
+  await expect(page.getByText("Public proof before provider expansion.")).toBeVisible();
+  await expect(page.getByText(/not a financial service/i)).toBeVisible();
 });
 
 test("First Revenue Game connects product judgment to reliable backend evidence", async ({ page }) => {

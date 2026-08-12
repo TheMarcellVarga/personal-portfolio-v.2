@@ -29,7 +29,7 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
       "Cross-owner isolation, prompt injection, schema repair, accessibility, and deployment contracts are automated release gates.",
     ],
     limitations: [
-      "The complete product path is available as a guided build; this case study does not claim a public production service.",
+      "The live guided demo is read-only and uses fictional evidence; authenticated document ingestion and reviewed export remain a private evaluation workspace.",
       "External model calls and paid-provider comparisons remain disabled pending explicit cost and credential approval.",
     ],
   },
@@ -47,12 +47,12 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
       "Resolved proof ownership before issuing short-lived MinIO access and kept operational telemetry free of secrets and applicant data.",
     ],
     verification: [
-      "Forty-one Vitest tests and 35 passing Playwright checks cover the product shell, API contracts, responsive behavior, and member/operator workflow.",
+      "Forty-one Vitest tests and 36 passing Playwright checks cover the product shell, API contracts, responsive behavior, and member/operator workflow.",
       "Thirty-four JUnit and Testcontainers tests exercise the backend against real PostgreSQL and Redpanda services.",
       "The verification harness proves application-to-approval state, BFF reads, outbox drain and recovery, custom metrics, Grafana provisioning, and log privacy.",
     ],
     limitations: [
-      "The end-to-end product slice is verified against its supporting services; no hosted production environment or production end-user identity deployment is claimed.",
+      "The public demo is deployed in deterministic demo mode; managed persistence, production end-user identity, and the Java service stack are not activated on the public URL.",
       "The demonstrated golden path uses link proof. MinIO file handling is verified separately through permission and storage coverage.",
       "Redis is readiness-checked but owns no product workload, and production SLOs, alert routing, retention, scaling, and incident ownership remain open.",
     ],
