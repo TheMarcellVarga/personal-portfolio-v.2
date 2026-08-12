@@ -25,24 +25,18 @@ import { gsap } from "gsap";
 import {
   ArrowRight,
   ArrowUpRight,
-  Blocks,
   ChevronDown,
-  Code2,
   Download,
   Github,
   Linkedin,
   Mail,
-  Rocket,
-  Sparkles,
 } from "lucide-react";
 import Header from "./header";
 import Footer from "./footer";
 import { history, type HistoryItem } from "./data/history";
 import { projects, type Project } from "./data/projects";
-import { SectionLabel } from "./components/SectionLabel";
 import { HomeIntro } from "./components/HomeIntro";
 import { PageBackground } from "./components/PageBackground";
-import { HeroCanvasBackdrop } from "./components/HeroCanvasBackdrop";
 import { SplitTextReveal } from "./components/SplitTextReveal";
 
 const principlesStatement =
@@ -64,44 +58,21 @@ const supportingProjectOrder = [
 
 const processCards = [
   {
-    number: "01",
     title: "Product delivery",
     body: "Translate complex product requirements into usable interfaces, from the first decision through production detail.",
-    icon: Blocks,
-    colSpan: "lg:col-span-2",
   },
   {
-    number: "02",
     title: "International context",
     body: "Build with product teams across markets, balancing user needs, engineering constraints, and a clear shared direction.",
-    icon: Sparkles,
-    colSpan: "lg:col-span-1",
   },
   {
-    number: "03",
     title: "Core stack",
     body: "React, TypeScript, Java/Spring, and event-driven systems for durable product workflows.",
-    icon: Code2,
-    colSpan: "lg:col-span-1",
   },
   {
-    number: "04",
     title: "Ownership",
     body: "Carry the work through implementation, refining responsiveness, accessibility, motion, and product detail as it becomes real.",
-    icon: Rocket,
-    colSpan: "lg:col-span-2",
   },
-];
-
-const processTags = [
-  "AXON Networks",
-  "product delivery",
-  "React",
-  "TypeScript",
-  "Java / Spring",
-  "event systems",
-  "accessibility",
-  "responsive UI",
 ];
 
 function HeroDynamicBackdrop({
@@ -113,9 +84,7 @@ function HeroDynamicBackdrop({
     >
       <div className="absolute inset-0 bg-[#06111c]" />
       <div className="absolute inset-0 bg-[linear-gradient(118deg,rgba(5,10,18,0.98)_0%,rgba(8,18,29,0.94)_28%,rgba(16,39,56,0.84)_56%,rgba(72,104,122,0.82)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(255,255,255,0.08),transparent_18%),radial-gradient(circle_at_72%_24%,rgba(76,207,255,0.14),transparent_18%),radial-gradient(circle_at_84%_66%,rgba(255,224,182,0.08),transparent_24%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,8,14,0.16)_0%,rgba(4,8,14,0.04)_40%,rgba(4,8,14,0.28)_100%)]" />
-      <HeroCanvasBackdrop />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,8,14,0.12)_0%,rgba(4,8,14,0.02)_42%,rgba(4,8,14,0.3)_100%)]" />
     </div>
   );
 }
@@ -202,7 +171,7 @@ function HistoryItemComponent({
         duration: 0.7,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="glass-panel relative flex min-h-[18rem] snap-center flex-col overflow-hidden rounded-[1.9rem] bg-white/65 p-5 shadow-[0_12px_40px_rgba(11,17,26,0.04)] transition-[border-color] duration-300 sm:rounded-[2.1rem]"
+      className="relative flex min-h-[18rem] snap-center flex-col overflow-hidden border-t border-custom-blue/16 bg-[#f8f3ec]/72 p-5 transition-[border-color] duration-300 sm:p-7"
       style={{
         willChange: reduceMotion || compact ? "auto" : "transform, opacity, filter",
       }}
@@ -210,7 +179,7 @@ function HistoryItemComponent({
       <div className="relative z-10 flex h-full flex-col">
         <div className="mb-5 flex items-start justify-between gap-4">
           <div
-            className="inline-flex h-10 w-10 items-center justify-center rounded-[0.95rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)]"
+            className="inline-flex h-10 items-center justify-center text-custom-blue"
             style={{
               transform: `scale(${0.98 + normalizedFocus * 0.08})`,
             }}
@@ -221,7 +190,7 @@ function HistoryItemComponent({
           </div>
           {index === 0 && (
             <span
-              className="font-label rounded-full bg-white/62 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]"
+              className="font-label border-b border-custom-blue/30 pb-1 text-[0.58rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60"
               style={{
                 opacity: 0.58 + normalizedFocus * 0.42,
               }}
@@ -251,14 +220,14 @@ function HistoryItemComponent({
           ))}
         </div>
 
-        <div className="mt-auto flex flex-wrap gap-2 pt-5">
-          <span className="font-label rounded-full bg-white/62 px-3 py-1.5 text-[0.66rem] font-medium uppercase tracking-[0.14em] text-custom-blue/68 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]">
+        <div className="mt-auto flex flex-wrap gap-x-5 gap-y-2 border-t border-custom-blue/10 pt-5">
+          <span className="font-label text-[0.66rem] font-medium uppercase tracking-[0.14em] text-custom-blue/68">
             {item.time.start} {item.time.end ? `- ${item.time.end}` : "- Present"}
           </span>
           {item.skills.map((skill: string) => (
             <span
               key={skill}
-              className="font-label rounded-full bg-white/62 px-3 py-1.5 text-[0.66rem] font-medium uppercase tracking-[0.14em] text-custom-blue/68 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]"
+              className="font-label text-[0.66rem] font-medium uppercase tracking-[0.14em] text-custom-blue/58"
             >
               {skill}
             </span>
@@ -1045,7 +1014,7 @@ export default function Page() {
                   style={enableScrollMotion ? { y: heroPillsY } : undefined}
                   className="hero-scroll-layer mb-7 flex flex-wrap gap-3"
                 >
-                  <div data-hero-badge className="home-intro-fold inline-flex overflow-hidden rounded-full bg-white/10 px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl [transform-origin:left_center]">
+                  <div data-hero-badge className="home-intro-fold inline-flex border-l border-[#67d9ff]/60 pl-3 [transform-origin:left_center]">
                     <span data-hero-badge-label className="font-label block text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/90">
                       Product-focused frontend engineer
                     </span>
@@ -1087,7 +1056,7 @@ export default function Page() {
                   <div data-hero-cta-group className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
                     <button
                       onClick={scrollWork}
-                      className="group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.9)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8] hover:shadow-[0_24px_70px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.9)] active:translate-y-0 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c] sm:w-fit"
+                      className="group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-[0.45rem] bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_18px_44px_rgba(0,0,0,0.22)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8] active:translate-y-0 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c] sm:w-fit"
                     >
                       <span className="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_0%,rgba(103,217,255,0.18)_45%,transparent_70%)] transition-transform duration-700 group-hover:translate-x-full" />
                       <span className="relative z-10">Selected work</span>
@@ -1095,7 +1064,7 @@ export default function Page() {
                     </button>
                     <Link
                       href="/resume"
-                      className="hero-resume-cta group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full px-6 py-3 text-sm font-medium outline-none sm:w-fit"
+                      className="hero-resume-cta group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-[0.45rem] px-6 py-3 text-sm font-medium outline-none sm:w-fit"
                     >
                       <span className="hero-resume-sheen pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_0%,rgba(103,217,255,0.18)_45%,transparent_70%)] transition-transform duration-700 group-hover:translate-x-full" />
                       <span className="relative z-10">Resume</span>
@@ -1108,9 +1077,9 @@ export default function Page() {
 
               <motion.div
                 style={enableScrollMotion ? { y: portraitY, scale: portraitScale } : undefined}
-                className="hero-scroll-layer relative w-full max-w-[24rem] self-center overflow-hidden rounded-[1.65rem] border border-white/10 bg-white/6 p-2.5 shadow-[0_20px_70px_rgba(0,0,0,0.24)] backdrop-blur-xl sm:max-w-[30rem] sm:rounded-[2rem] sm:p-3 md:max-w-none"
+                className="hero-scroll-layer relative w-full max-w-[24rem] self-center overflow-hidden border border-white/12 bg-[#071726] p-1 shadow-[0_20px_70px_rgba(0,0,0,0.24)] sm:max-w-[30rem] md:max-w-none"
               >
-                <motion.div className="relative overflow-hidden rounded-[1.2rem] bg-[#071726] sm:rounded-[1.5rem]">
+                <motion.div className="relative overflow-hidden bg-[#071726]">
                   <div className="relative h-full w-full">
                     <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
                     <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
@@ -1135,7 +1104,7 @@ export default function Page() {
                   style={enableScrollMotion ? { y: heroPillsY } : undefined}
                   className="hero-scroll-layer mb-7 flex flex-wrap gap-3"
                 >
-                  <div data-hero-badge className="home-intro-fold inline-flex overflow-hidden rounded-full bg-white/10 px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl [transform-origin:left_center]">
+                  <div data-hero-badge className="home-intro-fold inline-flex border-l border-[#67d9ff]/60 pl-3 [transform-origin:left_center]">
                     <span data-hero-badge-label className="font-label block text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/90">
                       Product-focused frontend engineer
                     </span>
@@ -1177,7 +1146,7 @@ export default function Page() {
                   <div data-hero-cta-group className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
                     <button
                       onClick={scrollWork}
-                      className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.9)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8] hover:shadow-[0_24px_70px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.9)] active:translate-y-0 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c]"
+                      className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-[0.45rem] bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_18px_44px_rgba(0,0,0,0.22)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8] active:translate-y-0 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c]"
                     >
                       <span className="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_0%,rgba(103,217,255,0.18)_45%,transparent_70%)] transition-transform duration-700 group-hover:translate-x-full" />
                       <span className="relative z-10">Selected work</span>
@@ -1185,7 +1154,7 @@ export default function Page() {
                     </button>
                     <Link
                       href="/resume"
-                      className="hero-resume-cta group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-6 py-3 text-sm font-medium outline-none"
+                      className="hero-resume-cta group relative inline-flex items-center gap-3 overflow-hidden rounded-[0.45rem] px-6 py-3 text-sm font-medium outline-none"
                     >
                       <span className="hero-resume-sheen pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_0%,rgba(103,217,255,0.18)_45%,transparent_70%)] transition-transform duration-700 group-hover:translate-x-full" />
                       <span className="relative z-10">Resume</span>
@@ -1231,8 +1200,7 @@ export default function Page() {
             >
               <div className="absolute inset-x-0 bottom-0 h-[22rem] overflow-hidden rounded-t-[44%] [mask-image:linear-gradient(to_bottom,black_0%,black_65%,transparent_100%)] sm:h-[26rem] lg:inset-x-[-10%]">
                 {/* Keep the rising mask aligned with the fixed page surface underneath. */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(76,207,255,0.16),_transparent_28%),radial-gradient(circle_at_20%_70%,_rgba(255,153,102,0.16),_transparent_34%),radial-gradient(circle_at_85%_18%,_rgba(17,27,40,0.12),_transparent_24%),linear-gradient(180deg,_#f8f1e8_0%,_#f6efe5_46%,_#fff8f1_100%)] [background-attachment:fixed]" />
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(76,207,255,0.10),_transparent_28%),radial-gradient(circle_at_20%_70%,_rgba(255,153,102,0.08),_transparent_34%)] [background-attachment:fixed]" />
+                <div className="absolute inset-0 bg-[linear-gradient(145deg,_#f8f2ea_0%,_#f3eee7_48%,_#faf6f0_100%)] [background-attachment:fixed]" />
               </div>
             </motion.div>
           </section>
@@ -1258,11 +1226,10 @@ export default function Page() {
                         ? undefined
                         : { opacity: 0, scale: 0.98, y: 24 }
                   }
-                className="mx-auto flex h-auto min-h-[20rem] w-full max-w-5xl flex-col overflow-hidden rounded-[1.65rem] bg-[#071726]/92 p-5 text-white shadow-[0_40px_140px_rgba(5,16,32,0.28),inset_0_1px_0_rgba(255,255,255,0.16)] sm:min-h-[28rem] sm:rounded-[2.5rem] sm:p-8 lg:h-[40rem] lg:min-h-0 lg:rounded-[3rem] lg:p-12"
+                className="mx-auto flex h-auto min-h-[20rem] w-full max-w-5xl flex-col overflow-hidden border-y border-white/12 bg-[#071726] p-5 text-white shadow-[0_40px_140px_rgba(5,16,32,0.24)] sm:min-h-[28rem] sm:p-8 lg:h-[40rem] lg:min-h-0 lg:p-12"
               >
                 <div className="flex h-full flex-col justify-between gap-8">
                   <div>
-                    <SectionLabel index="01" label="Principles" tone="light" />
                     <motion.div
                       style={
                         enableScrollMotion && !isCompactViewport && principlesIntroReady
@@ -1332,13 +1299,12 @@ export default function Page() {
           >
             <div className="mb-8 grid gap-4 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-end">
               <div className="max-w-2xl">
-                <SectionLabel index="02" label="Proof" />
                 <SplitTextReveal
                   as="h2"
                   text="Product thinking, backed by delivery."
                   animate={!shouldReduceMotion}
                   triggerOnView
-                  className="mt-6 font-display text-[clamp(2.2rem,12vw,5.4rem)] leading-[0.95] tracking-[-0.04em] text-custom-blue sm:mt-8 sm:leading-[0.9]"
+                  className="font-display text-[clamp(2.2rem,12vw,5.4rem)] leading-[0.95] tracking-[-0.04em] text-custom-blue sm:leading-[0.9]"
                 />
               </div>
               <p className="max-w-xl text-[0.9rem] leading-7 text-custom-blue/66 lg:justify-self-end">
@@ -1348,43 +1314,21 @@ export default function Page() {
               </p>
             </div>
 
-            <div className="grid auto-rows-fr gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {processCards.map((card, index) => {
-                const Icon = card.icon;
-
+            <div className="grid border-t border-custom-blue/16 sm:grid-cols-2">
+              {processCards.map((card) => {
                 return (
                   <article
                     key={card.title}
                     data-capabilities-card
-                    className={`glass-panel relative flex min-h-[10rem] flex-col overflow-hidden rounded-[1.8rem] bg-white/65 p-4 shadow-[0_12px_40px_rgba(11,17,26,0.04)] sm:rounded-[2rem] ${card.colSpan}`}
+                    className="relative flex min-h-[13rem] flex-col border-b border-custom-blue/16 py-8 sm:min-h-[15rem] sm:px-8 sm:first:border-r sm:[&:nth-child(3)]:border-r"
                   >
-                    <div className="relative z-10 flex h-full flex-col">
-                      <div className="mb-4 flex items-start justify-between gap-3">
-                        <div className="inline-flex h-9 w-9 items-center justify-center rounded-[0.85rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)]">
-                          <Icon className="h-4.5 w-4.5" />
-                        </div>
-                        <span className="font-label rounded-full bg-white/62 px-2.5 py-1 text-[0.52rem] font-medium uppercase tracking-[0.18em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]">
-                          {card.number}
-                        </span>
-                      </div>
-                      <h2 className="max-w-[14ch] font-display text-[1.08rem] font-medium leading-[1.04] tracking-[-0.02em] text-custom-blue sm:text-[1.24rem]">
+                    <div className="relative z-10 flex h-full max-w-[32rem] flex-col">
+                      <h3 className="max-w-[14ch] font-display text-[1.45rem] font-medium leading-[1.02] tracking-[-0.025em] text-custom-blue sm:text-[1.75rem]">
                         {card.title}
-                      </h2>
-                      <p className="mt-2 max-w-[26rem] text-[0.75rem] leading-[1.55] text-custom-blue/70">
+                      </h3>
+                      <p className="mt-auto max-w-[28rem] pt-8 text-[0.9rem] leading-[1.65] text-custom-blue/66">
                         {card.body}
                       </p>
-                      <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
-                        {processTags
-                          .slice(index * 2, index * 2 + 2)
-                          .map((tag) => (
-                            <span
-                              key={tag}
-                              className="font-label rounded-full bg-white/62 px-2 py-1 text-[0.52rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                      </div>
                     </div>
                   </article>
                 );
@@ -1400,13 +1344,12 @@ export default function Page() {
           >
             <div className="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div className="max-w-2xl">
-                <SectionLabel index="03" label="Selected Work" />
                 <SplitTextReveal
                   as="h2"
                   text="Work that turns product thinking into interfaces."
                   animate={!shouldReduceMotion}
                   triggerOnView
-                  className="mt-6 font-display text-[clamp(2.15rem,11vw,5.4rem)] leading-[0.96] tracking-[-0.04em] text-custom-blue sm:mt-8 sm:leading-[0.9]"
+                  className="font-display text-[clamp(2.15rem,11vw,5.4rem)] leading-[0.96] tracking-[-0.04em] text-custom-blue sm:leading-[0.9]"
                 />
                 <p className="mt-5 text-[0.98rem] leading-relaxed text-custom-blue/65 sm:mt-6 sm:text-[1.05rem]">
                   A focused set of products where interface quality is backed by
@@ -1558,12 +1501,9 @@ export default function Page() {
             id="trajectory"
             className="relative mx-auto mt-24 w-full max-w-7xl sm:mt-36 lg:mt-48"
           >
-            <div className="pointer-events-none absolute left-1/2 top-8 h-[40rem] w-[min(48rem,90vw)] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,_rgba(103,217,255,0.14)_0%,_rgba(103,217,255,0.04)_40%,_transparent_75%)] blur-3xl" />
-            
             <div className="relative grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
               {/* Sticky Left Content */}
               <div className="lg:sticky lg:top-32 lg:h-fit lg:pt-4">
-                <SectionLabel index="04" label="Trajectory" />
                 <div className="mt-8 space-y-6">
                   <div className="space-y-5">
                     <h2 className="font-display text-[clamp(2.4rem,14vw,5.6rem)] leading-[0.9] tracking-[-0.045em] text-custom-blue">
@@ -1643,12 +1583,11 @@ export default function Page() {
             <motion.div
               data-scroll-anchor="contact"
               {...fadeInUp(0.06)}
-              className="relative mx-auto flex min-h-[24rem] w-full max-w-5xl items-start overflow-hidden rounded-[1.65rem] bg-[#071726] p-5 text-white shadow-[0_40px_140px_rgba(7,20,38,0.26),inset_0_1px_0_rgba(255,255,255,0.16)] sm:min-h-[28rem] sm:items-center sm:rounded-[2.75rem] sm:p-8"
+              className="relative mx-auto flex min-h-[24rem] w-full max-w-5xl items-start overflow-hidden rounded-[0.65rem] bg-[#071726] p-5 text-white shadow-[0_40px_140px_rgba(7,20,38,0.22)] sm:min-h-[28rem] sm:items-center sm:p-8"
             >
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(72,205,255,0.26),_transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.06),transparent_55%)]" />
+              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.035),transparent_58%)]" />
               <div className="relative grid w-full gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
                 <div>
-                  <SectionLabel index="05" label="Contact" tone="light" />
                   <h2 className="-mb-[0.08em] max-w-3xl pb-[0.08em] font-display text-[clamp(2.15rem,12vw,5rem)] leading-[1.1] tracking-[-0.04em] text-white">
                     Say hi.
                   </h2>
@@ -1662,7 +1601,7 @@ export default function Page() {
                 <div className="grid gap-2.5 self-end sm:gap-3">
                   <a
                     href="mailto:themarcellvarga@gmail.com"
-                    className="group flex items-center justify-between gap-3 rounded-[1.25rem] bg-white/7 px-3.5 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 sm:gap-4 sm:rounded-[1.35rem] sm:px-5 sm:py-3.5"
+                    className="group flex min-h-14 items-center justify-between gap-3 border-b border-white/20 px-1 py-3 transition-colors duration-300 hover:border-[#67d9ff] hover:text-[#67d9ff] sm:gap-4 sm:px-2 sm:py-3.5"
                   >
                     <span className="flex min-w-0 flex-1 items-center gap-3">
                       <Mail className="h-5 w-5 shrink-0 text-[#67d9ff]" />
@@ -1676,7 +1615,7 @@ export default function Page() {
                     href="https://www.linkedin.com/in/marcellvarga/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center justify-between rounded-[1.35rem] bg-white/7 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 sm:px-5 sm:py-3.5"
+                    className="group flex min-h-14 items-center justify-between border-b border-white/20 px-1 py-3 transition-colors duration-300 hover:border-[#67d9ff] hover:text-[#67d9ff] sm:px-2 sm:py-3.5"
                   >
                     <span className="flex items-center gap-3">
                       <Linkedin className="h-5 w-5 text-[#67d9ff]" />
@@ -1690,7 +1629,7 @@ export default function Page() {
                     href="https://github.com/TheMarcellVarga"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center justify-between rounded-[1.35rem] bg-white/7 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 sm:px-5 sm:py-3.5"
+                    className="group flex min-h-14 items-center justify-between border-b border-white/20 px-1 py-3 transition-colors duration-300 hover:border-[#67d9ff] hover:text-[#67d9ff] sm:px-2 sm:py-3.5"
                   >
                     <span className="flex items-center gap-3">
                       <Github className="h-5 w-5 text-[#67d9ff]" />
@@ -1716,7 +1655,7 @@ export default function Page() {
       <AnimatePresence>
         {activeProjectImage && !isCompactViewport && (
           <motion.div
-            className="pointer-events-none fixed z-[100] h-[11rem] w-[16rem] overflow-hidden rounded-[1.35rem] border-[1px] border-white/20 bg-white shadow-[0_24px_70px_rgba(0,0,0,0.3)] backdrop-blur-2xl md:h-[14rem] md:w-[22rem]"
+            className="pointer-events-none fixed z-[100] h-[11rem] w-[16rem] overflow-hidden border border-white/20 bg-white shadow-[0_24px_70px_rgba(0,0,0,0.3)] md:h-[14rem] md:w-[22rem]"
             style={{
               left: mouseXSpring,
               top: mouseYSpring,
@@ -1738,11 +1677,6 @@ export default function Page() {
                 priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-              <div className="absolute inset-x-0 bottom-3 flex justify-center">
-                <span className="font-label rounded-full bg-white/20 px-2 py-0.75 text-[0.5rem] font-medium uppercase tracking-[0.14em] text-white shadow-[0_8px_32px_rgba(0,0,0,0.1)] backdrop-blur-md">
-                  View project
-                </span>
-              </div>
             </div>
           </motion.div>
         )}

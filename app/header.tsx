@@ -205,17 +205,17 @@ export default function Header({
 
   return (
     <header
-      className={`sticky-header px-3 py-2.5 transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:py-4 lg:px-10 ${
+      className={`sticky-header px-4 py-3 transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 lg:px-10 ${
         isHeaderVisible || isOpen
           ? "opacity-100"
           : "opacity-0 pointer-events-none"
       }`}
     >
       <div
-        className={`mx-auto grid min-h-[3.5rem] w-full max-w-7xl grid-cols-[auto_1fr_auto] items-center rounded-full px-3.5 py-1.5 transition duration-300 sm:min-h-[4.5rem] sm:px-5 sm:py-2 lg:grid-cols-[1fr_auto_1fr] ${
+        className={`mx-auto grid min-h-[3.5rem] w-full max-w-7xl grid-cols-[auto_1fr_auto] items-center border-b px-1 py-1.5 transition duration-300 sm:min-h-[4.25rem] sm:px-2 sm:py-2 lg:grid-cols-[1fr_auto_1fr] ${
           useLightOnDark
-            ? "bg-[#0a1521]/95 shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_18px_48px_rgba(0,0,0,0.18)] backdrop-blur-2xl"
-            : "bg-white/72 shadow-[0_16px_50px_rgba(7,20,38,0.12),inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-2xl"
+            ? "border-white/16 bg-[#0a1521]/88 backdrop-blur-xl"
+            : "border-custom-blue/14 bg-[#f7f1e9]/88 backdrop-blur-xl"
         }`}
       >
         <div className="flex items-center gap-3 justify-self-start">
@@ -280,7 +280,7 @@ export default function Header({
               onMouseEnter={() => setHoveredItem(item.label)}
               onFocus={() => setHoveredItem(item.label)}
               onBlur={() => setHoveredItem(null)}
-              className={`font-label relative rounded-full px-4 py-2 text-[0.68rem] font-medium uppercase tracking-[0.16em] transition duration-300 ${
+              className={`font-label relative min-h-11 px-4 py-2 text-[0.68rem] font-medium uppercase tracking-[0.16em] transition duration-300 ${
                 highlightedItem === item.label
                   ? useLightOnDark
                     ? "text-white"
@@ -293,10 +293,10 @@ export default function Header({
               {highlightedItem === item.label ? (
                 <motion.span
                   layoutId="header-nav-highlight"
-                  className={`absolute inset-0 rounded-full ${
+                  className={`absolute inset-x-3 bottom-0 h-px ${
                     useLightOnDark
-                      ? "bg-white/12 shadow-[inset_0_1px_0_rgba(255,255,255,0.16)_opacity-60]"
-                      : "bg-custom-blue/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.48)_opacity-60]"
+                      ? "bg-[#67d9ff]"
+                      : "bg-custom-blue"
                   }`}
              
                   transition={
@@ -319,10 +319,10 @@ export default function Header({
         <div className="hidden items-center gap-3 justify-self-end lg:flex">
           <Link
             href="/resume"
-            className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition duration-300 ${
+            className={`inline-flex min-h-11 items-center gap-2 border-b px-2 py-2 text-sm font-medium transition duration-300 ${
               useLightOnDark
-                ? "bg-white/10 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16)_opacity-60] hover:bg-white/14"
-                : "bg-custom-blue/8 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.58),0_8px_24px_rgba(17,27,40,0.06)] hover:bg-custom-blue/12"
+                ? "border-white/24 text-white hover:border-[#67d9ff]"
+                : "border-custom-blue/24 text-custom-blue hover:border-custom-blue"
             }`}
           >
             Resume
@@ -352,7 +352,7 @@ export default function Header({
             initial="closed"
             animate="open"
             exit="closed"
-            className="mx-auto mt-3 w-full max-w-7xl overflow-hidden rounded-[1.5rem] bg-white/82 p-3 shadow-[0_28px_90px_rgba(7,20,38,0.12),inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-2xl sm:rounded-[2rem] sm:p-4 lg:hidden"
+            className="mx-auto mt-3 w-full max-w-7xl overflow-hidden rounded-[0.65rem] border border-custom-blue/10 bg-[#f7f1e9]/96 p-3 shadow-[0_28px_90px_rgba(7,20,38,0.12)] backdrop-blur-xl sm:p-4 lg:hidden"
           >
             <motion.div
               className="grid gap-2"
