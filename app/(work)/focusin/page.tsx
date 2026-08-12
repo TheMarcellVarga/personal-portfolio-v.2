@@ -169,7 +169,7 @@ export default function FocusinPage() {
                   width={960}
                   height={898}
                   priority
-                  className="mx-auto h-full max-h-[38rem] w-auto rounded-[2rem] object-contain drop-shadow-[0_26px_45px_rgba(0,0,0,0.28)]"
+                  className="mx-auto h-auto max-h-[38rem] w-auto rounded-[2rem] object-contain drop-shadow-[0_26px_45px_rgba(0,0,0,0.28)]"
                 />
                 <figcaption className="mx-auto mt-5 max-w-xl text-center text-xs leading-5 text-white/52">
                   Current deterministic review capture used as
@@ -237,7 +237,7 @@ export default function FocusinPage() {
                   alt="Focusin active break screen with Window Breath recommendation, progress, Done, and Skip controls"
                   width={960}
                   height={984}
-                  className="h-full w-full rounded-[1.45rem] object-cover object-top"
+                  className="h-auto w-full rounded-[1.45rem] object-cover object-top"
                 />
                 <figcaption className="px-2 pb-2 pt-4 text-sm leading-6 text-custom-blue/64">
                   The active break keeps progress, completion, and a respectful
