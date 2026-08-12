@@ -1649,13 +1649,9 @@ export default function Page() {
               <div className="relative grid w-full gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
                 <div>
                   <SectionLabel index="05" label="Contact" tone="light" />
-                  <SplitTextReveal
-                    as="h2"
-                    text="Say hi."
-                    animate={!shouldReduceMotion}
-                    triggerOnView
-                    className="max-w-3xl font-display text-[clamp(2.15rem,12vw,5rem)] leading-[1.02] tracking-[-0.04em] text-white"
-                  />
+                  <h2 className="-mb-[0.08em] max-w-3xl pb-[0.08em] font-display text-[clamp(2.15rem,12vw,5rem)] leading-[1.1] tracking-[-0.04em] text-white">
+                    Say hi.
+                  </h2>
                   <p className="mt-4 max-w-2xl text-[0.96rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
                     If you want to talk about a project, share feedback, or
                     just introduce yourself, send a note. I read everything
