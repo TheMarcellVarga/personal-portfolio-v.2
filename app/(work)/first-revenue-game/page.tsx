@@ -217,8 +217,8 @@ export default function FirstRevenueGamePage() {
             <Image
               src="/images/first-revenue-game/landing.jpg"
               alt="First Revenue Game landing page explaining its mission-first revenue workflow"
-              width={1365}
-              height={1000}
+              width={1280}
+              height={720}
               priority
               className="h-auto w-full"
             />
