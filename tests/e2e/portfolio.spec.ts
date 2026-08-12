@@ -72,12 +72,15 @@ test("about, contact, and resume routes are reachable", async ({ page }) => {
   await page.goto("/contact");
   await expect(page.getByRole("heading", { name: "Say hi." })).toBeVisible();
   await expect(page.getByRole("link", { name: /themarcellvarga@gmail.com/i })).toBeVisible();
+  await page.getByRole("button", { name: /reveal phone number/i }).click();
+  await expect(page.getByRole("link", { name: "+6589771730" })).toHaveAttribute(
+    "href",
+    "tel:+6589771730",
+  );
 
   await page.goto("/resume");
   await expect(page.getByRole("heading", { name: "Design-engineering work, on one page." })).toBeVisible();
-
-  const legacyPhoneEndpoint = await page.request.get("/api/contact/phone");
-  expect(legacyPhoneEndpoint.status()).toBe(404);
+  await expect(page.getByRole("button", { name: /reveal phone number/i })).toBeVisible();
 });
 
 test("branded recovery route guides visitors back to the portfolio", async ({ page }) => {
@@ -363,14 +366,18 @@ test("public pages do not expose stale private repository URLs", async ({ page }
   }
 });
 
-test("public routes do not serve personal phone data", async ({ page }) => {
+test("phone number is served only through the no-cache reveal endpoint", async ({ page }) => {
   const phoneResponse = await page.request.get("/api/contact/phone");
   const contactResponse = await page.request.get("/contact");
   const resumeResponse = await page.request.get("/resume");
 
-  expect(phoneResponse.status()).toBe(404);
-  await expect(contactResponse.text()).resolves.not.toContain("Reveal phone number");
-  await expect(resumeResponse.text()).resolves.not.toContain("Available on request");
+  expect(phoneResponse.status()).toBe(200);
+  expect(phoneResponse.headers()["cache-control"]).toContain("no-store");
+  await expect(phoneResponse.json()).resolves.toEqual({ phone: "+6589771730" });
+  await expect(contactResponse.text()).resolves.toContain("Reveal phone number");
+  await expect(resumeResponse.text()).resolves.toContain("Reveal phone number");
+  await expect(contactResponse.text()).resolves.not.toContain("+6589771730");
+  await expect(resumeResponse.text()).resolves.not.toContain("+6589771730");
 });
 
 test("selected work exposes canonical metadata and is listed in the sitemap", async ({ page }) => {

@@ -69,7 +69,7 @@ The portfolio uses semantic structure, reduced-motion support, and explicit imag
 
 ## Privacy and analytics
 
-The site exposes email and professional social links. Private environment values, credentials, and personal phone numbers must never be committed or served from public routes. Analytics and tracking are not installed or initialized: there is no consent banner, analytics cookie, PostHog integration, Vercel Analytics, Speed Insights, session recording, or hidden telemetry. The short-lived homepage intro cookie only remembers whether the visual intro has completed and is not used for measurement.
+The site exposes email and professional social links, with an optional click-to-reveal phone interaction. The reveal keeps the number out of initial page markup but is not scrape-proof; private environment values and credentials must never be committed. Analytics and tracking are not installed or initialized: there is no consent banner, analytics cookie, PostHog integration, Vercel Analytics, Speed Insights, session recording, or hidden telemetry. The short-lived homepage intro cookie only remembers whether the visual intro has completed and is not used for measurement.
 
 ## Deployment
 

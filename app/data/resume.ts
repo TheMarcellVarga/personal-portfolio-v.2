@@ -1,6 +1,8 @@
 export const resume = {
   name: "Marcell Varga",
-  title: "UX & Frontend Engineer building clear, scalable product interfaces and design systems",
+  title: "Product-minded UX & Frontend Engineer",
+  descriptor:
+    "Building production interfaces, design systems, and complex product workflows with React and TypeScript.",
   location: "Singapore",
   email: "themarcellvarga@gmail.com",
   website: "marcellvarga.com",
@@ -8,58 +10,31 @@ export const resume = {
   github: "github.com/TheMarcellVarga",
   githubHandle: "TheMarcellVarga",
   photo: "/images/personalpageprofilealt.webp",
-  profile: [
-    "Singapore-based UX and frontend engineer working at the intersection of Nordic design principles and software engineering. I turn complex product requirements into clear, scalable interfaces from early research and prototypes through production-ready code.",
-    "Currently contributing to AXON Networks products through UX/UI design, component systems, interactive prototyping, frontend development, and AI-aware workflows.",
-  ],
-  highlights: [
-    "Bridges the gap between UX design and production code, maintaining scalable design systems.",
-    "Designs and builds AI-aware workflows, prototypes, and production UI for complex product surfaces.",
-    "Works across UX, frontend, design systems, accessibility, and enough backend detail to keep ideas shippable.",
-  ],
-  coreStrengths: [
-    "AI product UX",
-    "UX and interaction design",
-    "Frontend engineering",
-    "Design systems",
-    "Accessibility",
-    "Product prototyping",
-    "Rapid prototyping",
-  ],
-  practicalSkills: [
-    "UX/UI design",
-    "AI-assisted workflows",
-    "User research",
-    "Usability testing",
-    "Interactive prototyping",
-    "Information architecture",
-    "Responsive design",
-    "Design-to-code workflow",
-  ],
-  technicalSkills: [
-    "HTML / CSS",
-    "JavaScript / TypeScript",
-    "React",
-    "Next.js",
-    "Tailwind CSS / shadcn/ui",
-    "AI product flows",
-    "Node.js / Express",
-    "Svelte / SvelteKit",
-    "Python / Django",
-    "SQL / PostgreSQL / MongoDB",
-    "GraphQL",
-    "Docker / CI/CD",
-    "Vercel / GCP / Firebase",
-    "Supabase",
-    "Java / Spring",
-    "Figma / Sketch",
+  tags: ["Product UX", "Frontend Engineering", "Design Systems", "React + TypeScript"],
+  profile:
+    "UX & Frontend Engineer focused on React, TypeScript, design systems, and complex product workflows. Combines product UX and frontend engineering to take ambiguous requirements from exploration to production.",
+  skillGroups: [
+    {
+      label: "Frontend",
+      items: ["React", "TypeScript", "Next.js", "Svelte"],
+    },
+    {
+      label: "Backend & Data",
+      items: ["Node.js / Express", "Java / Spring", "PostgreSQL", "REST APIs"],
+    },
+    {
+      label: "Platform",
+      items: ["Docker", "GCP", "CI/CD"],
+    },
+    {
+      label: "Design Engineering",
+      items: ["Figma", "Design Systems", "WCAG", "Prototyping"],
+    },
   ],
   languages: [
     { name: "Hungarian", level: "Native" },
-    { name: "English", level: "Full working proficiency" },
-    { name: "Danish", level: "Limited working proficiency" },
-    { name: "French", level: "Elementary proficiency" },
-    { name: "German", level: "Beginner proficiency" },
+    { name: "English", level: "Professional" },
+    { name: "Danish", level: "Working proficiency" },
   ],
   experience: [
     {
@@ -67,10 +42,12 @@ export const resume = {
       role: "UX & Frontend Engineer",
       period: "Oct 2022 - Present",
       bullets: [
-        "Contribute to AXON Networks product development across UX/UI design, frontend engineering, and product iteration with cross-functional teams.",
-        "Create interactive prototypes, scalable component libraries, and design-system patterns for complex product workflows.",
-        "Translate AI-aware product thinking and analytics collaboration into usable, production-ready workflows.",
-        "Develop supporting RESTful APIs with Node.js and Express and apply WCAG accessibility principles across shipped work.",
+        "Built and shipped React/TypeScript performance-monitoring and diagnostics interfaces for network equipment, including health checks, historical trends, and detailed snapshot views.",
+        "Designed and implemented a configurable analytics workspace where users can arrange graphs and save, search, restore, and manage personalized views.",
+        "Develop reusable React/TypeScript components and design-system patterns across a modular frontend platform, backed by automated interaction and accessibility tests.",
+        "Implement supporting REST APIs and middleware in Node.js and Express when product workflows require backend changes.",
+        "Apply WCAG-aligned accessibility practices across shared components and shipped interfaces, covering semantics, keyboard and focus behavior, responsive states, and 200% text reflow.",
+        "Work with product, engineering, QA, analytics, and stakeholders to clarify ambiguous requirements, validate workflows, and turn them into implementable frontend solutions.",
       ],
     },
     {
@@ -78,9 +55,9 @@ export const resume = {
       role: "UX Designer Intern",
       period: "Jan 2022 - Apr 2022",
       bullets: [
-        "Improved the MapsIndoors CMS through UX research and interactive, animated prototypes.",
-        "Worked with the company design system and contributed patterns for scalable desktop and mobile layouts.",
-        "Delivered Jira-managed product tasks, documentation, and design handoffs with accessibility and clarity in mind.",
+        "Conducted UX research and built interactive prototypes for the MapsIndoors CMS, translating findings into product improvements.",
+        "Contributed design-system patterns, responsive interface work, documentation, and developer handoff across desktop and mobile experiences.",
+        "Delivered Jira-managed product tasks with engineers, balancing interaction detail, accessibility, and SaaS implementation constraints.",
       ],
     },
   ],
@@ -88,11 +65,7 @@ export const resume = {
     {
       school: "University College of Northern Denmark",
       degree: "AP Degree in Multimedia Design",
-      period: "Aug 2020 - Jun 2022",
-      details: [
-        "Focused on Nordic design principles and frontend engineering through practical, company-led projects.",
-        "Built a design-to-code workflow spanning UX research, usability testing, responsive interfaces, and production-ready frontend applications.",
-      ],
+      period: "2020 - 2022",
     },
   ],
 } as const;

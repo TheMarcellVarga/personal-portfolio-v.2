@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { resume } from "../../data/resume";
+import { privateContact } from "../../data/private-contact.server";
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
@@ -55,8 +56,8 @@ function ExperienceItem({
 
 export default function AtsResumePage() {
   return (
-    <main className="min-h-screen bg-white text-[#111b28]">
-      <div className="mx-auto max-w-4xl px-6 py-8 sm:px-8 sm:py-10 print:px-[18mm] print:py-[18mm]">
+    <main className="ats-resume-route min-h-screen bg-white text-[#111b28]">
+      <div className="mx-auto max-w-4xl px-6 py-8 sm:px-8 sm:py-10 print:px-[16mm] print:py-[14mm]">
         <div className="mb-8 flex items-center justify-between gap-4 print:hidden">
           <Link
             href="/resume"
@@ -80,7 +81,7 @@ export default function AtsResumePage() {
             {resume.name}
           </h1>
           <p className="mt-3 max-w-3xl text-[1.05rem] leading-7 text-black/78">
-            {resume.title}
+            {resume.title} - {resume.descriptor}
           </p>
 
           <address className="mt-5 space-y-1.5 not-italic text-sm leading-6 text-black/72">
@@ -92,6 +93,15 @@ export default function AtsResumePage() {
                 className="font-medium text-black underline decoration-black/20 underline-offset-2"
               >
                 {resume.email}
+              </a>
+            </p>
+            <p>
+              Phone:{" "}
+              <a
+                href={`tel:${privateContact.phone}`}
+                className="font-medium text-black underline decoration-black/20 underline-offset-2"
+              >
+                {privateContact.phone}
               </a>
             </p>
             <p>
@@ -124,45 +134,10 @@ export default function AtsResumePage() {
           </address>
         </header>
 
-        <div className="mt-8 space-y-8">
+        <div className="ats-content mt-7 space-y-7">
           <section>
             <SectionHeading>Summary</SectionHeading>
-            <div className="mt-4 space-y-3">
-              {resume.profile.map((paragraph) => (
-                <p key={paragraph} className="text-sm leading-7 text-black/80">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-          </section>
-
-          <section>
-            <SectionHeading>Selected Highlights</SectionHeading>
-            <BulletList items={resume.highlights} />
-          </section>
-
-          <section>
-            <SectionHeading>Skills</SectionHeading>
-            <div className="mt-4 space-y-3 text-sm leading-7 text-black/80">
-              <p>
-                <span className="font-semibold text-black">Core:</span>{" "}
-                {resume.coreStrengths.join(", ")}
-              </p>
-              <p>
-                <span className="font-semibold text-black">Practical:</span>{" "}
-                {resume.practicalSkills.join(", ")}
-              </p>
-              <p>
-                <span className="font-semibold text-black">Technical:</span>{" "}
-                {resume.technicalSkills.join(", ")}
-              </p>
-              <p>
-                <span className="font-semibold text-black">Languages:</span>{" "}
-                {resume.languages
-                  .map((language) => `${language.name} (${language.level})`)
-                  .join(", ")}
-              </p>
-            </div>
+            <p className="mt-4 text-sm leading-7 text-black/80">{resume.profile}</p>
           </section>
 
           <section>
@@ -181,12 +156,24 @@ export default function AtsResumePage() {
           </section>
 
           <section>
+            <SectionHeading>Technical Skills</SectionHeading>
+            <div className="mt-4 space-y-2 text-sm leading-6 text-black/80">
+              {resume.skillGroups.map((group) => (
+                <p key={group.label}>
+                  <span className="font-semibold text-black">{group.label}:</span>{" "}
+                  {group.items.join(", ")}
+                </p>
+              ))}
+            </div>
+          </section>
+
+          <section>
             <SectionHeading>Education</SectionHeading>
             <div className="mt-4 space-y-4">
               {resume.education.map((education) => (
                 <article
                   key={`${education.school}-${education.degree}`}
-                  className="space-y-3"
+                  className="space-y-2"
                 >
                   <div className="flex flex-col gap-1 border-b border-black/10 pb-3 sm:flex-row sm:items-end sm:justify-between">
                     <div>
@@ -201,10 +188,18 @@ export default function AtsResumePage() {
                       {education.period}
                     </p>
                   </div>
-                  <BulletList items={education.details} />
                 </article>
               ))}
             </div>
+          </section>
+
+          <section>
+            <SectionHeading>Languages</SectionHeading>
+            <p className="mt-4 text-sm leading-6 text-black/80">
+              {resume.languages
+                .map((language) => `${language.name} (${language.level})`)
+                .join(" | ")}
+            </p>
           </section>
         </div>
       </div>
