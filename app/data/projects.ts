@@ -37,7 +37,7 @@ export const projects: Project[] = [
     description:
       "A full-stack financial research workspace that turns private source documents into cited, reviewable analysis without crossing into trade execution or personal advice.",
     highlight:
-      "The complete local workflow covers upload, retrieval, structured analysis, citation inspection, human approval, and reviewed export.",
+      "The live, read-only guided demo shows the full research rhythm with fictional evidence, visible citations, human approval, and a clearly bounded reviewed export.",
     skills: ["Next.js", "Go", "Supabase", "AI evaluation"],
     link: "/ai-finance",
     image: "/images/ai-finance/aperture-home.jpg",
