@@ -397,6 +397,24 @@ function ProjectListItem({
   );
 }
 
+function CaseStudyRestructuringNotice() {
+  return (
+    <div
+      aria-label="Case studies under restructuring"
+      data-testid="case-study-restructuring-notice"
+      role="note"
+      className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-[#f3ede5]/58 backdrop-blur-[2px]" />
+      <div className="relative flex w-[calc(100%+6rem)] -rotate-[6deg] items-center justify-center border-y border-custom-blue/20 bg-custom-blue px-8 py-5 text-center shadow-[0_20px_60px_rgba(17,27,40,0.18)] sm:py-7">
+        <span className="font-case-study whitespace-nowrap text-[clamp(1.75rem,7vw,6.2rem)] font-medium leading-none tracking-[-0.055em] text-[#f3ede5]">
+          Case studies under restructuring
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false);
   const [legacyProjectsOpen, setLegacyProjectsOpen] = useState(false);
@@ -1419,50 +1437,54 @@ export default function Page() {
               </div>
             </div>
 
-            <div className="border-t border-custom-blue/10">
-              {featuredProjects.map((project, idx) => (
-                <ProjectListItem
-                  key={project.title}
-                  project={project}
-                  numberLabel={`0${idx + 1}`}
-                  index={idx}
-                  shouldReduceMotion={shouldReduceMotion}
-                  isCompactViewport={isCompactViewport}
-                  setActiveProjectImage={setActiveProjectImage}
-                />
-              ))}
+            <div className="relative">
+              {/* TEMPORARY: comment out the next line when the case studies are ready. */}
+              <CaseStudyRestructuringNotice />
 
-              <div className="border-t border-custom-blue/10 pb-3 pt-10 sm:pt-12">
-                <p className="font-label text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-custom-blue/72">
-                  Supporting work
-                </p>
-                <p className="mt-2 max-w-2xl text-sm leading-6 text-custom-blue/62">
-                  Focused proof points that deepen the main story without competing
-                  with the three featured projects.
-                </p>
-              </div>
+              <div className="border-t border-custom-blue/10">
+                {featuredProjects.map((project, idx) => (
+                  <ProjectListItem
+                    key={project.title}
+                    project={project}
+                    numberLabel={`0${idx + 1}`}
+                    index={idx}
+                    shouldReduceMotion={shouldReduceMotion}
+                    isCompactViewport={isCompactViewport}
+                    setActiveProjectImage={setActiveProjectImage}
+                  />
+                ))}
 
-              {supportingProjects.map((project, idx) => (
-                <ProjectListItem
-                  key={project.title}
-                  project={project}
-                  numberLabel={`S${idx + 1}`}
-                  index={featuredProjects.length + idx}
-                  shouldReduceMotion={shouldReduceMotion}
-                  isCompactViewport={isCompactViewport}
-                  setActiveProjectImage={setActiveProjectImage}
-                />
-              ))}
+                <div className="border-t border-custom-blue/10 pb-3 pt-10 sm:pt-12">
+                  <p className="font-label text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-custom-blue/72">
+                    Supporting work
+                  </p>
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-custom-blue/62">
+                    Focused proof points that deepen the main story without competing
+                    with the three featured projects.
+                  </p>
+                </div>
 
-              <div className="group relative border-b border-custom-blue/5">
-                <button
-                  type="button"
-                  aria-controls="legacy-project-list"
-                  aria-expanded={legacyProjectsOpen}
-                  data-testid="legacy-projects-toggle"
-                  onClick={() => setLegacyProjectsOpen((isOpen) => !isOpen)}
-                  className="grid w-full grid-cols-[minmax(0,1fr)] gap-4 rounded-[1.5rem] px-3 py-5 text-left transition-colors duration-500 hover:bg-custom-blue/[0.01] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-custom-blue/30 focus-visible:ring-inset sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:py-8"
-                >
+                {supportingProjects.map((project, idx) => (
+                  <ProjectListItem
+                    key={project.title}
+                    project={project}
+                    numberLabel={`S${idx + 1}`}
+                    index={featuredProjects.length + idx}
+                    shouldReduceMotion={shouldReduceMotion}
+                    isCompactViewport={isCompactViewport}
+                    setActiveProjectImage={setActiveProjectImage}
+                  />
+                ))}
+
+                <div className="group relative border-b border-custom-blue/5">
+                  <button
+                    type="button"
+                    aria-controls="legacy-project-list"
+                    aria-expanded={legacyProjectsOpen}
+                    data-testid="legacy-projects-toggle"
+                    onClick={() => setLegacyProjectsOpen((isOpen) => !isOpen)}
+                    className="grid w-full grid-cols-[minmax(0,1fr)] gap-4 rounded-[1.5rem] px-3 py-5 text-left transition-colors duration-500 hover:bg-custom-blue/[0.01] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-custom-blue/30 focus-visible:ring-inset sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:py-8"
+                  >
                   <span className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:gap-8 md:col-span-1">
                     <span className="font-label min-w-[2.5rem] text-[0.62rem] font-bold text-custom-blue/70">
                       {String(featuredProjects.length + supportingProjects.length + 1).padStart(2, "0")}
@@ -1521,34 +1543,35 @@ export default function Page() {
                       <span className="absolute inset-0 bg-gradient-to-r from-custom-blue/35 to-transparent" />
                     </span>
                   </span>
-                </button>
+                  </button>
 
-                <div id="legacy-project-list">
-                  <AnimatePresence initial={false}>
-                    {legacyProjectsOpen && (
-                      <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: shouldReduceMotion ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}
-                      className="overflow-hidden pl-3 sm:pl-8"
-                      >
-                        <div className="border-l border-custom-blue/10 pl-3 sm:pl-6">
-                          {legacyProjects.map((project, idx) => (
-                            <ProjectListItem
-                              key={project.title}
-                              project={project}
-                              numberLabel={`L${idx + 1}`}
-                              index={idx}
-                              shouldReduceMotion={shouldReduceMotion}
-                              isCompactViewport={isCompactViewport}
-                              setActiveProjectImage={setActiveProjectImage}
-                            />
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  <div id="legacy-project-list">
+                    <AnimatePresence initial={false}>
+                      {legacyProjectsOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: shouldReduceMotion ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}
+                          className="overflow-hidden pl-3 sm:pl-8"
+                        >
+                          <div className="border-l border-custom-blue/10 pl-3 sm:pl-6">
+                            {legacyProjects.map((project, idx) => (
+                              <ProjectListItem
+                                key={project.title}
+                                project={project}
+                                numberLabel={`L${idx + 1}`}
+                                index={idx}
+                                shouldReduceMotion={shouldReduceMotion}
+                                isCompactViewport={isCompactViewport}
+                                setActiveProjectImage={setActiveProjectImage}
+                              />
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 </div>
               </div>
             </div>

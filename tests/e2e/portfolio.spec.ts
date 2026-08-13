@@ -13,6 +13,9 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page.locator(".home-intro-shell")).toHaveCount(0);
 
   await expect(page).toHaveTitle(/Marcell Varga/i);
+  await expect(page.getByTestId("case-study-restructuring-notice")).toContainText(
+    "Case studies under restructuring",
+  );
   await expect(page.locator("[data-hero-badge-label]").last()).toBeVisible();
   await expect(page.locator('#work a[href="/ai-finance"]')).toBeVisible();
   await expect(page.locator('#work a[href="/first-revenue-game"]')).toBeVisible();
