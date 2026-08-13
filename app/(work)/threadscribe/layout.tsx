@@ -20,8 +20,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/images/threadscribe/transformed-output.png",
-        width: 1280,
-        height: 720,
+        width: 983,
+        height: 1000,
         alt: "ThreadScribe Studio showing cleaned transcript output and provider disclosure",
       },
     ],

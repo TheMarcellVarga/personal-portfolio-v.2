@@ -175,9 +175,9 @@ export default function ThreadScribePage() {
                 <Image
                   src="/images/threadscribe/raw-transcript.png"
                   alt="ThreadScribe timestamped raw transcript with sample-mode disclosure and deleted temporary audio"
-                  width={1280}
-                  height={720}
-                  className="aspect-[0.983] w-full rounded-[1.45rem] object-cover object-right-top"
+                  width={983}
+                  height={1000}
+                  className="h-auto w-full rounded-[1.45rem]"
                   priority
                 />
                 <figcaption className="px-2 pb-2 pt-4 text-sm leading-6 text-custom-blue/64">
@@ -193,9 +193,9 @@ export default function ThreadScribePage() {
                 <Image
                   src="/images/threadscribe/transformed-output.png"
                   alt="ThreadScribe cleaned transcript with provider mode, confidence, safety, and off-device metadata"
-                  width={1280}
-                  height={720}
-                  className="aspect-[0.983] w-full rounded-[1.45rem] object-cover object-left-top"
+                  width={983}
+                  height={1000}
+                  className="h-auto w-full rounded-[1.45rem]"
                 />
                 <figcaption className="px-2 pb-2 pt-4 text-sm leading-6 text-custom-blue/64">
                   Cleaned output remains a labeled draft with model and safety

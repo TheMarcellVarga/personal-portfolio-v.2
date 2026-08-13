@@ -184,13 +184,16 @@ function HistoryItemComponent({
               transform: `scale(${0.98 + normalizedFocus * 0.08})`,
             }}
           >
-            <span className="font-label text-[0.56rem] font-bold tracking-[0.16em] text-custom-blue/72">
+            <span className="font-label text-[0.56rem] font-bold tracking-[0.16em] text-custom-blue/60">
               0{index + 1}
             </span>
           </div>
           {index === 0 && (
             <span
-              className="font-label border-b border-custom-blue/30 pb-1 text-[0.58rem] font-medium uppercase tracking-[0.15em] text-custom-blue/72"
+              className="font-label border-b border-custom-blue/30 pb-1 text-[0.58rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60"
+              style={{
+                opacity: 0.58 + normalizedFocus * 0.42,
+              }}
             >
               Current
             </span>
@@ -201,7 +204,7 @@ function HistoryItemComponent({
           <h3 className="max-w-[16ch] font-display text-[1.18rem] font-medium leading-[1.06] tracking-[-0.02em] text-custom-blue sm:text-[1.38rem]">
             {item.jobTitle}
           </h3>
-          <p className="font-label text-[0.72rem] font-medium uppercase tracking-[0.16em] text-custom-blue/72">
+          <p className="font-label text-[0.72rem] font-medium uppercase tracking-[0.16em] text-custom-blue/42">
             {item.company}
           </p>
         </div>
@@ -224,7 +227,7 @@ function HistoryItemComponent({
           {item.skills.map((skill: string) => (
             <span
               key={skill}
-              className="font-label text-[0.66rem] font-medium uppercase tracking-[0.14em] text-custom-blue/70"
+              className="font-label text-[0.66rem] font-medium uppercase tracking-[0.14em] text-custom-blue/58"
             >
               {skill}
             </span>
@@ -423,6 +426,7 @@ export default function Page() {
     restDelta: 0.001,
   });
   const heroCopyY = useTransform(smoothHeroProgress, [0, 1], [0, -36]);
+  const heroPillsY = useTransform(smoothHeroProgress, [0, 1], [0, -18]);
   const heroCardsY = useTransform(smoothHeroProgress, [0, 1], [0, -28]);
   const heroCopyOpacity = useTransform(smoothHeroProgress, [0, 0.85], [1, 0.58]);
   const portraitY = useTransform(smoothHeroProgress, [0, 1], [0, -80]);
@@ -659,6 +663,9 @@ export default function Page() {
   useLayoutEffect(() => {
     const stage = mainStageRef.current;
     if (!stage || shouldReduceMotion) return;
+    const badgeTargets = Array.from(
+      stage.querySelectorAll<HTMLElement>("[data-hero-badge]"),
+    );
     const badgeLabelTargets = Array.from(
       stage.querySelectorAll<HTMLElement>("[data-hero-badge-label]"),
     );
@@ -675,6 +682,11 @@ export default function Page() {
 
     if (introStage !== "done") {
       gsap.set(stage, { opacity: 0, y: 16 });
+      gsap.set(badgeTargets, {
+        autoAlpha: 0,
+        clipPath: "inset(0 100% 0 0 round 999px)",
+        y: 6,
+      });
       gsap.set(badgeLabelTargets, {
         autoAlpha: 0,
         x: -10,
@@ -689,6 +701,11 @@ export default function Page() {
     // Reveal the semantic stage immediately; animate its contents instead so
     // assistive technology never sees a partially transparent page.
     gsap.set(stage, { opacity: 1, y: 0 });
+    gsap.set(badgeTargets, {
+      autoAlpha: 0,
+      clipPath: "inset(0 100% 0 0 round 999px)",
+      y: 6,
+    });
     gsap.set(badgeLabelTargets, {
       autoAlpha: 0,
       x: -10,
@@ -706,6 +723,25 @@ export default function Page() {
         },
       });
 
+      if (badgeTargets.length) {
+        timeline.fromTo(
+          badgeTargets,
+          {
+            autoAlpha: 1,
+            clipPath: "inset(0 100% 0 0 round 999px)",
+            y: 6,
+          },
+          {
+            autoAlpha: 1,
+            clipPath: "inset(0 0% 0 0 round 999px)",
+            y: 0,
+            duration: 0.7,
+            stagger: 0.08,
+            clearProps: "opacity,visibility,clipPath,transform",
+          },
+          0.12,
+        );
+      }
       if (badgeLabelTargets.length) {
         timeline.fromTo(
           badgeLabelTargets,
@@ -975,6 +1011,17 @@ export default function Page() {
             <div className="relative z-30 mx-auto flex min-h-[100dvh] w-full max-w-7xl flex-col gap-7 px-4 pb-10 pt-22 sm:gap-10 sm:px-10 sm:pb-12 sm:pt-24 md:grid md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:items-center md:gap-7 lg:hidden">
               <div className="max-w-[36rem]">
                 <motion.div
+                  style={enableScrollMotion ? { y: heroPillsY } : undefined}
+                  className="hero-scroll-layer mb-7 flex flex-wrap gap-3"
+                >
+                  <div data-hero-badge className="home-intro-fold inline-flex border-l border-[#67d9ff]/60 pl-3 [transform-origin:left_center]">
+                    <span data-hero-badge-label className="font-label block text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/90">
+                      Product-focused frontend engineer
+                    </span>
+                  </div>
+                </motion.div>
+
+                <motion.div
                   style={
                     enableScrollMotion
                       ? { y: heroCopyY, opacity: heroCopyOpacity }
@@ -996,9 +1043,6 @@ export default function Page() {
                         Singapore-based product-focused frontend engineer using React
                         and TypeScript to turn complex products and AI workflows into
                         clear, resilient interfaces.
-                      </p>
-                      <p data-hero-badge-label className="mt-4 text-sm font-medium text-[#82ddff]">
-                        Frontend systems · Applied AI UX · Product delivery
                       </p>
                     </div>
                   </div>
@@ -1057,6 +1101,17 @@ export default function Page() {
             <div className="relative z-30 mx-auto hidden min-h-[100dvh] w-full max-w-7xl items-center px-6 pb-10 pt-24 sm:px-10 sm:pb-14 lg:flex lg:px-14 lg:pb-12">
               <div className="max-w-[36rem]">
                 <motion.div
+                  style={enableScrollMotion ? { y: heroPillsY } : undefined}
+                  className="hero-scroll-layer mb-7 flex flex-wrap gap-3"
+                >
+                  <div data-hero-badge className="home-intro-fold inline-flex border-l border-[#67d9ff]/60 pl-3 [transform-origin:left_center]">
+                    <span data-hero-badge-label className="font-label block text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/90">
+                      Product-focused frontend engineer
+                    </span>
+                  </div>
+                </motion.div>
+
+                <motion.div
                   style={
                     enableScrollMotion
                       ? { y: heroCopyY, opacity: heroCopyOpacity }
@@ -1078,9 +1133,6 @@ export default function Page() {
                         Singapore-based product-focused frontend engineer using React
                         and TypeScript to turn complex products and AI workflows into
                         clear, resilient interfaces.
-                      </p>
-                      <p data-hero-badge-label className="mt-4 text-sm font-medium text-[#82ddff]">
-                        Frontend systems · Applied AI UX · Product delivery
                       </p>
                     </div>
                   </div>
@@ -1304,6 +1356,10 @@ export default function Page() {
                   architecture, testing, and honest system boundaries.
                 </p>
               </div>
+              <div className="hidden items-center gap-3 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-custom-blue/70 md:flex">
+                <span className="h-px w-8 bg-custom-blue/15" />
+                Hover to reveal
+              </div>
             </div>
 
             <div className="border-t border-custom-blue/10">
@@ -1320,9 +1376,9 @@ export default function Page() {
               ))}
 
               <div className="border-t border-custom-blue/10 pb-3 pt-10 sm:pt-12">
-                <h3 className="font-display text-xl font-medium tracking-[-0.02em] text-custom-blue">
+                <p className="font-label text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-custom-blue/72">
                   Supporting work
-                </h3>
+                </p>
                 <p className="mt-2 max-w-2xl text-sm leading-6 text-custom-blue/62">
                   Focused proof points that deepen the main story without competing
                   with the three featured projects.

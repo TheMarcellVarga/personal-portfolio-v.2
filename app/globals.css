@@ -133,21 +133,15 @@
   }
 
   .glass-panel {
-    border: 1px solid rgba(17, 27, 40, 0.08);
-    box-shadow: 0 18px 54px rgba(17, 27, 40, 0.08);
-  }
-
-  .glass-panel :is(
-    .text-custom-blue\/35,
-    .text-custom-blue\/40,
-    .text-custom-blue\/42,
-    .text-custom-blue\/45,
-    .text-custom-blue\/50,
-    .text-custom-blue\/55,
-    .text-custom-blue\/58,
-    .text-custom-blue\/60
-  ) {
-    color: rgba(17, 27, 40, 0.72);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.14)),
+      var(--page-surface);
+    border: 1px solid transparent;
+    backdrop-filter: blur(24px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.72),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.18),
+      var(--page-shadow);
   }
 
   .animate-fade-in {
@@ -273,7 +267,10 @@
 
 @media (max-width: 639px) {
   .glass-panel {
-    box-shadow: 0 14px 38px rgba(17, 27, 40, 0.07);
+    backdrop-filter: blur(16px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.68),
+      0 16px 48px rgba(17, 27, 40, 0.07);
   }
 }
 
@@ -384,9 +381,9 @@
   *,
   *::before,
   *::after {
-    animation-duration: 0s !important;
+    animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0s !important;
+    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
 }

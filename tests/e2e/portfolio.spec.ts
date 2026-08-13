@@ -287,10 +287,11 @@ test.describe("mobile and motion fallbacks", () => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/contact");
 
-    const resumeLink = page.getByRole("link", { name: "Resume" }).first();
-    await expect
-      .poll(() => resumeLink.evaluate((element) => getComputedStyle(element).transitionDuration))
-      .toBe("0s");
+    const transitionDuration = await page
+      .getByRole("link", { name: "Resume" })
+      .evaluate((element) => Number.parseFloat(getComputedStyle(element).transitionDuration));
+
+    expect(transitionDuration).toBeLessThanOrEqual(0.001);
 
     for (const [route, heading] of [
       ["/threadscribe", "ThreadScribe Studio"],
