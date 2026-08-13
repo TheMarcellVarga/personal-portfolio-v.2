@@ -22,7 +22,7 @@ competing with the main portfolio narrative.
 - `/askcody`, `/catchscan`, and `/ess` — archived case studies.
 - `/about` — professional background, working approach, and current direction.
 - `/resume` and `/resume/ats` — human-readable and ATS-oriented resumes.
-- `/contact` — contact details.
+- Contact details live in the homepage footer/contact section and are reachable at `/#contact`.
 
 ## Experience labels
 

@@ -534,7 +534,7 @@ export default function EndlessActivityPage() {
                     Source available privately on request
                   </p>
                   <Link
-                    href="/contact"
+                    href="/#contact"
                     className="inline-flex items-center justify-center gap-2 rounded-full bg-white/64 px-6 py-3.5 text-sm font-semibold text-[#111b28] transition duration-300 hover:-translate-y-1 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111b28] focus-visible:ring-offset-3 focus-visible:ring-offset-[#ff5b52]"
                   >
                     Discuss the work <ArrowRight className="h-4 w-4" />

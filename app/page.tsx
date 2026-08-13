@@ -427,7 +427,7 @@ function CaseStudyRestructuringNotice() {
           <span className="font-label text-[0.62rem] font-medium uppercase tracking-[0.18em] text-[#f3ede5]/72 sm:text-[0.7rem]">
             Back shortly. In the meantime, {" "}
             <Link
-              href="/contact"
+              href="/#contact"
               className="pointer-events-auto underline decoration-[#f3ede5]/45 underline-offset-4 transition-colors hover:text-white hover:decoration-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-custom-blue"
             >
               contact me

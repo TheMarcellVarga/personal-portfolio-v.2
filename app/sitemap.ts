@@ -5,7 +5,6 @@ import { lastUpdated, siteUrl } from "./seo";
 const staticRoutes = [
   "",
   "/about",
-  "/contact",
   "/resume",
 ] as const;
 

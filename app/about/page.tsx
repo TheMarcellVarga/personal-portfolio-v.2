@@ -345,10 +345,10 @@ export default function AboutPage() {
               Send a note
             </a>
             <Link
-              href="/contact"
+              href="/#contact"
               className="group inline-flex items-center gap-2 font-label text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-custom-blue/64 outline-none transition-colors duration-300 hover:text-custom-blue focus-visible:ring-2 focus-visible:ring-custom-teal focus-visible:ring-offset-3"
             >
-              Contact page
+              Contact
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </div>

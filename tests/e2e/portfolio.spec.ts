@@ -18,8 +18,11 @@ test("homepage presents the product-engineering story and selected work", async 
   );
   await expect(page.getByRole("link", { name: /contact me/i })).toHaveAttribute(
     "href",
-    "/contact",
+    "/#contact",
   );
+  await page.getByRole("link", { name: /contact me/i }).click();
+  await expect(page).toHaveURL(/\/#contact$/);
+  await expect(page.locator("#contact")).toBeVisible();
   await expect(page.locator("[data-case-study-content]")).toHaveAttribute(
     "inert",
     "",
@@ -42,7 +45,7 @@ test("homepage presents the product-engineering story and selected work", async 
     firstWorkBox.x + firstWorkBox.width / 2,
     firstWorkBox.y + firstWorkBox.height / 2,
   );
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL(/\/#contact$/);
 
   await expect(page.getByRole("button", { name: /legacy projects/i })).toHaveAttribute(
     "aria-expanded",
@@ -81,22 +84,13 @@ test("principles statement types forward and reverses on scroll back", async ({ 
   await expect(statement).toHaveText("");
 });
 
-test("about, contact, and resume routes are reachable", async ({ page }) => {
+test("about and resume routes are reachable", async ({ page }) => {
   await page.goto("/about");
   await expect(
     page.getByRole("heading", { name: "Hi, I’m Marcell." }),
   ).toBeVisible();
   await expect(page.getByRole("link", { name: /see what i build/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: "My route here was not a straight line." })).toBeVisible();
-
-  await page.goto("/contact");
-  await expect(page.getByRole("heading", { name: "Say hi." })).toBeVisible();
-  await expect(page.getByRole("link", { name: /themarcellvarga@gmail.com/i })).toBeVisible();
-  await page.getByRole("button", { name: /reveal phone number/i }).click();
-  await expect(page.getByRole("link", { name: "+6589771730" })).toHaveAttribute(
-    "href",
-    "tel:+6589771730",
-  );
 
   await page.goto("/resume");
   await expect(page.getByRole("heading", { name: "Design-engineering work, on one page." })).toBeVisible();
@@ -305,7 +299,7 @@ test.describe("mobile and motion fallbacks", () => {
 
   test("reduced-motion preference shortens interface transitions", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.goto("/contact");
+    await page.goto("/about");
 
     const transitionDuration = await page
       .getByRole("link", { name: "Resume" })
@@ -328,7 +322,7 @@ test.describe("mobile and motion fallbacks", () => {
   });
 
   test("mobile navigation remains usable with a keyboard", async ({ page }) => {
-    await page.goto("/contact");
+    await page.goto("/about");
 
     const menuButton = page.getByRole("button", { name: "Open navigation" });
     await menuButton.focus();
@@ -356,7 +350,7 @@ test("public routes send baseline browser security headers", async ({ page }) =>
 });
 
 test("public pages contain no analytics or tracking surface", async ({ page }) => {
-  await page.goto("/contact");
+  await page.goto("/");
 
   await expect(page.getByRole("complementary", { name: "Optional analytics" })).toHaveCount(0);
   await expect(page.locator('script[src*="posthog"], script[src*="vercel-insights"], script[src*="analytics"]')).toHaveCount(0);
@@ -391,16 +385,22 @@ test("public pages do not expose stale private repository URLs", async ({ page }
 
 test("phone number is served only through the no-cache reveal endpoint", async ({ page }) => {
   const phoneResponse = await page.request.get("/api/contact/phone");
-  const contactResponse = await page.request.get("/contact");
+  const homepageResponse = await page.request.get("/");
   const resumeResponse = await page.request.get("/resume");
 
   expect(phoneResponse.status()).toBe(200);
   expect(phoneResponse.headers()["cache-control"]).toContain("no-store");
   await expect(phoneResponse.json()).resolves.toEqual({ phone: "+6589771730" });
-  await expect(contactResponse.text()).resolves.toContain("Reveal phone number");
+  await expect(homepageResponse.text()).resolves.not.toContain("Reveal phone number");
   await expect(resumeResponse.text()).resolves.toContain("Reveal phone number");
-  await expect(contactResponse.text()).resolves.not.toContain("+6589771730");
+  await expect(homepageResponse.text()).resolves.not.toContain("+6589771730");
   await expect(resumeResponse.text()).resolves.not.toContain("+6589771730");
+});
+
+test("the dedicated contact route is removed in favor of the homepage section", async ({ page }) => {
+  const response = await page.request.get("/contact");
+
+  expect(response.status()).toBe(404);
 });
 
 test("selected work exposes canonical metadata and is listed in the sitemap", async ({ page }) => {
@@ -483,7 +483,6 @@ test("public routes have no serious or critical automated accessibility violatio
     "/focusin",
     "/endless-activity",
     "/about",
-    "/contact",
     "/resume",
     "/askcody",
     "/catchscan",
