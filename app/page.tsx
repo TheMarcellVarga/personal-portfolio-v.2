@@ -398,18 +398,43 @@ function ProjectListItem({
 }
 
 function CaseStudyRestructuringNotice() {
+  const noticeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const content = noticeRef.current?.parentElement?.querySelector<HTMLElement>(
+      "[data-case-study-content]",
+    );
+    if (!content) return;
+
+    content.setAttribute("inert", "");
+    return () => content.removeAttribute("inert");
+  }, []);
+
   return (
     <div
+      ref={noticeRef}
       aria-label="Case studies under restructuring"
       data-testid="case-study-restructuring-notice"
       role="note"
-      className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center overflow-hidden"
+      className="pointer-events-auto absolute inset-0 z-20 flex items-center justify-center overflow-hidden"
     >
       <div className="absolute inset-0 bg-[#f3ede5]/58 backdrop-blur-[2px]" />
       <div className="relative flex w-[calc(100%+6rem)] -rotate-[6deg] items-center justify-center border-y border-custom-blue/20 bg-custom-blue px-8 py-5 text-center shadow-[0_20px_60px_rgba(17,27,40,0.18)] sm:py-7">
-        <span className="font-case-study whitespace-nowrap text-[clamp(1.75rem,7vw,6.2rem)] font-medium leading-none tracking-[-0.055em] text-[#f3ede5]">
-          Case studies under restructuring
-        </span>
+        <div className="flex flex-col items-center gap-2">
+          <span className="font-case-study whitespace-nowrap text-[clamp(1.75rem,7vw,6.2rem)] font-medium leading-none tracking-[-0.055em] text-[#f3ede5]">
+            Case studies under restructuring
+          </span>
+          <span className="font-label text-[0.62rem] font-medium uppercase tracking-[0.18em] text-[#f3ede5]/72 sm:text-[0.7rem]">
+            Back shortly. In the meantime, {" "}
+            <Link
+              href="/contact"
+              className="pointer-events-auto underline decoration-[#f3ede5]/45 underline-offset-4 transition-colors hover:text-white hover:decoration-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-custom-blue"
+            >
+              contact me
+            </Link>
+            .
+          </span>
+        </div>
       </div>
     </div>
   );
@@ -1441,7 +1466,10 @@ export default function Page() {
               {/* TEMPORARY: comment out the next line when the case studies are ready. */}
               <CaseStudyRestructuringNotice />
 
-              <div className="border-t border-custom-blue/10">
+              <div
+                data-case-study-content
+                className="border-t border-custom-blue/10"
+              >
                 {featuredProjects.map((project, idx) => (
                   <ProjectListItem
                     key={project.title}

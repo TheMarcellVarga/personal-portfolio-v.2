@@ -16,6 +16,14 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page.getByTestId("case-study-restructuring-notice")).toContainText(
     "Case studies under restructuring",
   );
+  await expect(page.getByRole("link", { name: /contact me/i })).toHaveAttribute(
+    "href",
+    "/contact",
+  );
+  await expect(page.locator("[data-case-study-content]")).toHaveAttribute(
+    "inert",
+    "",
+  );
   await expect(page.locator("[data-hero-badge-label]").last()).toBeVisible();
   await expect(page.locator('#work a[href="/ai-finance"]')).toBeVisible();
   await expect(page.locator('#work a[href="/first-revenue-game"]')).toBeVisible();
@@ -24,14 +32,23 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page.locator('#work a[href="/focusin"]')).toBeVisible();
   await expect(page.locator('#work a[href="/endless-activity"]')).toBeVisible();
   await expect(page.locator('#work a[href="/catchscan"]')).toHaveCount(0);
-  await expect(page.getByRole("button", { name: /legacy projects/i })).toBeVisible();
-  await expect(page.locator("#work a")).toHaveCount(6);
 
-  await page.getByRole("button", { name: /legacy projects/i }).click();
-  await expect(page.locator('#work a[href="/catchscan"]')).toBeVisible();
-  await expect(page.locator('#work a[href="/askcody"]')).toBeVisible();
-  await expect(page.locator('#work a[href="/ess"]')).toBeVisible();
-  await expect(page.locator("#work a")).toHaveCount(9);
+  const firstWorkLink = page.locator('#work a[href="/ai-finance"]');
+  await firstWorkLink.scrollIntoViewIfNeeded();
+  const firstWorkBox = await firstWorkLink.boundingBox();
+  expect(firstWorkBox).not.toBeNull();
+  if (!firstWorkBox) throw new Error("Selected work link has no bounding box");
+  await page.mouse.click(
+    firstWorkBox.x + firstWorkBox.width / 2,
+    firstWorkBox.y + firstWorkBox.height / 2,
+  );
+  await expect(page).toHaveURL(/\/$/);
+
+  await expect(page.getByRole("button", { name: /legacy projects/i })).toHaveAttribute(
+    "aria-expanded",
+    "false",
+  );
+  await expect(page.locator("[data-case-study-content] a")).toHaveCount(6);
   await expect(page.locator('#work a[href="/about"]')).toHaveCount(0);
 });
 
