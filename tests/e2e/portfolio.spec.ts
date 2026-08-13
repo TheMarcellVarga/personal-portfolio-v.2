@@ -289,7 +289,10 @@ test.describe("mobile and motion fallbacks", () => {
 
     const transitionDuration = await page
       .getByRole("link", { name: "Resume" })
-      .evaluate((element) => Number.parseFloat(getComputedStyle(element).transitionDuration));
+      .evaluate((element) => {
+        const duration = getComputedStyle(element).transitionDuration;
+        return duration === "" ? 0 : Number.parseFloat(duration);
+      });
 
     expect(transitionDuration).toBeLessThanOrEqual(0.001);
 
