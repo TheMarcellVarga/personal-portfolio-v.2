@@ -350,6 +350,19 @@ test("public routes send baseline browser security headers", async ({ page }) =>
   expect(response.headers()["content-security-policy"]).toContain("https://eu.i.posthog.com");
 });
 
+test("homepage header changes tone at the bottom of the page", async ({ page }) => {
+  await page.goto("/");
+
+  const headerSurface = page.locator("header.sticky-header > div").first();
+  await expect(headerSurface).toHaveClass(/bg-\[#0a1521\]\/95/);
+
+  await page.evaluate(() => {
+    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "auto" });
+  });
+
+  await expect(headerSurface).toHaveClass(/bg-white\/72/);
+});
+
 test("analytics stays off until a visitor opts in", async ({ page }) => {
   await page.goto("/");
 

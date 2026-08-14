@@ -630,6 +630,7 @@ export default function Page() {
   }, [shouldReduceMotion]);
 
   const [activeSection, setActiveSection] = useState("Intro");
+  const [isAtBottom, setIsAtBottom] = useState(false);
 
   useEffect(() => {
     const sectionIds = ["hero", "process", "work", "contact"];
@@ -688,6 +689,8 @@ export default function Page() {
       const nearTop = window.scrollY <= edgeThreshold;
       const nearBottom =
         window.innerHeight + window.scrollY >= doc.scrollHeight - edgeThreshold;
+
+      setIsAtBottom(nearBottom && !nearTop);
 
       if (nearTop) {
         setActiveSection("Intro");
@@ -1050,6 +1053,7 @@ export default function Page() {
           scrollToWork={scrollWork}
           scrollToContact={scrollContact}
           activeSection={activeSection}
+          isAtBottom={isAtBottom}
           logoRef={headerLogoRef}
           revealBrand={introHasCompleted}
           animateBrand={introHasCompleted && shouldAnimateHeaderBrand}
