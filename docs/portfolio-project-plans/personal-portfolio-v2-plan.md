@@ -183,7 +183,7 @@ Status: Release candidate prepared; production deployment and external validatio
 
 - deploy a release candidate;
 - test on Chrome, Safari, Firefox, iOS Safari, and one Android browser;
-- verify contact delivery and confirm that analytics/tracking remain absent;
+- verify contact delivery and analytics consent behavior;
 - run a privacy review;
 - ask 3-5 engineers or hiring managers for task-based feedback;
 - fix comprehension blockers;

@@ -346,17 +346,22 @@ test("public routes send baseline browser security headers", async ({ page }) =>
   expect(response.headers()["referrer-policy"]).toBe("strict-origin-when-cross-origin");
   expect(response.headers()["permissions-policy"]).toContain("camera=()");
   expect(response.headers()["content-security-policy"]).toContain("frame-ancestors 'none'");
-  expect(response.headers()["content-security-policy"]).not.toMatch(/posthog|vercel-insights|analytics/i);
+  expect(response.headers()["content-security-policy"]).toContain("https://*.vercel-insights.com");
+  expect(response.headers()["content-security-policy"]).toContain("https://eu.i.posthog.com");
 });
 
-test("public pages contain no analytics or tracking surface", async ({ page }) => {
+test("analytics stays off until a visitor opts in", async ({ page }) => {
   await page.goto("/");
 
-  await expect(page.getByRole("complementary", { name: "Optional analytics" })).toHaveCount(0);
-  await expect(page.locator('script[src*="posthog"], script[src*="vercel-insights"], script[src*="analytics"]')).toHaveCount(0);
+  const consent = page.getByRole("complementary", { name: "Optional analytics" });
+  await expect(consent).toBeVisible();
+  await consent.getByRole("button", { name: "Allow analytics" }).click();
+  await expect(consent).toHaveCount(0);
 
   const cookies = await page.context().cookies();
-  expect(cookies.some((cookie) => /analytics|posthog|tracking/i.test(cookie.name))).toBe(false);
+  expect(cookies.find((cookie) => cookie.name === "mv-analytics-consent")?.value).toBe(
+    "accepted",
+  );
 });
 
 test("public pages do not expose stale private repository URLs", async ({ page }) => {

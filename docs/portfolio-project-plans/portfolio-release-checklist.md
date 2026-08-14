@@ -46,7 +46,7 @@ horizontal overflow. Record the browser/version and date for every row.
 | --- | --- | --- | --- |
 | Contact route | The mailto link opens a message addressed to `themarcellvarga@gmail.com` | Pending | Pending |
 | Contact handling | A test message is received and can be replied to | Pending | Pending |
-| Analytics configuration | No analytics or tracking SDKs, consent surface, analytics cookie, or hidden telemetry are present | Local code review 2026-08-09 | Pass |
+| Analytics configuration | PostHog, Vercel Analytics, and Speed Insights initialize only after explicit opt-in; PostHog autocapture and session recording are disabled | Restored 2026-08-14 | Pending production verification |
 | Privacy sweep | No phone endpoint, private data, or unapproved identifier is publicly exposed | Pending | Pending |
 | Public links | No unpublished or private repository is linked from public routes | Local link sweep 2026-08-07 | Pass |
 
