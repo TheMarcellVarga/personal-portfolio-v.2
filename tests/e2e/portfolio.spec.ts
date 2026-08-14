@@ -351,7 +351,9 @@ test("public routes send baseline browser security headers", async ({ page }) =>
 });
 
 test("homepage header changes tone at the bottom of the page", async ({ page }) => {
+  await prepareHomepage(page);
   await page.goto("/");
+  await expect(page.locator(".home-intro-shell")).toHaveCount(0);
 
   const headerSurface = page.locator("header.sticky-header > div").first();
   await expect(headerSurface).toHaveClass(/bg-\[#0a1521\]\/95/);
