@@ -346,7 +346,8 @@ test("public routes send baseline browser security headers", async ({ page }) =>
   expect(response.headers()["referrer-policy"]).toBe("strict-origin-when-cross-origin");
   expect(response.headers()["permissions-policy"]).toContain("camera=()");
   expect(response.headers()["content-security-policy"]).toContain("frame-ancestors 'none'");
-  expect(response.headers()["content-security-policy"]).not.toMatch(/posthog|vercel-insights|analytics/i);
+  expect(response.headers()["content-security-policy"]).toContain("https://*.vercel-insights.com");
+  expect(response.headers()["content-security-policy"]).toContain("https://eu.i.posthog.com");
 });
 
 test("homepage header changes tone at the bottom of the page", async ({ page }) => {
@@ -364,13 +365,24 @@ test("homepage header changes tone at the bottom of the page", async ({ page }) 
   await expect(headerSurface).toHaveClass(/bg-white\/72/);
 });
 
-test("public pages contain no analytics or tracking surface", async ({ page }) => {
+test("analytics integrations are active without a consent prompt", async ({ page }) => {
   await page.goto("/");
 
-  await expect(page.getByRole("complementary", { name: "Optional analytics" })).toHaveCount(0);
   await expect(
-    page.locator('script[src*="posthog"], script[src*="vercel-insights"], script[src*="analytics"]'),
+    page.getByRole("complementary", { name: "Optional analytics" }),
   ).toHaveCount(0);
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const analyticsWindow = window as Window & {
+          va?: unknown;
+          si?: unknown;
+        };
+
+        return typeof analyticsWindow.va === "function" && typeof analyticsWindow.si === "function";
+      }),
+    )
+    .toBe(true);
 });
 
 test("public pages do not expose stale private repository URLs", async ({ page }) => {
