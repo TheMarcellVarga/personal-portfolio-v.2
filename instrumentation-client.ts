@@ -12,7 +12,13 @@ const isPostHogEnabled =
   (process.env.NODE_ENV === "production" ||
     process.env.NEXT_PUBLIC_POSTHOG_ENABLE_IN_DEV === "true");
 
-if (posthogKey && isPostHogEnabled && !posthog.__loaded) {
+const hasAnalyticsConsent =
+  typeof document !== "undefined" &&
+  document.cookie
+    .split("; ")
+    .some((entry) => entry === "mv-analytics-consent=accepted");
+
+if (posthogKey && isPostHogEnabled && hasAnalyticsConsent && !posthog.__loaded) {
   posthog.init(posthogKey, {
     api_host: posthogHost,
     defaults: "2026-01-30",
@@ -24,6 +30,10 @@ if (posthogKey && isPostHogEnabled && !posthog.__loaded) {
     person_profiles: "always",
     disable_session_recording: false,
     enable_recording_console_log: true,
+    session_recording: {
+      maskAllInputs: true,
+      collectFonts: false,
+    },
     capture_performance: true,
     capture_exceptions: true,
     loaded: (ph) => {

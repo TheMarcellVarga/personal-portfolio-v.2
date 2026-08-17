@@ -365,12 +365,11 @@ test("homepage header changes tone at the bottom of the page", async ({ page }) 
   await expect(headerSurface).toHaveClass(/bg-white\/72/);
 });
 
-test("analytics integrations are active without a consent prompt", async ({ page }) => {
+test("analytics waits for explicit consent and can be withdrawn", async ({ page }) => {
   await page.goto("/");
 
-  await expect(
-    page.getByRole("complementary", { name: "Optional analytics" }),
-  ).toHaveCount(0);
+  const privacyChoices = page.getByRole("complementary", { name: "Privacy choices" });
+  await expect(privacyChoices).toBeVisible();
   await expect
     .poll(() =>
       page.evaluate(() => {
@@ -382,7 +381,36 @@ test("analytics integrations are active without a consent prompt", async ({ page
         return typeof analyticsWindow.va === "function" && typeof analyticsWindow.si === "function";
       }),
     )
+    .toBe(false);
+
+  await privacyChoices.getByRole("button", { name: "Allow analytics" }).click();
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const analyticsWindow = window as Window & { va?: unknown; si?: unknown };
+        return typeof analyticsWindow.va === "function" && typeof analyticsWindow.si === "function";
+      }),
+    )
     .toBe(true);
+
+  await page.getByRole("button", { name: "Privacy" }).click();
+  await page.getByRole("button", { name: "Turn off" }).click();
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const analyticsWindow = window as Window & { va?: unknown; si?: unknown };
+        return typeof analyticsWindow.va === "function" || typeof analyticsWindow.si === "function";
+      }),
+    )
+    .toBe(false);
+});
+
+test("privacy page explains analytics choices", async ({ page }) => {
+  await page.goto("/privacy");
+
+  await expect(page.getByRole("heading", { name: "Your choices stay yours." })).toBeVisible();
+  await expect(page.getByText("Analytics is optional")).toBeVisible();
+  await expect(page.getByText("Service providers")).toBeVisible();
 });
 
 test("public pages do not expose stale private repository URLs", async ({ page }) => {

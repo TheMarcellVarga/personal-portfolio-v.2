@@ -39,7 +39,7 @@ export default function Footer({ isHover = false }: FooterProps) {
           </span>
         </div>
         <div className="sm:order-3">
-          <div className="grid grid-cols-3 gap-2 pl-12 sm:flex sm:items-center sm:gap-4 sm:pl-0">
+          <div className="grid grid-cols-2 gap-2 pl-12 sm:flex sm:items-center sm:gap-4 sm:pl-0">
             <Link
               href="/about"
               className={`rounded-full border border-custom-blue/10 px-4 py-2 text-center text-xs transition duration-300 hover:border-custom-blue/20 hover:text-custom-blue sm:rounded-none sm:border-0 sm:p-0 sm:text-sm ${
@@ -47,6 +47,14 @@ export default function Footer({ isHover = false }: FooterProps) {
               }`}
             >
               About me
+            </Link>
+            <Link
+              href="/privacy"
+              className={`rounded-full border border-custom-blue/10 px-4 py-2 text-center text-xs transition duration-300 hover:border-custom-blue/20 hover:text-custom-blue sm:rounded-none sm:border-0 sm:p-0 sm:text-sm ${
+                isHover ? "text-custom-blue/85" : "text-custom-blue/70"
+              }`}
+            >
+              Privacy
             </Link>
             <a
               href="https://www.linkedin.com/in/marcellvarga/"

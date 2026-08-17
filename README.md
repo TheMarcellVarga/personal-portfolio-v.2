@@ -69,7 +69,7 @@ The portfolio uses semantic structure, reduced-motion support, and explicit imag
 
 ## Privacy and analytics
 
-The site exposes email and professional social links, with an optional click-to-reveal phone interaction. The reveal keeps the number out of initial page markup but is not scrape-proof; private environment values and credentials must never be committed. PostHog, Vercel Analytics, and Speed Insights are enabled in production for pageviews, autocapture, session recording, performance, console logs, and error measurements. PostHog creates profiles for anonymous visitors. The short-lived homepage intro cookie only remembers whether the visual intro has completed and is not used for measurement.
+The site exposes email and professional social links, with an optional click-to-reveal phone interaction. The reveal keeps the number out of initial page markup but is not scrape-proof; private environment values and credentials must never be committed. PostHog, Vercel Analytics, and Speed Insights are available only after a visitor explicitly opts in through the privacy choices popover. If enabled, they collect pageviews, autocapture, session recording, performance, console logs, and error measurements. Inputs are masked in session recordings, and visitors can withdraw consent from the persistent Privacy control. The short-lived homepage intro cookie only remembers whether the visual intro has completed and is not used for measurement.
 
 ## Deployment
 
