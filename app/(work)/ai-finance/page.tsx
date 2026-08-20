@@ -149,7 +149,7 @@ export default function AiFinancePage() {
   )!;
 
   return (
-    <div className="relative">
+    <div className="case-study-page font-case-study relative">
       <PageBackground />
 
       <Header
@@ -231,7 +231,7 @@ export default function AiFinancePage() {
 
           <motion.figure
             {...fadeInUp(0.15)}
-            className="glass-panel relative mb-28 overflow-hidden rounded-[1.9rem] bg-[#071112] shadow-[0_24px_70px_rgba(11,17,26,0.14)] sm:rounded-[2.1rem]"
+            className="glass-panel relative mb-28 overflow-hidden rounded-[1.9rem] bg-custom-blue shadow-[0_24px_70px_rgba(11,17,26,0.14)] sm:rounded-[2.1rem]"
           >
             <Image
               src="/images/ai-finance/aperture-home.jpg"
@@ -241,7 +241,7 @@ export default function AiFinancePage() {
               priority
               className="h-auto w-full"
             />
-            <figcaption className="border-t border-white/10 bg-[#071112] px-5 py-4 text-xs leading-5 text-white/62">
+            <figcaption className="border-t border-white/10 bg-custom-blue px-5 py-4 text-xs leading-5 text-white/62">
               The public identity sets the tone; the product proof lives in the
               owner-scoped evidence workflow behind it.
             </figcaption>
@@ -289,7 +289,7 @@ export default function AiFinancePage() {
               </div>
               <ol className="mt-10 grid gap-px overflow-hidden rounded-[1.8rem] border border-custom-blue/10 bg-custom-blue/10 md:grid-cols-2 lg:grid-cols-3">
                 {researchJourney.map(({ title, text, icon: Icon }, index) => (
-                  <li key={title} className="bg-[#eef2f2] p-6 sm:p-7">
+                  <li key={title} className="bg-custom-blue/5 p-6 sm:p-7">
                     <div className="flex items-center justify-between">
                       <Icon className="h-5 w-5 text-custom-blue/65" />
                       <span className="font-label text-[0.62rem] font-semibold tracking-[0.18em] text-custom-blue/70">
@@ -305,7 +305,7 @@ export default function AiFinancePage() {
               </ol>
             </motion.section>
 
-            <motion.figure {...fadeInUp()} className="overflow-hidden rounded-[1.9rem] bg-[#08100f] shadow-[0_18px_52px_rgba(11,17,26,0.12)] sm:rounded-[2.1rem]">
+            <motion.figure {...fadeInUp()} className="overflow-hidden rounded-[1.9rem] bg-custom-blue shadow-[0_18px_52px_rgba(11,17,26,0.12)] sm:rounded-[2.1rem]">
               <Image
                 src="/images/ai-finance/aperture-product.jpg"
                 alt="Aperture product page explaining evidence, ownership, and safe AI boundaries"
@@ -362,11 +362,11 @@ export default function AiFinancePage() {
               </div>
             </motion.section>
 
-            <motion.section {...fadeInUp()} className="overflow-hidden rounded-[1.9rem] bg-[#10191d] p-6 text-white shadow-[0_24px_70px_rgba(11,17,26,0.16)] sm:rounded-[2.1rem] sm:p-9 lg:p-12">
+            <motion.section {...fadeInUp()} className="overflow-hidden rounded-[1.9rem] bg-custom-blue p-6 text-white shadow-[0_24px_70px_rgba(11,17,26,0.16)] sm:rounded-[2.1rem] sm:p-9 lg:p-12">
               <div className="grid gap-12 lg:grid-cols-[0.78fr_1.22fr]">
                 <div>
                   <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/8">
-                    <LockKeyhole className="h-5 w-5 text-[#67d9ff]" />
+                    <LockKeyhole className="h-5 w-5 text-custom-teal" />
                   </div>
                   <p className="mt-8 font-label text-[0.62rem] font-medium uppercase tracking-[0.2em] text-white/48">
                     Trust model
@@ -378,7 +378,7 @@ export default function AiFinancePage() {
                 <div className="grid gap-3 sm:grid-cols-2">
                   {visibleBoundaries.map((rule) => (
                     <div key={rule} className="flex items-start gap-3 rounded-[1.2rem] bg-white/[0.055] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
-                      <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#67d9ff]/80" />
+                      <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-custom-teal/80" />
                       <p className="text-sm leading-6 text-white/72">{rule}</p>
                     </div>
                   ))}
