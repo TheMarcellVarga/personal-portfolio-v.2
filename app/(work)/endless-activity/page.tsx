@@ -159,7 +159,7 @@ export default function EndlessActivityPage() {
   };
 
   return (
-    <div ref={pageRef} className="font-case-study relative overflow-x-hidden">
+    <div ref={pageRef} className="case-study-page font-case-study relative overflow-x-hidden">
       <PageBackground />
 
       <Header
@@ -200,7 +200,7 @@ export default function EndlessActivityPage() {
             </div>
 
             <div className="relative z-10 mx-auto mt-12 w-[min(78vw,19rem)] rotate-[5deg] sm:w-[min(64vw,25rem)] lg:mt-0 lg:w-full lg:max-w-[23rem] lg:justify-self-end xl:max-w-[25rem]">
-              <div className="absolute -left-20 top-16 h-72 w-72 rounded-full bg-[#ff5b52]/20 blur-3xl" />
+              <div className="absolute -left-20 top-16 h-72 w-72 rounded-full bg-custom-teal/20 blur-3xl" />
               <Image
                 src="/images/endless-activity/discover.png"
                 alt="Endless Activity Discover deck on iPhone"
@@ -216,7 +216,7 @@ export default function EndlessActivityPage() {
 
           <figure
             id="walkthrough"
-            className="scroll-mt-28 overflow-hidden rounded-[2.2rem] bg-[#111b28] p-5 text-white shadow-[0_28px_80px_rgba(17,27,40,0.16)] sm:p-7 lg:grid lg:grid-cols-[minmax(0,19rem)_minmax(0,1fr)] lg:items-center lg:gap-10 lg:p-10"
+            className="scroll-mt-28 overflow-hidden rounded-[2.2rem] bg-custom-blue p-5 text-white shadow-[0_28px_80px_rgba(17,27,40,0.16)] sm:p-7 lg:grid lg:grid-cols-[minmax(0,19rem)_minmax(0,1fr)] lg:items-center lg:gap-10 lg:p-10"
           >
             <video
               controls
@@ -225,7 +225,7 @@ export default function EndlessActivityPage() {
               poster="/images/endless-activity/discover.png"
               aria-label="Twenty-four second Endless Activity visual walkthrough"
               aria-describedby="endless-activity-transcript"
-              className="mx-auto w-full max-w-[19rem] rounded-[1.6rem] bg-[#f4f5f5]"
+              className="mx-auto w-full max-w-[19rem] rounded-[1.6rem] bg-white"
             >
               <source src="/images/endless-activity/endless-activity-demo.mp4" type="video/mp4" />
               <track
@@ -238,7 +238,7 @@ export default function EndlessActivityPage() {
               Your browser does not support the Endless Activity walkthrough.
             </video>
             <div className="mt-6 lg:mt-0">
-              <p className="text-[0.64rem] font-semibold uppercase tracking-[0.2em] text-[#ff8e87]">
+              <p className="text-[0.64rem] font-semibold uppercase tracking-[0.2em] text-custom-teal">
                 Accessible walkthrough
               </p>
               <h2 className="mt-4 max-w-[11ch] text-[clamp(2.4rem,5vw,4.8rem)] font-medium leading-[0.9] tracking-[-0.05em]">
@@ -253,10 +253,10 @@ export default function EndlessActivityPage() {
                   Read the walkthrough transcript
                 </summary>
                 <ol className="mt-4 space-y-3 text-sm leading-6 text-white/72">
-                  <li><span className="mr-2 font-mono text-xs text-[#ff8e87]">00:00</span>Discover presents one five-sense reset with duration, cost, energy, Save, and Skip controls.</li>
-                  <li><span className="mr-2 font-mono text-xs text-[#ff8e87]">00:06</span>The activity detail view expands into three practical steps and a Save for later action.</li>
-                  <li><span className="mr-2 font-mono text-xs text-[#ff8e87]">00:12</span>The Saved screen keeps the activity available for another moment.</li>
-                  <li><span className="mr-2 font-mono text-xs text-[#ff8e87]">00:18</span>Preferences expose duration, cost, energy, and setting filters without requiring an account.</li>
+                  <li><span className="mr-2 font-mono text-xs text-custom-teal">00:00</span>Discover presents one five-sense reset with duration, cost, energy, Save, and Skip controls.</li>
+                  <li><span className="mr-2 font-mono text-xs text-custom-teal">00:06</span>The activity detail view expands into three practical steps and a Save for later action.</li>
+                  <li><span className="mr-2 font-mono text-xs text-custom-teal">00:12</span>The Saved screen keeps the activity available for another moment.</li>
+                  <li><span className="mr-2 font-mono text-xs text-custom-teal">00:18</span>Preferences expose duration, cost, energy, and setting filters without requiring an account.</li>
                 </ol>
               </details>
             </div>
@@ -271,7 +271,7 @@ export default function EndlessActivityPage() {
                   aria-hidden={index >= proofStrip.length}
                 >
                   {item}
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#ff5b52]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-custom-teal" />
                 </span>
               ))}
             </div>
@@ -297,7 +297,7 @@ export default function EndlessActivityPage() {
             </div>
 
             <div className="mt-16 grid grid-flow-dense gap-4 lg:grid-cols-12 lg:grid-rows-2">
-              <article className="group relative min-h-[35rem] overflow-hidden rounded-[2.2rem] bg-[#111b28] text-white shadow-[0_28px_80px_rgba(17,27,40,0.16)] lg:col-span-7 lg:row-span-2">
+              <article className="group relative min-h-[35rem] overflow-hidden rounded-[2.2rem] bg-custom-blue text-white shadow-[0_28px_80px_rgba(17,27,40,0.16)] lg:col-span-7 lg:row-span-2">
                 <div className="grid h-full lg:grid-rows-[auto_1fr]">
                   <div className="p-7 sm:p-10 lg:p-12">
                     <Image
@@ -316,7 +316,7 @@ export default function EndlessActivityPage() {
                       about the system behind it.
                     </p>
                   </div>
-                  <div className="relative min-h-[18rem] overflow-hidden border-t border-white/10 bg-[radial-gradient(circle_at_50%_35%,rgba(255,91,82,0.26),transparent_54%)] px-8 pt-8">
+                  <div className="relative min-h-[18rem] overflow-hidden border-t border-white/10 bg-[radial-gradient(circle_at_50%_35%,rgba(76,207,255,0.24),transparent_54%)] px-8 pt-8">
                     <Image
                       src="/images/endless-activity/detail.png"
                       alt="Endless Activity detail view with metadata and action steps"
@@ -328,8 +328,8 @@ export default function EndlessActivityPage() {
                 </div>
               </article>
 
-              <article className="rounded-[2.2rem] bg-[#ffe3df] p-7 text-custom-blue shadow-[0_18px_55px_rgba(17,27,40,0.08)] sm:p-9 lg:col-span-5 lg:row-span-1">
-                <Bookmark className="h-6 w-6 text-[#e34e47]" aria-hidden="true" />
+              <article className="rounded-[2.2rem] bg-custom-teal/15 p-7 text-custom-blue shadow-[0_18px_55px_rgba(17,27,40,0.08)] sm:p-9 lg:col-span-5 lg:row-span-1">
+                <Bookmark className="h-6 w-6 text-custom-teal" aria-hidden="true" />
                 <h3 className="mt-8 max-w-[12ch] text-[2.15rem] font-medium leading-[0.94] tracking-[-0.045em] sm:text-[2.6rem]">
                   A complete loop in five moves.
                 </h3>
@@ -339,8 +339,8 @@ export default function EndlessActivityPage() {
                 </p>
               </article>
 
-              <article className="rounded-[2.2rem] bg-[#dff2e4] p-7 text-custom-blue shadow-[0_18px_55px_rgba(17,27,40,0.08)] sm:p-9 lg:col-span-5 lg:row-span-1">
-                <ShieldCheck className="h-6 w-6 text-[#2d8a55]" aria-hidden="true" />
+              <article className="rounded-[2.2rem] bg-custom-blue/10 p-7 text-custom-blue shadow-[0_18px_55px_rgba(17,27,40,0.08)] sm:p-9 lg:col-span-5 lg:row-span-1">
+                <ShieldCheck className="h-6 w-6 text-custom-teal" aria-hidden="true" />
                 <h3 className="mt-8 max-w-[13ch] text-[2.15rem] font-medium leading-[0.94] tracking-[-0.045em] sm:text-[2.6rem]">
                   Restraint is part of the architecture.
                 </h3>
@@ -384,13 +384,12 @@ export default function EndlessActivityPage() {
               <div className="space-y-8 pb-24">
                 {productDecisions.map((decision, index) => {
                   const Icon = decision.icon;
-                  const backgrounds = ["#111b28", "#244234", "#8c3934"];
                   return (
                     <article
                       key={decision.title}
                       data-stack-card
-                      className="sticky top-28 min-h-[28rem] overflow-hidden rounded-[2.3rem] p-7 text-white shadow-[0_34px_90px_rgba(17,27,40,0.22)] sm:p-10 lg:min-h-[31rem] lg:p-12"
-                      style={{ backgroundColor: backgrounds[index], zIndex: index + 1 }}
+                      className="sticky top-28 min-h-[28rem] overflow-hidden rounded-[2.3rem] bg-custom-blue p-7 text-white shadow-[0_34px_90px_rgba(17,27,40,0.22)] sm:p-10 lg:min-h-[31rem] lg:p-12"
+                      style={{ zIndex: index + 1 }}
                     >
                       <div className="flex h-full min-h-[23rem] flex-col">
                         <div className="flex items-start justify-between gap-6">
@@ -420,7 +419,7 @@ export default function EndlessActivityPage() {
             <div className="grid lg:grid-cols-[0.84fr_1.16fr]">
               <div className="border-b border-custom-blue/10 p-7 sm:p-10 lg:border-b-0 lg:border-r lg:p-12">
                 <p className="text-sm font-medium text-custom-blue/72">Verification rail</p>
-                <p className="mt-10 text-[clamp(4.8rem,12vw,9rem)] font-medium leading-none tracking-[-0.075em] text-[#d6423c]">
+                <p className="mt-10 text-[clamp(4.8rem,12vw,9rem)] font-medium leading-none tracking-[-0.075em] text-custom-teal">
                   {verificationSlides[activeEvidence].value}
                 </p>
                 <h2 className="mt-7 max-w-[11ch] text-[clamp(2.4rem,5vw,4.5rem)] font-medium leading-[0.92] tracking-[-0.05em] text-custom-blue">
@@ -431,7 +430,7 @@ export default function EndlessActivityPage() {
                 </p>
               </div>
 
-              <div className="flex min-h-[28rem] flex-col justify-between bg-[#111b28] p-7 text-white sm:p-10 lg:p-12">
+              <div className="flex min-h-[28rem] flex-col justify-between bg-custom-blue p-7 text-white sm:p-10 lg:p-12">
                 <div className="flex items-center justify-between gap-4">
                   <span className="text-xs font-semibold uppercase tracking-[0.18em] text-white/72">
                     Recorded evidence
@@ -448,7 +447,7 @@ export default function EndlessActivityPage() {
                       onClick={() => setActiveEvidence(index)}
                       className={`w-full border-b py-4 text-left text-[1.25rem] font-medium transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 ${
                         activeEvidence === index
-                          ? "border-[#ff6d63] text-white"
+                          ? "border-custom-teal text-white"
                           : "border-white/10 text-white/72 hover:text-white"
                       }`}
                     >
@@ -494,7 +493,7 @@ export default function EndlessActivityPage() {
 
             <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {gallery.map((item) => (
-                <figure key={item.src} className="group overflow-hidden rounded-[2rem] bg-[#111b28] p-3 shadow-[0_22px_64px_rgba(17,27,40,0.13)]">
+                <figure key={item.src} className="group overflow-hidden rounded-[2rem] bg-custom-blue p-3 shadow-[0_22px_64px_rgba(17,27,40,0.13)]">
                   <div className="overflow-hidden rounded-[1.5rem]">
                     <Image
                       src={item.src}
@@ -515,27 +514,27 @@ export default function EndlessActivityPage() {
           <CaseStudyEvidence caseStudy={caseStudies["endless-activity"]} />
           <OtherWorks currentProjectTitle="Endless Activity" />
 
-          <section className="my-32 overflow-hidden rounded-[2.4rem] bg-[#ff5b52] px-7 py-16 text-[#111b28] shadow-[0_30px_90px_rgba(142,48,43,0.22)] sm:px-10 sm:py-20 lg:px-16 lg:py-24">
+          <section className="my-32 overflow-hidden rounded-[2.4rem] bg-custom-teal px-7 py-16 text-custom-blue shadow-[0_30px_90px_rgba(17,27,40,0.14)] sm:px-10 sm:py-20 lg:px-16 lg:py-24">
             <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
               <div>
-                <p className="text-sm font-semibold text-[#111b28]">Supporting work, specific proof</p>
+                <p className="text-sm font-semibold text-custom-blue">Supporting work, specific proof</p>
                 <h2 className="mt-5 max-w-[10ch] text-[clamp(3rem,7vw,6.6rem)] font-medium leading-[0.86] tracking-[-0.06em]">
                   Product judgment that reaches the code.
                 </h2>
               </div>
               <div className="space-y-6">
-                <p className="max-w-xl text-[1.05rem] leading-7 text-[#111b28]">
+                <p className="max-w-xl text-[1.05rem] leading-7 text-custom-blue">
                   Endless Activity complements the flagship work with a compact
                   example of native interaction, local architecture, accessibility,
                   and knowing where a version one should stop.
                 </p>
                 <div className="flex flex-col gap-3 sm:flex-row">
-                  <p className="inline-flex items-center justify-center rounded-full bg-[#111b28]/10 px-6 py-3.5 text-sm font-semibold text-[#111b28]">
+                  <p className="inline-flex items-center justify-center rounded-full bg-custom-blue/10 px-6 py-3.5 text-sm font-semibold text-custom-blue">
                     Source available privately on request
                   </p>
                   <Link
                     href="/#contact"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-white/64 px-6 py-3.5 text-sm font-semibold text-[#111b28] transition duration-300 hover:-translate-y-1 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111b28] focus-visible:ring-offset-3 focus-visible:ring-offset-[#ff5b52]"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-white/64 px-6 py-3.5 text-sm font-semibold text-custom-blue transition duration-300 hover:-translate-y-1 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-custom-blue focus-visible:ring-offset-3 focus-visible:ring-offset-custom-teal"
                   >
                     Discuss the work <ArrowRight className="h-4 w-4" />
                   </Link>
