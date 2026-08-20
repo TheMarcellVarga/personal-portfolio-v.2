@@ -99,7 +99,7 @@ export default function FocusinPage() {
   const reveal = (delay = 0) => revealMotion(delay, reduceMotion);
 
   return (
-    <div className="relative">
+    <div className="case-study-page font-case-study relative">
       <PageBackground />
 
       <Header
@@ -141,11 +141,11 @@ export default function FocusinPage() {
 
           <motion.section
             {...reveal(0.12)}
-            className="overflow-hidden rounded-[2rem] bg-[#081326] text-white shadow-[0_28px_80px_rgba(17,27,40,0.16)] sm:rounded-[2.6rem]"
+            className="overflow-hidden rounded-[2rem] bg-custom-blue text-white shadow-[0_28px_80px_rgba(17,27,40,0.16)] sm:rounded-[2.6rem]"
           >
             <div className="grid lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
               <div className="p-7 sm:p-10 lg:p-12 xl:p-16">
-                <p className="font-label text-[0.64rem] font-semibold uppercase tracking-[0.2em] text-[#7db8ff]">
+                <p className="font-label text-[0.64rem] font-semibold uppercase tracking-[0.2em] text-custom-teal">
                   Product premise
                 </p>
                 <h2 className="mt-5 max-w-[10ch] font-display text-[clamp(2.7rem,6vw,5.2rem)] font-medium leading-[0.9] tracking-[-0.05em]">
@@ -162,7 +162,7 @@ export default function FocusinPage() {
                 </div>
               </div>
 
-              <figure className="relative min-h-[28rem] overflow-hidden border-t border-white/10 bg-[radial-gradient(circle_at_50%_35%,rgba(69,143,255,0.34),transparent_47%)] p-6 sm:p-10 lg:min-h-[42rem] lg:border-l lg:border-t-0">
+              <figure className="relative min-h-[28rem] overflow-hidden border-t border-white/10 bg-[radial-gradient(circle_at_50%_35%,rgba(76,207,255,0.24),transparent_47%)] p-6 sm:p-10 lg:min-h-[42rem] lg:border-l lg:border-t-0">
                 <Image
                   src="/images/focusin/light-focusing.png"
                   alt="Focusin menu bar interface showing a running focus interval and a state-aware micro-break recommendation"
@@ -203,7 +203,7 @@ export default function FocusinPage() {
                   className="relative"
                 >
                   <article className="glass-panel h-full rounded-[1.5rem] bg-white/64 p-5 shadow-[0_12px_40px_rgba(11,17,26,0.04)]">
-                    <span className="font-label text-[0.62rem] font-semibold tracking-[0.18em] text-[#087aff]">
+                    <span className="font-label text-[0.62rem] font-semibold tracking-[0.18em] text-custom-teal">
                       {state.number}
                     </span>
                     <h3 className="mt-8 font-display text-[1.65rem] font-medium leading-none tracking-[-0.035em] text-custom-blue">
@@ -247,9 +247,9 @@ export default function FocusinPage() {
 
               <motion.div
                 {...reveal(0.08)}
-                className="rounded-[2rem] bg-[#081326] p-7 text-white shadow-[0_24px_70px_rgba(17,27,40,0.14)] sm:rounded-[2.5rem] sm:p-10 lg:p-12"
+                className="rounded-[2rem] bg-custom-blue p-7 text-white shadow-[0_24px_70px_rgba(17,27,40,0.14)] sm:rounded-[2.5rem] sm:p-10 lg:p-12"
               >
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-[1.1rem] bg-[#2c86ff] text-white">
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-[1.1rem] bg-custom-teal text-custom-blue">
                   <BellOff className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <h2 className="mt-7 max-w-[11ch] font-display text-[clamp(2.6rem,6vw,5rem)] font-medium leading-[0.92] tracking-[-0.05em]">
@@ -288,7 +288,7 @@ export default function FocusinPage() {
                     {...reveal(index * 0.04)}
                     className="grid gap-5 border-b border-custom-blue/10 py-7 sm:grid-cols-[3.25rem_0.72fr_1.28fr] sm:items-start sm:gap-8 sm:py-9"
                   >
-                    <div className="inline-flex h-11 w-11 items-center justify-center rounded-[1rem] bg-[#d9e9ff] text-[#087aff]">
+                    <div className="inline-flex h-11 w-11 items-center justify-center rounded-[1rem] bg-custom-teal/15 text-custom-teal">
                       <Icon className="h-4.5 w-4.5" aria-hidden="true" />
                     </div>
                     <h3 className="font-display text-[1.5rem] font-medium leading-[1.02] tracking-[-0.03em] text-custom-blue">
@@ -303,13 +303,13 @@ export default function FocusinPage() {
             </div>
           </section>
 
-          <section className="overflow-hidden rounded-[2rem] bg-[#081326] text-white shadow-[0_24px_70px_rgba(17,27,40,0.14)] sm:rounded-[2.5rem]">
+          <section className="overflow-hidden rounded-[2rem] bg-custom-blue text-white shadow-[0_24px_70px_rgba(17,27,40,0.14)] sm:rounded-[2.5rem]">
             <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
               <motion.div
                 {...reveal()}
                 className="border-b border-white/10 p-7 sm:p-10 lg:border-b-0 lg:border-r lg:p-12"
               >
-                <p className="font-display text-[clamp(5rem,13vw,9rem)] font-medium leading-none tracking-[-0.075em] text-[#6dabff]">
+                <p className="font-display text-[clamp(5rem,13vw,9rem)] font-medium leading-none tracking-[-0.075em] text-custom-teal">
                   54
                 </p>
                 <h2 className="mt-7 max-w-[10ch] font-display text-[clamp(2.4rem,5vw,4.5rem)] font-medium leading-[0.92] tracking-[-0.05em]">
@@ -354,7 +354,7 @@ export default function FocusinPage() {
                   Quiet hours, interval controls, activity preferences, and
                   system integration stay native, inspectable, and reversible.
                 </p>
-                <p className="mt-6 max-w-xl border-l-2 border-[#087aff] pl-5 text-sm leading-6 text-custom-blue/62">
+                <p className="mt-6 max-w-xl border-l-2 border-custom-teal pl-5 text-sm leading-6 text-custom-blue/62">
                   These are current deterministic review captures. Final public
                   media must still come from the exact signed candidate.
                 </p>
@@ -362,7 +362,7 @@ export default function FocusinPage() {
 
               <motion.figure
                 {...reveal(0.08)}
-                className="overflow-hidden rounded-[1.9rem] bg-[#070a0d] p-3 shadow-[0_24px_70px_rgba(17,27,40,0.14)] sm:rounded-[2.1rem]"
+                className="overflow-hidden rounded-[1.9rem] bg-custom-blue p-3 shadow-[0_24px_70px_rgba(17,27,40,0.14)] sm:rounded-[2.1rem]"
               >
                 <Image
                   src="/images/focusin/dark-settings-reminder.png"
@@ -403,7 +403,7 @@ function Meta({ label, value }: { label: string; value: string }) {
 function CompactProof({ value, label }: { value: string; label: string }) {
   return (
     <div>
-      <strong className="font-display text-3xl tracking-[-0.05em] text-[#6dabff]">
+      <strong className="font-display text-3xl tracking-[-0.05em] text-custom-teal">
         {value}
       </strong>
       <p className="mt-1 font-label text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-white/52">
@@ -424,7 +424,7 @@ function Proof({
 }) {
   return (
     <div className="grid gap-4 sm:grid-cols-[auto_1fr] sm:items-start">
-      <strong className="min-w-[5.5rem] font-display text-4xl tracking-[-0.05em] text-[#6dabff]">
+      <strong className="min-w-[5.5rem] font-display text-4xl tracking-[-0.05em] text-custom-teal">
         {value}
       </strong>
       <div>
@@ -441,7 +441,7 @@ function ResilienceFact({ text }: { text: string }) {
   return (
     <div className="flex items-start gap-3 border-t border-white/10 pt-4">
       <Check
-        className="mt-0.5 h-4 w-4 shrink-0 text-[#6dabff]"
+        className="mt-0.5 h-4 w-4 shrink-0 text-custom-teal"
         aria-hidden="true"
       />
       <p className="text-sm leading-6 text-white/64">{text}</p>
