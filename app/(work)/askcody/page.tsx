@@ -247,7 +247,7 @@ export default function AskCodyPage() {
   const projectData = projects.find((p) => p.title === "AskCody")!;
 
   return (
-    <div className="relative">
+    <div className="case-study-page font-case-study relative">
       <PageBackground />
       
       <Header 
@@ -303,7 +303,7 @@ export default function AskCodyPage() {
 
           <motion.div 
             {...fadeInUp(0.2)}
-            className={`glass-panel relative mb-24 aspect-[16/9] overflow-hidden rounded-[1.9rem] bg-white/65 shadow-[0_18px_48px_rgba(11,17,26,0.06)] sm:rounded-[2.1rem] ${projectData.backgroundClass}`}
+            className="glass-panel relative mb-24 aspect-[16/9] overflow-hidden rounded-[1.9rem] bg-custom-blue shadow-[0_18px_48px_rgba(11,17,26,0.06)] sm:rounded-[2.1rem]"
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.4),transparent_50%)]" />
             <Image
