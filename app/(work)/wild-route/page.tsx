@@ -114,7 +114,7 @@ export default function WildRoutePage() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative">
+    <div className="case-study-page font-case-study relative">
       <PageBackground />
 
       <Header
@@ -197,7 +197,7 @@ export default function WildRoutePage() {
 
           <motion.div
             {...fadeInUp(0.16)}
-            className="glass-panel relative aspect-[16/9] overflow-hidden rounded-[1.9rem] bg-[#171d16] shadow-[0_24px_70px_rgba(17,27,40,0.12)] sm:rounded-[2.1rem]"
+            className="glass-panel relative aspect-[16/9] overflow-hidden rounded-[1.9rem] bg-custom-blue shadow-[0_24px_70px_rgba(17,27,40,0.12)] sm:rounded-[2.1rem]"
           >
             <Image
               src="/images/wild-route/home.png"
@@ -271,7 +271,7 @@ export default function WildRoutePage() {
 
             <motion.div
               {...fadeInUp(0.08)}
-              className="glass-panel relative aspect-[16/9] overflow-hidden rounded-[1.9rem] bg-[#171d16] shadow-[0_24px_70px_rgba(17,27,40,0.12)] sm:rounded-[2.1rem]"
+              className="glass-panel relative aspect-[16/9] overflow-hidden rounded-[1.9rem] bg-custom-blue shadow-[0_24px_70px_rgba(17,27,40,0.12)] sm:rounded-[2.1rem]"
             >
               <Image
                 src="/images/wild-route/planner.png"
@@ -328,7 +328,7 @@ export default function WildRoutePage() {
                     {...fadeInUp(index * 0.08)}
                     className="glass-panel group rounded-[1.9rem] bg-white/65 p-6 shadow-[0_12px_40px_rgba(11,17,26,0.04)] sm:rounded-[2.1rem] sm:p-7"
                   >
-                    <div className="inline-flex h-11 w-11 items-center justify-center rounded-[1rem] bg-custom-blue text-[#d7ff40] shadow-[0_12px_24px_rgba(17,27,40,0.12)] transition-transform duration-500 group-hover:scale-105">
+                    <div className="inline-flex h-11 w-11 items-center justify-center rounded-[1rem] bg-custom-blue text-custom-teal shadow-[0_12px_24px_rgba(17,27,40,0.12)] transition-transform duration-500 group-hover:scale-105">
                       <Icon className="h-5 w-5" />
                     </div>
                     <h3 className="mt-7 font-display text-[1.08rem] font-medium leading-[1.04] tracking-[-0.02em] text-custom-blue sm:text-[1.24rem]">
@@ -346,11 +346,11 @@ export default function WildRoutePage() {
           <section className="pb-24 sm:pb-32">
             <motion.div
               {...fadeInUp()}
-              className="overflow-hidden rounded-[2rem] bg-[#171d16] text-white shadow-[0_24px_70px_rgba(17,27,40,0.14)] sm:rounded-[2.5rem]"
+              className="overflow-hidden rounded-[2rem] bg-custom-blue text-white shadow-[0_24px_70px_rgba(17,27,40,0.14)] sm:rounded-[2.5rem]"
             >
               <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
                 <div className="border-b border-white/10 p-6 sm:p-10 lg:border-b-0 lg:border-r lg:p-12">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-[1.1rem] bg-[#d7ff40] text-[#171d16]">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-[1.1rem] bg-custom-teal text-custom-blue">
                     <AlertTriangle className="h-5 w-5" />
                   </div>
                   <p className="mt-8 text-[0.64rem] font-medium uppercase tracking-[0.2em] text-white/55">
@@ -363,7 +363,7 @@ export default function WildRoutePage() {
 
                 <div className="space-y-8 p-6 sm:p-10 lg:p-12">
                   <div>
-                    <span className="text-[0.64rem] font-medium uppercase tracking-[0.18em] text-[#d7ff40]">
+                    <span className="text-[0.64rem] font-medium uppercase tracking-[0.18em] text-custom-teal">
                       The failure
                     </span>
                     <p className="mt-3 text-[1.05rem] leading-7 text-white/70">
@@ -373,7 +373,7 @@ export default function WildRoutePage() {
                     </p>
                   </div>
                   <div>
-                    <span className="text-[0.64rem] font-medium uppercase tracking-[0.18em] text-[#d7ff40]">
+                    <span className="text-[0.64rem] font-medium uppercase tracking-[0.18em] text-custom-teal">
                       The repair
                     </span>
                     <p className="mt-3 text-[1.05rem] leading-7 text-white/70">
@@ -410,7 +410,7 @@ export default function WildRoutePage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <motion.figure
                 {...fadeInUp(0.06)}
-                className="glass-panel overflow-hidden rounded-[1.9rem] bg-[#171d16] p-3 shadow-[0_24px_70px_rgba(17,27,40,0.12)] sm:rounded-[2.1rem] sm:p-4"
+                className="glass-panel overflow-hidden rounded-[1.9rem] bg-custom-blue p-3 shadow-[0_24px_70px_rgba(17,27,40,0.12)] sm:rounded-[2.1rem] sm:p-4"
               >
                 <Image
                   src="/images/wild-route/planner-mobile.png"
@@ -422,7 +422,7 @@ export default function WildRoutePage() {
               </motion.figure>
               <motion.figure
                 {...fadeInUp(0.12)}
-                className="glass-panel overflow-hidden rounded-[1.9rem] bg-[#171d16] p-3 shadow-[0_24px_70px_rgba(17,27,40,0.12)] sm:rounded-[2.1rem] sm:p-4"
+                className="glass-panel overflow-hidden rounded-[1.9rem] bg-custom-blue p-3 shadow-[0_24px_70px_rgba(17,27,40,0.12)] sm:rounded-[2.1rem] sm:p-4"
               >
                 <Image
                   src="/images/wild-route/share-mobile.png"
@@ -449,7 +449,7 @@ export default function WildRoutePage() {
                   {...fadeInUp(index * 0.08)}
                   className="glass-panel rounded-[1.9rem] bg-white/65 p-6 shadow-[0_12px_40px_rgba(11,17,26,0.04)] sm:rounded-[2.1rem]"
                 >
-                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-[0.9rem] bg-custom-blue text-[#d7ff40]">
+                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-[0.9rem] bg-custom-blue text-custom-teal">
                     {index === 0 ? <Braces className="h-4 w-4" /> : index === 1 ? <Route className="h-4 w-4" /> : <ShieldCheck className="h-4 w-4" />}
                   </div>
                   <h3 className="mt-6 font-display text-[1.08rem] font-medium leading-[1.04] tracking-[-0.02em] text-custom-blue sm:text-[1.24rem]">
@@ -465,7 +465,7 @@ export default function WildRoutePage() {
 
           <motion.section
             {...fadeInUp()}
-            className="relative overflow-hidden rounded-[2rem] bg-[#171d16] p-6 text-white shadow-[0_24px_70px_rgba(17,27,40,0.14)] sm:rounded-[2.5rem] sm:p-10 lg:p-14"
+            className="relative overflow-hidden rounded-[2rem] bg-custom-blue p-6 text-white shadow-[0_24px_70px_rgba(17,27,40,0.14)] sm:rounded-[2.5rem] sm:p-10 lg:p-14"
           >
             <Image
               src="/images/wild-route/ribbon.png"
@@ -474,9 +474,9 @@ export default function WildRoutePage() {
               sizes="100vw"
               className="object-cover opacity-25"
             />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(18,24,17,0.98),rgba(18,24,17,0.88)_55%,rgba(18,24,17,0.42))]" />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(17,27,40,0.98),rgba(17,27,40,0.88)_55%,rgba(17,27,40,0.42))]" />
             <div className="relative max-w-3xl">
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-[1.1rem] bg-[#d7ff40] text-[#171d16]">
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-[1.1rem] bg-custom-teal text-custom-blue">
                 <Sparkles className="h-5 w-5" />
               </div>
               <h2 className="mt-8 max-w-[12ch] font-display text-[clamp(2.6rem,6vw,5.25rem)] font-medium leading-[0.9] tracking-[-0.05em]">
