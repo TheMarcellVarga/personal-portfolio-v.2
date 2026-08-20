@@ -134,7 +134,7 @@ export default function FirstRevenueGamePage() {
   const projectData = projects.find((project) => project.title === "First Revenue Game")!;
 
   return (
-    <div className="relative font-case-study">
+    <div className="case-study-page relative font-case-study">
       <PageBackground />
 
       <Header
@@ -212,7 +212,7 @@ export default function FirstRevenueGamePage() {
 
           <motion.figure
             {...fadeInUp(0.15)}
-            className="relative mb-28 overflow-hidden rounded-[1.9rem] bg-[#0d1a1f] shadow-[0_24px_70px_rgba(11,17,26,0.16)] sm:rounded-[2.1rem]"
+            className="relative mb-28 overflow-hidden rounded-[1.9rem] bg-custom-blue shadow-[0_24px_70px_rgba(11,17,26,0.16)] sm:rounded-[2.1rem]"
           >
             <Image
               src="/images/first-revenue-game/landing.jpg"
@@ -222,7 +222,7 @@ export default function FirstRevenueGamePage() {
               priority
               className="h-auto w-full"
             />
-            <figcaption className="border-t border-white/10 bg-[#0d1a1f] px-5 py-4 text-xs leading-5 text-white/64">
+            <figcaption className="border-t border-white/10 bg-custom-blue px-5 py-4 text-xs leading-5 text-white/64">
               The promise stays narrow: move one monetizable skill toward a paid
               outcome, and count only evidence that leaves the product.
             </figcaption>
@@ -261,8 +261,8 @@ export default function FirstRevenueGamePage() {
             <motion.section {...fadeInUp()}>
               <SectionLabel index="02" label="Member + operator loop" />
               <div className="mt-7 grid gap-4 lg:grid-cols-[0.95fr_1.05fr]">
-                <div className="overflow-hidden rounded-[1.9rem] bg-[#102129] p-6 text-white sm:p-8">
-                  <p className="max-w-md text-xs font-medium uppercase tracking-[0.19em] text-[#efb95e]">
+                <div className="overflow-hidden rounded-[1.9rem] bg-custom-blue p-6 text-white sm:p-8">
+                  <p className="max-w-md text-xs font-medium uppercase tracking-[0.19em] text-custom-teal">
                     Recovery is a product feature
                   </p>
                   <h2 className="mt-4 max-w-[11ch] font-display text-[clamp(2.6rem,5vw,4.5rem)] leading-[0.9] tracking-[-0.05em]">
@@ -321,7 +321,7 @@ export default function FirstRevenueGamePage() {
                   const Icon = item.icon;
                   return (
                     <li key={item.title} className="glass-panel rounded-[1.6rem] bg-white/65 p-5">
-                      <Icon className="h-5 w-5 text-[#b1762f]" aria-hidden="true" />
+                      <Icon className="h-5 w-5 text-custom-teal" aria-hidden="true" />
                       <p className="mt-7 text-[0.61rem] font-medium uppercase tracking-[0.17em] text-custom-blue/48">{item.label}</p>
                       <h3 className="mt-2 text-xl font-medium tracking-[-0.025em] text-custom-blue">{item.title}</h3>
                       <p className="mt-2 text-sm leading-6 text-custom-blue/68">{item.text}</p>
@@ -331,7 +331,7 @@ export default function FirstRevenueGamePage() {
               </ul>
             </motion.section>
 
-            <motion.section {...fadeInUp()} className="overflow-hidden rounded-[2rem] bg-[#0d1b22] px-6 py-9 text-white sm:px-9 sm:py-12 lg:px-12">
+            <motion.section {...fadeInUp()} className="overflow-hidden rounded-[2rem] bg-custom-blue px-6 py-9 text-white sm:px-9 sm:py-12 lg:px-12">
               <SectionLabel index="04" label="Trust + reliability" tone="light" />
               <div className="mt-8 grid gap-12 lg:grid-cols-[0.72fr_1.28fr]">
                 <div>
@@ -349,7 +349,7 @@ export default function FirstRevenueGamePage() {
                     const Icon = decision.icon;
                     return (
                       <article key={decision.title} className="grid gap-4 py-6 sm:grid-cols-[auto_1fr]">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#efb95e]/12 text-[#efb95e]">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-custom-teal/12 text-custom-teal">
                           <Icon className="h-5 w-5" aria-hidden="true" />
                         </div>
                         <div>
@@ -373,7 +373,7 @@ export default function FirstRevenueGamePage() {
                 <ul className="mt-7 space-y-4">
                   {operationalEvidence.map((item) => (
                     <li key={item} className="flex gap-3 text-sm leading-6 text-custom-blue/70">
-                      <Activity className="mt-1 h-4 w-4 shrink-0 text-[#a86d28]" aria-hidden="true" />
+                      <Activity className="mt-1 h-4 w-4 shrink-0 text-custom-teal" aria-hidden="true" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -393,12 +393,12 @@ export default function FirstRevenueGamePage() {
                   Source available privately on request
                 </p>
               </div>
-              <div className="overflow-hidden rounded-[1.9rem] bg-[#09151b] shadow-[0_24px_70px_rgba(11,17,26,0.15)]">
+              <div className="overflow-hidden rounded-[1.9rem] bg-custom-blue shadow-[0_24px_70px_rgba(11,17,26,0.15)]">
                 <video
                   controls
                   preload="metadata"
                   poster="/images/first-revenue-game/member-dashboard.jpg"
-                  className="aspect-video w-full bg-[#09151b] object-contain"
+                  className="aspect-video w-full bg-custom-blue object-contain"
                 >
                   <source src="/images/first-revenue-game/walkthrough.mp4" type="video/mp4" />
                   <track kind="captions" src="/images/first-revenue-game/walkthrough.vtt" srcLang="en" label="English" default />
@@ -477,7 +477,7 @@ function ScreenshotFrame({
   caption: string;
 }) {
   return (
-    <figure className="overflow-hidden rounded-[1.7rem] bg-[#0c1920] shadow-[0_18px_55px_rgba(11,17,26,0.12)]">
+    <figure className="overflow-hidden rounded-[1.7rem] bg-custom-blue shadow-[0_18px_55px_rgba(11,17,26,0.12)]">
       <Image src={src} alt={alt} width={width} height={height} className="h-auto w-full" />
       <figcaption className="border-t border-white/10 px-5 py-4 text-xs leading-5 text-white/64">{caption}</figcaption>
     </figure>
