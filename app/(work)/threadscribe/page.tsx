@@ -84,7 +84,7 @@ export default function ThreadScribePage() {
   const reveal = (delay = 0) => revealMotion(delay, reduceMotion);
 
   return (
-    <div className="relative">
+    <div className="case-study-page font-case-study relative">
       <PageBackground />
 
       <Header
@@ -125,7 +125,7 @@ export default function ThreadScribePage() {
 
           <motion.figure
             {...reveal(0.12)}
-            className="glass-panel overflow-hidden rounded-[1.9rem] bg-[#071312] p-2 shadow-[0_24px_70px_rgba(17,27,40,0.12)] sm:rounded-[2.1rem] sm:p-3"
+            className="glass-panel overflow-hidden rounded-[1.9rem] bg-custom-blue p-2 shadow-[0_24px_70px_rgba(17,27,40,0.12)] sm:rounded-[2.1rem] sm:p-3"
           >
             <video
               controls
@@ -133,7 +133,7 @@ export default function ThreadScribePage() {
               preload="metadata"
               poster="/images/threadscribe/transformed-output.png"
               aria-label="Fifty-four second ThreadScribe Studio workflow demonstration"
-              className="aspect-video w-full rounded-[1.45rem] bg-[#071312] object-contain sm:rounded-[1.65rem]"
+              className="aspect-video w-full rounded-[1.45rem] bg-custom-blue object-contain sm:rounded-[1.65rem]"
             >
               <source
                 src="/images/threadscribe/threadscribe-demo.mp4"
@@ -205,13 +205,13 @@ export default function ThreadScribePage() {
             </div>
           </section>
 
-          <section className="overflow-hidden rounded-[2rem] bg-[#071312] text-white shadow-[0_24px_70px_rgba(17,27,40,0.14)] sm:rounded-[2.5rem]">
+          <section className="overflow-hidden rounded-[2rem] bg-custom-blue text-white shadow-[0_24px_70px_rgba(17,27,40,0.14)] sm:rounded-[2.5rem]">
             <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
               <motion.div
                 {...reveal()}
                 className="border-b border-white/10 p-7 sm:p-10 lg:border-b-0 lg:border-r lg:p-12"
               >
-                <p className="font-display text-[clamp(4.8rem,12vw,8.6rem)] font-medium leading-none tracking-[-0.07em] text-[#83cfc6]">
+                <p className="font-display text-[clamp(4.8rem,12vw,8.6rem)] font-medium leading-none tracking-[-0.07em] text-custom-teal">
                   45/45
                 </p>
                 <h2 className="mt-7 max-w-[11ch] font-display text-[clamp(2.4rem,5vw,4.5rem)] font-medium leading-[0.92] tracking-[-0.05em]">
@@ -275,7 +275,7 @@ export default function ThreadScribePage() {
                     className="relative"
                   >
                     <article className="glass-panel h-full rounded-[1.5rem] bg-white/64 p-5 shadow-[0_12px_40px_rgba(11,17,26,0.04)]">
-                      <div className="inline-flex h-10 w-10 items-center justify-center rounded-[0.95rem] bg-custom-blue text-[#83cfc6]">
+                      <div className="inline-flex h-10 w-10 items-center justify-center rounded-[0.95rem] bg-custom-blue text-custom-teal">
                         <Icon className="h-4 w-4" aria-hidden="true" />
                       </div>
                       <h3 className="mt-6 font-display text-[1.08rem] font-medium leading-[1.04] tracking-[-0.02em] text-custom-blue">
@@ -314,9 +314,9 @@ export default function ThreadScribePage() {
 
               <motion.div
                 {...reveal(0.08)}
-                className="rounded-[2rem] bg-[#071312] p-7 text-white shadow-[0_24px_70px_rgba(17,27,40,0.14)] sm:rounded-[2.5rem] sm:p-10 lg:p-12"
+                className="rounded-[2rem] bg-custom-blue p-7 text-white shadow-[0_24px_70px_rgba(17,27,40,0.14)] sm:rounded-[2.5rem] sm:p-10 lg:p-12"
               >
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-[1.1rem] bg-[#83cfc6] text-[#071312]">
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-[1.1rem] bg-custom-teal text-custom-blue">
                   <TriangleAlert className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <h2 className="mt-7 max-w-[11ch] font-display text-[clamp(2.6rem,6vw,5rem)] font-medium leading-[0.92] tracking-[-0.05em]">
@@ -370,7 +370,7 @@ function Proof({
 }) {
   return (
     <div className="grid gap-4 sm:grid-cols-[auto_1fr] sm:items-start">
-      <strong className="min-w-[6.5rem] font-display text-4xl tracking-[-0.05em] text-[#83cfc6]">
+      <strong className="min-w-[6.5rem] font-display text-4xl tracking-[-0.05em] text-custom-teal">
         {value}
       </strong>
       <div>
@@ -387,7 +387,7 @@ function FailureFact({ text }: { text: string }) {
   return (
     <div className="flex items-start gap-3 rounded-[1.3rem] border border-white/10 bg-white/[0.055] p-4">
       <CheckCircle2
-        className="mt-0.5 h-4 w-4 shrink-0 text-[#83cfc6]"
+        className="mt-0.5 h-4 w-4 shrink-0 text-custom-teal"
         aria-hidden="true"
       />
       <p className="text-sm leading-6 text-white/64">{text}</p>
