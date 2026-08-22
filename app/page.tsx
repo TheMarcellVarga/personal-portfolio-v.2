@@ -907,11 +907,11 @@ export default function Page() {
     );
 
     if (!capabilitiesInView) {
-      gsap.set(cards, { opacity: 0, y: 22 });
+      gsap.set(cards, { opacity: 0, y: 48, scale: 0.96 });
       return;
     }
 
-    gsap.set(cards, { opacity: 0, y: 22 });
+    gsap.set(cards, { opacity: 0, y: 48, scale: 0.96 });
 
     const tl = gsap.timeline({
       delay: 0.08,
@@ -923,8 +923,9 @@ export default function Page() {
       {
         opacity: 1,
         y: 0,
-        duration: 0.66,
-        stagger: 0.08,
+        scale: 1,
+        duration: 0.72,
+        stagger: 0.1,
       },
     );
 
