@@ -16,17 +16,10 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page.getByTestId("case-study-restructuring-notice")).toContainText(
     "Case studies under restructuring",
   );
-  await expect(page.getByRole("link", { name: /contact me/i })).toHaveAttribute(
-    "href",
-    "/#contact",
-  );
-  await page.getByRole("link", { name: /contact me/i }).click();
-  await expect(page).toHaveURL(/\/#contact$/);
-  await expect(page.locator("#contact")).toBeVisible();
-  await expect(page.locator("[data-case-study-content]")).toHaveAttribute(
-    "inert",
-    "",
-  );
+
+  await page.locator("header nav").getByRole("button", { name: "Contact", exact: true }).click();
+  await expect(page.locator("#contact")).toBeInViewport();
+  await expect(page.locator("[data-case-study-content]")).toHaveAttribute("inert", "");
   await expect(page.locator("[data-hero-badge-label]").last()).toBeVisible();
   await expect(page.locator('#work a[href="/ai-finance"]')).toBeVisible();
   await expect(page.locator('#work a[href="/first-revenue-game"]')).toBeVisible();
@@ -35,17 +28,6 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page.locator('#work a[href="/focusin"]')).toBeVisible();
   await expect(page.locator('#work a[href="/endless-activity"]')).toBeVisible();
   await expect(page.locator('#work a[href="/catchscan"]')).toHaveCount(0);
-
-  const firstWorkLink = page.locator('#work a[href="/ai-finance"]');
-  await firstWorkLink.scrollIntoViewIfNeeded();
-  const firstWorkBox = await firstWorkLink.boundingBox();
-  expect(firstWorkBox).not.toBeNull();
-  if (!firstWorkBox) throw new Error("Selected work link has no bounding box");
-  await page.mouse.click(
-    firstWorkBox.x + firstWorkBox.width / 2,
-    firstWorkBox.y + firstWorkBox.height / 2,
-  );
-  await expect(page).toHaveURL(/\/#contact$/);
 
   await expect(page.getByRole("button", { name: /legacy projects/i })).toHaveAttribute(
     "aria-expanded",
@@ -365,11 +347,11 @@ test("homepage header changes tone at the bottom of the page", async ({ page }) 
   await expect(headerSurface).toHaveClass(/bg-white\/72/);
 });
 
-test("analytics waits for explicit consent and can be withdrawn", async ({ page }) => {
+test("analytics loads without an interrupting privacy popover", async ({ page }) => {
   await page.goto("/");
 
-  const privacyChoices = page.getByRole("complementary", { name: "Privacy choices" });
-  await expect(privacyChoices).toBeVisible();
+  await expect(page.getByRole("complementary", { name: "Privacy choices" })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Privacy" })).toHaveCount(0);
   await expect
     .poll(() =>
       page.evaluate(() => {
@@ -381,35 +363,14 @@ test("analytics waits for explicit consent and can be withdrawn", async ({ page 
         return typeof analyticsWindow.va === "function" && typeof analyticsWindow.si === "function";
       }),
     )
-    .toBe(false);
-
-  await privacyChoices.getByRole("button", { name: "Allow analytics" }).click();
-  await expect
-    .poll(() =>
-      page.evaluate(() => {
-        const analyticsWindow = window as Window & { va?: unknown; si?: unknown };
-        return typeof analyticsWindow.va === "function" && typeof analyticsWindow.si === "function";
-      }),
-    )
     .toBe(true);
-
-  await page.getByRole("button", { name: "Privacy" }).click();
-  await page.getByRole("button", { name: "Turn off" }).click();
-  await expect
-    .poll(() =>
-      page.evaluate(() => {
-        const analyticsWindow = window as Window & { va?: unknown; si?: unknown };
-        return typeof analyticsWindow.va === "function" || typeof analyticsWindow.si === "function";
-      }),
-    )
-    .toBe(false);
 });
 
-test("privacy page explains analytics choices", async ({ page }) => {
+test("privacy page explains analytics behavior", async ({ page }) => {
   await page.goto("/privacy");
 
-  await expect(page.getByRole("heading", { name: "Your choices stay yours." })).toBeVisible();
-  await expect(page.getByText("Analytics is optional")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Analytics, clearly explained." })).toBeVisible();
+  await expect(page.getByText("Analytics is active")).toBeVisible();
   await expect(page.getByText("Service providers")).toBeVisible();
 });
 

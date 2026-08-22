@@ -62,6 +62,9 @@ const supportingProjectOrder = [
   "Endless Activity",
 ];
 
+// Flip to true when the case studies need to be temporarily covered again.
+const SHOW_CASE_STUDY_RESTRUCTURING_NOTICE = true;
+
 const processCards = [
   {
     number: "01",
@@ -1467,8 +1470,7 @@ export default function Page() {
             </div>
 
             <div className="relative">
-              {/* TEMPORARY: comment out the next line when the case studies are ready. */}
-              <CaseStudyRestructuringNotice />
+              {SHOW_CASE_STUDY_RESTRUCTURING_NOTICE && <CaseStudyRestructuringNotice />}
 
               <div
                 data-case-study-content

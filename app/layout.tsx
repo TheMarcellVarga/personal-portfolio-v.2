@@ -2,7 +2,6 @@ import "./globals.css";
 import PostHogProvider from "./providers/PostHogProvider";
 import { metadata } from "./metadata";
 import { personSameAs, structuredData } from "./seo";
-import AnalyticsConsent from "./components/AnalyticsConsent";
 import AnalyticsIntegrations from "./components/AnalyticsIntegrations";
 import ScrollReset from "./components/ScrollReset";
 import SmoothScroll from "./components/SmoothScroll";
@@ -39,7 +38,6 @@ export default function RootLayout({
             {children}
           </SmoothScroll>
           <AnalyticsIntegrations />
-          <AnalyticsConsent />
         </PostHogProvider>
       </body>
     </html>

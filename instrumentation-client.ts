@@ -12,13 +12,7 @@ const isPostHogEnabled =
   (process.env.NODE_ENV === "production" ||
     process.env.NEXT_PUBLIC_POSTHOG_ENABLE_IN_DEV === "true");
 
-const hasAnalyticsConsent =
-  typeof document !== "undefined" &&
-  document.cookie
-    .split("; ")
-    .some((entry) => entry === "mv-analytics-consent=accepted");
-
-if (posthogKey && isPostHogEnabled && hasAnalyticsConsent && !posthog.__loaded) {
+if (posthogKey && isPostHogEnabled && !posthog.__loaded) {
   posthog.init(posthogKey, {
     api_host: posthogHost,
     defaults: "2026-01-30",
