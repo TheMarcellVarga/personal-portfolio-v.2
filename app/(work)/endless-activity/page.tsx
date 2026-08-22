@@ -419,7 +419,7 @@ export default function EndlessActivityPage() {
             <div className="grid lg:grid-cols-[0.84fr_1.16fr]">
               <div className="border-b border-custom-blue/10 p-7 sm:p-10 lg:border-b-0 lg:border-r lg:p-12">
                 <p className="text-sm font-medium text-custom-blue/72">Verification rail</p>
-                <p className="mt-10 text-[clamp(4.8rem,12vw,9rem)] font-medium leading-none tracking-[-0.075em] text-custom-teal">
+                <p className="mt-10 text-[clamp(4.8rem,12vw,9rem)] font-medium leading-none tracking-[-0.075em] text-[#176b87]">
                   {verificationSlides[activeEvidence].value}
                 </p>
                 <h2 className="mt-7 max-w-[11ch] text-[clamp(2.4rem,5vw,4.5rem)] font-medium leading-[0.92] tracking-[-0.05em] text-custom-blue">
