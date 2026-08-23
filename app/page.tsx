@@ -112,10 +112,12 @@ type ProcessCardData = (typeof processCards)[number];
 function ProcessCard({
   card,
   index,
+  isCompactViewport,
   shouldReduceMotion,
 }: {
   card: ProcessCardData;
   index: number;
+  isCompactViewport: boolean;
   shouldReduceMotion: boolean;
 }) {
   const Icon = card.icon;
@@ -124,7 +126,13 @@ function ProcessCard({
     target: cardRef,
     offset: ["start end", "start 0.58"],
   });
-  const y = useTransform(cardScrollProgress, [0, 1], [96, 0]);
+  const entryDirection = index % 2 === 0 ? -1 : 1;
+  const entryDistance = isCompactViewport ? 0 : 72;
+  const x = useTransform(
+    cardScrollProgress,
+    [0, 1],
+    [entryDirection * entryDistance, 0],
+  );
   const scale = useTransform(cardScrollProgress, [0, 1], [0.94, 1]);
 
   return (
@@ -135,7 +143,7 @@ function ProcessCard({
         shouldReduceMotion
           ? undefined
           : {
-              y,
+              x,
               scale,
               willChange: "transform",
             }
@@ -1415,6 +1423,7 @@ export default function Page() {
                     key={card.title}
                     card={card}
                     index={index}
+                    isCompactViewport={isCompactViewport}
                     shouldReduceMotion={shouldReduceMotion}
                   />
                 );
