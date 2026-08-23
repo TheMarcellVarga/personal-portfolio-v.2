@@ -63,7 +63,7 @@ const supportingProjectOrder = [
 ];
 
 // Flip to true when the case studies need to be temporarily covered again.
-const SHOW_CASE_STUDY_RESTRUCTURING_NOTICE = true;
+const SHOW_CASE_STUDY_RESTRUCTURING_NOTICE = false;
 
 const processCards = [
   {
