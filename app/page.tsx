@@ -124,7 +124,7 @@ function ProcessCard({
   const cardRef = useRef<HTMLElement>(null);
   const { scrollYProgress: cardScrollProgress } = useScroll({
     target: cardRef,
-    offset: ["start end", "start 0.68"],
+    offset: ["start end", "start 0.74"],
   });
   const entryDirection = index % 2 === 0 ? -1 : 1;
   const entryDistance = isCompactViewport ? 0 : 72;
