@@ -125,7 +125,6 @@ function ProcessCard({
   const revealStart = 0.04 + index * 0.065;
   const revealEnd = revealStart + 0.5;
   const y = useTransform(scrollProgress, [revealStart, revealEnd], [56, 0]);
-  const opacity = useTransform(scrollProgress, [revealStart, revealEnd], [0, 1]);
   const scale = useTransform(scrollProgress, [revealStart, revealEnd], [0.96, 1]);
 
   return (
@@ -136,12 +135,11 @@ function ProcessCard({
           ? undefined
           : {
               y,
-              opacity,
               scale,
-              willChange: "transform, opacity",
+              willChange: "transform",
             }
       }
-      className={`glass-panel relative flex min-h-[10rem] flex-col overflow-hidden rounded-[1.8rem] bg-white/65 p-4 shadow-[0_12px_40px_rgba(11,17,26,0.04)] sm:rounded-[2rem] ${card.colSpan}`}
+      className={`glass-panel relative flex min-h-[10rem] flex-col overflow-hidden rounded-[1.8rem] bg-white/65 p-4 shadow-[0_12px_40px_rgba(11,17,26,0.04)] transition-none sm:rounded-[2rem] ${card.colSpan}`}
     >
       <div className="relative z-10 flex h-full flex-col">
         <div className="mb-4 flex items-start justify-between gap-3">
