@@ -1518,7 +1518,7 @@ export default function Page() {
                     aria-expanded={legacyProjectsOpen}
                     data-testid="legacy-projects-toggle"
                     onClick={() => setLegacyProjectsOpen((isOpen) => !isOpen)}
-                    className="grid w-full grid-cols-[minmax(0,1fr)] gap-4 rounded-[1.5rem] px-3 py-5 text-left transition-colors duration-500 hover:bg-custom-blue/[0.01] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-custom-blue/30 focus-visible:ring-inset sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:py-8"
+                    className="grid w-full cursor-pointer grid-cols-[minmax(0,1fr)] gap-4 rounded-[1.5rem] px-3 py-5 text-left transition-colors duration-500 hover:bg-custom-blue/[0.01] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-custom-blue/30 focus-visible:ring-inset sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:py-8"
                   >
                   <span className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:gap-8 md:col-span-1">
                     <span className="font-label min-w-[2.5rem] text-[0.62rem] font-bold text-custom-blue/70">
