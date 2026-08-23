@@ -19,6 +19,7 @@ import {
   useTransform,
   useMotionValue,
   useSpring,
+  type MotionValue,
 } from "framer-motion";
 import { useClientReducedMotion } from "./hooks/useClientReducedMotion";
 import { gsap } from "gsap";
@@ -106,6 +107,73 @@ const processTags = [
   "accessibility",
   "responsive UI",
 ];
+
+type ProcessCardData = (typeof processCards)[number];
+
+function ProcessCard({
+  card,
+  index,
+  scrollProgress,
+  shouldReduceMotion,
+}: {
+  card: ProcessCardData;
+  index: number;
+  scrollProgress: MotionValue<number>;
+  shouldReduceMotion: boolean;
+}) {
+  const Icon = card.icon;
+  const revealStart = 0.04 + index * 0.065;
+  const revealEnd = revealStart + 0.5;
+  const y = useTransform(scrollProgress, [revealStart, revealEnd], [56, 0]);
+  const opacity = useTransform(scrollProgress, [revealStart, revealEnd], [0, 1]);
+  const scale = useTransform(scrollProgress, [revealStart, revealEnd], [0.96, 1]);
+
+  return (
+    <motion.article
+      data-capabilities-card
+      style={
+        shouldReduceMotion
+          ? undefined
+          : {
+              y,
+              opacity,
+              scale,
+              willChange: "transform, opacity",
+            }
+      }
+      className={`glass-panel relative flex min-h-[10rem] flex-col overflow-hidden rounded-[1.8rem] bg-white/65 p-4 shadow-[0_12px_40px_rgba(11,17,26,0.04)] sm:rounded-[2rem] ${card.colSpan}`}
+    >
+      <div className="relative z-10 flex h-full flex-col">
+        <div className="mb-4 flex items-start justify-between gap-3">
+          <div className="inline-flex h-9 w-9 items-center justify-center rounded-[0.85rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)]">
+            <Icon className="h-4.5 w-4.5" />
+          </div>
+          <span className="font-label rounded-full bg-white/62 px-2.5 py-1 text-[0.52rem] font-medium uppercase tracking-[0.18em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]">
+            {card.number}
+          </span>
+        </div>
+        <h2 className="max-w-[14ch] font-display text-[1.08rem] font-medium leading-[1.04] tracking-[-0.02em] text-custom-blue sm:text-[1.24rem]">
+          {card.title}
+        </h2>
+        <p className="mt-2 max-w-[26rem] text-[0.75rem] leading-[1.55] text-custom-blue/70">
+          {card.body}
+        </p>
+        <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
+          {processTags
+            .slice(index * 2, index * 2 + 2)
+            .map((tag) => (
+              <span
+                key={tag}
+                className="font-label rounded-full bg-white/62 px-2 py-1 text-[0.52rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]"
+              >
+                {tag}
+              </span>
+            ))}
+        </div>
+      </div>
+    </motion.article>
+  );
+}
 
 function HeroDynamicBackdrop({
 }) {
@@ -460,8 +528,6 @@ export default function Page() {
   const headerLogoRef = useRef<HTMLSpanElement>(null);
   const mainStageRef = useRef<HTMLDivElement>(null);
   const capabilitiesSectionRef = useRef<HTMLElement>(null);
-  const capabilitiesHasPlayedRef = useRef(false);
-  const [capabilitiesInView, setCapabilitiesInView] = useState(false);
 
   const heroRef = useRef<HTMLElement>(null);
   const principlesRef = useRef<HTMLElement>(null);
@@ -517,6 +583,10 @@ export default function Page() {
   const { scrollYProgress: workScrollProgress } = useScroll({
     target: workSectionRef,
     offset: ["start end", "end start"],
+  });
+  const { scrollYProgress: capabilitiesScrollProgress } = useScroll({
+    target: capabilitiesSectionRef,
+    offset: ["start end", "start 0.32"],
   });
   const principlesRevealEnd = PRINCIPLES_REVEAL_END;
   const principlesOpacity = useTransform(
@@ -879,60 +949,6 @@ export default function Page() {
       timeline?.kill();
     };
   }, [introStage, shouldReduceMotion]);
-
-  useEffect(() => {
-    const section = capabilitiesSectionRef.current;
-    if (!section || shouldReduceMotion) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting || capabilitiesHasPlayedRef.current) return;
-        capabilitiesHasPlayedRef.current = true;
-        setCapabilitiesInView(true);
-        observer.disconnect();
-      },
-      { threshold: 0.28, rootMargin: "0px 0px -16% 0px" },
-    );
-
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, [shouldReduceMotion]);
-
-  useLayoutEffect(() => {
-    const section = capabilitiesSectionRef.current;
-    if (!section || shouldReduceMotion) return;
-
-    const cards = Array.from(
-      section.querySelectorAll<HTMLElement>("[data-capabilities-card]"),
-    );
-
-    if (!capabilitiesInView) {
-      gsap.set(cards, { opacity: 0, y: 48, scale: 0.96 });
-      return;
-    }
-
-    gsap.set(cards, { opacity: 0, y: 48, scale: 0.96 });
-
-    const tl = gsap.timeline({
-      delay: 0.08,
-      defaults: { ease: "power4.out" },
-    });
-
-    tl.to(
-      cards,
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.72,
-        stagger: 0.1,
-      },
-    );
-
-    return () => {
-      tl.kill();
-    };
-  }, [capabilitiesInView, shouldReduceMotion]);
 
   const featuredProjects = useMemo(
     () =>
@@ -1401,43 +1417,14 @@ export default function Page() {
 
             <div className="grid auto-rows-fr gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {processCards.map((card, index) => {
-                const Icon = card.icon;
-
                 return (
-                  <article
+                  <ProcessCard
                     key={card.title}
-                    data-capabilities-card
-                    className={`glass-panel relative flex min-h-[10rem] flex-col overflow-hidden rounded-[1.8rem] bg-white/65 p-4 shadow-[0_12px_40px_rgba(11,17,26,0.04)] sm:rounded-[2rem] ${card.colSpan}`}
-                  >
-                    <div className="relative z-10 flex h-full flex-col">
-                      <div className="mb-4 flex items-start justify-between gap-3">
-                        <div className="inline-flex h-9 w-9 items-center justify-center rounded-[0.85rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)]">
-                          <Icon className="h-4.5 w-4.5" />
-                        </div>
-                        <span className="font-label rounded-full bg-white/62 px-2.5 py-1 text-[0.52rem] font-medium uppercase tracking-[0.18em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]">
-                          {card.number}
-                        </span>
-                      </div>
-                      <h2 className="max-w-[14ch] font-display text-[1.08rem] font-medium leading-[1.04] tracking-[-0.02em] text-custom-blue sm:text-[1.24rem]">
-                        {card.title}
-                      </h2>
-                      <p className="mt-2 max-w-[26rem] text-[0.75rem] leading-[1.55] text-custom-blue/70">
-                        {card.body}
-                      </p>
-                      <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
-                        {processTags
-                          .slice(index * 2, index * 2 + 2)
-                          .map((tag) => (
-                            <span
-                              key={tag}
-                              className="font-label rounded-full bg-white/62 px-2 py-1 text-[0.52rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                      </div>
-                    </div>
-                  </article>
+                    card={card}
+                    index={index}
+                    scrollProgress={capabilitiesScrollProgress}
+                    shouldReduceMotion={shouldReduceMotion}
+                  />
                 );
               })}
             </div>
