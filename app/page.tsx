@@ -19,7 +19,6 @@ import {
   useTransform,
   useMotionValue,
   useSpring,
-  type MotionValue,
 } from "framer-motion";
 import { useClientReducedMotion } from "./hooks/useClientReducedMotion";
 import { gsap } from "gsap";
@@ -113,23 +112,25 @@ type ProcessCardData = (typeof processCards)[number];
 function ProcessCard({
   card,
   index,
-  scrollProgress,
   shouldReduceMotion,
 }: {
   card: ProcessCardData;
   index: number;
-  scrollProgress: MotionValue<number>;
   shouldReduceMotion: boolean;
 }) {
   const Icon = card.icon;
-  const revealStart = 0.04 + index * 0.065;
-  const revealEnd = revealStart + 0.5;
-  const y = useTransform(scrollProgress, [revealStart, revealEnd], [56, 0]);
-  const scale = useTransform(scrollProgress, [revealStart, revealEnd], [0.96, 1]);
+  const cardRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: cardScrollProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "start 0.58"],
+  });
+  const y = useTransform(cardScrollProgress, [0, 1], [96, 0]);
+  const scale = useTransform(cardScrollProgress, [0, 1], [0.94, 1]);
 
   return (
     <motion.article
       data-capabilities-card
+      ref={cardRef}
       style={
         shouldReduceMotion
           ? undefined
@@ -525,7 +526,6 @@ export default function Page() {
   const enableScrollMotion = hasMounted && !shouldReduceMotion;
   const headerLogoRef = useRef<HTMLSpanElement>(null);
   const mainStageRef = useRef<HTMLDivElement>(null);
-  const capabilitiesSectionRef = useRef<HTMLElement>(null);
 
   const heroRef = useRef<HTMLElement>(null);
   const principlesRef = useRef<HTMLElement>(null);
@@ -581,10 +581,6 @@ export default function Page() {
   const { scrollYProgress: workScrollProgress } = useScroll({
     target: workSectionRef,
     offset: ["start end", "end start"],
-  });
-  const { scrollYProgress: capabilitiesScrollProgress } = useScroll({
-    target: capabilitiesSectionRef,
-    offset: ["start end", "start 0.32"],
   });
   const principlesRevealEnd = PRINCIPLES_REVEAL_END;
   const principlesOpacity = useTransform(
@@ -1391,7 +1387,6 @@ export default function Page() {
 
           <section
             id="process"
-            ref={capabilitiesSectionRef}
             data-scroll-anchor="process"
             className="relative mx-auto w-full max-w-7xl py-16 sm:py-24 lg:py-32"
           >
@@ -1420,7 +1415,6 @@ export default function Page() {
                     key={card.title}
                     card={card}
                     index={index}
-                    scrollProgress={capabilitiesScrollProgress}
                     shouldReduceMotion={shouldReduceMotion}
                   />
                 );
