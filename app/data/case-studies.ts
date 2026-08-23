@@ -149,4 +149,70 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
       "Accounts, cloud sync, live events, required location, booking, payments, social planning, and AI-generated activities are intentionally outside version one.",
     ],
   },
+  catchscan: {
+    id: "catchscan",
+    role: "Product UX, interface direction, design system work, Tailwind CSS, Atomic Design, and dashboard frontend",
+    problem:
+      "Help creators review copyright monitoring signals through a calmer, more structured workflow instead of making a dense dashboard the starting point.",
+    user: "Creators and rights teams who need to understand ownership signals, review matches, and decide what to do next.",
+    decisions: [
+      "Organized monitoring data around ownership, status, and next action so the dashboard could support a repeatable review loop.",
+      "Used reusable Atomic Design patterns to keep navigation, tables, filters, and status treatments consistent.",
+      "Reduced visual competition between high-volume data and the actions that move a review forward.",
+      "Carried the system into responsive layouts so the product stayed useful outside a wide desktop canvas.",
+    ],
+    verification: [
+      "The dashboard concept demonstrates a reusable visual language across navigation, review states, and content density.",
+      "The case study covers the design system decisions that made future product areas easier to extend.",
+      "The interface was reviewed as a workflow, not only as a collection of polished screens.",
+    ],
+    limitations: [
+      "This is an archived concept case study, not evidence of a current production deployment.",
+      "The available material documents the interface direction and reusable patterns more than live product outcomes.",
+    ],
+  },
+  askcody: {
+    id: "askcody",
+    role: "Enterprise UX, React and TypeScript interface work, Fluent UI patterns, information architecture, and responsive product design",
+    problem:
+      "Make desk booking, room availability, and workplace resources easier to find and act on inside Microsoft Teams without overwhelming enterprise users.",
+    user: "People planning where and how to work, alongside workplace operators managing rooms, desks, and shared resources.",
+    decisions: [
+      "Grouped the workplace system around the decisions users make most often: find a place, understand availability, and confirm a booking.",
+      "Used Fluent UI conventions to make the experience feel native to the Microsoft Teams environment.",
+      "Kept navigation and resource states legible across a complex information architecture.",
+      "Used reusable content and interaction patterns so the concept could scale beyond one booking flow.",
+    ],
+    verification: [
+      "The concept maps a complex office-management system into a structured, navigable workflow.",
+      "The interface direction keeps resource availability and next actions visible together.",
+      "Responsive layouts were considered as part of the product system rather than as a final adjustment.",
+    ],
+    limitations: [
+      "This is an archived enterprise concept and is not presented as a current Microsoft Teams integration.",
+      "The available material focuses on interface and workflow direction rather than measured adoption or production telemetry.",
+    ],
+  },
+  ess: {
+    id: "ess",
+    role: "UX/UI direction, information architecture, responsive web design, content strategy, usability testing, implementation, and SEO",
+    problem:
+      "Give American students a clearer way to understand European study options, application support, pricing, partner universities, and the practical reality of moving abroad.",
+    user: "American students aged 18 and older who are exploring study abroad and need trustworthy information before they commit to a new path.",
+    decisions: [
+      "Started with research, personas, and the Five Planes method to connect organizational goals with student needs.",
+      "Built the information architecture around services, universities, pricing, practical guidance, and contact paths.",
+      "Used content structure and readable page templates to make a dense, trust-sensitive decision easier to navigate.",
+      "Carried the system through responsive prototypes, implementation, usability checks, and SEO metadata.",
+    ],
+    verification: [
+      "Five-second and think-aloud checks were used to evaluate first impressions and task clarity.",
+      "The final direction brings research, client feedback, content, and responsive behavior into one information platform.",
+      "The project documents a full design-to-code path from strategy and structure through implementation.",
+    ],
+    limitations: [
+      "This is an archived project and does not claim current content, partner, or search-performance results.",
+      "The case study preserves the design process and final direction rather than presenting a live service inventory.",
+    ],
+  },
 };
