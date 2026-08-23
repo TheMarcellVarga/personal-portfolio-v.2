@@ -71,7 +71,11 @@ export default function CaseStudyPage({ caseStudyId }: CaseStudyPageProps) {
               >
                 <div className="border-y border-custom-blue/10">
                   <IndexMetaRow label="Year" value={project.date} />
-                  <IndexMetaRow label="Experience" value={project.status} />
+                  <IndexMetaRow
+                    label="Experience"
+                    value={project.status}
+                    dataCaseStudyStatus={caseStudyId}
+                  />
                   <IndexMetaRow label="Category" value={project.category} />
                 </div>
 
@@ -136,7 +140,10 @@ export default function CaseStudyPage({ caseStudyId }: CaseStudyPageProps) {
             </div>
           </section>
 
-          <section className="pb-20 sm:pb-28 lg:pb-32">
+          <section
+            data-case-study-evidence={caseStudyId}
+            className="pb-20 sm:pb-28 lg:pb-32"
+          >
             <div className="mb-8 max-w-3xl">
               <SectionLabel index="Proof" label="Decisions" />
               <h2 className="font-display text-[clamp(2.3rem,7vw,5.4rem)] leading-[0.92] tracking-[-0.05em] text-custom-blue">
@@ -225,13 +232,26 @@ function Reveal({
   );
 }
 
-function IndexMetaRow({ label, value }: { label: string; value: string }) {
+function IndexMetaRow({
+  label,
+  value,
+  dataCaseStudyStatus,
+}: {
+  label: string;
+  value: string;
+  dataCaseStudyStatus?: CaseStudyId;
+}) {
   return (
     <div className="grid gap-1 border-b border-custom-blue/8 py-3 last:border-b-0 sm:grid-cols-[7rem_1fr] sm:gap-4">
-      <span className="font-label text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/60">
+      <span className="font-label text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/70">
         {label}
       </span>
-      <span className="text-sm leading-6 text-custom-blue/82">{value}</span>
+      <span
+        data-case-study-status={dataCaseStudyStatus}
+        className="text-sm leading-6 text-custom-blue/82"
+      >
+        {value}
+      </span>
     </div>
   );
 }

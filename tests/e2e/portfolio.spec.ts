@@ -138,98 +138,69 @@ test("Aperture case study presents measurable systems evidence", async ({ page }
   await page.goto("/ai-finance");
 
   await expect(page.getByRole("heading", { name: "Aperture Financial Intelligence" })).toBeVisible();
-  await expect(page.getByText("40/40")).toBeVisible();
-  await expect(page.getByText("From private document to reviewed evidence.")).toBeVisible();
-  await expect(page.getByRole("list", { name: "Aperture system architecture" })).toBeVisible();
-  await expect(page.getByText("Public proof before provider expansion.")).toBeVisible();
-  await expect(page.getByText(/not a financial service/i)).toBeVisible();
+  await expect(page.getByText(/40 of 40 evidence regression cases pass/i)).toBeVisible();
+  await expect(page.getByText("Research with a visible chain of evidence.")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Verification", exact: true })).toBeVisible();
+  await expect(page.getByText(/without crossing into trade execution or personal advice/i)).toBeVisible();
 });
 
 test("First Revenue Game connects product judgment to reliable backend evidence", async ({ page }) => {
   await page.goto("/first-revenue-game");
 
   await expect(page.getByRole("heading", { name: "First Revenue Game", exact: true })).toBeVisible();
-  await expect(page.getByText("41", { exact: true })).toBeVisible();
-  await expect(
-    page.getByRole("list", { name: "First Revenue Game product workflow" }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("list", { name: "First Revenue Game system architecture" }),
-  ).toBeVisible();
-  await expect(page.getByRole("heading", { name: "The backend earns its complexity." })).toBeVisible();
-  await expect(page.getByText(/no hosted production environment/i).first()).toBeVisible();
-  await expect(page.locator("video")).toHaveAttribute(
-    "poster",
-    "/images/first-revenue-game/member-dashboard.jpg",
-  );
-  await expect(page.getByText("Source available privately on request")).toBeVisible();
+  await expect(page.getByText(/Forty-one Vitest tests and 36 passing Playwright checks/i)).toBeVisible();
+  await expect(page.getByText("One mission, then proof.")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Verification", exact: true })).toBeVisible();
+  await expect(page.getByText(/production end-user identity/i)).toBeVisible();
+  await expect(page.getByAltText("First Revenue Game member proof pending review state")).toBeVisible();
 });
 
 test("Wild Route case study proves product engineering beyond the interface", async ({ page }) => {
   await page.goto("/wild-route");
 
   await expect(page.getByRole("heading", { name: "Wild Route" })).toBeVisible();
-  await expect(page.getByText("74", { exact: true })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "What broke in production." })).toBeVisible();
-  await expect(page.getByText(/process memory would be shared/i)).toBeVisible();
-  await expect(page.getByText(/deterministic planning dataset and estimates/i)).toBeVisible();
-  await expect(page.getByRole("link", { name: /open live demo/i })).toHaveAttribute(
+  await expect(page.getByText(/74 deterministic Vitest cases pass/i)).toBeVisible();
+  await expect(page.getByText("A calm interface for a dense decision.")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Verification", exact: true })).toBeVisible();
+  await expect(page.getByText(/deterministic planning dataset, planning estimates/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /open public demo/i })).toHaveAttribute(
     "href",
     "https://ai-travel-planner-psi-five.vercel.app",
   );
-  await expect(page.getByText("Source available privately on request")).toBeVisible();
+  await expect(page.getByAltText("Wild Route selected route planner with ranking reasons")).toBeVisible();
 });
 
 test("ThreadScribe case study shows trustworthy AI interaction evidence", async ({ page }) => {
   await page.goto("/threadscribe");
 
   await expect(page.getByRole("heading", { name: "ThreadScribe Studio" })).toBeVisible();
-  await expect(page.getByText("45/45")).toBeVisible();
-  await expect(
-    page.getByRole("list", { name: "ThreadScribe system architecture" }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("heading", { name: "Failure stays truthful and useful." }),
-  ).toBeVisible();
-  await expect(page.getByText(/public walkthrough uses deterministic sample/i)).toBeVisible();
-  await expect(page.getByText("Source available privately on request")).toBeVisible();
-  await expect(page.locator("video track[kind='captions']")).toHaveAttribute(
-    "src",
-    "/images/threadscribe/threadscribe-demo.vtt",
-  );
+  await expect(page.getByText(/45 of 45 deterministic checks/i)).toBeVisible();
+  await expect(page.getByText("Keep the source close to the draft.")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Verification", exact: true })).toBeVisible();
+  await expect(page.getByText(/public walkthrough uses deterministic sample transforms/i)).toBeVisible();
+  await expect(page.getByAltText("ThreadScribe raw timestamped transcript view")).toBeVisible();
 });
 
 test("Focusin case study connects native product judgment to verified engineering", async ({ page }) => {
   await page.goto("/focusin");
 
   await expect(page.getByRole("heading", { name: "Focusin", exact: true })).toBeVisible();
-  await expect(page.getByText("54", { exact: true }).first()).toBeVisible();
-  await expect(page.getByRole("list", { name: "Focusin product state loop" })).toBeVisible();
-  await expect(
-    page.getByRole("heading", { name: "The local loop does not depend on platform permission." }),
-  ).toBeVisible();
+  await expect(page.getByText(/Fifty-four deterministic tests/i)).toBeVisible();
+  await expect(page.getByText("A small reset that knows when to get out of the way.")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Verification", exact: true })).toBeVisible();
   await expect(page.getByText(/no signed archive, installable external beta/i)).toBeVisible();
-  await expect(page.getByText("Source available privately on request")).toBeVisible();
+  await expect(page.getByAltText("Focusin macOS micro-break recommendation")).toBeVisible();
 });
 
 test("Endless Activity case study presents native product craft with honest scope", async ({ page }) => {
   await page.goto("/endless-activity");
 
   await expect(page.getByRole("heading", { name: "Endless Activity", exact: true })).toBeVisible();
-  await page.getByRole("button", { name: "Core logic and golden paths" }).click();
-  await expect(page.getByText("12 + 7", { exact: true })).toBeVisible();
-  await expect(
-    page.getByRole("heading", { name: "The deck owns presentation, not truth." }),
-  ).toBeVisible();
+  await expect(page.getByText(/Twelve unit tests and seven UI tests/i)).toBeVisible();
+  await expect(page.getByText("A quick choice for the moment between plans.")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Verification", exact: true })).toBeVisible();
   await expect(page.getByText(/latest full simulator verification is dated/i)).toBeVisible();
-  await expect(page.getByText("Source available privately on request").first()).toBeVisible();
-  await expect(page.locator("#walkthrough video track[kind='descriptions']")).toHaveAttribute(
-    "src",
-    "/images/endless-activity/endless-activity-demo.vtt",
-  );
-  await expect(page.locator("#endless-activity-transcript")).toContainText(
-    "Preferences expose duration",
-  );
+  await expect(page.getByAltText("Endless Activity saved activity collection")).toBeVisible();
 });
 
 test.describe("mobile and motion fallbacks", () => {
@@ -269,8 +240,8 @@ test.describe("mobile and motion fallbacks", () => {
   test("Endless Activity stacks the device artwork below the mobile copy", async ({ page }) => {
     await page.goto("/endless-activity");
 
-    const copy = await page.locator("main header > div").nth(0).boundingBox();
-    const device = await page.locator("main header img").boundingBox();
+    const copy = await page.getByRole("heading", { name: "Endless Activity", exact: true }).boundingBox();
+    const device = await page.getByAltText("Endless Activity interface preview").boundingBox();
 
     expect(copy).not.toBeNull();
     expect(device).not.toBeNull();
