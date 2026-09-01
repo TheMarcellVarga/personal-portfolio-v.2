@@ -112,43 +112,16 @@ type ProcessCardData = (typeof processCards)[number];
 function ProcessCard({
   card,
   index,
-  isCompactViewport,
-  shouldReduceMotion,
 }: {
   card: ProcessCardData;
   index: number;
-  isCompactViewport: boolean;
-  shouldReduceMotion: boolean;
 }) {
   const Icon = card.icon;
-  const cardRef = useRef<HTMLElement>(null);
-  const { scrollYProgress: cardScrollProgress } = useScroll({
-    target: cardRef,
-    offset: ["start end", "start 0.74"],
-  });
-  const entryDirection = index % 2 === 0 ? -1 : 1;
-  const entryDistance = isCompactViewport ? 0 : 72;
-  const x = useTransform(
-    cardScrollProgress,
-    [0, 1],
-    [entryDirection * entryDistance, 0],
-  );
-  const scale = useTransform(cardScrollProgress, [0, 1], [0.94, 1]);
 
   return (
-    <motion.article
+    <article
       data-capabilities-card
-      ref={cardRef}
-      style={
-        shouldReduceMotion
-          ? undefined
-          : {
-              x,
-              scale,
-              willChange: "transform",
-            }
-      }
-      className={`glass-panel relative flex min-h-[10rem] flex-col overflow-hidden rounded-[1.8rem] bg-white/65 p-4 shadow-[0_12px_40px_rgba(11,17,26,0.04)] transition-none sm:rounded-[2rem] ${card.colSpan}`}
+      className={`relative flex min-h-[10rem] flex-col overflow-hidden rounded-[1.8rem] border border-white/60 bg-white/78 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_12px_40px_rgba(11,17,26,0.04)] transition-none sm:rounded-[2rem] ${card.colSpan}`}
     >
       <div className="relative z-10 flex h-full flex-col">
         <div className="mb-4 flex items-start justify-between gap-3">
@@ -178,7 +151,7 @@ function ProcessCard({
             ))}
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }
 
@@ -211,17 +184,8 @@ function fadeInUp(delay = 0) {
   };
 }
 
-function clamp01(value: number) {
-  return Math.min(1, Math.max(0, value));
-}
-
 function isExternalProjectLink(link: string) {
   return link.startsWith("http");
-}
-
-function smoothstep(value: number) {
-  const t = clamp01(value);
-  return t * t * (3 - 2 * t);
 }
 
 function readIntroAlreadySeen() {
@@ -245,53 +209,19 @@ function readIntroAlreadySeen() {
 function HistoryItemComponent({ 
   item, 
   index, 
-  focus,
-  reduceMotion,
-  compact,
 }: { 
   item: HistoryItem; 
   index: number; 
-  focus: number;
-  reduceMotion: boolean;
-  compact: boolean;
 }) {
-  const normalizedFocus = reduceMotion ? 1 : focus;
-  const restOffset = 28 + index * 12;
-  const cardMotion = reduceMotion || compact
-    ? {
-        x: 0,
-        opacity: 1,
-        scale: 1,
-        filter: "blur(0px)",
-      }
-    : {
-        x: (1 - normalizedFocus) * restOffset,
-        opacity: 0.48 + normalizedFocus * 0.52,
-        scale: 0.965 + normalizedFocus * 0.035,
-        filter: `blur(${(1 - normalizedFocus) * 0.35}px)`,
-      };
-
   return (
-    <motion.article
+    <article
       id={`history-item-${index}`}
-      initial={false}
-      animate={cardMotion}
-      transition={{
-        duration: 0.7,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className="glass-panel relative flex min-h-[18rem] snap-center flex-col overflow-hidden rounded-[1.9rem] bg-white/65 p-5 shadow-[0_12px_40px_rgba(11,17,26,0.04)] transition-[border-color] duration-300 sm:rounded-[2.1rem]"
-      style={{
-        willChange: reduceMotion || compact ? "auto" : "transform, opacity, filter",
-      }}
+      className="relative flex min-h-[18rem] snap-center flex-col overflow-hidden rounded-[1.9rem] border border-white/60 bg-white/78 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_12px_40px_rgba(11,17,26,0.04)] transition-[border-color] duration-300 sm:rounded-[2.1rem]"
     >
       <div className="relative z-10 flex h-full flex-col">
         <div className="mb-5 flex items-start justify-between gap-4">
           <div
             className="inline-flex h-10 w-10 items-center justify-center rounded-[0.95rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)]"
-            style={{
-              transform: `scale(${0.98 + normalizedFocus * 0.08})`,
-            }}
           >
             <span className="font-label text-[0.56rem] font-bold tracking-[0.16em] text-custom-blue/60">
               0{index + 1}
@@ -300,9 +230,6 @@ function HistoryItemComponent({
           {index === 0 && (
             <span
               className="font-label rounded-full bg-white/62 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]"
-              style={{
-                opacity: 0.58 + normalizedFocus * 0.42,
-              }}
             >
               Current
             </span>
@@ -313,7 +240,7 @@ function HistoryItemComponent({
           <h3 className="max-w-[16ch] font-display text-[1.18rem] font-medium leading-[1.06] tracking-[-0.02em] text-custom-blue sm:text-[1.38rem]">
             {item.jobTitle}
           </h3>
-          <p className="font-label text-[0.72rem] font-medium uppercase tracking-[0.16em] text-custom-blue/42">
+          <p className="font-label text-[0.72rem] font-medium uppercase tracking-[0.16em] text-custom-blue/70">
             {item.company}
           </p>
         </div>
@@ -343,7 +270,7 @@ function HistoryItemComponent({
           ))}
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }
 
@@ -987,76 +914,34 @@ export default function Page() {
   const principlesDisplayText =
     isCompactViewport || shouldReduceMotion ? principlesStatement : typedText;
 
-  const [historyFocusValues, setHistoryFocusValues] = useState(() =>
-    history.map(() => 0),
-  );
-  const historyFocusRef = useRef(history.map(() => 0));
   const [historyActiveIndex, setHistoryActiveIndex] = useState(0);
-  const historyActiveIndexRef = useRef(0);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const centeredEntry = entries.find((entry) => entry.isIntersecting);
+        if (!centeredEntry) return;
 
-    let animationFrameId = 0;
+        const nextIndex = Number(
+          (centeredEntry.target as HTMLElement).dataset.historyIndex,
+        );
+        if (Number.isInteger(nextIndex)) setHistoryActiveIndex(nextIndex);
+      },
+      { rootMargin: "-48% 0px -48% 0px", threshold: 0 },
+    );
 
-    const updateHistoryFocus = () => {
-      const viewportCenter = window.innerHeight / 2;
-      const influenceRadius = Math.max(window.innerHeight * 0.42, 420);
-      let didChange = false;
-      let nextActiveIndex = 0;
-
-      const nextValues = history.map((_, index) => {
-        const element = document.getElementById(`history-item-${index}`);
-        if (!element) return 0;
-
-        const rect = element.getBoundingClientRect();
-        const cardCenter = rect.top + rect.height / 2;
-        const distance = Math.abs(cardCenter - viewportCenter);
-        const focus = smoothstep(1 - distance / influenceRadius);
-        const nextFocus = shouldReduceMotion ? (focus > 0.5 ? 1 : 0) : focus;
-
-        if (cardCenter <= viewportCenter) {
-          nextActiveIndex = index;
-        }
-
-        if (Math.abs(nextFocus - historyFocusRef.current[index]) > 0.01) {
-          didChange = true;
-        }
-
-        return nextFocus;
-      });
-
-      if (didChange) {
-        historyFocusRef.current = nextValues;
-        setHistoryFocusValues(nextValues);
+    history.forEach((_, index) => {
+      const element = document.getElementById(`history-item-${index}`);
+      if (element) {
+        element.dataset.historyIndex = String(index);
+        observer.observe(element);
       }
-
-      if (nextActiveIndex !== historyActiveIndexRef.current) {
-        historyActiveIndexRef.current = nextActiveIndex;
-        setHistoryActiveIndex(nextActiveIndex);
-      }
-    };
-
-    const onScroll = () => {
-      if (animationFrameId) return;
-      animationFrameId = window.requestAnimationFrame(() => {
-        updateHistoryFocus();
-        animationFrameId = 0;
-      });
-    };
-
-    updateHistoryFocus();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", updateHistoryFocus);
+    });
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", updateHistoryFocus);
-      if (animationFrameId) {
-        window.cancelAnimationFrame(animationFrameId);
-      }
+      observer.disconnect();
     };
-  }, [shouldReduceMotion]);
+  }, []);
 
   return (
     <div className="relative">
@@ -1423,8 +1308,6 @@ export default function Page() {
                     key={card.title}
                     card={card}
                     index={index}
-                    isCompactViewport={isCompactViewport}
-                    shouldReduceMotion={shouldReduceMotion}
                   />
                 );
               })}
@@ -1671,9 +1554,6 @@ export default function Page() {
                     key={`${item.company}-${item.time.start}`}
                     item={item}
                     index={index}
-                    focus={historyFocusValues[index] ?? 0}
-                    reduceMotion={shouldReduceMotion}
-                    compact={isCompactViewport}
                   />
                 ))}
               </div>

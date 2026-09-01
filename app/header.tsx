@@ -216,8 +216,8 @@ export default function Header({
       <div
         className={`mx-auto grid min-h-[3.5rem] w-full max-w-7xl grid-cols-[auto_1fr_auto] items-center rounded-full px-3.5 py-1.5 transition duration-300 sm:min-h-[4.5rem] sm:px-5 sm:py-2 lg:grid-cols-[1fr_auto_1fr] ${
           useLightOnDark
-            ? "bg-[#0a1521]/95 shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_18px_48px_rgba(0,0,0,0.18)] backdrop-blur-2xl"
-            : "bg-white/72 shadow-[0_16px_50px_rgba(7,20,38,0.12),inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-2xl"
+            ? "bg-[#0a1521]/95 shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_18px_48px_rgba(0,0,0,0.18)]"
+            : "bg-white/72 shadow-[0_16px_50px_rgba(7,20,38,0.12),inset_0_1px_0_rgba(255,255,255,0.72)]"
         }`}
       >
         <div className="flex items-center gap-3 justify-self-start">

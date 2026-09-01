@@ -197,6 +197,19 @@
     contain: layout paint style;
   }
 
+  .hero-dot-field {
+    position: absolute;
+    inset: -2.5rem;
+    background-image: radial-gradient(
+      circle,
+      rgba(150, 204, 226, 0.24) 0 0.95px,
+      transparent 1.15px
+    );
+    background-size: 24px 24px;
+    mix-blend-mode: screen;
+    pointer-events: none;
+  }
+
   html[data-home-intro="0"] .home-intro-shell {
     display: none !important;
   }
