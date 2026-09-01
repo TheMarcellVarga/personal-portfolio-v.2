@@ -69,8 +69,8 @@ test("about and resume routes are reachable", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Hi, I’m Marcell." }),
   ).toBeVisible();
-  await expect(page.getByRole("link", { name: /see what i build/i })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "My route here was not a straight line." })).toBeVisible();
+  await expect(page.getByRole("link", { name: /more about me/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Home has meant a few different places." })).toBeVisible();
 
   await page.goto("/resume");
   await expect(page.getByRole("heading", { name: "Design-engineering work, on one page." })).toBeVisible();
