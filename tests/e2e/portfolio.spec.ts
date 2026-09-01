@@ -35,6 +35,22 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page.locator('#work a[href="/about"]')).toHaveCount(0);
 });
 
+test("header uses the dark treatment only over the hero", async ({ page }) => {
+  await prepareHomepage(page);
+  await page.goto("/");
+
+  const headerSurface = page.locator("header > div").first();
+  await expect(headerSurface).toHaveClass(/bg-\[#0a1521\]\/95/);
+
+  await page.locator("header nav").getByRole("button", { name: "Contact", exact: true }).click();
+  await expect(page.locator("#contact")).toBeInViewport();
+  await expect(headerSurface).toHaveClass(/bg-white\/72/);
+  await expect(headerSurface).not.toHaveClass(/bg-\[#0a1521\]\/95/);
+
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "auto" }));
+  await expect(headerSurface).toHaveClass(/bg-\[#0a1521\]\/95/);
+});
+
 test("principles statement types forward and reverses on scroll back", async ({ page }) => {
   await prepareHomepage(page);
   await page.goto("/");

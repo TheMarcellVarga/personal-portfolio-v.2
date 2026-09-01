@@ -20,7 +20,6 @@ interface HeaderProps {
   scrollToWork?: () => void;
   scrollToContact?: () => void;
   activeSection?: string;
-  isAtBottom?: boolean;
   logoRef?: RefObject<HTMLSpanElement | null>;
   revealBrand?: boolean;
   animateBrand?: boolean;
@@ -41,7 +40,6 @@ export default function Header({
   scrollToWork,
   scrollToContact,
   activeSection,
-  isAtBottom = false,
   logoRef,
   revealBrand = true,
   animateBrand = true,
@@ -54,9 +52,7 @@ export default function Header({
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const isHomePage = pathname === "/";
   const isHeroSection = isHomePage && activeSection === "Intro";
-  const isContactSection = isHomePage && activeSection === "Contact";
-  const useLightOnDark =
-    ((isHeroSection || isContactSection) && !isAtBottom && !isOpen);
+  const useLightOnDark = isHeroSection && !isOpen;
   const highlightedItem = hoveredItem ?? activeSection ?? null;
   const menuEase = [0.22, 1, 0.36, 1] as const;
   const mobileMenuVariants: Variants = {
