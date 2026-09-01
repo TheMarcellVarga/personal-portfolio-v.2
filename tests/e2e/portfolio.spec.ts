@@ -298,7 +298,11 @@ test("public routes send baseline browser security headers", async ({ page }) =>
   expect(response.headers()["permissions-policy"]).toContain("camera=()");
   expect(response.headers()["content-security-policy"]).toContain("frame-ancestors 'none'");
   expect(response.headers()["content-security-policy"]).toContain("https://*.vercel-insights.com");
-  expect(response.headers()["content-security-policy"]).toContain("https://eu.i.posthog.com");
+  expect(response.headers()["content-security-policy"]).toContain("script-src");
+  expect(response.headers()["content-security-policy"]).toContain("script-src 'self' 'unsafe-inline'");
+  expect(response.headers()["content-security-policy"]).toContain("https://*.posthog.com");
+  expect(response.headers()["content-security-policy"]).toContain("connect-src 'self'");
+  expect(response.headers()["content-security-policy"]).toContain("worker-src 'self' blob: data:");
 });
 
 test("homepage header changes tone at the bottom of the page", async ({ page }) => {

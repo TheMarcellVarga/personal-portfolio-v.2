@@ -11,9 +11,9 @@ const contentSecurityPolicy = [
   "media-src 'self' blob:",
   "font-src 'self' data:",
   "style-src 'self' 'unsafe-inline'",
-  `script-src 'self' 'unsafe-inline'${developmentScriptPolicy} https://*.vercel-insights.com`,
-  "connect-src 'self' https://*.vercel-insights.com https://eu.i.posthog.com https://us.i.posthog.com",
-  "worker-src 'self' blob:",
+  `script-src 'self' 'unsafe-inline'${developmentScriptPolicy} https://*.vercel-insights.com https://*.posthog.com`,
+  "connect-src 'self' https://*.vercel-insights.com https://*.posthog.com",
+  "worker-src 'self' blob: data:",
 ].join("; ");
 
 const nextConfig = {
