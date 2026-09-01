@@ -128,7 +128,7 @@ export default function ResumePage() {
               <p className="font-label text-[0.68rem] font-medium uppercase tracking-[0.28em] text-custom-blue/70">
                 Resume / 2026
               </p>
-              <h1 className="mt-3 font-display text-[clamp(2.3rem,5vw,4.5rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-custom-blue">
+              <h1 className="mt-3 font-display text-[clamp(2.3rem,8vw,4.5rem)] leading-[0.95] tracking-[-0.04em] text-custom-blue sm:leading-[0.9]">
                 Design-engineering work, on <span className="title-accent">one page.</span>
               </h1>
               <p className="mt-5 max-w-2xl text-[1rem] leading-7 text-custom-blue/68">
