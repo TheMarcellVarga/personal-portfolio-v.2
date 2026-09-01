@@ -10,7 +10,7 @@ const lenisOptions = {
     duration: 0.7,
   },
   // Keep the authored smoothing without making the viewport trail the gesture.
-  lerp: 0.28,
+  lerp: 0.23,
   smoothWheel: true,
   syncTouch: false,
   wheelMultiplier: 1,
