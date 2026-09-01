@@ -54,7 +54,7 @@ export default function AboutPage() {
                 </span>
               </div>
               <h1 className="max-w-[8ch] text-balance font-display text-[clamp(4.3rem,13vw,9rem)] font-medium leading-[0.84] tracking-[-0.065em] text-custom-blue">
-                Hi, I’m Marcell.
+                Hi, I’m <span className="title-accent">Marcell.</span>
               </h1>
               <p className="mt-8 max-w-[37rem] text-pretty text-[1.05rem] leading-8 text-custom-blue/72 sm:text-xl sm:leading-9">
                 Hungarian, shaped by Denmark, now living in Singapore. I like new
@@ -124,7 +124,7 @@ export default function AboutPage() {
                 A few coordinates
               </p>
               <h2 className="mt-6 max-w-[13ch] text-balance font-display text-[clamp(3rem,8vw,6.6rem)] font-normal leading-[0.92] tracking-[-0.05em] text-custom-blue">
-                Home has meant a few different places.
+                Home has meant a few different <span className="title-accent">places.</span>
               </h2>
               <div className="mt-9 grid max-w-4xl gap-6 text-base leading-8 text-custom-blue/68 sm:grid-cols-2 sm:text-lg sm:leading-8">
                 <p>

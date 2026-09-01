@@ -11,6 +11,7 @@ export type CaseStudyId =
 
 export type Project = {
   title: string;
+  titleAccent?: string;
   subTitle: string;
   date: string;
   description: string;
@@ -35,6 +36,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     title: "Aperture Financial Intelligence",
+    titleAccent: "Intelligence",
     subTitle: "Evidence-led financial research with human approval",
     date: "2026",
     description:
@@ -53,6 +55,7 @@ export const projects: Project[] = [
   },
   {
     title: "First Revenue Game",
+    titleAccent: "Revenue Game",
     subTitle: "Commercial proof, operator review, and reliable progression",
     date: "2026",
     description:
@@ -71,6 +74,7 @@ export const projects: Project[] = [
   },
   {
     title: "Wild Route",
+    titleAccent: "Route",
     subTitle: "Prompt-first route planning for adventure travelers",
     date: "2026",
     description:
@@ -89,6 +93,7 @@ export const projects: Project[] = [
   },
   {
     title: "ThreadScribe Studio",
+    titleAccent: "Studio",
     subTitle: "Trustworthy AI transcript interaction, built local-first",
     date: "2026",
     description:
@@ -107,6 +112,7 @@ export const projects: Project[] = [
   },
   {
     title: "Focusin",
+    titleAccent: "Focusin",
     subTitle: "A native macOS focus-and-reset loop",
     date: "2026",
     description:
@@ -125,6 +131,7 @@ export const projects: Project[] = [
   },
   {
     title: "Endless Activity",
+    titleAccent: "Activity",
     subTitle: "A native iOS activity deck for the moment between plans",
     date: "2026",
     description:
@@ -143,6 +150,7 @@ export const projects: Project[] = [
   },
   {
     title: "CatchScan",
+    titleAccent: "CatchScan",
     subTitle: "Copyright protection SaaS",
     date: "2021",
     description:
@@ -161,6 +169,7 @@ export const projects: Project[] = [
   },
   {
     title: "AskCody",
+    titleAccent: "AskCody",
     subTitle: "Hybrid office management in Microsoft Teams",
     date: "2022",
     description:
@@ -179,6 +188,7 @@ export const projects: Project[] = [
   },
   {
     title: "European Study Solution",
+    titleAccent: "Solution",
     subTitle: "Student agency and information platform",
     date: "2021",
     description:

@@ -1289,6 +1289,7 @@ export default function Page() {
                 <SplitTextReveal
                   as="h2"
                   text="Product thinking, backed by delivery."
+                  accentText="delivery."
                   animate={!shouldReduceMotion}
                   triggerOnView
                   className="mt-6 font-display text-[clamp(2.2rem,12vw,5.4rem)] leading-[0.95] tracking-[-0.04em] text-custom-blue sm:mt-8 sm:leading-[0.9]"
@@ -1326,6 +1327,7 @@ export default function Page() {
                 <SplitTextReveal
                   as="h2"
                   text="Work that turns product thinking into interfaces."
+                  accentText="interfaces."
                   animate={!shouldReduceMotion}
                   triggerOnView
                   className="mt-6 font-display text-[clamp(2.15rem,11vw,5.4rem)] leading-[0.96] tracking-[-0.04em] text-custom-blue sm:mt-8 sm:leading-[0.9]"
@@ -1498,7 +1500,7 @@ export default function Page() {
                     <h2 className="font-display text-[clamp(2.4rem,14vw,5.6rem)] leading-[0.9] tracking-[-0.045em] text-custom-blue">
                       Design. <br />
                       Product. <br />
-                      Craft.
+                      <span className="title-accent">Craft.</span>
                     </h2>
                     {/* <p className="max-w-md text-[1.02rem] leading-7 text-custom-blue/60">
                       A compact read of the path from multimedia design in Denmark into product engineering and AI-leaning interface work from Singapore.

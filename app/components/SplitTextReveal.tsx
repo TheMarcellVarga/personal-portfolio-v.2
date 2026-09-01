@@ -22,7 +22,23 @@ type SplitTextRevealProps = {
   delay?: number;
   duration?: number;
   stagger?: number;
+  accentText?: string;
 };
+
+function renderTextWithAccent(text: string, accentText?: string) {
+  if (!accentText) return text;
+
+  const accentStart = text.indexOf(accentText);
+  if (accentStart < 0) return text;
+
+  return (
+    <>
+      {text.slice(0, accentStart)}
+      <span className="title-accent">{accentText}</span>
+      {text.slice(accentStart + accentText.length)}
+    </>
+  );
+}
 
 export function SplitTextReveal({
   as = "span",
@@ -34,6 +50,7 @@ export function SplitTextReveal({
   delay = 0,
   duration = 0.9,
   stagger = 0.018,
+  accentText,
 }: SplitTextRevealProps) {
   const rootRef = useRef<HTMLElement | null>(null);
   const hasAnimatedRef = useRef(false);
@@ -118,7 +135,7 @@ export function SplitTextReveal({
       className={className}
       style={{ visibility: visible && !animate ? "visible" : "hidden" }}
     >
-      {text}
+      {renderTextWithAccent(text, accentText)}
     </Component>
   );
 }

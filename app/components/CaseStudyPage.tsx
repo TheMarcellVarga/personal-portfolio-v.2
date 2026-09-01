@@ -54,7 +54,15 @@ export default function CaseStudyPage({ caseStudyId }: CaseStudyPageProps) {
                       : "max-w-[9ch] text-[clamp(3.1rem,9vw,7rem)]"
                   }`}
                 >
-                  {project.title}
+                  {project.titleAccent ? (
+                    <>
+                      {project.title.split(project.titleAccent)[0]}
+                      <span className="title-accent">{project.titleAccent}</span>
+                      {project.title.split(project.titleAccent)[1]}
+                    </>
+                  ) : (
+                    project.title
+                  )}
                 </h1>
                 <p className="mt-7 max-w-2xl text-[1.08rem] leading-7 text-custom-blue/72">
                   {project.subTitle}

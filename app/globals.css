@@ -41,6 +41,7 @@
   --page-surface-strong: rgba(255, 252, 249, 0.84);
   --page-border: rgba(17, 27, 40, 0.08);
   --page-shadow: 0 28px 90px rgba(17, 27, 40, 0.09);
+  --title-accent: #b64a2b;
 }
 
 @layer base {
@@ -116,6 +117,10 @@
 
   .font-case-study {
     font-family: "Cabinet Grotesk", var(--font);
+  }
+
+  .title-accent {
+    color: var(--title-accent);
   }
 
   .case-study-marquee-track {
