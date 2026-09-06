@@ -461,6 +461,7 @@ export default function Page() {
   const enableScrollMotion = hasMounted && !shouldReduceMotion;
   const headerLogoRef = useRef<HTMLSpanElement>(null);
   const mainStageRef = useRef<HTMLDivElement>(null);
+  const heroIntroAnimationStartedRef = useRef(false);
 
   const heroRef = useRef<HTMLElement>(null);
   const principlesRef = useRef<HTMLElement>(null);
@@ -756,8 +757,9 @@ export default function Page() {
       ...ctaGroups,
     ];
 
-    if (introStage !== "done") {
-      gsap.set(stage, { opacity: 0, y: 16 });
+    gsap.set(stage, { opacity: 1, y: 0 });
+
+    if (introStage !== "exiting" && introStage !== "done") {
       gsap.set(badgeTargets, {
         autoAlpha: 0,
         clipPath: "inset(0 100% 0 0 round 999px)",
@@ -774,9 +776,11 @@ export default function Page() {
       return;
     }
 
-    // Reveal the semantic stage immediately; animate its contents instead so
-    // assistive technology never sees a partially transparent page.
-    gsap.set(stage, { opacity: 1, y: 0 });
+    if (heroIntroAnimationStartedRef.current) return;
+    heroIntroAnimationStartedRef.current = true;
+
+    // Keep the page ready underneath the intro and animate only its hero
+    // contents as the intro starts to exit.
     gsap.set(badgeTargets, {
       autoAlpha: 0,
       clipPath: "inset(0 100% 0 0 round 999px)",
@@ -905,8 +909,7 @@ export default function Page() {
   const introIsVisible = introStage !== "done";
   const introHasCompleted = introStage === "done";
   const introHeaderMuted = introStage !== "done";
-  const revealHeroTitle = introStage === "done";
-  const revealMainStage = introStage === "done";
+  const revealHeroTitle = introStage === "exiting" || introStage === "done";
   const principlesIntroReady = introStage === "done";
   const principlesDisplayText =
     isCompactViewport || shouldReduceMotion ? principlesStatement : typedText;
@@ -970,14 +973,6 @@ export default function Page() {
         } ${enableScrollMotion ? "hero-motion-ready" : ""}`}
         aria-hidden={introIsVisible}
         inert={introIsVisible ? true : undefined}
-        style={
-          revealMainStage
-            ? undefined
-            : {
-                opacity: 0,
-                transform: "translate3d(0, 16px, 0)",
-              }
-        }
       >
         <main className="relative z-10 px-4 pb-8 pt-0 sm:px-6 sm:pb-12 lg:px-10">
           <section

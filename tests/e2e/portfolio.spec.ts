@@ -35,6 +35,16 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page.locator('#work a[href="/about"]')).toHaveCount(0);
 });
 
+test("homepage is ready behind the playing intro", async ({ page }) => {
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+
+  await expect(page.locator(".home-intro-shell")).toBeVisible();
+  await expect(page.locator(".home-intro-stage")).toHaveCSS("opacity", "1");
+  await expect(
+    page.locator('img[alt="Portrait of Marcell Varga"]').first(),
+  ).toHaveAttribute("src", /personalpageprofilealt/);
+});
+
 test("header uses the dark treatment only over the hero", async ({ page }) => {
   await prepareHomepage(page);
   await page.goto("/");
