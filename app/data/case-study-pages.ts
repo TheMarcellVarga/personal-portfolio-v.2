@@ -5,13 +5,20 @@ export type CaseStudyVisual = {
   alt: string;
   caption: string;
   fit?: "cover" | "contain";
+  wide?: boolean;
 };
 
 export type CaseStudyPageContent = {
   demoUrl?: string;
   demoLabel?: string;
+  heroImage?: string;
+  heroAlt?: string;
   contextTitle: string;
   contextBody: string;
+  process?: readonly {
+    title: string;
+    body: string;
+  }[];
   gallery: readonly CaseStudyVisual[];
 };
 
@@ -103,19 +110,40 @@ export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
     ],
   },
   focusin: {
+    heroImage: "/images/focusin/focusin-loop-hero.webp",
+    heroAlt: "Focusin moving from a focus interval into an active micro-break",
     contextTitle: "A small reset that knows when to get out of the way.",
     contextBody:
       "Focusin turns a focus deadline into one state-aware micro-break. The product keeps the loop local, optional, and resilient across sleep, relaunch, permission changes, and the imperfect timing of desktop work.",
-    gallery: [
+    process: [
       {
-        src: "/images/focusin/light-breaking.png",
-        alt: "Focusin macOS micro-break recommendation",
-        caption: "The break state offers one useful action instead of another dashboard to manage.",
+        title: "Find the smallest useful loop",
+        body: "I reduced the product to one repeatable transition: focus, notice the deadline, take one suitable reset, and return. Accounts, streaks, task management, and remote content stayed outside version one.",
       },
       {
-        src: "/images/focusin/dark-settings-reminder.png",
-        alt: "Focusin macOS settings reminder in dark mode",
-        caption: "Platform settings remain supportive context rather than a blocker to the core loop.",
+        title: "Model time as durable state",
+        body: "The interaction was mapped as a date-derived state machine before visual polish. Persisted deadlines let the app reconcile honestly after sleep, relaunch, delayed timers, and clock changes.",
+      },
+      {
+        title: "Make recommendations inspectable",
+        body: "A reviewed 21-activity catalog and ordered fallback policy separate hard safety preferences from softer state, duration, and novelty matching—without remote generation.",
+      },
+      {
+        title: "Prove the uncomfortable states",
+        body: "The release work concentrated on permission denial, quiet hours, invalid content, large text, contrast, reduced transparency, and service failures—not only the ideal timer path.",
+      },
+    ],
+    gallery: [
+      {
+        src: "/images/focusin/break-sequence.webp",
+        alt: "Focusin macOS micro-break recommendation",
+        caption: "The lifecycle changes clearly from break due to one active, time-bounded reset.",
+      },
+      {
+        src: "/images/focusin/settings-and-resilience.webp",
+        alt: "Focusin activity and system settings showing local preferences and recovery",
+        caption: "Preferences shape the recommendation while platform-service failure stays recoverable and non-blocking.",
+        wide: true,
       },
     ],
   },

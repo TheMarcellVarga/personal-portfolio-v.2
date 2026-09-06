@@ -12,6 +12,7 @@
     "lint": "eslint --ext .ts,.tsx . --ignore-pattern \".history/**\"",
     "check": "npm run lint && npm run build",
     "test:e2e": "playwright test",
+    "media:focusin": "node scripts/generate-focusin-media.mjs",
     "cloudflare:security": "node scripts/apply-cloudflare-security.mjs"
   },
   "dependencies": {

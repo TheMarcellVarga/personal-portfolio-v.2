@@ -117,8 +117,8 @@ export default function CaseStudyPage({ caseStudyId }: CaseStudyPageProps) {
             <figure className="glass-panel relative aspect-[16/9] overflow-hidden rounded-[1.65rem] bg-custom-blue p-2.5 shadow-[0_28px_90px_rgba(17,27,40,0.11)] sm:rounded-[2rem] sm:p-3">
               <div className="relative h-full overflow-hidden rounded-[1.15rem] bg-[#071726] sm:rounded-[1.45rem]">
                 <Image
-                  src={project.image}
-                  alt={`${project.title} interface preview`}
+                  src={content.heroImage ?? project.image}
+                  alt={content.heroAlt ?? `${project.title} interface preview`}
                   fill
                   priority
                   sizes="(max-width: 767px) 100vw, (max-width: 1279px) 90vw, 1200px"
@@ -170,6 +170,33 @@ export default function CaseStudyPage({ caseStudyId }: CaseStudyPageProps) {
               ))}
             </div>
           </section>
+
+          {content.process && (
+            <section className="pb-20 sm:pb-28 lg:pb-32">
+              <div className="grid gap-10 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:gap-16">
+                <div className="max-w-xl lg:sticky lg:top-28 lg:self-start">
+                  <SectionLabel index="Process" label="How it took shape" />
+                  <h2 className="font-display text-[clamp(2.3rem,7vw,5.4rem)] leading-[0.92] tracking-[-0.04em] text-custom-blue">
+                    Small on the surface. Deliberate underneath.
+                  </h2>
+                  <p className="mt-6 max-w-[62ch] text-[0.98rem] leading-7 text-custom-blue/65">
+                    The process moved from product restraint to runtime truth, then through content safety and hostile-state verification.
+                  </p>
+                </div>
+
+                <ol className="border-t border-custom-blue/12">
+                  {content.process.map((step, index) => (
+                    <ProcessStep
+                      key={step.title}
+                      index={index + 1}
+                      title={step.title}
+                      body={step.body}
+                    />
+                  ))}
+                </ol>
+              </div>
+            </section>
+          )}
 
           <section className="pb-20 sm:pb-28 lg:pb-32">
             <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
@@ -293,7 +320,7 @@ function VisualCard({ visual, index }: { visual: CaseStudyVisual; index: number 
   return (
     <figure
       className={`group overflow-hidden rounded-[1.65rem] bg-custom-blue p-2.5 shadow-[0_22px_64px_rgba(17,27,40,0.12)] sm:rounded-[2rem] sm:p-3 ${
-        index === 0 && visual.fit !== "contain" ? "sm:col-span-2" : ""
+        (index === 0 && visual.fit !== "contain") || visual.wide ? "sm:col-span-2" : ""
       }`}
     >
       <div className="overflow-hidden rounded-[1.15rem] bg-[#071726] sm:rounded-[1.45rem]">
@@ -328,5 +355,27 @@ function DarkList({ title, items }: { title: string; items: readonly string[] })
         ))}
       </ul>
     </div>
+  );
+}
+
+function ProcessStep({
+  index,
+  title,
+  body,
+}: {
+  index: number;
+  title: string;
+  body: string;
+}) {
+  return (
+    <li className="grid gap-3 border-b border-custom-blue/12 py-7 sm:grid-cols-[4rem_minmax(0,0.72fr)_minmax(0,1.28fr)] sm:gap-6 sm:py-8">
+      <span className="font-label text-[0.62rem] font-medium tracking-[0.18em] text-custom-blue/45">
+        {String(index).padStart(2, "0")}
+      </span>
+      <h3 className="max-w-[18ch] font-display text-[1.3rem] font-medium leading-[1.08] tracking-[-0.02em] text-custom-blue">
+        {title}
+      </h3>
+      <p className="max-w-[62ch] text-[0.84rem] leading-6 text-custom-blue/68">{body}</p>
+    </li>
   );
 }

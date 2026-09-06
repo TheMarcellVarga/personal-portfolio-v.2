@@ -19,10 +19,10 @@ export const metadata: Metadata = {
     type: "article",
     images: [
       {
-        url: "/images/focusin/light-focusing.png",
-        width: 960,
-        height: 898,
-        alt: "Focusin native macOS menu bar interface during a focus interval",
+        url: "/images/focusin/focusin-loop-hero.webp",
+        width: 2400,
+        height: 1350,
+        alt: "Focusin moving from a focus interval into an active micro-break",
       },
     ],
   },

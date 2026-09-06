@@ -205,7 +205,16 @@ test("Focusin case study connects native product judgment to verified engineerin
   await expect(page.getByText("A small reset that knows when to get out of the way.")).toBeVisible();
   await expect(page.getByRole("heading", { name: "Verification", exact: true })).toBeVisible();
   await expect(page.getByText(/no signed archive, installable external beta/i)).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Small on the surface. Deliberate underneath." }),
+  ).toBeVisible();
+  await expect(
+    page.getByAltText("Focusin moving from a focus interval into an active micro-break"),
+  ).toBeVisible();
   await expect(page.getByAltText("Focusin macOS micro-break recommendation")).toBeVisible();
+  await expect(
+    page.getByAltText("Focusin activity and system settings showing local preferences and recovery"),
+  ).toBeVisible();
 });
 
 test("Endless Activity case study presents native product craft with honest scope", async ({ page }) => {

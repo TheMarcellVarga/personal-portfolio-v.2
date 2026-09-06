@@ -121,7 +121,7 @@ export const projects: Project[] = [
       "The verified product work spans a date-derived state machine, curated recommendation policy, resilient platform integrations, accessibility behavior, and local persistence.",
     skills: ["SwiftUI", "Swift", "macOS", "Accessibility"],
     link: "/focusin",
-    image: "/images/focusin/light-focusing.png",
+    image: "/images/focusin/focusin-loop-hero.webp",
     category: "Native macOS product",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(48,132,255,0.32),_transparent_28%),linear-gradient(160deg,_#102347_0%,_#245da8_52%,_#dce8f8_100%)]",
