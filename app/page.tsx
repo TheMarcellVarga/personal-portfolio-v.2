@@ -57,7 +57,6 @@ const featuredProjectOrder = [
 ];
 
 const supportingProjectOrder = [
-  "ThreadScribe Studio",
   "Focusin",
   "Endless Activity",
 ];
@@ -883,7 +882,10 @@ export default function Page() {
   const featuredProjects = useMemo(
     () =>
       projects
-        .filter((project) => project.portfolioPlacement === "featured")
+        .filter(
+          (project) =>
+            project.isListed !== false && project.portfolioPlacement === "featured",
+        )
         .sort(
           (left, right) =>
             featuredProjectOrder.indexOf(left.title) -
@@ -894,7 +896,10 @@ export default function Page() {
   const supportingProjects = useMemo(
     () =>
       projects
-        .filter((project) => project.portfolioPlacement === "supporting")
+        .filter(
+          (project) =>
+            project.isListed !== false && project.portfolioPlacement === "supporting",
+        )
         .sort(
           (left, right) =>
             supportingProjectOrder.indexOf(left.title) -

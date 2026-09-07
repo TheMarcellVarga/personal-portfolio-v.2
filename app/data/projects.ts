@@ -30,6 +30,7 @@ export type Project = {
     | "Native iOS build"
     | "Archived case study";
   portfolioPlacement: "featured" | "supporting" | "archive";
+  isListed?: boolean;
   caseStudyId?: CaseStudyId;
 };
 
@@ -108,6 +109,7 @@ export const projects: Project[] = [
       "bg-[radial-gradient(circle_at_top_right,_rgba(99,206,194,0.28),_transparent_28%),linear-gradient(155deg,_#071312_0%,_#10201f_52%,_#233332_100%)]",
     status: "Guided product walkthrough",
     portfolioPlacement: "supporting",
+    isListed: false,
     caseStudyId: "threadscribe",
   },
   {

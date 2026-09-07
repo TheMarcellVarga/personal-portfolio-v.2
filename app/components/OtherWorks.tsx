@@ -14,7 +14,10 @@ type OtherWorksProps = {
 
 export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
   const otherProjects = projects.filter(
-    (p) => p.title !== currentProjectTitle && p.portfolioPlacement !== "archive"
+    (p) =>
+      p.isListed !== false &&
+      p.title !== currentProjectTitle &&
+      p.portfolioPlacement !== "archive",
   );
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);

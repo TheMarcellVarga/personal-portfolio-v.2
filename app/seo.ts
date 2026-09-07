@@ -27,6 +27,7 @@ export const personSameAs = [
 export const selectedWorks = projects
   .filter(
     (project) =>
+      project.isListed !== false &&
       project.portfolioPlacement !== "archive" &&
       project.link.startsWith("/"),
   )

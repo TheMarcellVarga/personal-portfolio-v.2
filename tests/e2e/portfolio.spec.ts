@@ -22,7 +22,7 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page.locator('#work a[href="/ai-finance"]')).toBeVisible();
   await expect(page.locator('#work a[href="/first-revenue-game"]')).toBeVisible();
   await expect(page.locator('#work a[href="/wild-route"]')).toBeVisible();
-  await expect(page.locator('#work a[href="/threadscribe"]')).toBeVisible();
+  await expect(page.locator('#work a[href="/threadscribe"]')).toHaveCount(0);
   await expect(page.locator('#work a[href="/focusin"]')).toBeVisible();
   await expect(page.locator('#work a[href="/endless-activity"]')).toBeVisible();
   await expect(page.locator('#work a[href="/catchscan"]')).toHaveCount(0);
@@ -31,7 +31,7 @@ test("homepage presents the product-engineering story and selected work", async 
     "aria-expanded",
     "false",
   );
-  await expect(page.locator("[data-case-study-content] a")).toHaveCount(6);
+  await expect(page.locator("[data-case-study-content] a")).toHaveCount(5);
   await expect(page.locator('#work a[href="/about"]')).toHaveCount(0);
 });
 
@@ -138,15 +138,15 @@ test("case study recommendations use current work and vary by the page", async (
   test.setTimeout(45_000);
 
   for (const [route, currentTitle, expectedCount] of [
-    ["/ai-finance", "Aperture Financial Intelligence", 5],
-    ["/first-revenue-game", "First Revenue Game", 5],
-    ["/wild-route", "Wild Route", 5],
+    ["/ai-finance", "Aperture Financial Intelligence", 4],
+    ["/first-revenue-game", "First Revenue Game", 4],
+    ["/wild-route", "Wild Route", 4],
     ["/threadscribe", "ThreadScribe Studio", 5],
-    ["/focusin", "Focusin", 5],
-    ["/endless-activity", "Endless Activity", 5],
-    ["/catchscan", "CatchScan", 6],
-    ["/askcody", "AskCody", 6],
-    ["/ess", "European Study Solution", 6],
+    ["/focusin", "Focusin", 4],
+    ["/endless-activity", "Endless Activity", 4],
+    ["/catchscan", "CatchScan", 5],
+    ["/askcody", "AskCody", 5],
+    ["/ess", "European Study Solution", 5],
   ] as const) {
     await page.goto(route);
 
