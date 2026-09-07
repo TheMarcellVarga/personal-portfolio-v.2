@@ -118,7 +118,7 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
     verification: [
       "Fifty-four deterministic tests cover lifecycle, persistence, quiet hours, recommendation passes, catalog validation, permission reconciliation, and beta templates.",
       "Twenty-one bundled activities pass state, duration, safety, and default-filter coverage validation, with named human content approval for version 0.1.0 (1).",
-      "Forty-one current appearance and accessibility captures cover light and dark modes, large text, increased contrast, reduced transparency, recovery states, and Settings.",
+      "Forty-one recorded appearance and accessibility captures cover light and dark modes, large text, increased contrast, reduced transparency, recovery states, and Settings; they remain engineering evidence rather than final release media.",
     ],
     limitations: [
       "The current build and unsigned Release integrity are verified; no signed archive, installable external beta, TestFlight build, or App Store listing exists yet.",
