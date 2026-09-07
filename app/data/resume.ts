@@ -1,6 +1,6 @@
 export const resume = {
   name: "Marcell Varga",
-  title: "UX & Frontend Engineer",
+  title: "Product-minded UX & Frontend Engineer",
   descriptor:
     "Building production interfaces, design systems, and complex product workflows with React and TypeScript.",
   location: "Singapore",
@@ -12,7 +12,7 @@ export const resume = {
   photo: "/images/personalpageprofilealt.webp",
   tags: ["Product UX", "Frontend Engineering", "Design Systems", "React + TypeScript"],
   profile:
-    "UX & Frontend Engineer at AXON Networks, working primarily with React and TypeScript. Combines product UX and frontend engineering to take ambiguous requirements from exploration to production.",
+    "UX & Frontend Engineer focused on React, TypeScript, design systems, and complex product workflows. Combines product UX and frontend engineering to take ambiguous requirements from exploration to production.",
   skillGroups: [
     {
       label: "Frontend",
@@ -32,9 +32,9 @@ export const resume = {
     },
   ],
   languages: [
-    { name: "Hungarian", level: "Native or bilingual proficiency" },
-    { name: "English", level: "Full professional proficiency" },
-    { name: "Danish", level: "Limited working proficiency" },
+    { name: "Hungarian", level: "Native" },
+    { name: "English", level: "Professional" },
+    { name: "Danish", level: "Working proficiency" },
   ],
   experience: [
     {
@@ -63,11 +63,9 @@ export const resume = {
   ],
   education: [
     {
-      school: "UCN - Professionshøjskolen University College Nordjylland",
+      school: "University College of Northern Denmark",
       degree: "AP Degree in Multimedia Design",
       period: "2020 - 2022",
-      details:
-        "Focused on UX, interaction design, frontend development, and digital product delivery through practical and company-led projects.",
     },
   ],
 } as const;
