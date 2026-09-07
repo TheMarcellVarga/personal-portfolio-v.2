@@ -188,6 +188,9 @@ export default function AtsResumePage() {
                       {education.period}
                     </p>
                   </div>
+                  <p className="text-sm leading-6 text-black/80">
+                    {education.details}
+                  </p>
                 </article>
               ))}
             </div>

@@ -281,6 +281,9 @@ export default function ResumePage() {
                             {education.period}
                           </p>
                         </div>
+                        <p className="mt-2.5 text-[10px] leading-[1.5] text-white/58">
+                          {education.details}
+                        </p>
                       </article>
                     ))}
                   </MainSection>
