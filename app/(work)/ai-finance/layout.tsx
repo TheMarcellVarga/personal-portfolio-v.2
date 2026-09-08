@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     type: "article",
     images: [
       {
-        url: "/images/ai-finance/aperture-home.jpg",
+        url: "/images/ai-finance/aperture-guided-overview.jpg",
         width: 1440,
         height: 1024,
         alt: "Aperture Financial Intelligence product interface",

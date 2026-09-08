@@ -166,8 +166,12 @@ test("Aperture case study presents measurable systems evidence", async ({ page }
   await expect(page.getByRole("heading", { name: "Aperture Financial Intelligence" })).toBeVisible();
   await expect(page.getByText(/40 of 40 evidence regression cases pass/i)).toBeVisible();
   await expect(page.getByText("Research with a visible chain of evidence.")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "From financial data to a reviewable decision-support workflow." })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Verification", exact: true })).toBeVisible();
   await expect(page.getByText(/without crossing into trade execution or personal advice/i)).toBeVisible();
+  await expect(page.getByAltText(/time-stamped public ETF market prices/i)).toBeVisible();
+  await expect(page.getByAltText(/mapping Microsoft filing findings to SEC source locations/i)).toBeVisible();
+  await expect(page.getByAltText(/human review history and reviewed Markdown export state/i)).toBeVisible();
 });
 
 test("First Revenue Game connects product judgment to reliable backend evidence", async ({ page }) => {

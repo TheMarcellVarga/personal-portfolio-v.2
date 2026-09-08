@@ -177,10 +177,11 @@ export default function CaseStudyPage({ caseStudyId }: CaseStudyPageProps) {
                 <div className="max-w-xl lg:sticky lg:top-28 lg:self-start">
                   <SectionLabel index="Process" label="How it took shape" />
                   <h2 className="font-display text-[clamp(2.3rem,7vw,5.4rem)] leading-[0.92] tracking-[-0.04em] text-custom-blue">
-                    Small on the surface. Deliberate underneath.
+                    {content.processTitle ?? "Small on the surface. Deliberate underneath."}
                   </h2>
                   <p className="mt-6 max-w-[62ch] text-[0.98rem] leading-7 text-custom-blue/65">
-                    The process moved from product restraint to runtime truth, then through content safety and hostile-state verification.
+                    {content.processBody ??
+                      "The process moved from product restraint to runtime truth, then through content safety and hostile-state verification."}
                   </p>
                 </div>
 

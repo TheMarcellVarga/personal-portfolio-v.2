@@ -21,7 +21,7 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
       "Separated Next.js product rendering from the authoritative Go finance and document API.",
       "Bound material claims to the active retrieval evidence or a visible unsupported state.",
       "Stored immutable raw output and append-only human edits, decisions, and citation feedback.",
-      "Kept external providers disabled by default while deterministic evaluation and failure handling matured.",
+      "Used time-stamped public market and SEC data for the guided demo while keeping personal finance data out of portfolio media.",
     ],
     verification: [
       "40 of 40 evidence regression cases pass across five source documents.",
@@ -29,7 +29,7 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
       "Cross-owner isolation, prompt injection, schema repair, accessibility, and deployment contracts are automated release gates.",
     ],
     limitations: [
-      "The live guided demo is read-only and uses fictional evidence; authenticated document ingestion and reviewed export remain a private evaluation workspace.",
+      "The guided demo is read-only and uses an illustrative allocation with time-stamped public market prices and public SEC filing data; authenticated document ingestion and reviewed export remain a private evaluation workspace.",
       "External model calls and paid-provider comparisons remain disabled pending explicit cost and credential approval.",
     ],
   },

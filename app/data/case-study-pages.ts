@@ -15,6 +15,8 @@ export type CaseStudyPageContent = {
   heroAlt?: string;
   contextTitle: string;
   contextBody: string;
+  processTitle?: string;
+  processBody?: string;
   process?: readonly {
     title: string;
     body: string;
@@ -26,14 +28,47 @@ export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
   aperture: {
     demoUrl: "https://ai-finance-two-bice.vercel.app/demo",
     demoLabel: "Open guided demo",
+    heroImage: "/images/ai-finance/aperture-guided-overview.jpg",
+    heroAlt: "Aperture guided research demo with a public market snapshot and evidence prompt",
     contextTitle: "Research with a visible chain of evidence.",
     contextBody:
-      "Aperture keeps source documents, retrieval evidence, structured analysis, human edits, and reviewed export in one workflow. The product does not try to make uncertainty disappear. It makes the work easier to challenge.",
+      "Aperture keeps public market context, source documents, retrieval evidence, structured analysis, human edits, and reviewed export in one workflow. The product does not try to make uncertainty disappear. It makes the work easier to challenge.",
+    processTitle: "From financial data to a reviewable decision-support workflow.",
+    processBody:
+      "The process started with the product boundary, then worked inward through ownership, retrieval, structured output, citation integrity, and human approval before visual polish.",
+    process: [
+      {
+        title: "Define the decision boundary",
+        body: "I framed Aperture as research and portfolio decision support—not a broker, trading bot, or source of personalized investment advice. That constraint shaped the language, tools, data model, and release criteria from the start.",
+      },
+      {
+        title: "Ground the interface in owned data",
+        body: "I separated the Next.js product surface from the authoritative Go finance and document APIs, then made ownership, provider, freshness, and failure states visible before adding any AI-generated layer.",
+      },
+      {
+        title: "Bind findings to evidence",
+        body: "I built the research path around page-aware ingestion, hybrid retrieval, structured findings, and claim-to-chunk citation rules. A material claim must point to evidence from the active run or remain visibly unsupported.",
+      },
+      {
+        title: "Keep approval human and auditable",
+        body: "Raw output stays immutable. Edits, acceptance, rejection, citation feedback, regeneration, and export are recorded separately, then exercised through accessibility, security, evaluation, and end-to-end release gates.",
+      },
+    ],
     gallery: [
       {
-        src: "/images/ai-finance/aperture-product.jpg",
-        alt: "Aperture Financial Intelligence research workspace",
-        caption: "The research workspace keeps citations and review state close to the analysis.",
+        src: "/images/ai-finance/aperture-portfolio.jpg",
+        alt: "Aperture portfolio context using time-stamped public ETF market prices",
+        caption: "A public, time-stamped market snapshot provides context without exposing personal holdings or implying a recommendation.",
+      },
+      {
+        src: "/images/ai-finance/aperture-evidence.jpg",
+        alt: "Aperture evidence workspace mapping Microsoft filing findings to SEC source locations",
+        caption: "Material findings distinguish direct support from interpretation and stay bound to the active retrieval run.",
+      },
+      {
+        src: "/images/ai-finance/aperture-review.jpg",
+        alt: "Aperture human review history and reviewed Markdown export state",
+        caption: "The review trail keeps source ingestion, retrieval, model output, human edits, approval, and export inspectable.",
       },
     ],
   },

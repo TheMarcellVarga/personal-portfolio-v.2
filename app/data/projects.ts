@@ -43,10 +43,10 @@ export const projects: Project[] = [
     description:
       "A full-stack financial research workspace that turns private source documents into cited, reviewable analysis without crossing into trade execution or personal advice.",
     highlight:
-      "The live, read-only guided demo shows the full research rhythm with fictional evidence, visible citations, human approval, and a clearly bounded reviewed export.",
+      "The read-only guided demo uses time-stamped public market and SEC data to show the research rhythm, visible citations, human approval, and a clearly bounded reviewed export.",
     skills: ["Next.js", "Go", "Supabase", "AI evaluation"],
     link: "/ai-finance",
-    image: "/images/ai-finance/aperture-home.jpg",
+    image: "/images/ai-finance/aperture-guided-overview.jpg",
     category: "Fintech systems + trustworthy AI",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(103,232,249,0.3),_transparent_28%),linear-gradient(155deg,_#071112_0%,_#111820_52%,_#1f1a16_100%)]",
