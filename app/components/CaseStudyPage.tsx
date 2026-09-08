@@ -114,18 +114,22 @@ export default function CaseStudyPage({ caseStudyId }: CaseStudyPageProps) {
           </section>
 
           <Reveal reduceMotion={shouldReduceMotion} delay={0.14} className="mt-12 sm:mt-16">
-            <figure className="glass-panel relative aspect-[16/9] overflow-hidden rounded-[1.65rem] bg-custom-blue p-2.5 shadow-[0_28px_90px_rgba(17,27,40,0.11)] sm:rounded-[2rem] sm:p-3">
-              <div className="relative h-full overflow-hidden rounded-[1.15rem] bg-[#071726] sm:rounded-[1.45rem]">
-                <Image
-                  src={content.heroImage ?? project.image}
-                  alt={content.heroAlt ?? `${project.title} interface preview`}
-                  fill
-                  priority
-                  sizes="(max-width: 767px) 100vw, (max-width: 1279px) 90vw, 1200px"
-                  className="object-cover"
-                />
-              </div>
-            </figure>
+            {content.heroScreens ? (
+              <MobileProductHero screens={content.heroScreens} />
+            ) : (
+              <figure className="glass-panel relative aspect-[16/9] overflow-hidden rounded-[1.65rem] bg-custom-blue p-2.5 shadow-[0_28px_90px_rgba(17,27,40,0.11)] sm:rounded-[2rem] sm:p-3">
+                <div className="relative h-full overflow-hidden rounded-[1.15rem] bg-[#071726] sm:rounded-[1.45rem]">
+                  <Image
+                    src={content.heroImage ?? project.image}
+                    alt={content.heroAlt ?? `${project.title} interface preview`}
+                    fill
+                    priority
+                    sizes="(max-width: 767px) 100vw, (max-width: 1279px) 90vw, 1200px"
+                    className="object-cover"
+                  />
+                </div>
+              </figure>
+            )}
           </Reveal>
 
           <section className="py-20 sm:py-28 lg:py-32">
@@ -318,6 +322,26 @@ function IndexCard({
 }
 
 function VisualCard({ visual, index }: { visual: CaseStudyVisual; index: number }) {
+  if (visual.presentation === "phone") {
+    return (
+      <figure className="group overflow-hidden rounded-[1.65rem] bg-[#071726] p-3 shadow-[0_22px_64px_rgba(17,27,40,0.12)] sm:rounded-[2rem] sm:p-4">
+        <div className="flex min-h-[34rem] items-center justify-center overflow-hidden rounded-[1.15rem] bg-[radial-gradient(circle_at_50%_15%,rgba(255,91,82,0.18),transparent_32%),linear-gradient(155deg,#182738_0%,#09121c_72%)] px-6 py-10 sm:min-h-[44rem] sm:rounded-[1.45rem] sm:px-10">
+          <Image
+            src={visual.src}
+            alt={visual.alt}
+            width={1170}
+            height={2532}
+            sizes="(max-width: 639px) 76vw, (max-width: 1279px) 38vw, 430px"
+            className="h-auto w-full max-w-[20rem] rounded-[2.2rem] shadow-[0_26px_72px_rgba(0,0,0,0.34)] ring-1 ring-white/14 transition-transform duration-700 ease-out group-hover:scale-[1.015] sm:max-w-[22rem]"
+          />
+        </div>
+        <figcaption className="px-1 pb-1 pt-4 text-[0.75rem] leading-6 text-white/68">
+          {visual.caption}
+        </figcaption>
+      </figure>
+    );
+  }
+
   return (
     <figure
       className={`group overflow-hidden rounded-[1.65rem] bg-custom-blue p-2.5 shadow-[0_22px_64px_rgba(17,27,40,0.12)] sm:rounded-[2rem] sm:p-3 ${
@@ -338,6 +362,42 @@ function VisualCard({ visual, index }: { visual: CaseStudyVisual; index: number 
       <figcaption className="px-1 pb-1 pt-4 text-[0.75rem] leading-6 text-white/68">
         {visual.caption}
       </figcaption>
+    </figure>
+  );
+}
+
+function MobileProductHero({
+  screens,
+}: {
+  screens: readonly { src: string; alt: string }[];
+}) {
+  return (
+    <figure className="relative overflow-hidden rounded-[1.65rem] bg-[#071726] px-4 pb-0 pt-10 shadow-[0_34px_110px_rgba(5,16,32,0.2)] sm:rounded-[2.5rem] sm:px-8 sm:pt-14 lg:px-14 lg:pt-16">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_8%,rgba(255,91,82,0.28),transparent_28%),radial-gradient(circle_at_16%_80%,rgba(76,207,255,0.16),transparent_24%)]" />
+      <div className="relative mx-auto flex min-h-[36rem] max-w-5xl items-end justify-center sm:min-h-[42rem] lg:min-h-[46rem]">
+        {screens.slice(0, 3).map((screen, index) => (
+          <div
+            key={screen.src}
+            className={`absolute bottom-0 w-[15.5rem] overflow-hidden rounded-t-[2rem] bg-black p-[0.42rem] shadow-[0_30px_90px_rgba(0,0,0,0.42)] ring-1 ring-white/14 transition-transform duration-700 ease-out hover:scale-[1.01] sm:w-[18rem] lg:w-[20rem] ${
+              index === 0
+                ? "hidden -translate-x-[82%] translate-y-12 -rotate-[4deg] sm:block"
+                : index === 1
+                  ? "z-10"
+                  : "hidden translate-x-[82%] translate-y-12 rotate-[4deg] sm:block"
+            }`}
+          >
+            <Image
+              src={screen.src}
+              alt={screen.alt}
+              width={1170}
+              height={2532}
+              priority={index === 1}
+              sizes="(max-width: 639px) 70vw, (max-width: 1023px) 34vw, 320px"
+              className="h-auto w-full rounded-t-[1.62rem]"
+            />
+          </div>
+        ))}
+      </div>
     </figure>
   );
 }
@@ -370,7 +430,7 @@ function ProcessStep({
 }) {
   return (
     <li className="grid gap-3 border-b border-custom-blue/12 py-7 sm:grid-cols-[4rem_minmax(0,0.72fr)_minmax(0,1.28fr)] sm:gap-6 sm:py-8">
-      <span className="font-label text-[0.62rem] font-medium tracking-[0.18em] text-custom-blue/45">
+      <span className="font-label text-[0.62rem] font-medium tracking-[0.18em] text-custom-blue/70">
         {String(index).padStart(2, "0")}
       </span>
       <h3 className="max-w-[18ch] font-display text-[1.3rem] font-medium leading-[1.08] tracking-[-0.02em] text-custom-blue">

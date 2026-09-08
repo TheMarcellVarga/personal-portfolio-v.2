@@ -5,6 +5,7 @@ export type CaseStudyVisual = {
   alt: string;
   caption: string;
   fit?: "cover" | "contain";
+  presentation?: "landscape" | "phone";
   wide?: boolean;
 };
 
@@ -13,6 +14,10 @@ export type CaseStudyPageContent = {
   demoLabel?: string;
   heroImage?: string;
   heroAlt?: string;
+  heroScreens?: readonly {
+    src: string;
+    alt: string;
+  }[];
   contextTitle: string;
   contextBody: string;
   processTitle?: string;
@@ -183,21 +188,68 @@ export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
     ],
   },
   "endless-activity": {
+    heroScreens: [
+      {
+        src: "/images/endless-activity/detail.png",
+        alt: "Endless Activity activity detail sheet with steps and safety guidance",
+      },
+      {
+        src: "/images/endless-activity/discover.png",
+        alt: "Endless Activity Discover deck with a realistic activity and visible save and skip controls",
+      },
+      {
+        src: "/images/endless-activity/preferences.png",
+        alt: "Endless Activity native preference controls for practical activity constraints",
+      },
+    ],
     contextTitle: "A quick choice for the moment between plans.",
     contextBody:
       "Endless Activity opens directly into a tactile, local-first deck. Save, skip, filtering, and recovery are visible as part of the same interaction, while deterministic ranking keeps the recommendation understandable and private.",
+    processTitle: "From restraint to a dependable loop.",
+    processBody:
+      "The work moved from a deliberately narrow product promise to deterministic architecture, inclusive interaction, and verified recovery states.",
+    process: [
+      {
+        title: "Protect the smallest useful loop",
+        body: "I reduced the product to one immediate suggestion, save, skip, practical filters, and a durable Saved list. Accounts, location, live events, booking, and generated content stayed outside version one.",
+      },
+      {
+        title: "Make the catalog deterministic",
+        body: "I defined a 50-activity schema, validation rules, pure eligibility filters, transparent preference boosts, and seeded ordering so the deck could vary without becoming opaque or difficult to test.",
+      },
+      {
+        title: "Prototype the gesture as a system",
+        body: "The swipe interaction was built with threshold and velocity commits, spring-back cancellation, visible Save and Skip controls, haptics, named VoiceOver actions, and Reduce Motion behavior.",
+      },
+      {
+        title: "Finish the recovery paths",
+        body: "I treated exhausted decks, filter conflicts, saved removal, destructive reset, relaunch persistence, large text, and dark appearance as part of the core experience rather than cleanup work.",
+      },
+    ],
     gallery: [
       {
-        src: "/images/endless-activity/saved.png",
-        alt: "Endless Activity saved activity collection",
-        caption: "Saved activities remain a useful return path instead of disappearing into a feed.",
-        fit: "contain",
+        src: "/images/endless-activity/discover.png",
+        alt: "Endless Activity Discover activity deck",
+        caption: "The app opens on one concrete activity with visible alternatives to the swipe gesture.",
+        presentation: "phone",
       },
       {
         src: "/images/endless-activity/detail.png",
         alt: "Endless Activity activity detail view",
-        caption: "The detail view gives enough context to decide without adding onboarding.",
-        fit: "contain",
+        caption: "The native detail sheet adds materials, steps, and safety guidance only when needed.",
+        presentation: "phone",
+      },
+      {
+        src: "/images/endless-activity/saved.png",
+        alt: "Endless Activity saved activity collection",
+        caption: "Saved activities remain a useful return path instead of disappearing into a feed.",
+        presentation: "phone",
+      },
+      {
+        src: "/images/endless-activity/preferences.png",
+        alt: "Endless Activity preference controls",
+        caption: "Practical filters shape the deck without turning first launch into onboarding.",
+        presentation: "phone",
       },
     ],
   },
