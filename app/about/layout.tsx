@@ -3,7 +3,7 @@ import { roleTitle, siteName } from "../seo";
 
 const title = `About Marcell Varga | ${roleTitle}`;
 const description =
-  "Meet Marcell Varga, a Singapore-based product-focused frontend engineer who brings UX judgment into React, TypeScript, design systems, and trustworthy AI workflows.";
+  "Meet Marcell Varga, a Singapore-based UX and frontend engineer who brings product judgment into React, TypeScript, design systems, and trustworthy AI workflows.";
 
 export const metadata: Metadata = {
   title,

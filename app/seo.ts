@@ -3,13 +3,13 @@ import { projects } from "./data/projects";
 export const siteUrl = "https://marcellvarga.com";
 export const siteName = "Marcell Varga Portfolio";
 export const personName = "Marcell Varga";
-export const roleTitle = "Product-Focused Frontend Engineer";
+export const roleTitle = "UX & Frontend Engineer";
 export const location = "Singapore";
 export const profileImage = "/images/cinematic-profile-pic-sg.webp";
 export const shareImage = "/images/cinematic-profile-pic-sg.webp";
 
 export const siteDescription =
-  "Official portfolio of Marcell Varga, a Singapore-based product-focused frontend engineer building clear React and TypeScript interfaces, design systems, and trustworthy AI workflows.";
+  "Official portfolio of Marcell Varga, a Singapore-based UX and frontend engineer building clear React and TypeScript interfaces, design systems, and trustworthy AI workflows.";
 
 export const lastUpdated = "2026-08-08";
 export const alternatePersonNames = [
@@ -80,7 +80,7 @@ export const structuredData = {
       sameAs: personSameAs,
       mainEntityOfPage: `${siteUrl}/`,
       disambiguatingDescription:
-        "Marcell Varga, also searchable as Varga Marcell in Hungarian name order, is a Singapore-based product-focused frontend engineer working on clear product interfaces with React and TypeScript.",
+        "Marcell Varga, also searchable as Varga Marcell in Hungarian name order, is a Singapore-based UX and frontend engineer working on clear product interfaces with React and TypeScript.",
     },
     {
       "@type": "WebSite",
@@ -102,7 +102,7 @@ export const structuredData = {
       "@type": "ProfilePage",
       "@id": `${siteUrl}/#profile-page`,
       url: siteUrl,
-      name: "Marcell Varga - Product-Focused Frontend Engineer in Singapore",
+      name: "Marcell Varga - UX & Frontend Engineer in Singapore",
       description: siteDescription,
       dateModified: lastUpdated,
       mainEntity: {
@@ -117,7 +117,7 @@ export const structuredData = {
       "@type": "WebPage",
       "@id": `${siteUrl}/#homepage`,
       url: siteUrl,
-      name: "Marcell Varga | Product-Focused Frontend Engineer in Singapore",
+      name: "Marcell Varga | UX & Frontend Engineer in Singapore",
       description: siteDescription,
       dateModified: lastUpdated,
       isPartOf: {

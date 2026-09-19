@@ -997,7 +997,7 @@ export default function Page() {
                 >
                   <div data-hero-badge className="home-intro-fold inline-flex overflow-hidden rounded-full bg-white/10 px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl [transform-origin:left_center]">
                     <span data-hero-badge-label className="font-label block text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/90">
-                      Product-focused frontend engineer
+                      UX & Frontend Engineer
                     </span>
                   </div>
                 </motion.div>
@@ -1021,8 +1021,8 @@ export default function Page() {
                     />
                     <div data-hero-copy>
                       <p className="max-w-[30rem] text-[0.95rem] leading-7 text-white/90 sm:text-[1.05rem] sm:leading-8">
-                        Singapore-based product-focused frontend engineer using React
-                        and TypeScript to turn complex products and AI workflows into
+                        Singapore-based UX and frontend engineer using React and
+                        TypeScript to turn complex products and AI workflows into
                         clear, resilient interfaces.
                       </p>
                     </div>
@@ -1087,7 +1087,7 @@ export default function Page() {
                 >
                   <div data-hero-badge className="home-intro-fold inline-flex overflow-hidden rounded-full bg-white/10 px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl [transform-origin:left_center]">
                     <span data-hero-badge-label className="font-label block text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/90">
-                      Product-focused frontend engineer
+                      UX & Frontend Engineer
                     </span>
                   </div>
                 </motion.div>
@@ -1111,8 +1111,8 @@ export default function Page() {
                     />
                     <div data-hero-copy>
                       <p className="max-w-[30rem] text-[1.02rem] leading-7 text-white/90 sm:text-[1.08rem] sm:leading-8">
-                        Singapore-based product-focused frontend engineer using React
-                        and TypeScript to turn complex products and AI workflows into
+                        Singapore-based UX and frontend engineer using React and
+                        TypeScript to turn complex products and AI workflows into
                         clear, resilient interfaces.
                       </p>
                     </div>
