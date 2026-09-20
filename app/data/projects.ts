@@ -24,6 +24,7 @@ export type Project = {
   status:
     | "Guided product walkthrough"
     | "Live guided demo"
+    | "Live product preview"
     | "End-to-end product slice"
     | "Live public demo"
     | "Native macOS build"
@@ -38,19 +39,19 @@ export const projects: Project[] = [
   {
     title: "Aperture Financial Intelligence",
     titleAccent: "Intelligence",
-    subTitle: "Evidence-led financial research with human approval",
+    subTitle: "Portfolio intelligence, evidence-led research, and human judgment",
     date: "2026",
     description:
-      "A full-stack financial research workspace that turns private source documents into cited, reviewable analysis without crossing into trade execution or personal advice.",
+      "A full-stack financial intelligence workspace that connects portfolios, live market context, private-source research, scenario planning, and education without crossing into trade execution or personal advice.",
     highlight:
-      "The read-only guided demo uses time-stamped public market and SEC data to show the research rhythm, visible citations, human approval, and a clearly bounded reviewed export.",
-    skills: ["Next.js", "Go", "Supabase", "AI evaluation"],
+      "The current product pairs a calm five-destination workspace with provider-backed market monitoring, source-first AI research, visible assumptions, and an inspectable learning loop.",
+    skills: ["Product strategy", "Next.js", "Go", "Trustworthy AI"],
     link: "/ai-finance",
-    image: "/images/ai-finance/aperture-guided-overview.jpg",
+    image: "/images/ai-finance/aperture-home-2026.jpg",
     category: "Fintech systems + trustworthy AI",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(103,232,249,0.3),_transparent_28%),linear-gradient(155deg,_#071112_0%,_#111820_52%,_#1f1a16_100%)]",
-    status: "Live guided demo",
+    status: "Live product preview",
     portfolioPlacement: "featured",
     caseStudyId: "aperture",
   },
@@ -71,6 +72,8 @@ export const projects: Project[] = [
       "bg-[radial-gradient(circle_at_top_right,_rgba(239,178,86,0.34),_transparent_28%),linear-gradient(155deg,_#0c1820_0%,_#18343b_52%,_#725232_100%)]",
     status: "Live public demo",
     portfolioPlacement: "featured",
+    // Temporarily hidden from the portfolio listing. The case-study route remains available.
+    isListed: false,
     caseStudyId: "first-revenue-game",
   },
   {
@@ -84,7 +87,7 @@ export const projects: Project[] = [
       "An end-to-end product-engineering case study spanning interaction design, deterministic route logic, secure data boundaries, accessibility, testing, and a serverless production repair.",
     skills: ["Next.js", "TypeScript", "Supabase RLS", "Stripe", "Playwright"],
     link: "/wild-route",
-    image: "/images/wild-route/home.png",
+    image: "/images/wild-route/home-2026.jpg",
     category: "Product engineering + applied AI UX",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(214,255,64,0.32),_transparent_28%),linear-gradient(160deg,_#192018_0%,_#59634f_52%,_#d9ddd0_100%)]",

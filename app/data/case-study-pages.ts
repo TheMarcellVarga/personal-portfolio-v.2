@@ -31,49 +31,59 @@ export type CaseStudyPageContent = {
 
 export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
   aperture: {
-    demoUrl: "https://ai-finance-two-bice.vercel.app/demo",
-    demoLabel: "Open guided demo",
-    heroImage: "/images/ai-finance/aperture-guided-overview.jpg",
-    heroAlt: "Aperture guided research demo with a public market snapshot and evidence prompt",
-    contextTitle: "Research with a visible chain of evidence.",
+    demoUrl: "https://ai-finance-two-bice.vercel.app/",
+    demoLabel: "Visit Aperture",
+    heroImage: "/images/ai-finance/aperture-home-2026.jpg",
+    heroAlt: "Aperture Financial Intelligence homepage introducing a calm private wealth research workspace",
+    contextTitle: "One financial picture before many tools.",
     contextBody:
-      "Aperture keeps public market context, source documents, retrieval evidence, structured analysis, human edits, and reviewed export in one workflow. The product does not try to make uncertainty disappear. It makes the work easier to challenge.",
-    processTitle: "From financial data to a reviewable decision-support workflow.",
+      "Aperture connects the portfolio, provider-backed market context, private source material, planning assumptions, and the next useful question. It does not try to make uncertainty disappear. It makes the reasoning easier to inspect and revisit.",
+    processTitle: "From a broad fintech idea to one inspectable system.",
     processBody:
-      "The process started with the product boundary, then worked inward through ownership, retrieval, structured output, citation integrity, and human approval before visual polish.",
+      "The work moved from product restraint and information architecture into secure data boundaries, evidence-grounded AI, failure states, and finally a quieter visual language that could hold dense information without feeling like a trading terminal.",
     process: [
       {
-        title: "Define the decision boundary",
-        body: "I framed Aperture as research and portfolio decision support—not a broker, trading bot, or source of personalized investment advice. That constraint shaped the language, tools, data model, and release criteria from the start.",
+        title: "Set the product boundary",
+        body: "I framed Aperture as financial organization, research, scenario planning, and education—not a broker, trading bot, or source of personalized advice. That decision shaped the language, data model, tools, and release criteria from the start.",
       },
       {
-        title: "Ground the interface in owned data",
-        body: "I separated the Next.js product surface from the authoritative Go finance and document APIs, then made ownership, provider, freshness, and failure states visible before adding any AI-generated layer.",
+        title: "Find the smallest coherent map",
+        body: "I consolidated the experience into Overview, Markets, Portfolio, Plan, and Learn. Research, risk, journals, and evaluations remain available where the decision calls for them instead of competing as equal navigation destinations.",
       },
       {
-        title: "Bind findings to evidence",
-        body: "I built the research path around page-aware ingestion, hybrid retrieval, structured findings, and claim-to-chunk citation rules. A material claim must point to evidence from the active run or remain visibly unsupported.",
+        title: "Build authoritative boundaries",
+        body: "Next.js owns the product and AI experience while Go owns market normalization, calculations, ownership, rate limits, and audit behavior. The browser never receives raw provider, database, or model credentials.",
       },
       {
-        title: "Keep approval human and auditable",
-        body: "Raw output stays immutable. Edits, acceptance, rejection, citation feedback, regeneration, and export are recorded separately, then exercised through accessibility, security, evaluation, and end-to-end release gates.",
+        title: "Make evidence a product feature",
+        body: "The research path preserves page boundaries, retrieves owner-scoped passages, validates structured sections, and binds material claims to the active evidence run. Unsupported interpretation stays visible instead of receiving a decorative citation.",
+      },
+      {
+        title: "Test the uncomfortable states",
+        body: "I treated missing providers, empty portfolios, stale prices, unsafe prompts, cross-owner access, malformed output, rejected citations, and reduced-motion behavior as core product states, then captured release evidence around them.",
       },
     ],
     gallery: [
       {
-        src: "/images/ai-finance/aperture-portfolio.jpg",
-        alt: "Aperture portfolio context using time-stamped public ETF market prices",
-        caption: "A public, time-stamped market snapshot provides context without exposing personal holdings or implying a recommendation.",
+        src: "/images/ai-finance/aperture-markets.jpg",
+        alt: "Aperture cross-market monitor showing provider-backed market states, freshness, filters, and research controls",
+        caption: "The market monitor keeps timeframe, provider freshness, confirmed state, flip distance, and study links together while labeling every indicator as research context—not a trade signal.",
+        fit: "contain",
+        wide: true,
       },
       {
-        src: "/images/ai-finance/aperture-evidence.jpg",
-        alt: "Aperture evidence workspace mapping Microsoft filing findings to SEC source locations",
-        caption: "Material findings distinguish direct support from interpretation and stay bound to the active retrieval run.",
+        src: "/images/ai-finance/aperture-research.jpg",
+        alt: "Aperture private research room with a structured earnings-review prompt and source-first empty state",
+        caption: "The research room makes the sequence explicit: add authorized source material, preserve page boundaries, retrieve evidence, then allow structured interpretation.",
+        fit: "contain",
+        wide: true,
       },
       {
-        src: "/images/ai-finance/aperture-review.jpg",
-        alt: "Aperture human review history and reviewed Markdown export state",
-        caption: "The review trail keeps source ingestion, retrieval, model output, human edits, approval, and export inspectable.",
+        src: "/images/ai-finance/aperture-learn.jpg",
+        alt: "Aperture education workspace showing an evidence-led curriculum and account-scoped study record",
+        caption: "Learning progress rewards evidence, repeatable process, and review discipline—not profit, prediction, or risk-taking.",
+        fit: "contain",
+        wide: true,
       },
     ],
   },
@@ -104,26 +114,47 @@ export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
   "wild-route": {
     demoUrl: "https://ai-travel-planner-psi-five.vercel.app",
     demoLabel: "Open public demo",
+    heroImage: "/images/wild-route/home-2026.jpg",
+    heroAlt: "Wild Route landing page introducing explainable adventure route planning",
     contextTitle: "A calm interface for a dense decision.",
     contextBody:
       "Wild Route starts with the traveler's intent, then exposes route reasoning, confidence, estimate boundaries, and provider handoffs at the point of choice. The experience stays useful even when live providers or immersive media are unavailable.",
+    processTitle: "How intent becomes a route.",
+    processBody:
+      "I treated route generation as a product pipeline rather than a chat response. Each stage narrows uncertainty, preserves the planning boundary, and leaves the traveler with something they can inspect before continuing elsewhere.",
+    process: [
+      {
+        title: "Set an honest product boundary",
+        body: "I defined Wild Route as planning and decision support—not an agency or booking engine. Prices remain estimates, availability belongs to external providers, and the interface keeps freshness, confidence, and assumptions close to every recommendation.",
+      },
+      {
+        title: "Turn intent into a structured brief",
+        body: "The prompt is normalized into origin, trip length, route shape, stop limit, budget posture, travel wishes, and exclusions. Schema validation happens before the system selects or scores a destination.",
+      },
+      {
+        title: "Compose and rank complete routes",
+        body: "Deterministic logic evaluates direct, one-stop, and two-stop journeys, calculates round-trip legs and planning costs, then explains why each stop earned its place. Free-plan promotion limits remain enforced after scoring.",
+      },
+      {
+        title: "Design for fallbacks and handoff",
+        body: "Provider and media adapters can degrade to disclosed fixtures without breaking the route. Save, share, and booking handoff flows preserve ownership and privacy boundaries, then verification covers accessibility, reduced motion, failure states, and the hosted golden path.",
+      },
+    ],
     gallery: [
       {
-        src: "/images/wild-route/planner.png",
-        alt: "Wild Route selected route planner with ranking reasons",
-        caption: "Ranked alternatives make the route logic inspectable before a traveler commits.",
+        src: "/images/wild-route/compose-2026.jpg",
+        alt: "Wild Route route composer showing a structured travel brief beside the generated route globe",
+        caption: "A plain-language brief becomes explicit origin, duration, route-shape, stop, budget, and wish constraints before composition.",
       },
       {
-        src: "/images/wild-route/planner-mobile.png",
-        alt: "Wild Route mobile route planner",
-        caption: "The mobile sequence keeps route order, reasons, estimates, and actions intact.",
-        fit: "contain",
+        src: "/images/wild-route/planner-2026.jpg",
+        alt: "Wild Route ranked planner showing a round-trip route on the globe with weather, confidence, and estimate status",
+        caption: "Ranked complete routes keep route shape, confidence, current conditions, sources, and estimate status visible together.",
       },
       {
-        src: "/images/wild-route/share-mobile.png",
-        alt: "Wild Route mobile route sharing view",
-        caption: "Sharing is bounded to an explicit preview instead of exposing the original prompt.",
-        fit: "contain",
+        src: "/images/wild-route/share-2026.jpg",
+        alt: "Wild Route published route preview with journey breakdown and planning estimate disclosures",
+        caption: "The published view shares a sanitized route snapshot while keeping costs, freshness, and external-provider boundaries explicit.",
       },
     ],
   },

@@ -23,7 +23,7 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page.locator("[data-case-study-content]")).not.toHaveAttribute("inert");
   await expect(page.locator("[data-hero-badge-label]").last()).toBeVisible();
   await expect(page.locator('#work a[href="/ai-finance"]')).toBeVisible();
-  await expect(page.locator('#work a[href="/first-revenue-game"]')).toBeVisible();
+  await expect(page.locator('#work a[href="/first-revenue-game"]')).toHaveCount(0);
   await expect(page.locator('#work a[href="/wild-route"]')).toBeVisible();
   await expect(page.locator('#work a[href="/threadscribe"]')).toHaveCount(0);
   await expect(page.locator('#work a[href="/focusin"]')).toBeVisible();
@@ -34,7 +34,7 @@ test("homepage presents the product-engineering story and selected work", async 
     "aria-expanded",
     "false",
   );
-  await expect(page.locator("[data-case-study-content] a")).toHaveCount(5);
+  await expect(page.locator("[data-case-study-content] a")).toHaveCount(4);
   await expect(page.locator('#work a[href="/about"]')).toHaveCount(0);
 });
 
@@ -124,7 +124,7 @@ test("branded recovery route guides visitors back to the portfolio", async ({ pa
 
 test("featured work uses the shared evidence record", async ({ page }) => {
   for (const [route, evidenceId, status] of [
-    ["/ai-finance", "aperture", "Live guided demo"],
+    ["/ai-finance", "aperture", "Live product preview"],
     ["/first-revenue-game", "first-revenue-game", "Live public demo"],
     ["/wild-route", "wild-route", "Live public demo"],
     ["/threadscribe", "threadscribe", "Guided product walkthrough"],
@@ -168,13 +168,13 @@ test("Aperture case study presents measurable systems evidence", async ({ page }
 
   await expect(page.getByRole("heading", { name: "Aperture Financial Intelligence" })).toBeVisible();
   await expect(page.getByText(/40 of 40 evidence regression cases pass/i)).toBeVisible();
-  await expect(page.getByText("Research with a visible chain of evidence.")).toBeVisible();
-  await expect(page.getByRole("heading", { name: "From financial data to a reviewable decision-support workflow." })).toBeVisible();
+  await expect(page.getByText("One financial picture before many tools.")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "From a broad fintech idea to one inspectable system." })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Verification", exact: true })).toBeVisible();
   await expect(page.getByText(/without crossing into trade execution or personal advice/i)).toBeVisible();
-  await expect(page.getByAltText(/time-stamped public ETF market prices/i)).toBeVisible();
-  await expect(page.getByAltText(/mapping Microsoft filing findings to SEC source locations/i)).toBeVisible();
-  await expect(page.getByAltText(/human review history and reviewed Markdown export state/i)).toBeVisible();
+  await expect(page.getByAltText(/cross-market monitor showing provider-backed market states/i)).toBeVisible();
+  await expect(page.getByAltText(/private research room with a structured earnings-review prompt/i)).toBeVisible();
+  await expect(page.getByAltText(/education workspace showing an evidence-led curriculum/i)).toBeVisible();
 });
 
 test("First Revenue Game connects product judgment to reliable backend evidence", async ({ page }) => {
@@ -200,7 +200,10 @@ test("Wild Route case study proves product engineering beyond the interface", as
     "href",
     "https://ai-travel-planner-psi-five.vercel.app",
   );
-  await expect(page.getByAltText("Wild Route selected route planner with ranking reasons")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "How intent becomes a route." })).toBeVisible();
+  await expect(
+    page.getByAltText(/Wild Route ranked planner showing a round-trip route/i),
+  ).toBeVisible();
 });
 
 test("ThreadScribe case study shows trustworthy AI interaction evidence", async ({ page }) => {

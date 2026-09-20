@@ -13,24 +13,25 @@ export type CaseStudyRecord = {
 export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
   aperture: {
     id: "aperture",
-    role: "Independent product direction, UX/UI, Next.js frontend, Go API integration, AI evaluation, and release engineering",
+    role: "Independent product strategy, UX/UI, Next.js product engineering, Go API integration, market-data systems, trustworthy AI, and release engineering",
     problem:
-      "Turn private financial source material into structured research that remains traceable, challengeable, and human-approved without implying trade execution or personal advice.",
-    user: "Research-minded investors and analysts who need evidence, freshness, uncertainty, and decision boundaries visible in one workflow.",
+      "Bring a portfolio, changing market context, private-source research, planning assumptions, and financial education into one coherent workspace without turning complexity into false certainty.",
+    user: "Research-minded individuals who want to understand what they own, inspect market context, test scenarios, and keep evidence and limitations close to every conclusion.",
     decisions: [
-      "Separated Next.js product rendering from the authoritative Go finance and document API.",
-      "Bound material claims to the active retrieval evidence or a visible unsupported state.",
-      "Stored immutable raw output and append-only human edits, decisions, and citation feedback.",
-      "Used time-stamped public market and SEC data for the guided demo while keeping personal finance data out of portfolio media.",
+      "Reduced the product to five primary jobs—Overview, Markets, Portfolio, Plan, and Learn—while keeping research and risk tools in the context that needs them.",
+      "Separated the Next.js product and AI experience from the authoritative Go finance, ownership, calculation, and document APIs.",
+      "Made provider coverage, data freshness, assumptions, citations, and unsupported states visible instead of smoothing over missing evidence.",
+      "Kept generation subordinate to human judgment through immutable raw output, append-only review events, and an evidence-first education loop.",
     ],
     verification: [
-      "40 of 40 evidence regression cases pass across five source documents.",
-      "The disposable-database E2E flow passes from upload through reviewed export.",
-      "Cross-owner isolation, prompt injection, schema repair, accessibility, and deployment contracts are automated release gates.",
+      "40 of 40 evidence regression cases pass across five source documents, including citation, injection, advice-boundary, unsupported-claim, and schema checks.",
+      "The disposable-database end-to-end path passes from private upload and retrieval through human review and reviewed Markdown export.",
+      "Go service tests, production builds, ownership isolation, accessibility contracts, deployment checks, and privacy-scrubbed telemetry form the release evidence.",
     ],
     limitations: [
-      "The guided demo is read-only and uses an illustrative allocation with time-stamped public market prices and public SEC filing data; authenticated document ingestion and reviewed export remain a private evaluation workspace.",
-      "External model calls and paid-provider comparisons remain disabled pending explicit cost and credential approval.",
+      "The public product preview demonstrates the brand and interaction system; authenticated finance and document workflows depend on configured local or production services and user-supplied data.",
+      "External model calls stay disabled by default. The verified research path uses deterministic generation until paid provider usage is explicitly enabled.",
+      "Aperture provides research and educational decision support only. It does not execute trades, recommend positions, or promise outcomes.",
     ],
   },
   "first-revenue-game": {

@@ -43,15 +43,15 @@ export default function CaseStudyPage({ caseStudyId }: CaseStudyPageProps) {
 
       <main className="relative z-10 px-4 pb-8 pt-0 sm:px-6 lg:px-10">
         <div className="mx-auto w-full max-w-7xl">
-          <section className="pt-32 sm:pt-36">
+          <section className="pt-40 sm:pt-44 lg:pt-48">
             <div className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(19rem,0.8fr)] lg:items-end lg:gap-16">
               <Reveal reduceMotion={shouldReduceMotion}>
                 <SectionLabel index="Project" label="Case Study" />
                 <h1
                   className={`font-display font-semibold leading-[0.9] tracking-[-0.055em] text-custom-blue ${
                     project.title.length > 24
-                      ? "max-w-[14ch] text-[clamp(2.9rem,8vw,5rem)] lg:text-[5.75rem]"
-                      : "max-w-[9ch] text-[clamp(3.1rem,9vw,7rem)]"
+                      ? "max-w-[14ch] text-[clamp(2.8rem,6.5vw,5.2rem)]"
+                      : "max-w-[9ch] text-[clamp(3rem,7.5vw,6rem)]"
                   }`}
                 >
                   {project.titleAccent ? (
@@ -282,13 +282,13 @@ function IndexMetaRow({
   dataCaseStudyStatus?: CaseStudyId;
 }) {
   return (
-    <div className="grid gap-1 border-b border-custom-blue/8 py-3 last:border-b-0 sm:grid-cols-[7rem_1fr] sm:gap-4">
+    <div className="grid gap-1 border-b border-custom-blue/8 py-3 last:border-b-0 sm:min-h-14 sm:grid-cols-[7rem_minmax(0,1fr)] sm:items-center sm:gap-4 sm:py-0">
       <span className="font-label text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/70">
         {label}
       </span>
       <span
         data-case-study-status={dataCaseStudyStatus}
-        className="text-sm leading-6 text-custom-blue/82"
+        className="text-sm leading-5 text-custom-blue/82"
       >
         {value}
       </span>
