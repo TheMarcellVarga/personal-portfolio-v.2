@@ -882,6 +882,20 @@ export default function Page() {
     return () => {
       window.clearTimeout(startDelay);
       timeline?.kill();
+
+      // The intro can finish before the staggered badge reveal completes.
+      // Clear the interrupted animation state so the pill keeps its full width.
+      if (introStage === "exiting") {
+        gsap.set(badgeTargets, {
+          clearProps: "opacity,visibility,clipPath,transform",
+        });
+        gsap.set(badgeLabelTargets, {
+          clearProps: "opacity,visibility,transform",
+        });
+        gsap.set(allTargets, {
+          clearProps: "opacity,visibility,transform",
+        });
+      }
     };
   }, [introStage, shouldReduceMotion]);
 
