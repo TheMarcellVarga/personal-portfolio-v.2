@@ -51,9 +51,9 @@ const principlesStatement =
 const PRINCIPLES_REVEAL_END = 0.74;
 
 const featuredProjectOrder = [
+  "Aperture Financial Intelligence",
   "Wild Route",
   "First Revenue Game",
-  "Aperture Financial Intelligence",
 ];
 
 const supportingProjectOrder = [
