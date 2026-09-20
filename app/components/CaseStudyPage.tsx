@@ -48,7 +48,7 @@ export default function CaseStudyPage({ caseStudyId }: CaseStudyPageProps) {
               <Reveal reduceMotion={shouldReduceMotion}>
                 <SectionLabel index="Project" label="Case Study" />
                 <h1
-                  className={`font-display font-semibold leading-[0.9] tracking-[-0.055em] text-custom-blue ${
+                  className={`font-display font-medium leading-[0.9] tracking-[-0.055em] text-custom-blue ${
                     project.title.length > 24
                       ? "max-w-[14ch] text-[clamp(2.9rem,8vw,5rem)] lg:text-[5.75rem]"
                       : "max-w-[9ch] text-[clamp(3.1rem,9vw,7rem)]"

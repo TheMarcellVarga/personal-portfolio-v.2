@@ -16,19 +16,28 @@ export const resume = {
   skillGroups: [
     {
       label: "Frontend",
-      items: ["React", "TypeScript", "Next.js", "Svelte"],
+      items: ["React", "TypeScript", "JavaScript", "D3.js", "Next.js", "Svelte"],
     },
     {
-      label: "Backend & Data",
-      items: ["Node.js / Express", "Java / Spring", "PostgreSQL", "REST APIs"],
+      label: "Architecture",
+      items: ["Module Federation", "single-spa", "Webpack", "Design Systems"],
     },
     {
-      label: "Platform",
-      items: ["Docker", "GCP", "CI/CD"],
+      label: "Backend & Integration",
+      items: ["Node.js / Express", "Java / Spring", "REST APIs", "WebSocket", "PostgreSQL"],
     },
     {
-      label: "Design Engineering",
-      items: ["Figma", "Design Systems", "WCAG", "Prototyping"],
+      label: "UX & Delivery",
+      items: [
+        "UX Engineering",
+        "Product Engineering",
+        "WCAG",
+        "Jest",
+        "Git",
+        "GCP / Docker",
+        "CI/CD",
+        "Artificial Intelligence",
+      ],
     },
   ],
   languages: [
@@ -42,12 +51,12 @@ export const resume = {
       role: "UX & Frontend Engineer",
       period: "Oct 2022 - Present",
       bullets: [
-        "Built and shipped React/TypeScript performance-monitoring and diagnostics interfaces for network equipment, including health checks, historical trends, and detailed snapshot views.",
-        "Designed and implemented a configurable analytics workspace where users can arrange graphs and save, search, restore, and manage personalized views.",
-        "Develop reusable React/TypeScript components and design-system patterns across a modular frontend platform, backed by automated interaction and accessibility tests.",
-        "Implement supporting REST APIs and middleware in Node.js and Express when product workflows require backend changes.",
-        "Apply WCAG-aligned accessibility practices across shared components and shipped interfaces, covering semantics, keyboard and focus behavior, responsive states, and 200% text reflow.",
-        "Work with product, engineering, QA, analytics, and stakeholders to clarify ambiguous requirements, validate workflows, and turn them into implementable frontend solutions.",
+        "Build and ship React/TypeScript product workflows for complex telecom software, taking work from interaction architecture and prototyping through production delivery.",
+        "Develop network diagnostics and performance-monitoring interfaces for network equipment, including health checks, historical trends, and detailed snapshot views.",
+        "Designed a configurable D3.js analytics workspace where users arrange graphs and save, search, restore, and manage personalized views.",
+        "Create reusable components and design-system patterns across a modular frontend architecture using Webpack, Module Federation, and single-spa.",
+        "Deliver WCAG-aligned accessibility and automated quality coverage across semantics, keyboard and focus behavior, responsive and 200% text reflow, and interaction tests.",
+        "Work beyond the frontend across REST and WebSocket integrations, Node.js/Express APIs, and Java/Spring services, partnering with product, QA, analytics, and engineering to turn technical requirements into shipped solutions.",
       ],
     },
     {

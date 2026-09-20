@@ -196,7 +196,7 @@ export default function Header({
 
   const items: NavItem[] = [
     { label: "Intro", path: "/#hero", action: scrollToHome },
-    { label: "Proof", path: "/#process", action: scrollToProcess },
+    { label: "Capabilities", path: "/#process", action: scrollToProcess },
     { label: "Work", path: "/#work", action: scrollToWork },
     { label: "Contact", path: "/#contact", action: scrollToContact },
   ];

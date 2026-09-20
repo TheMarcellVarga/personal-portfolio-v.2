@@ -64,55 +64,36 @@ const supportingProjectOrder = [
 // Flip to true when the case studies need to be temporarily covered again.
 const SHOW_CASE_STUDY_RESTRUCTURING_NOTICE = false;
 
-const processCards = [
+const capabilityRows = [
   {
-    number: "01",
-    title: "Product delivery",
-    body: "Translate complex product requirements into usable interfaces, from the first decision through production detail.",
+    title: "Product workflows",
+    body: "Turn ambiguous requirements into clear React and TypeScript workflows, from interaction architecture and prototyping through production delivery.",
     icon: Blocks,
-    colSpan: "lg:col-span-2",
   },
   {
-    number: "02",
-    title: "International context",
-    body: "Build with product teams across markets, balancing user needs, engineering constraints, and a clear shared direction.",
+    title: "Frontend architecture",
+    body: "Build reusable components and design-system patterns across modular frontends using Webpack, Module Federation, and single-spa.",
     icon: Sparkles,
-    colSpan: "lg:col-span-1",
   },
   {
-    number: "03",
-    title: "Core stack",
-    body: "React, TypeScript, Java/Spring, and event-driven systems for durable product workflows.",
+    title: "Systems integration",
+    body: "Work beyond the interface across REST and WebSocket integrations, Node.js and Express APIs, and Java and Spring services.",
     icon: Code2,
-    colSpan: "lg:col-span-1",
   },
   {
-    number: "04",
-    title: "Ownership",
-    body: "Carry the work through implementation, refining responsiveness, accessibility, motion, and product detail as it becomes real.",
+    title: "Accessible delivery",
+    body: "Carry responsive behavior, WCAG accessibility, interaction testing, and release detail through the full implementation.",
     icon: Rocket,
-    colSpan: "lg:col-span-2",
   },
 ];
 
-const processTags = [
-  "AXON Networks",
-  "product delivery",
-  "React",
-  "TypeScript",
-  "Java / Spring",
-  "event systems",
-  "accessibility",
-  "responsive UI",
-];
+type CapabilityRowData = (typeof capabilityRows)[number];
 
-type ProcessCardData = (typeof processCards)[number];
-
-function ProcessCard({
+function CapabilityRow({
   card,
   index,
 }: {
-  card: ProcessCardData;
+  card: CapabilityRowData;
   index: number;
 }) {
   const Icon = card.icon;
@@ -120,36 +101,20 @@ function ProcessCard({
   return (
     <article
       data-capabilities-card
-      className={`relative flex min-h-[10rem] flex-col overflow-hidden rounded-[1.8rem] border border-white/60 bg-white/78 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_12px_40px_rgba(11,17,26,0.04)] transition-none sm:rounded-[2rem] ${card.colSpan}`}
+      className="grid gap-4 border-t border-custom-blue/12 py-6 sm:grid-cols-[3rem_minmax(0,1fr)] sm:gap-6 sm:py-7"
     >
-      <div className="relative z-10 flex h-full flex-col">
-        <div className="mb-4 flex items-start justify-between gap-3">
-          <div className="inline-flex h-9 w-9 items-center justify-center rounded-[0.85rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)]">
-            <Icon className="h-4.5 w-4.5" />
-          </div>
-          <span className="font-label rounded-full bg-white/62 px-2.5 py-1 text-[0.52rem] font-medium uppercase tracking-[0.18em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]">
-            {card.number}
-          </span>
-        </div>
-        <h2 className="max-w-[14ch] font-display text-[1.08rem] font-medium leading-[1.04] tracking-[-0.02em] text-custom-blue sm:text-[1.24rem]">
+      <div className="flex h-10 w-10 items-center justify-center rounded-[0.9rem] bg-white/72 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_8px_24px_rgba(11,17,26,0.05)]">
+        <Icon className="h-[1.1rem] w-[1.1rem]" aria-hidden="true" />
+      </div>
+      <div className="grid gap-2 sm:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] sm:gap-8">
+        <h3 className="font-display text-[1.2rem] font-medium leading-tight tracking-[-0.02em] text-custom-blue sm:text-[1.35rem]">
           {card.title}
-        </h2>
-        <p className="mt-2 max-w-[26rem] text-[0.75rem] leading-[1.55] text-custom-blue/70">
+        </h3>
+        <p className="max-w-[36rem] text-[0.82rem] leading-6 text-custom-blue/66 sm:text-[0.9rem] sm:leading-7">
           {card.body}
         </p>
-        <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
-          {processTags
-            .slice(index * 2, index * 2 + 2)
-            .map((tag) => (
-              <span
-                key={tag}
-                className="font-label rounded-full bg-white/62 px-2 py-1 text-[0.52rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]"
-              >
-                {tag}
-              </span>
-            ))}
-        </div>
       </div>
+      <span className="sr-only">Capability {index + 1} of {capabilityRows.length}</span>
     </article>
   );
 }
@@ -208,66 +173,107 @@ function readIntroAlreadySeen() {
 function HistoryItemComponent({ 
   item, 
   index, 
+  isActive,
 }: { 
   item: HistoryItem; 
   index: number; 
+  isActive: boolean;
 }) {
   return (
     <article
       id={`history-item-${index}`}
-      className="relative flex min-h-[18rem] snap-center flex-col overflow-hidden rounded-[1.9rem] border border-white/60 bg-white/78 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_12px_40px_rgba(11,17,26,0.04)] transition-[border-color] duration-300 sm:rounded-[2.1rem]"
+      className={`group relative flex min-h-[60vh] snap-center flex-col justify-center overflow-hidden rounded-[1.85rem] border border-white/60 p-6 transition-all duration-700 sm:rounded-[2.4rem] sm:p-10 ${
+        isActive
+          ? "bg-white/90 shadow-[0_32px_80px_rgba(17,27,40,0.12)] ring-1 ring-[#67d9ff]/30"
+          : "bg-white/64 opacity-60 grayscale-[0.4] hover:-translate-y-1 hover:opacity-90 hover:grayscale-0"
+      }`}
     >
-      <div className="relative z-10 flex h-full flex-col">
-        <div className="mb-5 flex items-start justify-between gap-4">
-          <div
-            className="inline-flex h-10 w-10 items-center justify-center rounded-[0.95rem] bg-white/82 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_8px_22px_rgba(17,27,40,0.06)]"
-          >
-            <span className="font-label text-[0.56rem] font-bold tracking-[0.16em] text-custom-blue/60">
-              0{index + 1}
+      <div
+        className={`pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full blur-3xl transition-all duration-1000 ${
+          isActive ? "scale-110 bg-[#67d9ff]/22" : "scale-75 bg-[#67d9ff]/5"
+        }`}
+      />
+
+      <div className="relative flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+        <div className="space-y-4">
+          <div className="flex flex-wrap items-center gap-3">
+            <span
+              className={`font-label rounded-full px-4 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.18em] transition-colors duration-500 ${
+                isActive
+                  ? "bg-custom-blue/7 text-custom-blue"
+                  : "bg-custom-blue/5 text-custom-blue/40"
+              }`}
+            >
+              {item.time.start} {item.time.end ? `- ${item.time.end}` : "- Present"}
             </span>
+            {index === 0 && (
+              <span
+                className={`font-label rounded-full px-3.5 py-1.5 text-[0.58rem] font-bold uppercase tracking-[0.16em] transition-all duration-500 ${
+                  isActive
+                    ? "bg-[#67d9ff]/15 text-custom-blue shadow-[0_4px_12px_rgba(103,217,255,0.2)]"
+                    : "bg-custom-blue/5 text-custom-blue/30"
+                }`}
+              >
+                Current
+              </span>
+            )}
           </div>
-          {index === 0 && (
-            <span
-              className="font-label rounded-full bg-white/62 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-custom-blue/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]"
+
+          <div className="space-y-1">
+            <h3
+              className={`font-display text-[clamp(1.6rem,2.4vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.02em] text-custom-blue transition-opacity duration-500 ${
+                isActive ? "opacity-100" : "opacity-70"
+              }`}
             >
-              Current
-            </span>
-          )}
-        </div>
-
-        <div className="space-y-1">
-          <h3 className="max-w-[16ch] font-display text-[1.18rem] font-medium leading-[1.06] tracking-[-0.02em] text-custom-blue sm:text-[1.38rem]">
-            {item.jobTitle}
-          </h3>
-          <p className="font-label text-[0.72rem] font-medium uppercase tracking-[0.16em] text-custom-blue/70">
-            {item.company}
-          </p>
-        </div>
-
-        <div className="mt-2.5 grid max-w-[32rem] gap-2.5">
-          {item.description.map((paragraph: string) => (
+              {item.jobTitle}
+            </h3>
             <p
-              key={paragraph}
-              className="text-[0.78rem] leading-6 text-custom-blue/70"
+              className={`font-label text-[0.72rem] font-bold uppercase tracking-[0.22em] transition-colors duration-500 ${
+                isActive ? "text-custom-blue/50" : "text-custom-blue/30"
+              }`}
             >
-              {paragraph}
+              {item.company}
             </p>
-          ))}
+          </div>
         </div>
 
-        <div className="mt-auto flex flex-wrap gap-2 pt-5">
-          <span className="font-label rounded-full bg-white/62 px-3 py-1.5 text-[0.66rem] font-medium uppercase tracking-[0.14em] text-custom-blue/68 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]">
-            {item.time.start} {item.time.end ? `- ${item.time.end}` : "- Present"}
-          </span>
-          {item.skills.map((skill: string) => (
-            <span
-              key={skill}
-              className="font-label rounded-full bg-white/62 px-3 py-1.5 text-[0.66rem] font-medium uppercase tracking-[0.14em] text-custom-blue/68 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]"
-            >
-              {skill}
-            </span>
-          ))}
+        <div
+          className={`font-label text-[0.65rem] font-black tracking-[0.2em] transition-all duration-700 ${
+            isActive ? "scale-110 text-custom-blue/25" : "scale-100 text-custom-blue/10"
+          }`}
+        >
+          0{index + 1}
         </div>
+      </div>
+
+      <div className="mt-8 grid gap-3.5">
+        {item.description.map((paragraph: string) => (
+          <p
+            key={paragraph}
+            className={`max-w-[42rem] rounded-[1.25rem] px-5 py-4 text-[0.94rem] leading-relaxed transition-all duration-700 ${
+              isActive
+                ? "bg-white/60 text-custom-blue/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_4px_16px_rgba(17,27,40,0.02)]"
+                : "text-custom-blue/50"
+            }`}
+          >
+            {paragraph}
+          </p>
+        ))}
+      </div>
+
+      <div className="mt-8 flex flex-wrap gap-2.5">
+        {item.skills.map((skill: string) => (
+          <span
+            key={skill}
+            className={`font-label rounded-full px-4 py-2 text-[0.62rem] font-bold uppercase tracking-[0.14em] transition-all duration-500 ${
+              isActive
+                ? "bg-white text-custom-blue/70 shadow-[inset_0_1px_0_rgba(255,255,255,1),0_8px_24px_rgba(17,27,40,0.04)]"
+                : "bg-white/40 text-custom-blue/30"
+            }`}
+          >
+            {skill}
+          </span>
+        ))}
       </div>
     </article>
   );
@@ -637,7 +643,7 @@ export default function Page() {
     const sectionIds = ["hero", "process", "work", "contact"];
     const sectionMap: Record<string, string> = {
       hero: "Intro",
-      process: "Proof",
+      process: "Capabilities",
       work: "Work",
       contact: "Contact",
     };
@@ -1017,7 +1023,7 @@ export default function Page() {
                       animate={revealHeroTitle && !shouldReduceMotion}
                       visible={revealHeroTitle}
                       delay={0.08}
-                      className="max-w-[8ch] font-display text-[clamp(2.85rem,13vw,4.2rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[clamp(3.4rem,8vw,4.8rem)] md:text-[clamp(3.8rem,7vw,5.4rem)]"
+                      className="max-w-[8ch] font-display text-[clamp(2.85rem,13vw,4.2rem)] font-normal leading-[0.98] tracking-[-0.025em] text-white sm:text-[clamp(3.4rem,8vw,4.8rem)] md:text-[clamp(3.8rem,7vw,5.4rem)]"
                     />
                     <div data-hero-copy>
                       <p className="max-w-[30rem] text-[0.95rem] leading-7 text-white/90 sm:text-[1.05rem] sm:leading-8">
@@ -1107,7 +1113,7 @@ export default function Page() {
                       animate={revealHeroTitle && !shouldReduceMotion}
                       visible={revealHeroTitle}
                       delay={0.08}
-                      className="max-w-[6.6ch] font-display text-[3.35rem] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[4.5rem] md:text-[5.3rem] lg:text-[6rem] xl:text-[6.8rem] 2xl:text-[7.5rem]"
+                      className="max-w-[6.6ch] font-display text-[3.35rem] font-normal leading-[0.98] tracking-[-0.025em] text-white sm:text-[4.5rem] md:text-[5.3rem] lg:text-[6rem] xl:text-[6.8rem] 2xl:text-[7.5rem]"
                     />
                     <div data-hero-copy>
                       <p className="max-w-[30rem] text-[1.02rem] leading-7 text-white/90 sm:text-[1.08rem] sm:leading-8">
@@ -1224,11 +1230,10 @@ export default function Page() {
                       className="mb-8 h-px w-full bg-[linear-gradient(90deg,rgba(76,216,255,0.85),rgba(76,216,255,0.02))]"
                     />
                     <p
-                      className="max-w-4xl font-display text-[clamp(1.55rem,7vw,4.6rem)] leading-[1.12] tracking-[-0.02em] !text-[#f8fbff] sm:leading-[1.08]"
+                      className="max-w-4xl font-display text-[clamp(1.55rem,7vw,4.6rem)] leading-[1.14] tracking-[-0.025em] !text-[#e8f0f4] sm:leading-[1.1]"
                       style={{
-                        color: "#f8fbff",
-                        WebkitTextFillColor: "#f8fbff",
-                        textShadow: "0 1px 0 rgba(255,255,255,0.06)",
+                        color: "#e8f0f4",
+                        WebkitTextFillColor: "#e8f0f4",
                       }}
                     >
                       {principlesDisplayText}
@@ -1279,35 +1284,42 @@ export default function Page() {
             data-scroll-anchor="process"
             className="relative mx-auto w-full max-w-7xl py-16 sm:py-24 lg:py-32"
           >
-            <div className="mb-8 grid gap-4 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-end">
-              <div className="max-w-2xl">
-                <SectionLabel index="02" label="Proof" />
-                <SplitTextReveal
-                  as="h2"
-                  text="Product thinking, backed by delivery."
-                  accentText="delivery."
-                  animate={!shouldReduceMotion}
-                  triggerOnView
-                  className="mt-6 font-display text-[clamp(2.2rem,12vw,5.4rem)] leading-[0.95] tracking-[-0.04em] text-custom-blue sm:mt-8 sm:leading-[0.9]"
-                />
-              </div>
-              <p className="max-w-xl text-[0.9rem] leading-7 text-custom-blue/66 lg:justify-self-end">
-                Current work is grounded in product delivery: clarifying complex
-                requirements, building resilient interfaces and backend workflows,
-                and carrying the details through verification and release.
+            <div className="mb-10 max-w-4xl sm:mb-14">
+              <SplitTextReveal
+                as="h2"
+                text="What I bring to a product team."
+                accentText="product team."
+                animate={!shouldReduceMotion}
+                triggerOnView
+                className="font-display text-[clamp(2.2rem,12vw,5.4rem)] leading-[0.98] tracking-[-0.04em] text-custom-blue sm:leading-[0.92]"
+              />
+              <p className="mt-5 max-w-2xl text-[0.95rem] leading-7 text-custom-blue/66 sm:mt-6 sm:text-[1.05rem] sm:leading-8">
+                Product judgment, frontend depth, and enough backend context to carry
+                complex workflows from ambiguity to release.
               </p>
             </div>
 
-            <div className="grid auto-rows-fr gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {processCards.map((card, index) => {
-                return (
-                  <ProcessCard
-                    key={card.title}
-                    card={card}
-                    index={index}
-                  />
-                );
-              })}
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:gap-16 xl:gap-24">
+              <aside className="flex min-h-[22rem] flex-col justify-between rounded-[2rem] bg-[#071726] p-6 text-white shadow-[0_28px_90px_rgba(7,23,38,0.16),inset_0_1px_0_rgba(255,255,255,0.14)] sm:min-h-[26rem] sm:rounded-[2.5rem] sm:p-9 lg:sticky lg:top-28 lg:self-start">
+                <p className="max-w-[15ch] font-display text-[clamp(2rem,7vw,3.6rem)] leading-[1.02] tracking-[-0.035em] text-[#e8f0f4]">
+                  UX judgment meets production engineering.
+                </p>
+                <div className="mt-12 border-t border-white/15 pt-5">
+                  <p className="text-sm font-medium text-white/90">
+                    React + TypeScript
+                  </p>
+                  <p className="mt-2 max-w-sm text-sm leading-6 text-white/60">
+                    Design systems, modular frontends, API integration, testing, and
+                    accessibility.
+                  </p>
+                </div>
+              </aside>
+
+              <div>
+                {capabilityRows.map((card, index) => (
+                  <CapabilityRow key={card.title} card={card} index={index} />
+                ))}
+              </div>
             </div>
           </section>
 
@@ -1363,8 +1375,8 @@ export default function Page() {
                     Supporting work
                   </p>
                   <p className="mt-2 max-w-2xl text-sm leading-6 text-custom-blue/62">
-                    Focused proof points that deepen the main story without competing
-                    with the three featured projects.
+                    Focused case studies that add range without competing with the
+                    three featured projects.
                   </p>
                 </div>
 
@@ -1546,12 +1558,14 @@ export default function Page() {
               </div>
 
               {/* Scrolling History List */}
-              <div className="relative snap-y snap-proximity space-y-5 py-6 sm:space-y-16 sm:py-10 lg:py-[20vh]">                
+              <div className="relative snap-y snap-proximity space-y-12 py-[20vh] sm:space-y-24">
+                <div className="pointer-events-none absolute bottom-12 left-5 top-12 hidden w-px bg-gradient-to-b from-custom-blue/0 via-custom-blue/10 to-custom-blue/0 sm:block" />
                 {history.map((item, index) => (
                   <HistoryItemComponent
                     key={`${item.company}-${item.time.start}`}
                     item={item}
                     index={index}
+                    isActive={historyActiveIndex === index}
                   />
                 ))}
               </div>

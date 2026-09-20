@@ -13,6 +13,9 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page.locator(".home-intro-shell")).toHaveCount(0);
 
   await expect(page).toHaveTitle(/Marcell Varga/i);
+  await expect(page.locator("#process h2")).toContainText("What I bring to a product team.");
+  await expect(page.locator("[data-capabilities-card]")).toHaveCount(4);
+  await expect(page.locator("header nav").getByRole("button", { name: "Capabilities", exact: true })).toBeVisible();
   await expect(page.getByTestId("case-study-restructuring-notice")).toHaveCount(0);
 
   await page.locator("header nav").getByRole("button", { name: "Contact", exact: true }).click();
