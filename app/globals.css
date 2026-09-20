@@ -34,7 +34,6 @@
 :root {
   --font: -apple-system, BlinkMacSystemFont, "Apple Color Emoji", Inter, Roboto,
     "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-  --display-font: "Cabinet Grotesk", var(--font);
   --mono-font:
     "SF Mono", menlo, monaco, consolas, "Courier New", Courier, monospace;
   --page-background: #f3ede5;
@@ -101,14 +100,11 @@
 
 @layer utilities {
   .font-display {
-    font-family: var(--display-font);
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
+    font-family: var(--font);
   }
 
   .font-body {
     font-family: var(--font);
-    font-weight: 400;
   }
 
   .font-label {

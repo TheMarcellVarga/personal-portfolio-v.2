@@ -217,7 +217,7 @@ export default function ResumePage() {
                       Singapore / 2026
                     </p>
                   </div>
-                  <h1 className="mt-5 font-display text-[3rem] font-medium leading-[0.9] tracking-[-0.06em] text-white">
+                  <h1 className="mt-5 font-display text-[3rem] font-semibold leading-[0.9] tracking-[-0.06em] text-white">
                     {resume.name}
                   </h1>
                   <p className="mt-4 max-w-xl text-[1.08rem] font-medium leading-6 text-white/68">

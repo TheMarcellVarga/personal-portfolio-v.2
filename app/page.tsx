@@ -1037,7 +1037,7 @@ export default function Page() {
                       animate={revealHeroTitle && !shouldReduceMotion}
                       visible={revealHeroTitle}
                       delay={0.08}
-                      className="max-w-[8ch] font-display text-[clamp(2.85rem,13vw,4.2rem)] font-normal leading-[0.98] tracking-[-0.025em] text-white sm:text-[clamp(3.4rem,8vw,4.8rem)] md:text-[clamp(3.8rem,7vw,5.4rem)]"
+                      className="max-w-[8ch] font-display text-[clamp(2.85rem,13vw,4.2rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[clamp(3.4rem,8vw,4.8rem)] md:text-[clamp(3.8rem,7vw,5.4rem)]"
                     />
                     <div data-hero-copy>
                       <p className="max-w-[30rem] text-[0.95rem] leading-7 text-white/90 sm:text-[1.05rem] sm:leading-8">
@@ -1127,7 +1127,7 @@ export default function Page() {
                       animate={revealHeroTitle && !shouldReduceMotion}
                       visible={revealHeroTitle}
                       delay={0.08}
-                      className="max-w-[6.6ch] font-display text-[3.35rem] font-normal leading-[0.98] tracking-[-0.025em] text-white sm:text-[4.5rem] md:text-[5.3rem] lg:text-[6rem] xl:text-[6.8rem] 2xl:text-[7.5rem]"
+                      className="max-w-[6.6ch] font-display text-[3.35rem] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[4.5rem] md:text-[5.3rem] lg:text-[6rem] xl:text-[6.8rem] 2xl:text-[7.5rem]"
                     />
                     <div data-hero-copy>
                       <p className="max-w-[30rem] text-[1.02rem] leading-7 text-white/90 sm:text-[1.08rem] sm:leading-8">
@@ -1244,10 +1244,11 @@ export default function Page() {
                       className="mb-8 h-px w-full bg-[linear-gradient(90deg,rgba(76,216,255,0.85),rgba(76,216,255,0.02))]"
                     />
                     <p
-                      className="max-w-4xl font-display text-[clamp(1.55rem,7vw,4.6rem)] leading-[1.14] tracking-[-0.025em] !text-[#e8f0f4] sm:leading-[1.1]"
+                      className="max-w-4xl font-display text-[clamp(1.55rem,7vw,4.6rem)] leading-[1.12] tracking-[-0.02em] !text-[#f8fbff] sm:leading-[1.08]"
                       style={{
-                        color: "#e8f0f4",
-                        WebkitTextFillColor: "#e8f0f4",
+                        color: "#f8fbff",
+                        WebkitTextFillColor: "#f8fbff",
+                        textShadow: "0 1px 0 rgba(255,255,255,0.06)",
                       }}
                     >
                       {principlesDisplayText}
