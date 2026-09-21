@@ -5,6 +5,7 @@ import { personSameAs, structuredData } from "./seo";
 import AnalyticsIntegrations from "./components/AnalyticsIntegrations";
 import ScrollReset from "./components/ScrollReset";
 import SmoothScroll from "./components/SmoothScroll";
+import { CursorPopover } from "./components/CursorPopover";
 
 export { metadata };
 
@@ -37,6 +38,7 @@ export default function RootLayout({
             <ScrollReset />
             {children}
           </SmoothScroll>
+          <CursorPopover />
           <AnalyticsIntegrations />
         </PostHogProvider>
       </body>

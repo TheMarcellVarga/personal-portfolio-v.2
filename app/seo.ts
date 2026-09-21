@@ -9,9 +9,9 @@ export const profileImage = "/images/cinematic-profile-pic-sg.webp";
 export const shareImage = "/images/cinematic-profile-pic-sg.webp";
 
 export const siteDescription =
-  "Official portfolio of Marcell Varga, a Singapore-based UX and frontend engineer building clear React and TypeScript interfaces, design systems, and trustworthy AI workflows.";
+  "Official portfolio of Marcell Varga, a Singapore-based UX and frontend engineer using React and TypeScript to turn complex products and AI workflows into clear, resilient interfaces.";
 
-export const lastUpdated = "2026-08-08";
+export const lastUpdated = "2026-09-20";
 export const alternatePersonNames = [
   "Varga Marcell",
   "TheMarcellVarga",
@@ -102,7 +102,7 @@ export const structuredData = {
       "@type": "ProfilePage",
       "@id": `${siteUrl}/#profile-page`,
       url: siteUrl,
-      name: "Marcell Varga - UX & Frontend Engineer in Singapore",
+      name: `${personName} - ${roleTitle} in ${location}`,
       description: siteDescription,
       dateModified: lastUpdated,
       mainEntity: {
@@ -117,7 +117,7 @@ export const structuredData = {
       "@type": "WebPage",
       "@id": `${siteUrl}/#homepage`,
       url: siteUrl,
-      name: "Marcell Varga | UX & Frontend Engineer in Singapore",
+      name: `${personName} | ${roleTitle} in ${location}`,
       description: siteDescription,
       dateModified: lastUpdated,
       isPartOf: {

@@ -253,6 +253,7 @@ export default function Header({
           {backLink ? (
             <Link
               href={backLink.href}
+              data-cursor-label="Go back"
               className={`inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-[0.72rem] font-medium uppercase tracking-[0.16em] transition duration-300 sm:px-4 ${
                 useLightOnDark
                   ? "bg-white/10 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16)_opacity-60] hover:bg-white/14"
@@ -317,6 +318,7 @@ export default function Header({
         <div className="hidden items-center gap-3 justify-self-end lg:flex">
           <Link
             href="/resume"
+            data-cursor-label="Open resume"
             className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition duration-300 ${
               useLightOnDark
                 ? "bg-white/10 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16)_opacity-60] hover:bg-white/14"

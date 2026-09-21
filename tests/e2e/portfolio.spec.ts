@@ -14,7 +14,10 @@ test("homepage presents the product-engineering story and selected work", async 
 
   await expect(page).toHaveTitle(/Marcell Varga/i);
   await expect(page.locator("#process h2")).toContainText("What I bring to a product team.");
-  await expect(page.locator("[data-capabilities-card]")).toHaveCount(4);
+  await expect(page.locator("[data-expertise-row]")).toHaveCount(3);
+  await expect(page.locator("#process")).toContainText("React");
+  await expect(page.locator("#process")).toContainText("accessibility");
+  await expect(page.locator("#process")).toContainText("Reliable delivery");
   await expect(page.locator("header nav").getByRole("button", { name: "Capabilities", exact: true })).toBeVisible();
   await expect(page.getByTestId("case-study-restructuring-notice")).toHaveCount(0);
 
@@ -192,7 +195,8 @@ test("Wild Route case study proves product engineering beyond the interface", as
   await page.goto("/wild-route");
 
   await expect(page.getByRole("heading", { name: "Wild Route" })).toBeVisible();
-  await expect(page.getByText(/74 deterministic Vitest cases pass/i)).toBeVisible();
+  await expect(page.getByText(/101 deterministic Vitest cases pass/i)).toBeVisible();
+  await expect(page.getByText(/22 Chromium checks cover/i)).toBeVisible();
   await expect(page.getByText("A calm interface for a dense decision.")).toBeVisible();
   await expect(page.getByRole("heading", { name: "Verification", exact: true })).toBeVisible();
   await expect(page.getByText(/deterministic planning dataset, planning estimates/i)).toBeVisible();
@@ -204,6 +208,37 @@ test("Wild Route case study proves product engineering beyond the interface", as
   await expect(
     page.getByAltText(/Wild Route ranked planner showing a round-trip route/i),
   ).toBeVisible();
+
+  const heroRatio = await page
+    .getByAltText(/Wild Route landing page introducing explainable adventure route planning/i)
+    .locator("xpath=ancestor::figure")
+    .evaluate((figure) => {
+      const bounds = figure.getBoundingClientRect();
+      return bounds.width / bounds.height;
+    });
+  expect(heroRatio).toBeGreaterThan(1.57);
+  expect(heroRatio).toBeLessThan(1.63);
+
+  const galleryWidths = await Promise.all(
+    [
+      /Wild Route route composer showing/i,
+      /Wild Route ranked planner showing/i,
+      /Wild Route published route preview/i,
+    ].map((alt) =>
+      page
+        .getByAltText(alt)
+        .locator("xpath=ancestor::figure")
+        .evaluate((figure) => figure.getBoundingClientRect().width),
+    ),
+  );
+  expect(Math.max(...galleryWidths) - Math.min(...galleryWidths)).toBeLessThan(2);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  const mobileWidths = await page.evaluate(() => ({
+    documentWidth: document.documentElement.scrollWidth,
+    viewportWidth: window.innerWidth,
+  }));
+  expect(mobileWidths.documentWidth).toBeLessThanOrEqual(mobileWidths.viewportWidth + 1);
 });
 
 test("ThreadScribe case study shows trustworthy AI interaction evidence", async ({ page }) => {
@@ -473,6 +508,50 @@ test("selected work exposes canonical metadata and is listed in the sitemap", as
   for (const route of ["/catchscan", "/askcody", "/ess"]) {
     expect(sitemapText).not.toContain(`https://marcellvarga.com${route}`);
   }
+});
+
+test("utility routes keep titles, social metadata, and canonicals aligned", async ({ page }) => {
+  await prepareHomepage(page);
+
+  await page.goto("/");
+  await expect(page).toHaveTitle("Marcell Varga | UX & Frontend Engineer in Singapore");
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+    "content",
+    /clear, resilient interfaces/i,
+  );
+
+  await page.goto("/about");
+  await expect(page).toHaveTitle("About | Marcell Varga");
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+    "content",
+    "https://marcellvarga.com/about",
+  );
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+    "content",
+    "About Marcell Varga | UX & Frontend Engineer",
+  );
+
+  await page.goto("/resume/ats");
+  await expect(page).toHaveTitle("ATS Resume | Marcell Varga");
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    "https://marcellvarga.com/resume/ats",
+  );
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+    "content",
+    "https://marcellvarga.com/resume/ats",
+  );
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+    "content",
+    /noindex/i,
+  );
+
+  await page.goto("/privacy");
+  await expect(page).toHaveTitle("Privacy and analytics | Marcell Varga");
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+    "content",
+    "https://marcellvarga.com/privacy",
+  );
 });
 
 test("internal portfolio links resolve", async ({ page }) => {

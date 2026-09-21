@@ -14,7 +14,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const projectRoutes = projects
     .filter(
       (project) =>
-        project.isListed !== false &&
         project.link.startsWith("/") &&
         project.portfolioPlacement !== "archive",
     )

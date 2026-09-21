@@ -14,6 +14,7 @@ export type CaseStudyPageContent = {
   demoLabel?: string;
   heroImage?: string;
   heroAlt?: string;
+  heroAspect?: "16/9" | "16/10";
   heroScreens?: readonly {
     src: string;
     alt: string;
@@ -116,6 +117,7 @@ export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
     demoLabel: "Open public demo",
     heroImage: "/images/wild-route/home-2026.jpg",
     heroAlt: "Wild Route landing page introducing explainable adventure route planning",
+    heroAspect: "16/10",
     contextTitle: "A calm interface for a dense decision.",
     contextBody:
       "Wild Route starts with the traveler's intent, then exposes route reasoning, confidence, estimate boundaries, and provider handoffs at the point of choice. The experience stays useful even when live providers or immersive media are unavailable.",
@@ -150,11 +152,13 @@ export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
         src: "/images/wild-route/planner-2026.jpg",
         alt: "Wild Route ranked planner showing a round-trip route on the globe with weather, confidence, and estimate status",
         caption: "Ranked complete routes keep route shape, confidence, current conditions, sources, and estimate status visible together.",
+        wide: true,
       },
       {
         src: "/images/wild-route/share-2026.jpg",
         alt: "Wild Route published route preview with journey breakdown and planning estimate disclosures",
         caption: "The published view shares a sanitized route snapshot while keeping costs, freshness, and external-provider boundaries explicit.",
+        wide: true,
       },
     ],
   },

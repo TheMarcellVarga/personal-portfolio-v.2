@@ -1,10 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { siteName } from "../seo";
+
+const title = "Privacy and analytics";
+const description = "Privacy and analytics information for the Marcell Varga portfolio.";
 
 export const metadata: Metadata = {
-  title: "Privacy and analytics",
-  description: "Privacy and analytics information for the Marcell Varga portfolio.",
+  title,
+  description,
   alternates: { canonical: "/privacy" },
+  openGraph: {
+    title: `${title} | Marcell Varga`,
+    description,
+    url: "/privacy",
+    siteName,
+    type: "article",
+  },
 };
 
 const vendorLinks = [

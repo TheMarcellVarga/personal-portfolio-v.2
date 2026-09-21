@@ -117,7 +117,11 @@ export default function CaseStudyPage({ caseStudyId }: CaseStudyPageProps) {
             {content.heroScreens ? (
               <MobileProductHero screens={content.heroScreens} />
             ) : (
-              <figure className="glass-panel relative aspect-[16/9] overflow-hidden rounded-[1.65rem] bg-custom-blue p-2.5 shadow-[0_28px_90px_rgba(17,27,40,0.11)] sm:rounded-[2rem] sm:p-3">
+              <figure
+                className={`glass-panel relative overflow-hidden rounded-[1.65rem] bg-custom-blue p-2.5 shadow-[0_28px_90px_rgba(17,27,40,0.11)] sm:rounded-[2rem] sm:p-3 ${
+                  content.heroAspect === "16/10" ? "aspect-[16/10]" : "aspect-[16/9]"
+                }`}
+              >
                 <div className="relative h-full overflow-hidden rounded-[1.15rem] bg-[#071726] sm:rounded-[1.45rem]">
                   <Image
                     src={content.heroImage ?? project.image}

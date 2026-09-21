@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {
   alternatePersonNames,
+  location,
   personName,
   roleTitle,
   shareImage,
@@ -9,9 +10,11 @@ import {
   siteUrl,
 } from "./seo";
 
+const homeTitle = `${personName} | ${roleTitle} in ${location}`;
+
 export const metadata: Metadata = {
   title: {
-    default: `${personName} | ${roleTitle} in Singapore`,
+    default: homeTitle,
     template: `%s | ${personName}`,
   },
   description: siteDescription,
@@ -48,21 +51,21 @@ export const metadata: Metadata = {
     type: "profile",
     locale: "en_US",
     url: "/",
-    title: `${personName} | ${roleTitle} in Singapore`,
+    title: homeTitle,
     description: siteDescription,
     siteName,
     images: [
       {
         url: shareImage,
-        width: 1200,
-        height: 900,
+        width: 1600,
+        height: 1200,
         alt: "Marcell Varga, Singapore-based UX and frontend engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${personName} | ${roleTitle} in Singapore`,
+    title: homeTitle,
     description: siteDescription,
     images: [shareImage],
   },

@@ -63,6 +63,7 @@ export default function AboutPage() {
               <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">
                 <Link
                   href="#more-about-me"
+                  data-cursor-label="Keep reading"
                   className="group inline-flex items-center gap-3 rounded-full bg-custom-blue px-6 py-3 text-sm font-medium text-white shadow-[0_18px_48px_rgba(17,27,40,0.18)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-[#0b2438] active:translate-y-0 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-custom-teal focus-visible:ring-offset-3"
                 >
                   More about me
@@ -218,6 +219,7 @@ export default function AboutPage() {
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a
               href="mailto:themarcellvarga@gmail.com"
+              data-cursor-label="Send email"
               className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-custom-blue px-6 py-3 text-sm font-medium text-white shadow-[0_18px_48px_rgba(17,27,40,0.18)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-[#0b2438] active:translate-y-0 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-custom-teal focus-visible:ring-offset-3 sm:w-fit"
             >
               <Mail className="h-4 w-4 text-[#67d9ff]" />
@@ -225,6 +227,7 @@ export default function AboutPage() {
             </a>
             <Link
               href="/#contact"
+              data-cursor-label="Open contact"
               className="group inline-flex items-center gap-2 font-label text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-custom-blue/64 outline-none transition-colors duration-300 hover:text-custom-blue focus-visible:ring-2 focus-visible:ring-custom-teal focus-visible:ring-offset-3"
             >
               Contact

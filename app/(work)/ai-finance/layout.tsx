@@ -21,7 +21,7 @@ export const metadata: Metadata = {
       {
         url: "/images/ai-finance/aperture-guided-overview.jpg",
         width: 1440,
-        height: 1024,
+        height: 810,
         alt: "Aperture Financial Intelligence product interface",
       },
     ],

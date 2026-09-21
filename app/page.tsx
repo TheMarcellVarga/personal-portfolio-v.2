@@ -22,18 +22,15 @@ import {
 } from "framer-motion";
 import { useClientReducedMotion } from "./hooks/useClientReducedMotion";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   ArrowRight,
   ArrowUpRight,
-  Blocks,
   ChevronDown,
-  Code2,
   Download,
   Github,
   Linkedin,
   Mail,
-  Rocket,
-  Sparkles,
 } from "lucide-react";
 import Header from "./header";
 import Footer from "./footer";
@@ -44,6 +41,8 @@ import { HomeIntro } from "./components/HomeIntro";
 import { PageBackground } from "./components/PageBackground";
 import { HeroCanvasBackdrop } from "./components/HeroCanvasBackdrop";
 import { SplitTextReveal } from "./components/SplitTextReveal";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const principlesStatement =
   "I turn complex product workflows into clear interfaces, then carry them through backend architecture, reliability, testing, and release.";
@@ -64,57 +63,52 @@ const supportingProjectOrder = [
 // Flip to true when the case studies need to be temporarily covered again.
 const SHOW_CASE_STUDY_RESTRUCTURING_NOTICE = false;
 
-const capabilityRows = [
+const expertiseGroups = [
   {
-    title: "Product workflows",
-    body: "Turn ambiguous requirements into clear React and TypeScript workflows, from interaction architecture and prototyping through production delivery.",
-    icon: Blocks,
+    title: "Product judgment",
+    description:
+      "I turn ambiguous requirements into clear workflows and focused product decisions.",
   },
   {
-    title: "Frontend architecture",
-    body: "Build reusable components and design-system patterns across modular frontends using Webpack, Module Federation, and single-spa.",
-    icon: Sparkles,
+    title: "Frontend ownership",
+    description:
+      "I carry the work from UX and prototyping into production React and TypeScript.",
   },
   {
-    title: "Systems integration",
-    body: "Work beyond the interface across REST and WebSocket integrations, Node.js and Express APIs, and Java and Spring services.",
-    icon: Code2,
+    title: "Reliable delivery",
+    description:
+      "I work across APIs, accessibility, testing, and release details so the experience holds up in production.",
   },
-  {
-    title: "Accessible delivery",
-    body: "Carry responsive behavior, WCAG accessibility, interaction testing, and release detail through the full implementation.",
-    icon: Rocket,
-  },
-];
+] as const;
 
-type CapabilityRowData = (typeof capabilityRows)[number];
+type ExpertiseGroup = (typeof expertiseGroups)[number];
 
-function CapabilityRow({
-  card,
+function ExpertiseRow({
+  group,
   index,
 }: {
-  card: CapabilityRowData;
+  group: ExpertiseGroup;
   index: number;
 }) {
-  const Icon = card.icon;
-
   return (
     <article
-      data-capabilities-card
-      className="grid gap-4 border-t border-custom-blue/12 py-6 sm:grid-cols-[3rem_minmax(0,1fr)] sm:gap-6 sm:py-7"
+      data-expertise-row
+      className="relative grid gap-3 py-7 sm:grid-cols-[3rem_minmax(12rem,0.72fr)_minmax(0,1.28fr)] sm:gap-7 sm:py-9 lg:gap-10"
     >
-      <div className="flex h-10 w-10 items-center justify-center rounded-[0.9rem] bg-white/72 text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_8px_24px_rgba(11,17,26,0.05)]">
-        <Icon className="h-[1.1rem] w-[1.1rem]" aria-hidden="true" />
-      </div>
-      <div className="grid gap-2 sm:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] sm:gap-8">
-        <h3 className="font-display text-[1.2rem] font-medium leading-tight tracking-[-0.02em] text-custom-blue sm:text-[1.35rem]">
-          {card.title}
-        </h3>
-        <p className="max-w-[36rem] text-[0.82rem] leading-6 text-custom-blue/66 sm:text-[0.9rem] sm:leading-7">
-          {card.body}
-        </p>
-      </div>
-      <span className="sr-only">Capability {index + 1} of {capabilityRows.length}</span>
+      <span
+        data-expertise-divider
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-px origin-left bg-custom-blue/14"
+      />
+      <span className="font-mono pt-1 text-[0.66rem] tracking-[0.12em] text-custom-blue/64">
+        0{index + 1}
+      </span>
+      <h3 className="font-display text-[1.35rem] font-medium leading-tight tracking-[-0.025em] text-custom-blue sm:text-[1.55rem]">
+        {group.title}
+      </h3>
+      <p className="max-w-[44rem] text-[0.95rem] leading-7 text-custom-blue/68 sm:text-[1.05rem] sm:leading-8">
+        {group.description}
+      </p>
     </article>
   );
 }
@@ -173,107 +167,66 @@ function readIntroAlreadySeen() {
 function HistoryItemComponent({ 
   item, 
   index, 
-  isActive,
 }: { 
   item: HistoryItem; 
   index: number; 
-  isActive: boolean;
 }) {
   return (
     <article
       id={`history-item-${index}`}
-      className={`group relative flex min-h-[60vh] snap-center flex-col justify-center overflow-hidden rounded-[1.85rem] border border-white/60 p-6 transition-all duration-700 sm:rounded-[2.4rem] sm:p-10 ${
-        isActive
-          ? "bg-white/90 shadow-[0_32px_80px_rgba(17,27,40,0.12)] ring-1 ring-[#67d9ff]/30"
-          : "bg-white/64 opacity-60 grayscale-[0.4] hover:-translate-y-1 hover:opacity-90 hover:grayscale-0"
-      }`}
+      className="relative flex min-h-[18rem] snap-center flex-col overflow-hidden rounded-[1.9rem] border border-white/60 bg-white/78 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_12px_40px_rgba(11,17,26,0.04)] transition-[border-color] duration-300 sm:rounded-[2.1rem]"
     >
-      <div
-        className={`pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full blur-3xl transition-all duration-1000 ${
-          isActive ? "scale-110 bg-[#67d9ff]/22" : "scale-75 bg-[#67d9ff]/5"
-        }`}
-      />
-
-      <div className="relative flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-        <div className="space-y-4">
-          <div className="flex flex-wrap items-center gap-3">
-            <span
-              className={`font-label rounded-full px-4 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.18em] transition-colors duration-500 ${
-                isActive
-                  ? "bg-custom-blue/7 text-custom-blue"
-                  : "bg-custom-blue/5 text-custom-blue/40"
-              }`}
-            >
-              {item.time.start} {item.time.end ? `- ${item.time.end}` : "- Present"}
+      <div className="relative z-10 flex h-full flex-col">
+        <div className="mb-5 flex items-start justify-between gap-4">
+          <div
+            className="inline-flex items-center justify-center text-custom-blue/42"
+          >
+            <span className="font-label text-[0.56rem] font-semibold tracking-[0.16em]">
+              0{index + 1}
             </span>
-            {index === 0 && (
-              <span
-                className={`font-label rounded-full px-3.5 py-1.5 text-[0.58rem] font-bold uppercase tracking-[0.16em] transition-all duration-500 ${
-                  isActive
-                    ? "bg-[#67d9ff]/15 text-custom-blue shadow-[0_4px_12px_rgba(103,217,255,0.2)]"
-                    : "bg-custom-blue/5 text-custom-blue/30"
-                }`}
-              >
-                Current
-              </span>
-            )}
           </div>
-
-          <div className="space-y-1">
-            <h3
-              className={`font-display text-[clamp(1.6rem,2.4vw,2.4rem)] font-medium leading-[1.1] tracking-[-0.02em] text-custom-blue transition-opacity duration-500 ${
-                isActive ? "opacity-100" : "opacity-70"
-              }`}
+          {index === 0 && (
+            <span
+              className="font-label rounded-full bg-custom-teal/12 px-2.5 py-1.5 text-[0.54rem] font-medium uppercase tracking-[0.15em] text-custom-blue shadow-[inset_0_1px_0_rgba(255,255,255,0.58)]"
             >
-              {item.jobTitle}
-            </h3>
-            <p
-              className={`font-label text-[0.72rem] font-bold uppercase tracking-[0.22em] transition-colors duration-500 ${
-                isActive ? "text-custom-blue/50" : "text-custom-blue/30"
-              }`}
-            >
-              {item.company}
-            </p>
-          </div>
+              Current
+            </span>
+          )}
         </div>
 
-        <div
-          className={`font-label text-[0.65rem] font-black tracking-[0.2em] transition-all duration-700 ${
-            isActive ? "scale-110 text-custom-blue/25" : "scale-100 text-custom-blue/10"
-          }`}
-        >
-          0{index + 1}
-        </div>
-      </div>
-
-      <div className="mt-8 grid gap-3.5">
-        {item.description.map((paragraph: string) => (
-          <p
-            key={paragraph}
-            className={`max-w-[42rem] rounded-[1.25rem] px-5 py-4 text-[0.94rem] leading-relaxed transition-all duration-700 ${
-              isActive
-                ? "bg-white/60 text-custom-blue/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_4px_16px_rgba(17,27,40,0.02)]"
-                : "text-custom-blue/50"
-            }`}
-          >
-            {paragraph}
+        <div className="space-y-1">
+          <h3 className="max-w-none font-display text-[1.18rem] font-medium leading-[1.06] tracking-[-0.02em] text-custom-blue sm:text-[1.38rem]">
+            {item.jobTitle}
+          </h3>
+          <p className="font-label text-[0.72rem] font-medium uppercase tracking-[0.16em] text-custom-blue/70">
+            {item.company}
           </p>
-        ))}
-      </div>
+        </div>
 
-      <div className="mt-8 flex flex-wrap gap-2.5">
-        {item.skills.map((skill: string) => (
-          <span
-            key={skill}
-            className={`font-label rounded-full px-4 py-2 text-[0.62rem] font-bold uppercase tracking-[0.14em] transition-all duration-500 ${
-              isActive
-                ? "bg-white text-custom-blue/70 shadow-[inset_0_1px_0_rgba(255,255,255,1),0_8px_24px_rgba(17,27,40,0.04)]"
-                : "bg-white/40 text-custom-blue/30"
-            }`}
-          >
-            {skill}
+        <div className="mt-2.5 grid max-w-[32rem] gap-2.5">
+          {item.description.map((paragraph: string) => (
+            <p
+              key={paragraph}
+              className="text-[0.78rem] leading-6 text-custom-blue/70"
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
+        <div className="mt-auto flex flex-wrap gap-2 pt-5">
+          <span className="font-label rounded-full bg-custom-blue/8 px-3 py-1.5 text-[0.66rem] font-medium uppercase tracking-[0.14em] text-custom-blue/78 shadow-[inset_0_1px_0_rgba(255,255,255,0.58)]">
+            {item.time.start} {item.time.end ? `- ${item.time.end}` : "- Present"}
           </span>
-        ))}
+          {item.skills.map((skill: string) => (
+            <span
+              key={skill}
+              className="font-label rounded-full bg-custom-blue/8 px-3 py-1.5 text-[0.66rem] font-medium uppercase tracking-[0.14em] text-custom-blue/78 shadow-[inset_0_1px_0_rgba(255,255,255,0.58)]"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
       </div>
     </article>
   );
@@ -466,6 +419,7 @@ export default function Page() {
   const enableScrollMotion = hasMounted && !shouldReduceMotion;
   const headerLogoRef = useRef<HTMLSpanElement>(null);
   const mainStageRef = useRef<HTMLDivElement>(null);
+  const capabilitiesSectionRef = useRef<HTMLElement>(null);
   const heroIntroAnimationStartedRef = useRef(false);
 
   const heroRef = useRef<HTMLElement>(null);
@@ -899,6 +853,61 @@ export default function Page() {
     };
   }, [introStage, shouldReduceMotion]);
 
+  useLayoutEffect(() => {
+    const section = capabilitiesSectionRef.current;
+    if (!section || shouldReduceMotion) return;
+
+    const rows = Array.from(
+      section.querySelectorAll<HTMLElement>("[data-expertise-row]"),
+    );
+    const dividers = Array.from(
+      section.querySelectorAll<HTMLElement>("[data-expertise-divider]"),
+    );
+    const progress = section.querySelector<HTMLElement>("[data-expertise-progress]");
+
+    const context = gsap.context(() => {
+      gsap.set(rows, { autoAlpha: 0, y: 28 });
+      gsap.set(dividers, { scaleX: 0, transformOrigin: "left center" });
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 72%",
+          once: true,
+        },
+      })
+        .to(dividers, {
+          scaleX: 1,
+          duration: 0.8,
+          stagger: 0.11,
+          ease: "power3.out",
+        })
+        .to(rows, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.72,
+          stagger: 0.1,
+          ease: "power3.out",
+        }, 0.08);
+
+      if (progress) {
+        gsap.fromTo(progress, { scaleX: 0 }, {
+          scaleX: 1,
+          ease: "none",
+          transformOrigin: "left center",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 70%",
+            end: "bottom 45%",
+            scrub: 0.5,
+          },
+        });
+      }
+    }, section);
+
+    return () => context.revert();
+  }, [shouldReduceMotion]);
+
   const featuredProjects = useMemo(
     () =>
       projects
@@ -1057,19 +1066,19 @@ export default function Page() {
                   <div data-hero-cta-group className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
                     <button
                       onClick={scrollWork}
-                      className="group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.9)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8] hover:shadow-[0_24px_70px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.9)] active:translate-y-0 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c] sm:w-fit"
+                      data-cursor-label="View work"
+                      className="relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.9)] outline-none transition duration-300 hover:bg-white/92 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c] sm:w-fit"
                     >
-                      <span className="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_0%,rgba(103,217,255,0.18)_45%,transparent_70%)] transition-transform duration-700 group-hover:translate-x-full" />
-                      <span className="relative z-10">Selected work</span>
-                      <ArrowRight className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                      <span>Selected work</span>
+                      <ArrowRight className="h-4 w-4" />
                     </button>
                     <Link
                       href="/resume"
-                      className="hero-resume-cta group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full px-6 py-3 text-sm font-medium outline-none sm:w-fit"
+                      data-cursor-label="Open resume"
+                      className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-white/10 px-6 py-3 text-sm font-medium text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16)_opacity-60] outline-none transition duration-300 hover:bg-white/14 focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c] sm:w-fit"
                     >
-                      <span className="hero-resume-sheen pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_0%,rgba(103,217,255,0.18)_45%,transparent_70%)] transition-transform duration-700 group-hover:translate-x-full" />
                       <span className="relative z-10">Resume</span>
-                      <Download className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
+                      <Download className="relative z-10 h-4 w-4" />
                     </Link>
                     </div>
                   </div>
@@ -1147,19 +1156,19 @@ export default function Page() {
                   <div data-hero-cta-group className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
                     <button
                       onClick={scrollWork}
-                      className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.9)] outline-none transition duration-300 hover:-translate-y-0.5 hover:bg-[#eef4f8] hover:shadow-[0_24px_70px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.9)] active:translate-y-0 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c]"
+                      data-cursor-label="View work"
+                      className="relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.9)] outline-none transition duration-300 hover:bg-white/92 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c]"
                     >
-                      <span className="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_0%,rgba(103,217,255,0.18)_45%,transparent_70%)] transition-transform duration-700 group-hover:translate-x-full" />
-                      <span className="relative z-10">Selected work</span>
-                      <ArrowRight className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                      <span>Selected work</span>
+                      <ArrowRight className="h-4 w-4" />
                     </button>
                     <Link
                       href="/resume"
-                      className="hero-resume-cta group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-6 py-3 text-sm font-medium outline-none"
+                      data-cursor-label="Open resume"
+                      className="inline-flex items-center gap-3 rounded-full bg-white/10 px-6 py-3 text-sm font-medium text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16)_opacity-60] outline-none transition duration-300 hover:bg-white/14 focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c]"
                     >
-                      <span className="hero-resume-sheen pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_0%,rgba(103,217,255,0.18)_45%,transparent_70%)] transition-transform duration-700 group-hover:translate-x-full" />
                       <span className="relative z-10">Resume</span>
-                      <Download className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
+                      <Download className="relative z-10 h-4 w-4" />
                     </Link>
                     </div>
                   </div>
@@ -1296,10 +1305,11 @@ export default function Page() {
 
           <section
             id="process"
+            ref={capabilitiesSectionRef}
             data-scroll-anchor="process"
             className="relative mx-auto w-full max-w-7xl py-16 sm:py-24 lg:py-32"
           >
-            <div className="mb-10 max-w-4xl sm:mb-14">
+            <div className="mb-10 max-w-5xl sm:mb-16">
               <SplitTextReveal
                 as="h2"
                 text="What I bring to a product team."
@@ -1309,32 +1319,21 @@ export default function Page() {
                 className="font-display text-[clamp(2.2rem,12vw,5.4rem)] leading-[0.98] tracking-[-0.04em] text-custom-blue sm:leading-[0.92]"
               />
               <p className="mt-5 max-w-2xl text-[0.95rem] leading-7 text-custom-blue/66 sm:mt-6 sm:text-[1.05rem] sm:leading-8">
-                Product judgment, frontend depth, and enough backend context to carry
-                complex workflows from ambiguity to release.
+                Product thinking and frontend engineering, carried from ambiguity
+                to release.
               </p>
             </div>
 
-            <div className="grid gap-8 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:gap-16 xl:gap-24">
-              <aside className="flex min-h-[22rem] flex-col justify-between rounded-[2rem] bg-[#071726] p-6 text-white shadow-[0_28px_90px_rgba(7,23,38,0.16),inset_0_1px_0_rgba(255,255,255,0.14)] sm:min-h-[26rem] sm:rounded-[2.5rem] sm:p-9 lg:sticky lg:top-28 lg:self-start">
-                <p className="max-w-[15ch] font-display text-[clamp(2rem,7vw,3.6rem)] leading-[1.02] tracking-[-0.035em] text-[#e8f0f4]">
-                  UX judgment meets production engineering.
-                </p>
-                <div className="mt-12 border-t border-white/15 pt-5">
-                  <p className="text-sm font-medium text-white/90">
-                    React + TypeScript
-                  </p>
-                  <p className="mt-2 max-w-sm text-sm leading-6 text-white/60">
-                    Design systems, modular frontends, API integration, testing, and
-                    accessibility.
-                  </p>
-                </div>
-              </aside>
-
-              <div>
-                {capabilityRows.map((card, index) => (
-                  <CapabilityRow key={card.title} card={card} index={index} />
-                ))}
-              </div>
+            <div className="relative">
+              <span
+                data-expertise-progress
+                aria-hidden="true"
+                className="absolute inset-x-0 top-0 h-[2px] origin-left bg-[var(--title-accent)]"
+              />
+              {expertiseGroups.map((group, index) => (
+                <ExpertiseRow key={group.title} group={group} index={index} />
+              ))}
+              <span aria-hidden="true" className="block h-px bg-custom-blue/14" />
             </div>
           </section>
 
@@ -1412,6 +1411,8 @@ export default function Page() {
                     type="button"
                     aria-controls="legacy-project-list"
                     aria-expanded={legacyProjectsOpen}
+                    data-cursor-label="Open archive"
+                    data-cursor-label-expanded="Close archive"
                     data-testid="legacy-projects-toggle"
                     onClick={() => setLegacyProjectsOpen((isOpen) => !isOpen)}
                     className="grid w-full cursor-pointer grid-cols-[minmax(0,1fr)] gap-4 rounded-[1.5rem] px-3 py-5 text-left transition-colors duration-500 hover:bg-custom-blue/[0.01] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-custom-blue/30 focus-visible:ring-inset sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:py-8"
@@ -1573,14 +1574,12 @@ export default function Page() {
               </div>
 
               {/* Scrolling History List */}
-              <div className="relative snap-y snap-proximity space-y-12 py-[20vh] sm:space-y-24">
-                <div className="pointer-events-none absolute bottom-12 left-5 top-12 hidden w-px bg-gradient-to-b from-custom-blue/0 via-custom-blue/10 to-custom-blue/0 sm:block" />
+              <div className="relative snap-y snap-proximity space-y-5 py-6 sm:space-y-16 sm:py-10 lg:py-[20vh]">
                 {history.map((item, index) => (
                   <HistoryItemComponent
                     key={`${item.company}-${item.time.start}`}
                     item={item}
                     index={index}
-                    isActive={historyActiveIndex === index}
                   />
                 ))}
               </div>
@@ -1615,6 +1614,7 @@ export default function Page() {
                 <div className="grid gap-2.5 self-end sm:gap-3">
                   <a
                     href="mailto:themarcellvarga@gmail.com"
+                    data-cursor-label="Send email"
                     className="group flex items-center justify-between gap-3 rounded-[1.25rem] bg-white/7 px-3.5 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 sm:gap-4 sm:rounded-[1.35rem] sm:px-5 sm:py-3.5"
                   >
                     <span className="flex min-w-0 flex-1 items-center gap-3">
@@ -1629,6 +1629,7 @@ export default function Page() {
                     href="https://www.linkedin.com/in/marcellvarga/"
                     target="_blank"
                     rel="noopener noreferrer"
+                    data-cursor-label="Open LinkedIn"
                     className="group flex items-center justify-between rounded-[1.35rem] bg-white/7 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 sm:px-5 sm:py-3.5"
                   >
                     <span className="flex items-center gap-3">
@@ -1643,6 +1644,7 @@ export default function Page() {
                     href="https://github.com/TheMarcellVarga"
                     target="_blank"
                     rel="noopener noreferrer"
+                    data-cursor-label="Open GitHub"
                     className="group flex items-center justify-between rounded-[1.35rem] bg-white/7 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 sm:px-5 sm:py-3.5"
                   >
                     <span className="flex items-center gap-3">

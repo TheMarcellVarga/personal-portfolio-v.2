@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { roleTitle, siteName } from "../seo";
 
-const title = `About Marcell Varga | ${roleTitle}`;
+const title = "About";
+const socialTitle = `About Marcell Varga | ${roleTitle}`;
 const description =
   "Meet Marcell Varga, a Singapore-based UX and frontend engineer who brings product judgment into React, TypeScript, design systems, and trustworthy AI workflows.";
 
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
     canonical: "/about",
   },
   openGraph: {
-    title,
+    title: socialTitle,
     description,
     url: "/about",
     siteName,
@@ -20,8 +21,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/images/marcell-great-wall.webp",
-        width: 1086,
-        height: 1448,
+        width: 1800,
+        height: 2400,
         alt: "Marcell Varga at the Great Wall of China",
       },
     ],

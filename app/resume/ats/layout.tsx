@@ -1,11 +1,20 @@
 import type { Metadata } from "next";
+import { siteName } from "../../seo";
 
 export const metadata: Metadata = {
-  title: "ATS Resume",
+  title: "ATS Resume | Marcell Varga",
   description:
     "ATS-readable resume for Marcell Varga, UX and frontend engineer in Singapore.",
   alternates: {
-    canonical: "/resume",
+    canonical: "/resume/ats",
+  },
+  openGraph: {
+    title: "Marcell Varga ATS Resume",
+    description:
+      "ATS-readable resume for Marcell Varga, UX and frontend engineer in Singapore.",
+    url: "/resume/ats",
+    siteName,
+    type: "profile",
   },
   robots: {
     index: false,
