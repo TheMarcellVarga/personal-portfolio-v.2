@@ -179,7 +179,7 @@ function HistoryItemComponent({
       <div className="relative z-10 flex h-full flex-col">
         <div className="mb-5 flex items-start justify-between gap-4">
           <div
-            className="inline-flex items-center justify-center text-custom-blue/42"
+            className="inline-flex items-center justify-center text-custom-blue/68"
           >
             <span className="font-label text-[0.56rem] font-semibold tracking-[0.16em]">
               0{index + 1}

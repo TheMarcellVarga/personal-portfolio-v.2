@@ -2,7 +2,13 @@ const nextCoreWebVitals = require("eslint-config-next/core-web-vitals");
 
 module.exports = [
   {
-    ignores: [".history/**", "**/.history/**", ".vercel/output/**"]
+    ignores: [
+      ".history/**",
+      "**/.history/**",
+      ".vercel/output/**",
+      "playwright-report/**",
+      "test-results/**",
+    ],
   },
   ...nextCoreWebVitals
 ];

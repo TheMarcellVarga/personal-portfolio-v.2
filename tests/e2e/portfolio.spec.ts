@@ -1,5 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+import { projects } from "../../app/data/projects";
 
 async function prepareHomepage(page: Page) {
   await page.addInitScript(() => {
@@ -143,22 +144,35 @@ test("featured work uses the shared evidence record", async ({ page }) => {
 test("case study recommendations use current work and vary by the page", async ({ page }) => {
   test.setTimeout(45_000);
 
-  for (const [route, currentTitle, expectedCount] of [
-    ["/ai-finance", "Aperture Financial Intelligence", 4],
-    ["/first-revenue-game", "First Revenue Game", 4],
-    ["/wild-route", "Wild Route", 4],
-    ["/threadscribe", "ThreadScribe Studio", 5],
-    ["/focusin", "Focusin", 4],
-    ["/endless-activity", "Endless Activity", 4],
-    ["/catchscan", "CatchScan", 5],
-    ["/askcody", "AskCody", 5],
-    ["/ess", "European Study Solution", 5],
+  for (const [route, currentTitle] of [
+    ["/ai-finance", "Aperture Financial Intelligence"],
+    ["/first-revenue-game", "First Revenue Game"],
+    ["/wild-route", "Wild Route"],
+    ["/threadscribe", "ThreadScribe Studio"],
+    ["/focusin", "Focusin"],
+    ["/endless-activity", "Endless Activity"],
+    ["/catchscan", "CatchScan"],
+    ["/askcody", "AskCody"],
+    ["/ess", "European Study Solution"],
   ] as const) {
     await page.goto(route);
 
+    const expectedRecommendations = projects.filter(
+      (project) =>
+        project.isListed !== false &&
+        project.portfolioPlacement !== "archive" &&
+        project.title !== currentTitle,
+    );
     const currentWork = page.locator("[data-other-works]");
     await expect(currentWork).toContainText("Current case studies");
-    await expect(currentWork.locator("[data-other-works-card]")).toHaveCount(expectedCount);
+    await expect(currentWork.locator("[data-other-works-card]")).toHaveCount(
+      expectedRecommendations.length,
+    );
+    for (const project of expectedRecommendations) {
+      await expect(
+        currentWork.getByRole("heading", { name: project.title, exact: true }),
+      ).toBeVisible();
+    }
     await expect(currentWork.getByRole("heading", { name: currentTitle })).toHaveCount(0);
     await expect(currentWork).not.toContainText("CatchScan");
     await expect(currentWork).not.toContainText("AskCody");
@@ -338,7 +352,7 @@ test.describe("mobile and motion fallbacks", () => {
     await page.goto("/about");
 
     const transitionDuration = await page
-      .getByRole("link", { name: "Resume" })
+      .getByRole("link", { name: "More about me" })
       .evaluate((element) => {
         const duration = getComputedStyle(element).transitionDuration;
         return duration === "" ? 0 : Number.parseFloat(duration);

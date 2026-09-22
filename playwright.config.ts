@@ -1,6 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const testPort = process.env.PLAYWRIGHT_PORT ?? "3100";
+// Keep the test server separate from the local development port (3100).
+const testPort = process.env.PLAYWRIGHT_PORT ?? "3101";
 const testBaseUrl = `http://localhost:${testPort}`;
 
 export default defineConfig({
