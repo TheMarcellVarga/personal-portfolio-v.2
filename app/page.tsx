@@ -53,9 +53,9 @@ const darkSectionPanelClassName =
   "overflow-hidden rounded-[1.65rem] bg-[#071726] text-white shadow-[0_40px_140px_rgba(7,20,38,0.26),inset_0_1px_0_rgba(255,255,255,0.16)] sm:rounded-[2.5rem] lg:rounded-[3rem]";
 
 const contactLinkClassName =
-  "group flex min-h-12 w-full items-center justify-between gap-3 rounded-[1.35rem] bg-white/7 px-4 py-3 text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white md:gap-4 md:px-5 md:py-3.5";
+  "group flex min-h-12 w-full items-center justify-between gap-3 rounded-xl border border-white/12 bg-white/[0.04] px-4 py-2.5 text-white/90 transition-colors duration-200 hover:border-white/20 hover:bg-white/[0.07] active:bg-white/[0.09] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white md:gap-4 md:px-5 md:py-3.5";
 const contactLinkLabelClassName =
-  "min-w-0 break-words font-label text-[0.72rem] font-medium uppercase leading-6 tracking-[0.02em] [overflow-wrap:anywhere] sm:tracking-[0.08em] md:tracking-[0.16em]";
+  "min-w-0 break-words font-label text-sm font-medium normal-case leading-5 tracking-normal [overflow-wrap:anywhere] md:text-[0.72rem]";
 
 
 const featuredProjectOrder = [
