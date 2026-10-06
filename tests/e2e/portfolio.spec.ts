@@ -97,6 +97,76 @@ test("principles statement types forward and reverses on scroll back", async ({ 
   await expect(statement).toHaveText("");
 });
 
+test("Principles stays visible throughout the desktop scroll sequence", async ({ page }) => {
+  await prepareHomepage(page);
+  await page.goto("/");
+  await expect(page.locator(".home-intro-shell")).toHaveCount(0);
+  const panel = page.locator('#about [data-scroll-anchor="about"]');
+
+  for (const progress of [0, 0.4, 0.7]) {
+    await page.locator("#about").evaluate((section, fraction) => {
+      const top = section.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: top + section.clientHeight * fraction, behavior: "instant" });
+    }, progress);
+    await expect(panel).toBeInViewport();
+    await expect(panel).toHaveCSS("opacity", "1");
+    await expect(panel).toContainText("Principles");
+  }
+  await expect(panel.locator("p")).toContainText("testing, and release.");
+});
+
+test("mobile Principles and Contact share the portfolio panel treatment", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await prepareHomepage(page);
+  await page.goto("/");
+  await expect(page.locator(".home-intro-shell")).toHaveCount(0);
+  const principles = page.locator('#about [data-scroll-anchor="about"]');
+  const contact = page.locator('#contact [data-scroll-anchor="contact"]');
+  await principles.scrollIntoViewIfNeeded();
+  await expect(principles).toHaveCSS("opacity", "1");
+  await expect(principles.locator("p")).toHaveText(
+    "I turn complex product workflows into clear interfaces, then carry them through backend architecture, reliability, testing, and release.",
+  );
+  await contact.scrollIntoViewIfNeeded();
+  await expect(contact.getByText("Contact", { exact: true })).toBeVisible();
+  const surfaces = await Promise.all([principles, contact].map((panel) => panel.evaluate((element) => {
+    const style = getComputedStyle(element);
+    return { background: style.backgroundColor, radius: style.borderRadius, left: element.getBoundingClientRect().left, width: element.clientWidth };
+  })));
+  expect(surfaces[0]).toEqual(surfaces[1]);
+});
+
+test("contact keeps desktop button styling across responsive breakpoints", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await prepareHomepage(page);
+  await page.goto("/");
+  await expect(page.locator(".home-intro-stage")).toHaveAttribute("aria-hidden", "false");
+  const contact = page.locator("#contact");
+  let desktopStyles: unknown;
+  for (const width of [1440, 768, 640, 390, 320]) {
+    await page.setViewportSize({ width, height: 844 });
+    await contact.scrollIntoViewIfNeeded();
+    await expect(contact.getByRole("link")).toHaveCount(3);
+    await expect(contact.getByRole("link", { name: /themarcellvarga@gmail.com/i })).toBeVisible();
+    const buttons = await contact.locator("a").evaluateAll((links) => links.map((link) => {
+      const style = getComputedStyle(link);
+      const label = link.querySelector("span span")!;
+      return {
+        treatment: { background: style.backgroundColor, radius: style.borderRadius, shadow: style.boxShadow, textTransform: getComputedStyle(label).textTransform },
+        fits: link.scrollWidth <= link.clientWidth + 1,
+        touchHeight: link.getBoundingClientRect().height,
+      };
+    }));
+    const styles = buttons.map((button) => button.treatment);
+    if (width === 1440) desktopStyles = styles;
+    else expect(styles).toEqual(desktopStyles);
+    for (const button of buttons) {
+      expect(button.fits).toBe(true);
+      expect(button.touchHeight).toBeGreaterThanOrEqual(44);
+    }
+  }
+});
+
 test("about and resume routes are reachable", async ({ page }) => {
   await page.goto("/about");
   await expect(

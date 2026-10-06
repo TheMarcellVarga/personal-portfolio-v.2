@@ -49,6 +49,15 @@ const principlesStatement =
 
 const PRINCIPLES_REVEAL_END = 0.74;
 
+const darkSectionPanelClassName =
+  "overflow-hidden rounded-[1.65rem] bg-[#071726] text-white shadow-[0_40px_140px_rgba(7,20,38,0.26),inset_0_1px_0_rgba(255,255,255,0.16)] sm:rounded-[2.5rem] lg:rounded-[3rem]";
+
+const contactLinkClassName =
+  "group flex min-h-12 w-full items-center justify-between gap-3 rounded-[1.35rem] bg-white/7 px-4 py-3 text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white md:gap-4 md:px-5 md:py-3.5";
+const contactLinkLabelClassName =
+  "min-w-0 break-words font-label text-[0.72rem] font-medium uppercase leading-6 tracking-[0.02em] [overflow-wrap:anywhere] sm:tracking-[0.08em] md:tracking-[0.16em]";
+
+
 const featuredProjectOrder = [
   "Aperture Financial Intelligence",
   "Wild Route",
@@ -93,7 +102,7 @@ function ExpertiseRow({
   return (
     <article
       data-expertise-row
-      className="relative grid gap-3 py-7 sm:grid-cols-[3rem_minmax(12rem,0.72fr)_minmax(0,1.28fr)] sm:gap-7 sm:py-9 lg:gap-10"
+      className="relative grid grid-cols-[1.5rem_minmax(0,1fr)] gap-x-4 gap-y-3 py-8 sm:grid-cols-[3rem_minmax(12rem,0.72fr)_minmax(0,1.28fr)] sm:gap-7 sm:py-9 lg:gap-10"
     >
       <span
         data-expertise-divider
@@ -106,7 +115,7 @@ function ExpertiseRow({
       <h3 className="font-display text-[1.35rem] font-medium leading-tight tracking-[-0.025em] text-custom-blue sm:text-[1.55rem]">
         {group.title}
       </h3>
-      <p className="max-w-[44rem] text-[0.95rem] leading-7 text-custom-blue/68 sm:text-[1.05rem] sm:leading-8">
+      <p className="col-start-2 max-w-[44rem] text-base sm:col-start-auto leading-7 text-custom-blue/68 sm:text-[1.05rem] sm:leading-8">
         {group.description}
       </p>
     </article>
@@ -174,7 +183,7 @@ function HistoryItemComponent({
   return (
     <article
       id={`history-item-${index}`}
-      className="relative flex min-h-[18rem] snap-center flex-col overflow-hidden rounded-[1.9rem] border border-white/60 bg-white/78 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_12px_40px_rgba(11,17,26,0.04)] transition-[border-color] duration-300 sm:rounded-[2.1rem]"
+      className="relative flex min-h-0 sm:min-h-[18rem] snap-center flex-col overflow-hidden rounded-[1.9rem] border border-white/60 bg-white/78 p-7 sm:p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_12px_40px_rgba(11,17,26,0.04)] transition-[border-color] duration-300 sm:rounded-[2.1rem]"
     >
       <div className="relative z-10 flex h-full flex-col">
         <div className="mb-5 flex items-start justify-between gap-4">
@@ -195,7 +204,7 @@ function HistoryItemComponent({
         </div>
 
         <div className="space-y-1">
-          <h3 className="max-w-none font-display text-[1.18rem] font-medium leading-[1.06] tracking-[-0.02em] text-custom-blue sm:text-[1.38rem]">
+          <h3 className="max-w-none font-display text-[1.25rem] font-medium leading-[1.2] tracking-[-0.02em] text-custom-blue sm:text-[1.38rem] sm:leading-[1.06]">
             {item.jobTitle}
           </h3>
           <p className="font-label text-[0.72rem] font-medium uppercase tracking-[0.16em] text-custom-blue/70">
@@ -207,7 +216,7 @@ function HistoryItemComponent({
           {item.description.map((paragraph: string) => (
             <p
               key={paragraph}
-              className="text-[0.78rem] leading-6 text-custom-blue/70"
+              className="text-[0.9375rem] leading-7 text-custom-blue/70 sm:text-[0.78rem] sm:leading-6"
             >
               {paragraph}
             </p>
@@ -302,14 +311,44 @@ function ProjectListItem({
         href={project.link}
         target={isExternalProjectLink(project.link) ? "_blank" : undefined}
         rel={isExternalProjectLink(project.link) ? "noreferrer" : undefined}
-        className="grid grid-cols-[minmax(0,1fr)] gap-4 rounded-[1.5rem] border-b border-custom-blue/5 px-3 py-5 transition-colors duration-500 hover:bg-custom-blue/[0.01] sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:px-0 md:py-8"
+        className="grid grid-cols-[minmax(0,1fr)] gap-4 rounded-none border-b border-custom-blue/15 px-0 py-9 transition-colors duration-500 hover:bg-custom-blue/[0.01] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-custom-blue sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:px-0 md:py-8"
       >
-        <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:gap-8 md:col-span-1">
-          <span className="font-label min-w-[2.5rem] text-[0.62rem] font-bold text-custom-blue/70">
+        <div data-mobile-project-card className="grid min-w-0 gap-5 md:hidden">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-custom-blue/5">
+            <Image
+              src={project.image}
+              alt={`${project.title} preview`}
+              fill
+              sizes="(max-width: 767px) calc(100vw - 4rem), 0px"
+              className="object-cover"
+            />
+          </div>
+          <div className="min-w-0">
+            <div className="mb-3 flex items-center justify-between gap-3 text-xs leading-5 text-custom-blue/60">
+              <span className="font-mono">{numberLabel}</span>
+              <span className="text-right">{project.status}</span>
+            </div>
+            <div className="flex items-start justify-between gap-4">
+              <h3 className="min-w-0 text-pretty font-display text-[clamp(1.5rem,6.6vw,1.875rem)] font-medium leading-[1.15] tracking-[-0.02em] text-custom-blue">
+                {project.title}
+              </h3>
+              <ArrowUpRight aria-hidden="true" className="mt-1.5 h-5 w-5 shrink-0 text-custom-blue/75" />
+            </div>
+            <p className="mt-3 text-sm leading-6 text-custom-blue/70">
+              {project.subTitle}
+            </p>
+            <p className="mt-4 text-xs leading-5 text-custom-blue/60">
+              {project.skills.slice(0, 4).join(" · ")}
+            </p>
+          </div>
+        </div>
+        <div className="hidden md:contents">
+        <div className="flex min-w-0 flex-row items-start gap-3 sm:flex-row sm:items-center sm:gap-8 md:col-span-1">
+          <span className="font-label min-w-[1.25rem] pt-1 text-[0.62rem] font-bold sm:min-w-[2.5rem] sm:pt-0 text-custom-blue/70">
             {numberLabel}
           </span>
           <div className="flex flex-1 items-center justify-between gap-4">
-            <h3 className="min-w-0 text-pretty font-display text-[clamp(1.55rem,8vw,1.95rem)] leading-[1.02] tracking-[-0.02em] text-custom-blue transition-transform duration-500 group-hover:translate-x-0 sm:text-[2.2rem] md:group-hover:translate-x-2 lg:text-[2.8rem]">
+            <h3 className="min-w-0 text-pretty font-display text-[clamp(1.7rem,7.5vw,2rem)] leading-[1.05] sm:leading-[1.02] tracking-[-0.02em] text-custom-blue transition-transform duration-500 group-hover:translate-x-0 sm:text-[2.2rem] md:group-hover:translate-x-2 lg:text-[2.8rem]">
               {project.title}
             </h3>
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-custom-blue/10 transition-all duration-500 group-hover:rotate-45 group-hover:bg-custom-blue group-hover:text-white md:hidden">
@@ -322,7 +361,7 @@ function ProjectListItem({
           {project.skills.slice(0, 4).map((skill) => (
             <span
               key={skill}
-              className="text-[0.58rem] font-medium uppercase tracking-[0.15em] text-custom-blue/70"
+              className="text-[0.6875rem] font-medium uppercase tracking-[0.12em] text-custom-blue/70 sm:text-[0.58rem] sm:tracking-[0.15em]"
             >
               {skill}
             </span>
@@ -330,11 +369,11 @@ function ProjectListItem({
         </div>
 
         <div className="flex items-center justify-between gap-6 md:justify-self-end">
-          <div className="flex items-center gap-3 text-left md:flex-col md:items-end md:gap-0.5 md:text-right">
-            <span className="font-label text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/70">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-left md:flex-col md:items-end md:gap-0.5 md:text-right">
+            <span className="font-label text-[0.6875rem] font-medium uppercase tracking-[0.12em] text-custom-blue/70 sm:text-[0.58rem] sm:tracking-[0.18em]">
               {project.category}
             </span>
-            <span className="font-label text-[0.58rem] font-bold text-custom-blue/70">
+            <span className="font-label text-[0.6875rem] font-bold text-custom-blue/70 sm:text-[0.58rem]">
               {project.status}
             </span>
           </div>
@@ -344,16 +383,6 @@ function ProjectListItem({
           <ArrowUpRight className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
         </div>
 
-        <div className="overflow-hidden rounded-[1.25rem] border border-custom-blue/8 md:hidden">
-          <div className="relative aspect-[16/10]">
-            <Image
-              src={project.image}
-              alt={`${project.title} preview`}
-              fill
-              sizes="(max-width: 767px) 100vw, 0px"
-              className="object-cover"
-            />
-          </div>
         </div>
       </Link>
     </motion.article>
@@ -471,29 +500,24 @@ export default function Page() {
   const liquidRise = useTransform(liquidProgress, [0, 1], [260, -54]);
   const { scrollYProgress: principlesProgress } = useScroll({
     target: principlesRef,
-    offset: ["start start", "end end"],
+    offset: ["start 85%", "end 85%"],
   });
   const { scrollYProgress: workScrollProgress } = useScroll({
     target: workSectionRef,
     offset: ["start end", "end start"],
   });
   const principlesRevealEnd = PRINCIPLES_REVEAL_END;
-  const principlesOpacity = useTransform(
-    principlesProgress,
-    [0, 0.12, 0.74, 0.86, 0.95, 1],
-    [0, 1, 1, 0.88, 0.32, 0],
-  );
   const principlesScale = useTransform(
     principlesProgress,
     [0, 0.18, 0.74, 0.86, 1],
-    [0.92, 1, 1, 0.99, 0.92],
+    [0.98, 1, 1, 1, 1],
   );
   const principlesY = useTransform(
     principlesProgress,
     [0, 0.2, 0.74, 0.86, 1],
-    [36, 0, 0, -8, -72],
+    [16, 0, 0, 0, 0],
   );
-  const principlesGlow = useTransform(principlesProgress, [0, 1], [0, 0.5]);
+  const principlesGlow = useTransform(principlesProgress, [0, 1], [0.35, 1]);
 
   const [isCompactViewport, setIsCompactViewport] = useState(false);
   useEffect(() => {
@@ -944,7 +968,6 @@ export default function Page() {
   const introHasCompleted = introStage === "done";
   const introHeaderMuted = introStage !== "done";
   const revealHeroTitle = introStage === "exiting" || introStage === "done";
-  const principlesIntroReady = introStage === "done";
   const principlesDisplayText =
     isCompactViewport || shouldReduceMotion ? principlesStatement : typedText;
 
@@ -1008,104 +1031,71 @@ export default function Page() {
         aria-hidden={introIsVisible}
         inert={introIsVisible ? true : undefined}
       >
-        <main className="relative z-10 px-4 pb-8 pt-0 sm:px-6 sm:pb-12 lg:px-10">
+        <main className="page-gutter relative z-10 pb-8 pt-0 sm:px-6 sm:pb-12 lg:px-10">
           <section
             id="hero"
             ref={heroRef}
-            className="isolate relative left-1/2 z-20 min-h-[100dvh] w-screen -translate-x-1/2 overflow-x-clip overflow-y-visible"
+            className="isolate relative left-1/2 z-20 min-h-0 w-screen sm:min-h-[100dvh] -translate-x-1/2 overflow-x-clip overflow-y-visible"
           >
             <div className="absolute inset-0 bg-[#06111c]" />
             <HeroDynamicBackdrop />
             <div className="absolute inset-0 z-10 bg-[linear-gradient(180deg,rgba(4,9,15,0.92)_0%,rgba(4,9,15,0.82)_36%,rgba(4,9,15,0.44)_100%)] lg:bg-[linear-gradient(90deg,rgba(4,9,15,0.98)_0%,rgba(4,9,15,0.9)_30%,rgba(4,9,15,0.6)_52%,rgba(4,9,15,0.18)_72%,rgba(4,9,15,0.08)_100%)]" />
 
-            <div className="relative z-30 mx-auto flex min-h-[100dvh] w-full max-w-7xl flex-col gap-7 px-4 pb-10 pt-22 sm:gap-10 sm:px-10 sm:pb-12 sm:pt-24 md:grid md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:items-center md:gap-7 lg:hidden">
-              <div className="max-w-[36rem]">
-                <motion.div
-                  style={enableScrollMotion ? { y: heroPillsY } : undefined}
-                  className="hero-scroll-layer mb-7 flex flex-wrap gap-3"
-                >
-                  <div data-hero-badge className="home-intro-fold inline-flex overflow-hidden rounded-full bg-white/10 px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_16px_40px_rgba(0,0,0,0.18)_opacity-60] backdrop-blur-xl [transform-origin:left_center]">
-                    <span data-hero-badge-label className="font-label block text-[0.66rem] font-medium uppercase tracking-[0.28em] text-white/90">
-                      UX & Frontend Engineer
-                    </span>
+            <div className="relative z-30 mx-auto w-full max-w-7xl pt-28 sm:pt-32 lg:hidden">
+              <div className="page-gutter sm:px-10">
+                <div data-hero-badge className="home-intro-fold mb-7 inline-flex rounded-full bg-white/10 px-4 py-2 [transform-origin:left_center]">
+                  <span data-hero-badge-label className="font-label text-[0.625rem] font-medium uppercase tracking-[0.2em] text-white/90">
+                    UX & Frontend Engineer
+                  </span>
+                </div>
+                <div className="home-intro-fold [transform-origin:bottom]">
+                  <SplitTextReveal
+                    as="h1"
+                    text="Marcell Varga"
+                    animate={revealHeroTitle && !shouldReduceMotion}
+                    visible={revealHeroTitle}
+                    delay={0.08}
+                    className="max-w-[6.6ch] font-display text-[clamp(3.6rem,16vw,6rem)] font-semibold leading-[0.95] tracking-[-0.03em] text-white"
+                  />
+                  <div data-hero-copy className="mt-6 max-w-[30rem]">
+                    <p className="text-base leading-7 text-white/90 sm:text-lg sm:leading-8">
+                      Singapore-based UX and frontend engineer using React and
+                      TypeScript to turn complex products and AI workflows into
+                      clear, resilient interfaces.
+                    </p>
                   </div>
-                </motion.div>
-
-                <motion.div
-                  style={
-                    enableScrollMotion
-                      ? { y: heroCopyY, opacity: heroCopyOpacity }
-                      : undefined
-                  }
-                  className="hero-scroll-layer space-y-6"
-                >
-                  <div className="home-intro-fold space-y-6 [transform-origin:bottom]">
-                    <SplitTextReveal
-                      as="h1"
-                      text="Marcell Varga"
-                      animate={revealHeroTitle && !shouldReduceMotion}
-                      visible={revealHeroTitle}
-                      delay={0.08}
-                      className="max-w-[8ch] font-display text-[clamp(2.85rem,13vw,4.2rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-white sm:text-[clamp(3.4rem,8vw,4.8rem)] md:text-[clamp(3.8rem,7vw,5.4rem)]"
-                    />
-                    <div data-hero-copy>
-                      <p className="max-w-[30rem] text-[0.95rem] leading-7 text-white/90 sm:text-[1.05rem] sm:leading-8">
-                        Singapore-based UX and frontend engineer using React and
-                        TypeScript to turn complex products and AI workflows into
-                        clear, resilient interfaces.
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  style={enableScrollMotion ? { y: heroCardsY } : undefined}
-                  className="hero-scroll-layer mt-10"
-                >
-                  <div className="home-intro-fold flex flex-col gap-4 [transform-origin:bottom] sm:flex-row sm:items-center sm:gap-6">
-                  <div data-hero-cta-group className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-                    <button
-                      onClick={scrollWork}
-                      data-cursor-label="View work"
-                      className="relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-white px-6 py-3 text-sm font-medium text-custom-blue shadow-[0_20px_60px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.9)] outline-none transition duration-300 hover:bg-white/92 active:scale-[0.985] focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c] sm:w-fit"
-                    >
-                      <span>Selected work</span>
-                      <ArrowRight className="h-4 w-4" />
-                    </button>
-                    <Link
-                      href="/resume"
-                      data-cursor-label="Open resume"
-                      className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-white/10 px-6 py-3 text-sm font-medium text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.16)_opacity-60] outline-none transition duration-300 hover:bg-white/14 focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#06111c] sm:w-fit"
-                    >
-                      <span className="relative z-10">Resume</span>
-                      <Download className="relative z-10 h-4 w-4" />
-                    </Link>
-                    </div>
-                  </div>
-                </motion.div>
+                </div>
+                <div data-hero-cta-group className="home-intro-fold mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 [transform-origin:bottom]">
+                  <button
+                    onClick={scrollWork}
+                    data-cursor-label="View work"
+                    className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-white px-5 py-3 text-sm font-medium text-custom-blue transition hover:bg-white/92 active:scale-[0.985] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                  >
+                    Selected work
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
+                  <Link
+                    href="/resume"
+                    data-cursor-label="Open resume"
+                    className="inline-flex min-h-12 items-center gap-2 text-sm font-medium text-white/90 transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                  >
+                    Resume
+                    <Download className="h-4 w-4 shrink-0" />
+                  </Link>
+                </div>
               </div>
-
-              <motion.div
-                style={enableScrollMotion ? { y: portraitY, scale: portraitScale } : undefined}
-                className="hero-scroll-layer relative w-full max-w-[24rem] self-center overflow-hidden rounded-[1.65rem] border border-white/10 bg-white/6 p-2.5 shadow-[0_20px_70px_rgba(0,0,0,0.24)] backdrop-blur-xl sm:max-w-[30rem] sm:rounded-[2rem] sm:p-3 md:max-w-none"
-              >
-                <motion.div className="relative overflow-hidden rounded-[1.2rem] bg-[#071726] sm:rounded-[1.5rem]">
-                  <div className="relative h-full w-full">
-                    <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
-                    <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
-                    <div className="relative aspect-[1.18] w-full sm:aspect-[1.04] md:aspect-[0.78]">
-                      <Image
-                        src="/images/personalpageprofilealt.webp"
-                        alt="Portrait of Marcell Varga"
-                        fill
-                        sizes="(max-width: 639px) 24rem, (max-width: 1023px) 30rem, 0px"
-                        priority
-                        className="object-cover object-[center_18%]"
-                      />
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
+              <div className="home-intro-fold relative mt-8 flex h-[23rem] w-full items-end justify-center overflow-hidden sm:h-[30rem] [transform-origin:bottom]">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_70%,rgba(76,207,255,0.12),transparent_70%)]" />
+                <Image
+                  src="/images/personalpageprofilealt.webp"
+                  alt="Portrait of Marcell Varga"
+                  width={1210}
+                  height={1777}
+                  sizes="(max-width: 639px) 80vw, (max-width: 1023px) 60vw, 0px"
+                  priority
+                  className="relative h-full w-auto max-w-none object-contain object-bottom drop-shadow-[0_24px_60px_rgba(0,0,0,0.3)]"
+                />
+              </div>
             </div>
 
             <div className="relative z-30 mx-auto hidden min-h-[100dvh] w-full max-w-7xl items-center px-6 pb-10 pt-24 sm:px-10 sm:pb-14 lg:flex lg:px-14 lg:pb-12">
@@ -1219,41 +1209,31 @@ export default function Page() {
           <section
             id="about"
             ref={principlesRef}
-            className="isolate relative z-10 mx-auto mt-8 w-full max-w-7xl sm:mt-12 lg:-mt-12 lg:h-[260vh]"
+            className="isolate relative z-30 mx-auto mt-8 w-full max-w-7xl sm:mt-12 lg:-mt-12 lg:h-[260vh]"
           >
             <div className="lg:sticky lg:top-16 lg:flex lg:h-[32rem] lg:items-center lg:py-10 xl:top-24 xl:h-[40rem] xl:py-12">
                 <motion.div
                   data-scroll-anchor="about"
                   style={
                     enableScrollMotion && !isCompactViewport
-                      ? principlesIntroReady
-                        ? {
-                            opacity: principlesOpacity,
-                            scale: principlesScale,
-                            y: principlesY,
-                          }
-                        : { opacity: 0, scale: 0.98, y: 24 }
-                      : principlesIntroReady
-                        ? undefined
-                        : { opacity: 0, scale: 0.98, y: 24 }
+                      ? { scale: principlesScale, y: principlesY }
+                      : undefined
                   }
-                className="mx-auto flex h-auto min-h-[20rem] w-full max-w-5xl flex-col overflow-hidden rounded-[1.65rem] bg-[#071726]/92 p-5 text-white shadow-[0_40px_140px_rgba(5,16,32,0.28),inset_0_1px_0_rgba(255,255,255,0.16)] sm:min-h-[28rem] sm:rounded-[2.5rem] sm:p-8 lg:h-[40rem] lg:min-h-0 lg:rounded-[3rem] lg:p-12"
+                  className={`${darkSectionPanelClassName} mx-auto flex h-auto w-full max-w-5xl flex-col px-6 py-8 sm:min-h-[28rem] sm:p-8 lg:h-[40rem] lg:min-h-0 lg:p-12`}
               >
                 <div className="flex h-full flex-col justify-between gap-8">
                   <div>
                     <SectionLabel index="01" label="Principles" tone="light" />
                     <motion.div
                       style={
-                        enableScrollMotion && !isCompactViewport && principlesIntroReady
+                        enableScrollMotion && !isCompactViewport
                           ? { opacity: principlesGlow }
-                          : principlesIntroReady
-                            ? undefined
-                            : { opacity: 0 }
+                          : undefined
                       }
                       className="mb-8 h-px w-full bg-[linear-gradient(90deg,rgba(76,216,255,0.85),rgba(76,216,255,0.02))]"
                     />
                     <p
-                      className="max-w-4xl font-display text-[clamp(1.55rem,7vw,4.6rem)] leading-[1.12] tracking-[-0.02em] !text-[#f8fbff] sm:leading-[1.08]"
+                      className="max-w-4xl font-display text-[clamp(1.5rem,6.5vw,4.6rem)] leading-[1.18] tracking-[-0.02em] !text-[#f8fbff] sm:leading-[1.08]"
                       style={{
                         color: "#f8fbff",
                         WebkitTextFillColor: "#f8fbff",
@@ -1261,7 +1241,7 @@ export default function Page() {
                       }}
                     >
                       {principlesDisplayText}
-                      {!shouldReduceMotion &&
+                      {!isCompactViewport && !shouldReduceMotion &&
                         typedText.length > 0 &&
                         typedText.length < principlesStatement.length && (
                         <span className="ml-1 inline-block animate-pulse text-[#67d9ff]">
@@ -1270,7 +1250,7 @@ export default function Page() {
                       )}
                     </p>
                   </div>
-                  <div className="mt-10 flex items-center justify-between gap-4">
+                  <div className="mt-10 hidden items-center justify-between gap-4 lg:flex">
                     <div
                       className={`${isCompactViewport ? "hidden lg:flex" : "flex"} items-center gap-2 text-sm text-white/58`}
                       aria-hidden="true"
@@ -1307,7 +1287,7 @@ export default function Page() {
             id="process"
             ref={capabilitiesSectionRef}
             data-scroll-anchor="process"
-            className="relative mx-auto w-full max-w-7xl py-16 sm:py-24 lg:py-32"
+            className="relative mx-auto w-full max-w-7xl py-20 sm:py-24 lg:py-32"
           >
             <div className="mb-10 max-w-5xl sm:mb-16">
               <SplitTextReveal
@@ -1316,9 +1296,9 @@ export default function Page() {
                 accentText="product team."
                 animate={!shouldReduceMotion}
                 triggerOnView
-                className="font-display text-[clamp(2.2rem,12vw,5.4rem)] leading-[0.98] tracking-[-0.04em] text-custom-blue sm:leading-[0.92]"
+                className="font-display text-[clamp(2.3rem,10vw,5.4rem)] leading-[1.02] tracking-[-0.04em] text-custom-blue sm:leading-[0.92]"
               />
-              <p className="mt-5 max-w-2xl text-[0.95rem] leading-7 text-custom-blue/66 sm:mt-6 sm:text-[1.05rem] sm:leading-8">
+              <p className="mt-5 max-w-2xl text-base leading-7 text-custom-blue/66 sm:mt-6 sm:text-[1.05rem] sm:leading-8">
                 Product thinking and frontend engineering, carried from ambiguity
                 to release.
               </p>
@@ -1341,7 +1321,7 @@ export default function Page() {
             id="work"
             ref={workSectionRef}
             data-scroll-anchor="work"
-            className="relative mx-auto w-full max-w-7xl py-16 sm:py-24 lg:py-32"
+            className="relative mx-auto w-full max-w-7xl py-20 sm:py-24 lg:py-32"
           >
             <div className="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div className="max-w-2xl">
@@ -1352,7 +1332,7 @@ export default function Page() {
                   accentText="interfaces."
                   animate={!shouldReduceMotion}
                   triggerOnView
-                  className="mt-6 font-display text-[clamp(2.15rem,11vw,5.4rem)] leading-[0.96] tracking-[-0.04em] text-custom-blue sm:mt-8 sm:leading-[0.9]"
+                  className="mt-6 font-display text-[clamp(2.3rem,10vw,5.4rem)] leading-[1.02] tracking-[-0.04em] text-custom-blue sm:mt-8 sm:leading-[0.9]"
                 />
                 <p className="mt-5 text-[0.98rem] leading-relaxed text-custom-blue/65 sm:mt-6 sm:text-[1.05rem]">
                   A focused set of products where interface quality is backed by
@@ -1415,14 +1395,22 @@ export default function Page() {
                     data-cursor-label-expanded="Close archive"
                     data-testid="legacy-projects-toggle"
                     onClick={() => setLegacyProjectsOpen((isOpen) => !isOpen)}
-                    className="grid w-full cursor-pointer grid-cols-[minmax(0,1fr)] gap-4 rounded-[1.5rem] px-3 py-5 text-left transition-colors duration-500 hover:bg-custom-blue/[0.01] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-custom-blue/30 focus-visible:ring-inset sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:py-8"
+                    className="grid w-full cursor-pointer grid-cols-[minmax(0,1fr)] gap-4 rounded-none px-0 py-8 text-left transition-colors duration-500 hover:bg-custom-blue/[0.01] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-custom-blue/30 focus-visible:ring-inset sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:py-8"
                   >
-                  <span className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:gap-8 md:col-span-1">
-                    <span className="font-label min-w-[2.5rem] text-[0.62rem] font-bold text-custom-blue/70">
+                    <span className="flex w-full items-center justify-between gap-4 md:hidden">
+                      <span className="min-w-0">
+                        <span className="block font-display text-2xl font-medium leading-tight tracking-[-0.02em]">Legacy projects</span>
+                        <span className="mt-2 block text-sm leading-6 text-custom-blue/65">3 earlier case studies</span>
+                      </span>
+                      <ChevronDown aria-hidden="true" className={`h-5 w-5 shrink-0 transition-transform ${legacyProjectsOpen ? "rotate-180" : ""}`} />
+                    </span>
+                    <span className="hidden md:contents">
+                  <span className="flex min-w-0 flex-row items-start gap-3 sm:flex-row sm:items-center sm:gap-8 md:col-span-1">
+                    <span className="font-label min-w-[1.25rem] pt-1 text-[0.62rem] font-bold sm:min-w-[2.5rem] sm:pt-0 text-custom-blue/70">
                       {String(featuredProjects.length + supportingProjects.length + 1).padStart(2, "0")}
                     </span>
                     <span className="flex flex-1 items-center justify-between gap-4">
-                      <span className="min-w-0 font-display text-[clamp(1.55rem,8vw,1.95rem)] leading-[1.02] tracking-[-0.02em] text-custom-blue transition-transform duration-500 group-hover:translate-x-0 sm:text-[2.2rem] md:group-hover:translate-x-2 lg:text-[2.8rem]">
+                      <span className="min-w-0 font-display text-[clamp(1.7rem,7.5vw,2rem)] leading-[1.05] sm:leading-[1.02] tracking-[-0.02em] text-custom-blue transition-transform duration-500 group-hover:translate-x-0 sm:text-[2.2rem] md:group-hover:translate-x-2 lg:text-[2.8rem]">
                         Legacy projects
                       </span>
                       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-custom-blue/10 transition-all duration-500 group-hover:bg-custom-blue group-hover:text-white md:hidden">
@@ -1437,7 +1425,7 @@ export default function Page() {
                     {legacyProjects.map((project) => (
                       <span
                         key={project.title}
-                        className="text-[0.58rem] font-medium uppercase tracking-[0.15em] text-custom-blue/70"
+                        className="text-[0.6875rem] font-medium uppercase tracking-[0.12em] text-custom-blue/70 sm:text-[0.58rem] sm:tracking-[0.15em]"
                       >
                         {project.title === "European Study Solution"
                           ? "ESS"
@@ -1447,11 +1435,11 @@ export default function Page() {
                   </span>
 
                   <span className="flex items-center justify-between gap-6 md:justify-self-end">
-                    <span className="flex items-center gap-3 text-left md:flex-col md:items-end md:gap-0.5 md:text-right">
-                      <span className="font-label text-[0.58rem] font-medium uppercase tracking-[0.18em] text-custom-blue/70">
+                    <span className="flex flex-wrap items-center gap-x-3 gap-y-2 text-left md:flex-col md:items-end md:gap-0.5 md:text-right">
+                      <span className="font-label text-[0.6875rem] font-medium uppercase tracking-[0.12em] text-custom-blue/70 sm:text-[0.58rem] sm:tracking-[0.18em]">
                         Earlier work
                       </span>
-                      <span className="font-label text-[0.58rem] font-bold text-custom-blue/70">
+                      <span className="font-label text-[0.6875rem] font-bold text-custom-blue/70 sm:text-[0.58rem]">
                         3 case studies
                       </span>
                     </span>
@@ -1463,18 +1451,7 @@ export default function Page() {
                     />
                   </span>
 
-                  <span className="overflow-hidden rounded-[1.25rem] border border-custom-blue/8 md:hidden">
-                    <span className="relative block aspect-[16/10]">
-                      <Image
-                        src={legacyProjects[0]?.image ?? "/images/catchscan-index.png"}
-                        alt="Preview of legacy portfolio projects"
-                        fill
-                        sizes="(max-width: 767px) 100vw, 0px"
-                        className="object-cover"
-                      />
-                      <span className="absolute inset-0 bg-gradient-to-r from-custom-blue/35 to-transparent" />
                     </span>
-                  </span>
                   </button>
 
                   <div id="legacy-project-list">
@@ -1485,9 +1462,9 @@ export default function Page() {
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: shouldReduceMotion ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}
-                          className="overflow-hidden pl-3 sm:pl-8"
+                          className="overflow-hidden sm:pl-8"
                         >
-                          <div className="border-l border-custom-blue/10 pl-3 sm:pl-6">
+                          <div className="border-custom-blue/10 sm:border-l sm:pl-6">
                             {legacyProjects.map((project, idx) => (
                               <ProjectListItem
                                 key={project.title}
@@ -1511,17 +1488,17 @@ export default function Page() {
 
           <section
             id="trajectory"
-            className="relative mx-auto mt-24 w-full max-w-7xl sm:mt-36 lg:mt-48"
+            className="relative mx-auto mt-20 w-full max-w-7xl sm:mt-36 lg:mt-48"
           >
             <div className="pointer-events-none absolute left-1/2 top-8 h-[40rem] w-[min(48rem,90vw)] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,_rgba(103,217,255,0.14)_0%,_rgba(103,217,255,0.04)_40%,_transparent_75%)] blur-3xl" />
             
-            <div className="relative grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+            <div className="relative grid gap-6 sm:gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
               {/* Sticky Left Content */}
               <div className="lg:sticky lg:top-32 lg:h-fit lg:pt-4">
                 <SectionLabel index="04" label="Trajectory" />
                 <div className="mt-8 space-y-6">
                   <div className="space-y-5">
-                    <h2 className="font-display text-[clamp(2.4rem,14vw,5.6rem)] leading-[0.9] tracking-[-0.045em] text-custom-blue">
+                    <h2 className="font-display text-[clamp(2.6rem,12vw,5.6rem)] leading-[0.96] sm:leading-[0.9] tracking-[-0.045em] text-custom-blue">
                       Design. <br />
                       Product. <br />
                       <span className="title-accent">Craft.</span>
@@ -1574,7 +1551,7 @@ export default function Page() {
               </div>
 
               {/* Scrolling History List */}
-              <div className="relative snap-y snap-proximity space-y-5 py-6 sm:space-y-16 sm:py-10 lg:py-[20vh]">
+              <div className="relative space-y-6 py-0 sm:snap-y sm:snap-proximity sm:space-y-16 sm:py-10 lg:py-[20vh]">
                 {history.map((item, index) => (
                   <HistoryItemComponent
                     key={`${item.company}-${item.time.start}`}
@@ -1588,72 +1565,67 @@ export default function Page() {
 
           <section
             id="contact"
-            className="mx-auto mt-16 flex min-h-[auto] w-full max-w-7xl items-start py-6 sm:mt-28 sm:min-h-[calc(100dvh-12rem)] sm:items-center sm:py-10 lg:mt-36 lg:min-h-[calc(100dvh-10rem)]"
+            className="mx-auto mt-20 flex w-full max-w-7xl items-start md:mt-28 md:min-h-[calc(100dvh-12rem)] md:items-center md:py-10 lg:mt-36 lg:min-h-[calc(100dvh-10rem)]"
             onMouseEnter={() => setFooterHover(true)}
             onMouseLeave={() => setFooterHover(false)}
           >
             <motion.div
               data-scroll-anchor="contact"
               {...fadeInUp(0.06)}
-              className="relative mx-auto flex min-h-[24rem] w-full max-w-5xl items-start overflow-hidden rounded-[1.65rem] bg-[#071726] p-5 text-white shadow-[0_40px_140px_rgba(7,20,38,0.26),inset_0_1px_0_rgba(255,255,255,0.16)] sm:min-h-[28rem] sm:items-center sm:rounded-[2.75rem] sm:p-8"
+              className={`${darkSectionPanelClassName} relative mx-auto flex w-full max-w-5xl items-start px-6 py-8 md:min-h-[28rem] md:items-center md:p-8`}
             >
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(72,205,255,0.26),_transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.06),transparent_55%)]" />
-              <div className="relative grid w-full gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
+              <div className="relative grid w-full min-w-0 grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-8">
                 <div>
                   <SectionLabel index="05" label="Contact" tone="light" />
-                  <h2 className="-mb-[0.08em] max-w-3xl pb-[0.08em] font-display text-[clamp(2.15rem,12vw,5rem)] leading-[1.1] tracking-[-0.04em] text-white">
+                  <h2 className="font-display text-[clamp(3rem,14vw,5rem)] font-medium leading-[1.05] tracking-[-0.03em] text-white">
                     Say hi.
                   </h2>
-                  <p className="mt-4 max-w-2xl text-[0.96rem] leading-7 text-white/72 sm:text-[1.05rem] sm:leading-8">
+                  <p className="mt-5 max-w-2xl text-base leading-7 text-white/80 sm:text-[1.05rem] sm:leading-8">
                     If you want to talk about a project, share feedback, or
                     just introduce yourself, send a note. I read everything
                     myself and usually reply within a day.
                   </p>
                 </div>
-
-                <div className="grid gap-2.5 self-end sm:gap-3">
+                <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-3 self-end">
                   <a
                     href="mailto:themarcellvarga@gmail.com"
                     data-cursor-label="Send email"
-                    className="group flex items-center justify-between gap-3 rounded-[1.25rem] bg-white/7 px-3.5 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 sm:gap-4 sm:rounded-[1.35rem] sm:px-5 sm:py-3.5"
+                    className={contactLinkClassName}
                   >
                     <span className="flex min-w-0 flex-1 items-center gap-3">
-                      <Mail className="h-5 w-5 shrink-0 text-[#67d9ff]" />
-                      <span className="min-w-0 break-all font-label text-[0.58rem] font-medium uppercase tracking-[0.1em] text-white/80 sm:text-[0.72rem] sm:tracking-[0.16em]">
-                        themarcellvarga@gmail.com
+                      <Mail aria-hidden="true" className="h-5 w-5 shrink-0 text-[#67d9ff]" />
+                      <span className={contactLinkLabelClassName}>
+                        themarcellvarga<wbr />@gmail.com
                       </span>
                     </span>
-                    <ArrowUpRight className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    <ArrowUpRight aria-hidden="true" className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
                   <a
                     href="https://www.linkedin.com/in/marcellvarga/"
                     target="_blank"
                     rel="noopener noreferrer"
                     data-cursor-label="Open LinkedIn"
-                    className="group flex items-center justify-between rounded-[1.35rem] bg-white/7 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 sm:px-5 sm:py-3.5"
+                    className={contactLinkClassName}
                   >
-                    <span className="flex items-center gap-3">
-                      <Linkedin className="h-5 w-5 text-[#67d9ff]" />
-                      <span className="font-label text-[0.72rem] font-medium uppercase tracking-[0.16em] text-white/80">
-                        LinkedIn
-                      </span>
+                    <span className="flex min-w-0 items-center gap-3">
+                      <Linkedin aria-hidden="true" className="h-5 w-5 shrink-0 text-[#67d9ff]" />
+                      <span className={contactLinkLabelClassName}>LinkedIn</span>
                     </span>
-                    <ArrowUpRight className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    <ArrowUpRight aria-hidden="true" className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
                   <a
                     href="https://github.com/TheMarcellVarga"
                     target="_blank"
                     rel="noopener noreferrer"
                     data-cursor-label="Open GitHub"
-                    className="group flex items-center justify-between rounded-[1.35rem] bg-white/7 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 sm:px-5 sm:py-3.5"
+                    className={contactLinkClassName}
                   >
-                    <span className="flex items-center gap-3">
-                      <Github className="h-5 w-5 text-[#67d9ff]" />
-                      <span className="font-label text-[0.72rem] font-medium uppercase tracking-[0.16em] text-white/80">
-                        GitHub
-                      </span>
+                    <span className="flex min-w-0 items-center gap-3">
+                      <Github aria-hidden="true" className="h-5 w-5 shrink-0 text-[#67d9ff]" />
+                      <span className={contactLinkLabelClassName}>GitHub</span>
                     </span>
-                    <ArrowUpRight className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    <ArrowUpRight aria-hidden="true" className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
                 </div>
               </div>
