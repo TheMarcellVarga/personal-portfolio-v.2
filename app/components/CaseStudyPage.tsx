@@ -41,7 +41,7 @@ export default function CaseStudyPage({ caseStudyId }: CaseStudyPageProps) {
         backLink={{ href: "/#work", label: "Back to work" }}
       />
 
-      <main className="relative z-10 px-4 pb-8 pt-0 sm:px-6 lg:px-10">
+      <main className="page-gutter relative z-10 pb-8 pt-0 sm:px-6 lg:px-10">
         <div className="mx-auto w-full max-w-7xl">
           <section className="pt-40 sm:pt-44 lg:pt-48">
             <div className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(19rem,0.8fr)] lg:items-end lg:gap-16">

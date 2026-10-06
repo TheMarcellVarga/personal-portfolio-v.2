@@ -28,21 +28,21 @@ export default function Footer({ isHover = false }: FooterProps) {
   }, []);
 
   return (
-    <footer className="px-4 pb-8 pt-3 sm:px-6 lg:px-10">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 border-t border-custom-blue/10 pt-5 text-sm text-custom-blue/70 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:pt-6">
+    <footer className="page-gutter pb-[max(2rem,env(safe-area-inset-bottom))] pt-3 sm:px-6 lg:px-10">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-5 border-t border-custom-blue/10 pt-5 text-sm text-custom-blue/70 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:pt-6">
         <div className="flex flex-col gap-1.5 sm:contents">
           <p className="text-xs sm:text-sm">
             © {new Date().getFullYear()} Marcell Varga
           </p>
-          <span className="text-[0.68rem] text-custom-blue/70 sm:order-2 sm:ml-auto sm:text-xs">
+          <span className="text-xs text-custom-blue/70 sm:order-2 sm:ml-auto sm:text-xs">
             🇸🇬 Local Time: {currentTime}
           </span>
         </div>
         <div className="sm:order-3">
-          <div className="grid grid-cols-2 gap-2 pl-12 sm:flex sm:items-center sm:gap-4 sm:pl-0">
+          <nav aria-label="Footer navigation" className="grid grid-cols-2 gap-2 sm:flex sm:items-center sm:gap-4">
             <Link
               href="/about"
-              className={`rounded-full border border-custom-blue/10 px-4 py-2 text-center text-xs transition duration-300 hover:border-custom-blue/20 hover:text-custom-blue sm:rounded-none sm:border-0 sm:p-0 sm:text-sm ${
+              className={`flex min-h-11 items-center justify-start px-0 py-2.5 text-left text-sm transition duration-300 hover:border-custom-blue/20 hover:text-custom-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-custom-blue sm:min-h-0 sm:rounded-none sm:border-0 sm:p-0 sm:text-sm ${
                 isHover ? "text-custom-blue/85" : "text-custom-blue/70"
               }`}
             >
@@ -50,7 +50,7 @@ export default function Footer({ isHover = false }: FooterProps) {
             </Link>
             <Link
               href="/privacy"
-              className={`rounded-full border border-custom-blue/10 px-4 py-2 text-center text-xs transition duration-300 hover:border-custom-blue/20 hover:text-custom-blue sm:rounded-none sm:border-0 sm:p-0 sm:text-sm ${
+              className={`flex min-h-11 items-center justify-start px-0 py-2.5 text-left text-sm transition duration-300 hover:border-custom-blue/20 hover:text-custom-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-custom-blue sm:min-h-0 sm:rounded-none sm:border-0 sm:p-0 sm:text-sm ${
                 isHover ? "text-custom-blue/85" : "text-custom-blue/70"
               }`}
             >
@@ -60,7 +60,7 @@ export default function Footer({ isHover = false }: FooterProps) {
               href="https://www.linkedin.com/in/marcellvarga/"
               target="_blank"
               rel="noopener noreferrer"
-              className={`rounded-full border border-custom-blue/10 px-4 py-2 text-center text-xs transition duration-300 hover:border-custom-blue/20 hover:text-custom-blue sm:rounded-none sm:border-0 sm:p-0 sm:text-sm ${
+              className={`flex min-h-11 items-center justify-start px-0 py-2.5 text-left text-sm transition duration-300 hover:border-custom-blue/20 hover:text-custom-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-custom-blue sm:min-h-0 sm:rounded-none sm:border-0 sm:p-0 sm:text-sm ${
                 isHover ? "text-custom-blue/85" : "text-custom-blue/70"
               }`}
             >
@@ -70,13 +70,13 @@ export default function Footer({ isHover = false }: FooterProps) {
               href="https://github.com/TheMarcellVarga"
               target="_blank"
               rel="noopener noreferrer"
-              className={`rounded-full border border-custom-blue/10 px-4 py-2 text-center text-xs transition duration-300 hover:border-custom-blue/20 hover:text-custom-blue sm:rounded-none sm:border-0 sm:p-0 sm:text-sm ${
+              className={`flex min-h-11 items-center justify-start px-0 py-2.5 text-left text-sm transition duration-300 hover:border-custom-blue/20 hover:text-custom-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-custom-blue sm:min-h-0 sm:rounded-none sm:border-0 sm:p-0 sm:text-sm ${
                 isHover ? "text-custom-blue/85" : "text-custom-blue/70"
               }`}
             >
               GitHub
             </a>
-          </div>
+          </nav>
         </div>
       </div>
     </footer>

@@ -203,7 +203,7 @@ export default function Header({
 
   return (
     <header
-      className={`sticky-header px-3 py-2.5 transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:py-4 lg:px-10 ${
+      className={`page-gutter sticky-header py-4 transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:py-4 lg:px-10 ${
         isHeaderVisible || isOpen
           ? "opacity-100"
           : "opacity-0 pointer-events-none"

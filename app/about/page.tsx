@@ -43,7 +43,7 @@ export default function AboutPage() {
       <PageBackground />
       <Header isOpen={isOpen} setIsOpen={setIsOpen} activeSection="About" />
 
-      <main className="relative z-10 px-4 pb-8 sm:px-6 sm:pb-12 lg:px-10">
+      <main className="page-gutter relative z-10 pb-8 sm:px-6 sm:pb-12 lg:px-10">
         <section className="relative mx-auto flex min-h-[100dvh] w-full max-w-7xl items-center pb-14 pt-28 sm:pb-20 sm:pt-36">
           <div className="pointer-events-none absolute -left-[18%] top-[16%] -z-10 h-[32rem] w-[32rem] rounded-full bg-[radial-gradient(circle,rgba(76,207,255,0.2),transparent_70%)] blur-2xl" />
           <div className="grid w-full items-center gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(22rem,0.98fr)] lg:gap-16">

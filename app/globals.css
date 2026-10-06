@@ -244,6 +244,11 @@
 }
 
 @media (max-width: 639px) {
+  .page-gutter {
+    padding-left: max(clamp(1.75rem, 8.25vw, 2rem), env(safe-area-inset-left));
+    padding-right: max(clamp(1.75rem, 8.25vw, 2rem), env(safe-area-inset-right));
+  }
+
   .glass-panel {
     backdrop-filter: blur(16px);
     box-shadow:
