@@ -1,0 +1,59 @@
+                                      Marcel Varga
+                                      UX & FRONTEND ENGINEER                                                             SINGAPORE / 2026
+
+
+
+
+                                      Building production interfaces, design systems, and complex
+                                      product workflows with React and TypeScript.
+                                       PRODUCT UX           FRONTEND ENGINEERING           DESIGN SYSTEMS         REACT + TYPESCRIPT
+
+
+
+    themarcellvarga@gmail.com         01     PROFILE
+    +6589771730                       UX & Frontend Engineer focused on React, TypeScript, design systems, and complex product
+    marcellvarga.com                  workflows. Combines product UX and frontend engineering to take ambiguous requirements
+                                      from exploration to production.
+    linkedin.com/in/marcellvarga
+    TheMarcellVarga                   02     EXPERIENCE
+    Singapore
+                                      UX & Frontend Engineer                                                         OCT 2022 - PRESENT
+
+                                      A XO N N E T WO R KS
+TECHNICAL TOOLKIT
+FRONTEND                                   Build and ship React/TypeScript product workflows for complex telecom software, taking work
+React · TypeScript · JavaScript ·          from interaction architecture and prototyping through production delivery.
+D3.js · Next.js · Svelte                   Develop network diagnostics and performance-monitoring interfaces for network equipment,
+                                           including health checks, historical trends, and detailed snapshot views.
+ARCHITECTURE
+Module Federation · single-spa ·           Designed a configurable D3.js analytics workspace where users arrange graphs and save,
+Webpack · Design Systems                   search, restore, and manage personalized views.
+                                           Create reusable components and design-system patterns across a modular frontend
+BACKEND & INTEGRATION                      architecture using Webpack, Module Federation, and single-spa.
+Node.js / Express · Java / Spring ·        Deliver WCAG-aligned accessibility and automated quality coverage across semantics,
+REST APIs · WebSocket ·
+PostgreSQL                                 keyboard and focus behavior, responsive and 200% text reflow, and interaction tests.
+UX & DELIVERY
+                                           Work beyond the frontend across REST and WebSocket integrations, Node.js/Express APIs, and
+                                           Java/Spring services, partnering with product, QA, analytics, and engineering to turn technical
+UX Engineering · Product                   requirements into shipped solutions.
+Engineering · WCAG · Jest · Git ·
+GCP / Docker · CI/CD · Artificial
+Intelligence                          UX Designer Intern                                                            JAN 2022 - APR 2022
+
+                                      MAPSPEOPLE
+LANGUAGES
+                                           Conducted UX research and built interactive prototypes for the MapsIndoors CMS, translating
+Hungarian                                  findings into product improvements.
+Native
+                                           Contributed design-system patterns, responsive interface work, documentation, and developer
+English                                    handoff across desktop and mobile experiences.
+Professional
+                                           Delivered Jira-managed product tasks with engineers, balancing interaction detail, accessibility,
+Danish                                     and SaaS implementation constraints.
+Working proficiency
+                                      03     E D U CAT I O N
+                                      AP Degree in Multimedia Design                                                          2020 - 2022
+
+                                      UNIVERSITY COLLEGE OF NORTHERN DENMARK
+

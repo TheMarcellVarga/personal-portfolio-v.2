@@ -1,0 +1,63 @@
+Marcell Varga
+ATS RESUME
+
+Product-minded UX & Frontend Engineer - Building production interfaces, design systems, and complex product workflows
+with React and TypeScript.
+Location: Singapore
+Phone: +6589771730
+LinkedIn: linkedin.com/in/marcellvarga
+
+Email: themarcellvarga@gmail.com
+Website: marcellvarga.com
+GitHub: github.com/TheMarcellVarga
+
+SUMMARY
+
+UX & Frontend Engineer focused on React, TypeScript, design systems, and complex product workflows. Combines product UX and frontend
+engineering to take ambiguous requirements from exploration to production.
+EXPERIENCE
+
+UX & Frontend Engineer
+AXON NETWORKS
+
+OCT 2022 - PRESENT
+
+Build and ship React/TypeScript product workflows for complex telecom software, taking work from interaction architecture and prototyping
+through production delivery.
+Develop network diagnostics and performance-monitoring interfaces for network equipment, including health checks, historical trends, and
+detailed snapshot views.
+Designed a configurable D3.js analytics workspace where users arrange graphs and save, search, restore, and manage personalized views.
+Create reusable components and design-system patterns across a modular frontend architecture using Webpack, Module Federation, and
+single-spa.
+Deliver WCAG-aligned accessibility and automated quality coverage across semantics, keyboard and focus behavior, responsive and 200% text
+reflow, and interaction tests.
+Work beyond the frontend across REST and WebSocket integrations, Node.js/Express APIs, and Java/Spring services, partnering with product,
+QA, analytics, and engineering to turn technical requirements into shipped solutions.
+
+UX Designer Intern
+MAPSPEOPLE
+
+JAN 2022 - APR 2022
+
+Conducted UX research and built interactive prototypes for the MapsIndoors CMS, translating findings into product improvements.
+Contributed design-system patterns, responsive interface work, documentation, and developer handoff across desktop and mobile
+experiences.
+Delivered Jira-managed product tasks with engineers, balancing interaction detail, accessibility, and SaaS implementation constraints.
+TECHNICAL SKILLS
+
+Frontend: React, TypeScript, JavaScript, D3.js, Next.js, Svelte
+Architecture: Module Federation, single-spa, Webpack, Design Systems
+Backend & Integration: Node.js / Express, Java / Spring, REST APIs, WebSocket, PostgreSQL
+UX & Delivery: UX Engineering, Product Engineering, WCAG, Jest, Git, GCP / Docker, CI/CD, Artificial Intelligence
+EDUCATION
+
+AP Degree in Multimedia Design
+
+UNIVERSITY COLLEGE OF NORTHERN DENMARK
+LANGUAGES
+
+Hungarian (Native) | English (Professional) | Danish (Working proficiency)
+
+2020 - 2022
+
+

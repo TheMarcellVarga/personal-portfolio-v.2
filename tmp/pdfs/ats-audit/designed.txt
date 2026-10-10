@@ -1,0 +1,110 @@
+Marcel Varga
+UX & FRONTEND ENGINEER
+
+SINGAPORE / 2026
+
+Building production interfaces, design systems, and complex
+product workflows with React and TypeScript.
+PRODUCT UX
+
+themarcellvarga@gmail.com
++6589771730
+marcellvarga.com
+linkedin.com/in/marcellvarga
+TheMarcellVarga
+Singapore
+TECHNICAL TOOLKIT
+
+01
+
+DESIGN SYSTEMS
+
+REACT + TYPESCRIPT
+
+PROFILE
+
+UX & Frontend Engineer focused on React, TypeScript, design systems, and complex product
+workflows. Combines product UX and frontend engineering to take ambiguous requirements
+from exploration to production.
+02
+
+EXPERIENCE
+
+UX & Frontend Engineer
+
+OCT 2022 - PRESENT
+
+A XO N N E T WO R KS
+
+Build and ship React/TypeScript product workflows for complex telecom software, taking work
+from interaction architecture and prototyping through production delivery.
+Develop network diagnostics and performance-monitoring interfaces for network equipment,
+including health checks, historical trends, and detailed snapshot views.
+Designed a configurable D3.js analytics workspace where users arrange graphs and save,
+search, restore, and manage personalized views.
+Create reusable components and design-system patterns across a modular frontend
+architecture using Webpack, Module Federation, and single-spa.
+Deliver WCAG-aligned accessibility and automated quality coverage across semantics,
+keyboard and focus behavior, responsive and 200% text reflow, and interaction tests.
+Work beyond the frontend across REST and WebSocket integrations, Node.js/Express APIs, and
+Java/Spring services, partnering with product, QA, analytics, and engineering to turn technical
+requirements into shipped solutions.
+
+FRONTEND
+
+React · TypeScript · JavaScript ·
+D3.js · Next.js · Svelte
+ARCHITECTURE
+
+Module Federation · single-spa ·
+Webpack · Design Systems
+BACKEND & INTEGRATION
+
+Node.js / Express · Java / Spring ·
+REST APIs · WebSocket ·
+PostgreSQL
+UX & DELIVERY
+
+UX Engineering · Product
+Engineering · WCAG · Jest · Git ·
+GCP / Docker · CI/CD · Artificial
+Intelligence
+
+FRONTEND ENGINEERING
+
+UX Designer Intern
+
+JAN 2022 - APR 2022
+
+MAPSPEOPLE
+
+LANGUAGES
+
+Conducted UX research and built interactive prototypes for the MapsIndoors CMS, translating
+findings into product improvements.
+Contributed design-system patterns, responsive interface work, documentation, and developer
+handoff across desktop and mobile experiences.
+Delivered Jira-managed product tasks with engineers, balancing interaction detail, accessibility,
+and SaaS implementation constraints.
+
+Hungarian
+Native
+
+English
+
+Professional
+
+Danish
+
+Working proficiency
+03
+
+E D U CAT I O N
+
+AP Degree in Multimedia Design
+
+UNIVERSITY COLLEGE OF NORTHERN DENMARK
+
+2020 - 2022
+
+
