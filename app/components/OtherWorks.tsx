@@ -7,6 +7,7 @@ import { ArrowUpRight } from "lucide-react";
 import { gsap } from "gsap";
 import { projects } from "../data/projects";
 import { SectionLabel } from "./SectionLabel";
+import { useClientReducedMotion } from "../hooks/useClientReducedMotion";
 
 type OtherWorksProps = {
   currentProjectTitle: string;
@@ -22,6 +23,7 @@ export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
   const hasPlayedRef = useRef(false);
+  const reduceMotion = useClientReducedMotion();
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -47,6 +49,11 @@ export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
 
     const cards = Array.from(section.querySelectorAll<HTMLElement>("[data-other-works-card]"));
 
+    if (reduceMotion) {
+      gsap.set(cards, { opacity: 1, y: 0 });
+      return;
+    }
+
     if (!inView) {
       gsap.set(cards, { opacity: 0, y: 22 });
       return;
@@ -69,7 +76,7 @@ export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
     return () => {
       tl.kill();
     };
-  }, [inView]);
+  }, [inView, reduceMotion]);
 
   return (
     <section
@@ -83,10 +90,11 @@ export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
         interface, architecture, testing, and release.
       </p>
       <div className="mt-8 grid gap-3.5 sm:mt-12 md:grid-cols-2">
-        {otherProjects.map((project, index) => (
+        {otherProjects.map((project) => (
           <article
             key={project.title}
             data-other-works-card
+            data-motion-reveal
             className="glass-panel group relative min-h-[19rem] overflow-hidden rounded-[1.9rem] bg-white/65 shadow-[0_12px_40px_rgba(11,17,26,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_48px_rgba(11,17,26,0.05)] sm:min-h-[22rem] sm:rounded-[2.1rem]"
           >
             <Link

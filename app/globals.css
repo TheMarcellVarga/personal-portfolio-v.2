@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* The designed resume uses its paper typography on screen and in print. */
+@custom-variant sheet (&:where(.resume-sheet, .resume-sheet *));
+
 @font-face {
   font-family: "Cabinet Grotesk";
   src: url("/fonts/cabinet-grotesk/cabinet-grotesk-400.woff2") format("woff2");
@@ -42,6 +45,143 @@
   --page-border: rgba(17, 27, 40, 0.08);
   --page-shadow: 0 28px 90px rgba(17, 27, 40, 0.09);
   --title-accent: #b64a2b;
+  --panel-background: #071726;
+  --panel-radius: 1.65rem;
+  --panel-shadow: 0 40px 140px rgba(7, 20, 38, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  --section-space: 5rem;
+  --heading-size: clamp(2.3rem, 10vw, 5.4rem);
+}
+
+/* Portfolio primitives extracted from the index. Keep route styling on these rails. */
+@layer components {
+  .portfolio-main {
+    position: relative;
+    z-index: 10;
+    padding: 8rem 1.5rem 3rem;
+  }
+
+  .portfolio-container {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+  }
+
+  .page-eyebrow {
+    margin-bottom: 1.5rem;
+    font-size: 0.68rem;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-custom-blue);
+  }
+
+  .page-title,
+  .section-heading {
+    font-family: var(--font);
+    font-size: var(--heading-size);
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    color: var(--color-custom-blue);
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+  }
+
+  .page-title {
+    max-width: 18ch;
+    font-size: clamp(3rem, 7vw, 5.4rem);
+  }
+
+  .page-lead {
+    margin-top: 1.5rem;
+    max-width: 62ch;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgb(17 27 40 / 72%);
+  }
+
+  .portfolio-section {
+    padding-block: var(--section-space);
+  }
+
+  .dark-panel {
+    overflow: hidden;
+    border-radius: var(--panel-radius);
+    background: var(--panel-background);
+    color: white;
+    box-shadow: var(--panel-shadow);
+  }
+
+  .portfolio-button {
+    display: inline-flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    border-radius: 999px;
+    padding: 0.75rem 1.5rem;
+    background: var(--color-custom-blue);
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+    transition: background 300ms, transform 300ms;
+  }
+
+  .portfolio-button:hover {
+    background: #0b2438;
+    transform: translateY(-2px);
+  }
+
+  .portfolio-button:active {
+    transform: scale(0.985);
+  }
+
+  .portfolio-button:focus-visible {
+    outline: 2px solid var(--title-accent);
+    outline-offset: 4px;
+  }
+
+  .portfolio-button-secondary {
+    background: var(--page-surface-strong);
+    color: var(--color-custom-blue);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 66%);
+  }
+
+  .portfolio-button-secondary:hover {
+    background: white;
+  }
+
+  .portfolio-button-light {
+    background: white;
+    color: var(--color-custom-blue);
+  }
+
+  .portfolio-button-light:hover {
+    background: rgb(255 255 255 / 92%);
+  }
+}
+
+@media (min-width: 640px) {
+  :root {
+    --panel-radius: 2.5rem;
+    --section-space: 6rem;
+  }
+
+  .portfolio-main { padding: 9rem 1.5rem 3rem; }
+  .page-lead { font-size: 1.125rem; }
+  .section-heading { line-height: 0.96; }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --panel-radius: 3rem;
+    --section-space: 8rem;
+  }
+
+  .portfolio-main { padding-inline: 2.5rem; }
 }
 
 @layer base {
@@ -115,10 +255,6 @@
     font-family: var(--mono-font);
   }
 
-  .font-case-study {
-    font-family: "Cabinet Grotesk", var(--font);
-  }
-
   .title-accent {
     color: var(--title-accent);
   }
@@ -187,8 +323,29 @@
     scrollbar-color: rgba(17, 27, 40, 0.08) transparent;
   }
 
+  .resume-preview {
+    width: min(794px, 100%);
+    aspect-ratio: 210 / 297;
+    border-radius: var(--panel-radius);
+    margin-inline: auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .resume-preview-content {
+    width: 794px;
+    height: calc(794px * 297 / 210);
+    transform: scale(var(--resume-preview-scale, 1));
+    transform-origin: top left;
+  }
+
   .resume-sheet {
-    width: min(210mm, 100%);
+    width: 100%;
+    height: 100%;
+  }
+
+  .resume-sheet .resume-print-grid {
+    height: 100%;
   }
 
   .hero-dynamic-field {
@@ -362,7 +519,44 @@
   margin: 0;
 }
 
+/* Shared paper styling keeps the preview faithful to the downloadable PDF. */
+.resume-sheet {
+  background: #081522 !important;
+}
+
+  .resume-sheet::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        ellipse 88mm 58mm at 83% 3%,
+        rgba(76, 207, 255, 0.14) 0%,
+        rgba(76, 207, 255, 0.055) 36%,
+        rgba(8, 21, 34, 0) 74%
+      ),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0) 44%);
+  }
+
+  /* Preserve whole words in PDF extraction, including the double l in Marcell. */
+  .resume-sheet * {
+    letter-spacing: normal !important;
+    font-variant-ligatures: none;
+  }
+
+  .resume-screen-art {
+    display: none !important;
+  }
+
 @media print {
+  .resume-preview,
+  .resume-preview-content {
+    display: contents;
+    transform: none;
+  }
+
   *,
   *::before,
   *::after {
@@ -415,29 +609,11 @@
     position: absolute !important;
     inset: 0 !important;
     margin: 0 !important;
+    opacity: 1 !important;
+    transform: none !important;
     overflow: hidden;
     page-break-after: avoid;
     break-after: avoid;
-  }
-
-  .resume-sheet::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background:
-      radial-gradient(
-        ellipse 88mm 58mm at 83% 3%,
-        rgba(76, 207, 255, 0.14) 0%,
-        rgba(76, 207, 255, 0.055) 36%,
-        rgba(8, 21, 34, 0) 74%
-      ),
-      linear-gradient(145deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0) 44%);
-  }
-
-  .resume-screen-art {
-    display: none !important;
   }
 
   .resume-print-grid {
@@ -479,13 +655,13 @@
     font-size: 9px !important;
   }
 
-  .ats-resume-route header h1 {
+  .ats-resume-route header .ats-name {
     margin-top: 2mm !important;
     font-size: 32px !important;
     line-height: 1 !important;
   }
 
-  .ats-resume-route header h1 + p {
+  .ats-resume-route header .ats-name + p {
     margin-top: 2.5mm !important;
     font-size: 11.5px !important;
     line-height: 1.45 !important;
@@ -557,5 +733,50 @@
     margin-top: 1.3mm !important;
     width: 1mm !important;
     height: 1mm !important;
+  }
+}
+
+/* Each specialty has its own composition, with motion inside normal page flow. */
+[data-expertise-graphic="ux"] {
+  height: clamp(13rem, 36svh, 26rem);
+}
+
+[data-expertise-graphic="frontend"] {
+  height: clamp(14rem, 40svh, 32rem);
+}
+
+[data-expertise-graphic="ai"] {
+  height: clamp(12rem, 26svh, 20rem);
+}
+
+@media (min-width: 1024px) {
+  [data-expertise-graphic="ux"] {
+    height: 26rem;
+  }
+
+  [data-expertise-graphic="frontend"] {
+    height: 32rem;
+  }
+
+  [data-expertise-graphic="ai"] {
+    height: 20rem;
+  }
+}
+
+@media print {
+  .portfolio-shell {
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  .portfolio-main {
+    padding: 0 !important;
+  }
+
+  .ats-sheet {
+    background: white !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none;
   }
 }

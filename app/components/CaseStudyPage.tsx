@@ -2,17 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { caseStudyPages, type CaseStudyVisual } from "../data/case-study-pages";
 import { caseStudies } from "../data/case-studies";
 import { projects, type CaseStudyId } from "../data/projects";
 import { useClientReducedMotion } from "../hooks/useClientReducedMotion";
-import Footer from "../footer";
-import Header from "../header";
 import { OtherWorks } from "./OtherWorks";
-import { PageBackground } from "./PageBackground";
+import { PortfolioShell } from "./PortfolioShell";
+import { PageIntro } from "./PageIntro";
 import { SectionLabel } from "./SectionLabel";
 
 type CaseStudyPageProps = {
@@ -26,48 +25,28 @@ export default function CaseStudyPage({ caseStudyId }: CaseStudyPageProps) {
     caseStudyPages[caseStudyId],
   ];
   const shouldReduceMotion = useClientReducedMotion();
-  const [isOpen, setIsOpen] = useState(false);
 
   if (!project || !record || !content) return null;
 
   return (
-    <div className="case-study-page relative font-case-study">
-      <PageBackground />
-
-      <Header
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        activeSection="Work"
-        backLink={{ href: "/#work", label: "Back to work" }}
-      />
-
-      <main className="page-gutter relative z-10 pb-8 pt-0 sm:px-6 lg:px-10">
+    <PortfolioShell className="case-study-page" activeSection="Work" backLink={{ href: "/#work", label: "Back to work" }}>
+      <main id="main-content" className="portfolio-main page-gutter">
         <div className="mx-auto w-full max-w-7xl">
-          <section className="pt-40 sm:pt-44 lg:pt-48">
+          <section>
             <div className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(19rem,0.8fr)] lg:items-end lg:gap-16">
               <Reveal reduceMotion={shouldReduceMotion}>
-                <SectionLabel index="Project" label="Case Study" />
-                <h1
-                  className={`font-display font-semibold leading-[0.9] tracking-[-0.055em] text-custom-blue ${
-                    project.title.length > 24
-                      ? "max-w-[14ch] text-[clamp(2.8rem,6.5vw,5.2rem)]"
-                      : "max-w-[9ch] text-[clamp(3rem,7.5vw,6rem)]"
-                  }`}
-                >
-                  {project.titleAccent ? (
+                <PageIntro
+                  eyebrow="Project / Case study"
+                  title={project.titleAccent ? (
                     <>
                       {project.title.split(project.titleAccent)[0]}
                       <span className="title-accent">{project.titleAccent}</span>
                       {project.title.split(project.titleAccent)[1]}
                     </>
-                  ) : (
-                    project.title
-                  )}
-                </h1>
-                <p className="mt-7 max-w-2xl text-[1.08rem] leading-7 text-custom-blue/72">
-                  {project.subTitle}
-                </p>
-                <p className="mt-4 max-w-2xl text-[0.98rem] leading-7 text-custom-blue/62">
+                  ) : project.title}
+                  description={project.subTitle}
+                />
+                <p className="mt-4 max-w-[62ch] text-base leading-7 text-custom-blue/72">
                   {project.description}
                 </p>
               </Reveal>
@@ -103,7 +82,7 @@ export default function CaseStudyPage({ caseStudyId }: CaseStudyPageProps) {
                     href={content.demoUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-7 inline-flex items-center gap-2 rounded-full bg-custom-blue px-5 py-3 text-sm font-medium text-white shadow-[0_18px_44px_rgba(17,27,40,0.14)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#1a2939] active:translate-y-0 active:scale-[0.985] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-custom-blue focus-visible:ring-offset-2"
+                    className="portfolio-button mt-7"
                   >
                     {content.demoLabel ?? "Open project"}
                     <ArrowUpRight className="h-4 w-4" />
@@ -136,15 +115,15 @@ export default function CaseStudyPage({ caseStudyId }: CaseStudyPageProps) {
             )}
           </Reveal>
 
-          <section className="py-20 sm:py-28 lg:py-32">
-            <div className="mb-8 grid gap-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-end">
+          <section className="portfolio-section">
+            <div className="mb-10 max-w-5xl space-y-6">
               <div className="max-w-2xl">
                 <SectionLabel index="Context" label="The work" />
-                <h2 className="font-display text-[clamp(2.3rem,7vw,5.4rem)] leading-[0.92] tracking-[-0.05em] text-custom-blue">
+                <h2 className="section-heading">
                   {content.contextTitle}
                 </h2>
               </div>
-              <p className="max-w-xl text-[0.98rem] leading-7 text-custom-blue/65 lg:justify-self-end">
+              <p className="max-w-[62ch] text-base leading-7 text-custom-blue/72">
                 {content.contextBody}
               </p>
             </div>
@@ -158,11 +137,11 @@ export default function CaseStudyPage({ caseStudyId }: CaseStudyPageProps) {
 
           <section
             data-case-study-evidence={caseStudyId}
-            className="pb-20 sm:pb-28 lg:pb-32"
+            className="pb-[var(--section-space)]"
           >
             <div className="mb-8 max-w-3xl">
               <SectionLabel index="Proof" label="Decisions" />
-              <h2 className="font-display text-[clamp(2.3rem,7vw,5.4rem)] leading-[0.92] tracking-[-0.05em] text-custom-blue">
+              <h2 className="section-heading">
                 The choices that made the product hold together.
               </h2>
             </div>
@@ -180,11 +159,11 @@ export default function CaseStudyPage({ caseStudyId }: CaseStudyPageProps) {
           </section>
 
           {content.process && (
-            <section className="pb-20 sm:pb-28 lg:pb-32">
+            <section className="pb-[var(--section-space)]">
               <div className="grid gap-10 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:gap-16">
                 <div className="max-w-xl lg:sticky lg:top-28 lg:self-start">
                   <SectionLabel index="Process" label="How it took shape" />
-                  <h2 className="font-display text-[clamp(2.3rem,7vw,5.4rem)] leading-[0.92] tracking-[-0.04em] text-custom-blue">
+                  <h2 className="section-heading">
                     {content.processTitle ?? "Small on the surface. Deliberate underneath."}
                   </h2>
                   <p className="mt-6 max-w-[62ch] text-[0.98rem] leading-7 text-custom-blue/65">
@@ -207,11 +186,11 @@ export default function CaseStudyPage({ caseStudyId }: CaseStudyPageProps) {
             </section>
           )}
 
-          <section className="pb-20 sm:pb-28 lg:pb-32">
+          <section className="pb-[var(--section-space)]">
             <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
               <div className="max-w-3xl">
                 <SectionLabel index="Screens" label="Selected work" />
-                <h2 className="font-display text-[clamp(2.3rem,7vw,5.4rem)] leading-[0.92] tracking-[-0.05em] text-custom-blue">
+                <h2 className="section-heading">
                   The interface, in context.
                 </h2>
               </div>
@@ -225,12 +204,12 @@ export default function CaseStudyPage({ caseStudyId }: CaseStudyPageProps) {
             </div>
           </section>
 
-          <section className="pb-20 sm:pb-28 lg:pb-32">
-            <div className="overflow-hidden rounded-[1.65rem] bg-[#071726] p-5 text-white shadow-[0_40px_140px_rgba(5,16,32,0.22)] sm:rounded-[2.5rem] sm:p-8 lg:p-12">
+          <section className="pb-[var(--section-space)]">
+            <div className="dark-panel p-7 sm:p-10 lg:p-12">
               <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
                 <div>
                   <SectionLabel index="Release" label="Proof and boundaries" tone="light" />
-                  <h2 className="max-w-[10ch] font-display text-[clamp(2.6rem,7vw,5.4rem)] leading-[0.9] tracking-[-0.05em] text-white">
+                  <h2 className="section-heading max-w-[14ch] text-white">
                     What the build makes visible.
                   </h2>
                 </div>
@@ -247,8 +226,7 @@ export default function CaseStudyPage({ caseStudyId }: CaseStudyPageProps) {
         </div>
       </main>
 
-      <Footer />
-    </div>
+    </PortfolioShell>
   );
 }
 
@@ -412,7 +390,7 @@ function DarkList({ title, items }: { title: string; items: readonly string[] })
       <h3 className="font-label text-[0.64rem] font-medium uppercase tracking-[0.2em] text-custom-teal">
         {title}
       </h3>
-      <ul className="mt-4 space-y-3 text-[0.86rem] leading-6 text-white/70">
+      <ul className="mt-4 space-y-3 text-base leading-7 text-white/75">
         {items.map((item) => (
           <li key={item} className="border-t border-white/10 pt-3 first:border-t-0 first:pt-0">
             {item}
@@ -440,7 +418,7 @@ function ProcessStep({
       <h3 className="max-w-[18ch] font-display text-[1.3rem] font-medium leading-[1.08] tracking-[-0.02em] text-custom-blue">
         {title}
       </h3>
-      <p className="max-w-[62ch] text-[0.84rem] leading-6 text-custom-blue/68">{body}</p>
+      <p className="max-w-[62ch] text-base leading-7 text-custom-blue/72">{body}</p>
     </li>
   );
 }

@@ -2,6 +2,8 @@ import { expect, test, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { projects } from "../../app/data/projects";
 
+test.use({ launchOptions: { args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"] } });
+
 async function prepareHomepage(page: Page) {
   await page.addInitScript(() => {
     window.sessionStorage.setItem("mv-home-intro", "1");
@@ -14,12 +16,12 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page.locator(".home-intro-shell")).toHaveCount(0);
 
   await expect(page).toHaveTitle(/Marcell Varga/i);
-  await expect(page.locator("#process h2")).toContainText("What I bring to a product team.");
-  await expect(page.locator("[data-expertise-row]")).toHaveCount(3);
+  await expect(page.locator("#process h2")).toContainText("How I think and build.");
+  await expect(page.locator("[data-expertise-area]")).toHaveCount(3);
   await expect(page.locator("#process")).toContainText("React");
-  await expect(page.locator("#process")).toContainText("accessibility");
-  await expect(page.locator("#process")).toContainText("Reliable delivery");
-  await expect(page.locator("header nav").getByRole("button", { name: "Capabilities", exact: true })).toBeVisible();
+  await expect(page.locator("#process")).toContainText("WCAG");
+  await expect(page.locator("#process")).toContainText("Working with AI");
+  await expect(page.locator("header nav").getByRole("button", { name: "Approach", exact: true })).toBeVisible();
   await expect(page.getByTestId("case-study-restructuring-notice")).toHaveCount(0);
 
   await page.locator("header nav").getByRole("button", { name: "Contact", exact: true }).click();
@@ -50,6 +52,169 @@ test("homepage is ready behind the playing intro", async ({ page }) => {
   await expect(
     page.locator('img[alt="Portrait of Marcell Varga"]').first(),
   ).toHaveAttribute("src", /personalpageprofilealt/);
+});
+
+test("capabilities keep expertise readable and graphics decorative", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await prepareHomepage(page);
+  await page.goto("/");
+  await expect(page.locator(".home-intro-stage")).toHaveAttribute("aria-hidden", "false");
+  const section = page.locator("#process");
+  await expect(section.getByRole("heading", { level: 3 })).toHaveText([
+    "Designing interactions", "Building interfaces", "Working with AI",
+  ]);
+  await expect(section.getByRole("button")).toHaveCount(0);
+  await expect(section.locator('[aria-live]')).toHaveCount(0);
+  const graphics = section.locator("[data-expertise-graphic]");
+  await expect(graphics).toHaveCount(3);
+  for (const graphic of await graphics.all()) {
+    await expect(graphic).toHaveAttribute("aria-hidden", "true");
+    await expect(graphic.locator('button, a, [tabindex]')).toHaveCount(0);
+  }
+});
+
+test("capabilities move with normal scrolling without pinned holds", async ({ page }) => {
+  await prepareHomepage(page);
+  await page.goto("/");
+  await expect(page.locator(".home-intro-stage")).toHaveAttribute("aria-hidden", "false");
+  for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }, { width: 320, height: 640 }]) {
+    await page.setViewportSize(viewport);
+    for (const area of await page.locator("[data-expertise-area]").all()) {
+      const row = area.locator(".expertise-row");
+      await area.evaluate(element => scrollTo({ top: element.getBoundingClientRect().top + scrollY - 100, behavior: "instant" }));
+      await expect(area.locator("h3")).toBeInViewport();
+      await expect(area.locator("[data-expertise-graphic]")).toBeInViewport();
+      const before = await row.evaluate(element => element.getBoundingClientRect().top);
+      await page.evaluate(() => scrollBy({ top: 160, behavior: "instant" }));
+      await expect.poll(() => row.evaluate(element => element.getBoundingClientRect().top)).toBeCloseTo(before - 160, 0);
+      const bounds = await area.evaluate(element => {
+        const row = element.firstElementChild!;
+        return { rowHeight: row.clientHeight, areaHeight: element.clientHeight, fits: row.scrollHeight <= row.clientHeight + 1 };
+      });
+      expect(bounds.areaHeight).toBeLessThanOrEqual(bounds.rowHeight + 2);
+      expect(bounds.fits).toBe(true);
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  }
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(page.locator(".expertise-row").first()).toHaveCSS("position", "relative");
+});
+
+test("capabilities keep the heading above varied row compositions", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await prepareHomepage(page);
+  await page.goto("/");
+  await expect(page.locator(".home-intro-stage")).toHaveAttribute("aria-hidden", "false");
+  const section = page.locator("#process");
+  for (const viewport of [{ width: 1440, height: 900 }, { width: 1024, height: 720 }, { width: 390, height: 844 }, { width: 320, height: 640 }]) {
+    await page.setViewportSize(viewport);
+    await expect(section.locator('[data-expertise-area="frontend"] [data-expertise-copy]')).toHaveCSS(
+      "order", viewport.width >= 1024 ? "2" : "1",
+    );
+    const bounds = await section.evaluate(element => {
+      const heading = element.querySelector("h2")!.getBoundingClientRect();
+      const firstRow = element.querySelector(".expertise-row")!.getBoundingClientRect();
+      const rows = Array.from(element.querySelectorAll(".expertise-row")).map(row => {
+        const text = row.querySelector("[data-expertise-copy]")!.getBoundingClientRect();
+        const graphic = row.querySelector("[data-expertise-graphic]")!.getBoundingClientRect();
+        return { kind: row.closest("[data-expertise-area]")!.getAttribute("data-expertise-area"), textLeft: text.left, textTop: text.top, textRight: text.right, textBottom: text.bottom, graphicLeft: graphic.left, graphicRight: graphic.right, graphicTop: graphic.top, graphicBottom: graphic.bottom };
+      });
+      return { headingBottom: heading.bottom, rowTop: firstRow.top, rows };
+    });
+    expect(bounds.headingBottom).toBeLessThan(bounds.rowTop);
+    for (const row of bounds.rows) {
+      if (viewport.width >= 1024) {
+        if (row.kind === "frontend") expect(row.graphicRight).toBeLessThan(row.textLeft);
+        else expect(row.textRight).toBeLessThan(row.graphicLeft);
+      } else {
+        expect(row.textBottom).toBeLessThan(row.graphicTop);
+      }
+    }
+  }
+  await expect(section.getByRole("navigation")).toHaveCount(0);
+});
+
+test("capability graphics stay usable without WebGL", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await prepareHomepage(page);
+  await page.addInitScript(() => {
+    const getContext = HTMLCanvasElement.prototype.getContext;
+    Object.defineProperty(HTMLCanvasElement.prototype, "getContext", {
+      value(this: HTMLCanvasElement, contextId: string, options: unknown) {
+        if (contextId === "webgl2") {
+          this.dataset.webglAttempted = "true";
+          return null;
+        }
+        return Reflect.apply(getContext, this, [contextId, options]);
+      },
+    });
+  });
+  await page.goto("/");
+  await expect(page.locator(".home-intro-stage")).toHaveAttribute("aria-hidden", "false");
+  await expect(page.locator("[data-expertise-graphic]")).toHaveCount(3);
+  for (const graphic of await page.locator("[data-expertise-graphic]").all()) {
+    await graphic.scrollIntoViewIfNeeded();
+    await expect(graphic.locator("canvas")).toHaveAttribute("data-webgl-attempted", "true");
+    await expect(graphic).toHaveAttribute("data-renderer", "vector");
+    await expect(graphic.locator("svg")).toBeVisible();
+  }
+  await expect(page.locator("#process")).toContainText("React");
+  await expect(page.locator("#process")).toContainText("Figma");
+  await expect(page.locator("#process").getByRole("button")).toHaveCount(0);
+});
+
+test.describe("ambient capability graphics", () => {
+  test("ambient motion pauses offscreen and with reduced motion", async ({ page }) => {
+    await prepareHomepage(page);
+    await page.addInitScript(() => {
+      const getContext = HTMLCanvasElement.prototype.getContext;
+      const tracked = new WeakSet<WebGL2RenderingContext>();
+      Object.defineProperty(HTMLCanvasElement.prototype, "getContext", {
+        value(this: HTMLCanvasElement, contextId: string, options: unknown) {
+          const context = Reflect.apply(getContext, this, [contextId, options]);
+          if (contextId === "webgl2" && context instanceof WebGL2RenderingContext && this.parentElement?.dataset.expertiseGraphic && !tracked.has(context)) {
+            tracked.add(context);
+            const canvas = this;
+            const draw = context.drawElements;
+            context.drawElements = (...args: Parameters<WebGL2RenderingContext["drawElements"]>) => {
+              canvas.dataset.drawCalls = String(Number(canvas.dataset.drawCalls ?? 0) + 1);
+              return Reflect.apply(draw, context, args);
+            };
+          }
+          return context;
+        },
+      });
+    });
+    await page.goto("/");
+    await expect(page.locator(".home-intro-stage")).toHaveAttribute("aria-hidden", "false");
+    for (const graphic of await page.locator("[data-expertise-graphic]").all()) {
+      await page.emulateMedia({ reducedMotion: "no-preference" });
+      await graphic.scrollIntoViewIfNeeded();
+      await expect(graphic).toHaveAttribute("data-renderer", "three", { timeout: 15000 });
+      const canvas = graphic.locator("canvas");
+      const count = async () => Number(await canvas.getAttribute("data-draw-calls"));
+      await expect.poll(count).toBeGreaterThan(0);
+      const running = await count();
+      await expect.poll(count).toBeGreaterThan(running);
+
+      await page.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
+      await expect(graphic).not.toBeInViewport();
+      await page.waitForTimeout(100);
+      const paused = await count();
+      await page.waitForTimeout(200);
+      expect(await count()).toBe(paused);
+
+      await graphic.scrollIntoViewIfNeeded();
+      await expect.poll(count).toBeGreaterThan(paused);
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      // Allow the final static pose to render on the software GPU.
+      await page.waitForTimeout(500);
+      const reduced = await count();
+      await page.waitForTimeout(200);
+      expect(await count()).toBe(reduced);
+      await expect(graphic).toHaveAttribute("data-renderer", "three");
+    }
+  });
 });
 
 test("header uses the dark treatment only over the hero", async ({ page }) => {
@@ -97,22 +262,32 @@ test("principles statement types forward and reverses on scroll back", async ({ 
   await expect(statement).toHaveText("");
 });
 
-test("Principles stays visible throughout the desktop scroll sequence", async ({ page }) => {
+test("Principles preserves the desktop reveal and fits shorter screens", async ({ page }) => {
   await prepareHomepage(page);
   await page.goto("/");
-  await expect(page.locator(".home-intro-shell")).toHaveCount(0);
+  await expect(page.locator(".home-intro-stage")).toHaveAttribute("aria-hidden", "false");
   const panel = page.locator('#about [data-scroll-anchor="about"]');
 
-  for (const progress of [0, 0.4, 0.7]) {
-    await page.locator("#about").evaluate((section, fraction) => {
-      const top = section.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top: top + section.clientHeight * fraction, behavior: "instant" });
-    }, progress);
-    await expect(panel).toBeInViewport();
-    await expect(panel).toHaveCSS("opacity", "1");
-    await expect(panel).toContainText("Principles");
+  for (const size of [{ width: 1440, height: 900 }, { width: 1280, height: 720 }, { width: 1024, height: 720 }]) {
+    await page.setViewportSize(size);
+    for (const progress of [0.2, 0.6, 0.75]) {
+      await page.locator("#about").evaluate((section, fraction) => {
+        const top = section.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: top + (section.clientHeight - window.innerHeight) * fraction, behavior: "instant" });
+      }, progress);
+      await expect(panel).toBeInViewport();
+      await expect.poll(() => panel.evaluate(element => Number(getComputedStyle(element).opacity))).toBeGreaterThan(0.98);
+      await expect(panel).toContainText("Principles");
+    }
+    await expect(panel.locator("p")).toContainText("testing, and release.");
+    const bounds = await panel.evaluate((element) => {
+      const rect = element.getBoundingClientRect();
+      return { top: rect.top, bottom: rect.bottom, contentFits: element.scrollHeight <= element.clientHeight + 1 };
+    });
+    expect(bounds.top).toBeGreaterThanOrEqual(0);
+    expect(bounds.bottom).toBeLessThanOrEqual(size.height);
+    expect(bounds.contentFits).toBe(true);
   }
-  await expect(panel.locator("p")).toContainText("testing, and release.");
 });
 
 test("mobile Principles and Contact share the portfolio panel treatment", async ({ page }) => {
@@ -158,7 +333,15 @@ test("contact keeps desktop button styling across responsive breakpoints", async
       };
     }));
     const styles = buttons.map((button) => button.treatment);
-    if (width === 1440) desktopStyles = styles;
+    if (width === 1440) {
+      desktopStyles = styles;
+      for (const style of styles) {
+        expect(style.radius).toBe("21.6px");
+        expect(style.textTransform).toBe("uppercase");
+        expect(style.shadow).toContain("inset");
+        expect(style.background).toMatch(/(?:, |\/ )0\.07\)$/);
+      }
+    }
     else expect(styles).toEqual(desktopStyles);
     for (const button of buttons) {
       expect(button.fits).toBe(true);

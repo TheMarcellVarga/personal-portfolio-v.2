@@ -24,38 +24,47 @@ import { useClientReducedMotion } from "./hooks/useClientReducedMotion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
+  Accessibility,
   ArrowRight,
+  Blocks,
   ArrowUpRight,
   ChevronDown,
   Download,
   Github,
   Linkedin,
   Mail,
+  MousePointer2,
+  PanelsTopLeft,
+  Plug,
+  RadioTower,
 } from "lucide-react";
+import { SiD3Dotjs, SiFigma, SiNodedotjs, SiReact, SiSpring, SiTypescript } from "react-icons/si";
 import Header from "./header";
 import Footer from "./footer";
 import { history, type HistoryItem } from "./data/history";
+import { resume } from "./data/resume";
 import { projects, type Project } from "./data/projects";
 import { SectionLabel } from "./components/SectionLabel";
 import { HomeIntro } from "./components/HomeIntro";
 import { PageBackground } from "./components/PageBackground";
 import { HeroCanvasBackdrop } from "./components/HeroCanvasBackdrop";
+import { ExpertiseVisual } from "./components/ExpertiseVisual";
 import { SplitTextReveal } from "./components/SplitTextReveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const principlesStatement =
-  "I turn complex product workflows into clear interfaces, then carry them through backend architecture, reliability, testing, and release.";
+  "I like making complex things feel simple. For me, design and code are two parts of the same process.";
 
 const PRINCIPLES_REVEAL_END = 0.74;
 
 const darkSectionPanelClassName =
-  "overflow-hidden rounded-[1.65rem] bg-[#071726] text-white shadow-[0_40px_140px_rgba(7,20,38,0.26),inset_0_1px_0_rgba(255,255,255,0.16)] sm:rounded-[2.5rem] lg:rounded-[3rem]";
+  "dark-panel";
 
 const contactLinkClassName =
-  "group flex min-h-12 w-full items-center justify-between gap-3 rounded-xl border border-white/12 bg-white/[0.04] px-4 py-2.5 text-white/90 transition-colors duration-200 hover:border-white/20 hover:bg-white/[0.07] active:bg-white/[0.09] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white md:gap-4 md:px-5 md:py-3.5";
+  "group flex min-h-12 w-full items-center justify-between gap-3 rounded-[1.35rem] bg-white/7 px-4 py-3 text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white md:gap-4 md:px-5 md:py-3.5";
 const contactLinkLabelClassName =
-  "min-w-0 break-words font-label text-sm font-medium normal-case leading-5 tracking-normal [overflow-wrap:anywhere] md:text-[0.72rem]";
+  "min-w-0 break-words font-label text-[0.72rem] font-medium uppercase leading-6 tracking-[0.08em] text-white/80 [overflow-wrap:anywhere] sm:tracking-[0.16em]";
 
 
 const featuredProjectOrder = [
@@ -72,53 +81,110 @@ const supportingProjectOrder = [
 // Flip to true when the case studies need to be temporarily covered again.
 const SHOW_CASE_STUDY_RESTRUCTURING_NOTICE = false;
 
-const expertiseGroups = [
+const expertiseAreas = [
   {
-    title: "Product judgment",
+    title: "Designing interactions",
+    kind: "ux",
     description:
-      "I turn ambiguous requirements into clear workflows and focused product decisions.",
+      "I work through the details of a flow until it feels clear and natural to use.",
+    tools: [
+      { label: "Figma", icon: SiFigma },
+      { label: "Interaction design", icon: MousePointer2 },
+      { label: "Prototyping", icon: PanelsTopLeft },
+      { label: "WCAG", icon: Accessibility },
+    ],
   },
   {
-    title: "Frontend ownership",
+    title: "Building interfaces",
+    kind: "frontend",
     description:
-      "I carry the work from UX and prototyping into production React and TypeScript.",
+      "I turn designs into interfaces, with care for accessibility and the pieces that hold everything together.",
+    tools: [
+      { label: resume.skillGroups[0].items[0], icon: SiReact },
+      { label: resume.skillGroups[0].items[1], icon: SiTypescript },
+      { label: resume.skillGroups[0].items[3], icon: SiD3Dotjs },
+      { label: resume.skillGroups[1].items[0], icon: Blocks },
+    ],
   },
   {
-    title: "Reliable delivery",
+    title: "Working with AI",
+    kind: "ai",
     description:
-      "I work across APIs, accessibility, testing, and release details so the experience holds up in production.",
+      "I use AI as part of the process, while keeping the decisions and judgment my own.",
+    tools: [
+      { label: resume.skillGroups[2].items[0], icon: SiNodedotjs },
+      { label: resume.skillGroups[2].items[1], icon: SiSpring },
+      { label: resume.skillGroups[2].items[2], icon: Plug },
+      { label: resume.skillGroups[2].items[3], icon: RadioTower },
+    ],
   },
 ] as const;
 
-type ExpertiseGroup = (typeof expertiseGroups)[number];
+function ExpertiseArea({ area }: { area: (typeof expertiseAreas)[number] }) {
+  const stageRef = useRef<HTMLLIElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: stageRef,
+    offset: ["start end", "end start"],
+  });
+  const frontend = area.kind === "frontend";
+  const supporting = area.kind === "ai";
+  const layout = frontend
+    ? "border-custom-blue/14 py-8 lg:grid-cols-[1.15fr_0.85fr] lg:py-12"
+    : supporting
+      ? "border-custom-blue/20 py-8 lg:grid-cols-2"
+      : "border-[var(--title-accent)] py-8 lg:grid-cols-[0.85fr_1.15fr] lg:py-10";
 
-function ExpertiseRow({
-  group,
-  index,
-}: {
-  group: ExpertiseGroup;
-  index: number;
-}) {
   return (
-    <article
-      data-expertise-row
-      className="relative grid grid-cols-[1.5rem_minmax(0,1fr)] gap-x-4 gap-y-3 py-8 sm:grid-cols-[3rem_minmax(12rem,0.72fr)_minmax(0,1.28fr)] sm:gap-7 sm:py-9 lg:gap-10"
+    <li id={`capability-${area.kind}`} ref={stageRef} data-expertise-area={area.kind} className="relative min-w-0 scroll-mt-32">
+      <div className={`expertise-row relative flex flex-col gap-6 border-t lg:grid lg:items-center lg:gap-20 ${layout}`}>
+        <div data-expertise-copy className={`order-1 min-w-0 ${frontend ? "lg:order-2" : ""}`}>
+          <h3 className={`max-w-[19ch] font-display font-medium leading-[1.04] tracking-[-0.025em] text-custom-blue ${supporting ? "text-[1.75rem] sm:text-[2rem] lg:text-[2.25rem]" : "text-[clamp(2.25rem,3.5vw,3rem)]"}`}>
+            {area.title}
+          </h3>
+          <p className="mt-4 text-base leading-7 text-custom-blue/68 sm:text-lg">{area.description}</p>
+          <ul
+            aria-label={`Tools and methods for ${area.title}`}
+            className="mt-6 flex flex-wrap gap-x-5 gap-y-3 font-label text-[0.75rem] font-medium leading-5 text-custom-blue lg:mt-8"
+          >
+            {area.tools.map(({ label, icon: Icon }) => (
+              <li key={label} className="inline-flex items-center gap-2.5 whitespace-nowrap">
+                <Icon aria-hidden="true" focusable="false" className="h-[1.125rem] w-[1.125rem] shrink-0 text-custom-blue/75" />
+                <span>{label}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className={`order-2 min-w-0 ${frontend ? "lg:order-1" : ""}`}>
+          <ExpertiseVisual kind={area.kind} progress={scrollYProgress} />
+        </div>
+      </div>
+    </li>
+  );
+}
+
+function CapabilitiesSection() {
+  const shouldReduceMotion = useClientReducedMotion();
+
+  return (
+    <section
+      id="process"
+      data-scroll-anchor="process"
+      className="portfolio-container portfolio-section relative"
     >
-      <span
-        data-expertise-divider
-        aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-px origin-left bg-custom-blue/14"
-      />
-      <span className="font-mono pt-1 text-[0.66rem] tracking-[0.12em] text-custom-blue/64">
-        0{index + 1}
-      </span>
-      <h3 className="font-display text-[1.35rem] font-medium leading-tight tracking-[-0.025em] text-custom-blue sm:text-[1.55rem]">
-        {group.title}
-      </h3>
-      <p className="col-start-2 max-w-[44rem] text-base sm:col-start-auto leading-7 text-custom-blue/68 sm:text-[1.05rem] sm:leading-8">
-        {group.description}
-      </p>
-    </article>
+      <div className="mb-10 max-w-5xl sm:mb-16">
+        <SplitTextReveal
+          as="h2"
+          text="How I think and build."
+          accentText="build."
+          animate={!shouldReduceMotion}
+          triggerOnView
+          className="section-heading"
+        />
+      </div>
+      <ul aria-label="Specialties and technologies" className="relative min-w-0">
+        {expertiseAreas.map(area => <ExpertiseArea key={area.title} area={area} />)}
+      </ul>
+    </section>
   );
 }
 
@@ -448,7 +514,6 @@ export default function Page() {
   const enableScrollMotion = hasMounted && !shouldReduceMotion;
   const headerLogoRef = useRef<HTMLSpanElement>(null);
   const mainStageRef = useRef<HTMLDivElement>(null);
-  const capabilitiesSectionRef = useRef<HTMLElement>(null);
   const heroIntroAnimationStartedRef = useRef(false);
 
   const heroRef = useRef<HTMLElement>(null);
@@ -500,24 +565,29 @@ export default function Page() {
   const liquidRise = useTransform(liquidProgress, [0, 1], [260, -54]);
   const { scrollYProgress: principlesProgress } = useScroll({
     target: principlesRef,
-    offset: ["start 85%", "end 85%"],
+    offset: ["start start", "end end"],
   });
   const { scrollYProgress: workScrollProgress } = useScroll({
     target: workSectionRef,
     offset: ["start end", "end start"],
   });
   const principlesRevealEnd = PRINCIPLES_REVEAL_END;
+  const principlesOpacity = useTransform(
+    principlesProgress,
+    [0, 0.12, 0.74, 0.86, 0.95, 1],
+    [0, 1, 1, 0.88, 0.32, 0],
+  );
   const principlesScale = useTransform(
     principlesProgress,
     [0, 0.18, 0.74, 0.86, 1],
-    [0.98, 1, 1, 1, 1],
+    [0.92, 1, 1, 0.99, 0.92],
   );
   const principlesY = useTransform(
     principlesProgress,
     [0, 0.2, 0.74, 0.86, 1],
-    [16, 0, 0, 0, 0],
+    [36, 0, 0, -8, -72],
   );
-  const principlesGlow = useTransform(principlesProgress, [0, 1], [0.35, 1]);
+  const principlesGlow = useTransform(principlesProgress, [0, 1], [0, 0.5]);
 
   const [isCompactViewport, setIsCompactViewport] = useState(false);
   useEffect(() => {
@@ -621,7 +691,7 @@ export default function Page() {
     const sectionIds = ["hero", "process", "work", "contact"];
     const sectionMap: Record<string, string> = {
       hero: "Intro",
-      process: "Capabilities",
+      process: "Approach",
       work: "Work",
       contact: "Contact",
     };
@@ -877,60 +947,6 @@ export default function Page() {
     };
   }, [introStage, shouldReduceMotion]);
 
-  useLayoutEffect(() => {
-    const section = capabilitiesSectionRef.current;
-    if (!section || shouldReduceMotion) return;
-
-    const rows = Array.from(
-      section.querySelectorAll<HTMLElement>("[data-expertise-row]"),
-    );
-    const dividers = Array.from(
-      section.querySelectorAll<HTMLElement>("[data-expertise-divider]"),
-    );
-    const progress = section.querySelector<HTMLElement>("[data-expertise-progress]");
-
-    const context = gsap.context(() => {
-      gsap.set(rows, { autoAlpha: 0, y: 28 });
-      gsap.set(dividers, { scaleX: 0, transformOrigin: "left center" });
-
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top 72%",
-          once: true,
-        },
-      })
-        .to(dividers, {
-          scaleX: 1,
-          duration: 0.8,
-          stagger: 0.11,
-          ease: "power3.out",
-        })
-        .to(rows, {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.72,
-          stagger: 0.1,
-          ease: "power3.out",
-        }, 0.08);
-
-      if (progress) {
-        gsap.fromTo(progress, { scaleX: 0 }, {
-          scaleX: 1,
-          ease: "none",
-          transformOrigin: "left center",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 70%",
-            end: "bottom 45%",
-            scrub: 0.5,
-          },
-        });
-      }
-    }, section);
-
-    return () => context.revert();
-  }, [shouldReduceMotion]);
 
   const featuredProjects = useMemo(
     () =>
@@ -1059,9 +1075,9 @@ export default function Page() {
                   />
                   <div data-hero-copy className="mt-6 max-w-[30rem]">
                     <p className="text-base leading-7 text-white/90 sm:text-lg sm:leading-8">
-                      Singapore-based UX and frontend engineer using React and
-                      TypeScript to turn complex products and AI workflows into
-                      clear, resilient interfaces.
+                      I’m Marcell, a UX and frontend engineer based in Singapore.
+                      I design and build interfaces, connecting how things look
+                      with how they work.
                     </p>
                   </div>
                 </div>
@@ -1130,9 +1146,9 @@ export default function Page() {
                     />
                     <div data-hero-copy>
                       <p className="max-w-[30rem] text-[1.02rem] leading-7 text-white/90 sm:text-[1.08rem] sm:leading-8">
-                        Singapore-based UX and frontend engineer using React and
-                        TypeScript to turn complex products and AI workflows into
-                        clear, resilient interfaces.
+                        I’m Marcell, a UX and frontend engineer based in Singapore.
+                        I design and build interfaces, connecting how things look
+                        with how they work.
                       </p>
                     </div>
                   </div>
@@ -1211,15 +1227,15 @@ export default function Page() {
             ref={principlesRef}
             className="isolate relative z-30 mx-auto mt-8 w-full max-w-7xl sm:mt-12 lg:-mt-12 lg:h-[260vh]"
           >
-            <div className="lg:sticky lg:top-16 lg:flex lg:h-[32rem] lg:items-center lg:py-10 xl:top-24 xl:h-[40rem] xl:py-12">
+            <div className="lg:sticky lg:top-16 lg:flex lg:h-[calc(100dvh-8rem)] lg:items-center xl:top-24 xl:h-[calc(100dvh-12rem)]">
                 <motion.div
                   data-scroll-anchor="about"
                   style={
                     enableScrollMotion && !isCompactViewport
-                      ? { scale: principlesScale, y: principlesY }
+                      ? { opacity: principlesOpacity, scale: principlesScale, y: principlesY }
                       : undefined
                   }
-                  className={`${darkSectionPanelClassName} mx-auto flex h-auto w-full max-w-5xl flex-col px-6 py-8 sm:min-h-[28rem] sm:p-8 lg:h-[40rem] lg:min-h-0 lg:p-12`}
+                  className={`${darkSectionPanelClassName} mx-auto flex h-auto w-full max-w-5xl flex-col px-6 py-8 sm:min-h-[28rem] sm:p-8 lg:h-[min(40rem,calc(100dvh-8rem))] lg:min-h-0 lg:bg-[#071726]/92 lg:p-12 xl:h-[min(40rem,calc(100dvh-12rem))]`}
               >
                 <div className="flex h-full flex-col justify-between gap-8">
                   <div>
@@ -1233,7 +1249,7 @@ export default function Page() {
                       className="mb-8 h-px w-full bg-[linear-gradient(90deg,rgba(76,216,255,0.85),rgba(76,216,255,0.02))]"
                     />
                     <p
-                      className="max-w-4xl font-display text-[clamp(1.5rem,6.5vw,4.6rem)] leading-[1.18] tracking-[-0.02em] !text-[#f8fbff] sm:leading-[1.08]"
+                      className="max-w-4xl font-display text-[clamp(1.5rem,6.5vw,4.6rem)] leading-[1.18] tracking-[-0.02em] !text-[#f8fbff] sm:leading-[1.08] lg:text-[min(4.6rem,8dvh)]"
                       style={{
                         color: "#f8fbff",
                         WebkitTextFillColor: "#f8fbff",
@@ -1283,53 +1299,21 @@ export default function Page() {
             </div>
           </section>
 
-          <section
-            id="process"
-            ref={capabilitiesSectionRef}
-            data-scroll-anchor="process"
-            className="relative mx-auto w-full max-w-7xl py-20 sm:py-24 lg:py-32"
-          >
-            <div className="mb-10 max-w-5xl sm:mb-16">
-              <SplitTextReveal
-                as="h2"
-                text="What I bring to a product team."
-                accentText="product team."
-                animate={!shouldReduceMotion}
-                triggerOnView
-                className="font-display text-[clamp(2.3rem,10vw,5.4rem)] leading-[1.02] tracking-[-0.04em] text-custom-blue sm:leading-[0.92]"
-              />
-              <p className="mt-5 max-w-2xl text-base leading-7 text-custom-blue/66 sm:mt-6 sm:text-[1.05rem] sm:leading-8">
-                Product thinking and frontend engineering, carried from ambiguity
-                to release.
-              </p>
-            </div>
-
-            <div className="relative">
-              <span
-                data-expertise-progress
-                aria-hidden="true"
-                className="absolute inset-x-0 top-0 h-[2px] origin-left bg-[var(--title-accent)]"
-              />
-              {expertiseGroups.map((group, index) => (
-                <ExpertiseRow key={group.title} group={group} index={index} />
-              ))}
-              <span aria-hidden="true" className="block h-px bg-custom-blue/14" />
-            </div>
-          </section>
+          <CapabilitiesSection />
 
           <section
             id="work"
             ref={workSectionRef}
             data-scroll-anchor="work"
-            className="relative mx-auto w-full max-w-7xl py-20 sm:py-24 lg:py-32"
+            className="portfolio-container portfolio-section relative"
           >
             <div className="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div className="max-w-2xl">
                 <SectionLabel index="03" label="Selected Work" />
                 <SplitTextReveal
                   as="h2"
-                  text="Work that turns product thinking into interfaces."
-                  accentText="interfaces."
+                  text="A few things I’ve made."
+                  accentText="made."
                   animate={!shouldReduceMotion}
                   triggerOnView
                   className="mt-6 font-display text-[clamp(2.3rem,10vw,5.4rem)] leading-[1.02] tracking-[-0.04em] text-custom-blue sm:mt-8 sm:leading-[0.9]"
@@ -1579,7 +1563,7 @@ export default function Page() {
                 <div>
                   <SectionLabel index="05" label="Contact" tone="light" />
                   <h2 className="font-display text-[clamp(3rem,14vw,5rem)] font-medium leading-[1.05] tracking-[-0.03em] text-white">
-                    Say hi.
+                    Say hi!
                   </h2>
                   <p className="mt-5 max-w-2xl text-base leading-7 text-white/80 sm:text-[1.05rem] sm:leading-8">
                     If you want to talk about a project, share feedback, or
