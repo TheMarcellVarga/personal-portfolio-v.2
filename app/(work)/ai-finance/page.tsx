@@ -1,5 +1,5 @@
-import CaseStudyPage from "../../components/CaseStudyPage";
+import ApertureCaseStudy from "../../components/ApertureCaseStudy";
 
 export default function AiFinancePage() {
-  return <CaseStudyPage caseStudyId="aperture" />;
+  return <ApertureCaseStudy />;
 }

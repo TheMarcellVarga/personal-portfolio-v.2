@@ -780,3 +780,96 @@
     backdrop-filter: none;
   }
 }
+
+/* Aperture's case inherits the index foundation; product captures keep product colors. */
+.aperture-case { --case-muted: #4e5965; }
+.aperture-case section[id] { scroll-margin-top: 7rem; }
+.aperture-case .page-intro { max-width: 65rem; }
+.aperture-intro-row { display: flex; align-items: center; justify-content: space-between; gap: 2rem; margin-top: 1.5rem; }
+.aperture-intro-row p { max-width: 58ch; color: var(--case-muted); line-height: 1.75; }
+.aperture-intro-row .portfolio-button { flex-shrink: 0; }
+.aperture-meta { display: flex; flex-wrap: wrap; gap: 1.5rem 3rem; margin: 2.5rem 0 2rem; }
+.aperture-meta dt { font-size: .75rem; color: var(--case-muted); margin-bottom: .4rem; }
+.aperture-meta dd { font-size: .875rem; color: var(--color-custom-blue); }
+.aperture-hero img { width: 100%; height: auto; border-radius: var(--panel-radius); box-shadow: var(--panel-shadow); }
+.aperture-case figcaption { margin-top: .85rem; font-size: .75rem; line-height: 1.6; color: var(--case-muted); }
+.aperture-section-nav { display: flex; flex-wrap: wrap; gap: .5rem 2rem; padding: 1.4rem 0; margin-top: 1.5rem; border-bottom: 1px solid rgb(17 27 40 / .14); }
+.aperture-section-nav a { font-size: .875rem; padding: .5rem 0; color: var(--case-muted); transition: color .2s; }
+.aperture-section-nav a:hover { color: var(--title-accent); }
+.aperture-brief { display: grid; grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: start; }
+.aperture-brief-copy p { max-width: 60ch; line-height: 1.8; color: var(--case-muted); }
+.aperture-brief-copy p + p { margin-top: 1rem; }
+.aperture-brief-copy .aperture-audience { font-size: .875rem; }
+.aperture-section-lead { margin: 1.5rem 0 2.5rem; max-width: 62ch; line-height: 1.75; color: var(--case-muted); }
+.aperture-selector { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+.aperture-selector button { display: flex; align-items: center; gap: .6rem; min-height: 48px; padding: .7rem 1.1rem; border-radius: .85rem; background: rgb(255 255 255 / .6); color: var(--color-custom-blue); cursor: pointer; transition: background .2s, color .2s; }
+.aperture-selector button[aria-pressed="true"] { color: white; background: var(--color-custom-blue); }
+.aperture-selector button:hover:not([aria-pressed="true"]) { background: white; }
+.aperture-stage-number { font-variant-numeric: tabular-nums; font-size: .75rem; opacity: .8; }
+.aperture-walkthrough { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 2rem; align-items: start; }
+.aperture-screen-frame { overflow: hidden; background: var(--color-custom-blue); border-radius: var(--panel-radius); }
+.aperture-product-image { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: contain; }
+.aperture-screen-copy { padding: 1.5rem 0; }
+.aperture-case h3 { font-size: clamp(1.35rem, 2vw, 1.75rem); font-weight: 500; line-height: 1.15; letter-spacing: -.025em; text-wrap: balance; }
+.aperture-screen-copy p, .aperture-geography p, .aperture-update-pair p { margin-top: 1rem; line-height: 1.75; color: var(--case-muted); }
+.aperture-design-decision { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgb(17 27 40 / .14); }
+.aperture-design-decision h4 { font-size: .875rem; font-weight: 600; }
+.aperture-design-decision p { font-size: .875rem; }
+.aperture-geography { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start; padding: 2.5rem 0; border-top: 1px solid rgb(17 27 40 / .14); }
+.aperture-geography .aperture-example-note { font-size: .75rem; }
+.aperture-geography-example { background: rgb(255 255 255 / .65); border-radius: var(--panel-radius); padding: 1.5rem; }
+.aperture-geography-controls { display: flex; flex-wrap: wrap; gap: .5rem; }
+.aperture-geography-controls button { min-height: 44px; border-bottom: 2px solid transparent; padding: .5rem; font-size: .8125rem; color: var(--case-muted); cursor: pointer; }
+.aperture-geography-controls button[aria-pressed="true"] { color: var(--title-accent); border-color: var(--title-accent); }
+.aperture-geography-result { padding-top: 2rem; min-height: 17rem; }
+.aperture-geography-result h4 { font-size: 2rem; line-height: 1.2; letter-spacing: -.03em; }
+.aperture-geography-result .aperture-geography-outcome { display: flex; align-items: start; gap: .6rem; font-size: .875rem; color: var(--color-custom-blue); }
+.aperture-geography-outcome svg { flex-shrink: 0; margin-top: .2rem; color: var(--title-accent); }
+.aperture-update-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; padding-top: 2.5rem; border-top: 1px solid rgb(17 27 40 / .14); }
+.aperture-digest-flow { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem; margin-top: 1.5rem; }
+.aperture-digest-flow li { display: flex; align-items: center; gap: .65rem; font-size: .8125rem; font-weight: 500; }
+.aperture-digest-flow svg { color: var(--title-accent); }
+.aperture-update-pair .aperture-detail-note { font-size: .8125rem; }
+.aperture-mobile-scope { display: grid; gap: .65rem; margin-top: 1.5rem; }
+.aperture-mobile-scope li { display: flex; gap: .65rem; align-items: center; font-size: .875rem; }
+.aperture-mobile-scope svg { color: var(--title-accent); }
+.aperture-engineering { padding: clamp(1.5rem, 4vw, 3rem); }
+.aperture-engineering-lead { max-width: 60ch; margin-top: 1.5rem; line-height: 1.75; color: #c4ccd4; }
+.aperture-architecture { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2.5rem; margin-top: 3rem; padding: 2rem 0; border-block: 1px solid rgb(255 255 255 / .16); }
+.aperture-architecture li { position: relative; padding-right: 1rem; }
+.aperture-architecture h3 { font-size: 1.15rem; color: white; }
+.aperture-architecture p { font-size: .875rem; color: #c4ccd4; line-height: 1.75; margin-top: .75rem; }
+.aperture-architecture svg { position: absolute; right: -1.5rem; top: 0; width: 18px; color: var(--color-custom-teal); }
+.aperture-release { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; }
+.aperture-release h3 { font-size: 1.15rem; color: white; }
+.aperture-release p { margin-top: 1rem; line-height: 1.75; color: #e0e5ea; }
+.aperture-release .aperture-dark-note { font-size: .8125rem; color: #c4ccd4; }
+.aperture-evidence-details { margin-top: 2rem; border-top: 1px solid rgb(255 255 255 / .16); }
+.aperture-evidence-details summary { display: flex; gap: 1rem; justify-content: space-between; align-items: center; min-height: 60px; padding: 1rem 0; cursor: pointer; color: white; font-size: .875rem; list-style: none; }
+.aperture-evidence-details summary::-webkit-details-marker { display: none; }
+.aperture-evidence-details[open] summary svg { transform: rotate(180deg); }
+.aperture-evidence-expanded { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; padding: 1rem 0; }
+.aperture-evidence-expanded h4 { color: white; font-size: .875rem; font-weight: 600; }
+.aperture-evidence-expanded ul { margin-top: 1rem; display: grid; gap: 1rem; color: #c4ccd4; font-size: .8125rem; line-height: 1.75; }
+.aperture-case button:focus-visible, .aperture-section-nav a:focus-visible, .aperture-evidence-details summary:focus-visible { outline: 2px solid var(--title-accent); outline-offset: 4px; }
+.aperture-evidence-details summary:focus-visible { outline-color: white; }
+@media (max-width: 1023px) {
+  .aperture-walkthrough { grid-template-columns: 1fr; gap: .5rem; }
+  .aperture-screen-copy { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2rem; }
+  .aperture-screen-copy h3 { grid-column: 1; }
+  .aperture-screen-copy > p { grid-column: 1; }
+  .aperture-design-decision { grid-column: 2; grid-row: 1 / 3; margin: 0; padding: 0; border: 0; }
+}
+@media (max-width: 767px) {
+  .aperture-intro-row { align-items: flex-start; flex-direction: column; gap: 1.5rem; }
+  .aperture-meta { gap: 1.5rem; }
+  .aperture-meta div:first-child { width: 100%; }
+  .aperture-brief, .aperture-geography, .aperture-update-pair, .aperture-release, .aperture-evidence-expanded { grid-template-columns: 1fr; gap: 2rem; }
+  .aperture-selector button { flex: 1 1 40%; justify-content: flex-start; font-size: .875rem; }
+  .aperture-screen-copy { display: block; }
+  .aperture-design-decision { margin-top: 1.5rem; }
+  .aperture-geography { padding-top: 2rem; }
+  .aperture-geography-result { min-height: 0; }
+  .aperture-architecture { grid-template-columns: 1fr; gap: 2.5rem; }
+  .aperture-architecture svg { left: 0; top: auto; bottom: -1.8rem; transform: rotate(90deg); }
+}

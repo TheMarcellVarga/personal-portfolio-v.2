@@ -433,18 +433,35 @@ test("case study recommendations use current work and vary by the page", async (
   }
 });
 
-test("Aperture case study presents measurable systems evidence", async ({ page }) => {
+test("Aperture case study connects product screens to current implementation evidence", async ({ page }) => {
   await page.goto("/ai-finance");
-
   await expect(page.getByRole("heading", { name: "Aperture Financial Intelligence" })).toBeVisible();
-  await expect(page.getByText(/40 of 40 evidence regression cases pass/i)).toBeVisible();
-  await expect(page.getByText("One financial picture before many tools.")).toBeVisible();
-  await expect(page.getByRole("heading", { name: "From a broad fintech idea to one inspectable system." })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Verification", exact: true })).toBeVisible();
+  const stages = page.getByRole("group", { name: "Product walkthrough stages" });
+  for (const [label, title, alt] of [
+    ["Markets", "Find what deserves a closer look.", "Aperture cross-market monitor"],
+    ["Evidence", "Open the source behind the sentence.", "Aperture evidence preview"],
+    ["Human review", "The draft is not the final decision.", "Aperture human review preview"],
+    ["Learn", "Reward the research habit.", "Aperture education workspace"],
+  ]) {
+    const button = stages.getByRole("button", { name: new RegExp(label) });
+    await button.click();
+    await expect(button).toHaveAttribute("aria-pressed", "true");
+    await expect(page.getByRole("heading", { name: title, exact: true })).toBeVisible();
+    await expect(page.locator("#aperture-screen img")).toHaveAttribute("alt", new RegExp(alt));
+  }
+  const geography = page.getByRole("group", { name: "Geography examples" });
+  await geography.getByRole("button", { name: "Cross-border asset" }).click();
+  await expect(page.getByRole("heading", { name: "Global", exact: true })).toBeVisible();
+  await geography.getByRole("button", { name: "Country missing" }).click();
+  await expect(page.getByRole("heading", { name: "Unattributed", exact: true })).toBeVisible();
+  await expect(page.getByText("Unknown geography stays visible. No invented map pin.")).toBeVisible();
+  await expect(page.getByText("40 of 40 regression cases", { exact: true })).toBeVisible();
+  const disclosure = page.locator(".aperture-evidence-details");
+  await disclosure.locator("summary").click();
   await expect(page.getByText(/without crossing into trade execution or personal advice/i)).toBeVisible();
-  await expect(page.getByAltText(/cross-market monitor showing provider-backed market states/i)).toBeVisible();
-  await expect(page.getByAltText(/private research room with a structured earnings-review prompt/i)).toBeVisible();
-  await expect(page.getByAltText(/education workspace showing an evidence-led curriculum/i)).toBeVisible();
+  await expect(page.getByText(/External model calls remain disabled by default/)).toBeVisible();
+  await disclosure.locator("summary").click();
+  await expect(disclosure).not.toHaveAttribute("open");
 });
 
 test("First Revenue Game connects product judgment to reliable backend evidence", async ({ page }) => {

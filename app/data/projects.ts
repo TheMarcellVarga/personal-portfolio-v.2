@@ -39,12 +39,12 @@ export const projects: Project[] = [
   {
     title: "Aperture Financial Intelligence",
     titleAccent: "Intelligence",
-    subTitle: "Portfolio intelligence, evidence-led research, and human judgment",
+    subTitle: "From market context to a research note you can inspect",
     date: "2026",
     description:
       "A full-stack financial intelligence workspace that connects portfolios, live market context, private-source research, scenario planning, and education without crossing into trade execution or personal advice.",
     highlight:
-      "The current product pairs a calm five-destination workspace with provider-backed market monitoring, source-first AI research, visible assumptions, and an inspectable learning loop.",
+      "Provider-backed markets, source-linked research, human review, and new geography, digest, and mobile companion work.",
     skills: ["Product strategy", "Next.js", "Go", "Trustworthy AI"],
     link: "/ai-finance",
     image: "/images/ai-finance/aperture-home-2026.jpg",

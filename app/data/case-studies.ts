@@ -13,25 +13,26 @@ export type CaseStudyRecord = {
 export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
   aperture: {
     id: "aperture",
-    role: "Independent product strategy, UX/UI, Next.js product engineering, Go API integration, market-data systems, trustworthy AI, and release engineering",
+    role: "Independent product design and engineering: UX, Next.js, Go, market data, evidence retrieval, and release verification.",
     problem:
-      "Bring a portfolio, changing market context, private-source research, planning assumptions, and financial education into one coherent workspace without turning complexity into false certainty.",
-    user: "Research-minded individuals who want to understand what they own, inspect market context, test scenarios, and keep evidence and limitations close to every conclusion.",
+      "A price chart cannot explain a portfolio, and an AI answer is hard to trust without its source. Aperture brings both into a research workflow people can inspect.",
+    user: "Individuals researching their holdings, comparing scenarios, and checking the evidence behind a financial conclusion.",
     decisions: [
-      "Reduced the product to five primary jobs—Overview, Markets, Portfolio, Plan, and Learn—while keeping research and risk tools in the context that needs them.",
-      "Separated the Next.js product and AI experience from the authoritative Go finance, ownership, calculation, and document APIs.",
-      "Made provider coverage, data freshness, assumptions, citations, and unsupported states visible instead of smoothing over missing evidence.",
-      "Kept generation subordinate to human judgment through immutable raw output, append-only review events, and an evidence-first education loop.",
+      "Five primary destinations keep the workspace navigable: Overview, Markets, Portfolio, Plan, and Learn.",
+      "Provider freshness and coverage travel with market data; missing values stay missing.",
+      "Every material research claim links to evidence from the active retrieval run.",
+      "Human edits and approval are recorded separately from immutable generated output.",
     ],
     verification: [
-      "40 of 40 evidence regression cases pass across five source documents, including citation, injection, advice-boundary, unsupported-claim, and schema checks.",
-      "The disposable-database end-to-end path passes from private upload and retrieval through human review and reviewed Markdown export.",
-      "Go service tests, production builds, ownership isolation, accessibility contracts, deployment checks, and privacy-scrubbed telemetry form the release evidence.",
+      "The recorded evidence baseline passes 40 of 40 regression cases across five source documents: citations, injection, advice boundaries, unsupported claims, and schema validity.",
+      "The recorded disposable-database check covers private upload, retrieval, human review, and reviewed Markdown export.",
+      "Go tests, production builds, ownership checks, accessibility contracts, and deployment checks are documented in the source repository.",
     ],
     limitations: [
-      "The public product preview demonstrates the brand and interaction system; authenticated finance and document workflows depend on configured local or production services and user-supplied data.",
-      "External model calls stay disabled by default. The verified research path uses deterministic generation until paid provider usage is explicitly enabled.",
-      "Aperture provides research and educational decision support only. It does not execute trades, recommend positions, or promise outcomes.",
+      "The public preview shows the product direction. Private finance and research workflows require configured services, sign-in, and user-supplied data.",
+      "External model calls remain disabled by default; the verified research baseline uses deterministic generation.",
+      "The Expo companion implements Overview, Markets, and Inbox. Device release, push delivery, and full web parity remain future work.",
+      "Research and educational decision support only, without crossing into trade execution or personal advice.",
     ],
   },
   "first-revenue-game": {
