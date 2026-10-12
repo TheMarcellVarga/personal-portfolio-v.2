@@ -19,9 +19,9 @@ export const metadata: Metadata = {
     type: "article",
     images: [
       {
-        url: "/images/wild-route/home.png",
+        url: "/images/wild-route/home-october-2026.jpg",
         width: 1440,
-        height: 810,
+        height: 900,
         alt: "Wild Route travel planning interface",
       },
     ],

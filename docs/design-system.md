@@ -25,7 +25,9 @@ Use `title-accent` for emphasis and `section-heading` for major section headings
 Use `portfolio-button`, with `portfolio-button-secondary` on warm backgrounds or
 `portfolio-button-light` inside navy panels. Keep visible keyboard focus.
 
-Case studies all render through `CaseStudyPage`. Product screenshots retain their
+Most case studies render through `CaseStudyPage`. Aperture and Wild Route use dedicated
+screen-led layouts that retain `PortfolioShell`, `PageIntro`, the shared container,
+and index tokens. Product screenshots retain their
 own product colors; surrounding typography and surfaces belong to the portfolio.
 Use real captions below photographs instead of tilted or floating badges.
 

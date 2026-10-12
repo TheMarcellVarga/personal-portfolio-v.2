@@ -87,7 +87,7 @@ export const projects: Project[] = [
       "An end-to-end product-engineering case study spanning interaction design, deterministic route logic, secure data boundaries, accessibility, testing, and a serverless production repair.",
     skills: ["Next.js", "TypeScript", "Supabase RLS", "Stripe", "Playwright"],
     link: "/wild-route",
-    image: "/images/wild-route/home-2026.jpg",
+    image: "/images/wild-route/home-october-2026.jpg",
     category: "Product engineering + applied AI UX",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(214,255,64,0.32),_transparent_28%),linear-gradient(160deg,_#192018_0%,_#59634f_52%,_#d9ddd0_100%)]",

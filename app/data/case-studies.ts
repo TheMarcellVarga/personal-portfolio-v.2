@@ -72,7 +72,7 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
       "Reworked save and preview flows for stateless serverless hosting after the first deployed implementation exposed a process-memory assumption.",
     ],
     verification: [
-      "101 deterministic Vitest cases pass across route generation, entitlements, validation, security, share, and handoff behavior.",
+      "104 deterministic Vitest cases pass across route generation, entitlements, validation, security, share, and handoff behavior.",
       "22 Chromium checks cover the hosted golden path, responsive collision guards, keyboard flow, axe accessibility, reduced motion, and media fallbacks.",
       "Six Supabase migrations pass static verification; local and Vercel-compatible production builds pass, while dependency advisories remain tracked separately from the interface release evidence.",
     ],

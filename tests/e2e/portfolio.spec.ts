@@ -475,54 +475,24 @@ test("First Revenue Game connects product judgment to reliable backend evidence"
   await expect(page.getByAltText("First Revenue Game member proof pending review state")).toBeVisible();
 });
 
-test("Wild Route case study proves product engineering beyond the interface", async ({ page }) => {
+test("Wild Route case study connects the journey to inspectable evidence", async ({ page }) => {
   await page.goto("/wild-route");
-
-  await expect(page.getByRole("heading", { name: "Wild Route" })).toBeVisible();
-  await expect(page.getByText(/101 deterministic Vitest cases pass/i)).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Wild Route", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Start with a wish." })).toBeVisible();
+  await expect(page.getByAltText(/Wild Route ranked planner showing a round-trip route/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /open public demo/i })).toHaveAttribute("href", "https://ai-travel-planner-psi-five.vercel.app");
+  const disclosure = page.locator("details").filter({ hasText: "Explore verification and current limits" });
+  await expect(disclosure).not.toHaveAttribute("open");
+  await disclosure.locator("summary").click();
+  await expect(page.getByText(/104 deterministic Vitest cases pass/i)).toBeVisible();
   await expect(page.getByText(/22 Chromium checks cover/i)).toBeVisible();
-  await expect(page.getByText("A calm interface for a dense decision.")).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Verification", exact: true })).toBeVisible();
   await expect(page.getByText(/deterministic planning dataset, planning estimates/i)).toBeVisible();
-  await expect(page.getByRole("link", { name: /open public demo/i })).toHaveAttribute(
-    "href",
-    "https://ai-travel-planner-psi-five.vercel.app",
-  );
-  await expect(page.getByRole("heading", { name: "How intent becomes a route." })).toBeVisible();
-  await expect(
-    page.getByAltText(/Wild Route ranked planner showing a round-trip route/i),
-  ).toBeVisible();
-
-  const heroRatio = await page
-    .getByAltText(/Wild Route landing page introducing explainable adventure route planning/i)
-    .locator("xpath=ancestor::figure")
-    .evaluate((figure) => {
-      const bounds = figure.getBoundingClientRect();
-      return bounds.width / bounds.height;
-    });
-  expect(heroRatio).toBeGreaterThan(1.57);
-  expect(heroRatio).toBeLessThan(1.63);
-
-  const galleryWidths = await Promise.all(
-    [
-      /Wild Route route composer showing/i,
-      /Wild Route ranked planner showing/i,
-      /Wild Route published route preview/i,
-    ].map((alt) =>
-      page
-        .getByAltText(alt)
-        .locator("xpath=ancestor::figure")
-        .evaluate((figure) => figure.getBoundingClientRect().width),
-    ),
-  );
-  expect(Math.max(...galleryWidths) - Math.min(...galleryWidths)).toBeLessThan(2);
-
-  await page.setViewportSize({ width: 390, height: 844 });
-  const mobileWidths = await page.evaluate(() => ({
-    documentWidth: document.documentElement.scrollWidth,
-    viewportWidth: window.innerWidth,
-  }));
-  expect(mobileWidths.documentWidth).toBeLessThanOrEqual(mobileWidths.viewportWidth + 1);
+  await disclosure.locator("summary").click();
+  await expect(disclosure).not.toHaveAttribute("open");
+  for (const width of [390, 320]) {
+    await page.setViewportSize({ width, height: 844 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+  }
 });
 
 test("ThreadScribe case study shows trustworthy AI interaction evidence", async ({ page }) => {

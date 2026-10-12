@@ -1,5 +1,5 @@
-import CaseStudyPage from "../../components/CaseStudyPage";
+import WildRouteCaseStudy from "../../components/WildRouteCaseStudy";
 
 export default function WildRoutePage() {
-  return <CaseStudyPage caseStudyId="wild-route" />;
+  return <WildRouteCaseStudy />;
 }
