@@ -873,3 +873,41 @@
   .aperture-architecture { grid-template-columns: 1fr; gap: 2.5rem; }
   .aperture-architecture svg { left: 0; top: auto; bottom: -1.8rem; transform: rotate(90deg); }
 }
+
+/* Focusin follows the index and Aperture case grammar; native screens stay native. */
+.focusin-walkthrough { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+.focusin-capture-stage { display: flex; justify-content: center; align-items: center; min-height: 36rem; padding: 2rem; background: #e5e1db; border-radius: var(--panel-radius); }
+.focusin-capture { width: auto; max-width: 100%; height: auto; max-height: 34rem; object-fit: contain; border-radius: 12px; box-shadow: 0 16px 40px rgb(17 27 40 / .16); }
+.focusin-refinements { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; padding-top: 2rem; border-top: 1px solid rgb(17 27 40 / .14); }
+.focusin-refinements p { margin-top: 1rem; color: var(--case-muted); line-height: 1.75; max-width: 60ch; }
+.focusin-settings { margin-top: 2.5rem; }
+.focusin-settings img { width: 100%; height: auto; border-radius: var(--panel-radius); }
+.focusin-scenarios { flex-direction: column; align-items: flex-start; }
+.focusin-recovery { grid-template-columns: .75fr 1.5fr; margin-bottom: 2.5rem; }
+.focusin-recovery-result { min-height: 19rem; }
+.focusin-recovery-result dl { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.focusin-recovery-result dt { font-size: .8125rem; font-weight: 600; }
+.focusin-recovery-result dd { margin-top: .5rem; color: var(--case-muted); line-height: 1.75; }
+.focusin-recovery-result > p { font-size: .875rem; }
+.focusin-case .aperture-engineering > h3, .focusin-case .aperture-engineering h4 { color: white; }
+.focusin-case .aperture-architecture h4, .focusin-case .aperture-release h4 { font-size: 1.15rem; }
+@media (max-width: 1023px) {
+  .focusin-walkthrough { grid-template-columns: 1fr; }
+}
+@media (max-width: 767px) {
+  .focusin-capture-stage { min-height: 0; padding: 1.25rem; }
+  .focusin-refinements, .focusin-recovery, .focusin-recovery-result dl { grid-template-columns: 1fr; gap: 1.5rem; }
+  .focusin-scenarios { flex-direction: row; align-items: stretch; }
+  .focusin-recovery-result { min-height: 0; }
+}
+
+.focusin-settings a { display: block; }
+.focusin-settings figcaption a { display: inline; text-decoration: underline; text-underline-offset: 3px; }
+.focusin-settings a:focus-visible { outline: 2px solid var(--title-accent); outline-offset: 4px; }
+@media (max-width: 767px) {
+  .focusin-introduction { display: flex; flex-direction: column; }
+  .focusin-introduction .page-intro { order: 0; }
+  .focusin-introduction .aperture-hero { order: 1; margin-top: 2rem; }
+  .focusin-introduction .aperture-intro-row { order: 2; }
+  .focusin-introduction .aperture-meta { order: 3; margin-bottom: 0; }
+}

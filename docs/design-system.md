@@ -25,11 +25,25 @@ Use `title-accent` for emphasis and `section-heading` for major section headings
 Use `portfolio-button`, with `portfolio-button-secondary` on warm backgrounds or
 `portfolio-button-light` inside navy panels. Keep visible keyboard focus.
 
-Most case studies render through `CaseStudyPage`. Aperture and Wild Route use dedicated
+Most case studies render through `CaseStudyPage`. Aperture, Focusin, and Wild Route use dedicated
 screen-led layouts that retain `PortfolioShell`, `PageIntro`, the shared container,
 and index tokens. Product screenshots retain their
 own product colors; surrounding typography and surfaces belong to the portfolio.
 Use real captions below photographs instead of tilted or floating badges.
+
+Walkthrough selectors and Focusin recovery examples use labelled button groups
+with `aria-pressed`. Selected controls use ink with white text; unselected controls use a
+light surface and ink text. Keep the shared rust focus outline, a minimum 48px
+control height, and polite live announcements for changing explanatory copy.
+Native disclosures keep longer evidence readable without interrupting the main
+story; their focus outline is white inside a navy panel.
+
+Focusin adapts these shared patterns to native popover captures: images preserve
+their aspect ratio and fit within a neutral stage, with provenance in the caption.
+The walkthrough pairs a readable capture with its design decision on desktop and
+stacks them below 1024px. Recovery examples and refinement copy stack below
+768px. The screenshot stage color and capture shadow are local presentation
+details, not additional portfolio color or elevation tokens.
 
 ## Motion and document layouts
 

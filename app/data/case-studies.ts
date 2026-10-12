@@ -120,10 +120,10 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
     verification: [
       "Fifty-four deterministic tests cover lifecycle, persistence, quiet hours, recommendation passes, catalog validation, permission reconciliation, and beta templates.",
       "Twenty-one bundled activities pass state, duration, safety, and default-filter coverage validation, with named human content approval for version 0.1.0 (1).",
-      "Forty-one recorded appearance and accessibility captures cover light and dark modes, large text, increased contrast, reduced transparency, recovery states, and Settings; they remain engineering evidence rather than final release media.",
+      "Forty-one July appearance and accessibility captures cover light and dark modes, large text, increased contrast, reduced transparency, recovery states, and Settings. They predate the September opaque-panel refinement; three newer popover captures show that refinement. All remain engineering evidence rather than final release media.",
     ],
     limitations: [
-      "The current build and unsigned Release integrity are verified; no signed archive, installable external beta, TestFlight build, or App Store listing exists yet.",
+      "Earlier local build and unsigned Release integrity checks are recorded. The 12 October 2026 native rerun is blocked by a missing SwiftUI macro plugin in the installed Command Line Tools; no signed archive, installable external beta, TestFlight build, or App Store listing exists yet.",
       "Exact-candidate VoiceOver, notification, login-item, lifecycle, upgrade, and final-media checks remain open until a signed candidate exists.",
       "The five-to-eight-person beta has not run, so the case study makes no usability, satisfaction, or real-world recommendation-quality claim.",
     ],

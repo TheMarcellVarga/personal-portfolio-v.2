@@ -1,5 +1,5 @@
-import CaseStudyPage from "../../components/CaseStudyPage";
+import FocusinCaseStudy from "../../components/FocusinCaseStudy";
 
 export default function FocusinPage() {
-  return <CaseStudyPage caseStudyId="focusin" />;
+  return <FocusinCaseStudy />;
 }

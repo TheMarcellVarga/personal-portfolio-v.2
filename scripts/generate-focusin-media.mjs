@@ -121,6 +121,12 @@ async function writeSettings() {
     .toFile(path.join(outputRoot, "settings-and-resilience.webp"));
 }
 
+async function writeLoopScreens() {
+  for (const [name, source] of [["focus", sources.focusing], ["due", sources.breakDue], ["reset", sources.breaking]]) {
+    await sharp(source).resize({ width: 960, withoutEnlargement: true }).webp({ quality: 92 }).toFile(path.join(outputRoot, `loop-${name}.webp`));
+  }
+}
+
 await fs.mkdir(outputRoot, { recursive: true });
-await Promise.all([writeHero(), writeBreakSequence(), writeSettings()]);
+await Promise.all([writeHero(), writeBreakSequence(), writeSettings(), writeLoopScreens()]);
 console.log("Generated Focusin portfolio media in public/images/focusin");
