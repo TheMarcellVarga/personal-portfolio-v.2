@@ -1,5 +1,5 @@
-import CaseStudyPage from "../../components/CaseStudyPage";
+import EndlessActivityCaseStudy from "../../components/EndlessActivityCaseStudy";
 
 export default function EndlessActivityPage() {
-  return <CaseStudyPage caseStudyId="endless-activity" />;
+  return <EndlessActivityCaseStudy />;
 }

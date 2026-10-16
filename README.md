@@ -18,7 +18,7 @@ competing with the main portfolio narrative.
 - `/wild-route` — Wild Route, a live public adventure travel-planning demo.
 - `/threadscribe` — ThreadScribe Studio, a guided walkthrough of a local-first trustworthy AI workspace.
 - `/focusin` — Focusin, a native macOS product build and case study.
-- `/endless-activity` — Endless Activity, a native iOS product-craft case study.
+- `/endless-activity` — Endless Activity, a screen-led native iOS case with a selectable walkthrough and dated implementation evidence.
 - `/askcody`, `/catchscan`, and `/ess` — archived case studies.
 - `/about` — professional background, working approach, and current direction.
 - `/resume` and `/resume/ats` — human-readable and ATS-oriented resumes.
@@ -80,3 +80,10 @@ The canonical production domain is `marcellvarga.com`. Keep the deployment confi
 - Source-code links are withheld until their public repositories are verified. Current case studies state that private source is available on request.
 - Professional AXON work is represented without confidential screenshots or implementation details.
 - Archived case studies do not represent the current technical scope.
+
+## Endless Activity presentation refresh
+
+The 16 October 2026 refresh follows the index foundation and Aperture case layout.
+Real portrait captures, a selectable four-stage walkthrough, and a captioned
+video lead the story. October native UI refinements are distinguished from the
+earlier simulator evidence. See [the refresh record](docs/ENDLESS_ACTIVITY_CASE_STUDY_REFRESH.md).

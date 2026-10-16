@@ -142,8 +142,8 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
     ],
     verification: [
       "Fifty bundled activities pass unique ID, unique title, schema, tagging, step-count, and content-quality validation.",
-      "Twelve unit tests and seven UI tests passed again on 8 September 2026 on the iPhone 17e simulator, covering ranking, persistence, swipes, details, filters, Saved, and relaunch state.",
-      "The current large-device build passes on iPhone 17 Pro Max, with visual checks across the core flow in light and dark appearance.",
+      "Twelve unit tests and seven UI tests passed on 28 June 2026 on the iPhone 17e simulator, covering ranking, persistence, swipes, details, filters, Saved, and relaunch state.",
+      "The June baseline includes an iPhone 17 Pro Max build and standard-size simulator captures. October layout and contrast corrections have recorded iOS 27 compilation; fresh simulator visual and UI verification remains pending.",
     ],
     limitations: [
       "The project is a polished local MVP and portfolio proof point, not an App Store release or evidence of real-world retention or recommendation quality.",

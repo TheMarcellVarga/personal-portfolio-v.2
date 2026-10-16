@@ -25,7 +25,7 @@ Use `title-accent` for emphasis and `section-heading` for major section headings
 Use `portfolio-button`, with `portfolio-button-secondary` on warm backgrounds or
 `portfolio-button-light` inside navy panels. Keep visible keyboard focus.
 
-Most case studies render through `CaseStudyPage`. Aperture, Focusin, and Wild Route use dedicated
+Most case studies render through `CaseStudyPage`. Aperture, Focusin, Wild Route, and Endless Activity use dedicated
 screen-led layouts that retain `PortfolioShell`, `PageIntro`, the shared container,
 and index tokens. Product screenshots retain their
 own product colors; surrounding typography and surfaces belong to the portfolio.
@@ -60,3 +60,9 @@ changes must preserve those document layouts and the existing PDF download paths
 `tests/e2e/design-system.spec.ts` checks all routes against the index's font and
 background, common content alignment, mobile containment, navigation, and print
 presentation. Keep that coverage current when adding a route.
+
+Endless Activity pairs native portrait captures with concise interaction copy.
+Its three-device hero collapses to Discover on mobile. Walkthrough controls use
+the shared labelled button group and selected state; only the capture transition
+animates, respecting reduced motion. Historical capture provenance and pending
+simulator checks remain visible outside the evidence disclosure.

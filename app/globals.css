@@ -911,3 +911,45 @@
   .focusin-introduction .aperture-intro-row { order: 2; }
   .focusin-introduction .aperture-meta { order: 3; margin-bottom: 0; }
 }
+
+/* Endless Activity: shared portfolio foundation, native captures at their own ratio. */
+.endless-introduction { display: flex; flex-direction: column; }
+.endless-hero { margin-top: 2.5rem; }
+.endless-hero-stage { display: flex; align-items: center; justify-content: center; gap: clamp(1.5rem, 5vw, 5rem); padding: 3.5rem 2rem; overflow: hidden; }
+.endless-device { width: min(100%, 18rem); flex-shrink: 0; border-radius: 2rem; padding: .4rem; background: #12171d; box-shadow: 0 18px 40px rgb(0 0 0 / .2); }
+.endless-device img { display: block; width: 100%; height: auto; border-radius: 1.65rem; }
+.endless-hero-device { width: clamp(9rem, 21vw, 16rem); }
+.endless-device-0 { transform: rotate(-5deg) translateY(1rem); }
+.endless-device-2 { transform: rotate(5deg) translateY(1rem); }
+.endless-device-1 { width: clamp(11rem, 23vw, 18rem); position: relative; z-index: 1; }
+.endless-walkthrough { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(2rem, 6vw, 6rem); }
+.endless-capture-stage { display: flex; justify-content: center; padding: 2rem; border-radius: var(--panel-radius); background: rgb(17 27 40 / .045); }
+.endless-screen-copy { max-width: 29rem; }
+.endless-case .endless-screen-copy h3 { font-size: clamp(1.75rem, 3vw, 2.5rem); }
+.endless-screen-copy > p { margin-top: 1.25rem; color: var(--case-muted); line-height: 1.8; }
+.endless-screen-copy .endless-outcome { display: flex; align-items: start; gap: .75rem; color: var(--color-custom-blue); font-size: .875rem; }
+.endless-outcome svg { flex-shrink: 0; margin-top: .25rem; color: var(--title-accent); }
+.endless-demo { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.endless-note { color: var(--case-muted); font-size: .8125rem; line-height: 1.8; max-width: 68ch; }
+.endless-video-stage { display: flex; justify-content: center; padding: 2rem; }
+.endless-video-stage video { display: block; max-width: 100%; width: auto; height: 32rem; border-radius: 1rem; background: #12171d; }
+.endless-refinements { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem; }
+.endless-refinements article { border-top: 1px solid rgb(17 27 40 / .18); padding-top: 1.5rem; }
+.endless-case .endless-refinements h3 { font-size: 1.4rem; }
+.endless-refinements p { margin-top: 1rem; color: var(--case-muted); line-height: 1.8; font-size: .9375rem; }
+.endless-refinement-note { margin-top: 2rem; }
+.endless-light-accent { color: #e9bca1; }
+.endless-contact-link { margin-top: 1.5rem; }
+@media (max-width: 767px) {
+  .endless-hero { order: 1; margin-top: 2rem; }
+  .endless-introduction .aperture-intro-row { order: 2; }
+  .endless-introduction .aperture-meta { order: 3; margin-bottom: 0; }
+  .endless-hero-stage { padding: 2rem 1rem; }
+  .endless-device-0, .endless-device-2 { display: none; }
+  .endless-device-1 { width: min(100%, 15rem); }
+  .endless-walkthrough, .endless-demo, .endless-refinements { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .endless-capture-stage { padding: 1.5rem 1rem; }
+  .endless-capture-stage .endless-device { width: min(100%, 15rem); }
+  .endless-video-stage { padding: 1.5rem 1rem; }
+  .endless-video-stage video { height: auto; max-height: 32rem; }
+}

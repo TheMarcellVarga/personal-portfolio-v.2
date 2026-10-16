@@ -530,11 +530,10 @@ test("Endless Activity case study presents native product craft with honest scop
   await page.goto("/endless-activity");
 
   await expect(page.getByRole("heading", { name: "Endless Activity", exact: true })).toBeVisible();
-  await expect(page.getByText(/Twelve unit tests and seven UI tests/i)).toBeVisible();
-  await expect(page.getByText("A quick choice for the moment between plans.")).toBeVisible();
-  await expect(page.getByText("From restraint to a dependable loop.")).toBeVisible();
   await expect(page.getByRole("heading", { name: "Verification", exact: true })).toBeVisible();
-  await expect(page.getByText(/passed again on 8 September 2026/i)).toBeVisible();
+  await expect(page.getByText("12 unit tests. 7 UI tests.")).toBeVisible();
+  await expect(page.getByText(/Recorded full simulator run: 28 June 2026/)).toBeVisible();
+  await page.getByRole("group", { name: "Endless Activity walkthrough stages" }).getByRole("button", { name: "Saved", exact: true }).click();
   await expect(page.getByAltText("Endless Activity saved activity collection")).toBeVisible();
 });
 
@@ -579,7 +578,7 @@ test.describe("mobile and motion fallbacks", () => {
     const device = await page
       .getByAltText(
         "Endless Activity Discover deck with a realistic activity and visible save and skip controls",
-      )
+      ).first()
       .boundingBox();
 
     expect(copy).not.toBeNull();
