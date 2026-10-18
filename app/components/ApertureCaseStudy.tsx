@@ -16,7 +16,7 @@ const walkthrough = [
     label: "Markets",
     title: "Find what deserves a closer look.",
     body: "Filter across asset classes, inspect the confirmed trend, then open a study with the market context still attached.",
-    decision: "Freshness, provider coverage, and closed-candle confirmation sit beside the numbers. A market state is research context, never an instruction to trade.",
+    decision: "When I revisit a number, I want to know where it came from and how current it is. Freshness, coverage, and confirmation stay beside the data.",
     image: "/images/ai-finance/aperture-markets.jpg",
     alt: "Aperture cross-market monitor showing provider-backed market states, freshness, filters, and research controls",
     caption: "Web workspace capture · market values are a historical snapshot.",
@@ -25,7 +25,7 @@ const walkthrough = [
     label: "Evidence",
     title: "Open the source behind the sentence.",
     body: "Private documents become page-aware passages. Structured analysis links material claims to evidence from that research run.",
-    decision: "Direct support and interpretation stay distinct. Unsupported claims remain visible instead of receiving a citation that only looks convincing.",
+    decision: "I want to check the source, not just read a convincing answer. Direct support and interpretation stay distinct, and unsupported claims remain visible.",
     image: "/images/ai-finance/aperture-evidence.jpg",
     alt: "Aperture evidence preview linking research findings to source filing pages and support labels",
     caption: "Public product illustration · demonstrates the citation interaction, not a live model result.",
@@ -75,7 +75,7 @@ export default function ApertureCaseStudy() {
               description="From market context to a research note you can inspect."
             />
             <div className="aperture-intro-row">
-              <p>A financial research workspace I designed and built across Next.js and Go. Sources, uncertainty, and human judgment stay in view.</p>
+              <p>A financial research workspace I designed, built, and use myself. It brings my interest in finance and my work as a product engineer into the same place.</p>
               <Link href={caseStudyPages.aperture.demoUrl!} target="_blank" rel="noreferrer" className="portfolio-button">
                 Visit Aperture <ArrowUpRight size={16} aria-hidden="true" />
               </Link>
@@ -102,8 +102,7 @@ export default function ApertureCaseStudy() {
             <h2 className="section-heading">A chart shows a price.<br />It doesn’t explain <span className="title-accent">the picture.</span></h2>
             <div className="aperture-brief-copy">
               <p>{record.problem}</p>
-              <p>I organized the product around five jobs: Overview, Markets, Portfolio, Plan, and Learn. Research tools live where the question arises.</p>
-              <p className="aperture-audience">For individuals researching holdings, checking sources, and comparing scenarios.</p>
+              <p className="aperture-audience">Five everyday jobs keep it focused: Overview, Markets, Portfolio, Plan, and Learn. Research tools live where the question arises.</p>
             </div>
           </section>
 

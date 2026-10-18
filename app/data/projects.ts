@@ -42,7 +42,7 @@ export const projects: Project[] = [
     subTitle: "From market context to a research note you can inspect",
     date: "2026",
     description:
-      "A full-stack financial intelligence workspace that connects portfolios, live market context, private-source research, scenario planning, and education without crossing into trade execution or personal advice.",
+      "A financial research workspace I designed, built, and use myself to bring portfolios, market context, source material, and scenario planning into one place.",
     highlight:
       "Provider-backed markets, source-linked research, human review, and new geography, digest, and mobile companion work.",
     skills: ["Product strategy", "Next.js", "Go", "Trustworthy AI"],

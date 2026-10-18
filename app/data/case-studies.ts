@@ -15,7 +15,7 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
     id: "aperture",
     role: "Independent product design and engineering: UX, Next.js, Go, market data, evidence retrieval, and release verification.",
     problem:
-      "A price chart cannot explain a portfolio, and an AI answer is hard to trust without its source. Aperture brings both into a research workflow people can inspect.",
+      "I use Aperture myself. A price chart alone cannot explain a portfolio, and I want to check the source behind an AI answer. The workspace brings that context together while keeping the judgment with me.",
     user: "Individuals researching their holdings, comparing scenarios, and checking the evidence behind a financial conclusion.",
     decisions: [
       "Five primary destinations keep the workspace navigable: Overview, Markets, Portfolio, Plan, and Learn.",
