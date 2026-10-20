@@ -37,7 +37,7 @@ for (const width of [1440, 390, 320]) {
     await expect(page.locator("h1")).toHaveCSS("font-family", /sans-serif/);
     const reference = await page.evaluate(() => { const el = document.querySelector("h1")!; return { font: getComputedStyle(el).fontFamily, left: el.getBoundingClientRect().left, background: getComputedStyle(document.documentElement).backgroundColor }; });
     await page.goto("/burnout3-ios");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Burnout 3: Takedown");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Burnout 3: Takedown for iOS");
     const actual = await page.evaluate(() => { const el = document.querySelector("h1")!; return { font: getComputedStyle(el).fontFamily, left: el.getBoundingClientRect().left, background: getComputedStyle(document.documentElement).backgroundColor, overflow: document.documentElement.scrollWidth - innerWidth }; });
     expect(actual.font).toBe(reference.font);
     expect(actual.left).toBe(reference.left);

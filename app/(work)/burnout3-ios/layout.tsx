@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { siteName } from "../../seo";
 
-const title = "Burnout 3: Takedown — Native iOS Port Case Study";
+const title = "Burnout 3: Takedown for iOS — Case Study";
 const description = "Marcell Varga’s experimental iPhone port of Burnout 3: Takedown, built on burnout3-pc. Touch interaction, ARM64 adaptation and measured graphics tradeoffs.";
 
 export const metadata: Metadata = {

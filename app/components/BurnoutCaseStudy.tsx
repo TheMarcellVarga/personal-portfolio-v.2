@@ -41,7 +41,7 @@ export default function BurnoutCaseStudy() {
       <main id="main-content" className="portfolio-main page-gutter">
         <div className="portfolio-container">
           <section aria-label="Project introduction">
-            <PageIntro eyebrow="Side project / iOS port" title={<>Burnout 3: <span className="title-accent">Takedown</span></>} description="An experimental iOS port of Burnout 3: Takedown." />
+            <PageIntro eyebrow="Side project / iOS port" title={<>Burnout 3: <span className="title-accent">Takedown</span> for iOS</>} description="An experimental iOS port of Burnout 3: Takedown." />
             <figure className={styles.heroCapture} data-recorded-game-frame>
               <Image src="/images/burnout3/gameplay-controller-20261019.webp" alt="Burnout 3: Takedown gameplay on iPhone with the actual native analog sticks, D-pad, face buttons and shoulder controls visible" width={2796} height={1290} sizes="(max-width: 1280px) 90vw, 1280px" preload />
               <figcaption>Full-screen iPhone 15 Pro Max capture · 19 October 2026 · recorded race replay with the native touch controls visible.</figcaption>

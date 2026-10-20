@@ -155,7 +155,7 @@ export const projects: Project[] = [
     caseStudyId: "endless-activity",
   },
   {
-    title: "Burnout 3: Takedown",
+    title: "Burnout 3: Takedown for iOS",
     titleAccent: "Takedown",
     subTitle: "A native iOS port of a 2000s racing favorite",
     date: "2026",

@@ -76,7 +76,7 @@ const featuredProjectOrder = [
 const supportingProjectOrder = [
   "Focusin",
   "Endless Activity",
-  "Burnout 3: Takedown",
+  "Burnout 3: Takedown for iOS",
 ];
 
 // Flip to true when the case studies need to be temporarily covered again.
