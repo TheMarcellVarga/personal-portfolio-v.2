@@ -3,7 +3,7 @@ import AxeBuilder from "@axe-core/playwright";
 
 const routes = [
   "/about", "/privacy", "/resume", "/resume/ats", "/ai-finance", "/wild-route",
-  "/first-revenue-game", "/threadscribe", "/focusin", "/endless-activity",
+  "/first-revenue-game", "/threadscribe", "/focusin", "/endless-activity", "/burnout3-ios",
   "/askcody", "/catchscan", "/ess", "/missing-design-system-page",
 ];
 

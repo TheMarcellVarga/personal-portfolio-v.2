@@ -76,6 +76,7 @@ const featuredProjectOrder = [
 const supportingProjectOrder = [
   "Focusin",
   "Endless Activity",
+  "Burnout 3: Takedown",
 ];
 
 // Flip to true when the case studies need to be temporarily covered again.

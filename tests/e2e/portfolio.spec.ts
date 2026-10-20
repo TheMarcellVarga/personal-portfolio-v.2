@@ -40,7 +40,7 @@ test("homepage presents the product-engineering story and selected work", async 
     "aria-expanded",
     "false",
   );
-  await expect(page.locator("[data-case-study-content] a")).toHaveCount(4);
+  await expect(page.locator("[data-case-study-content] a")).toHaveCount(5);
   await expect(page.locator('#work a[href="/about"]')).toHaveCount(0);
 });
 

@@ -1,0 +1,315 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-19T03:05:00.649085+00:00",
+  "title": "Design System: Marcell Varga Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "custom-blue": {
+        "role": "neutral",
+        "displayName": "Custom Blue",
+        "tonalRamp": [
+          "oklch(15.00% 0.0296 255.30)",
+          "oklch(26.43% 0.0296 255.30)",
+          "oklch(37.86% 0.0296 255.30)",
+          "oklch(49.29% 0.0296 255.30)",
+          "oklch(60.71% 0.0296 255.30)",
+          "oklch(72.14% 0.0296 255.30)",
+          "oklch(83.57% 0.0296 255.30)",
+          "oklch(95.00% 0.0296 255.30)"
+        ]
+      },
+      "title-accent": {
+        "role": "primary",
+        "displayName": "Title Accent",
+        "tonalRamp": [
+          "oklch(15.00% 0.1475 36.61)",
+          "oklch(26.43% 0.1475 36.61)",
+          "oklch(37.86% 0.1475 36.61)",
+          "oklch(49.29% 0.1475 36.61)",
+          "oklch(60.71% 0.1475 36.61)",
+          "oklch(72.14% 0.1475 36.61)",
+          "oklch(83.57% 0.1475 36.61)",
+          "oklch(95.00% 0.1475 36.61)"
+        ]
+      },
+      "page-background": {
+        "role": "neutral",
+        "displayName": "Page Background",
+        "tonalRamp": [
+          "oklch(15.00% 0.0125 75.37)",
+          "oklch(26.43% 0.0125 75.37)",
+          "oklch(37.86% 0.0125 75.37)",
+          "oklch(49.29% 0.0125 75.37)",
+          "oklch(60.71% 0.0125 75.37)",
+          "oklch(72.14% 0.0125 75.37)",
+          "oklch(83.57% 0.0125 75.37)",
+          "oklch(95.00% 0.0125 75.37)"
+        ]
+      },
+      "page-surface": {
+        "role": "neutral",
+        "displayName": "Page Surface",
+        "tonalRamp": [
+          "oklch(15.00% 0.0068 67.75)",
+          "oklch(26.43% 0.0068 67.75)",
+          "oklch(37.86% 0.0068 67.75)",
+          "oklch(49.29% 0.0068 67.75)",
+          "oklch(60.71% 0.0068 67.75)",
+          "oklch(72.14% 0.0068 67.75)",
+          "oklch(83.57% 0.0068 67.75)",
+          "oklch(95.00% 0.0068 67.75)"
+        ]
+      },
+      "page-surface-strong": {
+        "role": "neutral",
+        "displayName": "Page Surface Strong",
+        "tonalRamp": [
+          "oklch(15.00% 0.0051 67.77)",
+          "oklch(26.43% 0.0051 67.77)",
+          "oklch(37.86% 0.0051 67.77)",
+          "oklch(49.29% 0.0051 67.77)",
+          "oklch(60.71% 0.0051 67.77)",
+          "oklch(72.14% 0.0051 67.77)",
+          "oklch(83.57% 0.0051 67.77)",
+          "oklch(95.00% 0.0051 67.77)"
+        ]
+      },
+      "page-border": {
+        "role": "neutral",
+        "displayName": "Page Border",
+        "tonalRamp": [
+          "oklch(15.00% 0.0296 255.30)",
+          "oklch(26.43% 0.0296 255.30)",
+          "oklch(37.86% 0.0296 255.30)",
+          "oklch(49.29% 0.0296 255.30)",
+          "oklch(60.71% 0.0296 255.30)",
+          "oklch(72.14% 0.0296 255.30)",
+          "oklch(83.57% 0.0296 255.30)",
+          "oklch(95.00% 0.0296 255.30)"
+        ]
+      },
+      "panel-background": {
+        "role": "neutral",
+        "displayName": "Panel Background",
+        "tonalRamp": [
+          "oklch(15.00% 0.0375 248.45)",
+          "oklch(26.43% 0.0375 248.45)",
+          "oklch(37.86% 0.0375 248.45)",
+          "oklch(49.29% 0.0375 248.45)",
+          "oklch(60.71% 0.0375 248.45)",
+          "oklch(72.14% 0.0375 248.45)",
+          "oklch(83.57% 0.0375 248.45)",
+          "oklch(95.00% 0.0375 248.45)"
+        ]
+      },
+      "case-muted": {
+        "role": "neutral",
+        "displayName": "Case Muted",
+        "tonalRamp": [
+          "oklch(15.00% 0.0240 250.63)",
+          "oklch(26.43% 0.0240 250.63)",
+          "oklch(37.86% 0.0240 250.63)",
+          "oklch(49.29% 0.0240 250.63)",
+          "oklch(60.71% 0.0240 250.63)",
+          "oklch(72.14% 0.0240 250.63)",
+          "oklch(83.57% 0.0240 250.63)",
+          "oklch(95.00% 0.0240 250.63)"
+        ]
+      },
+      "panel-muted": {
+        "role": "neutral",
+        "displayName": "Panel Muted",
+        "tonalRamp": [
+          "oklch(15.00% 0.0142 248.00)",
+          "oklch(26.43% 0.0142 248.00)",
+          "oklch(37.86% 0.0142 248.00)",
+          "oklch(49.29% 0.0142 248.00)",
+          "oklch(60.71% 0.0142 248.00)",
+          "oklch(72.14% 0.0142 248.00)",
+          "oklch(83.57% 0.0142 248.00)",
+          "oklch(95.00% 0.0142 248.00)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "tonalRamp": [
+          "oklch(15.00% 0.0000 89.88)",
+          "oklch(26.43% 0.0000 89.88)",
+          "oklch(37.86% 0.0000 89.88)",
+          "oklch(49.29% 0.0000 89.88)",
+          "oklch(60.71% 0.0000 89.88)",
+          "oklch(72.14% 0.0000 89.88)",
+          "oklch(83.57% 0.0000 89.88)",
+          "oklch(95.00% 0.0000 89.88)"
+        ]
+      },
+      "custom-teal": {
+        "role": "secondary",
+        "displayName": "Custom Teal",
+        "tonalRamp": [
+          "oklch(15.00% 0.1306 226.53)",
+          "oklch(26.43% 0.1306 226.53)",
+          "oklch(37.86% 0.1306 226.53)",
+          "oklch(49.29% 0.1306 226.53)",
+          "oklch(60.71% 0.1306 226.53)",
+          "oklch(72.14% 0.1306 226.53)",
+          "oklch(83.57% 0.1306 226.53)",
+          "oklch(95.00% 0.1306 226.53)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Page title",
+        "purpose": "Shared introduction heading; uses the incumbent font stack."
+      },
+      "headline": {
+        "displayName": "Section heading",
+        "purpose": "Large section titles; line height tightens on tablet and desktop."
+      },
+      "title": {
+        "displayName": "Case-study subheading",
+        "purpose": "Explanatory subheadings in established case studies."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Relaxed prose and shared lead."
+      },
+      "label": {
+        "displayName": "Existing eyebrow",
+        "purpose": "Explicitly retained PageIntro label."
+      }
+    },
+    "shadows": [
+      {
+        "name": "page-shadow",
+        "value": "0 28px 90px rgba(17, 27, 40, 0.09)",
+        "purpose": "Shared light surface depth."
+      },
+      {
+        "name": "panel-shadow",
+        "value": "0 40px 140px rgba(7, 20, 38, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.16)",
+        "purpose": "Shared dark panels and major capture frames."
+      }
+    ],
+    "motion": [
+      {
+        "name": "button-state-transition",
+        "value": "background 300ms, transform 300ms",
+        "purpose": "Shared portfolio button hover and active states."
+      },
+      {
+        "name": "selector-state-transition",
+        "value": "background .2s, color .2s",
+        "purpose": "Shared case-study selector feedback."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation-duration: 0.01ms; animation-iteration-count: 1; transition-duration: 0.01ms; scroll-behavior: auto",
+        "purpose": "Global prefers-reduced-motion override."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "shared-tablet",
+        "value": "640px"
+      },
+      {
+        "name": "case-columns",
+        "value": "768px"
+      },
+      {
+        "name": "shared-desktop",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Shared portfolio action with hover, active and keyboard focus states.",
+      "html": "<button class=\"ds-button\">Explore the source</button>",
+      "css": ".ds-button { display:inline-flex;min-height:3rem;align-items:center;justify-content:center;gap:.75rem;border:0;border-radius:999px;padding:.75rem 1.5rem;background:var(--color-custom-blue,#111b28);color:white;font-family:var(--font,sans-serif);font-size:.875rem;font-weight:500;line-height:1.5;text-align:center;cursor:pointer;transition:background 300ms,transform 300ms; } .ds-button:hover { background:#0b2438;transform:translateY(-2px); } .ds-button:active { transform:scale(.985); } .ds-button:focus-visible { outline:2px solid var(--title-accent,#b64a2b);outline-offset:4px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Shared portfolio action with hover, active and keyboard focus states.",
+      "html": "<button class=\"ds-button\">Explore the source</button>",
+      "css": ".ds-button { display:inline-flex;min-height:3rem;align-items:center;justify-content:center;gap:.75rem;border:0;border-radius:999px;padding:.75rem 1.5rem;background:var(--color-custom-blue,#111b28);color:white;font-family:var(--font,sans-serif);font-size:.875rem;font-weight:500;line-height:1.5;text-align:center;cursor:pointer;transition:background 300ms,transform 300ms; } .ds-button:hover { background:#0b2438;transform:translateY(-2px); } .ds-button:active { transform:scale(.985); } .ds-button:focus-visible { outline:2px solid var(--title-accent,#b64a2b);outline-offset:4px; }.ds-button { background:var(--page-surface-strong,rgba(255,252,249,.84));color:var(--color-custom-blue,#111b28);box-shadow:inset 0 1px 0 rgb(255 255 255 / 66%); } .ds-button:hover { background:white; }"
+    },
+    {
+      "name": "Light Button",
+      "kind": "button",
+      "refersTo": "button-light",
+      "description": "Shared portfolio action with hover, active and keyboard focus states.",
+      "html": "<button class=\"ds-button\">Explore the source</button>",
+      "css": ".ds-button { display:inline-flex;min-height:3rem;align-items:center;justify-content:center;gap:.75rem;border:0;border-radius:999px;padding:.75rem 1.5rem;background:var(--color-custom-blue,#111b28);color:white;font-family:var(--font,sans-serif);font-size:.875rem;font-weight:500;line-height:1.5;text-align:center;cursor:pointer;transition:background 300ms,transform 300ms; } .ds-button:hover { background:#0b2438;transform:translateY(-2px); } .ds-button:active { transform:scale(.985); } .ds-button:focus-visible { outline:2px solid var(--title-accent,#b64a2b);outline-offset:4px; }.ds-button { background:white;color:var(--color-custom-blue,#111b28); } .ds-button:hover { background:rgb(255 255 255 / 92%); }"
+    },
+    {
+      "name": "Walkthrough Selector",
+      "kind": "chip",
+      "refersTo": "selector",
+      "description": "Pressed and unpressed states used for product stages and recorded experiments.",
+      "html": "<div class=\"ds-selector\"><button aria-pressed=\"true\">Selected stage</button><button aria-pressed=\"false\">Another stage</button></div>",
+      "css": ".ds-selector { display:flex;flex-wrap:wrap;gap:.5rem;font-family:var(--font,sans-serif); } .ds-selector button { display:flex;align-items:center;gap:.6rem;min-height:48px;padding:.7rem 1.1rem;border:0;border-radius:.85rem;background:rgb(255 255 255 / .6);color:var(--color-custom-blue,#111b28);cursor:pointer;transition:background .2s,color .2s; } .ds-selector button[aria-pressed=\"true\"] { color:white;background:var(--color-custom-blue,#111b28); } .ds-selector button:hover:not([aria-pressed=\"true\"]) { background:white; } .ds-selector button:focus-visible { outline:2px solid var(--title-accent,#b64a2b);outline-offset:4px; }"
+    },
+    {
+      "name": "Case Section Navigation",
+      "kind": "nav",
+      "description": "Wrapping section links with a thin divider.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Case study sections\"><a href=\"#interaction\">Making it feel native</a><a href=\"#engineering\">What\u2019s underneath</a></nav>",
+      "css": ".ds-nav { display:flex;flex-wrap:wrap;gap:.5rem 2rem;padding:1.4rem 0;margin-top:1.5rem;border-bottom:1px solid rgb(17 27 40 / .14);font-family:var(--font,sans-serif); } .ds-nav a { font-size:.875rem;padding:.5rem 0;color:var(--case-muted,#4e5965);text-decoration:none;transition:color .2s; } .ds-nav a:hover { color:var(--title-accent,#b64a2b); } .ds-nav a:focus-visible { outline:2px solid var(--title-accent,#b64a2b);outline-offset:4px; }"
+    },
+    {
+      "name": "Dark Engineering Panel",
+      "kind": "card",
+      "refersTo": "dark-panel",
+      "description": "Shared dark surface for architecture and implementation evidence.",
+      "html": "<section class=\"ds-panel\"><h2>What\u2019s underneath</h2><p>Implementation decisions and recorded evidence.</p></section>",
+      "css": ".ds-panel { overflow:hidden;border-radius:var(--panel-radius,1.65rem);background:var(--panel-background,#071726);color:white;box-shadow:var(--panel-shadow,0 40px 140px rgba(7,20,38,.26));padding:clamp(1.5rem,4vw,3rem);font-family:var(--font,sans-serif); } .ds-panel h2 { font-size:clamp(2.3rem,10vw,5.4rem);font-weight:500;line-height:1.02;letter-spacing:-.04em;text-wrap:balance;margin:0; } .ds-panel p { max-width:60ch;margin-top:1.5rem;line-height:1.75;color:#c4ccd4; }"
+    },
+    {
+      "name": "Evidence Disclosure",
+      "kind": "custom",
+      "description": "Native details element for supporting evidence on dark panels.",
+      "html": "<div class=\"ds-evidence\"><details><summary>Verification and limitations<svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m6 9 6 6 6-6\"/></svg></summary><p>Recorded evidence and remaining validation scope.</p></details></div>",
+      "css": ".ds-evidence { padding:1.5rem;background:var(--panel-background,#071726);color:white;font-family:var(--font,sans-serif); } .ds-evidence details { border-top:1px solid rgb(255 255 255 / .16); } .ds-evidence summary { display:flex;gap:1rem;justify-content:space-between;align-items:center;min-height:60px;padding:1rem 0;cursor:pointer;font-size:.875rem;list-style:none; } .ds-evidence summary::-webkit-details-marker { display:none; } .ds-evidence details[open] summary svg { transform:rotate(180deg); } .ds-evidence summary:focus-visible { outline:2px solid white;outline-offset:4px; } .ds-evidence p { color:#c4ccd4;font-size:.8125rem;line-height:1.75; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "",
+    "overview": "This records the existing index foundation and the shared Aperture and Burnout case-study presentation. The user has explicitly pinned that incumbent visual identity. Warm page surfaces, dark blue text, rust emphasis, large medium-weight headings and generous section spacing carry the portfolio framing. Product captures retain their own colors.\n\nThe shared shell supplies the background, fixed header and footer. Case studies reuse the same introduction, container, buttons, selectors and dark engineering panel. A new named creative metaphor has not been established; this document describes the implementation without inventing one.",
+    "keyCharacteristics": [
+      "Warm page background with dark blue text and rust title emphasis.",
+      "Shared sans-serif type across headings, prose and labels.",
+      "Wide containers, generous section separation and compact related content.",
+      "Product imagery framed by portfolio surfaces without recoloring its contents.",
+      "Interactive selectors and expandable evidence within normal page flow."
+    ],
+    "rules": [
+      {
+        "name": "The Capture Color Rule",
+        "body": "Portfolio chrome follows the shared palette; captured interfaces and game frames keep their native colors.",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "Do extend the index and Aperture foundation through shared type, containers, buttons and surface variables.",
+      "Do preserve native colors and truthful captions in product captures.",
+      "Do retain visible keyboard focus, pressed states and responsive wrapping for existing controls.",
+      "Do keep detailed evidence available through the established disclosure pattern.",
+      "Do honor the implementation's reduced-motion overrides."
+    ],
+    "donts": [
+      "Don't replace the established portfolio identity for a supporting case study.",
+      "Don't promote device controls, game imagery colors or one case's measurements into global design tokens.",
+      "Don't describe recorded frames or explanatory overlays as live product execution.",
+      "Don't fabricate product UI for a case study. Use genuine captures and distinguish historical app screenshots from game-only output."
+    ]
+  }
+}

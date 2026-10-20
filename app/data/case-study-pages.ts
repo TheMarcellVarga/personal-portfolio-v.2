@@ -31,6 +31,33 @@ export type CaseStudyPageContent = {
 };
 
 export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
+  "burnout3-ios": {
+    heroImage: "/images/burnout3/gameplay-controller-20261019.webp",
+    heroAlt: "Full-screen Burnout 3: Takedown gameplay capture on iPhone with the actual native controller visible",
+    contextTitle: "An experimental iOS port of Burnout 3: Takedown.",
+    contextBody: "Apple port and touch interaction work built on the existing burnout3-pc recompilation project. Physical-device race tests establish a working experiment, with compatibility and sustained performance still under investigation.",
+    gallery: [
+      {
+        src: "/images/burnout3/gameplay-controller-20261019.webp",
+        alt: "iPhone race replay with the actual native touch controller",
+        caption: "Full-screen device capture · 19 October 2026 · actual gameplay and native controls.",
+        fit: "contain",
+        wide: true,
+      },
+      {
+        src: "/images/burnout3/race-live-reflections.webp",
+        alt: "Build 46 recorded race frame with live reflections",
+        caption: "iPhone 15 Pro Max · build 46 · full live-reflection material path.",
+        fit: "contain",
+      },
+      {
+        src: "/images/burnout3/race-fast-preset.webp",
+        alt: "Build 45 recorded race frame with flatter car materials",
+        caption: "iPhone 15 Pro Max · build 45 · fast preset, at a different replay moment.",
+        fit: "contain",
+      },
+    ],
+  },
   aperture: {
     demoUrl: "https://ai-finance-two-bice.vercel.app/",
     demoLabel: "Visit Aperture",

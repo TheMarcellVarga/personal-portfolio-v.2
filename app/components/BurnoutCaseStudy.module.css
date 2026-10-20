@@ -1,0 +1,35 @@
+.case section[id] { scroll-margin-top: 7rem; }
+.case :global(.page-title) { max-width: none; }
+.heroCapture { margin: 2rem auto 0; }
+.heroCapture img { width: 100%; height: auto; border-radius: var(--panel-radius); }
+.controllerCapture { margin-bottom: 2rem; }
+.controllerCapture img { width: 100%; height: auto; border-radius: 1rem; }
+.interaction { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+.decisions { margin: 0; }
+.decisions li { padding: 1.5rem 0; border-top: 1px solid var(--page-border); }
+.decisions li:first-child { padding-top: 0; border-top: none; }
+.decisions p { margin-top: .75rem; color: var(--case-muted); line-height: 1.75; max-width: 60ch; }
+.buildLabel { opacity: .85; font-size: .75rem; }
+.preset { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); align-items: start; gap: 2.5rem; }
+.raceFrame { overflow: hidden; border-radius: var(--panel-radius); background: var(--panel-background); }
+.raceFrame img { width: 100%; height: auto; }
+.presetCopy { padding-top: 1rem; }
+.presetCopy > p { margin-top: 1rem; color: var(--case-muted); line-height: 1.75; }
+.measurement { margin-top: 2rem; width: 100%; text-align: left; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.measurement caption { text-align: left; font-size: .75rem; margin-bottom: 1rem; color: var(--case-muted); }
+.measurement th { font-size: .8125rem; font-weight: 400; color: var(--case-muted); }
+.measurement td { font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.4; font-weight: 500; letter-spacing: -.025em; }
+.presetCopy .measurementNote { font-size: .75rem; }
+.textLink { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1rem; min-height: 44px; font-size: .875rem; text-decoration: underline; text-underline-offset: .25em; }
+.currentStatus { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--page-border); max-width: 85ch; color: var(--case-muted); font-size: .875rem; line-height: 1.8; }
+.currentStatus strong { color: var(--color-custom-blue); font-weight: 500; }
+.credits { padding-block: 1rem; max-width: 85ch; font-size: .8125rem; line-height: 1.8; color: #c4ccd4; }
+.credits a { text-decoration: underline; text-underline-offset: .2em; color: white; }
+@media (max-width: 1023px) {
+  .interaction { grid-template-columns: 1fr; gap: 1rem; }
+  .preset { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 1.5rem; }
+}
+@media (max-width: 767px) {
+  .preset { grid-template-columns: 1fr; gap: .75rem; }
+  .presetCopy { padding-top: .75rem; }
+}

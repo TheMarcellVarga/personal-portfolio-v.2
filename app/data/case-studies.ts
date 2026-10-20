@@ -11,6 +11,31 @@ export type CaseStudyRecord = {
 };
 
 export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
+  "burnout3-ios": {
+    id: "burnout3-ios",
+    role: "Independent Apple port and interaction work on top of burnout3-pc: ARM64 runtime adaptation, UIKit controls, audio, ISO import, saves and performance investigation.",
+    problem: "Port the PlayStation 2 version to iPhone through an existing recompilation project, then make it usable through touch and explain the measured tradeoffs.",
+    user: "A personal technical experiment for playing a supported Burnout 3: Takedown disc on iPhone.",
+    decisions: [
+      "Reuse the upstream recompilation architecture, with translated game code compiled ahead of time for ARM64.",
+      "Use proportional touch sticks with immediate input release, independently of their visual return animation.",
+      "Import the player's ISO once and keep it alongside a persistent virtual memory card in the app sandbox.",
+      "Measure main-scene submissions separately from simulation ticks and displayed frames.",
+    ],
+    verification: [
+      "Committed reports document seven Mac regression groups and physical iPhone 15 Pro Max GPU/math checks on iOS 27.0.1.",
+      "The build-45 and build-46 race replays each reached blank 12000 without a reported host failure. Their two-second main-scene samples are shown in this case.",
+      "Exact zero-area triangle rejection preserved the recorded race images and all 4 MiB of GS memory byte for byte.",
+      "9,366 of 9,368 analyzed functions translate; that count is not behavioral verification of the whole game.",
+    ],
+    limitations: [
+      "Only the PS2 NTSC-U SLUS_210.50 / SLUS-21050 disc is supported. Users supply their own ISO; game data and generated game code are not distributed.",
+      "Full-game correctness, every track, crash mode, save/profile round trips and sustained audio quality need broader validation.",
+      "A stable 50–60 FPS rate is unproven. Build 51 recorded 42.9 minimum / 51.85 median main-scene submissions per second in its short test. Build 53's race comparison is pending in the committed evidence.",
+      "Backgrounding or an audio interruption ends the run; close and reopen to restart. Physical-controller support remains future work.",
+      "This portfolio presents recorded project evidence. It does not run the game, distribute an app, or claim these device checks were rerun for this page.",
+    ],
+  },
   aperture: {
     id: "aperture",
     role: "Independent product design and engineering: UX, Next.js, Go, market data, evidence retrieval, and release verification.",

@@ -1,4 +1,5 @@
 export type CaseStudyId =
+  | "burnout3-ios"
   | "aperture"
   | "first-revenue-game"
   | "wild-route"
@@ -153,6 +154,25 @@ export const projects: Project[] = [
     portfolioPlacement: "supporting",
     caseStudyId: "endless-activity",
   },
+  {
+    title: "Burnout 3: Takedown",
+    titleAccent: "Takedown",
+    subTitle: "A native iOS port of a 2000s racing favorite",
+    date: "2026",
+    description:
+      "An experimental native iOS port built on burnout3-pc, connecting ARM64 recompilation to touch controls, Metal presentation, audio and local saves.",
+    highlight:
+      "Physical-device race tests, hands-on interaction work and measured graphics tradeoffs. A working proof of concept with full-game validation still ahead.",
+    skills: ["Native iOS", "C++ / ARM64", "UIKit", "Metal / MoltenVK"],
+    link: "/burnout3-ios",
+    image: "/images/burnout3/gameplay-controller-20261019.webp",
+    category: "Native iOS + performance exploration",
+    backgroundClass: "bg-custom-blue",
+    status: "Native iOS build",
+    portfolioPlacement: "supporting",
+    caseStudyId: "burnout3-ios",
+  },
+
   {
     title: "CatchScan",
     titleAccent: "CatchScan",
