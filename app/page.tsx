@@ -50,8 +50,24 @@ import { PageBackground } from "./components/PageBackground";
 import { HeroCanvasBackdrop } from "./components/HeroCanvasBackdrop";
 import { ExpertiseVisual } from "./components/ExpertiseVisual";
 import { SplitTextReveal } from "./components/SplitTextReveal";
+import orbitStyles from "./components/HeroOrbit.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
+
+function HeroOrbit() {
+  return (
+    <div aria-hidden="true" className={orbitStyles.orbit}>
+      <svg viewBox="0 0 500 500" fill="none" className={orbitStyles.track}>
+        <circle
+          cx="250" cy="250" r="238"
+          stroke="currentColor" strokeWidth="1"
+          strokeDasharray="22 52"
+        />
+        <circle cx="250" cy="12" r="4" className={orbitStyles.point} />
+      </svg>
+    </div>
+  );
+}
 
 const principlesStatement =
   "I like making complex things feel simple. For me, design and code are two parts of the same process.";
@@ -1103,6 +1119,7 @@ export default function Page() {
               </div>
               <div className="home-intro-fold relative mt-8 flex h-[23rem] w-full items-end justify-center overflow-hidden sm:h-[30rem] [transform-origin:bottom]">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_70%,rgba(76,207,255,0.12),transparent_70%)]" />
+                <HeroOrbit />
                 <Image
                   src="/images/personalpageprofilealt.webp"
                   alt="Portrait of Marcell Varga"
@@ -1110,7 +1127,7 @@ export default function Page() {
                   height={1777}
                   sizes="(max-width: 639px) 80vw, (max-width: 1023px) 60vw, 0px"
                   priority
-                  className="relative h-full w-auto max-w-none object-contain object-bottom drop-shadow-[0_24px_60px_rgba(0,0,0,0.3)]"
+                  className="pointer-events-none relative h-full w-auto max-w-none object-contain object-bottom drop-shadow-[0_24px_60px_rgba(0,0,0,0.3)]"
                 />
               </div>
             </div>
@@ -1188,6 +1205,7 @@ export default function Page() {
               >
                 <motion.div className="hero-scroll-layer relative flex h-[72svh] min-h-[32rem] w-[min(104vw,46rem)] items-end justify-end sm:h-[78svh] sm:w-[min(88vw,42rem)] lg:h-[86svh] lg:w-[44rem] xl:h-[90svh] xl:w-[50rem]">
                   <div className="relative flex h-full w-full items-end justify-end">
+                    <HeroOrbit />
                     <div className="absolute inset-x-[12%] bottom-[4%] h-[16%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.42)_0%,_transparent_72%)] blur-2xl" />
                     <div className="absolute inset-y-[8%] left-[10%] w-px bg-[linear-gradient(180deg,transparent,rgba(255,255,255,0.16),transparent)]" />
                     <Image
