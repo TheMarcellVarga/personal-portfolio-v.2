@@ -33,6 +33,13 @@ try {
     content.style.gridRow = "1";
     grid.prepend(content);
   });
+  const overflow = await page.locator(".resume-sheet").evaluate((sheet) => {
+    const bottom = sheet.getBoundingClientRect().bottom;
+    return [...sheet.querySelectorAll("section")].some(
+      (section) => section.getBoundingClientRect().bottom > bottom - 12,
+    );
+  });
+  if (overflow) throw new Error("Resume sections would overflow the A4 page.");
   await mkdir("output/pdf", { recursive: true });
   await page.pdf({
     path: output,

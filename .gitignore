@@ -43,3 +43,6 @@ next-env.d.ts
 # agents
 .agents
 skills-lock.json
+
+# Local visual and PDF verification artifacts
+/tmp/

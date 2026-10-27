@@ -12,11 +12,11 @@ export const resume = {
   photo: "/images/personalpageprofilealt.webp",
   tags: ["Product UX", "Frontend Engineering", "Design Systems", "React + TypeScript"],
   profile:
-    "UX & Frontend Engineer focused on React, TypeScript, design systems, and complex product workflows. Combines product UX and frontend engineering to take ambiguous requirements from exploration to production.",
+    "UX & Frontend Engineer building complex React and TypeScript products since 2022. Combines UX research, interaction design, and frontend engineering to take workflows from exploration to production, with a focus on reusable design systems, accessibility, and API integration.",
   skillGroups: [
     {
       label: "Frontend",
-      items: ["React", "TypeScript", "JavaScript", "D3.js", "Next.js", "Svelte"],
+      items: ["React", "TypeScript", "JavaScript", "HTML", "CSS", "Redux", "D3.js", "Next.js", "Svelte"],
     },
     {
       label: "Architecture",
@@ -27,23 +27,27 @@ export const resume = {
       items: ["Node.js / Express", "Java / Spring", "REST APIs", "WebSocket", "PostgreSQL"],
     },
     {
-      label: "UX & Delivery",
+      label: "UX & Product",
       items: [
-        "UX Engineering",
-        "Product Engineering",
-        "WCAG",
-        "Jest",
-        "Git",
-        "GCP / Docker",
-        "CI/CD",
-        "Artificial Intelligence",
+        "Figma",
+        "UX Research",
+        "Interaction Design",
+        "Usability Testing",
       ],
+    },
+    {
+      label: "Quality & Security",
+      items: ["WCAG Accessibility", "Jest", "Cypress", "Web Application Security"],
+    },
+    {
+      label: "Delivery & AI",
+      items: ["Git", "CI/CD", "GCP", "Docker", "Large Language Models (LLMs)"],
     },
   ],
   languages: [
     { name: "Hungarian", level: "Native" },
     { name: "English", level: "Professional" },
-    { name: "Danish", level: "Working proficiency" },
+    { name: "Danish", level: "Limited working proficiency" },
   ],
   experience: [
     {
@@ -51,7 +55,9 @@ export const resume = {
       role: "UX & Frontend Engineer",
       period: "Oct 2022 - Present",
       bullets: [
-        "Build and ship React/TypeScript product workflows for complex telecom software, taking work from interaction architecture and prototyping through production delivery.",
+        // Company-wide scope, not a claim that this interface serves every user.
+        // Source: https://news.axon-networks.com/2026/10/axon-networks-launches-axon-datum.html
+        "Deliver React/TypeScript workflows for AXON's OaaS platform, from UX exploration to production; AXON reports 30+ operators and 97M+ managed users across its platforms.",
         "Develop network diagnostics and performance-monitoring interfaces for network equipment, including health checks, historical trends, and detailed snapshot views.",
         "Designed a configurable D3.js analytics workspace where users arrange graphs and save, search, restore, and manage personalized views.",
         "Create reusable components and design-system patterns across a modular frontend architecture using Webpack, Module Federation, and single-spa.",
@@ -74,7 +80,7 @@ export const resume = {
     {
       school: "University College of Northern Denmark",
       degree: "AP Degree in Multimedia Design",
-      period: "2020 - 2022",
+      period: "Sep 2020 - Jun 2022",
     },
   ],
 } as const;
