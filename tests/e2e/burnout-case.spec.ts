@@ -1,31 +1,50 @@
 import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
-test("Burnout case shows genuine captures without invented game controls", async ({ page }) => {
+test("Burnout case shows the current Xbox capture without invented controls", async ({ page }) => {
   await page.goto("/burnout3-ios");
   const frame = page.locator("[data-recorded-game-frame]");
-  await expect(frame.locator("img")).toHaveAttribute("src", /gameplay-controller-20261019/);
-  await expect(frame).toContainText("native touch controls visible");
-  const controller = page.locator("[data-native-controller-capture]");
-  await expect(controller.locator("img")).toHaveAttribute("src", /gameplay-controller-detail-20261019/);
-  await expect(controller).toContainText("Actual controller during a race replay");
+  await expect(frame.locator("img")).toHaveAttribute("src", /xbox-hybrid-controls-20261023/);
+  await expect(frame).toContainText("Xbox-based build 10");
+  await expect(frame).toContainText("actual native touch controls visible");
   await expect(page.getByRole("button", { name: "Steering stick" })).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Hold accelerator" })).toHaveCount(0);
   await expect(page.locator("[data-control-demo]")).toHaveCount(0);
-  await expect(page.locator(".page-lead")).toHaveText("An experimental iOS port of Burnout 3: Takedown.");
+  await expect(page.locator(".page-lead")).toHaveText("A console racer, adapted for the way a phone is held.");
+  await expect(page.getByRole("link", { name: "Explore the PS2 origin" })).toHaveAttribute("href", /tree\/ps2-legacy$/);
 });
 
-test("Burnout recorded presets and evidence work with a keyboard", async ({ page }) => {
+test("Burnout recorded native session screens work with a keyboard", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/burnout3-ios");
-  await page.getByRole("button", { name: "Live reflections Build 46" }).click();
-  await expect(page.locator("#burnout-preset")).toContainText("48.55");
-  await expect(page.locator("#burnout-preset img")).toHaveAttribute("alt", /Build 46/);
-  await page.getByRole("button", { name: "Faster preset Build 45" }).click();
-  await expect(page.locator("#burnout-preset")).toContainText("59.9");
+  const settings = page.getByRole("button", { name: "iOS settings Build 9" });
+  // The shared reduced-motion provider replaces its Lenis wrapper after hydration.
+  // Retry this idempotent keyboard selection if that remount detaches the target.
+  await expect(async () => {
+    await settings.press("Enter");
+    await expect(settings).toHaveAttribute("aria-pressed", "true", { timeout: 500 });
+  }).toPass({ timeout: 10_000 });
+  await expect(page.locator("#burnout-session-screen img")).toHaveAttribute("src", /xbox-settings-20261023/);
+  await expect(page.locator("#burnout-session-screen")).toContainText("display changes wait for the next app launch");
+  const resume = page.getByRole("button", { name: "Resume game Build 9" });
+  await resume.focus();
+  await expect(resume).toBeFocused();
+  await resume.press("Enter");
+  await expect(page.locator("#burnout-session-screen img")).toHaveAttribute("src", /xbox-resume-launcher/);
+  await expect(page.locator("#burnout-session-screen")).toContainText("runtime stays in memory");
+});
+
+test("Burnout keeps current evidence, metric scope and upstream credits inspectable", async ({ page }) => {
+  await page.goto("/burnout3-ios");
+  await expect(page.locator("#burnout-performance table")).toContainText("76.92%");
+  await expect(page.locator("#burnout-performance table")).toContainText("52.98%");
+  await expect(page.locator("#burnout-performance")).toContainText("sequential runs on a warm phone");
   await page.getByText("Verification, limitations and credits", { exact: true }).click();
-  await expect(page.locator("details")).toContainText("SLUS_210.50");
-  await expect(page.locator("details")).toContainText("b27cd98");
+  await expect(page.locator("details")).toContainText("USA original Xbox release");
+  await expect(page.locator("details")).toContainText("b4cd396");
+  await expect(page.locator("details")).toContainText("58% of one core");
+  await expect(page.locator("details").getByRole("link", { name: "Takedawn", exact: true })).toHaveAttribute("href", "https://github.com/xenophobentx/takedawn");
+  await expect(page.getByRole("link", { name: "Explore the source" })).toHaveAttribute("href", "https://github.com/TheMarcellVarga/burnout3-ios/tree/main");
 });
 
 for (const width of [1440, 390, 320]) {
@@ -54,6 +73,8 @@ for (const width of [1440, 390, 320]) {
     if (process.env.CAPTURE_BURNOUT === "1") {
       await page.screenshot({ path: `tmp/burnout-case/${width}-full.png`, fullPage: true });
       await page.screenshot({ path: `tmp/burnout-case/${width}-hero.png` });
+      await page.locator("#burnout-session").screenshot({ path: `tmp/burnout-case/${width}-session.png` });
+      await page.locator("#burnout-performance").screenshot({ path: `tmp/burnout-case/${width}-performance.png` });
     }
   });
 }

@@ -1,69 +1,84 @@
 # Burnout 3: Takedown supporting case
 
-Date: 19 October 2026.
+Updated: 27 October 2026. Route: `/burnout3-ios`.
 
-Route: `/burnout3-ios`. Placement: supporting work after Focusin and Endless
-Activity. Reference: the index and `/ai-finance`; this page extends their visual
-system rather than introducing a separate gaming theme.
+The case remains supporting work alongside Focusin and Endless Activity. It
+uses the existing index/Aperture typography, warm surfaces, rust emphasis and
+navy engineering panel. No gaming-themed replacement shell was introduced.
 
-The story is the Apple adaptation and interaction work built on burnout3-pc.
-It opens with a genuine full-screen gameplay capture including the native
-controller. A second race capture shows the same actual app controls in the
-interaction section. Three practical decisions lead into historical graphics
-experiments.
-The architecture, validation limits and upstream credit remain accessible
-without turning the case into a development log.
+## Current story and source
+
+The project began as an Apple adaptation of burnout3-pc’s PS2 implementation.
+The main app now uses the Xbox-based Takedawn/xboxrecomp foundation, direct
+Metal presentation and a native iOS launcher. The old PS2 work is preserved on
+`ps2-legacy`; its main-scene submission metrics are not used to describe the
+Xbox runtime.
+
+Content is grounded in committed source
+`b4cd396f5536f5bcaf33d5e3a6e624c01709abf5` in
+[burnout3-ios](https://github.com/TheMarcellVarga/burnout3-ios/tree/b4cd396f5536f5bcaf33d5e3a6e624c01709abf5):
+`README.md`, `ios/README.md`, `ios/DEVICE_STATUS.md`, `ios/OPTIMIZATION.md`, the
+native shell, preference/import validator, session guard and touch overlay.
+Main is the current app; build 13 changes identity/artwork over the recorded
+build-9/10 interaction implementation.
+
+The case now covers:
+
+- The PS2 origin and move to the Xbox runtime, with accurate upstream attribution.
+- Neutral stick pickup, immediate release, compact driving actions, response curves and faint visuals.
+- Game menu → native Settings → Launcher → Resume game, using genuine captures.
+- Manifest-verified, staged installation of 716 files and preservation of existing data.
+- Pacing and redundant-draw optimization with explicit metric and test limits.
+- Runtime architecture, the seven host suites and unresolved device validation.
 
 ## Evidence boundary
 
-Content was grounded in committed `burnout3-ios` revision `b27cd98`, specifically
-`docs/GPU_STATUS.md`, `docs/NATIVE_STATUS.md`, the UIKit input/launch code and the
-build configuration. Uncommitted reports and the in-progress README rewrite were
-not used to advance the reported performance status. On 19 October 2026, at the
-user’s request, the installed app’s existing `--race-soak` replay was run to
-capture the actual gameplay UI via `devicectl device capture screenshot`. This
-is new visual evidence, not a rerun of the historical GPU/math regressions or a
-new benchmark. The replay uses its existing disposable memory card.
+The roughly 155-second single-track race sample measured 59.9–60.1 Metal
+presentations per second across 31 five-second samples. It is not a claim of
+sustained full-game 60 FPS. The separate menu pacing comparison used five
+five-second windows per setting: 76.92% versus 52.98% mean whole-process CPU
+relative to one core, with recent guest-flip p95 of 16.760 versus 16.744 ms
+for 8 ms versus 4 ms spin lead. Runs were sequential on a warm phone; these
+are not thermally controlled measurements, a PS2/Xbox benchmark or a battery-life result.
 
-The graphics selector shows historical builds 45 and 46, each with 42 two-second
-main-scene intervals. These are scene submissions, not simulation ticks or display
-refreshes. The frames show different replay moments, so the selector is not a
-matched image-difference comparison. Build 51's later short-race measurement is
-identified separately. Build 53's race comparison remains pending in the committed
-source. Full-game compatibility and stable 50–60 FPS are not claimed.
+The visible native screens are from build 9 and the quieter controls from
+build 10, captured 23 October. Portfolio updates did not rerun game tests or
+benchmarks. Seven host suites and scripted device checks establish the bounded
+behaviors described in the source. Physical touch comfort, end-to-end Files
+provider integration, audio quality and long-session behavior remain open.
+The held live runtime still used about 58% of one core in a recorded sample.
 
 ## Media provenance
 
-Two historical renderer captures and two new full-screen device captures were
-converted losslessly to WebP without cropping, retouching or compositing:
+The following full device screenshots were converted losslessly to WebP,
+without cropping, retouching, composites or recreated controls. Paths below are
+relative to the development Xbox checkout’s ignored run folder
+`local/runs/iphone-20261023/`.
 
-| Portfolio file | Source capture | Meaning |
+| Portfolio file | Original screenshot | Meaning |
 | --- | --- | --- |
-| `public/images/burnout3/race-live-reflections.webp` | `local/reports/iphone-race46-race.png` | Build 46 race with live reflections |
-| `public/images/burnout3/race-fast-preset.webp` | `local/reports/iphone-race45-original-12000.png` | Build 45 faster preset at original camera distances |
-| `public/images/burnout3/gameplay-controller-20261019.webp` | `local/reports/portfolio-gameplay-controller-20261019.png` | Full-screen race replay with actual native controls, captured 19 October 2026 |
-| `public/images/burnout3/gameplay-controller-detail-20261019.webp` | `local/reports/portfolio-gameplay-controller-detail-20261019.png` | A second full-screen gameplay/controller capture from the same replay |
+| `xbox-hybrid-controls-20261023.webp` | `build10-grid.png` | Xbox build 10 race start, actual faint hybrid controls |
+| `xbox-pause-menu-20261023.webp` | `final9-pause-menu.png` | Original pause menu with the injected IOS SETTINGS row |
+| `xbox-settings-20261023.webp` | `final9-native-panel.png` | Native Settings and Launcher toolbar action |
+| `xbox-resume-launcher-20261023.webp` | `native-launcher-roundtrip.png` | Resume game launcher from the earlier build-9 menu test |
 
-No controller UI or device surround is recreated in HTML/CSS. Both gameplay
-captures include the native overlay in the original device screenshot. The
-historical graphics selector retains raw renderer-only images, explicitly
-captioned as excluding the app controls, to preserve its original benchmark
-context. No controls were added to those historical frames. The only interactive
-elements are portfolio navigation, recorded-image selection and evidence disclosure.
+Files live under `public/images/burnout3/`. The older PS2 captures from
+19 October and build-45/46 renderer output remain as historical media but no
+longer represent the current app in the case or work index. No browser game
+controls or device surround are fabricated. The selector changes recorded
+screens; it does not operate a game session.
 
-The game is introduced as a 2000s console racer. References to PS2 identify the
-specific source version and toolchain used for this port, not platform exclusivity.
+## Portfolio verification
 
-## Design and verification
+The focused browser suite checks genuine media, current source/legacy links,
+keyboard-operated screen selection, inspectable measurement limits, index and
+sitemap presence, and the incumbent font/background/alignment. At 1440, 390
+and 320 pixels it checks image loading, horizontal containment and WCAG A/AA
+with axe. These verify the portfolio page, not game runtime behavior.
 
-Shared `PortfolioShell`, `PageIntro`, portfolio containers, warm background, rust
-accent, typography, buttons, section spacing and navy evidence panel follow the
-existing index/Aperture implementation. The case-specific image framing
-and measurement table are contained in `BurnoutCaseStudy.module.css`.
-
-Verification covers the production build, TypeScript, scoped ESLint and six
-Playwright cases: genuine capture presentation without fabricated controls, keyboard
-graphics selection, expandable evidence, index placement, sitemap,
-shared typography/background/alignment, mobile containment and WCAG A/AA axe
-checks at 1440, 390 and 320 pixels. Portfolio checks do not establish game runtime
-correctness or performance.
+Verified on 27 October 2026 with Node 22.13.1: production build, TypeScript,
+scoped ESLint and all seven focused Playwright tests pass. WCAG A/AA checks
+pass at 1440, 390 and 320 pixels. All four lossless WebP files were compared
+pixel-for-pixel against the original screenshots. The keyboard test allows
+for the existing reduced-motion provider’s startup wrapper remount before
+asserting the selected screen. Evidence is under `tmp/burnout-case/`.

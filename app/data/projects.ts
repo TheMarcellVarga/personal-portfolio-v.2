@@ -160,12 +160,12 @@ export const projects: Project[] = [
     subTitle: "A native iOS port of a 2000s racing favorite",
     date: "2026",
     description:
-      "An experimental native iOS port built on burnout3-pc, connecting ARM64 recompilation to touch controls, Metal presentation, audio and local saves.",
+      "A native iOS experiment built on Takedawn and xboxrecomp, connecting the Xbox runtime and direct Metal rendering to hybrid touch controls, verified imports and a resumable launcher.",
     highlight:
-      "Physical-device race tests, hands-on interaction work and measured graphics tradeoffs. A working proof of concept with full-game validation still ahead.",
-    skills: ["Native iOS", "C++ / ARM64", "UIKit", "Metal / MoltenVK"],
+      "From a PS2 proof of concept to the main Xbox-based app: native settings, session ownership and measured pacing changes, with bounded device evidence and explicit limits.",
+    skills: ["Native iOS", "C / ARM64", "UIKit", "Metal"],
     link: "/burnout3-ios",
-    image: "/images/burnout3/gameplay-controller-20261019.webp",
+    image: "/images/burnout3/xbox-hybrid-controls-20261023.webp",
     category: "Native iOS + performance exploration",
     backgroundClass: "bg-custom-blue",
     status: "Native iOS build",

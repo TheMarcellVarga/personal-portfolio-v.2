@@ -24,14 +24,15 @@ placements. Shared navigation and project data connect the index, individual
 case studies and sitemap. Existing resume and contact flows remain in place.
 
 The user confirmed Burnout 3: Takedown as a supporting case alongside Focusin
-and Endless Activity. It is an experimental Apple port built on burnout3-pc;
-its upstream foundation and remaining validation limits must remain explicit.
+and Endless Activity. It began as an Apple port built on burnout3-pc and now uses the Xbox-based
+Takedawn/xboxrecomp foundation. Its upstream credits and remaining validation
+limits must remain explicit.
 The web case demonstrates recorded work; it does not execute or distribute the game.
 Only genuine captures may depict the app or its controls. Do not invent controller
 UI, add interactive controls over footage, or composite separate captures into an
 apparent app screenshot. Distinguish game-frame captures from complete app captures.
-Introduce the game as a 2000s console racer; PS2 terminology describes the specific
-version used as the source for this port.
+Introduce the game as a 2000s console racer. Xbox terminology describes the
+current source version; PS2 describes the preserved earlier implementation.
 
 ## Brand Commitments
 
@@ -45,8 +46,8 @@ The index and `app/components/ApertureCaseStudy.tsx` supply the established
 presentation reference. Project content is recorded in `app/data/`.
 
 Burnout content is grounded in the source repository’s committed revision
-`b27cd98`. At the user’s request, full-screen gameplay/controller captures were
-added from the connected iPhone on 19 October 2026. Its device captures, attribution
-and factual limits are documented
+`b4cd396` as of 27 October 2026. The current case uses full device captures from
+Xbox builds 9 and 10 on 23 October, with the earlier PS2 experiment retained as
+project history. Its device captures, attribution and factual limits are documented
 in `docs/BURNOUT_CASE_STUDY.md`. Historical measurements must retain their
 build, metric and test scope; they are not new runtime verification.

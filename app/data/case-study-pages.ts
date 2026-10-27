@@ -32,28 +32,34 @@ export type CaseStudyPageContent = {
 
 export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
   "burnout3-ios": {
-    heroImage: "/images/burnout3/gameplay-controller-20261019.webp",
-    heroAlt: "Full-screen Burnout 3: Takedown gameplay capture on iPhone with the actual native controller visible",
-    contextTitle: "An experimental iOS port of Burnout 3: Takedown.",
-    contextBody: "Apple port and touch interaction work built on the existing burnout3-pc recompilation project. Physical-device race tests establish a working experiment, with compatibility and sustained performance still under investigation.",
+    heroImage: "/images/burnout3/xbox-hybrid-controls-20261023.webp",
+    heroAlt: "Xbox-based Burnout 3 running on iPhone with the actual faint hybrid steering and driving controls",
+    contextTitle: "A console racer, adapted for the way a phone is held.",
+    contextBody: "An initial PS2 port evolved into a native iOS adaptation of the Xbox-based Takedawn runtime. The work connects ARM64 and Metal integration to hybrid touch controls, verified game imports, persistent settings and a resumable launcher.",
     gallery: [
       {
-        src: "/images/burnout3/gameplay-controller-20261019.webp",
-        alt: "iPhone race replay with the actual native touch controller",
-        caption: "Full-screen device capture · 19 October 2026 · actual gameplay and native controls.",
+        src: "/images/burnout3/xbox-hybrid-controls-20261023.webp",
+        alt: "Xbox-based build 10 race start with subtle action-labelled touch controls",
+        caption: "Full iPhone capture · build 10 · 23 October 2026 · actual hybrid controls.",
         fit: "contain",
         wide: true,
       },
       {
-        src: "/images/burnout3/race-live-reflections.webp",
-        alt: "Build 46 recorded race frame with live reflections",
-        caption: "iPhone 15 Pro Max · build 46 · full live-reflection material path.",
+        src: "/images/burnout3/xbox-pause-menu-20261023.webp",
+        alt: "Original race pause menu with the injected IOS SETTINGS entry before Quit",
+        caption: "Build 9 · the game menu opens native iOS settings while preserving its existing actions.",
         fit: "contain",
       },
       {
-        src: "/images/burnout3/race-fast-preset.webp",
-        alt: "Build 45 recorded race frame with flatter car materials",
-        caption: "iPhone 15 Pro Max · build 45 · fast preset, at a different replay moment.",
+        src: "/images/burnout3/xbox-settings-20261023.webp",
+        alt: "Native iOS settings with display preferences, control size and a Launcher action",
+        caption: "Build 9 · persistent native settings and a route back to the launcher.",
+        fit: "contain",
+      },
+      {
+        src: "/images/burnout3/xbox-resume-launcher-20261023.webp",
+        alt: "Native Burnout 3 launcher offering Resume game for the paused live session",
+        caption: "Build 9 · Resume game preserves the current session in memory.",
         fit: "contain",
       },
     ],

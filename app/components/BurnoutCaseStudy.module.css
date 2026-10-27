@@ -17,8 +17,8 @@
 .presetCopy > p { margin-top: 1rem; color: var(--case-muted); line-height: 1.75; }
 .measurement { margin-top: 2rem; width: 100%; text-align: left; border-collapse: collapse; font-variant-numeric: tabular-nums; }
 .measurement caption { text-align: left; font-size: .75rem; margin-bottom: 1rem; color: var(--case-muted); }
-.measurement th { font-size: .8125rem; font-weight: 400; color: var(--case-muted); }
-.measurement td { font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.4; font-weight: 500; letter-spacing: -.025em; }
+.measurement th { padding: .7rem .5rem .7rem 0; font-size: .8125rem; font-weight: 400; color: var(--case-muted); }
+.measurement td { font-size: clamp(1rem, 1.7vw, 1.35rem); line-height: 1.7; font-weight: 500; letter-spacing: -.025em; }
 .presetCopy .measurementNote { font-size: .75rem; }
 .textLink { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1rem; min-height: 44px; font-size: .875rem; text-decoration: underline; text-underline-offset: .25em; }
 .currentStatus { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--page-border); max-width: 85ch; color: var(--case-muted); font-size: .875rem; line-height: 1.8; }
@@ -33,3 +33,8 @@
   .preset { grid-template-columns: 1fr; gap: .75rem; }
   .presetCopy { padding-top: .75rem; }
 }
+
+.evolutionCopy p { color: var(--case-muted); line-height: 1.8; max-width: 65ch; }
+.evolutionCopy p + p { margin-top: 1.25rem; }
+.measurement td { padding-right: .5rem; white-space: nowrap; }
+.measurement tbody tr { border-top: 1px solid var(--page-border); }
