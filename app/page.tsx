@@ -122,11 +122,6 @@ const expertiseAreas = [
 ] as const;
 
 function ExpertiseArea({ area }: { area: (typeof expertiseAreas)[number] }) {
-  const stageRef = useRef<HTMLLIElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: stageRef,
-    offset: ["start end", "start center"],
-  });
   const frontend = area.kind === "frontend";
   const supporting = area.kind === "ai";
   const layout = frontend
@@ -136,7 +131,7 @@ function ExpertiseArea({ area }: { area: (typeof expertiseAreas)[number] }) {
       : "border-[var(--title-accent)] py-8 lg:grid-cols-[0.85fr_1.15fr] lg:py-10";
 
   return (
-    <li id={`capability-${area.kind}`} ref={stageRef} data-expertise-area={area.kind} className="relative min-w-0 scroll-mt-32">
+    <li id={`capability-${area.kind}`} data-expertise-area={area.kind} className="relative min-w-0 scroll-mt-32">
       <div className={`expertise-row relative flex flex-col gap-6 border-t lg:grid lg:items-center lg:gap-20 ${layout}`}>
         <div data-expertise-copy className={`order-1 min-w-0 ${frontend ? "lg:order-2" : ""}`}>
           <h3 className={`max-w-[19ch] font-display font-medium leading-[1.04] tracking-[-0.025em] text-custom-blue ${supporting ? "text-[1.75rem] sm:text-[2rem] lg:text-[2.25rem]" : "text-[clamp(2.25rem,3.5vw,3rem)]"}`}>
@@ -156,7 +151,7 @@ function ExpertiseArea({ area }: { area: (typeof expertiseAreas)[number] }) {
           </ul>
         </div>
         <div className={`order-2 min-w-0 ${frontend ? "lg:order-1" : ""}`}>
-          <ExpertiseVisual kind={area.kind} progress={scrollYProgress} />
+          <ExpertiseVisual kind={area.kind} />
         </div>
       </div>
     </li>

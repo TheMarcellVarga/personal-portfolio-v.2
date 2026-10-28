@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useMotionValueEvent, type MotionValue } from "framer-motion";
 import type { ExpertiseScene, ExpertiseKind } from "./expertise-scene";
 
 function GraphicFallback({ kind }: { kind: ExpertiseKind }) {
@@ -37,18 +36,12 @@ function GraphicFallback({ kind }: { kind: ExpertiseKind }) {
   );
 }
 
-export function ExpertiseVisual({ kind, progress }: { kind: ExpertiseKind; progress: MotionValue<number> }) {
+export function ExpertiseVisual({ kind }: { kind: ExpertiseKind }) {
   const hostRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sceneRef = useRef<ExpertiseScene | null>(null);
-  const progressRef = useRef(progress.get());
   const reducedMotionRef = useRef(false);
   const [ready, setReady] = useState(false);
-
-  useMotionValueEvent(progress, "change", (value) => {
-    progressRef.current = value;
-    sceneRef.current?.setProgress(value);
-  });
 
   useEffect(() => {
     const host = hostRef.current;
@@ -59,10 +52,8 @@ export function ExpertiseVisual({ kind, progress }: { kind: ExpertiseKind; progr
     let visible = false;
     const resize = () => sceneRef.current?.resize(host.clientWidth, host.clientHeight);
     const syncVisibility = () => sceneRef.current?.setActive(visible && !document.hidden);
-    const observer = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
-      syncVisibility();
-      if (!visible || loading) return;
+    const loadScene = () => {
+      if (loading) return;
       loading = true;
       void import("./expertise-scene").then(({ createExpertiseScene }) => {
         if (disposed) return;
@@ -70,15 +61,22 @@ export function ExpertiseVisual({ kind, progress }: { kind: ExpertiseKind; progr
           sceneRef.current = createExpertiseScene(canvas, kind, reducedMotionRef.current, () => {
             if (!disposed) setReady(true);
           });
-          sceneRef.current.setProgress(progressRef.current);
           resize();
           syncVisibility();
         } catch {
           // The vector version stays visible when WebGL is unavailable.
         }
       }).catch(() => {});
-    }, { threshold: 0.01 });
-    observer.observe(host);
+    };
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      syncVisibility();
+    });
+    visibilityObserver.observe(host);
+    const preloadObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) loadScene();
+    }, { rootMargin: `${Math.round(window.innerHeight * 1.5)}px 0px`, threshold: 0.01 });
+    preloadObserver.observe(host);
     const resizer = new ResizeObserver(resize);
     resizer.observe(host);
     const contextLost = () => setReady(false);
@@ -86,7 +84,8 @@ export function ExpertiseVisual({ kind, progress }: { kind: ExpertiseKind; progr
     document.addEventListener("visibilitychange", syncVisibility);
     return () => {
       disposed = true;
-      observer.disconnect();
+      visibilityObserver.disconnect();
+      preloadObserver.disconnect();
       resizer.disconnect();
       canvas.removeEventListener("webglcontextlost", contextLost);
       document.removeEventListener("visibilitychange", syncVisibility);
