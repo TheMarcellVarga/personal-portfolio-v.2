@@ -125,7 +125,7 @@ function ExpertiseArea({ area }: { area: (typeof expertiseAreas)[number] }) {
   const stageRef = useRef<HTMLLIElement>(null);
   const { scrollYProgress } = useScroll({
     target: stageRef,
-    offset: ["start end", "end start"],
+    offset: ["start end", "start center"],
   });
   const frontend = area.kind === "frontend";
   const supporting = area.kind === "ai";
