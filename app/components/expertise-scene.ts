@@ -6,6 +6,7 @@ export interface ExpertiseScene {
   resize: (width: number, height: number) => void;
   setActive: (active: boolean) => void;
   setReducedMotion: (reduced: boolean) => void;
+  finishAssembly: () => void;
   dispose: () => void;
 }
 
@@ -146,7 +147,7 @@ export function createExpertiseScene(
   let lastPaint = 0;
   let lastTick: number | null = null;
   let ambientSeconds = 0;
-  const assemblyStartedAt = performance.now();
+  let assemblyStartedAt = performance.now();
   const assemblyDuration = 900;
 
   // Assemble on a short timer after the scene is preloaded; ambient drift keeps it alive.
@@ -271,6 +272,10 @@ export function createExpertiseScene(
     setReducedMotion(value) {
       reduceMotion = value;
       lastTick = null;
+      invalidate();
+    },
+    finishAssembly() {
+      assemblyStartedAt = performance.now() - assemblyDuration;
       invalidate();
     },
     dispose() {
