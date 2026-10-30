@@ -61,7 +61,7 @@ export function ExpertiseVisual({ kind }: { kind: ExpertiseKind }) {
           sceneRef.current = createExpertiseScene(canvas, kind, reducedMotionRef.current, () => {
             if (!disposed) setReady(true);
           });
-          if (visible) sceneRef.current.finishAssembly();
+          if (visible) sceneRef.current.startAssembly();
           resize();
           syncVisibility();
         } catch {
@@ -71,7 +71,7 @@ export function ExpertiseVisual({ kind }: { kind: ExpertiseKind }) {
     };
     const visibilityObserver = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
-      if (visible) sceneRef.current?.finishAssembly();
+      if (visible) sceneRef.current?.startAssembly();
       syncVisibility();
     });
     visibilityObserver.observe(host);

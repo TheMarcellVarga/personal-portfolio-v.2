@@ -6,7 +6,7 @@ export interface ExpertiseScene {
   resize: (width: number, height: number) => void;
   setActive: (active: boolean) => void;
   setReducedMotion: (reduced: boolean) => void;
-  finishAssembly: () => void;
+  startAssembly: () => void;
   dispose: () => void;
 }
 
@@ -147,15 +147,17 @@ export function createExpertiseScene(
   let lastPaint = 0;
   let lastTick: number | null = null;
   let ambientSeconds = 0;
-  let assemblyStartedAt = performance.now();
-  const assemblyDuration = 900;
+  let assemblyStartedAt: number | null = null;
+  const assemblyDuration = 650;
 
-  // Assemble on a short timer after the scene is preloaded; ambient drift keeps it alive.
+  // Preload early, then assemble visibly when the scene enters the viewport.
   function render() {
     if (renderer.getContext().isContextLost()) return;
     progress = reduceMotion
       ? 1
-      : THREE.MathUtils.clamp((performance.now() - assemblyStartedAt) / assemblyDuration, 0, 1);
+      : assemblyStartedAt === null
+        ? 0
+        : THREE.MathUtils.clamp((performance.now() - assemblyStartedAt) / assemblyDuration, 0, 1);
     const phase = reduceMotion ? 1 : THREE.MathUtils.smoothstep(progress, 0.05, 0.85);
     const time = ambientSeconds;
     const drift = reduceMotion ? 0 : 1;
@@ -274,8 +276,9 @@ export function createExpertiseScene(
       lastTick = null;
       invalidate();
     },
-    finishAssembly() {
-      assemblyStartedAt = performance.now() - assemblyDuration;
+    startAssembly() {
+      if (assemblyStartedAt !== null) return;
+      assemblyStartedAt = performance.now();
       invalidate();
     },
     dispose() {
