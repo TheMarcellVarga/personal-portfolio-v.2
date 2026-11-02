@@ -79,7 +79,7 @@ export default function AtsResumePage() {
                 {resume.name}
               </h2>
               <p className="mt-3 max-w-3xl text-[1.05rem] leading-7 text-custom-blue/78">
-                {resume.title} - {resume.descriptor}
+                {resume.title}
               </p>
 
               <address className="mt-5 space-y-1.5 not-italic text-sm leading-6 text-custom-blue/72">

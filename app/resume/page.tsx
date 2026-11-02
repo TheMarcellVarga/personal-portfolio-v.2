@@ -170,7 +170,14 @@ export default function ResumePage() {
                                 {group.label}
                               </p>
                               <p className="mt-1.5 text-sm sheet:text-[10px] leading-[1.5] text-white/68">
-                                {group.items.join(" · ")}
+                                {group.items.map((item, index) => (
+                                  <span key={item}>
+                                    {index > 0 && " · "}
+                                    {item.startsWith("AI-Assisted") ? (
+                                      <><span className="whitespace-nowrap">AI-Assisted</span>{item.slice("AI-Assisted".length)}</>
+                                    ) : item}
+                                  </span>
+                                ))}
                               </p>
                             </div>
                           ))}

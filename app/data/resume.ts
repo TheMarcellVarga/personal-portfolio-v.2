@@ -1,6 +1,6 @@
 export const resume = {
   name: "Marcell Varga",
-  title: "Product-minded UX & Frontend Engineer",
+  title: "UX & Frontend Engineer | Product Engineering, React & TypeScript",
   descriptor:
     "Building production interfaces, design systems, and complex product workflows with React and TypeScript.",
   location: "Singapore",
@@ -12,7 +12,7 @@ export const resume = {
   photo: "/images/personalpageprofilealt.webp",
   tags: ["Product UX", "Frontend Engineering", "Design Systems", "React + TypeScript"],
   profile:
-    "UX & Frontend Engineer building complex React and TypeScript products since 2022. Combines UX research, interaction design, and frontend engineering to take workflows from exploration to production, with a focus on reusable design systems, accessibility, and API integration.",
+    "UX & Frontend Engineer with 4 years of experience building production React/TypeScript interfaces for complex B2B platforms. Combines UX design, reusable components, and API integration across diagnostics, monitoring, and analytics.",
   skillGroups: [
     {
       label: "Frontend",
@@ -24,7 +24,7 @@ export const resume = {
     },
     {
       label: "Backend & Integration",
-      items: ["Node.js / Express", "Java / Spring", "REST APIs", "WebSocket", "PostgreSQL"],
+      items: ["Node.js (Fastify/Express)", "Go", "Java / Spring", "REST APIs", "WebSocket", "PostgreSQL"],
     },
     {
       label: "UX & Product",
@@ -37,11 +37,11 @@ export const resume = {
     },
     {
       label: "Quality & Security",
-      items: ["WCAG Accessibility", "Jest", "Cypress", "Web Application Security"],
+      items: ["WCAG 2.1 (AA & AAA Criteria)", "Vitest", "Jest", "Cypress", "Web Application Security"],
     },
     {
       label: "Delivery & AI",
-      items: ["Git", "CI/CD", "GCP", "Docker", "Large Language Models (LLMs)"],
+      items: ["Git", "CI/CD", "GCP", "Docker", "AI-Assisted Development (Codex, Claude, Kimi)"],
     },
   ],
   languages: [
@@ -55,14 +55,14 @@ export const resume = {
       role: "UX & Frontend Engineer",
       period: "Oct 2022 - Present",
       bullets: [
-        // Company-wide scope, not a claim that this interface serves every user.
-        // Source: https://news.axon-networks.com/2026/10/axon-networks-launches-axon-datum.html
-        "Deliver React/TypeScript workflows for AXON's OaaS platform, from UX exploration to production; AXON reports 30+ operators and 97M+ managed users across its platforms.",
-        "Develop network diagnostics and performance-monitoring interfaces for network equipment, including health checks, historical trends, and detailed snapshot views.",
-        "Designed a configurable D3.js analytics workspace where users arrange graphs and save, search, restore, and manage personalized views.",
-        "Create reusable components and design-system patterns across a modular frontend architecture using Webpack, Module Federation, and single-spa.",
-        "Deliver WCAG-aligned accessibility and automated quality coverage across semantics, keyboard and focus behavior, responsive and 200% text reflow, and interaction tests.",
-        "Work beyond the frontend across REST and WebSocket integrations, Node.js/Express APIs, and Java/Spring services, partnering with product, QA, analytics, and engineering to turn technical requirements into shipped solutions.",
+        "Use customer feedback to shape interaction design and ship React/TypeScript workflows for AXON's Operator-as-a-Service (OaaS) platform, from exploration through production.",
+        "Build frontend workflows for diagnostics, performance monitoring, and agentic AI features, including health checks, historical trends, and equipment snapshots.",
+        "Designed and implemented a configurable analytics workspace with personalized monitoring views users can arrange, save, search, restore, and manage.",
+        "Build reusable React components and design-system patterns across maintainable, modular frontends using Webpack, Module Federation, and single-spa.",
+        "Implement internationalization (i18n) across translated UI, text expansion, locale-aware dates/numbers, and right-to-left (RTL) layouts.",
+        "Address WCAG 2.1 AA/AAA criteria with semantic chart tables, screen-reader access, keyboard navigation, and focus preservation across topology updates; test responsive layouts and 200% text resizing.",
+        "Contribute to Node.js/Fastify and Go APIs for saved analytics views, including PostgreSQL persistence, ownership checks, and regression tests; collaborate with product, QA, and backend engineers.",
+        "Contributed to OaaS, winner of Most Innovative Cloud Product or Solution at the 2025 Leading Lights Awards.",
       ],
     },
     {
@@ -71,8 +71,7 @@ export const resume = {
       period: "Jan 2022 - Apr 2022",
       bullets: [
         "Conducted UX research and built interactive prototypes for the MapsIndoors CMS, translating findings into product improvements.",
-        "Contributed design-system patterns, responsive interface work, documentation, and developer handoff across desktop and mobile experiences.",
-        "Delivered Jira-managed product tasks with engineers, balancing interaction detail, accessibility, and SaaS implementation constraints.",
+        "Contributed design-system patterns, responsive desktop/mobile interfaces, documentation, and developer handoff; delivered Jira-managed tasks with engineers, balancing interaction detail, accessibility, and SaaS constraints.",
       ],
     },
   ],

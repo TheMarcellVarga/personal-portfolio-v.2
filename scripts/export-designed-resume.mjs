@@ -3,7 +3,7 @@ import { copyFile, mkdir } from "node:fs/promises";
 
 // Run against the local development server: node scripts/export-designed-resume.mjs
 const baseUrl = process.env.RESUME_EXPORT_URL ?? "http://localhost:3100";
-const output = "output/pdf/Marcell-Varga-UX-Frontend-Engineer-Designed.pdf";
+const output = "output/pdf/Marcell_Varga_UX_Frontend_Engineer.pdf";
 const browser = await chromium.launch({ headless: true });
 
 try {
@@ -40,6 +40,12 @@ try {
     );
   });
   if (overflow) throw new Error("Resume sections would overflow the A4 page.");
+  const headlineFits = await page.locator(".resume-sheet header > p").evaluate((headline) => {
+    const range = document.createRange();
+    range.selectNodeContents(headline);
+    return range.getClientRects().length <= 2 && headline.scrollWidth <= headline.clientWidth;
+  });
+  if (!headlineFits) throw new Error("Resume description must fit within two lines without clipping.");
   await mkdir("output/pdf", { recursive: true });
   await page.pdf({
     path: output,
