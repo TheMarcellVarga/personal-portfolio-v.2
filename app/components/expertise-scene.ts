@@ -6,7 +6,7 @@ export interface ExpertiseScene {
   resize: (width: number, height: number) => void;
   setActive: (active: boolean) => void;
   setReducedMotion: (reduced: boolean) => void;
-  startAssembly: () => void;
+  setProgress: (progress: number) => void;
   dispose: () => void;
 }
 
@@ -147,17 +147,10 @@ export function createExpertiseScene(
   let lastPaint = 0;
   let lastTick: number | null = null;
   let ambientSeconds = 0;
-  let assemblyStartedAt: number | null = null;
-  const assemblyDuration = 650;
 
-  // Preload early, then assemble visibly when the scene enters the viewport.
+  // Scroll drives assembly; ambient drift keeps each finished sculpture alive.
   function render() {
     if (renderer.getContext().isContextLost()) return;
-    progress = reduceMotion
-      ? 1
-      : assemblyStartedAt === null
-        ? 0
-        : THREE.MathUtils.clamp((performance.now() - assemblyStartedAt) / assemblyDuration, 0, 1);
     const phase = reduceMotion ? 1 : THREE.MathUtils.smoothstep(progress, 0.05, 0.85);
     const time = ambientSeconds;
     const drift = reduceMotion ? 0 : 1;
@@ -276,10 +269,9 @@ export function createExpertiseScene(
       lastTick = null;
       invalidate();
     },
-    startAssembly() {
-      if (assemblyStartedAt !== null) return;
-      assemblyStartedAt = performance.now();
-      invalidate();
+    setProgress(value) {
+      progress = THREE.MathUtils.clamp(value, 0, 1);
+      if (!reduceMotion) invalidate();
     },
     dispose() {
       if (frame !== null) cancelAnimationFrame(frame);

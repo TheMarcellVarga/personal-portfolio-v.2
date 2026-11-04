@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useMotionValueEvent, type MotionValue } from "framer-motion";
 import type { ExpertiseScene, ExpertiseKind } from "./expertise-scene";
 
 function GraphicFallback({ kind }: { kind: ExpertiseKind }) {
@@ -36,12 +37,18 @@ function GraphicFallback({ kind }: { kind: ExpertiseKind }) {
   );
 }
 
-export function ExpertiseVisual({ kind }: { kind: ExpertiseKind }) {
+export function ExpertiseVisual({ kind, progress }: { kind: ExpertiseKind; progress: MotionValue<number> }) {
   const hostRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sceneRef = useRef<ExpertiseScene | null>(null);
+  const progressRef = useRef(progress.get());
   const reducedMotionRef = useRef(false);
   const [ready, setReady] = useState(false);
+
+  useMotionValueEvent(progress, "change", (value) => {
+    progressRef.current = value;
+    sceneRef.current?.setProgress(value);
+  });
 
   useEffect(() => {
     const host = hostRef.current;
@@ -61,7 +68,7 @@ export function ExpertiseVisual({ kind }: { kind: ExpertiseKind }) {
           sceneRef.current = createExpertiseScene(canvas, kind, reducedMotionRef.current, () => {
             if (!disposed) setReady(true);
           });
-          if (visible) sceneRef.current.startAssembly();
+          sceneRef.current.setProgress(progressRef.current);
           resize();
           syncVisibility();
         } catch {
@@ -71,7 +78,6 @@ export function ExpertiseVisual({ kind }: { kind: ExpertiseKind }) {
     };
     const visibilityObserver = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
-      if (visible) sceneRef.current?.startAssembly();
       syncVisibility();
     });
     visibilityObserver.observe(host);
