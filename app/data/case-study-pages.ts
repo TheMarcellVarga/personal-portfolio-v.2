@@ -238,19 +238,19 @@ export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
       },
       {
         title: "Prove the uncomfortable states",
-        body: "The release work concentrated on permission denial, quiet hours, invalid content, large text, contrast, reduced transparency, and service failures—not only the ideal timer path.",
+        body: "The November pass removed duplicate controls and beta-only UI, locked selectors during active breaks, and added Start Focus recovery when no activity is available. Native view smoke checks and 58 deterministic tests support the local build; signed integrations remain a release gate.",
       },
     ],
     gallery: [
       {
         src: "/images/focusin/break-sequence.webp",
         alt: "Focusin macOS micro-break recommendation",
-        caption: "The lifecycle changes clearly from break due to one active, time-bounded reset.",
+        caption: "Historical September UI showing the transition from break due to an active reset; the November app removes duplicate status and progress displays.",
       },
       {
         src: "/images/focusin/settings-and-resilience.webp",
         alt: "Focusin activity and system settings showing local preferences and recovery",
-        caption: "Preferences shape the recommendation while platform-service failure stays recoverable and non-blocking.",
+        caption: "Historical July Settings. The current app has three tabs, while launch at login is disabled in local builds.",
         wide: true,
       },
     ],
@@ -258,15 +258,15 @@ export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
   "endless-activity": {
     heroScreens: [
       {
-        src: "/images/endless-activity/detail.png",
+        src: "/images/endless-activity/detail-november-2026.png",
         alt: "Endless Activity activity detail sheet with steps and safety guidance",
       },
       {
-        src: "/images/endless-activity/discover.png",
+        src: "/images/endless-activity/discover-november-2026.png",
         alt: "Endless Activity Discover deck with a realistic activity and visible save and skip controls",
       },
       {
-        src: "/images/endless-activity/preferences.png",
+        src: "/images/endless-activity/preferences-november-2026.png",
         alt: "Endless Activity native preference controls for practical activity constraints",
       },
     ],

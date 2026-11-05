@@ -20,19 +20,21 @@ const stages = [
     label: "Break due", height: 932, title: "Make the next action obvious.",
     body: "When the interval ends, the status changes to break due. One recommendation is ready; the primary action starts it.",
     decision: "The state changes inside the app even when notifications are denied. Quiet hours silence reminders without stopping the loop.",
-    image: "/images/focusin/loop-due.webp", alt: "Focusin break-due popover with a clear Take Break action and a recommended activity",
+    image: "/images/focusin/loop-due.webp", alt: "Historical Focusin break-due interface before the November simplification",
   },
   {
-    label: "Reset", height: 1018, title: "One small thing to do now.",
-    body: "A time-bounded activity replaces the reminder with an instruction. Done and Skip keep the user in control.",
-    decision: "State and available time narrow a reviewed, bundled catalog. Office-safe and mindfulness preferences remain hard constraints.",
-    image: "/images/focusin/loop-reset.webp", alt: "Focusin active break in dark appearance with activity instructions, progress, Done and Skip actions",
+    label: "Break", height: 1018, title: "One small thing to do now.",
+    body: "A time-bounded activity replaces the reminder with an instruction. Finish Break and Skip both return to focus.",
+    decision: "The active activity stays fixed until the break ends. State and duration selectors disable with an explanation, so a preference change cannot silently replace the instructions.",
+    image: "/images/focusin/loop-reset.webp", alt: "Historical dark Focusin break interface with the former progress display and Done action",
   },
 ] as const;
 
 const scenarios = [
   { label: "After sleep", title: "Time catches up when the Mac wakes.", trigger: "The focus deadline passes while the Mac is asleep.", result: "On wake, Focusin reconciles elapsed time and enters break due.", reason: "Dates are persisted; a missed countdown tick cannot extend the interval." },
   { label: "Notifications denied", title: "The break is still there.", trigger: "The user declines notification permission.", result: "The menu bar and popover still show break due. Settings offers a permission recovery action.", reason: "Reminders are an optional delivery channel around a working local loop." },
+  { label: "Preferences changed", title: "The active break keeps its identity.", trigger: "A recommendation preference changes during a break.", result: "The current activity and deadline stay fixed. The new filter applies to the next suggestion.", reason: "State and duration selectors are disabled until Finish Break or Skip returns the user to focus." },
+  { label: "No activity", title: "Focus still has a way forward.", trigger: "A break is due, but the catalog is unavailable or no activity matches the hard filters.", result: "Start Break is disabled. Start Focus replaces shuffle so the user can resume work.", reason: "Library retry and preference recovery remain available without inventing a recommendation." },
   { label: "Activity removed", title: "Recover without swapping the activity.", trigger: "An active break’s activity is missing from the restored catalog.", result: "Focusin returns to break due instead of substituting a different activity mid-break.", reason: "A persisted activity ID protects the identity of the user’s chosen reset." },
 ] as const;
 
@@ -61,7 +63,7 @@ export default function FocusinCaseStudy() {
             </dl>
             <figure className="aperture-hero">
               <Image src="/images/focusin/focusin-loop-hero.webp" alt="Focusin’s native popover moving from a focus interval to an active micro-break, in light and dark appearance" width={2400} height={1350} sizes="(max-width: 1280px) 100vw, 1280px" preload />
-              <figcaption>Local engineering captures arranged to show the loop. Debug fixtures; unsigned build, not release media.</figcaption>
+              <figcaption>Earlier interface · September 2026 engineering fixtures. These captures predate the November simplification and are not release media.</figcaption>
             </figure>
           </section>
 
@@ -79,7 +81,7 @@ export default function FocusinCaseStudy() {
 
           <section id="focusin-product" className="pb-[var(--section-space)]">
             <h2 className="section-heading">Focus. Reset.<br /><span className="title-accent">Get back to it.</span></h2>
-            <p className="aperture-section-lead">Choose a moment to inspect the actual interface. Completing, skipping, or finishing a timed break starts the next focus interval.</p>
+            <p className="aperture-section-lead">Choose a moment in the loop. The earlier screenshots show its structure; the notes describe the current, simplified behavior. Completing, skipping, or finishing a timed break starts the next focus interval.</p>
             <div role="group" aria-label="Focusin walkthrough stages" className="aperture-selector">
               {stages.map((item, index) => <button key={item.label} type="button" aria-pressed={activeStage === index} aria-controls="focusin-screen" onClick={() => setActiveStage(index)}>{item.label}</button>)}
             </div>
@@ -88,7 +90,7 @@ export default function FocusinCaseStudy() {
                 <div className="focusin-capture-stage">
                   <Image src={stage.image} alt={stage.alt} width={768} height={stage.height} sizes="(max-width: 767px) 90vw, 420px" className="focusin-capture" />
                 </div>
-                <figcaption>September opaque-panel refinement · deterministic engineering fixture. Screen selection illustrates the app; it does not run a timer.</figcaption>
+                <figcaption>Historical September interface · before duplicate controls and progress displays were removed. This walkthrough selects screenshots; it does not run a timer.</figcaption>
               </figure>
               <div className="aperture-screen-copy" aria-live="polite" aria-atomic="true">
                 <h3>{stage.title}</h3><p>{stage.body}</p>
@@ -99,17 +101,12 @@ export default function FocusinCaseStudy() {
 
           <section id="focusin-updates" className="pb-[var(--section-space)]">
             <h2 className="section-heading">Small on screen.<br /><span className="title-accent">Considered in use.</span></h2>
-            <p className="aperture-section-lead">Recent work made the surfaces quieter, the controls easier to access, and recovery more explicit.</p>
+            <p className="aperture-section-lead">The November pass narrowed the interface to one status, one suggestion, and the next action. The goal was a smaller, dependable local product.</p>
             <div className="focusin-refinements">
-              <article><h3>A surface that holds its own.</h3><p>Opaque semantic panels keep desktop colors from bleeding through the popover. Light and dark appearances retain clear status, instructions, and actions.</p></article>
-              <article><h3>A timer that doesn’t talk every second.</h3><p>Stable VoiceOver progress semantics avoid countdown chatter. Settings actions expose named buttons, and larger text expands the layout.</p></article>
+              <article><h3>Less to scan. One clear next step.</h3><p>I removed repeated status copy, duplicate Settings and restart controls, the extra progress display, and the beta-feedback tab. Notification setup stays in Settings; the popover stays focused on the break.</p></article>
+              <article><h3>Make the boundaries visible.</h3><p>State and duration lock during a break. Launch at login is disabled in local builds with an explanation. When no activity is available, Start Focus keeps the user moving instead of leaving a dead end.</p></article>
             </div>
-            <figure className="focusin-settings">
-              <a href="/images/focusin/settings-and-resilience.webp" target="_blank" rel="noreferrer" aria-label="Inspect the full-size Focusin Settings capture (opens in a new tab)">
-                <Image src="/images/focusin/settings-and-resilience.webp" alt="Focusin native Activities and System settings with recommendation preferences and platform recovery controls" width={2000} height={1300} sizes="(max-width: 1280px) 100vw, 1280px" />
-              </a>
-              <figcaption>July Settings engineering fixtures. Historical supporting evidence; these captures predate the September popover refinement. <a href="/images/focusin/settings-and-resilience.webp" target="_blank" rel="noreferrer">Inspect full-size capture (new tab)</a>.</figcaption>
-            </figure>
+
           </section>
 
           <section id="focusin-engineering" className="pb-[var(--section-space)]">
@@ -133,8 +130,8 @@ export default function FocusinCaseStudy() {
                 <li><h4>Local persistence</h4><p>Codable settings and daily history; 21 bundled, reviewed activities.</p></li>
               </ol>
               <div className="aperture-release">
-                <div><h4>What is verified</h4><p>The recorded baseline covers 54 deterministic tests. Recorded native appearance and accessibility checks support the design.</p><p className="aperture-dark-note">Source-repository evidence, not usability or adoption metrics.</p></div>
-                <div><h4>What comes next</h4><p>Signing, exact-candidate platform checks, and the planned 5–8 person beta. No App Store release or user outcomes yet.</p></div>
+                <div><h4>What is verified</h4><p>The current baseline passes 58 deterministic tests, local validation, and the app build. Native view checks covered start, finish, skip, Return-key activation, Settings, disabled controls, and light/dark layouts.</p><p className="aperture-dark-note">Native checks used a temporary window host; larger-text layout was checked in dark appearance. This is engineering evidence, not usability or adoption data.</p></div>
+                <div><h4>What comes next</h4><p>Exact menu-bar opening, full keyboard traversal, VoiceOver speech, and signed platform checks remain open, along with the planned 5–8 person beta. No App Store release or user outcomes yet.</p></div>
               </div>
               <details className="aperture-evidence-details">
                 <summary>Verification evidence and release boundaries<ChevronDown size={18} aria-hidden="true" /></summary>

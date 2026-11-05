@@ -125,7 +125,7 @@ export const projects: Project[] = [
     description:
       "A local-first SwiftUI menu bar app that turns a focus deadline into one state-aware micro-break, then gets out of the way.",
     highlight:
-      "The verified product work spans a date-derived state machine, curated recommendation policy, resilient platform integrations, accessibility behavior, and local persistence.",
+      "A deliberately small focus-and-break loop with persisted deadlines, curated local recommendations, explicit disabled states, and 58 passing deterministic tests.",
     skills: ["SwiftUI", "Swift", "macOS", "Accessibility"],
     link: "/focusin",
     image: "/images/focusin/focusin-loop-hero.webp",
