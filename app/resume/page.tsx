@@ -175,6 +175,8 @@ export default function ResumePage() {
                                     {index > 0 && " · "}
                                     {item.startsWith("AI-Assisted") ? (
                                       <><span className="whitespace-nowrap">AI-Assisted</span>{item.slice("AI-Assisted".length)}</>
+                                    ) : item === "Java / Spring" ? (
+                                      <span className="whitespace-nowrap">{item}</span>
                                     ) : item}
                                   </span>
                                 ))}
