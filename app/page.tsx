@@ -1376,7 +1376,7 @@ export default function Page() {
                     In progress
                   </h3>
                   <p className="mt-2 max-w-2xl text-sm leading-6 text-custom-blue/70">
-                    Projects under active development or maintenance.
+                    Projects in progress / maintenance
                   </p>
                 </div>
 
