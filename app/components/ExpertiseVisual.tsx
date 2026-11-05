@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useMotionValueEvent, useScroll } from "framer-motion";
+import { useMotionValueEvent, type MotionValue } from "framer-motion";
 import type { ExpertiseScene, ExpertiseKind } from "./expertise-scene";
 
 function GraphicFallback({ kind }: { kind: ExpertiseKind }) {
@@ -37,12 +37,8 @@ function GraphicFallback({ kind }: { kind: ExpertiseKind }) {
   );
 }
 
-export function ExpertiseVisual({ kind }: { kind: ExpertiseKind }) {
+export function ExpertiseVisual({ kind, progress }: { kind: ExpertiseKind; progress: MotionValue<number> }) {
   const hostRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: progress } = useScroll({
-    target: hostRef,
-    offset: ["start end", "center 65%"],
-  });
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sceneRef = useRef<ExpertiseScene | null>(null);
   const progressRef = useRef(progress.get());

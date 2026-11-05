@@ -19,6 +19,7 @@ import {
   useTransform,
   useMotionValue,
   useSpring,
+  type MotionValue,
 } from "framer-motion";
 import { useClientReducedMotion } from "./hooks/useClientReducedMotion";
 import { gsap } from "gsap";
@@ -49,6 +50,7 @@ import { HomeIntro } from "./components/HomeIntro";
 import { PageBackground } from "./components/PageBackground";
 import { HeroCanvasBackdrop } from "./components/HeroCanvasBackdrop";
 import { ExpertiseJourney } from "./components/ExpertiseJourney";
+import { ExpertiseVisual } from "./components/ExpertiseVisual";
 import { SplitTextReveal } from "./components/SplitTextReveal";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -121,13 +123,19 @@ const expertiseAreas = [
   },
 ] as const;
 
-function ExpertiseArea({ area }: { area: (typeof expertiseAreas)[number] }) {
+function ExpertiseArea({ area, progress }: { area: (typeof expertiseAreas)[number]; progress: MotionValue<number> }) {
+  const frontend = area.kind === "frontend";
   const supporting = area.kind === "ai";
+  const layout = frontend
+    ? "border-custom-blue/14 py-8 lg:grid-cols-[1.15fr_0.85fr] lg:py-12"
+    : supporting
+      ? "border-custom-blue/20 py-8 lg:grid-cols-2"
+      : "border-[var(--title-accent)] py-8 lg:grid-cols-[0.85fr_1.15fr] lg:py-10";
 
   return (
     <li id={`capability-${area.kind}`} data-expertise-area={area.kind} className="relative min-w-0 scroll-mt-32">
-      <div className="expertise-row relative flex min-h-[19rem] items-center border-t border-custom-blue/15 py-10 pr-[30%] sm:min-h-[22rem] lg:min-h-[25rem] lg:pr-[55%]">
-        <div data-expertise-copy className="min-w-0">
+      <div className={`expertise-row relative flex flex-col gap-6 border-t lg:grid lg:items-center lg:gap-20 ${layout}`}>
+        <div data-expertise-copy className={`order-1 min-w-0 ${frontend ? "lg:order-2" : ""}`}>
           <h3 className={`max-w-[19ch] font-display font-medium leading-[1.04] tracking-[-0.025em] text-custom-blue ${supporting ? "text-[1.75rem] sm:text-[2rem] lg:text-[2.25rem]" : "text-[clamp(2.25rem,3.5vw,3rem)]"}`}>
             {area.title}
           </h3>
@@ -144,6 +152,9 @@ function ExpertiseArea({ area }: { area: (typeof expertiseAreas)[number] }) {
             ))}
           </ul>
         </div>
+        <div className={`order-2 min-w-0 ${frontend ? "lg:order-1" : ""}`}>
+          <ExpertiseVisual kind={area.kind} progress={progress} />
+        </div>
       </div>
     </li>
   );
@@ -151,6 +162,10 @@ function ExpertiseArea({ area }: { area: (typeof expertiseAreas)[number] }) {
 
 function CapabilitiesSection() {
   const shouldReduceMotion = useClientReducedMotion();
+  const uxProgress = useMotionValue(0);
+  const frontendProgress = useMotionValue(0);
+  const aiProgress = useMotionValue(0);
+  const sceneProgress = { ux: uxProgress, frontend: frontendProgress, ai: aiProgress };
 
   return (
     <section
@@ -169,8 +184,8 @@ function CapabilitiesSection() {
         />
       </div>
       <ul aria-label="Specialties and technologies" className="relative min-w-0">
-        <ExpertiseJourney />
-        {expertiseAreas.map(area => <ExpertiseArea key={area.title} area={area} />)}
+        <ExpertiseJourney uxProgress={uxProgress} frontendProgress={frontendProgress} aiProgress={aiProgress} />
+        {expertiseAreas.map(area => <ExpertiseArea key={area.title} area={area} progress={sceneProgress[area.kind]} />)}
       </ul>
     </section>
   );

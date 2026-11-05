@@ -151,7 +151,7 @@ export function createExpertiseScene(
   // Scroll drives assembly; ambient drift keeps each finished sculpture alive.
   function render() {
     if (renderer.getContext().isContextLost()) return;
-    const phase = reduceMotion ? 1 : THREE.MathUtils.smoothstep(progress, 0.05, 0.85);
+    const phase = reduceMotion ? 1 : THREE.MathUtils.smoothstep(progress, 0, 1);
     const time = ambientSeconds;
     const drift = reduceMotion ? 0 : 1;
     const offset = kind === "ux" ? 0 : kind === "frontend" ? 1.7 : 3.2;
