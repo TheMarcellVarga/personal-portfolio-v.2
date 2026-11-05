@@ -17,9 +17,9 @@ const walkthrough = [
     title: "Find what deserves a closer look.",
     body: "Filter across asset classes, inspect the confirmed trend, then open a study with the market context still attached.",
     decision: "When I revisit a number, I want to know where it came from and how current it is. Freshness, coverage, and confirmation stay beside the data.",
-    image: "/images/ai-finance/aperture-markets.jpg",
+    image: "/images/ai-finance/aperture-markets-current.jpg",
     alt: "Aperture cross-market monitor showing provider-backed market states, freshness, filters, and research controls",
-    caption: "Web workspace capture · market values are a historical snapshot.",
+    caption: "Markets capture from 6 November 2026 · market values are historical.",
   },
   {
     label: "Portfolio",
@@ -35,9 +35,9 @@ const walkthrough = [
     title: "Reward the research habit.",
     body: "Move from a market question into an evidence-led curriculum and a personal study record.",
     decision: "Progress recognizes learning and review discipline. It does not reward profit streaks, predictions, or risk-taking.",
-    image: "/images/ai-finance/aperture-learn.jpg",
+    image: "/images/ai-finance/aperture-learn-current.jpg",
     alt: "Aperture education workspace showing an evidence-led curriculum and account-scoped study record",
-    caption: "Web workspace capture · learning is part of the same five-destination shell.",
+    caption: "Learn capture from 6 November 2026 · learning is part of the same five-destination shell.",
   },
 ] as const;
 
@@ -69,8 +69,8 @@ export default function ApertureCaseStudy() {
               <div><dt>Experience</dt><dd data-case-study-status="aperture">{project.status}</dd></div>
             </dl>
             <figure className="aperture-hero">
-              <Image src="/images/ai-finance/aperture-markets.jpg" alt="Aperture Markets workspace with cross-asset research context and five primary destinations" width={1490} height={715} sizes="(max-width: 1280px) 100vw, 1280px" preload />
-              <figcaption>Earlier Markets capture · figures are historical. The latest local version makes geography optional and puts the table first.</figcaption>
+              <Image src="/images/ai-finance/aperture-markets-current.jpg" alt="Aperture Markets workspace with cross-asset research context and five primary destinations" width={1512} height={741} sizes="(max-width: 1280px) 100vw, 1280px" preload />
+              <figcaption>Markets capture from 6 November 2026 · figures are historical.</figcaption>
             </figure>
           </section>
 
@@ -152,7 +152,7 @@ export default function ApertureCaseStudy() {
               </ol>
               <div className="aperture-release">
                 <div><h3>Verification</h3><p>The latest local pass: <strong>20 focused checks passed</strong>, plus a production build, lint, and TypeScript checks.</p><p className="aperture-dark-note">Live integration checks also covered portfolio creation, goal calculations, document processing, and cross-owner access denial. Temporary portfolio data was removed.</p></div>
-                <div><h3>What you can try</h3><p>The public URL is a web preview. The latest simplified workflows were verified locally with Clerk sign-in, the Go API, Postgres, and a persistent document worker.</p><p className="aperture-dark-note">The public deployment has not been reverified for these changes. Paid model calls remain disabled; planning and research checks use deterministic paths.</p></div>
+                <div><h3>What you can try</h3><p>The public preview connects its Vercel frontend to a Go API on Railway and Supabase Postgres. The signed-in overview now reaches the portfolio service.</p><p className="aperture-dark-note">The deployed API uses Clerk authentication. Document research is disabled in this deployment; its persistent worker was verified locally. Live AI generation was not verified in the public preview.</p></div>
               </div>
               <details className="aperture-evidence-details">
                 <summary>Implementation evidence and release boundaries<ChevronDown size={18} aria-hidden="true" /></summary>

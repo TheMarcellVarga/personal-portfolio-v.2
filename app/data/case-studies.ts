@@ -56,6 +56,7 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
       "Preserve owner-scoped document retrieval and a human review record separate from generated output.",
     ],
     verification: [
+      "On 6 November 2026, the deployed Go API passed its health check and rejected an unauthenticated portfolio request. The signed-in public overview showed the portfolio service connected.",
       "On 5 November 2026, the local presentation pass passed lint, TypeScript, the production build, and 20 focused tests covering goals, structured research, review, Markdown export, and overview charts.",
       "The existing Google/Clerk sign-in flow, connected overview, portfolio entry, planner empty state, and a Markets view with 98 provider-backed instruments were checked locally in Chrome.",
       "Live checks used a separate development identity to create and read a provider-backed portfolio through Next.js and Go, calculate a goal scenario, and deny access from another identity. The temporary portfolio was deleted.",
@@ -64,7 +65,7 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
       "The earlier research baseline records 40 of 40 regression cases across five source documents. That historical suite and its disposable-database review/export check were not rerun during the latest presentation pass.",
     ],
     limitations: [
-      "The latest simplification and runtime checks are local. The existing public web preview has not been reverified or redeployed for this update.",
+      "The public deployment uses a Railway trial and Clerk development authentication. Document research is disabled there; the worker and private-document workflow were verified locally only.",
       "External model calls remain disabled by default; verified planning and research paths use deterministic calculations or generation, not a live paid model.",
       "Paid subscriptions, account-wide export, email alerts, and the older risk-report generation/save action are disabled in the current preview.",
       "Private workflows require sign-in, configured services, and user-supplied holdings or source material. Browser and live integration checks do not constitute a complete production-readiness audit.",
