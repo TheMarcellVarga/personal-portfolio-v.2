@@ -97,7 +97,7 @@ function ContactItem({
 
 function BulletList({ items }: { items: readonly string[] }) {
   return (
-    <ul className="space-y-2">
+    <ul className="space-y-[9px]">
       {items.map((item) => (
         <li key={item} className="flex gap-2.5 text-sm sheet:text-[11px] leading-[1.5] text-white/70">
           <span className="mt-[0.4rem] h-1 w-1 shrink-0 rounded-full bg-[#67d9ff]" />

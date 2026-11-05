@@ -1,9 +1,9 @@
 import { chromium } from "@playwright/test";
-import { copyFile, mkdir } from "node:fs/promises";
+import { mkdir } from "node:fs/promises";
 
 // Run against the local development server: node scripts/export-designed-resume.mjs
 const baseUrl = process.env.RESUME_EXPORT_URL ?? "http://localhost:3100";
-const output = "output/pdf/Marcell_Varga_UX_Frontend_Engineer.pdf";
+const output = "output/pdf/Marcell_Varga_CV_Designed_2026.pdf";
 const browser = await chromium.launch({ headless: true });
 
 try {
@@ -55,8 +55,7 @@ try {
     tagged: true,
     outline: true,
   });
-  await copyFile(output, "public/MarcellVargaResume2026.pdf");
-  console.log(`Exported ${output} and updated the website download.`);
+  console.log(`Exported ${output}.`);
 } finally {
   await browser.close();
 }
