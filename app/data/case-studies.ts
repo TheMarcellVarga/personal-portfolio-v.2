@@ -111,13 +111,13 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
       "Reworked save and preview flows for stateless serverless hosting after the first deployed implementation exposed a process-memory assumption.",
     ],
     verification: [
-      "109 deterministic Vitest cases pass locally (November 2026) across route generation, entitlements, validation, security, share, and handoff behavior.",
-      "24 Chromium checks pass locally across the demo golden path, responsive collision guards, keyboard flow, axe accessibility, reduced motion, and media fallbacks.",
-      "The November production build, TypeScript checks, and ESLint pass. Demo-session isolation and missing share/provider links have dedicated regression tests.",
+      "121 Vitest cases passed locally on November 6 across route generation, validation, security, share, handoff, and fallback behavior.",
+      "The earlier November pass covered 24 Chromium checks across the demo journey, responsive layout, keyboard flow, accessibility, reduced motion, and media fallbacks.",
+      "A local browser check verified the restored globe and selected-route Google Flights handoff; Google suggested dates that still need confirmation.",
     ],
     limitations: [
       "The public URL is an earlier release. November screenshots and verification describe the local simplification, which has not been deployed.",
-      "The public demo uses a deterministic planning dataset, planning estimates, and inspectable route generation rather than live inventory or an LLM.",
+      "The local demo uses deterministic route generation and sample planning data rather than live inventory or an LLM; the route label identifies this boundary.",
       "Managed authentication, cloud persistence, billing, email, and live travel integrations are outside the verified demo path. Demo account features stay disabled; external providers own bookings and final prices.",
       "Demo saves use browser-local storage and previews use schema-validated stateless recipes, not cross-device account persistence.",
     ],

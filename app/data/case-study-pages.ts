@@ -153,7 +153,7 @@ export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
     heroAspect: "16/10",
     contextTitle: "A calm interface for a dense decision.",
     contextBody:
-      "Wild Route starts with the traveler's intent, then exposes route reasoning, confidence, estimate boundaries, and provider handoffs at the point of choice. The November local demo removes secondary UI, restores the interactive globe with an ordered journey fallback, and disables unavailable account features.",
+      "Wild Route starts with the traveler's intent, then shows ranked routes on an interactive globe, app confidence, a demo-data label, and a route-specific Google Flights handoff. An ordered journey fallback keeps the local demo usable without WebGL.",
     processTitle: "How intent becomes a route.",
     processBody:
       "I treated route generation as a product pipeline rather than a chat response. Each stage narrows uncertainty, preserves the planning boundary, and leaves the traveler with something they can inspect before continuing elsewhere.",
@@ -182,9 +182,9 @@ export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
         caption: "A plain-language brief becomes explicit origin, duration, route-shape, stop, budget, and wish constraints before composition.",
       },
       {
-        src: "/images/wild-route/planner-november-2026.jpg",
-        alt: "Wild Route ranked planner showing an ordered journey, route alternatives, app confidence, and price status",
-        caption: "The November 5 screenshot shows the fallback journey view; the interactive globe has since been restored locally.",
+        src: "/images/wild-route/planner-globe-november-2026.jpg",
+        alt: "Wild Route ranked planner showing the globe, route alternatives, demo data label, and Google Flights link",
+        caption: "The November 6 local planner brings the globe, ranked routes, and external search together; the public deployment remains an earlier release.",
         wide: true,
       },
       {

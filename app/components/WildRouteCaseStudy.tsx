@@ -29,7 +29,7 @@ export default function WildRouteCaseStudy() {
                   <div className="col-span-2"><dt className="text-custom-blue/65">Experience</dt><dd data-case-study-status="wild-route">Live public demo</dd></div>
                 </dl>
                 <Link href={demo} target="_blank" rel="noreferrer" className="portfolio-button mt-6">Open public demo <ArrowUpRight aria-hidden="true" className="h-4 w-4" /></Link>
-                <p className="mt-3 text-sm leading-6 text-custom-blue/70">The public URL is the earlier release. These screens show the November 5 local refresh; the globe was restored locally on November 6.</p>
+                <p className="mt-3 text-sm leading-6 text-custom-blue/70">The public URL is an earlier release. The screens show the local November refresh; the globe and route-based Google Flights link are newer local changes.</p>
               </div>
             </div>
             <div className="mt-10 sm:mt-14">
@@ -53,9 +53,9 @@ export default function WildRouteCaseStudy() {
               <div>
                 <SectionLabel index="01" label="Describe the trip" />
                 <h2 className="section-heading">Start with a wish.</h2>
-                <p className="mt-5 text-base leading-7 text-custom-blue/75">The planner opens directly to the trip brief. Optional origin, duration, stop count, and route shape sit behind Trip preferences, keeping the first step simple.</p>
+                <p className="mt-5 text-base leading-7 text-custom-blue/75">The planner opens directly to the trip brief, with Enter submitting the request. Optional origin, duration, stop count, and route shape sit behind Trip preferences.</p>
                 <blockquote className="my-7 border-y border-custom-blue/15 py-6 font-display text-2xl font-medium leading-snug tracking-[-0.02em]">“A 12-day round trip from Singapore with hiking, surf, and one meaningful stop.”</blockquote>
-                <p className="text-sm leading-6 text-custom-blue/70">The example used in these captures. Deterministic interpretation and route data; no live model call.</p>
+                <p className="text-sm leading-6 text-custom-blue/70">The example shown in the brief screenshot. Deterministic interpretation and route data; no live model call.</p>
               </div>
               <Screen src="/images/wild-route/compose-november-2026.jpg" alt="Wild Route composer with the Singapore travel brief and editable journey constraints" />
             </div>
@@ -64,12 +64,13 @@ export default function WildRouteCaseStudy() {
           <section className="pb-[var(--section-space)]">
             <div className="mb-8 grid items-end gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
               <div><SectionLabel index="02" label="Compare the journeys" /><h2 className="section-heading">A whole route.<br />A reason for each stop.</h2></div>
-              <p className="max-w-[52ch] text-base leading-7 text-custom-blue/75">Compare complete journeys on the interactive globe. If WebGL is unavailable, an ordered journey view keeps the route usable. The screenshot shows the earlier fallback-only version.</p>
+              <p className="max-w-[52ch] text-base leading-7 text-custom-blue/75">Compare ranked journeys on the interactive globe, then select a route to inspect its stops and reasoning. If WebGL is unavailable, an ordered journey view keeps the route usable.</p>
             </div>
-            <Screen src="/images/wild-route/planner-november-2026.jpg" alt="Wild Route ranked planner showing a round-trip route with destination imagery, route legs, and planning status" />
+            <Screen src="/images/wild-route/planner-globe-november-2026.jpg" alt="Wild Route ranked planner showing a round-trip route on the interactive globe, demo data label, and Google Flights link" width={1447} height={741} />
+            <p className="mt-3 text-sm leading-6 text-custom-blue/70">Local planner, November 6: the globe, route comparison, and flight-search handoff in one view.</p>
             <div className="mt-7 grid gap-7 border-t border-custom-blue/15 pt-6 md:grid-cols-3">
               <Decision title="Why this route?" body="Ranking, wishes, and confidence explain the suggestion. Confidence belongs to the app’s scoring, not a provider guarantee." />
-              <Decision title="What do we know?" body="Source freshness and assumptions remain inspectable. Missing live fares stay unpriced, with confirmation left to external providers." />
+              <Decision title="What do we know?" body="A demo-data label makes the rules-based planner explicit. Source freshness and assumptions remain inspectable; live fares are not part of the route score." />
               <Decision title="What if it fails?" body="The journey view provides a fallback when the globe cannot load. Bundled artwork, a retryable brief, and clear action errors keep failures recoverable." />
             </div>
           </section>
@@ -79,7 +80,7 @@ export default function WildRouteCaseStudy() {
               <Screen src="/images/wild-route/share-november-2026.jpg" alt="Wild Route public route preview showing the journey breakdown and external booking boundary" />
               <div><SectionLabel index="03" label="Keep the decision" /><h2 className="section-heading">Take the route<br />with you.</h2>
                 <p className="mt-5 text-base leading-7 text-custom-blue/75">Save a route for later or share a public preview. The original prompt stays private; the shared view carries the journey and its planning caveats.</p>
-                <p className="mt-5 text-base leading-7 text-custom-blue/75">Booking links continue on external provider sites. Wild Route helps choose the journey; providers confirm availability and final prices.</p>
+                <p className="mt-5 text-base leading-7 text-custom-blue/75">The selected route opens in Google Flights with its stops filled in. Travelers check the suggested dates, availability, and prices there; Wild Route does not complete the booking.</p>
                 <p className="mt-6 border-t border-custom-blue/15 pt-5 text-sm leading-6 text-custom-blue/70">Enter Demo Mode before planning to save and share. Saves stay in this browser; preview links reconstruct a validated public route. Profiles, cloud sync, and billing are unavailable in demo mode.</p>
               </div>
             </div>
@@ -94,7 +95,7 @@ export default function WildRouteCaseStudy() {
               </ol>
               <div className="grid gap-8 sm:grid-cols-2">
                 <div><h3 className="font-display text-2xl font-medium text-white">A failure worth fixing.</h3><p className="mt-3 text-base leading-7 text-white/80">The first hosted save flow assumed the next request could read the same server’s memory. Serverless hosting broke that assumption. I rebuilt the demo around browser-local saves and validated stateless previews.</p></div>
-                <div><h3 className="font-display text-2xl font-medium text-white">Less interface. A stronger demo.</h3><p className="mt-3 text-base leading-7 text-white/80">I removed repeated explainers, newsletter signup, and secondary controls. Optional settings stay in disclosures, unavailable account features stay disabled, and every demo login gets its own server-generated identity.</p></div>
+                <div><h3 className="font-display text-2xl font-medium text-white">Less interface. A stronger demo.</h3><p className="mt-3 text-base leading-7 text-white/80">I removed repeated explainers, restored the globe, and replaced an unconnected flight-search panel with a direct route-based handoff. A demo-data label makes the current planning boundary visible.</p></div>
               </div>
               <details className="mt-9 border-t border-white/20 pt-5">
                 <summary className="cursor-pointer py-2 text-base font-medium text-white underline decoration-white/40 underline-offset-8 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Explore verification and current limits</summary>
@@ -112,8 +113,8 @@ export default function WildRouteCaseStudy() {
   );
 }
 
-function Screen({ src, alt, priority = false }: { src: string; alt: string; priority?: boolean }) {
-  return <figure className="overflow-hidden rounded-[var(--panel-radius)] bg-custom-blue p-2 sm:p-3"><a href={src} target="_blank" rel="noreferrer" aria-label={`View full-size: ${alt}`} className="block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--title-accent)]"><Image src={src} alt={alt} width={1440} height={900} preload={priority} sizes="(max-width: 1023px) 100vw, 1280px" className="h-auto w-full rounded-[calc(var(--panel-radius)-0.5rem)]" /></a></figure>;
+function Screen({ src, alt, priority = false, width = 1440, height = 900 }: { src: string; alt: string; priority?: boolean; width?: number; height?: number }) {
+  return <figure className="overflow-hidden rounded-[var(--panel-radius)] bg-custom-blue p-2 sm:p-3"><a href={src} target="_blank" rel="noreferrer" aria-label={`View full-size: ${alt}`} className="block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--title-accent)]"><Image src={src} alt={alt} width={width} height={height} preload={priority} sizes="(max-width: 1023px) 100vw, 1280px" className="h-auto w-full rounded-[calc(var(--panel-radius)-0.5rem)]" /></a></figure>;
 }
 
 function Decision({ title, body }: { title: string; body: string }) {

@@ -54,3 +54,15 @@ mechanical design detector reported no findings. Full production verification is
 not claimed: the first build encountered unrelated concurrent homepage props and
 project-status typing changes; a later attempt found another build already active.
 Those concurrent edits and processes were preserved.
+
+## November 6 follow-up
+
+The case now shows the restored interactive globe and its journey fallback, the
+demo-data disclosure, Enter-to-submit, and the selected-route Google Flights
+handoff. Google suggests dates, and its site owns prices, availability and
+booking. `planner-globe-november-2026.jpg` is a local browser capture from the
+current Wild Route planner (1447 × 741); earlier images remain November 5
+captures. The public demo remains an earlier deployment. On November 6, 121
+Wild Route Vitest tests passed locally, and a browser check confirmed the
+multi-city handoff. The earlier 24 Chromium checks are historical, not a fresh
+full-suite result for this follow-up.

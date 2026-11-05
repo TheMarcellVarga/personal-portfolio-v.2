@@ -483,17 +483,18 @@ test("Wild Route case study connects the journey to inspectable evidence", async
   await page.goto("/wild-route");
   await expect(page.getByRole("heading", { name: "Wild Route", exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Start with a wish." })).toBeVisible();
-  await expect(page.getByAltText(/Wild Route ranked planner showing a round-trip route/i)).toBeVisible();
+  await expect(page.getByAltText(/Wild Route ranked planner showing a round-trip route on the interactive globe/i)).toBeVisible();
   await expect(page.getByRole("link", { name: /open public demo/i })).toHaveAttribute("href", "https://ai-travel-planner-psi-five.vercel.app");
-  await expect(page.getByText(/screens show the November 5 local refresh/i)).toBeVisible();
+  await expect(page.getByText(/The screens show the local November refresh/i)).toBeVisible();
   await expect(page.locator('img[src*="home-november-2026"]')).toBeVisible();
   await expect(page.getByText(/If WebGL is unavailable, an ordered journey view/i)).toBeVisible();
+  await expect(page.getByText(/selected route opens in Google Flights with its stops filled in/i)).toBeVisible();
   const disclosure = page.locator("details").filter({ hasText: "Explore verification and current limits" });
   await expect(disclosure).not.toHaveAttribute("open");
   await disclosure.locator("summary").click();
-  await expect(page.getByText(/109 deterministic Vitest cases pass/i)).toBeVisible();
-  await expect(page.getByText(/24 Chromium checks pass locally/i)).toBeVisible();
-  await expect(page.getByText(/deterministic planning dataset, planning estimates/i)).toBeVisible();
+  await expect(page.getByText(/121 Vitest cases passed locally/i)).toBeVisible();
+  await expect(page.getByText(/earlier November pass covered 24 Chromium checks/i)).toBeVisible();
+  await expect(page.getByText(/deterministic route generation and sample planning data/i)).toBeVisible();
   await disclosure.locator("summary").click();
   await expect(disclosure).not.toHaveAttribute("open");
   for (const width of [390, 320]) {
