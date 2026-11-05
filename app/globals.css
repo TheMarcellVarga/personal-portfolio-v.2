@@ -914,11 +914,28 @@
 
 /* A quiet construction cue for the future-work entry. */
 .coming-soon-preview {
+  position: relative;
   background-color: #f3ede5;
+}
+.coming-soon-preview::before,
+.coming-soon-row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mask-image: linear-gradient(to right, transparent, black 22%, black 78%, transparent);
+}
+.coming-soon-preview::before {
   background-image: repeating-linear-gradient(135deg, transparent 0 18px, rgb(182 74 43 / .09) 18px 36px);
 }
+.coming-soon-preview > svg { position: relative; }
 @media (min-width: 768px) {
   .coming-soon-row {
+    position: relative;
+    isolation: isolate;
+  }
+  .coming-soon-row::before {
+    z-index: -1;
     background-image: repeating-linear-gradient(135deg, transparent 0 18px, rgb(182 74 43 / .035) 18px 36px);
   }
 }
