@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Mail } from "lucide-react";
 import { PortfolioShell } from "../components/PortfolioShell";
 import { PageIntro } from "../components/PageIntro";
 import { useClientReducedMotion } from "../hooks/useClientReducedMotion";
@@ -157,33 +157,54 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <motion.section {...reveal()} className="dark-panel portfolio-container my-12 p-7 sm:p-12 lg:p-16">
-          <p className="page-eyebrow text-white/80">That is probably enough about me</p>
-          <h2 className="section-heading max-w-[20ch] text-white">
-            Now tell me something about you.
-          </h2>
-          <p className="mt-6 max-w-[40rem] text-base leading-8 text-white/75">
-            A travel story, an odd observation, or simply a hello is more than enough.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-5">
-            <a
-              href="mailto:themarcellvarga@gmail.com"
-              data-cursor-label="Send email"
-              className="portfolio-button portfolio-button-light group"
-            >
-              <Mail className="h-4 w-4 text-custom-blue" />
-              Send a note
-            </a>
-            <Link
-              href="/#contact"
-              data-cursor-label="Open contact"
-              className="group inline-flex items-center gap-2 font-label text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-white/80 outline-none transition-colors duration-300 hover:text-white focus-visible:ring-2 focus-visible:ring-custom-teal focus-visible:ring-offset-3"
-            >
-              Contact
-              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-          </div>
-        </motion.section>
+        <section className="portfolio-container my-12">
+          <motion.div
+            {...reveal()}
+            className="dark-panel relative mx-auto flex w-full max-w-5xl items-start px-6 py-8 md:min-h-[28rem] md:items-center md:p-8"
+          >
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(72,205,255,0.26),_transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.06),transparent_55%)]" />
+            <div className="relative grid w-full min-w-0 grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-8">
+              <div>
+                <p className="page-eyebrow text-white/80">
+                  That is probably enough about me
+                </p>
+                <h2 className="font-display text-[clamp(3rem,14vw,5rem)] font-medium leading-[1.05] tracking-[-0.03em] text-white">
+                  Now tell me something about you.
+                </h2>
+                <p className="mt-5 max-w-2xl text-base leading-7 text-white/80 sm:text-[1.05rem] sm:leading-8">
+                  A travel story, an odd observation, or simply a hello is more than enough.
+                </p>
+              </div>
+              <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-3 self-end">
+                <a
+                  href="mailto:themarcellvarga@gmail.com"
+                  data-cursor-label="Send email"
+                  className="group flex min-h-12 w-full items-center justify-between gap-3 rounded-[1.35rem] bg-white/7 px-4 py-3 text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white md:gap-4 md:px-5 md:py-3.5"
+                >
+                  <span className="flex min-w-0 flex-1 items-center gap-3">
+                    <Mail aria-hidden="true" className="h-5 w-5 shrink-0 text-[#67d9ff]" />
+                    <span className="min-w-0 break-words font-label text-[0.72rem] font-medium uppercase leading-6 tracking-[0.08em] text-white/80 [overflow-wrap:anywhere] sm:tracking-[0.16em]">
+                      Send a note
+                    </span>
+                  </span>
+                  <ArrowUpRight aria-hidden="true" className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+                <Link
+                  href="/#contact"
+                  data-cursor-label="Open contact"
+                  className="group flex min-h-12 w-full items-center justify-between gap-3 rounded-[1.35rem] bg-white/7 px-4 py-3 text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] transition duration-300 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white md:gap-4 md:px-5 md:py-3.5"
+                >
+                  <span className="flex min-w-0 flex-1 items-center gap-3">
+                    <span className="min-w-0 break-words font-label text-[0.72rem] font-medium uppercase leading-6 tracking-[0.08em] text-white/80 [overflow-wrap:anywhere] sm:tracking-[0.16em]">
+                      Contact
+                    </span>
+                  </span>
+                  <ArrowUpRight aria-hidden="true" className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        </section>
       </main>
     </PortfolioShell>
   );
