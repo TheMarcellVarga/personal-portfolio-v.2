@@ -93,22 +93,22 @@ export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
         body: "The research path preserves page boundaries, retrieves owner-scoped passages, validates structured sections, and binds material claims to the active evidence run. Unsupported interpretation stays visible instead of receiving a decorative citation.",
       },
       {
-        title: "Test the uncomfortable states",
-        body: "I treated missing providers, empty portfolios, stale prices, unsafe prompts, cross-owner access, malformed output, rejected citations, and reduced-motion behavior as core product states, then captured release evidence around them.",
+        title: "Verify the real runtime",
+        body: "I checked connected and empty states, disabled actions, provider-backed portfolio creation, goal calculations, document processing, and ownership isolation. A cold start also verified the API, web app, and persistent document worker.",
       },
     ],
     gallery: [
       {
         src: "/images/ai-finance/aperture-markets.jpg",
         alt: "Aperture cross-market monitor showing provider-backed market states, freshness, filters, and research controls",
-        caption: "The market monitor keeps timeframe, provider freshness, confirmed state, flip distance, and study links together while labeling every indicator as research context—not a trade signal.",
+        caption: "Earlier Markets capture. The latest local version prioritizes this table and makes geography optional; displayed figures are historical.",
         fit: "contain",
         wide: true,
       },
       {
         src: "/images/ai-finance/aperture-research.jpg",
         alt: "Aperture private research room with a structured earnings-review prompt and source-first empty state",
-        caption: "The research room makes the sequence explicit: add authorized source material, preserve page boundaries, retrieve evidence, then allow structured interpretation.",
+        caption: "Earlier research-room capture. The current local runtime was checked with a synthetic document upload, persistent processing, and cross-owner access denial.",
         fit: "contain",
         wide: true,
       },

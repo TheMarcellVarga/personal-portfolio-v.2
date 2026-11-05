@@ -439,8 +439,7 @@ test("Aperture case study connects product screens to current implementation evi
   const stages = page.getByRole("group", { name: "Product walkthrough stages" });
   for (const [label, title, alt] of [
     ["Markets", "Find what deserves a closer look.", "Aperture cross-market monitor"],
-    ["Evidence", "Open the source behind the sentence.", "Aperture evidence preview"],
-    ["Human review", "The draft is not the final decision.", "Aperture human review preview"],
+    ["Portfolio", "Understand what you own.", "Aperture portfolio illustration"],
     ["Learn", "Reward the research habit.", "Aperture education workspace"],
   ]) {
     const button = stages.getByRole("button", { name: new RegExp(label) });
@@ -449,13 +448,10 @@ test("Aperture case study connects product screens to current implementation evi
     await expect(page.getByRole("heading", { name: title, exact: true })).toBeVisible();
     await expect(page.locator("#aperture-screen img")).toHaveAttribute("alt", new RegExp(alt));
   }
-  const geography = page.getByRole("group", { name: "Geography examples" });
-  await geography.getByRole("button", { name: "Cross-border asset" }).click();
-  await expect(page.getByRole("heading", { name: "Global", exact: true })).toBeVisible();
-  await geography.getByRole("button", { name: "Country missing" }).click();
-  await expect(page.getByRole("heading", { name: "Unattributed", exact: true })).toBeVisible();
-  await expect(page.getByText("Unknown geography stays visible. No invented map pin.")).toBeVisible();
-  await expect(page.getByText("40 of 40 regression cases", { exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "A smaller product. A stronger demo." })).toBeVisible();
+  await expect(page.getByText("20 focused checks passed", { exact: true })).toBeVisible();
+  await expect(page.getByText(/Upgrades, account-wide export, email alerts, and the older risk-report action are disabled/)).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Carry the context into mobile." })).toHaveCount(0);
   const disclosure = page.locator(".aperture-evidence-details");
   await disclosure.locator("summary").click();
   await expect(page.getByText(/without crossing into trade execution or personal advice/i)).toBeVisible();

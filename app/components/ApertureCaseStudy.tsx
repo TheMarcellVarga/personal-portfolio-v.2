@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowRight, ArrowUpRight, Check, ChevronDown } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronDown } from "lucide-react";
 import { caseStudies } from "../data/case-studies";
 import { caseStudyPages } from "../data/case-study-pages";
 import { projects } from "../data/projects";
@@ -22,22 +22,13 @@ const walkthrough = [
     caption: "Web workspace capture · market values are a historical snapshot.",
   },
   {
-    label: "Evidence",
-    title: "Open the source behind the sentence.",
-    body: "Private documents become page-aware passages. Structured analysis links material claims to evidence from that research run.",
-    decision: "I want to check the source, not just read a convincing answer. Direct support and interpretation stay distinct, and unsupported claims remain visible.",
-    image: "/images/ai-finance/aperture-evidence.jpg",
-    alt: "Aperture evidence preview linking research findings to source filing pages and support labels",
-    caption: "Public product illustration · demonstrates the citation interaction, not a live model result.",
-  },
-  {
-    label: "Human review",
-    title: "The draft is not the final decision.",
-    body: "Accept, edit, or reject a section. Inspect the review trail, then export the reviewed note with its sources and assumptions.",
-    decision: "Raw output stays immutable. Review events form a separate, append-only record, so the system preserves what the model wrote and what the person changed.",
-    image: "/images/ai-finance/aperture-review.jpg",
-    alt: "Aperture human review preview with approval history and a reviewed Markdown export",
-    caption: "Public product illustration · shows the review and export contract.",
+    label: "Portfolio",
+    title: "Understand what you own.",
+    body: "Enter your holdings, review their provider-backed value and allocation, then use that starting balance in a contribution-only goal scenario.",
+    decision: "A missing portfolio and an unavailable service need different states. Empty portfolios allow entry; service outages disable changes and offer a retry.",
+    image: "/images/ai-finance/aperture-portfolio.jpg",
+    alt: "Aperture portfolio illustration showing holdings and allocation",
+    caption: "Earlier public product illustration · historical ETF values, not a personal portfolio or a capture of the current authenticated interface.",
   },
   {
     label: "Learn",
@@ -50,19 +41,11 @@ const walkthrough = [
   },
 ] as const;
 
-const geographyExamples = [
-  { label: "Country supplied", place: "Country linked", body: "A provider country code can place an asset on the globe. The label preserves whether it describes an issuer or listing location.", result: "A location lens, not a claim about economic exposure." },
-  { label: "Cross-border asset", place: "Global", body: "An explicitly global instrument or crypto network belongs in the cross-border group, rather than being forced into one country.", result: "Global assets remain in the complete breakdown." },
-  { label: "Country missing", place: "Unattributed", body: "When the provider supplies no usable country, the asset stays in an unattributed group. Its value is still counted.", result: "Unknown geography stays visible. No invented map pin." },
-] as const;
-
 export default function ApertureCaseStudy() {
   const [activeScreen, setActiveScreen] = useState(0);
-  const [activeGeography, setActiveGeography] = useState(0);
   const project = projects.find(item => item.caseStudyId === "aperture")!;
   const record = caseStudies.aperture;
   const screen = walkthrough[activeScreen];
-  const geography = geographyExamples[activeGeography];
 
   return (
     <PortfolioShell className="case-study-page aperture-case" activeSection="Work" backLink={{ href: "/#work", label: "Back to work" }}>
@@ -72,12 +55,12 @@ export default function ApertureCaseStudy() {
             <PageIntro
               eyebrow="Project / Case study"
               title={<>Aperture Financial <span className="title-accent">Intelligence</span></>}
-              description="From market context to a research note you can inspect."
+              description="Markets, holdings, and goal scenarios in one focused workspace."
             />
             <div className="aperture-intro-row">
-              <p>A financial research workspace I designed, built, and use myself. It brings my interest in finance and my work as a product engineer into the same place.</p>
+              <p>A financial research workspace I designed and built around five everyday jobs: Overview, Markets, Portfolio, Plan, and Learn. The latest pass favors a smaller working product with clear limits.</p>
               <Link href={caseStudyPages.aperture.demoUrl!} target="_blank" rel="noreferrer" className="portfolio-button">
-                Visit Aperture <ArrowUpRight size={16} aria-hidden="true" />
+                Visit web preview <ArrowUpRight size={16} aria-hidden="true" />
               </Link>
             </div>
             <dl className="aperture-meta">
@@ -87,7 +70,7 @@ export default function ApertureCaseStudy() {
             </dl>
             <figure className="aperture-hero">
               <Image src="/images/ai-finance/aperture-markets.jpg" alt="Aperture Markets workspace with cross-asset research context and five primary destinations" width={1490} height={715} sizes="(max-width: 1280px) 100vw, 1280px" preload />
-              <figcaption>Markets, one of five connected workspaces. Historical product capture; figures are not current quotes.</figcaption>
+              <figcaption>Earlier Markets capture · figures are historical. The latest local version makes geography optional and puts the table first.</figcaption>
             </figure>
           </section>
 
@@ -132,43 +115,28 @@ export default function ApertureCaseStudy() {
           </section>
 
           <section id="aperture-updates" className="pb-[var(--section-space)]">
-            <h2 className="section-heading">The product <span className="title-accent">kept growing.</span></h2>
-            <p className="aperture-section-lead">Recent implementation adds geography, quieter monitoring, and a mobile companion.</p>
+            <h2 className="section-heading">A smaller product.<br /><span className="title-accent">A stronger demo.</span></h2>
+            <p className="aperture-section-lead">The latest pass prioritizes complete workflows over adding more features.</p>
             <article className="aperture-geography">
               <div>
-                <h3>Show where the data places an asset.</h3>
-                <p>The new investment globe connects portfolio holdings and market results to provider geography. A complete breakdown keeps global and unknown locations visible.</p>
-                <p className="aperture-example-note">Interactive explanation of the implemented grouping rules. These are illustrative cases, not portfolio data.</p>
+                <h3>Keep the main task in view.</h3>
+                <p>Five destinations connect market context, holdings, contribution-only planning, and learning. The overview summarizes the financial picture without repeating the navigation.</p>
               </div>
-              <div className="aperture-geography-example">
-                <div role="group" aria-label="Geography examples" className="aperture-geography-controls">
-                  {geographyExamples.map((item, index) => <button key={item.label} type="button" aria-pressed={activeGeography === index} onClick={() => setActiveGeography(index)}>{item.label}</button>)}
-                </div>
-                <div aria-live="polite" aria-atomic="true" className="aperture-geography-result">
-                  <h4>{geography.place}</h4><p>{geography.body}</p><p className="aperture-geography-outcome"><Check size={18} aria-hidden="true" />{geography.result}</p>
-                </div>
+              <div>
+                <h3>Reveal depth when it is useful.</h3>
+                <p>The market table comes first. Geography is optional, with country enrichment deferred until it is opened. Private document research remains a supporting workflow.</p>
               </div>
             </article>
             <div className="aperture-update-pair">
               <article>
-                <h3>A digest when something changes.</h3>
-                <p>Opt-in daily or weekly summaries select confirmed flips on closed daily candles. Users choose direction and delivery channel.</p>
-                <ol className="aperture-digest-flow" aria-label="Confirmed flip digest sequence">
-                  <li>Candle closes<ArrowRight size={16} aria-hidden="true" /></li>
-                  <li>Flip confirmed<ArrowRight size={16} aria-hidden="true" /></li>
-                  <li>Matching digest</li>
-                </ol>
-                <p className="aperture-detail-note">No matching flip means no message. Email delivery depends on server configuration; source freshness and coverage gaps travel with the digest.</p>
+                <h3>Remove what competes with the work.</h3>
+                <p>I removed duplicate destination cards, workspace particle effects, long settings explanations, notification shortcuts, and paid-plan promotion.</p>
+                <p className="aperture-detail-note">The goal was a calmer interface that makes the working product easier to explain and demonstrate.</p>
               </article>
               <article>
-                <h3>Carry the context into mobile.</h3>
-                <p>An Expo / React Native companion now shares the backend contracts and Clerk identity with the web workspace.</p>
-                <ul className="aperture-mobile-scope">
-                  <li><Check size={16} aria-hidden="true" />Overview and portfolio context</li>
-                  <li><Check size={16} aria-hidden="true" />Markets and asset detail</li>
-                  <li><Check size={16} aria-hidden="true" />Digest inbox and preferences</li>
-                </ul>
-                <p className="aperture-detail-note">Early implementation, not a store release. Push delivery, device verification, and full web parity remain ahead.</p>
+                <h3>Make unavailable actions explicit.</h3>
+                <p>Upgrades, account-wide export, email alerts, and the older risk-report action are disabled in the current preview. Research also disables itself when private storage is unavailable.</p>
+                <p className="aperture-detail-note">Portfolio outages show a retry action. Empty portfolios remain editable, and Refresh is disabled during a save to prevent overlapping requests.</p>
               </article>
             </div>
           </section>
@@ -180,11 +148,11 @@ export default function ApertureCaseStudy() {
               <ol className="aperture-architecture" aria-label="Application data flow">
                 <li><h3>Next.js</h3><p>Product UI, same-origin APIs, AI streaming, and review interactions.</p><ArrowRight aria-hidden="true" /></li>
                 <li><h3>Go</h3><p>Ownership checks, market normalization, portfolio calculations, and document APIs.</p><ArrowRight aria-hidden="true" /></li>
-                <li><h3>Postgres + private storage</h3><p>Source documents, retrieval, persisted runs, and the human review ledger.</p></li>
+                <li><h3>Postgres + private storage</h3><p>Portfolio records, page-aware sources, processing jobs, and the human review ledger.</p></li>
               </ol>
               <div className="aperture-release">
-                <div><h3>Verification</h3><p>The recorded evidence baseline: <strong>40 of 40 regression cases</strong> across five source documents.</p><p className="aperture-dark-note">Citation trust, injection, unsupported claims, schemas, and advice boundaries. Recorded source-repository evidence; these product checks were not rerun for this portfolio update.</p></div>
-                <div><h3>What you can try</h3><p>The public preview shows the product direction. Private workflows need configured services, sign-in, and your own source material.</p><p className="aperture-dark-note">External AI calls are disabled by default. The verified research path uses deterministic generation.</p></div>
+                <div><h3>Verification</h3><p>The latest local pass: <strong>20 focused checks passed</strong>, plus a production build, lint, and TypeScript checks.</p><p className="aperture-dark-note">Live integration checks also covered portfolio creation, goal calculations, document processing, and cross-owner access denial. Temporary portfolio data was removed.</p></div>
+                <div><h3>What you can try</h3><p>The public URL is a web preview. The latest simplified workflows were verified locally with Clerk sign-in, the Go API, Postgres, and a persistent document worker.</p><p className="aperture-dark-note">The public deployment has not been reverified for these changes. Paid model calls remain disabled; planning and research checks use deterministic paths.</p></div>
               </div>
               <details className="aperture-evidence-details">
                 <summary>Implementation evidence and release boundaries<ChevronDown size={18} aria-hidden="true" /></summary>
