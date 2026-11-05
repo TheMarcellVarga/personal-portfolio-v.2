@@ -30,6 +30,7 @@ export type Project = {
     | "Live public demo"
     | "Native macOS build"
     | "Native iOS build"
+    | "iOS prototype"
     | "Archived case study";
   portfolioPlacement: "featured" | "supporting" | "archive";
   isListed?: boolean;
@@ -160,15 +161,15 @@ export const projects: Project[] = [
     subTitle: "A native iOS port of a 2000s racing favorite",
     date: "2026",
     description:
-      "A native iOS experiment built on Takedawn and xboxrecomp, connecting the Xbox runtime and direct Metal rendering to hybrid touch controls, verified imports and a resumable launcher.",
+      "An iOS port experiment built on Takedawn and xboxrecomp, with recorded gameplay and a simplified native shell. Gameplay is disabled by default while known issues remain.",
     highlight:
-      "From a PS2 proof of concept to the main Xbox-based app: native settings, session ownership and measured pacing changes, with bounded device evidence and explicit limits.",
+      "ARM64 and Metal integration, touch input and verified imports, with historical device evidence kept separate from the locally checked presentation source.",
     skills: ["Native iOS", "C / ARM64", "UIKit", "Metal"],
     link: "/burnout3-ios",
     image: "/images/burnout3/xbox-hybrid-controls-20261023.webp",
     category: "Native iOS + performance exploration",
     backgroundClass: "bg-custom-blue",
-    status: "Native iOS build",
+    status: "iOS prototype",
     portfolioPlacement: "supporting",
     caseStudyId: "burnout3-ios",
   },

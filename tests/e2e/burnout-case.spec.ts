@@ -1,11 +1,16 @@
 import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
-test("Burnout case shows the current Xbox capture without invented controls", async ({ page }) => {
+test("Burnout case separates current source scope from historical Xbox capture without invented controls", async ({ page }) => {
   await page.goto("/burnout3-ios");
   const frame = page.locator("[data-recorded-game-frame]");
   await expect(frame.locator("img")).toHaveAttribute("src", /xbox-hybrid-controls-20261023/);
   await expect(frame).toContainText("Xbox-based build 10");
+  await expect(frame).toContainText("Historical");
+  const scope = page.locator("[data-current-build-scope]");
+  await expect(scope).toContainText("Gameplay is disabled by default");
+  await expect(scope).toContainText("not installed on the phone");
+  await expect(page.locator('[data-case-study-status="burnout3-ios"]')).toContainText("iOS prototype");
   await expect(frame).toContainText("actual native touch controls visible");
   await expect(page.getByRole("button", { name: "Steering stick" })).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Hold accelerator" })).toHaveCount(0);
@@ -25,7 +30,7 @@ test("Burnout recorded native session screens work with a keyboard", async ({ pa
     await expect(settings).toHaveAttribute("aria-pressed", "true", { timeout: 500 });
   }).toPass({ timeout: 10_000 });
   await expect(page.locator("#burnout-session-screen img")).toHaveAttribute("src", /xbox-settings-20261023/);
-  await expect(page.locator("#burnout-session-screen")).toContainText("display changes wait for the next app launch");
+  await expect(page.locator("#burnout-session-screen")).toContainText("visibly disables enhanced display options");
   const resume = page.getByRole("button", { name: "Resume game Build 9" });
   await resume.focus();
   await expect(resume).toBeFocused();
@@ -42,6 +47,8 @@ test("Burnout keeps current evidence, metric scope and upstream credits inspecta
   await page.getByText("Verification, limitations and credits", { exact: true }).click();
   await expect(page.locator("details")).toContainText("USA original Xbox release");
   await expect(page.locator("details")).toContainText("b4cd396");
+  await expect(page.locator("details")).toContainText("local, uncommitted source");
+  await expect(page.locator("details")).toContainText("BO3_IOS_GAMEPLAY_PREVIEW");
   await expect(page.locator("details")).toContainText("58% of one core");
   await expect(page.locator("details").getByRole("link", { name: "Takedawn", exact: true })).toHaveAttribute("href", "https://github.com/xenophobentx/takedawn");
   await expect(page.getByRole("link", { name: "Explore the source" })).toHaveAttribute("href", "https://github.com/TheMarcellVarga/burnout3-ios/tree/main");

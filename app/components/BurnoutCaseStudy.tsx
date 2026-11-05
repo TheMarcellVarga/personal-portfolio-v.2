@@ -17,21 +17,21 @@ const screens = [
   {
     label: "Game menu", build: "Build 9", image: "/images/burnout3/xbox-pause-menu-20261023.webp",
     title: "Start from the game’s own menu.",
-    body: "An IOS SETTINGS entry joins the original settings and race pause menus. It opens the native panel without replacing the game’s actions or breaking its existing Quit confirmation.",
+    body: "In the recorded prototype, IOS SETTINGS joins the original settings and race pause menus. It opens the native panel while preserving the game’s actions and Quit confirmation.",
     caption: "Original pause menu with IOS SETTINGS inserted before Quit",
     decision: "The game keeps its familiar navigation. The phone-specific choices have a clear home.",
   },
   {
     label: "iOS settings", build: "Build 9", image: "/images/burnout3/xbox-settings-20261023.webp",
     title: "Make the phone-specific choices understandable.",
-    body: "Render resolution and picture shape sit beside control size, visibility, layout, steering response and automatic acceleration. Touch choices update immediately; display changes wait for the next app launch.",
+    body: "Build 9 exposed display and touch options together. The current source keeps four touch preferences, fixes display to the original 640 × 480 / 4:3 baseline and visibly disables enhanced display options.",
     caption: "Native iOS settings with display and touch preferences and a Launcher action",
-    decision: "Persistent choices replace desktop-only settings, with reset kept separate from game files and saved profiles.",
+    decision: "The cleanup removes the legacy layout selector, reset action and duplicate launcher action. This capture records the earlier settings, before those cuts.",
   },
   {
     label: "Resume game", build: "Build 9", image: "/images/burnout3/xbox-resume-launcher-20261023.webp",
     title: "Leave the race without losing the session.",
-    body: "Launcher returns to the native shell with Resume game. The guest GPU and audio pause while the live runtime stays in memory. The game’s Save Profile still handles progress that must survive closing the app.",
+    body: "In the recorded prototype, Launcher returns to the native shell with Resume game. The guest GPU and audio pause while the live runtime stays in memory. The game’s Save Profile still handles progress that must survive closing the app.",
     caption: "Native launcher offering Resume game while the current session is paused",
     decision: "Settings, Launcher and Background own separate holds, so dismissing one cannot accidentally resume another.",
   },
@@ -49,12 +49,13 @@ export default function BurnoutCaseStudy() {
         <div className="portfolio-container">
           <section aria-label="Project introduction">
             <PageIntro eyebrow="Side project / iOS port" title={<>Burnout 3: <span className="title-accent">Takedown</span> for iOS</>} description="A console racer, adapted for the way a phone is held." />
+            <p className={styles.currentStatus} data-current-build-scope><strong>Current source · 5 November 2026.</strong> A simpler native shell, verified imports and four touch preferences. Gameplay is disabled by default while a HUD defect and broader device validation remain open. The update is built and checked locally, not installed on the phone.</p>
             <figure className={styles.heroCapture} data-recorded-game-frame data-native-controller-capture>
               <Image src="/images/burnout3/xbox-hybrid-controls-20261023.webp" alt="Xbox-based Burnout 3 running on iPhone with the actual faint steering stick and GAS, BRAKE, BOOST, CRASH, LOOK and VIEW controls" width={2796} height={1290} sizes="(max-width: 1280px) 90vw, 1280px" preload />
-              <figcaption>Full-screen iPhone 15 Pro Max capture · Xbox-based build 10 · 23 October 2026 · actual native touch controls visible.</figcaption>
+              <figcaption>Historical full-screen iPhone 15 Pro Max capture · Xbox-based build 10 · 23 October 2026 · actual native touch controls visible.</figcaption>
             </figure>
             <div className="aperture-intro-row">
-              <p>I wanted this game in my pocket. What began as a PS2 port became an Xbox-based iOS app built on Takedawn and xboxrecomp. My work connects the runtime and direct Metal rendering to the controls, setup and session flows around a race.</p>
+              <p>I wanted this game in my pocket. What began as a PS2 port became an Xbox-based iOS app built on Takedawn and xboxrecomp. My work connects the runtime and direct Metal rendering to touch controls, setup and session handling. The latest pass narrows the presentation build to features I can explain and verify.</p>
               <a href={`${source}/tree/main`} target="_blank" rel="noreferrer" className="portfolio-button">Explore the source <ArrowUpRight size={16} aria-hidden="true" /></a>
             </div>
             <dl className="aperture-meta">
@@ -88,26 +89,26 @@ export default function BurnoutCaseStudy() {
             <ol className={styles.decisions}>
               <li><h3>Start neutral. Release immediately.</h3><p>Touching the stick off-center does not suddenly steer the car. Movement after pickup drives the input; lifting clears it immediately. Only the visible knob springs back, with Reduce Motion respected.</p></li>
               <li><h3>Let one thumb stay on the driving actions.</h3><p>GAS, BRAKE and BOOST form a compact cluster. Sliding from gas to boost keeps acceleration held, while another finger steers. Standard, Gentle and Quick responses all retain full steering travel.</p></li>
-              <li><h3>Give the screen back to the race.</h3><p>The faint PS2-style treatment carries into the new overlay. Controls brighten when held, and action names replace extra Xbox button badges. The earlier Xbox layout remains available for comparison.</p></li>
+              <li><h3>Give the screen back to the race.</h3><p>The faint PS2-style treatment carries into the new overlay. Controls brighten when held, and action names replace extra Xbox button badges. The presentation source keeps one standard layout and omits the legacy selector.</p></li>
             </ol>
           </section>
 
           <section id="burnout-session" className="pb-[var(--section-space)]">
             <h2 className="section-heading">The race is one part.<br /><span className="title-accent">The app has to hold together.</span></h2>
-            <p className="aperture-section-lead">Recorded screens show how the original game menus connect to native iOS settings and a resumable launcher.</p>
+            <p className="aperture-section-lead">These October prototype captures document the game-menu, settings and resume flows. They predate the simpler presentation source; gameplay now requires an explicit build-time opt-in.</p>
             <div role="group" aria-label="Recorded iOS session screens" className="aperture-selector">
               {screens.map((item, index) => <button key={item.label} type="button" aria-pressed={activeScreen === index} aria-controls="burnout-session-screen" onClick={() => setActiveScreen(index)}>{item.label}<span className={styles.buildLabel}>{item.build}</span></button>)}
             </div>
             <div id="burnout-session-screen" className={styles.preset}>
               <figure>
                 <div className={styles.raceFrame}><Image src={screen.image} alt={screen.caption} width={2796} height={1290} sizes="(max-width: 767px) 90vw, 760px" /></div>
-                <figcaption>{screen.caption} · iPhone capture, 23 October 2026.</figcaption>
+                <figcaption>{screen.caption} · historical iPhone capture, 23 October 2026.</figcaption>
               </figure>
               <div className={styles.presetCopy} aria-live="polite" aria-atomic="true">
                 <h3>{screen.title}</h3><p>{screen.body}</p><p>{screen.decision}</p>
               </div>
             </div>
-            <p className={styles.currentStatus}><strong>Setup matters too.</strong> The Files importer stages an extracted Xbox folder and verifies all 716 files against the supported release before moving it into place. Failed validation preserves existing files; app updates keep the Xbox save container.</p>
+            <p className={styles.currentStatus}><strong>Setup matters too.</strong> The importer stages an extracted Xbox folder and verifies all 716 files before installation. The launcher now checks existing files too, with loading, error and disabled states. Failed imports preserve existing data; valid files alone do not enable gameplay in the default build.</p>
           </section>
 
           <section id="burnout-performance" className={`portfolio-section ${styles.interaction}`}>
@@ -138,8 +139,8 @@ export default function BurnoutCaseStudy() {
                 <li><h3>The phone experience</h3><p>UIKit controls, validated imports, persistent preferences and independently owned session holds connect the game to the launcher.</p></li>
               </ol>
               <div className="aperture-release">
-                <div><h3>Test the boundaries.</h3><p>Seven host suites cover input, imports, session ownership, menu dispatch, memory aliases and ARM64 MMIO. Scripted device checks separately exercise race input, save/reload and launcher/resume.</p></div>
-                <div><h3>Keep the unfinished work visible.</h3><p>A HUD rendering defect remains. The paused runtime still consumes CPU, and physical touch comfort, Files-provider integration, audio and long-session behavior need broader validation.</p></div>
+                <div><h3>Test the boundaries.</h3><p>The 5 November local pass built the iPhone Release app, passed all seven focused host suites and checked asynchronous validation/import and disabled states in a native UIKit harness. The supplied 716-file folder also validated. Earlier scripted phone checks exercised race input, save/reload and launcher/resume.</p></div>
+                <div><h3>Keep the unfinished work visible.</h3><p>Gameplay is disabled by default because the HUD defect and validation gaps remain. A build-time opt-in retains the prototype for controlled testing. Enhanced display choices stay disabled, and the updated app has not been installed or validated on the phone.</p></div>
               </div>
               <details className="aperture-evidence-details">
                 <summary>Verification, limitations and credits<ChevronDown size={18} aria-hidden="true" /></summary>
@@ -147,7 +148,7 @@ export default function BurnoutCaseStudy() {
                   <div><h4>Recorded verification</h4><ul>{record.verification.map(item => <li key={item}>{item}</li>)}</ul></div>
                   <div><h4>Still experimental</h4><ul>{record.limitations.map(item => <li key={item}>{item}</li>)}</ul></div>
                 </div>
-                <p className={styles.credits}>Current implementation built on <a href="https://github.com/xenophobentx/takedawn" target="_blank" rel="noreferrer">Takedawn</a> and <a href="https://github.com/xenophobentx/xboxrecomp" target="_blank" rel="noreferrer">xboxrecomp</a>. The earlier PS2 work built on <a href="https://github.com/danielgomesvieira2000/burnout3-pc" target="_blank" rel="noreferrer">burnout3-pc</a>. Burnout 3: Takedown is the Criterion Games / Electronic Arts title. Captures are genuine project evidence; no game or app download is offered. Content baseline: <a href={`${source}/tree/${baseline}`} target="_blank" rel="noreferrer">b4cd396 · 27 October 2026</a>. Device captures are from 23 October, not a new benchmark run.</p>
+                <p className={styles.credits}>Current implementation built on <a href="https://github.com/xenophobentx/takedawn" target="_blank" rel="noreferrer">Takedawn</a> and <a href="https://github.com/xenophobentx/xboxrecomp" target="_blank" rel="noreferrer">xboxrecomp</a>. The earlier PS2 work built on <a href="https://github.com/danielgomesvieira2000/burnout3-pc" target="_blank" rel="noreferrer">burnout3-pc</a>. Burnout 3: Takedown is the Criterion Games / Electronic Arts title. Captures are genuine project evidence; no game or app download is offered. Historical source baseline: <a href={`${source}/tree/${baseline}`} target="_blank" rel="noreferrer">b4cd396 · 27 October 2026</a>. Current scope reflects local, uncommitted source changes checked on 5 November 2026. Device captures and performance samples remain from October; no new benchmark run is claimed.</p>
               </details>
             </div>
           </section>

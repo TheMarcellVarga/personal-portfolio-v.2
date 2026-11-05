@@ -45,8 +45,12 @@ identity and prioritize tangible project evidence over long technical prose.
 The index and `app/components/ApertureCaseStudy.tsx` supply the established
 presentation reference. Project content is recorded in `app/data/`.
 
-Burnout content is grounded in the source repository’s committed revision
-`b4cd396` as of 27 October 2026. The current case uses full device captures from
+Burnout’s historical evidence is grounded in committed revision `b4cd396`
+(27 October 2026). The current scope also reflects the local, uncommitted
+presentation cleanup checked on 5 November 2026: gameplay is disabled by
+default, display stays on its original baseline, and the shell retains verified
+imports and four touch preferences. Those changes are not installed on the phone.
+The case uses full historical device captures from
 Xbox builds 9 and 10 on 23 October, with the earlier PS2 experiment retained as
 project history. Its device captures, attribution and factual limits are documented
 in `docs/BURNOUT_CASE_STUDY.md`. Historical measurements must retain their

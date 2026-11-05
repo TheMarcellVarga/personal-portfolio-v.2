@@ -35,46 +35,46 @@ export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
     heroImage: "/images/burnout3/xbox-hybrid-controls-20261023.webp",
     heroAlt: "Xbox-based Burnout 3 running on iPhone with the actual faint hybrid steering and driving controls",
     contextTitle: "A console racer, adapted for the way a phone is held.",
-    contextBody: "An initial PS2 port evolved into a native iOS adaptation of the Xbox-based Takedawn runtime. The work connects ARM64 and Metal integration to hybrid touch controls, verified game imports, persistent settings and a resumable launcher.",
+    contextBody: "An initial PS2 port evolved into an Xbox-based iOS prototype. The current local source simplifies the launcher and keeps verified imports and four touch preferences. Gameplay and enhanced display choices are disabled by default; October captures document the earlier prototype.",
     gallery: [
       {
         src: "/images/burnout3/xbox-hybrid-controls-20261023.webp",
         alt: "Xbox-based build 10 race start with subtle action-labelled touch controls",
-        caption: "Full iPhone capture · build 10 · 23 October 2026 · actual hybrid controls.",
+        caption: "Historical iPhone capture · build 10 · 23 October 2026 · actual hybrid controls.",
         fit: "contain",
         wide: true,
       },
       {
         src: "/images/burnout3/xbox-pause-menu-20261023.webp",
         alt: "Original race pause menu with the injected IOS SETTINGS entry before Quit",
-        caption: "Build 9 · the game menu opens native iOS settings while preserving its existing actions.",
+        caption: "Historical build 9 · the game menu opens native iOS settings while preserving its existing actions.",
         fit: "contain",
       },
       {
         src: "/images/burnout3/xbox-settings-20261023.webp",
         alt: "Native iOS settings with display preferences, control size and a Launcher action",
-        caption: "Build 9 · persistent native settings and a route back to the launcher.",
+        caption: "Historical build 9 · persistent native settings and a route back to the launcher.",
         fit: "contain",
       },
       {
         src: "/images/burnout3/xbox-resume-launcher-20261023.webp",
         alt: "Native Burnout 3 launcher offering Resume game for the paused live session",
-        caption: "Build 9 · Resume game preserves the current session in memory.",
+        caption: "Historical build 9 · Resume game preserves the current session in memory.",
         fit: "contain",
       },
     ],
   },
   aperture: {
     demoUrl: "https://ai-finance-two-bice.vercel.app/",
-    demoLabel: "Visit Aperture",
+    demoLabel: "Visit web preview",
     heroImage: "/images/ai-finance/aperture-home-2026.jpg",
     heroAlt: "Aperture Financial Intelligence homepage introducing a calm private wealth research workspace",
     contextTitle: "One financial picture before many tools.",
     contextBody:
-      "Aperture connects the portfolio, provider-backed market context, private source material, planning assumptions, and the next useful question. It does not try to make uncertainty disappear. It makes the reasoning easier to inspect and revisit.",
-    processTitle: "From a broad fintech idea to one inspectable system.",
+      "Aperture connects market context, holdings, contribution-only goal scenarios, and learning through five primary destinations. The latest local pass removes competing UI and disables unavailable actions so a smaller product is easier to use and demonstrate.",
+    processTitle: "From feature expansion to a focused, working demo.",
     processBody:
-      "The work moved from product restraint and information architecture into secure data boundaries, evidence-grounded AI, failure states, and finally a quieter visual language that could hold dense information without feeling like a trading terminal.",
+      "The latest work simplified the product surface, restored the local services, and verified the core flows through Next.js, Go, and Postgres. External model calls stayed disabled.",
     process: [
       {
         title: "Set the product boundary",
