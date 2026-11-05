@@ -176,14 +176,14 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
     user: "People between plans or low on ideas who want a fast, private suggestion they can save, skip, filter, and return to later.",
     decisions: [
       "Opened directly into a tactile card deck and made save and skip available as both gestures and visible controls.",
-      "Separated the immutable bundled catalog, pure ranking rules, persisted signals, and presentation deck so interaction state never corrupts source data.",
+      "Separated the catalog, pure ranking, persistence, and presentation state. Mutations read the latest stored state so a delayed swipe or stale Preferences screen cannot overwrite newer saves or filters.",
       "Used practical constraints and saved-category signals instead of opaque personalization or generated content.",
-      "Kept the complete version-one loop local and deterministic, with explicit recovery for exhausted decks and destructive history reset.",
+      "Kept the version-one loop local and deterministic, with compact filters, explicit empty-deck recovery, and a cancellable history-reset alert.",
     ],
     verification: [
       "Fifty bundled activities pass unique ID, unique title, schema, tagging, step-count, and content-quality validation.",
-      "Twelve unit tests and seven UI tests passed on 28 June 2026 on the iPhone 17e simulator, covering ranking, persistence, swipes, details, filters, Saved, and relaunch state.",
-      "The June baseline includes an iPhone 17 Pro Max build and standard-size simulator captures. October layout and contrast corrections have recorded iOS 27 compilation; fresh simulator visual and UI verification remains pending.",
+      "Seventeen unit tests and twelve UI tests passed on 5 November 2026 on iPhone 17e, covering catalog validation, ranking, persistence, swipes, details, filters, reset confirmation, Saved, and immediate relaunch state.",
+      "Four iPhone 17 Pro Max dark-mode checks passed. After the metadata layout correction, the two screen and accessibility XXXL checks passed again on each phone; current captures were visually reviewed.",
     ],
     limitations: [
       "The project is a polished local MVP and portfolio proof point, not an App Store release or evidence of real-world retention or recommendation quality.",

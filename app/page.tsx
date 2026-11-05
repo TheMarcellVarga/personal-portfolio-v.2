@@ -42,6 +42,7 @@ import {
 import { SiD3Dotjs, SiFigma, SiNodedotjs, SiReact, SiSpring, SiTypescript } from "react-icons/si";
 import Header from "./header";
 import Footer from "./footer";
+import { EndlessActivityPreview } from "./components/EndlessActivityPreview";
 import { history, type HistoryItem } from "./data/history";
 import { resume } from "./data/resume";
 import { projects, type Project } from "./data/projects";
@@ -384,6 +385,7 @@ function ProjectListItem({
       >
         <div data-mobile-project-card className="grid min-w-0 gap-5 md:hidden">
           <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-custom-blue/5">
+            {project.caseStudyId === "endless-activity" ? <EndlessActivityPreview /> : (
             <Image
               src={project.image}
               alt={`${project.title} preview`}
@@ -391,6 +393,7 @@ function ProjectListItem({
               sizes="(max-width: 767px) calc(100vw - 4rem), 0px"
               className="object-cover"
             />
+            )}
           </div>
           <div className="min-w-0">
             <div className="mb-3 flex items-center justify-between gap-3 text-xs leading-5 text-custom-blue/60">
@@ -1643,6 +1646,7 @@ export default function Page() {
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="relative h-full w-full">
+              {activeProjectImage === projects.find(project => project.caseStudyId === "endless-activity")?.image ? <EndlessActivityPreview /> : (
               <Image
                 src={activeProjectImage}
                 alt="Project preview"
@@ -1651,6 +1655,7 @@ export default function Page() {
                 className="object-cover"
                 priority
               />
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               <div className="absolute inset-x-0 bottom-3 flex justify-center">
                 <span className="font-label rounded-full bg-white/20 px-2 py-0.75 text-[0.5rem] font-medium uppercase tracking-[0.14em] text-white shadow-[0_8px_32px_rgba(0,0,0,0.1)] backdrop-blur-md">

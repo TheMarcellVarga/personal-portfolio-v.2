@@ -14,15 +14,15 @@ import { OtherWorks } from "./OtherWorks";
 
 const screens = [
   {
-    label: "Discover", file: "discover.png",
+    label: "Discover", file: "discover-november-2026.png",
     alt: "Endless Activity Discover deck with a realistic activity and visible save and skip controls",
     title: "One idea. Two easy answers.",
-    body: "Cook from what you already have. Thirty minutes, indoors, medium energy. Enough context to decide before opening another screen.",
+    body: "Try an unfamiliar ingredient. Time, budget, and energy give you enough context to decide before opening another screen.",
     decision: "Swipe right to save, left to skip. Visible buttons and named VoiceOver actions do the same job; a partial drag springs back.",
-    outcome: "Save and skip advance the deck and persist locally.",
+    outcome: "Save and skip persist immediately while the outgoing card finishes its animation.",
   },
   {
-    label: "Details", file: "detail.png",
+    label: "Details", file: "detail-november-2026.png",
     alt: "Endless Activity activity detail sheet with materials, steps, and safety guidance",
     title: "Turn an idea into a next step.",
     body: "A native sheet adds the materials, steps, and safety guidance needed to try the activity.",
@@ -30,19 +30,19 @@ const screens = [
     outcome: "The card helps you choose. The sheet helps you start.",
   },
   {
-    label: "Saved", file: "saved.png",
+    label: "Saved", file: "saved-november-2026.png",
     alt: "Endless Activity saved activity collection",
     title: "Keep the ideas worth coming back to.",
-    body: "Saved is a small collection you can reopen, inspect, or clear one idea at a time. It survives closing the app.",
+    body: "A concise collection you can reopen, inspect, or clear one idea at a time. Saves survive an immediate relaunch.",
     decision: "A save has a durable destination. Removing an idea works from the list or its detail sheet, using native controls.",
     outcome: "Relaunching restores the collection from local storage.",
   },
   {
-    label: "Preferences", file: "preferences.png",
+    label: "Preferences", file: "preferences-november-2026.png",
     alt: "Endless Activity native preference controls for time, cost, energy, setting, company, and category",
     title: "Make the next idea fit your day.",
     body: "Have less time or energy? Adjust practical constraints and return to a deck that respects them.",
-    decision: "No questionnaire before the first card. Filters persist immediately; resetting them keeps activity history intact.",
+    decision: "Each filter opens a native selection list. Any clears that group; resetting filters keeps activity history intact.",
     outcome: "An empty deck offers recovery: relax filters or reset skipped ideas.",
   },
 ] as const;
@@ -72,7 +72,7 @@ export default function EndlessActivityCaseStudy() {
                   </div>
                 ))}
               </div>
-              <figcaption>Discover, details, and Saved. Real simulator captures from the working SwiftUI app; these precede the October layout refinements.</figcaption>
+              <figcaption>Discover, details, and Saved from the verified SwiftUI build. Captured on 5 November 2026.</figcaption>
             </figure>
             <dl className="aperture-meta">
               <div><dt>My role</dt><dd>Product design + native iOS engineering</dd></div>
@@ -107,7 +107,7 @@ export default function EndlessActivityCaseStudy() {
                     <Image src={`/images/endless-activity/${screen.file}`} alt={screen.alt} width={1170} height={2532} sizes="(max-width: 767px) 240px, 290px" />
                   </motion.div>
                 </div>
-                <figcaption>Implemented iOS interface · historical simulator capture.</figcaption>
+                <figcaption>Verified SwiftUI build · 5 November 2026.</figcaption>
               </figure>
               <div className="endless-screen-copy" aria-live="polite" aria-atomic="true">
                 <h3>{screen.title}</h3><p>{screen.body}</p>
@@ -121,14 +121,14 @@ export default function EndlessActivityCaseStudy() {
             <div>
               <h2 id="endless-demo-title" className="section-heading">The loop,<br /><span className="title-accent">in 24 seconds.</span></h2>
               <p className="aperture-section-lead">Discover an idea, look closer, save it, and tune what comes next.</p>
-              <p className="endless-note">This walkthrough is assembled from verified simulator captures. It shows the implemented screens rather than a continuous gesture recording.</p>
+              <p className="endless-note">Four November simulator captures, assembled into a captioned screen tour.</p>
             </div>
             <figure>
               <div className="dark-panel endless-video-stage">
-                <video controls playsInline preload="none" poster="/images/endless-activity/discover.png" aria-label="Endless Activity 24-second screen walkthrough">
-                  <source src="/images/endless-activity/endless-activity-demo.mp4" type="video/mp4" />
-                  <track kind="captions" src="/images/endless-activity/endless-activity-demo.vtt" srcLang="en" label="English" default />
-                  <a href="/images/endless-activity/endless-activity-demo.mp4">Download the walkthrough</a>
+                <video controls playsInline preload="none" poster="/images/endless-activity/discover-november-2026.png" aria-label="Endless Activity 24-second screen walkthrough">
+                  <source src="/images/endless-activity/endless-activity-tour-november-2026.mp4" type="video/mp4" />
+                  <track kind="captions" src="/images/endless-activity/endless-activity-tour-november-2026.vtt" srcLang="en" label="English" default />
+                  <a href="/images/endless-activity/endless-activity-tour-november-2026.mp4">Download the walkthrough</a>
                 </video>
               </div>
               <figcaption>Playback is optional. The selectable screens above cover the same flow.</figcaption>
@@ -137,13 +137,13 @@ export default function EndlessActivityCaseStudy() {
 
           <section id="endless-refinements" className="pb-[var(--section-space)]">
             <h2 className="section-heading">Small fixes.<br /><span className="title-accent">A more usable deck.</span></h2>
-            <p className="aperture-section-lead">October refinements address what happens when the content or text size grows.</p>
+            <p className="aperture-section-lead">The November pass focused on a smaller interface and a more dependable everyday loop.</p>
             <div className="endless-refinements">
-              <article><h3>Let the content set the height.</h3><p>Content-sized cards and independent scrolling replace the oversized fixed layout. Save and Skip stay visible at every text size.</p></article>
-              <article><h3>Keep the next card quiet.</h3><p>Decorative back layers preserve the stacked-deck feel without letting another activity’s text leak around the active card.</p></article>
-              <article><h3>Make the small labels count.</h3><p>Adaptive secondary text strengthens contrast across Discover, details, Saved, and Preferences.</p></article>
+              <article><h3>Less on the surface.</h3><p>Compact filter summaries and shorter Saved rows keep the main screens easy to scan. Details stay one tap away.</p></article>
+              <article><h3>Save before the animation.</h3><p>The action is written immediately while a visual snapshot finishes the swipe. Closing the app mid-animation keeps the idea.</p></article>
+              <article><h3>Make room for larger text.</h3><p>Cards scroll around persistent Save and Skip buttons. At accessibility sizes, metadata becomes a readable vertical list.</p></article>
             </div>
-            <p className="endless-note endless-refinement-note">Implemented 2 October 2026. App and test-target compilation recorded with the iOS 27 SDK; fresh simulator and large-text visual checks remain pending. The captures above show the earlier build.</p>
+            <p className="endless-note endless-refinement-note">Verified 5 November 2026 on small and large iPhone simulators, including dark appearance and the largest accessibility text size. The captures above reflect this build.</p>
           </section>
 
           <section id="endless-engineering" className="pb-[var(--section-space)]">
@@ -156,7 +156,7 @@ export default function EndlessActivityCaseStudy() {
                 <li><h3>Local state</h3><p>SwiftUI deck state and a Codable UserDefaults store for signals and preferences.</p></li>
               </ol>
               <div className="aperture-release">
-                <div><h3>Verification</h3><p><strong>12 unit tests. 7 UI tests.</strong></p><p className="aperture-dark-note">Recorded full simulator run: 28 June 2026. Catalog, ranking, save/skip, filters, details, and relaunch persistence. October corrections still need simulator re-verification.</p></div>
+                <div><h3>Verification</h3><p><strong>17 unit tests. 12 UI tests.</strong></p><p className="aperture-dark-note">Full iPhone 17e suite: 5 November 2026, Xcode 27.2 and iOS 27.2. Four large-phone dark-mode checks passed; screen and largest-text checks passed again on each phone after the final metadata correction.</p></div>
                 <div><h3>Where it stands</h3><p>A working native MVP, built to run offline.</p><p className="aperture-dark-note">No App Store release or user-outcome claims. Accounts, live events, booking, and generated activities remain outside v1.</p></div>
               </div>
               <details className="aperture-evidence-details">

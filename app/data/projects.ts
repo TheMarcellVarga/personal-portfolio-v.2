@@ -144,10 +144,10 @@ export const projects: Project[] = [
     description:
       "A local-first SwiftUI product that turns boredom into a quick, realistic choice through a curated swipe deck and practical filters.",
     highlight:
-      "The supporting case study connects interaction craft to deterministic ranking, local persistence, accessibility alternatives, testing, and deliberate product restraint.",
+      "A focused solo discovery loop with compact native filters, durable local saves, accessible actions, and verified small- and large-iPhone layouts.",
     skills: ["SwiftUI", "Swift", "iOS", "Accessibility"],
     link: "/endless-activity",
-    image: "/images/endless-activity/discover.png",
+    image: "/images/endless-activity/discover-november-2026.png",
     category: "Native iOS product craft",
     backgroundClass:
       "bg-[radial-gradient(circle_at_top_right,_rgba(255,91,82,0.34),_transparent_30%),linear-gradient(160deg,_#111820_0%,_#202a35_48%,_#f4eee8_100%)]",

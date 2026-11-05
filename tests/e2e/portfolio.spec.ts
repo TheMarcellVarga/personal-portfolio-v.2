@@ -530,8 +530,8 @@ test("Endless Activity case study presents native product craft with honest scop
 
   await expect(page.getByRole("heading", { name: "Endless Activity", exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Verification", exact: true })).toBeVisible();
-  await expect(page.getByText("12 unit tests. 7 UI tests.")).toBeVisible();
-  await expect(page.getByText(/Recorded full simulator run: 28 June 2026/)).toBeVisible();
+  await expect(page.getByText("17 unit tests. 12 UI tests.")).toBeVisible();
+  await expect(page.getByText(/Full iPhone 17e suite: 5 November 2026/)).toBeVisible();
   await page.getByRole("group", { name: "Endless Activity walkthrough stages" }).getByRole("button", { name: "Saved", exact: true }).click();
   await expect(page.getByAltText("Endless Activity saved activity collection")).toBeVisible();
 });

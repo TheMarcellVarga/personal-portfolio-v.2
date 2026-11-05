@@ -7,6 +7,7 @@ import { ArrowUpRight } from "lucide-react";
 import { gsap } from "gsap";
 import { projects } from "../data/projects";
 import { SectionLabel } from "./SectionLabel";
+import { EndlessActivityPreview } from "./EndlessActivityPreview";
 import { useClientReducedMotion } from "../hooks/useClientReducedMotion";
 
 type OtherWorksProps = {
@@ -103,13 +104,13 @@ export function OtherWorks({ currentProjectTitle }: OtherWorksProps) {
               aria-label={`Open ${project.title}`}
             >
               <div className="absolute inset-0">
-                <Image
+                {project.caseStudyId === "endless-activity" ? <EndlessActivityPreview /> : <Image
                   src={project.image}
                   alt={project.title}
                   fill
                   sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
                   className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                />
+                />}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
                 <div className={`absolute inset-0 opacity-20 ${project.backgroundClass}`} />
               </div>

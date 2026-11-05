@@ -3,7 +3,7 @@ import { siteName } from "../../seo";
 
 const title = "Endless Activity Case Study";
 const description =
-  "A Marcell Varga case study for a local-first native iOS activity deck, covering product restraint, gesture UX, deterministic ranking, persistence, accessibility, and verified release evidence.";
+  "A Marcell Varga case study for a local-first native iOS activity deck, covering product restraint, gesture UX, deterministic ranking, persistence, accessibility, and dated simulator verification.";
 
 export const metadata: Metadata = {
   title,
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     type: "article",
     images: [
       {
-        url: "/images/endless-activity/discover.png",
+        url: "/images/endless-activity/discover-november-2026.png",
         width: 1170,
         height: 2532,
         alt: "Endless Activity native iOS Discover deck with visible Skip and Save controls",

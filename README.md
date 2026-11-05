@@ -83,7 +83,8 @@ The canonical production domain is `marcellvarga.com`. Keep the deployment confi
 
 ## Endless Activity presentation refresh
 
-The 16 October 2026 refresh follows the index foundation and Aperture case layout.
-Real portrait captures, a selectable four-stage walkthrough, and a captioned
-video lead the story. October native UI refinements are distinguished from the
-earlier simulator evidence. See [the refresh record](docs/ENDLESS_ACTIVITY_CASE_STUDY_REFRESH.md).
+The November 2026 update keeps the index foundation and Aperture case layout,
+with current native screenshots, a rebuilt captioned 24-second screen tour, and
+November simulator verification. The story now covers compact filters, concise
+Saved rows, immediate save persistence, and readable accessibility-size metadata.
+See [the refresh record](docs/ENDLESS_ACTIVITY_CASE_STUDY_REFRESH.md).

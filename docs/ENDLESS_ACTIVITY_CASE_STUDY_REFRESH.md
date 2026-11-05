@@ -1,6 +1,6 @@
 # Endless Activity case study refresh
 
-Date: 16 October 2026.
+Original refresh: 16 October 2026. Updated: 5 November 2026.
 
 Scope: post-roadmap portfolio refresh. The native app behavior is unchanged.
 
@@ -55,3 +55,41 @@ Publication is outside this local refresh.
   was not rebuilt or simulator-tested during this presentation update.
 - Final targeted rerun: all 6 walkthrough, case-content, mobile-artwork, and
   private-repository-link checks passed.
+
+## November evidence refresh
+
+This local follow-up synchronizes the case with the native interview cleanup.
+It preserves the existing page structure, motion, four-stage selector, portfolio
+placement, private-source policy, and route.
+
+- Copied the four current iPhone 17e light captures into versioned November URLs.
+  The index project image, shared gallery data, hero, selector, and Open Graph
+  image now reference those files. Existing media URLs remain available.
+- Rebuilt a 24-second H.264 screen tour from the same four captures and updated
+  WebVTT captions. The page identifies the format as assembled simulator captures.
+- Replaced the October pending-check narrative with compact filters, concise
+  Saved rows, immediate persistence before animation, and vertical metadata at
+  accessibility sizes.
+- Updated the shared evidence record to 17 unit and 12 UI tests passing on
+  iPhone 17e on 5 November 2026. Four large-phone dark-mode checks passed;
+  after the final metadata-only correction, two screen/XXXL checks passed again
+  on each phone. No physical haptic, spoken VoiceOver, App Store, or user-outcome
+  claim was added.
+
+Sources: the sibling `endless-activity` checkout's
+[testing strategy](../../endless-activity/docs/TESTING_STRATEGY.md),
+[roadmap](../../endless-activity/docs/MASTER_EXECUTION_ROADMAP.md), and
+[November captures](../../endless-activity/docs/assets/interview-2026-11-05/README.md).
+
+### November verification
+
+- Node 22.13.1; `npm run check` passes (lint and production build).
+- Seven scoped Playwright tests pass: 1440px, 390px, and 320px walkthroughs,
+  keyboard selection, real image loading, 24-second video metadata, captions,
+  evidence disclosure, mobile containment, case content, private-source links,
+  canonical metadata, and sitemap membership.
+- Axe WCAG A/AA reports zero violations in the three walkthrough viewport tests.
+- The existing local dev server on port 3100 was reused. The updated Preferences
+  stage was inspected in the in-app browser; desktop/mobile page captures were
+  generated for visual review.
+- This is a local source update. No commit, push, or deployment was performed.

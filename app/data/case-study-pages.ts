@@ -296,25 +296,25 @@ export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
     ],
     gallery: [
       {
-        src: "/images/endless-activity/discover.png",
+        src: "/images/endless-activity/discover-november-2026.png",
         alt: "Endless Activity Discover activity deck",
         caption: "The app opens on one concrete activity with visible alternatives to the swipe gesture.",
         presentation: "phone",
       },
       {
-        src: "/images/endless-activity/detail.png",
+        src: "/images/endless-activity/detail-november-2026.png",
         alt: "Endless Activity activity detail view",
         caption: "The native detail sheet adds materials, steps, and safety guidance only when needed.",
         presentation: "phone",
       },
       {
-        src: "/images/endless-activity/saved.png",
+        src: "/images/endless-activity/saved-november-2026.png",
         alt: "Endless Activity saved activity collection",
         caption: "Saved activities remain a useful return path instead of disappearing into a feed.",
         presentation: "phone",
       },
       {
-        src: "/images/endless-activity/preferences.png",
+        src: "/images/endless-activity/preferences-november-2026.png",
         alt: "Endless Activity preference controls",
         caption: "Practical filters shape the deck without turning first launch into onboarding.",
         presentation: "phone",
