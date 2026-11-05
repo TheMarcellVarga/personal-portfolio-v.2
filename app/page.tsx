@@ -163,6 +163,7 @@ function ExpertiseArea({ area, progress }: { area: (typeof expertiseAreas)[numbe
 
 function CapabilitiesSection() {
   const shouldReduceMotion = useClientReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
   const uxProgress = useMotionValue(0);
   const frontendProgress = useMotionValue(0);
   const aiProgress = useMotionValue(0);
@@ -171,6 +172,7 @@ function CapabilitiesSection() {
   return (
     <section
       id="process"
+      ref={sectionRef}
       data-scroll-anchor="process"
       className="portfolio-container portfolio-section relative"
     >
@@ -185,7 +187,7 @@ function CapabilitiesSection() {
         />
       </div>
       <ul aria-label="Specialties and technologies" className="relative min-w-0">
-        <ExpertiseJourney uxProgress={uxProgress} frontendProgress={frontendProgress} aiProgress={aiProgress} />
+        <ExpertiseJourney sectionRef={sectionRef} uxProgress={uxProgress} frontendProgress={frontendProgress} aiProgress={aiProgress} />
         {expertiseAreas.map(area => <ExpertiseArea key={area.title} area={area} progress={sceneProgress[area.kind]} />)}
       </ul>
     </section>

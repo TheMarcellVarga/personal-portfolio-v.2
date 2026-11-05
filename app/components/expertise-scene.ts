@@ -16,10 +16,10 @@ export function createExpertiseScene(
   reducedMotion: boolean,
   onRender: () => void,
 ): ExpertiseScene {
-  const context = canvas.getContext("webgl2", { alpha: true, antialias: false, powerPreference: "low-power" });
+  const context = canvas.getContext("webgl2", { alpha: true, antialias: true, powerPreference: "low-power" });
   if (!context) throw new Error("WebGL unavailable");
-  const renderer = new THREE.WebGLRenderer({ canvas, context, alpha: true, antialias: false, powerPreference: "low-power" });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1));
+  const renderer = new THREE.WebGLRenderer({ canvas, context, alpha: true, antialias: true, powerPreference: "low-power" });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
