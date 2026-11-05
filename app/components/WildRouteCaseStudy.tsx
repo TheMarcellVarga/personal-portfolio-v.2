@@ -29,11 +29,12 @@ export default function WildRouteCaseStudy() {
                   <div className="col-span-2"><dt className="text-custom-blue/65">Experience</dt><dd data-case-study-status="wild-route">Live public demo</dd></div>
                 </dl>
                 <Link href={demo} target="_blank" rel="noreferrer" className="portfolio-button mt-6">Open public demo <ArrowUpRight aria-hidden="true" className="h-4 w-4" /></Link>
+                <p className="mt-3 text-sm leading-6 text-custom-blue/70">The public URL is the earlier release. These screens show the verified local November refresh, pending deployment.</p>
               </div>
             </div>
             <div className="mt-10 sm:mt-14">
-              <Screen src="/images/wild-route/home-october-2026.jpg" alt="Wild Route homepage showing the travel brief beside three generated round-trip suggestions" priority />
-              <p className="mt-3 text-sm leading-6 text-custom-blue/70">The current product: a travel brief, comparable journeys, and an explicit planning-estimate boundary. Select any screen to view it full size.</p>
+              <Screen src="/images/wild-route/home-november-2026.jpg" alt="Wild Route simplified homepage with one planning action and an illustrative destination catalog" priority />
+              <p className="mt-3 text-sm leading-6 text-custom-blue/70">November local demo: a focused brief, comparable journeys, and an explicit planning boundary. Select a screen to view it full size.</p>
             </div>
           </section>
 
@@ -42,7 +43,7 @@ export default function WildRouteCaseStudy() {
               <h2 className="section-heading">Plan the journey.<br /><span className="title-accent">See the tradeoffs.</span></h2>
               <div className="max-w-[60ch] space-y-5 text-base leading-7 text-custom-blue/75 sm:text-lg">
                 <p>Flights, maps, destination guides, and notes each show a fragment of a trip. I wanted to bring those fragments into one decision: which route fits the adventure?</p>
-                <p>The hard part was making the result useful without overstating what the app knows. Every journey needs a reason, a return leg, and a clear boundary between a planning estimate and a booking.</p>
+                <p>The hard part was making the result useful without overstating what the app knows. Every journey needs a reason, a readable path, and a clear boundary between a planning estimate and a booking.</p>
               </div>
             </div>
           </section>
@@ -52,34 +53,34 @@ export default function WildRouteCaseStudy() {
               <div>
                 <SectionLabel index="01" label="Describe the trip" />
                 <h2 className="section-heading">Start with a wish.</h2>
-                <p className="mt-5 text-base leading-7 text-custom-blue/75">A plain-language idea becomes a brief you can edit. Origin, days, stop count, and route shape stay visible before composition.</p>
+                <p className="mt-5 text-base leading-7 text-custom-blue/75">The planner opens directly to the trip brief. Optional origin, duration, stop count, and route shape sit behind Trip preferences, keeping the first step simple.</p>
                 <blockquote className="my-7 border-y border-custom-blue/15 py-6 font-display text-2xl font-medium leading-snug tracking-[-0.02em]">“A 12-day round trip from Singapore with hiking, surf, and one meaningful stop.”</blockquote>
                 <p className="text-sm leading-6 text-custom-blue/70">The example used in these captures. Deterministic interpretation and route data; no live model call.</p>
               </div>
-              <Screen src="/images/wild-route/compose-october-2026.jpg" alt="Wild Route composer with the Singapore travel brief and editable journey constraints" />
+              <Screen src="/images/wild-route/compose-november-2026.jpg" alt="Wild Route composer with the Singapore travel brief and editable journey constraints" />
             </div>
           </section>
 
           <section className="pb-[var(--section-space)]">
             <div className="mb-8 grid items-end gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
               <div><SectionLabel index="02" label="Compare the journeys" /><h2 className="section-heading">A whole route.<br />A reason for each stop.</h2></div>
-              <p className="max-w-[52ch] text-base leading-7 text-custom-blue/75">The engine compares direct, one-stop, and two-stop journeys. Round trips return to the origin, and the map follows the same legs as the route details.</p>
+              <p className="max-w-[52ch] text-base leading-7 text-custom-blue/75">Compare complete journeys, then read each stop in travel order. I replaced the WebGL globe with an ordered journey overview so the core flow renders reliably across devices.</p>
             </div>
-            <Screen src="/images/wild-route/planner-october-2026.jpg" alt="Wild Route ranked planner showing a round-trip route with destination imagery, route legs, and planning status" />
+            <Screen src="/images/wild-route/planner-november-2026.jpg" alt="Wild Route ranked planner showing a round-trip route with destination imagery, route legs, and planning status" />
             <div className="mt-7 grid gap-7 border-t border-custom-blue/15 pt-6 md:grid-cols-3">
               <Decision title="Why this route?" body="Ranking, wishes, and confidence explain the suggestion. Confidence belongs to the app’s scoring, not a provider guarantee." />
-              <Decision title="What do we know?" body="Current conditions keep their source and observation time. Missing fare observations stay labeled as planning estimates." />
-              <Decision title="What if it fails?" body="A 2D map and bundled destination artwork keep the route usable when WebGL or remote media is unavailable." />
+              <Decision title="What do we know?" body="Source freshness and assumptions remain inspectable. Missing live fares stay unpriced, with confirmation left to external providers." />
+              <Decision title="What if it fails?" body="The journey view needs no WebGL. Bundled artwork, a retryable brief, and clear action errors keep failures recoverable." />
             </div>
           </section>
 
           <section className="pb-[var(--section-space)]">
             <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
-              <Screen src="/images/wild-route/share-october-2026.jpg" alt="Wild Route public route preview showing the journey breakdown and external booking boundary" />
+              <Screen src="/images/wild-route/share-november-2026.jpg" alt="Wild Route public route preview showing the journey breakdown and external booking boundary" />
               <div><SectionLabel index="03" label="Keep the decision" /><h2 className="section-heading">Take the route<br />with you.</h2>
                 <p className="mt-5 text-base leading-7 text-custom-blue/75">Save a route for later or share a public preview. The original prompt stays private; the shared view carries the journey and its planning caveats.</p>
                 <p className="mt-5 text-base leading-7 text-custom-blue/75">Booking links continue on external provider sites. Wild Route helps choose the journey; providers confirm availability and final prices.</p>
-                <p className="mt-6 border-t border-custom-blue/15 pt-5 text-sm leading-6 text-custom-blue/70">In the public demo, saves live in this browser and preview links reconstruct a validated public route. Cross-device account persistence remains a separate managed-service path.</p>
+                <p className="mt-6 border-t border-custom-blue/15 pt-5 text-sm leading-6 text-custom-blue/70">Enter Demo Mode before planning to save and share. Saves stay in this browser; preview links reconstruct a validated public route. Profiles, cloud sync, and billing are unavailable in demo mode.</p>
               </div>
             </div>
           </section>
@@ -93,7 +94,7 @@ export default function WildRouteCaseStudy() {
               </ol>
               <div className="grid gap-8 sm:grid-cols-2">
                 <div><h3 className="font-display text-2xl font-medium text-white">A failure worth fixing.</h3><p className="mt-3 text-base leading-7 text-white/80">The first hosted save flow assumed the next request could read the same server’s memory. Serverless hosting broke that assumption. I rebuilt the demo around browser-local saves and validated stateless previews.</p></div>
-                <div><h3 className="font-display text-2xl font-medium text-white">Designed for imperfect conditions.</h3><p className="mt-3 text-base leading-7 text-white/80">Keyboard access, reduced motion, provider fallback, and image failure are part of the experience. Private data stays behind ownership checks; public shares use an explicit safe snapshot.</p></div>
+                <div><h3 className="font-display text-2xl font-medium text-white">Less interface. A stronger demo.</h3><p className="mt-3 text-base leading-7 text-white/80">I removed repeated explainers, newsletter signup, and secondary controls. Optional settings stay in disclosures, unavailable account features stay disabled, and every demo login gets its own server-generated identity.</p></div>
               </div>
               <details className="mt-9 border-t border-white/20 pt-5">
                 <summary className="cursor-pointer py-2 text-base font-medium text-white underline decoration-white/40 underline-offset-8 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Explore verification and current limits</summary>

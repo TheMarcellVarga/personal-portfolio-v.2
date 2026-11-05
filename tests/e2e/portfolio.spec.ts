@@ -477,11 +477,14 @@ test("Wild Route case study connects the journey to inspectable evidence", async
   await expect(page.getByRole("heading", { name: "Start with a wish." })).toBeVisible();
   await expect(page.getByAltText(/Wild Route ranked planner showing a round-trip route/i)).toBeVisible();
   await expect(page.getByRole("link", { name: /open public demo/i })).toHaveAttribute("href", "https://ai-travel-planner-psi-five.vercel.app");
+  await expect(page.getByText(/screens show the verified local November refresh, pending deployment/i)).toBeVisible();
+  await expect(page.locator('img[src*="home-november-2026"]')).toBeVisible();
+  await expect(page.getByText(/I replaced the WebGL globe with an ordered journey overview/i)).toBeVisible();
   const disclosure = page.locator("details").filter({ hasText: "Explore verification and current limits" });
   await expect(disclosure).not.toHaveAttribute("open");
   await disclosure.locator("summary").click();
-  await expect(page.getByText(/104 deterministic Vitest cases pass/i)).toBeVisible();
-  await expect(page.getByText(/22 Chromium checks cover/i)).toBeVisible();
+  await expect(page.getByText(/109 deterministic Vitest cases pass/i)).toBeVisible();
+  await expect(page.getByText(/24 Chromium checks pass locally/i)).toBeVisible();
   await expect(page.getByText(/deterministic planning dataset, planning estimates/i)).toBeVisible();
   await disclosure.locator("summary").click();
   await expect(disclosure).not.toHaveAttribute("open");

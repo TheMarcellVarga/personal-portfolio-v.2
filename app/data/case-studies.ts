@@ -101,21 +101,23 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
     role: "Independent product direction, UX/UI, Next.js frontend, route/API architecture, security boundaries, testing, and deployment",
     problem:
       "Turn an open-ended adventure brief into a small, explainable set of route options without presenting planning estimates or external booking handoffs as confirmed travel inventory.",
-    user: "Independent adventure travelers comparing pace, climate, budget, and detours before validating details and booking with external providers.",
+    user: "Independent adventure travelers comparing pace, budget, and detours before validating details and booking with external providers.",
     decisions: [
+      "Simplified the demo to brief, comparison, local save/share, and external flight search; replaced the WebGL globe with an ordered journey overview and disabled unavailable account features.",
       "Started from travel intent and kept route reasoning, confidence, freshness, and estimate boundaries visible at the point of decision.",
       "Built a deterministic, schema-validated route engine before adding live model or provider dependencies.",
       "Kept browser traffic behind same-origin Next.js handlers, with ownership checks, Supabase RLS, and server-only booking-link construction.",
       "Reworked save and preview flows for stateless serverless hosting after the first deployed implementation exposed a process-memory assumption.",
     ],
     verification: [
-      "104 deterministic Vitest cases pass across route generation, entitlements, validation, security, share, and handoff behavior.",
-      "22 Chromium checks cover the hosted golden path, responsive collision guards, keyboard flow, axe accessibility, reduced motion, and media fallbacks.",
-      "Six Supabase migrations pass static verification; local and Vercel-compatible production builds pass, while dependency advisories remain tracked separately from the interface release evidence.",
+      "109 deterministic Vitest cases pass locally (November 2026) across route generation, entitlements, validation, security, share, and handoff behavior.",
+      "24 Chromium checks pass locally across the demo golden path, responsive collision guards, keyboard flow, axe accessibility, reduced motion, and media fallbacks.",
+      "The November production build, TypeScript checks, and ESLint pass. Demo-session isolation and missing share/provider links have dedicated regression tests.",
     ],
     limitations: [
+      "The public URL is an earlier release. November screenshots and verification describe the local simplification, which has not been deployed.",
       "The public demo uses a deterministic planning dataset, planning estimates, and inspectable route generation rather than live inventory or an LLM.",
-      "Live managed Supabase, Stripe, email, and travel-provider integrations remain intentionally off; booking completes on external provider sites.",
+      "Managed authentication, cloud persistence, billing, email, and live travel integrations are outside the verified demo path. Demo account features stay disabled; external providers own bookings and final prices.",
       "Demo saves use browser-local storage and previews use schema-validated stateless recipes, not cross-device account persistence.",
     ],
   },

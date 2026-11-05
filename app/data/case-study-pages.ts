@@ -148,12 +148,12 @@ export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
   "wild-route": {
     demoUrl: "https://ai-travel-planner-psi-five.vercel.app",
     demoLabel: "Open public demo",
-    heroImage: "/images/wild-route/home-2026.jpg",
+    heroImage: "/images/wild-route/home-november-2026.jpg",
     heroAlt: "Wild Route landing page introducing explainable adventure route planning",
     heroAspect: "16/10",
     contextTitle: "A calm interface for a dense decision.",
     contextBody:
-      "Wild Route starts with the traveler's intent, then exposes route reasoning, confidence, estimate boundaries, and provider handoffs at the point of choice. The experience stays useful even when live providers or immersive media are unavailable.",
+      "Wild Route starts with the traveler's intent, then exposes route reasoning, confidence, estimate boundaries, and provider handoffs at the point of choice. The November local demo removes secondary UI, uses an ordered journey view, and disables unavailable account features.",
     processTitle: "How intent becomes a route.",
     processBody:
       "I treated route generation as a product pipeline rather than a chat response. Each stage narrows uncertainty, preserves the planning boundary, and leaves the traveler with something they can inspect before continuing elsewhere.",
@@ -164,7 +164,7 @@ export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
       },
       {
         title: "Turn intent into a structured brief",
-        body: "The prompt is normalized into origin, trip length, route shape, stop limit, budget posture, travel wishes, and exclusions. Schema validation happens before the system selects or scores a destination.",
+        body: "The prompt is normalized into origin, trip length, route shape, stop limit, budget posture, travel wishes, and exclusions. Optional controls stay behind a disclosure; schema validation precedes route scoring.",
       },
       {
         title: "Compose and rank complete routes",
@@ -172,23 +172,23 @@ export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
       },
       {
         title: "Design for fallbacks and handoff",
-        body: "Provider and media adapters can degrade to disclosed fixtures without breaking the route. Save, share, and booking handoff flows preserve ownership and privacy boundaries, then verification covers accessibility, reduced motion, failure states, and the hosted golden path.",
+        body: "Provider and media adapters can degrade to disclosed fixtures without breaking the route. Save, share, and booking handoff flows preserve ownership and privacy boundaries, then local verification covers accessibility, reduced motion, failure states, session isolation, and the demo golden path.",
       },
     ],
     gallery: [
       {
-        src: "/images/wild-route/compose-2026.jpg",
-        alt: "Wild Route route composer showing a structured travel brief beside the generated route globe",
+        src: "/images/wild-route/compose-november-2026.jpg",
+        alt: "Wild Route route composer showing an open trip brief with optional preferences collapsed",
         caption: "A plain-language brief becomes explicit origin, duration, route-shape, stop, budget, and wish constraints before composition.",
       },
       {
-        src: "/images/wild-route/planner-2026.jpg",
-        alt: "Wild Route ranked planner showing a round-trip route on the globe with weather, confidence, and estimate status",
-        caption: "Ranked complete routes keep route shape, confidence, current conditions, sources, and estimate status visible together.",
+        src: "/images/wild-route/planner-november-2026.jpg",
+        alt: "Wild Route ranked planner showing an ordered journey, route alternatives, app confidence, and price status",
+        caption: "An ordered journey replaces the WebGL globe; route reasoning, app confidence, sources, and price status remain inspectable.",
         wide: true,
       },
       {
-        src: "/images/wild-route/share-2026.jpg",
+        src: "/images/wild-route/share-november-2026.jpg",
         alt: "Wild Route published route preview with journey breakdown and planning estimate disclosures",
         caption: "The published view shares a sanitized route snapshot while keeping costs, freshness, and external-provider boundaries explicit.",
         wide: true,
