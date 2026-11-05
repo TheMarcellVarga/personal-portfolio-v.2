@@ -372,6 +372,7 @@ function ProjectListItem({
   destination = project.link,
   statusLabel = project.status,
   inProgress = false,
+  comingSoon = false,
 }: {
   project: Project;
   numberLabel: string;
@@ -383,6 +384,7 @@ function ProjectListItem({
   destination?: string;
   statusLabel?: string;
   inProgress?: boolean;
+  comingSoon?: boolean;
 }) {
   return (
     <motion.article
@@ -403,12 +405,12 @@ function ProjectListItem({
         href={destination}
         target={isExternalProjectLink(destination) ? "_blank" : undefined}
         rel={isExternalProjectLink(destination) ? "noreferrer" : undefined}
-        className="grid grid-cols-[minmax(0,1fr)] gap-4 rounded-none border-b border-custom-blue/15 px-0 py-9 transition-colors duration-500 hover:bg-custom-blue/[0.01] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-custom-blue sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:px-0 md:py-8"
+        className={`grid grid-cols-[minmax(0,1fr)] gap-4 rounded-none border-b border-custom-blue/15 px-0 py-9 transition-colors duration-500 hover:bg-custom-blue/[0.01] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-custom-blue sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:px-0 md:py-8 ${comingSoon ? "coming-soon-row" : ""}`}
       >
         <div data-mobile-project-card className="grid min-w-0 gap-5 md:hidden">
           <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-custom-blue/5">
             {!project.image ? (
-              <div aria-hidden="true" className="flex h-full items-center justify-center bg-custom-blue text-white/80">
+              <div aria-hidden="true" className={`flex h-full items-center justify-center ${comingSoon ? "coming-soon-preview text-custom-blue/65" : "bg-custom-blue text-white/80"}`}>
                 <Github className="h-12 w-12" />
               </div>
             ) : project.caseStudyId === "endless-activity" ? <EndlessActivityPreview /> : (
@@ -1397,8 +1399,6 @@ export default function Page() {
                   <ProjectListItem
                     key={project.title}
                     project={project}
-                    destination="https://github.com/TheMarcellVarga/ai-travel-planner"
-                    statusLabel="GitHub ↗"
                     inProgress
                     numberLabel={String(featuredProjects.length + supportingProjects.length + 1).padStart(2, "0")}
                     index={featuredProjects.length + supportingProjects.length}
@@ -1412,6 +1412,7 @@ export default function Page() {
                   project={comingSoonProject}
                   statusLabel="GitHub ↗"
                   inProgress
+                  comingSoon
                   numberLabel={String(featuredProjects.length + supportingProjects.length + 2).padStart(2, "0")}
                   index={featuredProjects.length + supportingProjects.length + 1}
                   shouldReduceMotion={shouldReduceMotion}

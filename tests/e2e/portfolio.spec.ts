@@ -30,10 +30,8 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page.locator("[data-hero-badge-label]").last()).toBeVisible();
   await expect(page.locator('#work a[href="/ai-finance"]')).toBeVisible();
   await expect(page.locator('#work a[href="/first-revenue-game"]')).toHaveCount(0);
-  await expect(page.locator('#work a[href="/wild-route"]')).toHaveCount(0);
-  const wildRoute = page.locator('#work a[href="https://github.com/TheMarcellVarga/ai-travel-planner"]');
+  const wildRoute = page.locator('#work a[href="/wild-route"]');
   await expect(wildRoute).toBeVisible();
-  await expect(wildRoute).toHaveAttribute("target", "_blank");
   await expect(wildRoute).toContainText("In progress");
   await expect(page.locator("#work").getByRole("heading", { name: "In progress" })).toHaveCount(0);
   await expect(page.getByRole("link", { name: /Coming soon.*GitHub/ })).toHaveAttribute(
