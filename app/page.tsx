@@ -1659,7 +1659,7 @@ export default function Page() {
               />
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-              <div className="absolute inset-x-0 bottom-3 flex justify-center">
+              <div className="absolute inset-x-0 bottom-3 z-10 flex justify-center">
                 <span className="font-label rounded-full bg-white/20 px-2 py-0.75 text-[0.5rem] font-medium uppercase tracking-[0.14em] text-white shadow-[0_8px_32px_rgba(0,0,0,0.1)] backdrop-blur-md">
                   View project
                 </span>
