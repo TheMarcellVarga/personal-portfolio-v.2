@@ -36,7 +36,7 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(wildRoute).toHaveAttribute("target", "_blank");
   await expect(wildRoute).toContainText("In progress · GitHub");
   await expect(page.locator("#work").getByRole("heading", { name: "In progress" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Explore more projects on GitHub" })).toHaveAttribute(
+  await expect(page.getByRole("link", { name: /Coming soon.*GitHub/ })).toHaveAttribute(
     "href",
     "https://github.com/TheMarcellVarga?tab=repositories",
   );

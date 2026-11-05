@@ -1376,7 +1376,7 @@ export default function Page() {
                     In progress
                   </h3>
                   <p className="mt-2 max-w-2xl text-sm leading-6 text-custom-blue/70">
-                    Projects I’m still developing, alongside more experiments on GitHub.
+                    Projects under active development or maintenance.
                   </p>
                 </div>
 
@@ -1398,10 +1398,18 @@ export default function Page() {
                   href="https://github.com/TheMarcellVarga?tab=repositories"
                   target="_blank"
                   rel="noreferrer"
-                  className="group flex min-h-16 items-center justify-between gap-4 border-b border-custom-blue/15 py-5 text-sm font-medium text-custom-blue transition-colors hover:text-title-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-custom-blue"
+                  className="group flex items-center justify-between gap-4 border-b border-custom-blue/15 py-9 text-custom-blue transition-colors hover:bg-custom-blue/[0.01] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-custom-blue sm:py-8"
                 >
-                  <span>Explore more projects on GitHub</span>
-                  <ArrowUpRight aria-hidden="true" className="h-5 w-5 shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  <span className="flex min-w-0 items-center gap-3 sm:gap-8">
+                    <span className="font-label min-w-[1.25rem] text-[0.62rem] font-bold text-custom-blue/70 sm:min-w-[2.5rem]">
+                      {String(featuredProjects.length + supportingProjects.length + 2).padStart(2, "0")}
+                    </span>
+                    <span className="font-display text-2xl font-medium tracking-[-0.02em] sm:text-[2.2rem] lg:text-[2.8rem]">Coming soon</span>
+                  </span>
+                  <span className="flex shrink-0 items-center gap-4 text-sm text-custom-blue/70">
+                    <span>GitHub</span>
+                    <ArrowUpRight aria-hidden="true" className="h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  </span>
                 </a>
 
                 <div className="group relative border-b border-custom-blue/5">
@@ -1425,7 +1433,7 @@ export default function Page() {
                     <span className="hidden md:contents">
                   <span className="flex min-w-0 flex-row items-start gap-3 sm:flex-row sm:items-center sm:gap-8 md:col-span-1">
                     <span className="font-label min-w-[1.25rem] pt-1 text-[0.62rem] font-bold sm:min-w-[2.5rem] sm:pt-0 text-custom-blue/70">
-                      {String(featuredProjects.length + supportingProjects.length + 2).padStart(2, "0")}
+                      {String(featuredProjects.length + supportingProjects.length + 3).padStart(2, "0")}
                     </span>
                     <span className="flex flex-1 items-center justify-between gap-4">
                       <span className="min-w-0 font-display text-[clamp(1.7rem,7.5vw,2rem)] leading-[1.05] sm:leading-[1.02] tracking-[-0.02em] text-custom-blue transition-transform duration-500 group-hover:translate-x-0 sm:text-[2.2rem] md:group-hover:translate-x-2 lg:text-[2.8rem]">
