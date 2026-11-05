@@ -16,10 +16,10 @@ export function createExpertiseScene(
   reducedMotion: boolean,
   onRender: () => void,
 ): ExpertiseScene {
-  const context = canvas.getContext("webgl2", { alpha: true, antialias: true, powerPreference: "low-power" });
+  const context = canvas.getContext("webgl2", { alpha: true, antialias: false, powerPreference: "low-power" });
   if (!context) throw new Error("WebGL unavailable");
-  const renderer = new THREE.WebGLRenderer({ canvas, context, alpha: true, antialias: true, powerPreference: "low-power" });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+  const renderer = new THREE.WebGLRenderer({ canvas, context, alpha: true, antialias: false, powerPreference: "low-power" });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1));
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -144,16 +144,13 @@ export function createExpertiseScene(
   let frame: number | null = null;
   let reportedReady = false;
   let needsRender = true;
-  let lastPaint = 0;
-  let lastTick: number | null = null;
-  let ambientSeconds = 0;
 
-  // Scroll drives assembly; ambient drift keeps each finished sculpture alive.
+  // Scroll drives assembly; render only when the scene changes.
   function render() {
     if (renderer.getContext().isContextLost()) return;
     const phase = reduceMotion ? 1 : THREE.MathUtils.smoothstep(progress, 0, 1);
-    const time = ambientSeconds;
-    const drift = reduceMotion ? 0 : 1;
+    const time = 0;
+    const drift = 0;
     const offset = kind === "ux" ? 0 : kind === "frontend" ? 1.7 : 3.2;
     root.position.y = Math.sin(time * 0.6 + offset) * 0.035 * drift;
     root.rotation.set(
@@ -213,22 +210,15 @@ export function createExpertiseScene(
     }
   }
 
-  // Ambient motion runs at 30fps only while visible; scroll updates can render sooner.
   const requestRender = () => {
     if (!active || frame !== null) return;
-    frame = requestAnimationFrame((timestamp) => {
+    frame = requestAnimationFrame(() => {
       frame = null;
       if (!active || renderer.getContext().isContextLost()) return;
-      if (needsRender || timestamp - lastPaint >= 1000 / 30) {
-        if (!reduceMotion && lastTick !== null) {
-          ambientSeconds += Math.min((timestamp - lastTick) / 1000, 0.1);
-        }
-        lastTick = timestamp;
-        lastPaint = timestamp;
+      if (needsRender) {
         needsRender = false;
         render();
       }
-      if (!reduceMotion) requestRender();
     });
   };
   const invalidate = () => {
@@ -237,7 +227,6 @@ export function createExpertiseScene(
   };
   const contextRestored = () => {
     reportedReady = false;
-    lastTick = null;
     invalidate();
   };
   canvas.addEventListener("webglcontextrestored", contextRestored);
@@ -256,7 +245,6 @@ export function createExpertiseScene(
       invalidate();
     },
     setActive(value) {
-      if (active !== value) lastTick = null;
       active = value;
       if (!active && frame !== null) {
         cancelAnimationFrame(frame);
@@ -266,11 +254,12 @@ export function createExpertiseScene(
     },
     setReducedMotion(value) {
       reduceMotion = value;
-      lastTick = null;
       invalidate();
     },
     setProgress(value) {
-      progress = THREE.MathUtils.clamp(value, 0, 1);
+      const next = THREE.MathUtils.clamp(value, 0, 1);
+      if (next === progress) return;
+      progress = next;
       if (!reduceMotion) invalidate();
     },
     dispose() {
