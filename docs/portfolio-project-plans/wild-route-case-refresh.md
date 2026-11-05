@@ -5,8 +5,7 @@ and its Phase 7 session-isolation follow-up. Primary skill: impeccable (clarify)
 support: travel-product-guardrails. This updates the portfolio, not either deployment.
 
 The case preserves PortfolioShell, typography, spacing, and the three-step journey.
-It now explains the open trip brief, optional preferences, ordered journey overview
-in place of WebGL, local saves, public previews, and external flight search.
+It now explains the open trip brief, optional preferences, interactive globe with an ordered journey fallback, local saves, public previews, and external flight search.
 Repeated landing-page sections and newsletter signup were removed in the source
 app; unverified demo profile/cloud/billing features are disabled. Demo logins now
 receive unique server-generated identities, and incomplete share/provider responses
@@ -21,7 +20,7 @@ ordered journey, and its published preview. The sample prompt is a 12-day Singap
 round trip with hiking, surf, and one meaningful stop. No real account or private
 travel prompt is used. Destinations use disclosed fallback data; the local build
 may resolve attributed destination media, but no live fare or stay inventory is
-claimed. Weather and the globe are absent from the current planner.
+claimed. Weather and the globe are absent from these November 5 captures; the globe was restored locally on November 6.
 
 The public demo URL remains an earlier deployed release. The case explicitly
 labels the November screenshots and evidence as local work pending deployment.

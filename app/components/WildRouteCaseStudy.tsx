@@ -29,7 +29,7 @@ export default function WildRouteCaseStudy() {
                   <div className="col-span-2"><dt className="text-custom-blue/65">Experience</dt><dd data-case-study-status="wild-route">Live public demo</dd></div>
                 </dl>
                 <Link href={demo} target="_blank" rel="noreferrer" className="portfolio-button mt-6">Open public demo <ArrowUpRight aria-hidden="true" className="h-4 w-4" /></Link>
-                <p className="mt-3 text-sm leading-6 text-custom-blue/70">The public URL is the earlier release. These screens show the verified local November refresh, pending deployment.</p>
+                <p className="mt-3 text-sm leading-6 text-custom-blue/70">The public URL is the earlier release. These screens show the November 5 local refresh; the globe was restored locally on November 6.</p>
               </div>
             </div>
             <div className="mt-10 sm:mt-14">
@@ -64,13 +64,13 @@ export default function WildRouteCaseStudy() {
           <section className="pb-[var(--section-space)]">
             <div className="mb-8 grid items-end gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
               <div><SectionLabel index="02" label="Compare the journeys" /><h2 className="section-heading">A whole route.<br />A reason for each stop.</h2></div>
-              <p className="max-w-[52ch] text-base leading-7 text-custom-blue/75">Compare complete journeys, then read each stop in travel order. I replaced the WebGL globe with an ordered journey overview so the core flow renders reliably across devices.</p>
+              <p className="max-w-[52ch] text-base leading-7 text-custom-blue/75">Compare complete journeys on the interactive globe. If WebGL is unavailable, an ordered journey view keeps the route usable. The screenshot shows the earlier fallback-only version.</p>
             </div>
             <Screen src="/images/wild-route/planner-november-2026.jpg" alt="Wild Route ranked planner showing a round-trip route with destination imagery, route legs, and planning status" />
             <div className="mt-7 grid gap-7 border-t border-custom-blue/15 pt-6 md:grid-cols-3">
               <Decision title="Why this route?" body="Ranking, wishes, and confidence explain the suggestion. Confidence belongs to the app’s scoring, not a provider guarantee." />
               <Decision title="What do we know?" body="Source freshness and assumptions remain inspectable. Missing live fares stay unpriced, with confirmation left to external providers." />
-              <Decision title="What if it fails?" body="The journey view needs no WebGL. Bundled artwork, a retryable brief, and clear action errors keep failures recoverable." />
+              <Decision title="What if it fails?" body="The journey view provides a fallback when the globe cannot load. Bundled artwork, a retryable brief, and clear action errors keep failures recoverable." />
             </div>
           </section>
 

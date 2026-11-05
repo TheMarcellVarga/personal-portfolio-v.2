@@ -30,7 +30,17 @@ test("homepage presents the product-engineering story and selected work", async 
   await expect(page.locator("[data-hero-badge-label]").last()).toBeVisible();
   await expect(page.locator('#work a[href="/ai-finance"]')).toBeVisible();
   await expect(page.locator('#work a[href="/first-revenue-game"]')).toHaveCount(0);
-  await expect(page.locator('#work a[href="/wild-route"]')).toBeVisible();
+  await expect(page.locator('#work a[href="/wild-route"]')).toHaveCount(0);
+  const wildRoute = page.locator('#work a[href="https://github.com/TheMarcellVarga/ai-travel-planner"]');
+  await expect(wildRoute).toBeVisible();
+  await expect(wildRoute).toHaveAttribute("target", "_blank");
+  await expect(wildRoute).toContainText("In progress · GitHub");
+  await expect(page.locator("#work").getByRole("heading", { name: "In progress" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Explore more projects on GitHub" })).toHaveAttribute(
+    "href",
+    "https://github.com/TheMarcellVarga?tab=repositories",
+  );
+  await expect(page.locator("#work")).not.toContainText("Supporting work");
   await expect(page.locator('#work a[href="/threadscribe"]')).toHaveCount(0);
   await expect(page.locator('#work a[href="/focusin"]')).toBeVisible();
   await expect(page.locator('#work a[href="/endless-activity"]')).toBeVisible();
@@ -40,7 +50,7 @@ test("homepage presents the product-engineering story and selected work", async 
     "aria-expanded",
     "false",
   );
-  await expect(page.locator("[data-case-study-content] a")).toHaveCount(5);
+  await expect(page.locator("[data-case-study-content] a")).toHaveCount(6);
   await expect(page.locator('#work a[href="/about"]')).toHaveCount(0);
 });
 
@@ -477,9 +487,9 @@ test("Wild Route case study connects the journey to inspectable evidence", async
   await expect(page.getByRole("heading", { name: "Start with a wish." })).toBeVisible();
   await expect(page.getByAltText(/Wild Route ranked planner showing a round-trip route/i)).toBeVisible();
   await expect(page.getByRole("link", { name: /open public demo/i })).toHaveAttribute("href", "https://ai-travel-planner-psi-five.vercel.app");
-  await expect(page.getByText(/screens show the verified local November refresh, pending deployment/i)).toBeVisible();
+  await expect(page.getByText(/screens show the November 5 local refresh/i)).toBeVisible();
   await expect(page.locator('img[src*="home-november-2026"]')).toBeVisible();
-  await expect(page.getByText(/I replaced the WebGL globe with an ordered journey overview/i)).toBeVisible();
+  await expect(page.getByText(/If WebGL is unavailable, an ordered journey view/i)).toBeVisible();
   const disclosure = page.locator("details").filter({ hasText: "Explore verification and current limits" });
   await expect(disclosure).not.toHaveAttribute("open");
   await disclosure.locator("summary").click();

@@ -104,7 +104,7 @@ export const caseStudies: Record<CaseStudyRecord["id"], CaseStudyRecord> = {
       "Turn an open-ended adventure brief into a small, explainable set of route options without presenting planning estimates or external booking handoffs as confirmed travel inventory.",
     user: "Independent adventure travelers comparing pace, budget, and detours before validating details and booking with external providers.",
     decisions: [
-      "Simplified the demo to brief, comparison, local save/share, and external flight search; replaced the WebGL globe with an ordered journey overview and disabled unavailable account features.",
+      "Simplified the demo to brief, comparison, local save/share, and external flight search; restored the interactive globe with an ordered journey fallback and disabled unavailable account features.",
       "Started from travel intent and kept route reasoning, confidence, freshness, and estimate boundaries visible at the point of decision.",
       "Built a deterministic, schema-validated route engine before adding live model or provider dependencies.",
       "Kept browser traffic behind same-origin Next.js handlers, with ownership checks, Supabase RLS, and server-only booking-link construction.",

@@ -153,7 +153,7 @@ export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
     heroAspect: "16/10",
     contextTitle: "A calm interface for a dense decision.",
     contextBody:
-      "Wild Route starts with the traveler's intent, then exposes route reasoning, confidence, estimate boundaries, and provider handoffs at the point of choice. The November local demo removes secondary UI, uses an ordered journey view, and disables unavailable account features.",
+      "Wild Route starts with the traveler's intent, then exposes route reasoning, confidence, estimate boundaries, and provider handoffs at the point of choice. The November local demo removes secondary UI, restores the interactive globe with an ordered journey fallback, and disables unavailable account features.",
     processTitle: "How intent becomes a route.",
     processBody:
       "I treated route generation as a product pipeline rather than a chat response. Each stage narrows uncertainty, preserves the planning boundary, and leaves the traveler with something they can inspect before continuing elsewhere.",
@@ -184,7 +184,7 @@ export const caseStudyPages: Record<CaseStudyId, CaseStudyPageContent> = {
       {
         src: "/images/wild-route/planner-november-2026.jpg",
         alt: "Wild Route ranked planner showing an ordered journey, route alternatives, app confidence, and price status",
-        caption: "An ordered journey replaces the WebGL globe; route reasoning, app confidence, sources, and price status remain inspectable.",
+        caption: "The November 5 screenshot shows the fallback journey view; the interactive globe has since been restored locally.",
         wide: true,
       },
       {

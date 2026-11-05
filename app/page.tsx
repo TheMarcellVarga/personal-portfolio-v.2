@@ -72,7 +72,6 @@ const contactLinkLabelClassName =
 
 const featuredProjectOrder = [
   "Aperture Financial Intelligence",
-  "Wild Route",
   "First Revenue Game",
 ];
 
@@ -355,6 +354,8 @@ function ProjectListItem({
   isCompactViewport,
   setActiveProjectImage,
   className = "",
+  destination = project.link,
+  statusLabel = project.status,
 }: {
   project: Project;
   numberLabel: string;
@@ -363,6 +364,8 @@ function ProjectListItem({
   isCompactViewport: boolean;
   setActiveProjectImage: (image: string | null) => void;
   className?: string;
+  destination?: string;
+  statusLabel?: string;
 }) {
   return (
     <motion.article
@@ -380,9 +383,9 @@ function ProjectListItem({
       className={`group relative ${className}`}
     >
       <Link
-        href={project.link}
-        target={isExternalProjectLink(project.link) ? "_blank" : undefined}
-        rel={isExternalProjectLink(project.link) ? "noreferrer" : undefined}
+        href={destination}
+        target={isExternalProjectLink(destination) ? "_blank" : undefined}
+        rel={isExternalProjectLink(destination) ? "noreferrer" : undefined}
         className="grid grid-cols-[minmax(0,1fr)] gap-4 rounded-none border-b border-custom-blue/15 px-0 py-9 transition-colors duration-500 hover:bg-custom-blue/[0.01] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-custom-blue sm:rounded-none sm:px-0 sm:py-6 md:grid-cols-[minmax(0,1.15fr)_auto_minmax(0,0.95fr)_auto] md:items-center md:gap-8 md:px-0 md:py-8"
       >
         <div data-mobile-project-card className="grid min-w-0 gap-5 md:hidden">
@@ -400,7 +403,7 @@ function ProjectListItem({
           <div className="min-w-0">
             <div className="mb-3 flex items-center justify-between gap-3 text-xs leading-5 text-custom-blue/60">
               <span className="font-mono">{numberLabel}</span>
-              <span className="text-right">{project.status}</span>
+              <span className="text-right">{statusLabel}</span>
             </div>
             <div className="flex items-start justify-between gap-4">
               <h3 className="min-w-0 text-pretty font-display text-[clamp(1.5rem,6.6vw,1.875rem)] font-medium leading-[1.15] tracking-[-0.02em] text-custom-blue">
@@ -448,7 +451,7 @@ function ProjectListItem({
               {project.category}
             </span>
             <span className="font-label text-[0.6875rem] font-bold text-custom-blue/70 sm:text-[0.58rem]">
-              {project.status}
+              {statusLabel}
             </span>
           </div>
         </div>
@@ -961,7 +964,7 @@ export default function Page() {
       projects
         .filter(
           (project) =>
-            project.isListed !== false && project.portfolioPlacement === "featured",
+            project.isListed !== false && project.portfolioPlacement === "featured" && project.caseStudyId !== "wild-route",
         )
         .sort(
           (left, right) =>
@@ -1356,27 +1359,50 @@ export default function Page() {
                   />
                 ))}
 
-                <div className="border-t border-custom-blue/10 pb-3 pt-10 sm:pt-12">
-                  <p className="font-label text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-custom-blue/72">
-                    Supporting work
-                  </p>
-                  <p className="mt-2 max-w-2xl text-sm leading-6 text-custom-blue/62">
-                    Focused case studies that add range without competing with the
-                    three featured projects.
-                  </p>
-                </div>
-
                 {supportingProjects.map((project, idx) => (
                   <ProjectListItem
                     key={project.title}
                     project={project}
-                    numberLabel={`S${idx + 1}`}
+                    numberLabel={String(featuredProjects.length + idx + 1).padStart(2, "0")}
                     index={featuredProjects.length + idx}
                     shouldReduceMotion={shouldReduceMotion}
                     isCompactViewport={isCompactViewport}
                     setActiveProjectImage={setActiveProjectImage}
                   />
                 ))}
+
+                <div className="border-t border-custom-blue/10 pb-3 pt-10 sm:pt-12">
+                  <h3 className="font-display text-2xl font-medium tracking-[-0.02em] text-custom-blue">
+                    In progress
+                  </h3>
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-custom-blue/70">
+                    Projects I’m still developing, alongside more experiments on GitHub.
+                  </p>
+                </div>
+
+                {projects.filter((project) => project.caseStudyId === "wild-route").map((project) => (
+                  <ProjectListItem
+                    key={project.title}
+                    project={project}
+                    destination="https://github.com/TheMarcellVarga/ai-travel-planner"
+                    statusLabel="In progress · GitHub ↗"
+                    numberLabel={String(featuredProjects.length + supportingProjects.length + 1).padStart(2, "0")}
+                    index={featuredProjects.length + supportingProjects.length}
+                    shouldReduceMotion={shouldReduceMotion}
+                    isCompactViewport={isCompactViewport}
+                    setActiveProjectImage={setActiveProjectImage}
+                  />
+                ))}
+
+                <a
+                  href="https://github.com/TheMarcellVarga?tab=repositories"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex min-h-16 items-center justify-between gap-4 border-b border-custom-blue/15 py-5 text-sm font-medium text-custom-blue transition-colors hover:text-title-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-custom-blue"
+                >
+                  <span>Explore more projects on GitHub</span>
+                  <ArrowUpRight aria-hidden="true" className="h-5 w-5 shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                </a>
 
                 <div className="group relative border-b border-custom-blue/5">
                   <button
@@ -1399,7 +1425,7 @@ export default function Page() {
                     <span className="hidden md:contents">
                   <span className="flex min-w-0 flex-row items-start gap-3 sm:flex-row sm:items-center sm:gap-8 md:col-span-1">
                     <span className="font-label min-w-[1.25rem] pt-1 text-[0.62rem] font-bold sm:min-w-[2.5rem] sm:pt-0 text-custom-blue/70">
-                      {String(featuredProjects.length + supportingProjects.length + 1).padStart(2, "0")}
+                      {String(featuredProjects.length + supportingProjects.length + 2).padStart(2, "0")}
                     </span>
                     <span className="flex flex-1 items-center justify-between gap-4">
                       <span className="min-w-0 font-display text-[clamp(1.7rem,7.5vw,2rem)] leading-[1.05] sm:leading-[1.02] tracking-[-0.02em] text-custom-blue transition-transform duration-500 group-hover:translate-x-0 sm:text-[2.2rem] md:group-hover:translate-x-2 lg:text-[2.8rem]">
