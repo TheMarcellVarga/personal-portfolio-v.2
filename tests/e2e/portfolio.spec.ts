@@ -34,8 +34,8 @@ test("homepage presents the product-engineering story and selected work", async 
   const wildRoute = page.locator('#work a[href="https://github.com/TheMarcellVarga/ai-travel-planner"]');
   await expect(wildRoute).toBeVisible();
   await expect(wildRoute).toHaveAttribute("target", "_blank");
-  await expect(wildRoute).toContainText("In progress · GitHub");
-  await expect(page.locator("#work").getByRole("heading", { name: "In progress" })).toBeVisible();
+  await expect(wildRoute).toContainText("In progress");
+  await expect(page.locator("#work").getByRole("heading", { name: "In progress" })).toHaveCount(0);
   await expect(page.getByRole("link", { name: /Coming soon.*GitHub/ })).toHaveAttribute(
     "href",
     "https://github.com/TheMarcellVarga?tab=repositories",

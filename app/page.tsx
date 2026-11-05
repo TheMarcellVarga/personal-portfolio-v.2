@@ -81,6 +81,21 @@ const supportingProjectOrder = [
   "Burnout 3: Takedown for iOS",
 ];
 
+const comingSoonProject: Project = {
+  title: "Coming soon",
+  subTitle: "More projects in the works",
+  date: "",
+  description: "",
+  highlight: "",
+  skills: [],
+  link: "https://github.com/TheMarcellVarga?tab=repositories",
+  image: "",
+  category: "More projects",
+  backgroundClass: "",
+  status: "Guided product walkthrough",
+  portfolioPlacement: "supporting",
+};
+
 // Flip to true when the case studies need to be temporarily covered again.
 const SHOW_CASE_STUDY_RESTRUCTURING_NOTICE = false;
 
@@ -356,6 +371,7 @@ function ProjectListItem({
   className = "",
   destination = project.link,
   statusLabel = project.status,
+  inProgress = false,
 }: {
   project: Project;
   numberLabel: string;
@@ -366,6 +382,7 @@ function ProjectListItem({
   className?: string;
   destination?: string;
   statusLabel?: string;
+  inProgress?: boolean;
 }) {
   return (
     <motion.article
@@ -377,7 +394,7 @@ function ProjectListItem({
       onMouseEnter={() =>
         !shouldReduceMotion &&
         !isCompactViewport &&
-        setActiveProjectImage(project.image)
+        setActiveProjectImage(project.image || null)
       }
       onMouseLeave={() => setActiveProjectImage(null)}
       className={`group relative ${className}`}
@@ -390,7 +407,11 @@ function ProjectListItem({
       >
         <div data-mobile-project-card className="grid min-w-0 gap-5 md:hidden">
           <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-custom-blue/5">
-            {project.caseStudyId === "endless-activity" ? <EndlessActivityPreview /> : (
+            {!project.image ? (
+              <div aria-hidden="true" className="flex h-full items-center justify-center bg-custom-blue text-white/80">
+                <Github className="h-12 w-12" />
+              </div>
+            ) : project.caseStudyId === "endless-activity" ? <EndlessActivityPreview /> : (
             <Image
               src={project.image}
               alt={`${project.title} preview`}
@@ -403,7 +424,7 @@ function ProjectListItem({
           <div className="min-w-0">
             <div className="mb-3 flex items-center justify-between gap-3 text-xs leading-5 text-custom-blue/60">
               <span className="font-mono">{numberLabel}</span>
-              <span className="text-right">{statusLabel}</span>
+              <span className="flex items-center gap-2 text-right">{inProgress && <span className="rounded-full bg-custom-blue/10 px-3 py-1 text-custom-blue">In progress</span>}{statusLabel}</span>
             </div>
             <div className="flex items-start justify-between gap-4">
               <h3 className="min-w-0 text-pretty font-display text-[clamp(1.5rem,6.6vw,1.875rem)] font-medium leading-[1.15] tracking-[-0.02em] text-custom-blue">
@@ -447,6 +468,7 @@ function ProjectListItem({
 
         <div className="flex items-center justify-between gap-6 md:justify-self-end">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-left md:flex-col md:items-end md:gap-0.5 md:text-right">
+            {inProgress && <span className="mb-1 rounded-full bg-custom-blue/10 px-3 py-1 text-xs font-medium text-custom-blue">In progress</span>}
             <span className="font-label text-[0.6875rem] font-medium uppercase tracking-[0.12em] text-custom-blue/70 sm:text-[0.58rem] sm:tracking-[0.18em]">
               {project.category}
             </span>
@@ -1371,21 +1393,13 @@ export default function Page() {
                   />
                 ))}
 
-                <div className="border-t border-custom-blue/10 pb-3 pt-10 sm:pt-12">
-                  <h3 className="font-display text-2xl font-medium tracking-[-0.02em] text-custom-blue">
-                    In progress
-                  </h3>
-                  <p className="mt-2 max-w-2xl text-sm leading-6 text-custom-blue/70">
-                    Projects in progress / maintenance
-                  </p>
-                </div>
-
                 {projects.filter((project) => project.caseStudyId === "wild-route").map((project) => (
                   <ProjectListItem
                     key={project.title}
                     project={project}
                     destination="https://github.com/TheMarcellVarga/ai-travel-planner"
-                    statusLabel="In progress · GitHub ↗"
+                    statusLabel="GitHub ↗"
+                    inProgress
                     numberLabel={String(featuredProjects.length + supportingProjects.length + 1).padStart(2, "0")}
                     index={featuredProjects.length + supportingProjects.length}
                     shouldReduceMotion={shouldReduceMotion}
@@ -1394,23 +1408,16 @@ export default function Page() {
                   />
                 ))}
 
-                <a
-                  href="https://github.com/TheMarcellVarga?tab=repositories"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group flex items-center justify-between gap-4 border-b border-custom-blue/15 py-9 text-custom-blue transition-colors hover:bg-custom-blue/[0.01] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-custom-blue sm:py-8"
-                >
-                  <span className="flex min-w-0 items-center gap-3 sm:gap-8">
-                    <span className="font-label min-w-[1.25rem] text-[0.62rem] font-bold text-custom-blue/70 sm:min-w-[2.5rem]">
-                      {String(featuredProjects.length + supportingProjects.length + 2).padStart(2, "0")}
-                    </span>
-                    <span className="font-display text-2xl font-medium tracking-[-0.02em] sm:text-[2.2rem] lg:text-[2.8rem]">Coming soon</span>
-                  </span>
-                  <span className="flex shrink-0 items-center gap-4 text-sm text-custom-blue/70">
-                    <span>GitHub</span>
-                    <ArrowUpRight aria-hidden="true" className="h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                  </span>
-                </a>
+                <ProjectListItem
+                  project={comingSoonProject}
+                  statusLabel="GitHub ↗"
+                  inProgress
+                  numberLabel={String(featuredProjects.length + supportingProjects.length + 2).padStart(2, "0")}
+                  index={featuredProjects.length + supportingProjects.length + 1}
+                  shouldReduceMotion={shouldReduceMotion}
+                  isCompactViewport={isCompactViewport}
+                  setActiveProjectImage={setActiveProjectImage}
+                />
 
                 <div className="group relative border-b border-custom-blue/5">
                   <button
